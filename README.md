@@ -1,4 +1,4 @@
-# SCHL Website
+# Studio Click House
 
 This is a [Next.js](https://nextjs.org) project built with TypeScript, Tailwind CSS, and shadcn/ui.
 

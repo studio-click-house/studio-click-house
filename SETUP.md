@@ -1,4 +1,4 @@
-# SCH Website — Project Setup
+# Studio Click House — Project Setup
 
 ## 1. Create Next.js Project
 
