@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org) project built with TypeScript, Tailwind 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 18+ (LTS recommended)
-- [pnpm](https://pnpm.io/) (preferred) or [npm](https://www.npmjs.com/)
+- [pnpm](https://pnpm.io/)
 
 ## Getting Started
 
@@ -13,16 +13,12 @@ This is a [Next.js](https://nextjs.org) project built with TypeScript, Tailwind 
 
 ```bash
 pnpm install
-# or
-npm install
 ```
 
 ### 2. Run the development server
 
 ```bash
 pnpm dev
-# or
-npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
@@ -31,16 +27,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the r
 
 ```bash
 pnpm build
-# or
-npm run build
 ```
 
 ### 4. Start production server
 
 ```bash
 pnpm start
-# or
-npm start
 ```
 
 ## Project Structure

@@ -2,7 +2,7 @@
 ## Stack: Next.js 14 (App Router) + Framer Motion + Lenis + Tailwind + shadcn
 
 ```
-sch-website/
+studio-click-house/
 │
 ├── app/                                # Next.js App Router
 │   ├── layout.tsx                      # Root layout (Lenis provider, fonts, metadata)

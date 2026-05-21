@@ -3,27 +3,27 @@
 ## 1. Create Next.js Project
 
 ```bash
-npx create-next-app@latest sch-website --typescript --tailwind --eslint --app --src-dir no --import-alias "@/*"
-cd sch-website
+npx create-next-app@latest studio-click-house --typescript --tailwind --eslint --app --src-dir no --import-alias "@/*"
+cd studio-click-house
 ```
 
 ## 2. Install All Dependencies
 
 ```bash
 # Animations & Scroll
-npm install framer-motion lenis
+pnpm add framer-motion lenis
 
 # shadcn setup
-npx shadcn@latest init
+pnpm dlx shadcn@latest init
 
 # shadcn components we need
-npx shadcn@latest add button badge card accordion separator sheet
+pnpm dlx shadcn@latest add button badge card accordion separator sheet
 
 # Icons
-npm install lucide-react
+pnpm add lucide-react
 
 # Forms
-npm install react-hook-form zod @hookform/resolvers
+pnpm add react-hook-form zod @hookform/resolvers
 ```
 
 ## 3. Create Folder Structure (run all at once)
