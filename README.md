@@ -1,67 +1,74 @@
 # Studio Click House
 
-This is a [Next.js](https://nextjs.org) project built with TypeScript, Tailwind CSS, and shadcn/ui.
+Studio Click House is a SvelteKit marketing website for a creative studio specialising in image and video work. It is being built as a refined, motion-led visual experience that remains fast, accessible, SEO-friendly, and practical on lower-powered devices.
+
+## Technology
+
+- SvelteKit with Svelte 5 and TypeScript
+- Tailwind CSS v4
+- GSAP, ScrollTrigger, and Lenis
+- shadcn-svelte and lucide-svelte
+- Zod and sveltekit-superforms
+- Cloudflare Workers/Pages, R2, CDN, and Web Analytics
+- Bun for package management and scripts
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) 18+ (LTS recommended)
-- [pnpm](https://pnpm.io/)
+- [Bun](https://bun.sh/) 1.2 or later
+- A Cloudflare account for deployment, R2, CDN, and analytics configuration
 
-## Getting Started
-
-### 1. Install dependencies
+## Getting started
 
 ```bash
-pnpm install
+bun install
+bun run dev
 ```
 
-### 2. Run the development server
+Open the local URL printed by Vite.
+
+## Quality checks
 
 ```bash
-pnpm dev
+bun run check
+bun run lint
+bun run format:check
+bun run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
-
-### 3. Build for production
+Preview a production build locally with:
 
 ```bash
-pnpm build
+bun run preview
 ```
 
-### 4. Start production server
+## Project structure
+
+```text
+src/
+  routes/                 SvelteKit routes, layouts, form actions, and endpoints
+  lib/
+    components/           Layout, animation, section, common, SEO, and shadcn-svelte UI components
+    animations/           GSAP, ScrollTrigger, and Lenis helpers
+    config/               Site-wide configuration
+    content/              Reused content and page data
+    hooks/                Reusable Svelte hooks/actions
+    types/                Shared TypeScript types
+    utils/                Shared utilities
+  app.css                 Tailwind theme and global styles
+static/                   Static fallback assets and self-hosted fonts
+```
+
+For the complete convention guide, see [STRUCTURE.md](STRUCTURE.md). Agent implementation rules are in [AGENTS.md](AGENTS.md).
+
+## Cloudflare media and deployment
+
+Cloudflare R2 stores portfolio media. Public images and videos should be delivered through the configured Cloudflare custom domain/CDN, not direct bucket URLs. `.dev.vars.example` shows the public media-domain variable used in local development; never commit `.dev.vars`.
+
+The repository is prepared for `@sveltejs/adapter-cloudflare`. Configure the real R2 bucket binding and Cloudflare Web Analytics token once those production resources exist.
 
 ```bash
-pnpm start
+bun run cf:dev
+bun run cf:deploy
 ```
 
-## Project Structure
-
-- `app/` — Next.js App Router pages
-- `components/` — React components (ui, layout, sections, animations, seo, common)
-- `lib/` — Utility functions
-- `hooks/` — Custom React hooks
-- `content/` — Static content data
-- `config/` — Configuration files
-- `types/` — TypeScript types
-- `public/` — Static assets (images, fonts)
-- `styles/` — Global styles
-
-## Tech Stack
-
-- [Next.js 16](https://nextjs.org/)
-- [React 19](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS v4](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Lucide React](https://lucide.dev/)
-
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Learn Next.js](https://nextjs.org/learn)
-
-## Deploy on Vercel
-
-The easiest way to deploy is via the [Vercel Platform](https://vercel.com/new).
+Do not deploy before the Cloudflare project, domain, and R2 bucket details have been configured.

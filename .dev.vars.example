@@ -1,0 +1,2 @@
+# Add the public custom domain that fronts the production R2 bucket.
+PUBLIC_MEDIA_URL=https://media.studioclickhouse.com

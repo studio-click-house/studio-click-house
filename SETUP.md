@@ -1,106 +1,69 @@
 # Studio Click House — Project Setup
 
-## 1. Create Next.js Project
+This repository uses Bun and SvelteKit. It is an in-place migration from the former Next.js starter; do not recreate the repository or replace its Git and agent files.
+
+## 1. Install Bun
+
+Install Bun from [bun.sh](https://bun.sh/) if `bun --version` is not available, then restart the terminal so Bun is on your PATH.
+
+## 2. Install project dependencies
 
 ```bash
-npx create-next-app@latest studio-click-house --typescript --tailwind --eslint --app --src-dir no --import-alias "@/*"
-cd studio-click-house
+bun install
 ```
 
-## 2. Install All Dependencies
+This installs SvelteKit, Svelte 5, Tailwind CSS v4, GSAP, ScrollTrigger, Lenis, lucide-svelte, Zod, sveltekit-superforms, Cloudflare tooling, and the shadcn-svelte prerequisites.
+
+## 3. Motion runtime
+
+GSAP and ScrollTrigger power section-level motion. Lenis provides the single smooth-scroll instance and must be integrated with the GSAP ticker from the root layout layer. Do not initialize Lenis independently inside page sections.
+
+## 4. Run locally
 
 ```bash
-# Animations & Scroll
-pnpm add framer-motion lenis
-
-# shadcn setup
-pnpm dlx shadcn@latest init
-
-# shadcn components we need
-pnpm dlx shadcn@latest add button badge card accordion separator sheet
-
-# Icons
-pnpm add lucide-react
-
-# Forms
-pnpm add react-hook-form zod @hookform/resolvers
+bun run dev
 ```
 
-## 3. Create Folder Structure (run all at once)
+## 5. Validate the project
 
 ```bash
-mkdir -p app/about
-mkdir -p app/services/\[slug\]
-mkdir -p app/portfolio
-mkdir -p app/pricing
-mkdir -p "app/blog/[slug]"
-mkdir -p app/contact
-mkdir -p app/privacy
-mkdir -p app/terms
-mkdir -p app/api/contact
-mkdir -p components/layout
-mkdir -p components/seo
-mkdir -p components/animations
-mkdir -p components/sections
-mkdir -p components/common
-mkdir -p lib
-mkdir -p hooks
-mkdir -p content
-mkdir -p types
-mkdir -p config
-mkdir -p public/images/portfolio
-mkdir -p public/images/services
-mkdir -p public/images/team
-mkdir -p public/images/og
-mkdir -p public/fonts
-mkdir -p styles
+bun run check
+bun run lint
+bun run format:check
+bun run build
 ```
 
-## 4. Install Fonts (Google Fonts in layout.tsx)
+## 6. Add shadcn-svelte components when needed
 
-```tsx
-// app/layout.tsx — add this
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+The project is configured for shadcn-svelte in `components.json`. Do not pre-install UI components that are not yet needed.
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+```bash
+bun x shadcn-svelte@latest add button
 ```
 
-## 5. tailwind.config.ts — add brand colors
+Generated components belong in `src/lib/components/ui/`.
 
-```ts
-theme: {
-  extend: {
-    colors: {
-      brand: {
-        green: "#7ea641",         // SCH primary
-        dark: "#1a1a1a",
-        light: "#f8f8f6",
-      }
-    },
-    fontFamily: {
-      sans: ["var(--font-sans)"],
-    }
-  }
-}
+## 7. Configure Cloudflare media
+
+1. Create the production R2 bucket in Cloudflare.
+2. Configure a public custom domain for media delivery through Cloudflare CDN.
+3. Copy `.dev.vars.example` to `.dev.vars` for local values. Do not commit `.dev.vars`.
+4. Add the real R2 binding to `wrangler.jsonc` only after the bucket name is confirmed.
+5. Use the public media domain for browser-delivered portfolio images and video.
+
+R2 has no configured bucket name yet, so this repository intentionally does not invent one.
+
+## 8. Configure Cloudflare deployment
+
+The repository uses `@sveltejs/adapter-cloudflare` and has a base `wrangler.jsonc` file.
+
+```bash
+bun run cf:dev
+bun run cf:deploy
 ```
 
-## 6. styles/globals.css — add CSS variables
+Before deployment, set the Cloudflare project/domain configuration and add the `nodejs_als` compatibility flag if it is not already inherited from `wrangler.jsonc`.
 
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+## 9. Configure Cloudflare Web Analytics
 
-@layer base {
-  :root {
-    --brand-green: #7ea641;
-    --brand-dark: #1a1a1a;
-    --brand-light: #f8f8f6;
-  }
-}
-```
-
-## Done. Now open in Cursor and follow RULES.md
+When the production analytics token is available, add its snippet to `src/routes/+layout.svelte`. Keep it in that one root location and do not add duplicate analytics scripts to pages or sections.

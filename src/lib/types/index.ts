@@ -1,0 +1,6 @@
+export interface SeoMetadata {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  image?: string;
+}

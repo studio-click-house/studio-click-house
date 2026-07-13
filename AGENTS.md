@@ -1,228 +1,139 @@
 # Studio Click House — Agent & AI Coding Rules
 
-# Applies to: Cursor AI, Claude, Copilot, or any AI assistant working on this project.
+# Applies to Cursor AI, Claude, Copilot, and any AI assistant working on this project.
 
-# Stack: Next.js 16 App Router · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui · Framer Motion · Lenis
+# Stack: SvelteKit · Svelte 5 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger + Lenis · shadcn-svelte · Cloudflare · Bun
 
 ---
 
 ## Project
 
-Company: Studio Click House (SCH) — professional photo editing/retouching company
-Site: studioclickhouse.com
-No backend / no NestJS — this is a pure Next.js frontend project with API route handlers only.
+Studio Click House (SCHL) is a marketing website for a creative studio specialising in image and video work. The website should feel like an elegant visual experience while remaining fast, accessible, SEO-friendly, and usable on low-powered mobile devices.
+
+The application is a SvelteKit frontend deployed on private VPS.
 
 ---
 
 ## Git Rules — STRICT, NO EXCEPTIONS
 
-- NEVER run `git commit` without explicit user instruction. Not even "just saving progress."
-- NEVER run `git push` without explicit user instruction.
-- NEVER run `git add` as part of a task unless the user specifically said "stage" or "add to git."
-- NEVER auto-stage, auto-commit, or auto-push after completing a coding task.
-- NEVER combine a code task with a git operation in the same turn.
-- If asked to "save" or "deploy" → ask the user exactly what they mean before touching git.
-- Only allowed git actions: reading status (`git status`, `git log`, `git diff`) — these are safe and read-only.
-- Any git write operation (`add`, `commit`, `push`, `merge`, `rebase`, `reset`) → STOP and ask the user first, every single time.
+- Never run `git add`, `git commit`, or `git push` unless the user explicitly requests that exact action.
+- Never auto-stage, auto-commit, or auto-push after a coding task.
+- Read-only Git commands (`git status`, `git log`, `git diff`) are allowed.
+- If the user asks to “save” or “deploy”, ask what they mean before touching Git.
 
 ---
 
 ## Core Rules
 
-- Change only what was asked. Small/safe → do it; wider impact → ask first.
-- Question or "answer me" → text only, no code edits that turn.
-- After a task: one issue note only. No auto-fixing unrelated issues.
-- No refactoring or renaming outside scope.
+- Change only what was asked. Keep changes small and local.
+- A question or “answer me” request means text only; do not edit code in that turn.
+- Read every affected file first and trace its data flow before writing.
+- Match existing project naming, architecture, and style. Do not introduce patterns or dependencies without a clear need.
+- After a task, report at most one unrelated issue. Do not auto-fix it.
 
 ---
 
-## Before Writing
+## Files and Structure
 
-- Read every affected file first. Trace full data flow (callers, callees, readers/writers).
-- If structure is unclear, ask. Never assume.
-- Match existing style, naming, and patterns exactly. No new patterns.
+Do not move or rename files without explicit permission. New files must use the structure below.
 
----
+### Routes — only in `src/routes/`
 
-## Files & Structure
+- Every page route uses `+page.svelte`.
+- Shared route shells use `+layout.svelte`.
+- Server data and form actions belong in `+page.server.ts`.
+- HTTP handlers belong in `+server.ts`.
+- Route files compose sections; they do not contain large section implementations.
+- Add a new route to `src/routes/sitemap.xml/+server.ts` when the page is public.
 
-- Do not move or rename files.
-- New files: match folder, naming, casing, and pluralization exactly. Unsure → ask.
-- Do NOT create new folders outside the defined structure below.
+### Components — only in `src/lib/components/`
 
-### Pages → only in `app/`
+| Folder | What goes here |
+| --- | --- |
+| `layout/` | Navbar, footer, page shell, navigation |
+| `animations/` | Small reusable GSAP-aware animation components/actions |
+| `sections/` | Full-width page sections |
+| `common/` | Small reusable pieces such as cards and headings |
+| `seo/` | Reusable JSON-LD/schema components or builders |
+| `ui/` | shadcn-svelte generated base components only |
 
-- Every route is a folder with `page.tsx` inside.
-- `app/layout.tsx` is the only root layout — no extra layouts unless a nested route truly needs it.
-- Never put component or section logic inside page files — pages only import sections.
+### Data, configuration, and utilities
 
-### Components → split into 5 folders, never mix them
-
-| Folder                   | What goes here                                                      |
-| ------------------------ | ------------------------------------------------------------------- |
-| `components/layout/`     | Navbar, Footer, SmoothScrollProvider, PageTransition                |
-| `components/animations/` | Framer Motion wrapper components ONLY                               |
-| `components/sections/`   | Full-width page sections (HeroSection, ServicesGrid, etc.)          |
-| `components/common/`     | Small reusable pieces (SectionHeading, ServiceCard, BlogCard, etc.) |
-| `components/seo/`        | JSON-LD structured data components ONLY                             |
-| `components/ui/`         | shadcn/ui base components ONLY — do not put custom code here        |
-
-### Data → only in `content/`
-
-- Never hardcode repeated text or data inside components.
-- Services, FAQs, pricing, testimonials, stats → always in `content/*.ts`.
-- Import from content files into sections — never inline.
-
-### Utilities → only in `lib/`
-
-- All Framer Motion animation variants → `lib/animations.ts` — never define inline.
-- Lenis smooth scroll config → `lib/lenis.ts`
-- SEO metadata helper → `lib/metadata.ts`
-- JSON-LD schema builders → `lib/schema.ts`
-- Tailwind `cn()` utility → `lib/utils.ts`
-
-### Config → only in `config/`
-
-- Site name, URL, default OG image, social links → `config/site.ts`.
-- Never hardcode the site URL anywhere else.
-
-### Types → only in `types/index.ts`
-
-- All TypeScript interfaces and types live here.
-
-### Hooks → only in `hooks/`
-
-- Custom React hooks only (e.g. `useScrollProgress.ts`, `useInView.ts`).
+- Repeated services, FAQs, pricing, testimonials, and portfolio metadata belong in `src/lib/content/`.
+- Site name, URL, social links, and default OG image belong in `src/lib/config/site.ts`.
+- Shared utilities belong in `src/lib/utils/`; use `cn()` from `$lib/utils` for conditional Tailwind classes.
+- GSAP, ScrollTrigger, and Lenis setup and shared helpers belong in `src/lib/animations/`.
+- Shared TypeScript interfaces belong in `src/lib/types/`.
+- Custom Svelte hooks/actions belong in `src/lib/hooks/`.
+- Static fallback assets and self-hosted fonts belong in `static/`.
 
 ---
 
-## Engineering
+## SvelteKit Rules
 
-- No new libraries, abstractions, or patterns unless required and already aligned with the stack.
-- No magic strings. Use constants from `config/site.ts` or `content/` files.
-- Parallel awaits for independent async operations.
-- No `console.log`, commented-out code, or TODOs in production.
-- No over-engineering, hacky workarounds, unnecessary defaults, or guessing.
-
----
-
-## Next.js Rules (v16 App Router · React 19)
-
-- App Router only. Server Components by default; add `"use client"` only when truly needed.
-- No DB or external API logic in components — use Server Actions or `app/api/` route handlers only.
-- Use `next/image` for all images. Use `next/link` for all internal links.
-- Keep business logic out of components — it belongs in `lib/` or `content/`.
-- Every `page.tsx` must export a `metadata` object using `generatePageMetadata()` from `lib/metadata.ts`.
-- `app/sitemap.ts` must be updated whenever a new page is added.
-- All animated components that use Framer Motion must have `"use client"` at the top.
+- Use Svelte 5 runes only when state, derived state, or effects are genuinely needed.
+- Prefer server-rendered pages. Client-side code is for browser APIs, interaction, or animation only.
+- Use SvelteKit form actions and `sveltekit-superforms` for forms; validate with Zod on the server.
+- Keep business logic out of `.svelte` components when it can live in `src/lib/` or a server module.
+- Use normal semantic HTML for images and links. Give every meaningful image an accurate `alt`, explicit dimensions or aspect ratio, and a loading strategy.
+- Do not use React concepts, React files, `"use client"`, Next.js APIs, `next/image`, or `next/link`.
 
 ---
 
-## Animation Rules
+## Animation and Performance Rules
 
-- All Framer Motion animation variants defined in `lib/animations.ts` — never inline.
-- Framer Motion wrapper components live in `components/animations/` — use these in sections.
-- Never write `motion.div` directly inside section files — always use the wrapper.
-- Lenis smooth scroll initialized once only in `components/layout/SmoothScrollProvider.tsx`.
+- Use GSAP and ScrollTrigger for intentional editorial motion, not as decoration on every element.
+- Use Lenis for the single site-wide smooth-scroll instance. It must be initialized once in the root layout layer, integrated with the GSAP ticker, and destroyed when that layer is destroyed.
+- Register ScrollTrigger only in browser-executed code and clean up every GSAP context in `onMount` cleanup.
+- Do not initialize Lenis inside sections or create competing request-animation-frame loops.
+- Animate transforms and opacity whenever possible. Avoid layout-triggering properties and expensive filters on mobile.
+- Respect `prefers-reduced-motion`; provide a still, fully usable experience when motion is reduced.
+- Avoid pinned sections and continuous scroll effects on small screens unless they are tested and justified.
+- Lazy-load below-the-fold images and video. Use responsive sources, compressed formats, poster images, and pause video when it is offscreen.
+- Do not add 3D/WebGL libraries or effects unless the user explicitly asks.
 
-### Standard animation wrappers (use these, don't create new ones without asking):
+---
 
-- `<FadeUp>` — scroll fade up, default for most elements
-- `<FadeIn>` — simple opacity fade
-- `<StaggerContainer>` — parent wrapper when children need stagger
-- `<TextReveal>` — heading word/line reveal on scroll
-- `<ParallaxImage>` — image parallax on scroll
-- `<MarqueeScroll>` — infinite horizontal ticker
+## Cloudflare, R2, and Analytics
+
+- Deploy through `@sveltejs/adapter-cloudflare` and Wrangler.
+- Cloudflare R2 stores original portfolio media. Serve public media through the configured Cloudflare custom domain/CDN, not direct ad-hoc bucket URLs.
+- Keep bucket bindings, API tokens, and credentials server-only. Never expose them in client code or commit `.dev.vars`.
+- Add the R2 binding to `wrangler.jsonc` only after the real bucket name is known.
+- Add Cloudflare Web Analytics once the production site token is available; place the snippet in the root layout only.
 
 ---
 
 ## SEO Rules
 
-- Every `page.tsx` exports `metadata` via `generatePageMetadata()` from `lib/metadata.ts`.
-- Site URL and defaults always from `config/site.ts` — never hardcoded.
-- JSON-LD structured data added via components in `components/seo/`.
-- OG images stored in `public/images/og/`.
-- Every service page needs its own OG image and JSON-LD schema.
+- Every public route sets a unique title, description, canonical URL, and Open Graph data in `<svelte:head>`.
+- Use values from `src/lib/config/site.ts`; never hardcode the site URL elsewhere.
+- Add JSON-LD through `src/lib/components/seo/` for services and articles when those pages are created.
+- Place OG images in `static/images/og/` or use the approved public R2 media domain.
+- Give every meaningful user-facing landmark a stable, unique HTML `id`: navigation areas, headers, full sections, carousels, tables, tab lists and their panels, and linkable content blocks. This supports direct linking, in-page navigation, crawler understanding, and search-result/AI-summary deep links.
+- Use descriptive kebab-case IDs such as `services-overview`, `portfolio-carousel`, and `retouching-pricing-table`. IDs must be unique and stable across renders; do not generate random IDs or add IDs to purely decorative wrappers.
 
 ---
 
-## TypeScript
+## TypeScript and Style
 
-- Understand data shape; fix types properly.
-- No `as`, `any`, `unknown`, or type predicates (`is`) to force types.
-- No redundant annotations. Add explicit types only when inferred type would be unclear.
-- No single-use utility types that already exist in `types/index.ts`.
-
----
-
-## Naming Conventions
-
-- Variable and parameter names must be meaningful and self-descriptive.
-- No single-letter or abbreviated names that require guessing.
-- Loop variables and callbacks must reflect what the item represents:
-  `services.map((service) => ...)` not `services.map((s) => ...)`.
-- `camelCase` for variables and functions.
-- `PascalCase` for components and types.
-- `UPPER_SNAKE_CASE` for constants.
-- File names match component names exactly: `HeroSection.tsx` not `hero.tsx`.
+- Always use TypeScript; no JavaScript application files.
+- Use meaningful, self-describing names. Use `camelCase` for values/functions and `PascalCase` for components/types.
+- Do not use `any`, unsafe casts, or type predicates to bypass a type problem.
+- Use `lucide-svelte` for icons.
+- Use Tailwind tokens and CSS theme tokens. Do not use raw hex values in component markup.
+- Keep comments minimal and only for complex reasoning.
 
 ---
 
-## Code Style Rules
+## What Not To Do
 
-- Always TypeScript — no `.js` files ever.
-- Named exports everywhere — no default exports except `page.tsx` files.
-- Use `cn()` from `lib/utils.ts` for all conditional Tailwind classes.
-- Use `lucide-react` for all icons — no other icon libraries.
-- Forms use `react-hook-form` + `zod` validation always.
-- All colors use Tailwind brand tokens from `tailwind.config.ts` — never raw hex in JSX.
-- Minimal comments — only for genuinely complex logic.
-
----
-
-## Brand Tokens (never hardcode these values directly in JSX)
-
-| Token         | Value                     |
-| ------------- | ------------------------- |
-| Primary green | `brand-green` → `#7ea641` |
-| Dark          | `brand-dark` → `#1a1a1a`  |
-| Light         | `brand-light` → `#f8f8f6` |
-| Font          | Plus Jakarta Sans         |
-
----
-
-## What NOT to Do
-
-- Do NOT put component or section logic inside `app/` page files.
-- Do NOT write Framer Motion variants inline — always use `lib/animations.ts`.
-- Do NOT hardcode service names, FAQ text, pricing, testimonials — use `content/` files.
-- Do NOT install new packages without checking if the existing stack covers it.
-- Do NOT create folders outside the defined structure.
-- Do NOT use `default export` in components — only in `page.tsx` files.
-- Do NOT use raw hex colors in JSX — use brand tokens only.
-- Do NOT write `motion.div` directly in section files — use animation wrappers.
-
----
-
-## When Creating a New Page
-
-1. Create `app/[page-name]/page.tsx`
-2. Export `metadata` using `generatePageMetadata()` from `lib/metadata.ts`
-3. Import sections from `components/sections/`
-4. If a new section is needed → create it in `components/sections/`
-5. If new data is needed → add to relevant `content/*.ts` file
-6. Update `app/sitemap.ts` with the new page URL
-7. Add JSON-LD schema component if it's a service or blog page
-
----
-
-## When Creating a New Section
-
-1. Create file in `components/sections/`
-2. Pull data from `content/` — never hardcode text inside the section
-3. Wrap animated elements using components from `components/animations/`
-4. Use `<SectionHeading>` from `components/common/` for all h2 headings
-5. Add `"use client"` only if the section has animations or interactivity
+- Do not put full section implementations in route files.
+- Do not create custom code in `src/lib/components/ui/`.
+- Do not hardcode repeated content inside components.
+- Do not add packages when the current stack already covers the need.
+- Do not create external API or database logic in browser components.
+- Do not leave `console.log`, commented-out code, or TODO markers in production code.
 
 ---
 
@@ -232,13 +143,5 @@ No backend / no NestJS — this is a pure Next.js frontend project with API rout
 Quality: [Acceptable / Good / Production-Ready]
 Strengths:
 Concerns:
-AI-Code Risk: forced types · wrong layer · hardcoded data · inline animation · extra fetch · null path · style mismatch · client overuse · structure violation · magic string · raw color
+AI-Code Risk: forced types · wrong layer · hardcoded data · animation cleanup · extra fetch · null path · style mismatch · client overuse · structure violation · magic string · raw color
 ```
-
----
-
-## Working Style
-
-- Professional engineer mindset: maintainability, architecture, correctness.
-- Self-check after finishing. Verify nothing missed, result is clean.
-- One issue note after task completion — do not auto-fix unrelated things.
