@@ -18,7 +18,7 @@
         Proof belongs to the people who commissioned the work.
       </h2>
     </div>
-    <div class="lg:col-span-8 lg:pt-28">
+    <div class="lg:col-span-8 lg:pt-14">
       {#if testimonials.length}
         <div
           class="divide-y divide-brand-dark/15 border-y border-brand-dark/15"
@@ -35,7 +35,7 @@
       {:else}
         <div
           role="status"
-          class="grid min-h-80 content-between border-y border-brand-dark/15 py-8"
+          class="grid min-h-64 content-between border-y border-brand-dark/15 py-7"
         >
           <MessageSquareQuote
             size={40}

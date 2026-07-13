@@ -5,6 +5,7 @@ import type {
   FaqItem,
   ServiceItem,
   TestimonialItem,
+  WorkGalleryItem,
 } from "$lib/types/content";
 import type { RouteId } from "$app/types";
 
@@ -84,6 +85,54 @@ export const services: ServiceItem[] = [
     description:
       "Flexible post-production support for still and moving campaigns.",
     media: previewMedia.editingWorkspace,
+  },
+];
+
+export const workGalleryItems: WorkGalleryItem[] = [
+  {
+    id: "product-finishing",
+    category: "Product finishing",
+    title: "Shape, light, and a clean final frame.",
+    description:
+      "A considered product image keeps its material and lighting believable while removing visual distractions.",
+    tags: ["Product", "Retouching"],
+    media: previewMedia.perfumeStillLife,
+  },
+  {
+    id: "beauty-detail",
+    category: "Beauty detail",
+    title: "Texture stays present. Distraction falls away.",
+    description:
+      "Focused finishing balances skin detail, tone, and the intended character of the portrait.",
+    tags: ["Beauty", "High-end"],
+    media: previewMedia.studioPortrait,
+  },
+  {
+    id: "fashion-color",
+    category: "Fashion color",
+    title: "Color decisions that belong to the full story.",
+    description:
+      "Controlled color treatment helps separate the subject while keeping a campaign visually connected.",
+    tags: ["Fashion", "Color"],
+    media: previewMedia.redStudioPortrait,
+  },
+  {
+    id: "jewelry-detail",
+    category: "Jewelry detail",
+    title: "Small surfaces, closely considered.",
+    description:
+      "Reflection, edge definition, and material detail are handled without flattening the object.",
+    tags: ["Jewelry", "Detail"],
+    media: previewMedia.jewelryMacro,
+  },
+  {
+    id: "shadow-study",
+    category: "Shadow study",
+    title: "A grounded image still needs room to breathe.",
+    description:
+      "Directional shadow and negative space give a product weight without making the composition feel heavy.",
+    tags: ["Shadow", "Composition"],
+    media: previewMedia.perfumeShadow,
   },
 ];
 

@@ -43,3 +43,12 @@ export interface ClientLogoItem {
   width?: number;
   height?: number;
 }
+
+export interface WorkGalleryItem {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  tags: readonly string[];
+  media: PreviewMedia;
+}

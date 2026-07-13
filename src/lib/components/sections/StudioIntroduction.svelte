@@ -1,16 +1,73 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
+  import { registerScrollTrigger } from "$lib/animations/gsap";
   import { previewMedia } from "$lib/content/media";
+
+  let section: HTMLElement;
+  let imageMedia: HTMLDivElement;
+  let monochromeLayer: HTMLImageElement;
+
+  onMount(() => {
+    let context: { revert: () => void } | undefined;
+    let active = true;
+
+    registerScrollTrigger().then((runtime) => {
+      if (!active || !runtime || !section || !imageMedia || !monochromeLayer)
+        return;
+
+      const { gsap } = runtime;
+      context = gsap.context(() => {
+        const media = gsap.matchMedia();
+
+        media.add(
+          "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+          () => {
+            const timeline = gsap.timeline({
+              scrollTrigger: {
+                trigger: section,
+                start: "top 78%",
+                end: "bottom 45%",
+                scrub: 0.85,
+              },
+            });
+
+            timeline
+              .fromTo(
+                imageMedia,
+                { scale: 0.84, yPercent: 5 },
+                { scale: 1, yPercent: 0, ease: "none" },
+                0,
+              )
+              .fromTo(
+                monochromeLayer,
+                { autoAlpha: 1 },
+                { autoAlpha: 0.16, ease: "none" },
+                0.08,
+              );
+          },
+        );
+
+        return () => media.revert();
+      }, section);
+    });
+
+    return () => {
+      active = false;
+      context?.revert();
+    };
+  });
 </script>
 
 <section
   id="studio-introduction"
+  bind:this={section}
   aria-labelledby="studio-introduction-title"
   class="section-space bg-brand-paper"
 >
   <div class="site-shell grid gap-14 lg:grid-cols-12 lg:items-start">
-    <div class="lg:col-span-4 lg:pt-32">
+    <div class="lg:col-span-4 lg:pt-16">
       <p class="eyebrow text-brand-green">Studio introduction</p>
       <p
         data-scroll-copy
@@ -31,16 +88,33 @@
       >
         The polish should never overpower the picture.
       </h2>
-      <div class="mt-12 grid gap-7 sm:grid-cols-[1.2fr_0.8fr] sm:items-end">
+      <div class="mt-10 grid gap-7 sm:grid-cols-[1.2fr_0.8fr] sm:items-end">
         <figure class="relative">
-          <img
-            src={previewMedia.monochromePortrait.src}
-            alt={previewMedia.monochromePortrait.alt}
-            width={previewMedia.monochromePortrait.width}
-            height={previewMedia.monochromePortrait.height}
-            loading="lazy"
-            class="aspect-[4/5] w-full object-cover grayscale"
-          />
+          <div class="about-image-stage overflow-hidden bg-brand-dark">
+            <div
+              bind:this={imageMedia}
+              class="about-image-media relative origin-center will-change-transform"
+            >
+              <img
+                src={previewMedia.monochromePortrait.src}
+                alt={previewMedia.monochromePortrait.alt}
+                width={previewMedia.monochromePortrait.width}
+                height={previewMedia.monochromePortrait.height}
+                loading="lazy"
+                class="aspect-[4/5] w-full object-cover"
+              />
+              <img
+                bind:this={monochromeLayer}
+                src={previewMedia.monochromePortrait.src}
+                alt=""
+                aria-hidden="true"
+                width={previewMedia.monochromePortrait.width}
+                height={previewMedia.monochromePortrait.height}
+                loading="lazy"
+                class="absolute inset-0 aspect-[4/5] w-full object-cover grayscale will-change-[opacity]"
+              />
+            </div>
+          </div>
           <span
             class="absolute -left-3 -top-3 size-8 border-l border-t border-brand-coral"
             aria-hidden="true"

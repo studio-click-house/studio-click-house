@@ -5,9 +5,9 @@
 <section
   id="client-locations"
   aria-labelledby="client-locations-title"
-  class="overflow-hidden bg-brand-dark pt-20 text-brand-light sm:pt-28"
+  class="overflow-hidden bg-brand-dark pt-16 text-brand-light sm:pt-20"
 >
-  <div class="site-shell pb-12 sm:pb-16">
+  <div class="site-shell pb-10 sm:pb-12">
     <div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
       <div>
         <p class="eyebrow text-brand-green">Client locations</p>

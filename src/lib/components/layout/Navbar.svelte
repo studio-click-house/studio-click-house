@@ -80,16 +80,24 @@
         <button
           bind:this={menuButton}
           type="button"
-          class="menu-action flex items-center gap-3 border border-brand-light/30 bg-brand-dark/95 px-4 font-mono text-[0.62rem] font-medium uppercase tracking-[0.16em] text-brand-light backdrop-blur-xl transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green sm:px-5"
+          class="menu-action group flex items-center gap-3 border border-transparent bg-brand-dark/95 px-4 font-mono text-[0.62rem] font-medium uppercase tracking-[0.16em] text-brand-light backdrop-blur-xl transition-colors hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green sm:px-5"
           aria-expanded={isMenuOpen}
           aria-controls="primary-navigation-panel"
           onclick={() => (isMenuOpen = !isMenuOpen)}
         >
           <span>{isMenuOpen ? "Close" : "Menu"}</span>
           {#if isMenuOpen}
-            <X size={17} strokeWidth={1.7} />
+            <X
+              size={17}
+              strokeWidth={1.7}
+              class="transition-colors group-hover:text-brand-dark"
+            />
           {:else}
-            <Menu size={17} strokeWidth={1.7} />
+            <Menu
+              size={17}
+              strokeWidth={1.7}
+              class="transition-colors group-hover:text-brand-dark"
+            />
           {/if}
         </button>
 

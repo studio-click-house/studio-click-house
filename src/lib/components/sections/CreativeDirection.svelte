@@ -32,20 +32,20 @@
 <section
   id="creative-direction"
   aria-labelledby="creative-direction-title"
-  class="section-space overflow-hidden bg-brand-dark text-brand-light"
+  class="overflow-hidden bg-brand-dark py-16 text-brand-light sm:py-20 lg:py-24"
 >
   <div class="site-shell">
-    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <div class="grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
       <div>
         <p class="eyebrow text-brand-green">Creative direction</p>
         <h2
           id="creative-direction-title"
-          class="mt-8 font-display text-[clamp(4rem,8vw,8.25rem)] leading-[0.86] tracking-[-0.04em]"
+          class="mt-7 max-w-4xl font-display text-[clamp(3.5rem,6vw,6.5rem)] leading-[0.88] tracking-[-0.04em]"
         >
           Consistency is a creative decision.
         </h2>
       </div>
-      <figure class="relative lg:translate-y-24">
+      <figure class="relative w-full max-w-[30rem] lg:justify-self-end">
         <img
           src={previewMedia.jewelryDetail.src}
           alt={previewMedia.jewelryDetail.alt}
@@ -63,16 +63,16 @@
     </div>
 
     <ol
-      class="mt-20 grid border-t border-brand-light/20 sm:grid-cols-2 lg:mt-36 lg:grid-cols-3"
+      class="mt-16 grid border-t border-brand-light/20 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3"
     >
       {#each principles as principle, index (principle[0])}
         <li
-          class="border-b border-brand-light/20 p-6 sm:odd:border-r lg:border-r lg:nth-[3n]:border-r-0"
+          class="border-b border-brand-light/20 p-5 sm:odd:border-r lg:border-r lg:nth-[3n]:border-r-0"
         >
           <span class="font-mono text-[0.65rem] text-brand-green"
             >{String(index + 1).padStart(2, "0")}</span
           >
-          <h3 class="mt-10 font-display text-3xl">{principle[0]}</h3>
+          <h3 class="mt-6 font-display text-3xl">{principle[0]}</h3>
           <p class="mt-4 text-sm leading-relaxed text-brand-light/60">
             {principle[1]}
           </p>

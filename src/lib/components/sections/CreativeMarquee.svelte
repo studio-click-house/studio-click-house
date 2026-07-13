@@ -11,10 +11,10 @@
 <section
   id="creative-marquee"
   aria-labelledby="creative-marquee-title"
-  class="client-wall relative overflow-hidden bg-brand-light py-24 text-brand-dark sm:py-32"
+  class="client-wall relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20"
 >
   <div
-    class="site-shell relative z-10 mb-16 grid gap-6 lg:grid-cols-12 lg:items-end"
+    class="site-shell relative z-10 mb-12 grid gap-6 lg:grid-cols-12 lg:items-end"
   >
     <div class="lg:col-span-8">
       <p class="eyebrow text-brand-green">Client marks · awaiting approval</p>

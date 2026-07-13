@@ -10,6 +10,7 @@
   import ServicesSection from "$lib/components/sections/ServicesSection.svelte";
   import StudioIntroduction from "$lib/components/sections/StudioIntroduction.svelte";
   import TestimonialsSection from "$lib/components/sections/TestimonialsSection.svelte";
+  import WorkFieldsRail from "$lib/components/sections/WorkFieldsRail.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -48,6 +49,7 @@
   <HomeHero />
   <StudioIntroduction />
   <ScrollImageStory />
+  <WorkFieldsRail />
   <CreativeMarquee />
   <ServicesSection />
   <TestimonialsSection />
