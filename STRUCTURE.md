@@ -2,16 +2,16 @@
 
 ## Stack
 
-SvelteKit (Svelte 5), TypeScript, Tailwind CSS v4, GSAP, ScrollTrigger, Lenis, shadcn-svelte, lucide-svelte, Zod, sveltekit-superforms, Cloudflare R2/CDN/Web Analytics, and Bun.
+SvelteKit (Svelte 5), TypeScript, Tailwind CSS v4, GSAP, ScrollTrigger, Lenis, shadcn-svelte, lucide-svelte, Zod, sveltekit-superforms, private VPS hosting through the Node adapter, Cloudflare R2/CDN for media, and Bun.
 
 ```text
 studio-click-house/
 ├── src/
 │   ├── app.html                         # SvelteKit document shell
 │   ├── app.css                          # Tailwind theme tokens and global styles
-│   ├── app.d.ts                         # Application and Cloudflare types
+│   ├── app.d.ts                         # Application types
 │   ├── routes/                          # SvelteKit file-based routes
-│   │   ├── +layout.svelte               # Root layout, global head, analytics when configured
+│   │   ├── +layout.svelte               # Root layout and global head
 │   │   ├── +page.svelte                 # Home route composition only
 │   │   ├── about/
 │   │   │   └── +page.svelte
@@ -56,11 +56,10 @@ studio-click-house/
 ├── static/
 │   ├── images/                          # Fallback, OG, and non-R2 images
 │   └── fonts/                           # Self-hosted font files
-├── .dev.vars.example                    # Safe example local Cloudflare values
+├── .env.example                         # Safe example local media-domain value
 ├── components.json                      # shadcn-svelte CLI configuration
-├── svelte.config.js                     # SvelteKit + Cloudflare adapter
+├── svelte.config.js                     # SvelteKit + Node adapter
 ├── vite.config.ts                       # Vite + Tailwind CSS v4
-├── wrangler.jsonc                       # Cloudflare Worker configuration
 ├── package.json                         # Bun scripts and dependencies
 └── AGENTS.md                            # Repository coding rules
 ```
@@ -77,7 +76,7 @@ studio-click-house/
 
 ## Content and visual media
 
-Keep reusable copy and metadata in `src/lib/content/`. Store original portfolio images and videos in Cloudflare R2, then deliver them through the approved Cloudflare media domain. Keep only local fallback assets, fonts, and generated OG files in `static/`.
+Keep reusable copy and metadata in `src/lib/content/`. Store original portfolio images and videos in Cloudflare R2, then deliver them through the approved R2 public media domain. Keep only local fallback assets, fonts, and generated OG files in `static/`. The SvelteKit application itself runs on the private VPS through the Node adapter.
 
 ## Motion system
 

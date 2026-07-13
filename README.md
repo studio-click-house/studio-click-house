@@ -9,13 +9,15 @@ Studio Click House is a SvelteKit marketing website for a creative studio specia
 - GSAP, ScrollTrigger, and Lenis
 - shadcn-svelte and lucide-svelte
 - Zod and sveltekit-superforms
-- Cloudflare Workers/Pages, R2, CDN, and Web Analytics
+- Private VPS hosting with the SvelteKit Node adapter
+- Cloudflare R2 and its public media domain for images and video
 - Bun for package management and scripts
 
 ## Prerequisites
 
 - [Bun](https://bun.sh/) 1.2 or later
-- A Cloudflare account for deployment, R2, CDN, and analytics configuration
+- A private VPS with Node.js 20+ for production hosting
+- A Cloudflare account only for R2 media storage and its public media domain
 
 ## Getting started
 
@@ -60,15 +62,15 @@ static/                   Static fallback assets and self-hosted fonts
 
 For the complete convention guide, see [STRUCTURE.md](STRUCTURE.md). Agent implementation rules are in [AGENTS.md](AGENTS.md).
 
-## Cloudflare media and deployment
+## R2 media and VPS deployment
 
-Cloudflare R2 stores portfolio media. Public images and videos should be delivered through the configured Cloudflare custom domain/CDN, not direct bucket URLs. `.dev.vars.example` shows the public media-domain variable used in local development; never commit `.dev.vars`.
+Cloudflare R2 stores portfolio media. Public images and videos should be delivered through the configured R2 public custom domain/CDN, not direct bucket URLs. `.env.example` documents the public media-domain variable used in local development; never commit `.env` files.
 
-The repository is prepared for `@sveltejs/adapter-cloudflare`. Configure the real R2 bucket binding and Cloudflare Web Analytics token once those production resources exist.
+The website itself is deployed to the private VPS through `@sveltejs/adapter-node`. Build it with Bun, run the generated Node server behind the VPS reverse proxy, and set `ORIGIN` to the production URL.
 
 ```bash
-bun run cf:dev
-bun run cf:deploy
+bun run build
+ORIGIN=https://studioclickhouse.com bun run start
 ```
 
-Do not deploy before the Cloudflare project, domain, and R2 bucket details have been configured.
+Do not deploy before the VPS reverse proxy, production environment variables, and R2 media domain are configured.

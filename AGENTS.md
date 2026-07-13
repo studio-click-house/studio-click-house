@@ -2,7 +2,7 @@
 
 # Applies to Cursor AI, Claude, Copilot, and any AI assistant working on this project.
 
-# Stack: SvelteKit · Svelte 5 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger + Lenis · shadcn-svelte · Cloudflare · Bun
+# Stack: SvelteKit · Svelte 5 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger + Lenis · shadcn-svelte · Cloudflare R2 · Bun
 
 ---
 
@@ -10,7 +10,7 @@
 
 Studio Click House (SCHL) is a marketing website for a creative studio specialising in image and video work. The website should feel like an elegant visual experience while remaining fast, accessible, SEO-friendly, and usable on low-powered mobile devices.
 
-The application is a SvelteKit frontend deployed on private VPS.
+The application is a SvelteKit frontend deployed on a private VPS. Cloudflare is used only for R2 media storage and its public media domain, not for hosting the application.
 
 ---
 
@@ -94,13 +94,12 @@ Do not move or rename files without explicit permission. New files must use the 
 
 ---
 
-## Cloudflare, R2, and Analytics
+## VPS Deployment and R2 Media
 
-- Deploy through `@sveltejs/adapter-cloudflare` and Wrangler.
-- Cloudflare R2 stores original portfolio media. Serve public media through the configured Cloudflare custom domain/CDN, not direct ad-hoc bucket URLs.
-- Keep bucket bindings, API tokens, and credentials server-only. Never expose them in client code or commit `.dev.vars`.
-- Add the R2 binding to `wrangler.jsonc` only after the real bucket name is known.
-- Add Cloudflare Web Analytics once the production site token is available; place the snippet in the root layout only.
+- Deploy through `@sveltejs/adapter-node`. The VPS runs the generated Node server; Cloudflare Workers, Pages, and Wrangler are not part of this project.
+- Put the Node server behind the VPS reverse proxy for TLS, compression, and public traffic. Set `ORIGIN` to the production site URL; configure forwarded-header environment variables only when the proxy setup is confirmed.
+- Cloudflare R2 stores original portfolio media. Serve public images and video through the configured R2 public custom domain/CDN, not direct ad-hoc bucket URLs.
+- Keep R2 credentials server-only. Browser components may use only the public media URL from `PUBLIC_MEDIA_URL`; never commit real `.env` files or expose R2 API tokens.
 
 ---
 
@@ -112,6 +111,11 @@ Do not move or rename files without explicit permission. New files must use the 
 - Place OG images in `static/images/og/` or use the approved public R2 media domain.
 - Give every meaningful user-facing landmark a stable, unique HTML `id`: navigation areas, headers, full sections, carousels, tables, tab lists and their panels, and linkable content blocks. This supports direct linking, in-page navigation, crawler understanding, and search-result/AI-summary deep links.
 - Use descriptive kebab-case IDs such as `services-overview`, `portfolio-carousel`, and `retouching-pricing-table`. IDs must be unique and stable across renders; do not generate random IDs or add IDs to purely decorative wrappers.
+- Keep important public copy in server-rendered, semantic HTML. Do not hide essential service details, headings, pricing context, or contact information behind client-only interactions, animation-only states, images, or video.
+- Give every public page one clear `h1`, a logical heading hierarchy, and concise answer-first copy that explains what Studio Click House does, who a service is for, its deliverables, workflow, and relevant constraints. Use factual, specific language; never manufacture claims, clients, results, locations, prices, or FAQs for SEO.
+- Use accurate structured data that matches visible page content: `Organization` for the site, `Service` for service pages, `FAQPage` only for visible FAQs, and `BlogPosting` for articles. Never add schema solely to target a rich result or AI summary.
+- Link related pages with descriptive internal-link text and keep canonical URLs, service names, and terminology consistent across navigation, page copy, metadata, and schema.
+- When the core public content is ready, maintain an optional concise `static/llms.txt` that links to the canonical site, services, portfolio, and contact pages. It supplements—not replaces—crawlable HTML, metadata, sitemap, and structured data.
 
 ---
 
@@ -123,6 +127,16 @@ Do not move or rename files without explicit permission. New files must use the 
 - Use `lucide-svelte` for icons.
 - Use Tailwind tokens and CSS theme tokens. Do not use raw hex values in component markup.
 - Keep comments minimal and only for complex reasoning.
+
+---
+
+## Brand Tokens (Never hardcode these values in markup)
+
+| Token         | CSS Variable / Tailwind Class | Value                     |
+| ------------- | ----------------------------- | ------------------------- |
+| Primary green | `text-brand-green`            | `#7ea641`                 |
+| Dark          | `text-brand-dark`             | `#332E2D`                 |
+| Light         | `text-brand-light`            | `#f8f8f6`                 |
 
 ---
 

@@ -12,7 +12,7 @@ Install Bun from [bun.sh](https://bun.sh/) if `bun --version` is not available, 
 bun install
 ```
 
-This installs SvelteKit, Svelte 5, Tailwind CSS v4, GSAP, ScrollTrigger, Lenis, lucide-svelte, Zod, sveltekit-superforms, Cloudflare tooling, and the shadcn-svelte prerequisites.
+This installs SvelteKit, Svelte 5, Tailwind CSS v4, GSAP, ScrollTrigger, Lenis, lucide-svelte, Zod, sveltekit-superforms, the Node deployment adapter, and the shadcn-svelte prerequisites.
 
 ## 3. Motion runtime
 
@@ -43,27 +43,23 @@ bun x shadcn-svelte@latest add button
 
 Generated components belong in `src/lib/components/ui/`.
 
-## 7. Configure Cloudflare media
+## 7. Configure Cloudflare R2 media
 
 1. Create the production R2 bucket in Cloudflare.
 2. Configure a public custom domain for media delivery through Cloudflare CDN.
-3. Copy `.dev.vars.example` to `.dev.vars` for local values. Do not commit `.dev.vars`.
-4. Add the real R2 binding to `wrangler.jsonc` only after the bucket name is confirmed.
-5. Use the public media domain for browser-delivered portfolio images and video.
+3. Copy `.env.example` to `.env` for local values. Do not commit `.env`.
+4. Use the public media domain for browser-delivered portfolio images and video.
 
-R2 has no configured bucket name yet, so this repository intentionally does not invent one.
+The website runs on the VPS and does not need a Wrangler R2 binding. R2 credentials are only needed later if server-side code must read or write bucket objects.
 
-## 8. Configure Cloudflare deployment
+## 8. Deploy to the private VPS
 
-The repository uses `@sveltejs/adapter-cloudflare` and has a base `wrangler.jsonc` file.
+The repository uses `@sveltejs/adapter-node`. Build the app, then run the generated Node server behind the VPS reverse proxy.
 
 ```bash
-bun run cf:dev
-bun run cf:deploy
+bun install
+bun run build
+ORIGIN=https://studioclickhouse.com bun run start
 ```
 
-Before deployment, set the Cloudflare project/domain configuration and add the `nodejs_als` compatibility flag if it is not already inherited from `wrangler.jsonc`.
-
-## 9. Configure Cloudflare Web Analytics
-
-When the production analytics token is available, add its snippet to `src/routes/+layout.svelte`. Keep it in that one root location and do not add duplicate analytics scripts to pages or sections.
+Configure TLS and response compression in the VPS reverse proxy. If the proxy terminates HTTPS, set `ORIGIN` to the public HTTPS URL so form actions and canonical URLs resolve correctly.
