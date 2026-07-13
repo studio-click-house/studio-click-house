@@ -35,7 +35,7 @@
   class="section-space overflow-hidden bg-brand-dark text-brand-light"
 >
   <div class="site-shell">
-    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
       <div>
         <p class="eyebrow text-brand-green">Creative direction</p>
         <h2

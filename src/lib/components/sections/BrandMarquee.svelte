@@ -1,55 +1,62 @@
 <script lang="ts">
-  import { brandPlaceholders } from "$lib/content/home";
-  const loopItems = [...brandPlaceholders, ...brandPlaceholders];
+  import { services } from "$lib/content/home";
+
+  const serviceNames = services.map((service) => service.title);
+  const loopItems = [...serviceNames, ...serviceNames];
 </script>
 
-<section
-  id="brand-marquee"
-  aria-labelledby="brand-marquee-title"
-  class="overflow-hidden border-y border-brand-dark/15 bg-brand-light py-7"
+<div
+  id="hero-services-marquee"
+  role="region"
+  aria-label="Studio services"
+  class="hero-service-marquee absolute inset-x-0 bottom-0 z-20 overflow-hidden border-y border-brand-light/15 text-brand-light backdrop-blur-md"
 >
-  <div class="site-shell mb-6 flex items-center justify-between gap-6">
-    <h2 id="brand-marquee-title" class="eyebrow">Collaboration marks</h2>
-    <p
-      class="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-brand-dark/45"
-    >
-      Placeholder data · awaiting approval
-    </p>
-  </div>
   <div
-    class="marquee-track flex w-max items-center will-change-transform"
-    aria-label="Placeholder client marks"
+    class="marquee-track flex w-max items-center py-4 will-change-transform sm:py-[1.1rem]"
   >
     {#each loopItems as item, index (`${item}-${index}`)}
       <span
-        aria-hidden={index >= brandPlaceholders.length}
-        class="flex min-w-56 items-center justify-center border-r border-brand-dark/15 px-10 py-4 font-display text-2xl italic text-brand-dark/45 sm:min-w-72 sm:text-3xl"
-        >{item}</span
+        class="flex min-w-max items-center"
+        aria-hidden={index >= serviceNames.length}
       >
+        <span class="mx-5 size-1 bg-brand-green sm:mx-8" aria-hidden="true"
+        ></span>
+        <span
+          class="font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
+        >
+          {item}
+        </span>
+      </span>
     {/each}
   </div>
-</section>
+</div>
 
 <style>
-  .marquee-track {
-    animation: marquee 28s linear infinite;
+  .hero-service-marquee {
+    background: color-mix(in srgb, var(--color-brand-dark) 58%, transparent);
+    box-shadow:
+      inset 0 1px color-mix(in srgb, var(--color-brand-light) 8%, transparent),
+      0 -1.5rem 4rem
+        color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
   }
-  #brand-marquee:hover .marquee-track {
+
+  .marquee-track {
+    animation: marquee 34s linear infinite;
+  }
+
+  #hero-services-marquee:hover .marquee-track {
     animation-play-state: paused;
   }
+
   @keyframes marquee {
     to {
       transform: translateX(-50%);
     }
   }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
-      width: 100%;
-      flex-wrap: wrap;
       animation: none;
-    }
-    .marquee-track :global(span:nth-child(n + 6)) {
-      display: none;
     }
   }
 </style>

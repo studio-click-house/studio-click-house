@@ -12,11 +12,14 @@
   <div class="site-shell grid gap-14 lg:grid-cols-12 lg:items-start">
     <div class="lg:col-span-4 lg:pt-32">
       <p class="eyebrow text-brand-green">Studio introduction</p>
-      <p class="mt-7 max-w-sm text-sm leading-relaxed text-brand-dark/60">
+      <p
+        data-scroll-copy
+        class="mt-7 max-w-sm text-sm leading-relaxed text-brand-dark/60"
+      >
         A focused post-production partner for people building campaigns,
         catalogs, editorial stories, and visual systems.
       </p>
-      <a href={resolve("/about")} class="text-link mt-8"
+      <a href={resolve("/about")} data-scroll-copy class="text-link mt-8"
         >Meet the studio <ArrowUpRight size={16} /></a
       >
     </div>
@@ -48,7 +51,10 @@
             <span>Temporary editorial study</span><span>Proof 01</span>
           </figcaption>
         </figure>
-        <div class="space-y-5 text-base leading-relaxed text-brand-dark/70">
+        <div
+          data-scroll-copy
+          class="space-y-5 text-base leading-relaxed text-brand-dark/70"
+        >
           <p>
             Studio Click House supports image editing, retouching, and visual
             production with attention to material, light, color, and the way

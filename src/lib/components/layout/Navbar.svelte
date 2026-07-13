@@ -1,78 +1,200 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { page } from "$app/state";
   import { resolve } from "$app/paths";
-  import { ArrowUpRight, Menu } from "lucide-svelte";
+  import { ArrowUpRight, Menu, X } from "lucide-svelte";
   import { navigationItems } from "$lib/content/home";
+
+  let isMenuOpen = $state(false);
+  let menuButton = $state<HTMLButtonElement>();
+  let menuPanel = $state<HTMLDivElement>();
+
+  function closeMenu() {
+    isMenuOpen = false;
+  }
+
+  onMount(() => {
+    function handleKeydown(event: KeyboardEvent) {
+      if (event.key !== "Escape" || !isMenuOpen) return;
+      closeMenu();
+      menuButton?.focus();
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!isMenuOpen || !(event.target instanceof Node)) return;
+      if (
+        menuPanel?.contains(event.target) ||
+        menuButton?.contains(event.target)
+      )
+        return;
+      closeMenu();
+    }
+
+    document.addEventListener("keydown", handleKeydown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeydown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  });
 </script>
 
-<header id="site-header" class="fixed inset-x-0 top-0 z-50 p-3 sm:p-4">
+<header
+  id="site-header"
+  class="pointer-events-none fixed inset-x-0 top-0 z-50 py-4 sm:py-6"
+>
   <nav
     id="primary-navigation"
     aria-label="Primary navigation"
-    class="mx-auto flex max-w-[90rem] items-center justify-between border border-brand-dark/10 bg-brand-light/90 px-3 py-2.5 backdrop-blur-md sm:px-4"
+    class="site-shell flex items-start justify-between"
   >
     <a
       href={resolve("/")}
       aria-label="Studio Click House home"
-      class="shrink-0"
+      class="pointer-events-auto relative z-10 block shrink-0 transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
     >
       <img
         src="/images/brand/schl-logo.png"
         alt="Studio Click House"
         width="144"
         height="76"
-        class="h-8 w-auto sm:h-9"
+        class="h-10 w-auto drop-shadow-[0_2px_8px_rgba(32,33,31,0.22)] sm:h-12"
       />
     </a>
 
-    <ul class="hidden items-center gap-7 lg:flex" aria-label="Main routes">
-      {#each navigationItems as item (item.href)}
-        <li>
-          <a
-            href={resolve(item.href)}
-            aria-current={page.url.pathname === item.href ? "page" : undefined}
-            class="relative py-2 text-xs font-semibold uppercase tracking-[0.12em] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-brand-green after:transition-transform hover:after:scale-x-100 aria-[current=page]:after:scale-x-100"
-            >{item.label}</a
-          >
-        </li>
-      {/each}
-    </ul>
-
-    <div class="flex items-center gap-2">
+    <div class="pointer-events-auto flex items-center gap-2 sm:gap-3">
       <a
         href={resolve("/contact")}
-        class="hidden items-center gap-2 bg-brand-dark px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-brand-light transition-transform active:scale-[0.98] sm:inline-flex"
+        class="project-action group hidden items-center justify-between gap-4 border border-brand-light/30 bg-brand-dark/95 px-5 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-brand-light backdrop-blur-xl transition-colors hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] sm:inline-flex"
       >
-        Start a project <ArrowUpRight size={15} strokeWidth={1.75} />
+        Start a project
+        <ArrowUpRight
+          size={15}
+          strokeWidth={1.7}
+          class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
       </a>
 
-      <details class="group relative lg:hidden">
-        <summary
-          class="flex size-11 cursor-pointer list-none items-center justify-center border border-brand-dark/15 bg-brand-light [&::-webkit-details-marker]:hidden"
-          aria-label="Open navigation menu"
+      <div class="relative">
+        <button
+          bind:this={menuButton}
+          type="button"
+          class="menu-action flex items-center gap-3 border border-brand-light/30 bg-brand-dark/95 px-4 font-mono text-[0.62rem] font-medium uppercase tracking-[0.16em] text-brand-light backdrop-blur-xl transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green sm:px-5"
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation-panel"
+          onclick={() => (isMenuOpen = !isMenuOpen)}
         >
-          <Menu size={20} strokeWidth={1.7} />
-        </summary>
-        <div
-          class="absolute right-0 top-[calc(100%+0.5rem)] w-[min(20rem,calc(100vw-2rem))] border border-brand-dark/10 bg-brand-light p-3 shadow-2xl shadow-brand-dark/10"
-        >
-          <ul class="divide-y divide-brand-dark/10" aria-label="Mobile routes">
-            {#each navigationItems as item (item.href)}
-              <li>
-                <a href={resolve(item.href)} class="block py-4 text-lg"
-                  >{item.label}</a
-                >
-              </li>
-            {/each}
-          </ul>
-          <a
-            href={resolve("/contact")}
-            class="mt-3 flex items-center justify-between bg-brand-green p-4 font-semibold text-white"
+          <span>{isMenuOpen ? "Close" : "Menu"}</span>
+          {#if isMenuOpen}
+            <X size={17} strokeWidth={1.7} />
+          {:else}
+            <Menu size={17} strokeWidth={1.7} />
+          {/if}
+        </button>
+
+        {#if isMenuOpen}
+          <div
+            bind:this={menuPanel}
+            id="primary-navigation-panel"
+            class="navigation-panel absolute right-0 top-[calc(100%+0.75rem)] w-[min(38rem,calc(100vw-2rem))] overflow-hidden border border-brand-light/15 bg-brand-dark/95 text-brand-light shadow-2xl shadow-brand-dark/25 backdrop-blur-2xl"
           >
-            Start a project <ArrowUpRight size={18} />
-          </a>
-        </div>
-      </details>
+            <div
+              class="flex items-center justify-between border-b border-brand-light/10 px-5 py-4 sm:px-7"
+            >
+              <p
+                class="font-mono text-[0.56rem] uppercase tracking-[0.18em] text-brand-green"
+              >
+                Explore the studio
+              </p>
+              <p
+                class="font-mono text-[0.54rem] uppercase tracking-[0.14em] text-brand-light/35"
+              >
+                SCH · Navigation
+              </p>
+            </div>
+
+            <ol aria-label="Main routes" class="grid sm:grid-cols-2">
+              {#each navigationItems as item, index (item.href)}
+                <li class="border-b border-brand-light/10 odd:sm:border-r">
+                  <a
+                    href={resolve(item.href)}
+                    onclick={closeMenu}
+                    aria-current={page.url.pathname === item.href
+                      ? "page"
+                      : undefined}
+                    class="group/link flex items-end justify-between gap-6 px-5 py-5 transition-colors hover:bg-brand-light/[0.06] sm:px-7 sm:py-7"
+                  >
+                    <span
+                      class="font-display text-2xl tracking-[-0.02em] sm:text-3xl"
+                    >
+                      {item.label}
+                    </span>
+                    <span
+                      class="flex items-center gap-3 font-mono text-[0.55rem] tracking-[0.12em] text-brand-light/35 transition-colors group-hover/link:text-brand-green"
+                    >
+                      0{index + 1}
+                      <ArrowUpRight
+                        size={14}
+                        strokeWidth={1.6}
+                        class="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                      />
+                    </span>
+                  </a>
+                </li>
+              {/each}
+            </ol>
+
+            <a
+              href={resolve("/contact")}
+              onclick={closeMenu}
+              class="group flex items-center justify-between bg-brand-green px-5 py-5 text-xs font-bold uppercase tracking-[0.14em] text-brand-dark sm:px-7"
+            >
+              Discuss a new project
+              <ArrowUpRight
+                size={17}
+                strokeWidth={1.7}
+                class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </a>
+          </div>
+        {/if}
+      </div>
     </div>
   </nav>
 </header>
+
+<style>
+  .project-action {
+    height: 2.9rem;
+    min-width: 11.75rem;
+  }
+
+  .menu-action {
+    height: 2.9rem;
+    min-width: 5.9rem;
+    justify-content: space-between;
+  }
+
+  .navigation-panel {
+    animation: reveal-navigation 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: top right;
+  }
+
+  @keyframes reveal-navigation {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navigation-panel {
+      animation: none;
+    }
+  }
+</style>

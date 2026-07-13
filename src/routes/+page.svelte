@@ -1,5 +1,5 @@
 <script lang="ts">
-  import BrandMarquee from "$lib/components/sections/BrandMarquee.svelte";
+  import PageScrollReveals from "$lib/components/animations/PageScrollReveals.svelte";
   import ClientLocations from "$lib/components/sections/ClientLocations.svelte";
   import CreativeDirection from "$lib/components/sections/CreativeDirection.svelte";
   import CreativeMarquee from "$lib/components/sections/CreativeMarquee.svelte";
@@ -44,8 +44,8 @@
 <JsonLd data={faqData} />
 
 <main id="main-content">
+  <PageScrollReveals />
   <HomeHero />
-  <BrandMarquee />
   <StudioIntroduction />
   <ScrollImageStory />
   <CreativeMarquee />

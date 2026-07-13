@@ -1,5 +1,11 @@
 import { previewMedia } from "$lib/content/media";
-import type { FaqItem, ServiceItem, TestimonialItem } from "$lib/types/content";
+import type {
+  ClientLogoItem,
+  ClientLocationMarker,
+  FaqItem,
+  ServiceItem,
+  TestimonialItem,
+} from "$lib/types/content";
 import type { RouteId } from "$app/types";
 
 export const navigationItems = [
@@ -10,19 +16,17 @@ export const navigationItems = [
   { label: "Journal", href: "/blog" },
 ] as const satisfies readonly { label: string; href: RouteId }[];
 
-export const brandPlaceholders = [
-  "Client mark 01",
-  "Client mark 02",
-  "Client mark 03",
-  "Client mark 04",
-  "Client mark 05",
-];
-
-export const creativeMarqueeLines = [
-  "Clipping path — Retouching — Color",
-  "Visual craft — Consistency — Detail",
-  "Image — Motion — Production",
-];
+export const clientLogoItems: ClientLogoItem[] = Array.from(
+  { length: 15 },
+  (_, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    return {
+      id: `client-logo-${number}`,
+      label: `Client logo ${number}`,
+      shortLabel: `CL / ${number}`,
+    };
+  },
+);
 
 export const services: ServiceItem[] = [
   {
@@ -118,4 +122,61 @@ export const faqs: FaqItem[] = [
   },
 ];
 
-export const clientLocations: string[] = [];
+export const clientLocations: ClientLocationMarker[] = [
+  {
+    id: "united-states",
+    country: "United States",
+    flag: "🇺🇸",
+    clientCount: 1200,
+    position: { lat: 39.8, lng: -98.6 },
+  },
+  {
+    id: "brazil",
+    country: "Brazil",
+    flag: "🇧🇷",
+    clientCount: 354,
+    position: { lat: -14.2, lng: -51.9 },
+  },
+  {
+    id: "argentina",
+    country: "Argentina",
+    flag: "🇦🇷",
+    clientCount: 124,
+    position: { lat: -38.4, lng: -63.6 },
+  },
+  {
+    id: "south-africa",
+    country: "South Africa",
+    flag: "🇿🇦",
+    clientCount: 68,
+    position: { lat: -30.6, lng: 22.9 },
+  },
+  {
+    id: "united-arab-emirates",
+    country: "United Arab Emirates",
+    flag: "🇦🇪",
+    clientCount: 857,
+    position: { lat: 23.4, lng: 53.8 },
+  },
+  {
+    id: "bangladesh",
+    country: "Bangladesh",
+    flag: "🇧🇩",
+    clientCount: 5000,
+    position: { lat: 23.685, lng: 90.356 },
+  },
+  {
+    id: "china",
+    country: "China",
+    flag: "🇨🇳",
+    clientCount: 742,
+    position: { lat: 35.86, lng: 104.2 },
+  },
+  {
+    id: "australia",
+    country: "Australia",
+    flag: "🇦🇺",
+    clientCount: 1050,
+    position: { lat: -25.27, lng: 133.775 },
+  },
+];

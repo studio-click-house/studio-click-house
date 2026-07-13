@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
+  import BrandMarquee from "$lib/components/sections/BrandMarquee.svelte";
   import { previewMedia } from "$lib/content/media";
 
   let section: HTMLElement;
@@ -61,7 +62,7 @@
   ></div>
 
   <div
-    class="site-shell relative grid min-h-[100dvh] content-end pb-8 pt-32 sm:pb-12 lg:grid-cols-[1fr_19rem] lg:items-end lg:gap-10"
+    class="site-shell relative grid min-h-[100dvh] content-end pb-24 pt-32 sm:pb-28 lg:grid-cols-[1fr_19rem] lg:items-end lg:gap-10"
   >
     <div>
       <p class="hero-detail eyebrow mb-6 text-brand-green">
@@ -100,6 +101,8 @@
       </div>
     </div>
   </div>
+
+  <BrandMarquee />
 
   <p
     class="absolute right-4 top-1/2 hidden -translate-y-1/2 rotate-90 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-brand-light/55 xl:block"

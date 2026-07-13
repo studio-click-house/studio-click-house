@@ -23,3 +23,23 @@ export interface TestimonialItem {
   name: string;
   company: string;
 }
+
+export interface ClientLocationMarker {
+  id: string;
+  country: string;
+  flag: string;
+  clientCount: number;
+  position: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface ClientLogoItem {
+  id: string;
+  label: string;
+  shortLabel: string;
+  logoSrc?: string;
+  width?: number;
+  height?: number;
+}
