@@ -16,6 +16,20 @@ export default [
     },
   },
   {
-    ignores: [".svelte-kit/**", "build/**", "node_modules/**"],
+    files: ["**/*.svelte"],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+      },
+    },
+  },
+  {
+    ignores: [
+      ".agents/**",
+      ".codex/**",
+      ".svelte-kit/**",
+      "build/**",
+      "node_modules/**",
+    ],
   },
 ];

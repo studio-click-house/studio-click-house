@@ -1,0 +1,9 @@
+# Studio Click House
+
+Canonical site: https://studioclickhouse.com/
+Services: https://studioclickhouse.com/services
+Portfolio: https://studioclickhouse.com/portfolio
+About: https://studioclickhouse.com/about
+Contact: https://studioclickhouse.com/contact
+
+Studio Click House provides image editing, retouching, and visual production. Public service details and project examples should be read from the canonical pages above.
