@@ -18,7 +18,7 @@ export async function handleListBlocks({ category }: { category?: string }) {
                 "Blocks are not available for React Native framework. The react-native-reusables repository does not provide block templates.",
             },
             null,
-            2
+            2,
           ),
         },
       ],
@@ -41,7 +41,7 @@ export async function handleListBlocks({ category }: { category?: string }) {
     throw new Error(
       `Failed to list blocks: ${
         error instanceof Error ? error.message : String(error)
-      }`
+      }`,
     );
   }
 }

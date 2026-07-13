@@ -10,4 +10,4 @@ export const siteConfig = {
     instagram: "",
     facebook: "",
   },
-}
+};

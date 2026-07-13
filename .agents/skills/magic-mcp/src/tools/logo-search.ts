@@ -74,7 +74,7 @@ export class LogoSearchTool extends BaseTool {
     } catch (error) {
       console.error(
         `[${LOGO_TOOL_NAME}] Error fetching logos for ${query}:`,
-        error
+        error,
       );
       return []; // Return empty array on error
     }
@@ -96,7 +96,7 @@ export class LogoSearchTool extends BaseTool {
   private async convertToFormat(
     svgContent: string,
     format: "JSX" | "TSX" | "SVG",
-    componentName: string = "Icon"
+    componentName: string = "Icon",
   ): Promise<string> {
     if (format === "SVG") {
       return svgContent;
@@ -114,7 +114,7 @@ export class LogoSearchTool extends BaseTool {
               .split(":")
               .map((s: string) => s.trim());
             const camelProperty = property.replace(/-([a-z])/g, (g: string) =>
-              g[1].toUpperCase()
+              g[1].toUpperCase(),
             );
             return `${camelProperty}: "${value}"`;
           })
@@ -140,7 +140,7 @@ export class LogoSearchTool extends BaseTool {
     const timestamp = new Date().toISOString();
     const filename = `test-results/logo-search-${timestamp.replace(
       /[:.]/g,
-      "-"
+      "-",
     )}.json`;
 
     // Format response as component structure
@@ -196,8 +196,8 @@ export class LogoSearchTool extends BaseTool {
   async execute({ queries, format }: z.infer<typeof this.schema>) {
     console.log(
       `[${LOGO_TOOL_NAME}] Starting logo search for: ${queries.join(
-        ", "
-      )} in ${format} format`
+        ", ",
+      )} in ${format} format`,
     );
     try {
       // Process all queries
@@ -218,7 +218,7 @@ export class LogoSearchTool extends BaseTool {
 
             const logo = logos[0];
             console.log(
-              `[${LOGO_TOOL_NAME}] Processing logo for: ${logo.title}`
+              `[${LOGO_TOOL_NAME}] Processing logo for: ${logo.title}`,
             );
 
             const svgUrl =
@@ -230,7 +230,7 @@ export class LogoSearchTool extends BaseTool {
             const formattedContent = await this.convertToFormat(
               svgContent,
               format,
-              logo.title + "Icon"
+              logo.title + "Icon",
             );
 
             console.log(`[${LOGO_TOOL_NAME}] Successfully processed ${query}`);
@@ -242,7 +242,7 @@ export class LogoSearchTool extends BaseTool {
           } catch (error) {
             console.error(
               `[${LOGO_TOOL_NAME}] Error processing ${query}:`,
-              error
+              error,
             );
             return {
               query,
@@ -250,7 +250,7 @@ export class LogoSearchTool extends BaseTool {
               message: error instanceof Error ? error.message : "Unknown error",
             };
           }
-        })
+        }),
       );
 
       // Prepare summary
@@ -259,7 +259,7 @@ export class LogoSearchTool extends BaseTool {
 
       console.log(`[${LOGO_TOOL_NAME}] Results summary:`);
       console.log(
-        `[${LOGO_TOOL_NAME}] Successfully processed: ${successful.length}`
+        `[${LOGO_TOOL_NAME}] Successfully processed: ${successful.length}`,
       );
       console.log(`[${LOGO_TOOL_NAME}] Failed to process: ${failed.length}`);
 
@@ -269,7 +269,7 @@ export class LogoSearchTool extends BaseTool {
         format,
         successful: successful
           .filter(
-            (r): r is typeof r & { content: string } => r.content !== undefined
+            (r): r is typeof r & { content: string } => r.content !== undefined,
           )
           .map((r) => ({
             query: r.query,
@@ -277,7 +277,7 @@ export class LogoSearchTool extends BaseTool {
           })),
         failed: failed
           .filter(
-            (r): r is typeof r & { message: string } => r.message !== undefined
+            (r): r is typeof r & { message: string } => r.message !== undefined,
           )
           .map((r) => ({
             query: r.query,

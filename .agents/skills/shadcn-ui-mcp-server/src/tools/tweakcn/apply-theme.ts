@@ -2,13 +2,24 @@ import { z } from "zod";
 import { applyPresetByIdOrQuery } from "./orchestrator.js";
 
 export const schema = {
-  query: z.string().optional().describe("Search query for theme (e.g., 'cyberpunk', 'modern')"),
+  query: z
+    .string()
+    .optional()
+    .describe("Search query for theme (e.g., 'cyberpunk', 'modern')"),
   presetId: z.string().optional().describe("Specific preset ID if known"),
-  tailwindVersion: z.enum(["3", "4"]).optional().describe("Tailwind CSS version (default: '4')"),
-  dryRun: z.boolean().optional().describe("If true, returns preview instead of writing files"),
+  tailwindVersion: z
+    .enum(["3", "4"])
+    .optional()
+    .describe("Tailwind CSS version (default: '4')"),
+  dryRun: z
+    .boolean()
+    .optional()
+    .describe("If true, returns preview instead of writing files"),
 };
 
-export async function handleApplyTheme(args: z.infer<z.ZodObject<typeof schema>>) {
+export async function handleApplyTheme(
+  args: z.infer<z.ZodObject<typeof schema>>,
+) {
   try {
     const result = await applyPresetByIdOrQuery({
       query: args.query,

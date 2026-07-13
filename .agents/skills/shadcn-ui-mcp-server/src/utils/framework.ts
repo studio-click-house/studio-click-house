@@ -36,7 +36,7 @@ export function getFramework(): Framework {
   // Check command line arguments first
   const args = process.argv.slice(2);
   const frameworkIndex = args.findIndex(
-    (arg) => arg === "--framework" || arg === "-f"
+    (arg) => arg === "--framework" || arg === "-f",
   );
 
   if (frameworkIndex !== -1 && args[frameworkIndex + 1]) {
@@ -52,7 +52,7 @@ export function getFramework(): Framework {
       return framework;
     } else {
       logWarning(
-        `Invalid framework '${framework}' specified. Using default '${DEFAULT_FRAMEWORK}'`
+        `Invalid framework '${framework}' specified. Using default '${DEFAULT_FRAMEWORK}'`,
       );
     }
   }
@@ -88,7 +88,9 @@ export function getUiLibrary(): UiLibrary {
 
   if (framework !== "react") {
     if (requestedLib) {
-      logWarning(`--ui-library is only supported for React. Ignoring '${requestedLib}' for ${framework}.`);
+      logWarning(
+        `--ui-library is only supported for React. Ignoring '${requestedLib}' for ${framework}.`,
+      );
     }
     cachedUiLibrary = DEFAULT_UI_LIBRARY;
     return DEFAULT_UI_LIBRARY;
@@ -99,7 +101,9 @@ export function getUiLibrary(): UiLibrary {
     cachedUiLibrary = argLib;
     return argLib;
   } else if (argLib) {
-    logWarning(`Invalid UI library '${argLib}'. Using default '${DEFAULT_UI_LIBRARY}'`);
+    logWarning(
+      `Invalid UI library '${argLib}'. Using default '${DEFAULT_UI_LIBRARY}'`,
+    );
   }
 
   if (envLib === "radix" || envLib === "base") {
@@ -148,26 +152,26 @@ export function getFrameworkInfo() {
       framework === "svelte"
         ? "huntabyte/shadcn-svelte"
         : framework === "vue"
-        ? "unovue/shadcn-vue"
-        : framework === "react-native"
-        ? "founded-labs/react-native-reusables"
-        : "shadcn-ui/ui",
+          ? "unovue/shadcn-vue"
+          : framework === "react-native"
+            ? "founded-labs/react-native-reusables"
+            : "shadcn-ui/ui",
     fileExtension:
       framework === "svelte"
         ? ".svelte"
         : framework === "vue"
-        ? ".vue"
-        : framework === "react-native"
-        ? ".tsx"
-        : ".tsx",
+          ? ".vue"
+          : framework === "react-native"
+            ? ".tsx"
+            : ".tsx",
     description:
       framework === "svelte"
         ? "Svelte components from shadcn-svelte"
         : framework === "vue"
-        ? "Vue components from shadcn-vue"
-        : framework === "react-native"
-        ? "React Native components from react-native-reusables"
-        : "React components from shadcn/ui v4",
+          ? "Vue components from shadcn-vue"
+          : framework === "react-native"
+            ? "React Native components from react-native-reusables"
+            : "React components from shadcn/ui v4",
   };
 }
 
@@ -185,37 +189,41 @@ export function validateFrameworkSelection() {
 
   if (framework === "react") {
     const uiLibrary = getUiLibrary();
-    logInfo(`UI library: ${uiLibrary} (${uiLibrary === 'base' ? 'Base UI' : 'Radix UI'})`);
+    logInfo(
+      `UI library: ${uiLibrary} (${uiLibrary === "base" ? "Base UI" : "Radix UI"})`,
+    );
   } else {
     // Warn if UI_LIBRARY specified for non-React framework
     const envLib = process.env.UI_LIBRARY;
     const args = process.argv.slice(2);
     const argLib = args.includes("--ui-library");
     if (envLib || argLib) {
-      logWarning(`UI_LIBRARY is only supported for React. Ignoring for ${framework}.`);
+      logWarning(
+        `UI_LIBRARY is only supported for React. Ignoring for ${framework}.`,
+      );
     }
   }
 
   // Provide helpful information about switching frameworks
   if (framework === "react") {
     logInfo(
-      "To switch frameworks: set FRAMEWORK=svelte|vue|react-native or use --framework svelte|vue|react-native"
+      "To switch frameworks: set FRAMEWORK=svelte|vue|react-native or use --framework svelte|vue|react-native",
     );
   } else if (framework === "svelte") {
     logInfo(
-      "To switch frameworks: set FRAMEWORK=react|vue|react-native or use --framework react|vue|react-native"
+      "To switch frameworks: set FRAMEWORK=react|vue|react-native or use --framework react|vue|react-native",
     );
   } else if (framework === "vue") {
     logInfo(
-      "To switch frameworks: set FRAMEWORK=react|svelte|react-native or use --framework react|svelte|react-native"
+      "To switch frameworks: set FRAMEWORK=react|svelte|react-native or use --framework react|svelte|react-native",
     );
   } else if (framework === "react-native") {
     logInfo(
-      "To switch frameworks: set FRAMEWORK=react|svelte|vue or use --framework react|svelte|vue"
+      "To switch frameworks: set FRAMEWORK=react|svelte|vue or use --framework react|svelte|vue",
     );
   } else {
     logInfo(
-      "To switch frameworks: set FRAMEWORK=react|svelte|vue|react-native or use --framework react|svelte|vue|react-native"
+      "To switch frameworks: set FRAMEWORK=react|svelte|vue|react-native or use --framework react|svelte|vue|react-native",
     );
   }
 }

@@ -60,9 +60,12 @@ mkdir -p styles
 
 ```tsx
 // app/layout.tsx — add this
-import { Inter, Plus_Jakarta_Sans } from "next/font/google"
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" })
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 ```
 
 ## 5. tailwind.config.ts — add brand colors

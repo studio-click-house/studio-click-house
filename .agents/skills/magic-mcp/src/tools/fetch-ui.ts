@@ -21,7 +21,7 @@ export class FetchUiTool extends BaseTool {
     searchQuery: z
       .string()
       .describe(
-        "Search query for 21st.dev (library for searching UI components) to find a UI component that matches the user's message. Must be a two-four words max or phrase"
+        "Search query for 21st.dev (library for searching UI components) to find a UI component that matches the user's message. Must be a two-four words max or phrase",
       ),
   });
 
@@ -32,7 +32,7 @@ export class FetchUiTool extends BaseTool {
         {
           message,
           searchQuery,
-        }
+        },
       );
 
       return {

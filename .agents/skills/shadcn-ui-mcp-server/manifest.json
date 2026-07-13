@@ -37,13 +37,25 @@
     }
   },
   "tools": [
-    {"name": "list_components", "description": "List all available shadcn/ui components"},
-    {"name": "get_component", "description": "Get component source code"},
-    {"name": "get_component_demo", "description": "Get component demo/example code"},
-    {"name": "get_component_metadata", "description": "Get component metadata and dependencies"},
-    {"name": "list_blocks", "description": "List available shadcn/ui blocks"},
-    {"name": "get_block", "description": "Get block implementation"},
-    {"name": "get_directory_structure", "description": "Browse repository file structure"}
+    {
+      "name": "list_components",
+      "description": "List all available shadcn/ui components"
+    },
+    { "name": "get_component", "description": "Get component source code" },
+    {
+      "name": "get_component_demo",
+      "description": "Get component demo/example code"
+    },
+    {
+      "name": "get_component_metadata",
+      "description": "Get component metadata and dependencies"
+    },
+    { "name": "list_blocks", "description": "List available shadcn/ui blocks" },
+    { "name": "get_block", "description": "Get block implementation" },
+    {
+      "name": "get_directory_structure",
+      "description": "Browse repository file structure"
+    }
   ],
   "prompts": [
     {

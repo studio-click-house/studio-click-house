@@ -1,39 +1,41 @@
-import { Axios } from "axios"
-import { logError, logWarning, logInfo } from "./logger.js"
+import { Axios } from "axios";
+import { logError, logWarning, logInfo } from "./logger.js";
 
 // Constants for the Vue repository structure (v4)
-const REPO_OWNER = "unovue"
-const REPO_NAME = "shadcn-vue"
-const REPO_BRANCH = "dev"
+const REPO_OWNER = "unovue";
+const REPO_NAME = "shadcn-vue";
+const REPO_BRANCH = "dev";
 
 // App paths
-const APPS_V4_PATH = `apps/v4`
-const REGISTRY_PATH = `${APPS_V4_PATH}/registry`
-const NEW_YORK_V4_PATH = `${REGISTRY_PATH}/new-york-v4`
-const UI_PATH = `${NEW_YORK_V4_PATH}/ui`
-const BLOCKS_PATH = `${NEW_YORK_V4_PATH}/blocks`
-const DEMOS_PATH = `${APPS_V4_PATH}/components`
+const APPS_V4_PATH = `apps/v4`;
+const REGISTRY_PATH = `${APPS_V4_PATH}/registry`;
+const NEW_YORK_V4_PATH = `${REGISTRY_PATH}/new-york-v4`;
+const UI_PATH = `${NEW_YORK_V4_PATH}/ui`;
+const BLOCKS_PATH = `${NEW_YORK_V4_PATH}/blocks`;
+const DEMOS_PATH = `${APPS_V4_PATH}/components`;
 const formatComponentNameToCapital = (name: string) => {
   return name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join("")
-}
+    .join("");
+};
 const toKebabCase = (name: string) =>
   name
     // Convert PascalCase or camelCase to kebab-case
     .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
     .replace(/\s+/g, "-")
-    .toLowerCase()
+    .toLowerCase();
 // Normalize block names like "login01", "Login01", or "login-01" -> "Login01"
 const normalizeBlockName = (name: string) => {
-  const parts = (name || "").match(/[a-zA-Z]+|\d+/g) || []
+  const parts = (name || "").match(/[a-zA-Z]+|\d+/g) || [];
   return parts
     .map((p) =>
-      /[0-9]/.test(p) ? p : p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()
+      /[0-9]/.test(p)
+        ? p
+        : p.charAt(0).toUpperCase() + p.slice(1).toLowerCase(),
     )
-    .join("")
-}
+    .join("");
+};
 // GitHub API for accessing repository structure and metadata
 const githubApi = new Axios({
   baseURL: "https://api.github.com",
@@ -49,13 +51,13 @@ const githubApi = new Axios({
   transformResponse: [
     (data) => {
       try {
-        return JSON.parse(data)
+        return JSON.parse(data);
       } catch {
-        return data
+        return data;
       }
     },
   ],
-})
+});
 
 // GitHub Raw for directly fetching file contents
 const githubRaw = new Axios({
@@ -65,7 +67,7 @@ const githubRaw = new Axios({
   },
   timeout: 30000, // 30 seconds
   transformResponse: [(data) => data], // Return raw data
-})
+});
 
 /**
  * Fetch component source code from the Vue registry
@@ -75,36 +77,36 @@ const githubRaw = new Axios({
  */
 async function getComponentSource(
   componentName: string,
-  style: string = "new-york-v4"
+  style: string = "new-york-v4",
 ): Promise<string> {
-  const formattedComponentName = formatComponentNameToCapital(componentName)
-  const componentFolder = componentName.toLowerCase()
-  const basePath = UI_PATH // Only new-york-v4 is supported for v4
-  const componentPath = `${basePath}/${componentFolder}/${formattedComponentName}.vue`
+  const formattedComponentName = formatComponentNameToCapital(componentName);
+  const componentFolder = componentName.toLowerCase();
+  const basePath = UI_PATH; // Only new-york-v4 is supported for v4
+  const componentPath = `${basePath}/${componentFolder}/${formattedComponentName}.vue`;
 
   try {
-    const response = await githubRaw.get(`/${componentPath}`)
-    return response.data
+    const response = await githubRaw.get(`/${componentPath}`);
+    return response.data;
   } catch (error) {
     // Try alternative paths if the primary fails
     const altPaths = [
       `${basePath}/${componentFolder}/${formattedComponentName}.vue`,
       `${basePath}/${componentFolder}/index.ts`,
       `${basePath}/${formattedComponentName}.vue`,
-    ]
+    ];
 
     for (const altPath of altPaths) {
       try {
-        const response = await githubRaw.get(`/${altPath}`)
-        return response.data
+        const response = await githubRaw.get(`/${altPath}`);
+        return response.data;
       } catch {
-        continue
+        continue;
       }
     }
 
     throw new Error(
-      `Component "${formattedComponentName}" not found in Vue registry (v4)`
-    )
+      `Component "${formattedComponentName}" not found in Vue registry (v4)`,
+    );
   }
 }
 
@@ -116,26 +118,26 @@ async function getComponentSource(
  */
 async function getComponentDemo(
   componentName: string,
-  style: string = "new-york-v4"
+  style: string = "new-york-v4",
 ): Promise<string> {
-  const formattedComponentName = formatComponentNameToCapital(componentName)
+  const formattedComponentName = formatComponentNameToCapital(componentName);
   const demoPaths = [
     `${DEMOS_PATH}/${formattedComponentName}Demo.vue`,
     `${DEMOS_PATH}/${formattedComponentName}.vue`,
-  ]
+  ];
 
   for (const demoPath of demoPaths) {
     try {
-      const response = await githubRaw.get(`/${demoPath}`)
-      return response.data
+      const response = await githubRaw.get(`/${demoPath}`);
+      return response.data;
     } catch (error) {
-      continue
+      continue;
     }
   }
 
   throw new Error(
-    `Demo for component "${formattedComponentName}" not found in Vue registry (v4)`
-  )
+    `Demo for component "${formattedComponentName}" not found in Vue registry (v4)`,
+  );
 }
 
 /**
@@ -144,59 +146,59 @@ async function getComponentDemo(
  * @returns Promise with list of component names
  */
 async function getAvailableComponents(
-  style: string = "new-york-v4"
+  style: string = "new-york-v4",
 ): Promise<string[]> {
   try {
     // v4 components live under UI_PATH as directories
     const response = await githubApi.get(
-      `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${UI_PATH}`
-    )
+      `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${UI_PATH}`,
+    );
 
     if (!response.data || !Array.isArray(response.data)) {
-      throw new Error("Invalid response from GitHub API")
+      throw new Error("Invalid response from GitHub API");
     }
 
     const components = response.data
       .filter(
         (item: any) =>
           item.type === "dir" ||
-          (item.type === "file" && item.name.endsWith(".vue"))
+          (item.type === "file" && item.name.endsWith(".vue")),
       )
       .map((item: any) => {
         if (item.type === "dir") {
-          return item.name
+          return item.name;
         } else {
-          return item.name.replace(".vue", "")
+          return item.name.replace(".vue", "");
         }
-      })
+      });
 
     if (components.length === 0) {
-      throw new Error("No components found in the Vue registry (v4)")
+      throw new Error("No components found in the Vue registry (v4)");
     }
 
-    return components
+    return components;
   } catch (error: any) {
-    logError("Error fetching components from GitHub API", error)
+    logError("Error fetching components from GitHub API", error);
 
     // Check for specific error types
     if (error.response) {
-      const status = error.response.status
-      const message = error.response.data?.message || "Unknown error"
+      const status = error.response.status;
+      const message = error.response.data?.message || "Unknown error";
 
       if (status === 403 && message.includes("rate limit")) {
         throw new Error(
-          `GitHub API rate limit exceeded. Please set GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher limits. Error: ${message}`
-        )
+          `GitHub API rate limit exceeded. Please set GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher limits. Error: ${message}`,
+        );
       } else if (status === 404) {
         throw new Error(
-          `Components directory not found. The path ${UI_PATH} may not exist in the repository.`
-        )
+          `Components directory not found. The path ${UI_PATH} may not exist in the repository.`,
+        );
       } else if (status === 401) {
         throw new Error(
-          `Authentication failed. Please check your GITHUB_PERSONAL_ACCESS_TOKEN if provided.`
-        )
+          `Authentication failed. Please check your GITHUB_PERSONAL_ACCESS_TOKEN if provided.`,
+        );
       } else {
-        throw new Error(`GitHub API error (${status}): ${message}`)
+        throw new Error(`GitHub API error (${status}): ${message}`);
       }
     }
 
@@ -207,13 +209,13 @@ async function getAvailableComponents(
       error.code === "ETIMEDOUT"
     ) {
       throw new Error(
-        `Network error: ${error.message}. Please check your internet connection.`
-      )
+        `Network error: ${error.message}. Please check your internet connection.`,
+      );
     }
 
     // If all else fails, provide a fallback list of known Vue components
-    logWarning("Using fallback component list due to API issues")
-    return getFallbackComponents()
+    logWarning("Using fallback component list due to API issues");
+    return getFallbackComponents();
   }
 }
 
@@ -283,7 +285,7 @@ function getFallbackComponents(): string[] {
     "toggle",
     "toggle-group",
     "tooltip",
-  ]
+  ];
 }
 
 /**
@@ -294,40 +296,40 @@ function getFallbackComponents(): string[] {
 async function getComponentMetadata(componentName: string): Promise<any> {
   try {
     const response = await githubRaw.get(
-      `/${APPS_V4_PATH}/__registry__/index.ts`
-    )
-    const content: string = response.data as string
+      `/${APPS_V4_PATH}/__registry__/index.ts`,
+    );
+    const content: string = response.data as string;
 
     // Find the block for the component key
     const entryRegex = new RegExp(
       `"${componentName}"\s*:\\s*\{([\\s\\S]*?)\n\}`,
-      "s"
-    )
-    const entryMatch = content.match(entryRegex)
+      "s",
+    );
+    const entryMatch = content.match(entryRegex);
     if (!entryMatch) {
-      throw new Error(`Registry entry for ${componentName} not found`)
+      throw new Error(`Registry entry for ${componentName} not found`);
     }
 
-    const entry = entryMatch[1]
+    const entry = entryMatch[1];
 
     // Extract simple fields
-    const typeMatch = entry.match(/type:\s*"([^"]+)"/)
-    const depsMatch = entry.match(/registryDependencies:\s*\[([^\]]*)\]/s)
-    const filesMatch = entry.match(/files:\s*\[([\s\S]*?)\]/)
+    const typeMatch = entry.match(/type:\s*"([^"]+)"/);
+    const depsMatch = entry.match(/registryDependencies:\s*\[([^\]]*)\]/s);
+    const filesMatch = entry.match(/files:\s*\[([\s\S]*?)\]/);
     const registryDependencies = depsMatch
       ? depsMatch[1]
           .split(",")
           .map((d) => d.replace(/["'\s]/g, "").trim())
           .filter(Boolean)
-      : []
+      : [];
 
     // Parse file paths (best-effort)
-    const filePathRegex = /path:\s*"([^"]+)"/g
-    const files: string[] = []
+    const filePathRegex = /path:\s*"([^"]+)"/g;
+    const files: string[] = [];
     if (filesMatch) {
-      let m: RegExpExecArray | null
+      let m: RegExpExecArray | null;
       while ((m = filePathRegex.exec(filesMatch[1])) !== null) {
-        files.push(m[1])
+        files.push(m[1]);
       }
     }
 
@@ -336,10 +338,10 @@ async function getComponentMetadata(componentName: string): Promise<any> {
       type: typeMatch?.[1] || "registry:ui",
       registryDependencies,
       files,
-    }
+    };
   } catch (error) {
-    logError(`Error getting metadata for ${componentName}`, error)
-    return null
+    logError(`Error getting metadata for ${componentName}`, error);
+    return null;
   }
 }
 /**
@@ -354,34 +356,34 @@ async function buildDirectoryTree(
   owner: string = REPO_OWNER,
   repo: string = REPO_NAME,
   path: string = NEW_YORK_V4_PATH,
-  branch: string = REPO_BRANCH
+  branch: string = REPO_BRANCH,
 ): Promise<any> {
   try {
     const response = await githubApi.get(
-      `/repos/${owner}/${repo}/contents/${path}?ref=${branch}`
-    )
+      `/repos/${owner}/${repo}/contents/${path}?ref=${branch}`,
+    );
 
     if (!response.data) {
-      throw new Error("No data received from GitHub API")
+      throw new Error("No data received from GitHub API");
     }
 
-    const contents = response.data
+    const contents = response.data;
 
     // Handle different response types from GitHub API
     if (!Array.isArray(contents)) {
       // Check if it's an error response (like rate limit)
       if (contents.message) {
-        const message: string = contents.message
+        const message: string = contents.message;
         if (message.includes("rate limit exceeded")) {
           throw new Error(
-            `GitHub API rate limit exceeded. ${message} Consider setting GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher rate limits.`
-          )
+            `GitHub API rate limit exceeded. ${message} Consider setting GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher rate limits.`,
+          );
         } else if (message.includes("Not Found")) {
           throw new Error(
-            `Path not found: ${path}. The path may not exist in the repository.`
-          )
+            `Path not found: ${path}. The path may not exist in the repository.`,
+          );
         } else {
-          throw new Error(`GitHub API error: ${message}`)
+          throw new Error(`GitHub API error: ${message}`);
         }
       }
 
@@ -393,13 +395,13 @@ async function buildDirectoryTree(
           name: contents.name,
           url: contents.download_url,
           sha: contents.sha,
-        }
+        };
       } else {
         throw new Error(
           `Unexpected response type from GitHub API: ${JSON.stringify(
-            contents
-          )}`
-        )
+            contents,
+          )}`,
+        );
       }
     }
 
@@ -408,7 +410,7 @@ async function buildDirectoryTree(
       path,
       type: "directory",
       children: {},
-    }
+    };
 
     // Process each item
     for (const item of contents) {
@@ -420,7 +422,7 @@ async function buildDirectoryTree(
           name: item.name,
           url: item.download_url,
           sha: item.sha,
-        }
+        };
       } else if (item.type === "dir") {
         // Recursively process subdirectory (limit depth to avoid infinite recursion)
         if (path.split("/").length < 8) {
@@ -429,28 +431,28 @@ async function buildDirectoryTree(
               owner,
               repo,
               item.path,
-              branch
-            )
-            result.children[item.name] = subTree
+              branch,
+            );
+            result.children[item.name] = subTree;
           } catch (error) {
             logWarning(
               `Failed to fetch subdirectory ${item.path}: ${
                 error instanceof Error ? error.message : String(error)
-              }`
-            )
+              }`,
+            );
             result.children[item.name] = {
               path: item.path,
               type: "directory",
               error: "Failed to fetch contents",
-            }
+            };
           }
         }
       }
     }
 
-    return result
+    return result;
   } catch (error: any) {
-    logError(`Error building directory tree for ${path}`, error)
+    logError(`Error building directory tree for ${path}`, error);
 
     // Check if it's already a well-formatted error from above
     if (
@@ -458,37 +460,37 @@ async function buildDirectoryTree(
       (error.message.includes("rate limit") ||
         error.message.includes("GitHub API error"))
     ) {
-      throw error
+      throw error;
     }
 
     // Provide more specific error messages for HTTP errors
     if (error.response) {
-      const status: number = error.response.status
-      const responseData: any = error.response.data
-      const message: string = responseData?.message || "Unknown error"
+      const status: number = error.response.status;
+      const responseData: any = error.response.data;
+      const message: string = responseData?.message || "Unknown error";
 
       if (status === 404) {
         throw new Error(
-          `Path not found: ${path}. The path may not exist in the repository.`
-        )
+          `Path not found: ${path}. The path may not exist in the repository.`,
+        );
       } else if (status === 403) {
         if (message.includes("rate limit")) {
           throw new Error(
-            `GitHub API rate limit exceeded: ${message} Consider setting GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher rate limits.`
-          )
+            `GitHub API rate limit exceeded: ${message} Consider setting GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher rate limits.`,
+          );
         } else {
-          throw new Error(`Access forbidden: ${message}`)
+          throw new Error(`Access forbidden: ${message}`);
         }
       } else if (status === 401) {
         throw new Error(
-          `Authentication failed. Please check your GITHUB_PERSONAL_ACCESS_TOKEN if provided.`
-        )
+          `Authentication failed. Please check your GITHUB_PERSONAL_ACCESS_TOKEN if provided.`,
+        );
       } else {
-        throw new Error(`GitHub API error (${status}): ${message}`)
+        throw new Error(`GitHub API error (${status}): ${message}`);
       }
     }
 
-    throw error
+    throw error;
   }
 }
 
@@ -514,7 +516,7 @@ function getBasicVueStructure(): any {
         description: "Contains Vue blocks for v4",
       },
     },
-  }
+  };
 }
 
 /**
@@ -524,31 +526,31 @@ function getBasicVueStructure(): any {
  */
 function extractComponentDescription(code: string): string | null {
   // Look for Vue component description in template comments or script comments
-  const descriptionRegex = /<!--[\s\S]*?-->|\/\*\*[\s\S]*?\*\/|\/\/\s*(.+)/
-  const match = code.match(descriptionRegex)
+  const descriptionRegex = /<!--[\s\S]*?-->|\/\*\*[\s\S]*?\*\/|\/\/\s*(.+)/;
+  const match = code.match(descriptionRegex);
   if (match) {
     // Clean up the comment
     const description = match[0]
       .replace(/<!--|}-->|\/\*\*|\*\/|\*|\/\//g, "")
       .trim()
       .split("\n")[0]
-      .trim()
-    return description.length > 0 ? description : null
+      .trim();
+    return description.length > 0 ? description : null;
   }
 
   // Look for component name in script setup
-  const componentRegex = /<script.*setup.*>[\s\S]*?<\/script>/
-  const scriptMatch = code.match(componentRegex)
+  const componentRegex = /<script.*setup.*>[\s\S]*?<\/script>/;
+  const scriptMatch = code.match(componentRegex);
   if (scriptMatch) {
     const nameMatch = scriptMatch[0].match(
-      /defineComponent\(\s*{[\s\S]*?name:\s*['"]([^'"]+)['"]/
-    )
+      /defineComponent\(\s*{[\s\S]*?name:\s*['"]([^'"]+)['"]/,
+    );
     if (nameMatch) {
-      return `${nameMatch[1]} - A reusable Vue UI component`
+      return `${nameMatch[1]} - A reusable Vue UI component`;
     }
   }
 
-  return null
+  return null;
 }
 
 /**
@@ -557,30 +559,30 @@ function extractComponentDescription(code: string): string | null {
  * @returns Array of dependency names
  */
 function extractVueDependencies(code: string): string[] {
-  const dependencies: string[] = []
+  const dependencies: string[] = [];
 
   // Match import statements in script blocks
-  const scriptRegex = /<script.*?>([\s\S]*?)<\/script>/g
-  let scriptMatch: RegExpExecArray | null
+  const scriptRegex = /<script.*?>([\s\S]*?)<\/script>/g;
+  let scriptMatch: RegExpExecArray | null;
 
   while ((scriptMatch = scriptRegex.exec(code)) !== null) {
-    const scriptContent = scriptMatch[1]
-    const importRegex = /import\s+.*?\s+from\s+['"]([@\w\/\-\.]+)['"]/g
-    let importMatch: RegExpExecArray | null
+    const scriptContent = scriptMatch[1];
+    const importRegex = /import\s+.*?\s+from\s+['"]([@\w\/\-\.]+)['"]/g;
+    let importMatch: RegExpExecArray | null;
 
     while ((importMatch = importRegex.exec(scriptContent)) !== null) {
-      const dep: string = importMatch[1]
+      const dep: string = importMatch[1];
       if (
         !dep.startsWith("./") &&
         !dep.startsWith("../") &&
         !dep.startsWith("@/")
       ) {
-        dependencies.push(dep)
+        dependencies.push(dep);
       }
     }
   }
 
-  return [...new Set(dependencies)] // Remove duplicates
+  return [...new Set(dependencies)]; // Remove duplicates
 }
 
 /**
@@ -589,43 +591,43 @@ function extractVueDependencies(code: string): string[] {
  * @returns Array of component names used
  */
 function extractVueComponentUsage(code: string): string[] {
-  const components: string[] = []
+  const components: string[] = [];
 
   // Extract from template
-  const templateRegex = /<template.*?>([\s\S]*?)<\/template>/
-  const templateMatch = code.match(templateRegex)
+  const templateRegex = /<template.*?>([\s\S]*?)<\/template>/;
+  const templateMatch = code.match(templateRegex);
 
   if (templateMatch) {
-    const templateContent = templateMatch[1]
+    const templateContent = templateMatch[1];
     // Look for custom components (PascalCase or kebab-case)
-    const componentRegex = /<([A-Z]\w+|[a-z]+-[a-z-]+)/g
-    let match: RegExpExecArray | null
+    const componentRegex = /<([A-Z]\w+|[a-z]+-[a-z-]+)/g;
+    let match: RegExpExecArray | null;
 
     while ((match = componentRegex.exec(templateContent)) !== null) {
-      components.push(match[1])
+      components.push(match[1]);
     }
   }
 
   // Also extract from script imports
-  const scriptRegex = /<script.*?>([\s\S]*?)<\/script>/
-  const scriptMatch = code.match(scriptRegex)
+  const scriptRegex = /<script.*?>([\s\S]*?)<\/script>/;
+  const scriptMatch = code.match(scriptRegex);
 
   if (scriptMatch) {
-    const scriptContent = scriptMatch[1]
-    const importRegex = /import\s+\{([^}]+)\}\s+from/g
-    let match: RegExpExecArray | null
+    const scriptContent = scriptMatch[1];
+    const importRegex = /import\s+\{([^}]+)\}\s+from/g;
+    let match: RegExpExecArray | null;
 
     while ((match = importRegex.exec(scriptContent)) !== null) {
-      const imports = match[1].split(",").map((imp) => imp.trim())
+      const imports = match[1].split(",").map((imp) => imp.trim());
       imports.forEach((imp) => {
         if (imp[0] && imp[0] === imp[0].toUpperCase()) {
-          components.push(imp)
+          components.push(imp);
         }
-      })
+      });
     }
   }
 
-  return [...new Set(components)] // Remove duplicates
+  return [...new Set(components)]; // Remove duplicates
 }
 
 /**
@@ -635,10 +637,10 @@ async function buildDirectoryTreeWithFallback(
   owner: string = REPO_OWNER,
   repo: string = REPO_NAME,
   path: string = NEW_YORK_V4_PATH,
-  branch: string = REPO_BRANCH
+  branch: string = REPO_BRANCH,
 ): Promise<any> {
   try {
-    return await buildDirectoryTree(owner, repo, path, branch)
+    return await buildDirectoryTree(owner, repo, path, branch);
   } catch (error: any) {
     // If it's a rate limit error and we're asking for the default path, provide fallback
     if (
@@ -646,11 +648,11 @@ async function buildDirectoryTreeWithFallback(
       error.message.includes("rate limit") &&
       path === NEW_YORK_V4_PATH
     ) {
-      logWarning("Using fallback directory structure due to rate limit")
-      return getBasicVueStructure()
+      logWarning("Using fallback directory structure due to rate limit");
+      return getBasicVueStructure();
     }
     // Re-throw other errors
-    throw error
+    throw error;
   }
 }
 
@@ -662,19 +664,19 @@ async function buildDirectoryTreeWithFallback(
  */
 async function getBlockCode(
   blockName: string,
-  includeComponents: boolean = true
+  includeComponents: boolean = true,
 ): Promise<any> {
   // Prefer v4 registry blocks (directories with page.vue)
-  const blocksPath = BLOCKS_PATH
-  const normalized = normalizeBlockName(blockName)
+  const blocksPath = BLOCKS_PATH;
+  const normalized = normalizeBlockName(blockName);
 
   // Check for complex block directory
   const directoryResponse = await githubApi.get(
-    `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${blocksPath}/${normalized}?ref=${REPO_BRANCH}`
-  )
+    `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${blocksPath}/${normalized}?ref=${REPO_BRANCH}`,
+  );
 
   if (!directoryResponse.data) {
-    throw new Error(`Block "${blockName}" not found`)
+    throw new Error(`Block "${blockName}" not found`);
   }
 
   const blockStructure: any = {
@@ -687,19 +689,19 @@ async function getBlockCode(
     dependencies: new Set(),
     componentsUsed: new Set(),
     code: undefined as unknown as string,
-  }
+  };
 
   if (Array.isArray(directoryResponse.data)) {
-    blockStructure.totalFiles = directoryResponse.data.length
+    blockStructure.totalFiles = directoryResponse.data.length;
 
     for (const item of directoryResponse.data) {
       if (item.type === "file") {
-        const fileResponse = await githubRaw.get(`/${item.path}`)
-        const content = fileResponse.data
+        const fileResponse = await githubRaw.get(`/${item.path}`);
+        const content = fileResponse.data;
 
-        const description = extractComponentDescription(content)
-        const dependencies = extractVueDependencies(content)
-        const components = extractVueComponentUsage(content)
+        const description = extractComponentDescription(content);
+        const dependencies = extractVueDependencies(content);
+        const components = extractVueComponentUsage(content);
 
         blockStructure.files[item.name] = {
           path: item.name,
@@ -709,30 +711,30 @@ async function getBlockCode(
           description: description,
           dependencies: dependencies,
           componentsUsed: components,
-        }
+        };
 
         dependencies.forEach((dep: string) =>
-          blockStructure.dependencies.add(dep)
-        )
+          blockStructure.dependencies.add(dep),
+        );
         components.forEach((comp: string) =>
-          blockStructure.componentsUsed.add(comp)
-        )
+          blockStructure.componentsUsed.add(comp),
+        );
 
         blockStructure.structure.push({
           name: item.name,
           type: "file",
           size: content.length,
           description: description || `${item.name} - Main block file`,
-        })
+        });
 
         // If this is the main page file, set it as the primary code
         if (item.name.toLowerCase() === "page.vue") {
-          blockStructure.code = content
+          blockStructure.code = content;
           if (
             description &&
             blockStructure.description === `Complex block: ${normalized}`
           ) {
-            blockStructure.description = description
+            blockStructure.description = description;
           }
         }
       } else if (
@@ -741,22 +743,22 @@ async function getBlockCode(
         includeComponents
       ) {
         const componentsResponse = await githubApi.get(
-          `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${item.path}?ref=${REPO_BRANCH}`
-        )
+          `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${item.path}?ref=${REPO_BRANCH}`,
+        );
 
         if (Array.isArray(componentsResponse.data)) {
-          blockStructure.files.components = {}
-          const componentStructure: any[] = []
+          blockStructure.files.components = {};
+          const componentStructure: any[] = [];
 
           for (const componentItem of componentsResponse.data) {
             if (componentItem.type === "file") {
               const componentResponse = await githubRaw.get(
-                `/${componentItem.path}`
-              )
-              const content = componentResponse.data
+                `/${componentItem.path}`,
+              );
+              const content = componentResponse.data;
 
-              const dependencies = extractVueDependencies(content)
-              const components = extractVueComponentUsage(content)
+              const dependencies = extractVueDependencies(content);
+              const components = extractVueComponentUsage(content);
 
               blockStructure.files.components[componentItem.name] = {
                 path: `components/${componentItem.name}`,
@@ -765,20 +767,20 @@ async function getBlockCode(
                 lines: content.split("\n").length,
                 dependencies: dependencies,
                 componentsUsed: components,
-              }
+              };
 
               dependencies.forEach((dep: string) =>
-                blockStructure.dependencies.add(dep)
-              )
+                blockStructure.dependencies.add(dep),
+              );
               components.forEach((comp: string) =>
-                blockStructure.componentsUsed.add(comp)
-              )
+                blockStructure.componentsUsed.add(comp),
+              );
 
               componentStructure.push({
                 name: componentItem.name,
                 type: "component",
                 size: content.length,
-              })
+              });
             }
           }
 
@@ -787,30 +789,30 @@ async function getBlockCode(
             type: "directory",
             files: componentStructure,
             count: componentStructure.length,
-          })
+          });
         }
       }
     }
   }
 
-  blockStructure.dependencies = Array.from(blockStructure.dependencies)
-  blockStructure.componentsUsed = Array.from(blockStructure.componentsUsed)
+  blockStructure.dependencies = Array.from(blockStructure.dependencies);
+  blockStructure.componentsUsed = Array.from(blockStructure.componentsUsed);
 
   // Ensure we return page.vue as main code. If not loaded above, fetch explicitly
   if (!blockStructure.code) {
     try {
       const pageResponse = await githubRaw.get(
-        `/${blocksPath}/${normalized}/page.vue`
-      )
-      blockStructure.code = pageResponse.data
+        `/${blocksPath}/${normalized}/page.vue`,
+      );
+      blockStructure.code = pageResponse.data;
     } catch (e) {
-      blockStructure.code = ""
+      blockStructure.code = "";
     }
   }
 
-  blockStructure.usage = `To use the ${normalized} block, copy \`page.vue\` and any \`components\` into your project and update imports as needed.`
+  blockStructure.usage = `To use the ${normalized} block, copy \`page.vue\` and any \`components\` into your project and update imports as needed.`;
 
-  return blockStructure
+  return blockStructure;
 }
 
 /**
@@ -819,14 +821,14 @@ async function getBlockCode(
  * @returns Promise with categorized block list
  */
 async function getAvailableBlocks(category?: string): Promise<any> {
-  const blocksPath = BLOCKS_PATH
+  const blocksPath = BLOCKS_PATH;
 
-  const allBlocks: any[] = []
+  const allBlocks: any[] = [];
 
   try {
     const response = await githubApi.get(
-      `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${blocksPath}?ref=${REPO_BRANCH}`
-    )
+      `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${blocksPath}?ref=${REPO_BRANCH}`,
+    );
 
     if (Array.isArray(response.data)) {
       for (const item of response.data) {
@@ -837,19 +839,19 @@ async function getAvailableBlocks(category?: string): Promise<any> {
             path: item.path,
             size: item.size || 0,
             lastModified: "Available",
-          })
+          });
         } else if (item.type === "dir") {
           allBlocks.push({
             name: item.name,
             type: "complex",
             path: item.path,
             lastModified: "Directory",
-          })
+          });
         }
       }
     }
   } catch (error) {
-    throw new Error("No blocks found in Vue registry (v4)")
+    throw new Error("No blocks found in Vue registry (v4)");
   }
 
   // Categorize blocks by simple heuristics
@@ -864,52 +866,53 @@ async function getAvailableBlocks(category?: string): Promise<any> {
     mail: [],
     music: [],
     other: [],
-  }
+  };
 
   for (const block of allBlocks) {
     if (block.name.includes("calendar")) {
-      block.description = "Calendar component for date selection and scheduling"
-      blocks.calendar.push(block)
+      block.description =
+        "Calendar component for date selection and scheduling";
+      blocks.calendar.push(block);
     } else if (block.name.includes("dashboard")) {
       block.description =
-        "Dashboard layout with charts, metrics, and data display"
-      blocks.dashboard.push(block)
+        "Dashboard layout with charts, metrics, and data display";
+      blocks.dashboard.push(block);
     } else if (block.name.includes("login") || block.name.includes("signin")) {
-      block.description = "Authentication and login interface"
-      blocks.login.push(block)
+      block.description = "Authentication and login interface";
+      blocks.login.push(block);
     } else if (block.name.includes("sidebar")) {
-      block.description = "Navigation sidebar component"
-      blocks.sidebar.push(block)
+      block.description = "Navigation sidebar component";
+      blocks.sidebar.push(block);
     } else if (
       block.name.includes("products") ||
       block.name.includes("ecommerce")
     ) {
-      block.description = "Product listing and e-commerce components"
-      blocks.products.push(block)
+      block.description = "Product listing and e-commerce components";
+      blocks.products.push(block);
     } else if (block.name.includes("auth")) {
-      block.description = "Authentication related components"
-      blocks.authentication.push(block)
+      block.description = "Authentication related components";
+      blocks.authentication.push(block);
     } else if (block.name.includes("chart") || block.name.includes("graph")) {
-      block.description = "Data visualization and chart components"
-      blocks.charts.push(block)
+      block.description = "Data visualization and chart components";
+      blocks.charts.push(block);
     } else if (block.name.includes("mail") || block.name.includes("email")) {
-      block.description = "Email and mail interface components"
-      blocks.mail.push(block)
+      block.description = "Email and mail interface components";
+      blocks.mail.push(block);
     } else if (block.name.includes("music") || block.name.includes("player")) {
-      block.description = "Music player and media components"
-      blocks.music.push(block)
+      block.description = "Music player and media components";
+      blocks.music.push(block);
     } else {
-      block.description = `${block.name} - Custom Vue UI block`
-      blocks.other.push(block)
+      block.description = `${block.name} - Custom Vue UI block`;
+      blocks.other.push(block);
     }
   }
 
   Object.keys(blocks).forEach((key) => {
-    blocks[key].sort((a: any, b: any) => a.name.localeCompare(b.name))
-  })
+    blocks[key].sort((a: any, b: any) => a.name.localeCompare(b.name));
+  });
 
   if (category) {
-    const categoryLower = category.toLowerCase()
+    const categoryLower = category.toLowerCase();
     if (blocks[categoryLower]) {
       return {
         category,
@@ -919,28 +922,28 @@ async function getAvailableBlocks(category?: string): Promise<any> {
           category.charAt(0).toUpperCase() + category.slice(1)
         } blocks available in shadcn-vue v4`,
         usage: `Use 'get_block' tool with the block name to get the full source code and implementation details.`,
-      }
+      };
     } else {
       return {
         category,
         blocks: [],
         total: 0,
         availableCategories: Object.keys(blocks).filter(
-          (key) => blocks[key].length > 0
+          (key) => blocks[key].length > 0,
         ),
         suggestion: `Category '${category}' not found. Available categories: ${Object.keys(
-          blocks
+          blocks,
         )
           .filter((key) => blocks[key].length > 0)
           .join(", ")}`,
-      }
+      };
     }
   }
 
-  const totalBlocks = Object.values(blocks).flat().length
+  const totalBlocks = Object.values(blocks).flat().length;
   const nonEmptyCategories = Object.keys(blocks).filter(
-    (key) => blocks[key].length > 0
-  )
+    (key) => blocks[key].length > 0,
+  );
 
   return {
     categories: blocks,
@@ -948,9 +951,9 @@ async function getAvailableBlocks(category?: string): Promise<any> {
     availableCategories: nonEmptyCategories,
     summary: Object.keys(blocks).reduce((acc: any, key) => {
       if (blocks[key].length > 0) {
-        acc[key] = blocks[key].length
+        acc[key] = blocks[key].length;
       }
-      return acc
+      return acc;
     }, {}),
     usage:
       "Use 'get_block' tool with a specific block name to get full source code and implementation details.",
@@ -958,7 +961,7 @@ async function getAvailableBlocks(category?: string): Promise<any> {
       .slice(0, 3)
       .map((cat) => (blocks[cat][0] ? `${cat}: ${blocks[cat][0].name}` : ""))
       .filter(Boolean),
-  }
+  };
 }
 
 /**
@@ -968,18 +971,17 @@ async function getAvailableBlocks(category?: string): Promise<any> {
 function setGitHubApiKey(apiKey: string): void {
   // Update the Authorization header for the GitHub API instance
   if (apiKey && apiKey.trim()) {
-    ;(githubApi.defaults.headers as any)[
-      "Authorization"
-    ] = `Bearer ${apiKey.trim()}`
-    logInfo("GitHub API key updated successfully")
-    console.error("GitHub API key updated successfully")
+    (githubApi.defaults.headers as any)["Authorization"] =
+      `Bearer ${apiKey.trim()}`;
+    logInfo("GitHub API key updated successfully");
+    console.error("GitHub API key updated successfully");
   } else {
     // Remove authorization header if empty key provided
-    delete (githubApi.defaults.headers as any)["Authorization"]
-    console.error("GitHub API key removed - using unauthenticated requests")
+    delete (githubApi.defaults.headers as any)["Authorization"];
+    console.error("GitHub API key removed - using unauthenticated requests");
     console.error(
-      "For higher rate limits and reliability, provide a GitHub API token. See setup instructions: https://github.com/Jpisnice/shadcn-ui-mcp-server#readme"
-    )
+      "For higher rate limits and reliability, provide a GitHub API token. See setup instructions: https://github.com/Jpisnice/shadcn-ui-mcp-server#readme",
+    );
   }
 }
 
@@ -989,10 +991,10 @@ function setGitHubApiKey(apiKey: string): void {
  */
 async function getGitHubRateLimit(): Promise<any> {
   try {
-    const response = await githubApi.get("/rate_limit")
-    return response.data
+    const response = await githubApi.get("/rate_limit");
+    return response.data;
   } catch (error: any) {
-    throw new Error(`Failed to get rate limit info: ${error.message}`)
+    throw new Error(`Failed to get rate limit info: ${error.message}`);
   }
 }
 
@@ -1021,4 +1023,4 @@ export const axios = {
     BLOCKS_PATH,
     DEMOS_PATH,
   },
-}
+};

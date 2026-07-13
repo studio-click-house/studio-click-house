@@ -1,12 +1,14 @@
-import { getFramework } from "../utils/framework.js"
+import { getFramework } from "../utils/framework.js";
 import {
   getOptimizationInstructions,
   getPageTypeSpecificInstructions,
-} from "./helpers.js"
+} from "./helpers.js";
 
 // Small helper to append React Native specific notes to prompts when needed
-function getReactNativeNotes(context: "general" | "page" | "dashboard" | "auth" | "datatable"): string {
-  const base = `\n\nREACT NATIVE NOTES:\n- Use React Native primitives (View, Text, Pressable, Image) — no DOM/HTML.\n- Style with NativeWind (className) or StyleSheet.create; avoid web CSS.\n- Prefer FlatList/SectionList for lists; implement virtualization/windowing.\n- Use accessibility props (accessibilityLabel, accessibilityRole, accessibilityHint) instead of ARIA.\n- For animations use react-native-reanimated; for gestures use react-native-gesture-handler.\n- Consider SafeAreaView and Platform checks for iOS/Android differences.`
+function getReactNativeNotes(
+  context: "general" | "page" | "dashboard" | "auth" | "datatable",
+): string {
+  const base = `\n\nREACT NATIVE NOTES:\n- Use React Native primitives (View, Text, Pressable, Image) — no DOM/HTML.\n- Style with NativeWind (className) or StyleSheet.create; avoid web CSS.\n- Prefer FlatList/SectionList for lists; implement virtualization/windowing.\n- Use accessibility props (accessibilityLabel, accessibilityRole, accessibilityHint) instead of ARIA.\n- For animations use react-native-reanimated; for gestures use react-native-gesture-handler.\n- Consider SafeAreaView and Platform checks for iOS/Android differences.`;
 
   const extras: Record<typeof context, string> = {
     general: base,
@@ -20,9 +22,9 @@ function getReactNativeNotes(context: "general" | "page" | "dashboard" | "auth" 
     datatable:
       base +
       `\n- RN does not have native HTML tables; implement a DataTable with FlatList/FlashList.\n- Use item separators and row components; handle large datasets with virtualization.\n- For row actions, use Pressable/Swipeable patterns and action sheets.`,
-  }
+  };
 
-  return extras[context]
+  return extras[context];
 }
 
 /**
@@ -142,7 +144,7 @@ export const prompts = {
       },
     ],
   },
-}
+};
 
 /**
  * Map of prompt names to their handler functions
@@ -155,12 +157,12 @@ export const promptHandlers = {
     layout = "sidebar",
     style = "modern",
   }: {
-    pageType: string
-    features?: string
-    layout?: string
-    style?: string
+    pageType: string;
+    features?: string;
+    layout?: string;
+    style?: string;
   }) => {
-    const framework = getFramework()
+    const framework = getFramework();
 
     return {
       messages: [
@@ -211,7 +213,7 @@ Please provide complete, production-ready ${framework} code with proper imports 
           },
         },
       ],
-    }
+    };
   },
 
   "create-dashboard": ({
@@ -219,11 +221,11 @@ Please provide complete, production-ready ${framework} code with proper imports 
     widgets = "charts,tables,cards",
     navigation = "sidebar",
   }: {
-    dashboardType: string
-    widgets?: string
-    navigation?: string
+    dashboardType: string;
+    widgets?: string;
+    navigation?: string;
   }) => {
-    const framework = getFramework()
+    const framework = getFramework();
 
     return {
       messages: [
@@ -282,7 +284,7 @@ Provide complete ${framework} code with all necessary imports, types, and implem
           },
         },
       ],
-    }
+    };
   },
 
   "create-auth-flow": ({
@@ -290,11 +292,11 @@ Provide complete ${framework} code with all necessary imports, types, and implem
     providers = "email",
     features = "validation",
   }: {
-    authType: string
-    providers?: string
-    features?: string
+    authType: string;
+    providers?: string;
+    features?: string;
   }) => {
-    const framework = getFramework()
+    const framework = getFramework();
 
     return {
       messages: [
@@ -327,7 +329,7 @@ INSTRUCTIONS:
      .split(",")
      .map(
        (provider) =>
-         `- ${provider.trim()}: Implement ${provider.trim()} authentication UI`
+         `- ${provider.trim()}: Implement ${provider.trim()} authentication UI`,
      )
      .join("\n   ")}
 
@@ -349,7 +351,7 @@ INSTRUCTIONS:
      .split(",")
      .map(
        (feature) =>
-         `- ${feature.trim()}: Implement ${feature.trim()} functionality`
+         `- ${feature.trim()}: Implement ${feature.trim()} functionality`,
      )
      .join("\n   ")}
 
@@ -365,7 +367,7 @@ Provide complete ${framework} authentication flow code with proper TypeScript ty
           },
         },
       ],
-    }
+    };
   },
 
   "optimize-shadcn-component": ({
@@ -373,11 +375,11 @@ Provide complete ${framework} authentication flow code with proper TypeScript ty
     optimization = "performance",
     useCase = "general",
   }: {
-    component: string
-    optimization?: string
-    useCase?: string
+    component: string;
+    optimization?: string;
+    useCase?: string;
   }) => {
-    const framework = getFramework()
+    const framework = getFramework();
 
     return {
       messages: [
@@ -428,7 +430,7 @@ Provide the optimized ${framework} component code with detailed explanations of 
           },
         },
       ],
-    }
+    };
   },
 
   "create-data-table": ({
@@ -436,11 +438,11 @@ Provide the optimized ${framework} component code with detailed explanations of 
     features = "sorting,filtering,pagination",
     actions = "edit,delete",
   }: {
-    dataType: string
-    features?: string
-    actions?: string
+    dataType: string;
+    features?: string;
+    actions?: string;
   }) => {
-    const framework = getFramework()
+    const framework = getFramework();
 
     return {
       messages: [
@@ -479,11 +481,11 @@ INSTRUCTIONS:
          pagination: "- Page-based navigation with configurable page sizes",
          search: "- Real-time search across all columns",
          selection: "- Row selection with bulk actions support",
-       }
+       };
        return (
          featureInstructions[feature.trim()] ||
          `- ${feature.trim()}: Implement ${feature.trim()} functionality`
-       )
+       );
      })
      .join("\n   ")}
 
@@ -492,7 +494,7 @@ INSTRUCTIONS:
      .split(",")
      .map(
        (action) =>
-         `- ${action.trim()}: Implement ${action.trim()} action with proper confirmation dialogs`
+         `- ${action.trim()}: Implement ${action.trim()} action with proper confirmation dialogs`,
      )
      .join("\n   ")}
 
@@ -522,6 +524,6 @@ Provide complete ${framework} data table implementation with proper TypeScript t
           },
         },
       ],
-    }
+    };
   },
-}
+};

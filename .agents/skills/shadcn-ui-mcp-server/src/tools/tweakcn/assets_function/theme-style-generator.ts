@@ -128,7 +128,7 @@ const formatNumber = (num?: number) => {
 const colorFormatter = (
   colorValue: string,
   format: ColorFormat = "hsl",
-  tailwindVersion: "3" | "4" = "3"
+  tailwindVersion: "3" | "4" = "3",
 ): string => {
   // For standalone version, return the color as-is if it's already in a valid format
   // This avoids the culori dependency
@@ -156,7 +156,8 @@ const getShadowMap = (themeStyles: ThemeStyles, currentMode: ThemeMode) => {
     const offsetX2 = offsetX;
     const offsetY2 = fixedOffsetY;
     const blur2 = fixedBlur;
-    const spread2 = (parseFloat(spread?.replace("px", "") ?? "0") - 1).toString() + "px";
+    const spread2 =
+      (parseFloat(spread?.replace("px", "") ?? "0") - 1).toString() + "px";
     const color2 = color(1.0);
 
     return `${offsetX2} ${offsetY2} ${blur2} ${spread2} ${color2}`;
@@ -167,17 +168,17 @@ const getShadowMap = (themeStyles: ThemeStyles, currentMode: ThemeMode) => {
     "shadow-xs": `${offsetX} ${offsetY} ${blur} ${spread} ${color(0.5)}`,
     "shadow-2xl": `${offsetX} ${offsetY} ${blur} ${spread} ${color(2.5)}`,
     "shadow-sm": `${offsetX} ${offsetY} ${blur} ${spread} ${color(
-      1.0
+      1.0,
     )}, ${secondLayer("1px", "2px")}`,
     shadow: `${offsetX} ${offsetY} ${blur} ${spread} ${color(1.0)}, ${secondLayer("1px", "2px")}`,
     "shadow-md": `${offsetX} ${offsetY} ${blur} ${spread} ${color(
-      1.0
+      1.0,
     )}, ${secondLayer("2px", "4px")}`,
     "shadow-lg": `${offsetX} ${offsetY} ${blur} ${spread} ${color(
-      1.0
+      1.0,
     )}, ${secondLayer("4px", "6px")}`,
     "shadow-xl": `${offsetX} ${offsetY} ${blur} ${spread} ${color(
-      1.0
+      1.0,
     )}, ${secondLayer("8px", "10px")}`,
   };
 
@@ -187,7 +188,7 @@ const getShadowMap = (themeStyles: ThemeStyles, currentMode: ThemeMode) => {
 const generateColorVariables = (
   themeStyles: ThemeStyles,
   mode: ThemeMode,
-  formatColor: (color: string) => string
+  formatColor: (color: string) => string,
 ): string => {
   const styles = themeStyles[mode];
   return `
@@ -225,7 +226,10 @@ const generateColorVariables = (
   --sidebar-ring: ${formatColor(styles["sidebar-ring"])};`;
 };
 
-const generateFontVariables = (themeStyles: ThemeStyles, mode: ThemeMode): string => {
+const generateFontVariables = (
+  themeStyles: ThemeStyles,
+  mode: ThemeMode,
+): string => {
   const styles = themeStyles[mode];
   return `
   --font-sans: ${styles["font-sans"]};
@@ -245,7 +249,10 @@ const generateShadowVariables = (shadowMap: Record<string, string>): string => {
   --shadow-2xl: ${shadowMap["shadow-2xl"]};`;
 };
 
-const generateRawShadowVariables = (themeStyles: ThemeStyles, mode: ThemeMode): string => {
+const generateRawShadowVariables = (
+  themeStyles: ThemeStyles,
+  mode: ThemeMode,
+): string => {
   const styles = themeStyles[mode];
   return `
   --shadow-x: ${styles["shadow-offset-x"]};
@@ -274,7 +281,7 @@ const generateTrackingVariables = (themeStyles: ThemeStyles): string => {
 const generateThemeVariables = (
   themeStyles: ThemeStyles,
   mode: ThemeMode,
-  formatColor: (color: string) => string
+  formatColor: (color: string) => string,
 ): string => {
   const selector = mode === "dark" ? ".dark" : ":root";
   const colorVars = generateColorVariables(themeStyles, mode, formatColor);
@@ -363,7 +370,7 @@ const generateTailwindV4ThemeInline = (themeStyles: ThemeStyles): string => {
 
 const generateTailwindV3Config = (
   _themeStyles: ThemeStyles,
-  colorFormat: ColorFormat = "hsl"
+  colorFormat: ColorFormat = "hsl",
 ): string => {
   const colorToken = (key: string) => {
     return colorFormat === "hsl" ? `"hsl(var(--${key}))"` : `"var(--${key})"`;
@@ -445,7 +452,7 @@ module.exports = {
 export const generateThemeCode = (
   themeEditorState: ThemeEditorState,
   colorFormat: ColorFormat = "hsl",
-  tailwindVersion: "3" | "4" = "3"
+  tailwindVersion: "3" | "4" = "3",
 ): string => {
   if (
     !themeEditorState ||
@@ -456,12 +463,15 @@ export const generateThemeCode = (
   }
 
   const themeStyles = themeEditorState.styles as ThemeStyles;
-  const formatColor = (color: string) => colorFormatter(color, colorFormat, tailwindVersion);
+  const formatColor = (color: string) =>
+    colorFormatter(color, colorFormat, tailwindVersion);
 
   const lightTheme = generateThemeVariables(themeStyles, "light", formatColor);
   const darkTheme = generateThemeVariables(themeStyles, "dark", formatColor);
   const tailwindV4Theme =
-    tailwindVersion === "4" ? `\n\n${generateTailwindV4ThemeInline(themeStyles)}` : "";
+    tailwindVersion === "4"
+      ? `\n\n${generateTailwindV4ThemeInline(themeStyles)}`
+      : "";
 
   const bodyLetterSpacing =
     themeStyles["light"]["letter-spacing"] !== "0em"
@@ -474,7 +484,7 @@ export const generateThemeCode = (
 export const generateTailwindConfigCode = (
   themeEditorState: ThemeEditorState,
   colorFormat: ColorFormat = "hsl",
-  _tailwindVersion: "3" | "4" = "3"
+  _tailwindVersion: "3" | "4" = "3",
 ): string => {
   if (
     !themeEditorState ||

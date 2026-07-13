@@ -35,7 +35,11 @@ export async function backupFile(filePath: string): Promise<string> {
 export async function writeThemeBlock(
   filePath: string,
   blockContent: string,
-  options?: { markerStart?: string; markerEnd?: string; createBackup?: boolean }
+  options?: {
+    markerStart?: string;
+    markerEnd?: string;
+    createBackup?: boolean;
+  },
 ): Promise<{ filePath: string; backup?: string }> {
   const markerStart = options?.markerStart ?? "/* MCP-TWEAKCN-START */";
   const markerEnd = options?.markerEnd ?? "/* MCP-TWEAKCN-END */";
@@ -59,7 +63,10 @@ export async function writeThemeBlock(
 
   let out = original;
   if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
-    out = original.slice(0, startIdx) + block + original.slice(endIdx + markerEnd.length);
+    out =
+      original.slice(0, startIdx) +
+      block +
+      original.slice(endIdx + markerEnd.length);
   } else {
     out = original + "\n" + block;
   }

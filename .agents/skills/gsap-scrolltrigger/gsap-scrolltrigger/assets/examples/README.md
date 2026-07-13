@@ -23,12 +23,13 @@ gsap.from(".element", {
   y: 50,
   scrollTrigger: {
     trigger: ".element",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
 **Variations**:
+
 - Batch animations for multiple elements
 - Stagger from different directions (center, edges, random)
 - Grid-based stagger patterns
@@ -45,11 +46,12 @@ ScrollTrigger.create({
   start: "top top",
   end: "+=1000",
   pin: true,
-  scrub: 1
+  scrub: 1,
 });
 ```
 
 **Variations**:
+
 - Pin with timeline animations
 - Multiple pinned sections (stacked cards)
 - Pin with snap points
@@ -68,12 +70,13 @@ gsap.to(".panels", {
     trigger: ".container",
     pin: true,
     scrub: 1,
-    end: () => "+=" + container.offsetWidth
-  }
+    end: () => "+=" + container.offsetWidth,
+  },
 });
 ```
 
 **Variations**:
+
 - With snap points between panels
 - Nested animations within panels
 - Progress indicators
@@ -92,12 +95,13 @@ gsap.to(".bg", {
     trigger: ".section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 ```
 
 **Variations**:
+
 - Multi-layer parallax (2-5 layers)
 - Parallax with zoom
 - Directional parallax (horizontal/vertical)
@@ -118,12 +122,13 @@ gsap.from(split.lines, {
   stagger: 0.1,
   scrollTrigger: {
     trigger: ".text",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
 **Variations**:
+
 - Line-by-line reveals
 - Character animations
 - Typewriter effects
@@ -142,12 +147,13 @@ gsap.to(".curtain", {
   duration: 1,
   scrollTrigger: {
     trigger: ".image",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
 **Variations**:
+
 - Clip-path reveals
 - Scale reveals
 - Directional wipes
@@ -252,30 +258,30 @@ Each example is self-contained. Copy the relevant code sections:
 
 ```javascript
 // Slower animation
-duration: 2  // instead of 1
+duration: 2; // instead of 1
 
 // More gradual scroll response
-scrub: 2  // instead of true or 1
+scrub: 2; // instead of true or 1
 ```
 
 ### Change Trigger Points
 
 ```javascript
 // Trigger earlier
-start: "top 90%"  // instead of "top 80%"
+start: "top 90%"; // instead of "top 80%"
 
 // Trigger later
-start: "top 50%"
+start: "top 50%";
 ```
 
 ### Modify Easing
 
 ```javascript
 // More dramatic
-ease: "power3.out"  // instead of "power2.out"
+ease: "power3.out"; // instead of "power2.out"
 
 // Playful
-ease: "back.out(1.7)"
+ease: "back.out(1.7)";
 ```
 
 ---
@@ -314,12 +320,12 @@ if (window.innerWidth < 768) {
 
 // Or use ScrollTrigger.matchMedia()
 ScrollTrigger.matchMedia({
-  "(min-width: 800px)": function() {
+  "(min-width: 800px)": function () {
     // Desktop animations
   },
-  "(max-width: 799px)": function() {
+  "(max-width: 799px)": function () {
     // Mobile animations
-  }
+  },
 });
 ```
 
@@ -367,33 +373,36 @@ ScrollTrigger.matchMedia({
 <div class="fade-in">Content here</div>
 
 <script>
-gsap.from(".fade-in", {
-  opacity: 0,
-  y: 50,
-  duration: 1,
-  scrollTrigger: {
-    trigger: ".fade-in",
-    start: "top 80%"
-  }
-});
+  gsap.from(".fade-in", {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    scrollTrigger: {
+      trigger: ".fade-in",
+      start: "top 80%",
+    },
+  });
 </script>
 ```
 
 #### Progress Bar
 
 ```html
-<div class="progress" style="position: fixed; top: 0; left: 0; height: 4px; background: blue; transform-origin: left;"></div>
+<div
+  class="progress"
+  style="position: fixed; top: 0; left: 0; height: 4px; background: blue; transform-origin: left;"
+></div>
 
 <script>
-gsap.to(".progress", {
-  scaleX: 1,
-  ease: "none",
-  scrollTrigger: {
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 0.3
-  }
-});
+  gsap.to(".progress", {
+    scaleX: 1,
+    ease: "none",
+    scrollTrigger: {
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.3,
+    },
+  });
 </script>
 ```
 
@@ -403,18 +412,18 @@ gsap.to(".progress", {
 <a href="#section2">Go to Section 2</a>
 
 <script>
-gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(ScrollToPlugin);
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function(e) {
-    e.preventDefault();
-    gsap.to(window, {
-      duration: 1,
-      scrollTo: this.getAttribute("href"),
-      ease: "power2.inOut"
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: this.getAttribute("href"),
+        ease: "power2.inOut",
+      });
     });
   });
-});
 </script>
 ```
 

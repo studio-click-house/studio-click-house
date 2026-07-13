@@ -32,7 +32,7 @@ export async function handleGetBlock({
     throw new Error(
       `Failed to get block "${blockName}": ${
         error instanceof Error ? error.message : String(error)
-      }`
+      }`,
     );
   }
 }

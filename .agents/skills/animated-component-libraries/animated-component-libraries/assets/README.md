@@ -27,16 +27,18 @@ npx shadcn@latest add https://magicui.design/r/marquee
 ```
 
 **Required: lib/utils.ts**
+
 ```typescript
-import clsx, { ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
 **Required: app/globals.css (add animations)**
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -44,16 +46,23 @@ export function cn(...inputs: ClassValue[]) {
 
 @theme inline {
   --animate-marquee: marquee var(--duration) linear infinite;
-  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite
+    alternate;
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap))); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
 }
 
 @keyframes shimmer-slide {
-  to { transform: translate(calc(100cqw - 100%), 0); }
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+  }
 }
 ```
 
@@ -74,6 +83,7 @@ npm install ogl  # For WebGL components (Particles, Plasma, Aurora)
 ```
 
 **Copy components from reactbits.dev**:
+
 - Visit https://reactbits.dev
 - Browse component gallery
 - Click "View Code" on desired component
@@ -84,6 +94,7 @@ npm install ogl  # For WebGL components (Particles, Plasma, Aurora)
 ### Landing Page with Magic UI
 
 **app/page.tsx**
+
 ```typescript
 import { GridPattern } from "@/components/ui/grid-pattern"
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
@@ -144,12 +155,13 @@ export default function Home() {
 ### Interactive Dashboard with React Bits
 
 **src/App.jsx**
+
 ```jsx
-import { useState } from 'react'
-import CountUp from './components/CountUp'
-import BlurText from './components/BlurText'
-import Particles from './components/Particles'
-import './App.css'
+import { useState } from "react";
+import CountUp from "./components/CountUp";
+import BlurText from "./components/BlurText";
+import Particles from "./components/Particles";
+import "./App.css";
 
 function App() {
   return (
@@ -157,7 +169,7 @@ function App() {
       {/* Background */}
       <Particles
         particleCount={150}
-        particleColors={['#4ECDC4', '#45B7D1']}
+        particleColors={["#4ECDC4", "#45B7D1"]}
         particleSpread={10}
         speed={0.1}
         className="fixed inset-0"
@@ -208,10 +220,10 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 ## Component Showcase Examples
@@ -219,11 +231,13 @@ export default App
 ### Complete examples are available at:
 
 **Magic UI**:
+
 - Official examples: https://magicui.design
 - GitHub repository: https://github.com/magicuidesign/magicui
 - Component registry: Browse site for live demos
 
 **React Bits**:
+
 - Official examples: https://reactbits.dev
 - Component demos: Each component page includes live preview
 - GitHub: https://github.com/davidhdev/react-bits
@@ -236,13 +250,13 @@ Both libraries can be used together in the same project:
 
 ```jsx
 // Magic UI for structural patterns
-import { GridPattern } from "@/components/ui/grid-pattern"
-import { Marquee } from "@/components/ui/marquee"
+import { GridPattern } from "@/components/ui/grid-pattern";
+import { Marquee } from "@/components/ui/marquee";
 
 // React Bits for interactive elements
-import BlurText from './components/BlurText'
-import CountUp from './components/CountUp'
-import Particles from './components/Particles'
+import BlurText from "./components/BlurText";
+import CountUp from "./components/CountUp";
+import Particles from "./components/Particles";
 
 export default function HybridPage() {
   return (
@@ -252,7 +266,10 @@ export default function HybridPage() {
 
       {/* Magic UI pattern overlay */}
       <GridPattern
-        squares={[[4,4], [8,2]]}
+        squares={[
+          [4, 4],
+          [8, 2],
+        ]}
         className="absolute inset-0 opacity-30 -z-10"
       />
 
@@ -272,7 +289,7 @@ export default function HybridPage() {
         </Marquee>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -281,21 +298,24 @@ export default function HybridPage() {
 ### Performance-Optimized Setup
 
 ```jsx
-import { lazy, Suspense, useState, useEffect } from 'react'
+import { lazy, Suspense, useState, useEffect } from "react";
 
 // Lazy load heavy components
-const Particles = lazy(() => import('./components/Particles'))
-const AnimatedGridPattern = lazy(() => import('@/components/ui/animated-grid-pattern'))
+const Particles = lazy(() => import("./components/Particles"));
+const AnimatedGridPattern = lazy(
+  () => import("@/components/ui/animated-grid-pattern"),
+);
 
 export default function OptimizedPage() {
-  const [enableHeavyEffects, setEnableHeavyEffects] = useState(false)
+  const [enableHeavyEffects, setEnableHeavyEffects] = useState(false);
 
   useEffect(() => {
     // Enable on high-end devices only
-    const isHighEnd = navigator.hardwareConcurrency > 4 &&
-                     !navigator.userAgent.includes('Mobile')
-    setEnableHeavyEffects(isHighEnd)
-  }, [])
+    const isHighEnd =
+      navigator.hardwareConcurrency > 4 &&
+      !navigator.userAgent.includes("Mobile");
+    setEnableHeavyEffects(isHighEnd);
+  }, []);
 
   return (
     <div className="relative">
@@ -309,7 +329,7 @@ export default function OptimizedPage() {
 
       {/* Content */}
     </div>
-  )
+  );
 }
 ```
 

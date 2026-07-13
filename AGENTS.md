@@ -1,5 +1,7 @@
 # Studio Click House — Agent & AI Coding Rules
+
 # Applies to: Cursor AI, Claude, Copilot, or any AI assistant working on this project.
+
 # Stack: Next.js 16 App Router · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui · Framer Motion · Lenis
 
 ---
@@ -49,27 +51,30 @@ No backend / no NestJS — this is a pure Next.js frontend project with API rout
 - Do NOT create new folders outside the defined structure below.
 
 ### Pages → only in `app/`
+
 - Every route is a folder with `page.tsx` inside.
 - `app/layout.tsx` is the only root layout — no extra layouts unless a nested route truly needs it.
 - Never put component or section logic inside page files — pages only import sections.
 
 ### Components → split into 5 folders, never mix them
 
-| Folder | What goes here |
-|---|---|
-| `components/layout/` | Navbar, Footer, SmoothScrollProvider, PageTransition |
-| `components/animations/` | Framer Motion wrapper components ONLY |
-| `components/sections/` | Full-width page sections (HeroSection, ServicesGrid, etc.) |
-| `components/common/` | Small reusable pieces (SectionHeading, ServiceCard, BlogCard, etc.) |
-| `components/seo/` | JSON-LD structured data components ONLY |
-| `components/ui/` | shadcn/ui base components ONLY — do not put custom code here |
+| Folder                   | What goes here                                                      |
+| ------------------------ | ------------------------------------------------------------------- |
+| `components/layout/`     | Navbar, Footer, SmoothScrollProvider, PageTransition                |
+| `components/animations/` | Framer Motion wrapper components ONLY                               |
+| `components/sections/`   | Full-width page sections (HeroSection, ServicesGrid, etc.)          |
+| `components/common/`     | Small reusable pieces (SectionHeading, ServiceCard, BlogCard, etc.) |
+| `components/seo/`        | JSON-LD structured data components ONLY                             |
+| `components/ui/`         | shadcn/ui base components ONLY — do not put custom code here        |
 
 ### Data → only in `content/`
+
 - Never hardcode repeated text or data inside components.
 - Services, FAQs, pricing, testimonials, stats → always in `content/*.ts`.
 - Import from content files into sections — never inline.
 
 ### Utilities → only in `lib/`
+
 - All Framer Motion animation variants → `lib/animations.ts` — never define inline.
 - Lenis smooth scroll config → `lib/lenis.ts`
 - SEO metadata helper → `lib/metadata.ts`
@@ -77,13 +82,16 @@ No backend / no NestJS — this is a pure Next.js frontend project with API rout
 - Tailwind `cn()` utility → `lib/utils.ts`
 
 ### Config → only in `config/`
+
 - Site name, URL, default OG image, social links → `config/site.ts`.
 - Never hardcode the site URL anywhere else.
 
 ### Types → only in `types/index.ts`
+
 - All TypeScript interfaces and types live here.
 
 ### Hooks → only in `hooks/`
+
 - Custom React hooks only (e.g. `useScrollProgress.ts`, `useInView.ts`).
 
 ---
@@ -118,6 +126,7 @@ No backend / no NestJS — this is a pure Next.js frontend project with API rout
 - Lenis smooth scroll initialized once only in `components/layout/SmoothScrollProvider.tsx`.
 
 ### Standard animation wrappers (use these, don't create new ones without asking):
+
 - `<FadeUp>` — scroll fade up, default for most elements
 - `<FadeIn>` — simple opacity fade
 - `<StaggerContainer>` — parent wrapper when children need stagger
@@ -173,12 +182,12 @@ No backend / no NestJS — this is a pure Next.js frontend project with API rout
 
 ## Brand Tokens (never hardcode these values directly in JSX)
 
-| Token | Value |
-|---|---|
+| Token         | Value                     |
+| ------------- | ------------------------- |
 | Primary green | `brand-green` → `#7ea641` |
-| Dark | `brand-dark` → `#1a1a1a` |
-| Light | `brand-light` → `#f8f8f6` |
-| Font | Plus Jakarta Sans |
+| Dark          | `brand-dark` → `#1a1a1a`  |
+| Light         | `brand-light` → `#f8f8f6` |
+| Font          | Plus Jakarta Sans         |
 
 ---
 

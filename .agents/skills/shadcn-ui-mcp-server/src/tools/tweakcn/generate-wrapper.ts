@@ -1,4 +1,3 @@
- 
 /**
  * Generate a minimal CSS variables block and a basic Tailwind v3 config
  * from the normalized ThemeStyles. This is intentionally lightweight so it
@@ -7,7 +6,7 @@
 export function generateCssAndConfig(
   themeStyles: Record<string, any>,
   tailwindVersion: "3" | "4" = "3",
-  colorFormat: "hsl" | "var" = "hsl"
+  colorFormat: "hsl" | "var" = "hsl",
 ): { css: string; tailwindConfig?: string } {
   const modes: Array<"light" | "dark"> = ["light", "dark"];
 
@@ -34,7 +33,10 @@ export function generateCssAndConfig(
 
   const tailwindConfig = `/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  darkMode: ['class'],\n  theme: { extend: {} },\n}`;
 
-  return { css, tailwindConfig: tailwindVersion === "3" ? tailwindConfig : undefined };
+  return {
+    css,
+    tailwindConfig: tailwindVersion === "3" ? tailwindConfig : undefined,
+  };
 }
 
 export default generateCssAndConfig;

@@ -13,7 +13,8 @@ export class Cache {
   private storage: Map<string, CacheItem<any>>;
   private defaultTTL: number;
 
-  private constructor(defaultTTL = 3600000) { // Default TTL: 1 hour
+  private constructor(defaultTTL = 3600000) {
+    // Default TTL: 1 hour
     this.storage = new Map();
     this.defaultTTL = defaultTTL;
   }
@@ -49,10 +50,10 @@ export class Cache {
    */
   public get<T>(key: string): T | null {
     const item = this.storage.get(key);
-    
+
     // Return null if the item doesn't exist
     if (!item) return null;
-    
+
     // Check if the item has expired
     const now = Date.now();
     if (item.ttl > 0 && now - item.timestamp > item.ttl) {
@@ -60,7 +61,7 @@ export class Cache {
       this.storage.delete(key);
       return null;
     }
-    
+
     return item.value as T;
   }
 
@@ -74,14 +75,14 @@ export class Cache {
   public async getOrFetch<T>(
     key: string,
     fetchFn: () => Promise<T>,
-    ttl = this.defaultTTL
+    ttl = this.defaultTTL,
   ): Promise<T> {
     const cachedValue = this.get<T>(key);
-    
+
     if (cachedValue !== null) {
       return cachedValue;
     }
-    
+
     // Value not in cache or expired, fetch it
     const value = await fetchFn();
     this.set(key, value, ttl);
@@ -96,13 +97,13 @@ export class Cache {
   public has(key: string): boolean {
     const item = this.storage.get(key);
     if (!item) return false;
-    
+
     const now = Date.now();
     if (item.ttl > 0 && now - item.timestamp > item.ttl) {
       this.storage.delete(key);
       return false;
     }
-    
+
     return true;
   }
 
@@ -129,14 +130,14 @@ export class Cache {
   public clearExpired(): number {
     const now = Date.now();
     let deletedCount = 0;
-    
+
     this.storage.forEach((item, key) => {
       if (item.ttl > 0 && now - item.timestamp > item.ttl) {
         this.storage.delete(key);
         deletedCount++;
       }
     });
-    
+
     return deletedCount;
   }
 
@@ -147,14 +148,14 @@ export class Cache {
    */
   public deleteByPrefix(prefix: string): number {
     let deletedCount = 0;
-    
+
     this.storage.forEach((_, key) => {
       if (key.startsWith(prefix)) {
         this.storage.delete(key);
         deletedCount++;
       }
     });
-    
+
     return deletedCount;
   }
 

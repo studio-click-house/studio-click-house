@@ -13,27 +13,27 @@ type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 interface HttpClient {
   get<T>(
     endpoint: string,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<{ status: number; data: T }>;
   post<T>(
     endpoint: string,
     data?: unknown,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<{ status: number; data: T }>;
   put<T>(
     endpoint: string,
     data?: unknown,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<{ status: number; data: T }>;
   delete<T>(
     endpoint: string,
     data?: unknown,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<{ status: number; data: T }>;
   patch<T>(
     endpoint: string,
     data?: unknown,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<{ status: number; data: T }>;
 }
 
@@ -41,7 +41,7 @@ const createMethod = (method: HttpMethod) => {
   return async <T>(
     endpoint: string,
     data?: unknown,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ) => {
     const headers: HeadersInit = {
       "Content-Type": "application/json",

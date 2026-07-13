@@ -207,12 +207,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npm i && npm install -D tailwindcss @tailwindcss/vite`
                     : packageManager === "pnpm"
-                    ? `pnpm i && pnpm install -D tailwindcss @tailwindcss/vite`
-                    : packageManager === "yarn"
-                    ? `yarn add tailwindcss @tailwindcss/vite`
-                    : packageManager === "bun"
-                    ? `bunx --bun install tailwindcss @tailwindcss/vite`
-                    : `npm install tailwindcss @tailwindcss/vite`,
+                      ? `pnpm i && pnpm install -D tailwindcss @tailwindcss/vite`
+                      : packageManager === "yarn"
+                        ? `yarn add tailwindcss @tailwindcss/vite`
+                        : packageManager === "bun"
+                          ? `bunx --bun install tailwindcss @tailwindcss/vite`
+                          : `npm install tailwindcss @tailwindcss/vite`,
                   "",
                   "The current version of Vite splits TypeScript configuration into three files, two of which need to be edited.",
                   "Add the baseUrl and paths properties to the compilerOptions section of the tsconfig.json and tsconfig.app.json files",
@@ -238,12 +238,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
-                    : `npx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`,
+                      ? `pnpm dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
+                          : `npx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`,
                   "",
                   "The command will automatically configure your project with sensible defaults.",
                   "",
@@ -251,12 +251,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button --yes --overwrite`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest add button --yes --overwrite`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button --yes --overwrite`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button --yes --overwrite`
-                    : `npx ${packageName}@latest add button --yes --overwrite`,
+                      ? `pnpm dlx ${packageName}@latest add button --yes --overwrite`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button --yes --overwrite`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button --yes --overwrite`
+                          : `npx ${packageName}@latest add button --yes --overwrite`,
                   "",
                   "Now you can use the component in your project!",
                 ],
@@ -270,12 +270,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
-                    : `npx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`,
+                      ? `pnpm dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`
+                          : `npx ${packageName}@latest init --overwrite --base-color slate --css src/app.css --components-alias $lib/components --lib-alias $lib/ --utils-alias $lib/utils --hooks-alias $lib/hooks --ui-alias $lib/ui`,
                   "",
                   "The command will automatically configure your project with sensible defaults.",
                   "",
@@ -283,12 +283,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button --yes --overwrite`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest add button --yes --overwrite`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button --yes --overwrite`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button --yes --overwrite`
-                    : `npx ${packageName}@latest add button --yes --overwrite`,
+                      ? `pnpm dlx ${packageName}@latest add button --yes --overwrite`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button --yes --overwrite`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button --yes --overwrite`
+                          : `npx ${packageName}@latest add button --yes --overwrite`,
                   "",
                   "Now you can use the component in your project!",
                 ],
@@ -311,12 +311,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init`
-                    : `npx ${packageName}@latest init`,
+                      ? `pnpm dlx ${packageName}@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init`
+                          : `npx ${packageName}@latest init`,
                   "",
                   "Follow the prompts to select your preferences",
                   "",
@@ -324,12 +324,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest add button`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button`
-                    : `npx ${packageName}@latest add button`,
+                      ? `pnpm dlx ${packageName}@latest add button`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button`
+                          : `npx ${packageName}@latest add button`,
                   "",
                   "Now you can use the component in your project!",
                 ],
@@ -357,12 +357,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init`
-                    : `npx ${packageName}@latest init`,
+                      ? `pnpm dlx ${packageName}@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init`
+                          : `npx ${packageName}@latest init`,
                   "",
                   "Follow the prompts to select your preferences",
                   "",
@@ -370,12 +370,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest add button`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button`
-                    : `npx ${packageName}@latest add button`,
+                      ? `pnpm dlx ${packageName}@latest add button`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button`
+                          : `npx ${packageName}@latest add button`,
                   "",
                   "Now you can use the component in your project!",
                 ],
@@ -388,10 +388,10 @@ export const getResourceTemplate = (uri: string) => {
                     packageManager === "npm"
                       ? "npx"
                       : packageManager === "pnpm"
-                      ? "pnpm dlx"
-                      : packageManager === "yarn"
-                      ? "yarn dlx"
-                      : "bunx"
+                        ? "pnpm dlx"
+                        : packageManager === "yarn"
+                          ? "yarn dlx"
+                          : "bunx"
                   } create-remix my-app`,
                   "",
                   "Navigate to your project directory:",
@@ -409,12 +409,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init`
-                    : `npx ${packageName}@latest init`,
+                      ? `pnpm dlx ${packageName}@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init`
+                          : `npx ${packageName}@latest init`,
                   "",
                   "Follow the prompts to select your preferences",
                   "",
@@ -422,12 +422,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest add button`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button`
-                    : `npx ${packageName}@latest add button`,
+                      ? `pnpm dlx ${packageName}@latest add button`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button`
+                          : `npx ${packageName}@latest add button`,
                   "",
                   "Now you can use the component in your project!",
                 ],
@@ -441,12 +441,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init`
-                    : `npx ${packageName}@latest init`,
+                      ? `pnpm dlx ${packageName}@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init`
+                          : `npx ${packageName}@latest init`,
                   "",
                   "Follow the prompts to select your preferences",
                   "",
@@ -454,12 +454,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx ${packageName}@latest add button`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button`
-                    : `npx ${packageName}@latest add button`,
+                      ? `pnpm dlx ${packageName}@latest add button`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button`
+                          : `npx ${packageName}@latest add button`,
                   "",
                   "Now you can use the component in your project!",
                 ],
@@ -481,12 +481,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npm install nativewind tailwindcss`
                     : packageManager === "pnpm"
-                    ? `pnpm add nativewind tailwindcss`
-                    : packageManager === "yarn"
-                    ? `yarn add nativewind tailwindcss`
-                    : packageManager === "bun"
-                    ? `bun add nativewind tailwindcss`
-                    : `npm install nativewind tailwindcss`,
+                      ? `pnpm add nativewind tailwindcss`
+                      : packageManager === "yarn"
+                        ? `yarn add nativewind tailwindcss`
+                        : packageManager === "bun"
+                          ? `bun add nativewind tailwindcss`
+                          : `npm install nativewind tailwindcss`,
                   "",
                   "Initialize Tailwind CSS:",
                   `npx tailwindcss init`,
@@ -497,12 +497,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpx ${packageName}@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest init`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest init`
-                    : `npx ${packageName}@latest init`,
+                      ? `pnpx ${packageName}@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest init`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest init`
+                          : `npx ${packageName}@latest init`,
                   "",
                   "The command will automatically configure your project with sensible defaults.",
                   "",
@@ -510,12 +510,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx ${packageName}@latest add button --yes --overwrite`
                     : packageManager === "pnpm"
-                    ? `pnpx ${packageName}@latest add button --yes --overwrite`
-                    : packageManager === "yarn"
-                    ? `yarn dlx ${packageName}@latest add button --yes --overwrite`
-                    : packageManager === "bun"
-                    ? `bunx --bun ${packageName}@latest add button --yes --overwrite`
-                    : `npx ${packageName}@latest add button --yes --overwrite`,
+                      ? `pnpx ${packageName}@latest add button --yes --overwrite`
+                      : packageManager === "yarn"
+                        ? `yarn dlx ${packageName}@latest add button --yes --overwrite`
+                        : packageManager === "bun"
+                          ? `bunx --bun ${packageName}@latest add button --yes --overwrite`
+                          : `npx ${packageName}@latest add button --yes --overwrite`,
                   "",
                   "Install dependencies from the component registry:",
                   "Check the component's registry entry for required dependencies and install them",
@@ -547,12 +547,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx shadcn-vue@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx shadcn-vue@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx shadcn-vue@latest init`
-                    : packageManager === "bun"
-                    ? `bunx shadcn-vue@latest init`
-                    : `npx shadcn-vue@latest init`,
+                      ? `pnpm dlx shadcn-vue@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx shadcn-vue@latest init`
+                        : packageManager === "bun"
+                          ? `bunx shadcn-vue@latest init`
+                          : `npx shadcn-vue@latest init`,
                   "",
                   "Follow the prompts to configure components.json",
                   "",
@@ -560,12 +560,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx shadcn-vue@latest add button`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx shadcn-vue@latest add button`
-                    : packageManager === "yarn"
-                    ? `yarn dlx shadcn-vue@latest add button`
-                    : packageManager === "bun"
-                    ? `bunx shadcn-vue@latest add button`
-                    : `npx shadcn-vue@latest add button`,
+                      ? `pnpm dlx shadcn-vue@latest add button`
+                      : packageManager === "yarn"
+                        ? `yarn dlx shadcn-vue@latest add button`
+                        : packageManager === "bun"
+                          ? `bunx shadcn-vue@latest add button`
+                          : `npx shadcn-vue@latest add button`,
                   "",
                   "Now you can use the component in your Vue project!",
                 ],
@@ -619,12 +619,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx shadcn-vue@latest init`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx shadcn-vue@latest init`
-                    : packageManager === "yarn"
-                    ? `yarn dlx shadcn-vue@latest init`
-                    : packageManager === "bun"
-                    ? `bunx shadcn-vue@latest init`
-                    : `npx shadcn-vue@latest init`,
+                      ? `pnpm dlx shadcn-vue@latest init`
+                      : packageManager === "yarn"
+                        ? `yarn dlx shadcn-vue@latest init`
+                        : packageManager === "bun"
+                          ? `bunx shadcn-vue@latest init`
+                          : `npx shadcn-vue@latest init`,
                   "",
                   "Choose your preferred base color (e.g., Neutral)",
                   "",
@@ -637,12 +637,12 @@ export const getResourceTemplate = (uri: string) => {
                   packageManager === "npm"
                     ? `npx shadcn-vue@latest add button`
                     : packageManager === "pnpm"
-                    ? `pnpm dlx shadcn-vue@latest add button`
-                    : packageManager === "yarn"
-                    ? `yarn dlx shadcn-vue@latest add button`
-                    : packageManager === "bun"
-                    ? `bunx shadcn-vue@latest add button`
-                    : `npx shadcn-vue@latest add button`,
+                      ? `pnpm dlx shadcn-vue@latest add button`
+                      : packageManager === "yarn"
+                        ? `yarn dlx shadcn-vue@latest add button`
+                        : packageManager === "bun"
+                          ? `bunx shadcn-vue@latest add button`
+                          : `npx shadcn-vue@latest add button`,
                   "",
                   "11. Use the component in your Vue files:",
                   '<script setup lang="ts">',

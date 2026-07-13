@@ -134,18 +134,19 @@ The flagship feature of v2.0 is the **Design System Generator** - an AI-powered 
 
 The reasoning engine includes specialized rules for:
 
-| Category | Examples |
-|----------|----------|
-| **Tech & SaaS** | SaaS, Micro SaaS, B2B Service, Developer Tool / IDE, AI/Chatbot Platform, Cybersecurity Platform |
-| **Finance** | Fintech/Crypto, Banking, Insurance, Personal Finance Tracker, Invoice & Billing Tool |
-| **Healthcare** | Medical Clinic, Pharmacy, Dental, Veterinary, Mental Health, Medication Reminder |
-| **E-commerce** | General, Luxury, Marketplace (P2P), Subscription Box, Food Delivery |
-| **Services** | Beauty/Spa, Restaurant, Hotel, Legal, Home Services, Booking & Appointment |
-| **Creative** | Portfolio, Agency, Photography, Gaming, Music Streaming, Photo/Video Editor |
-| **Lifestyle** | Habit Tracker, Recipe & Cooking, Meditation, Weather, Diary, Mood Tracker |
-| **Emerging Tech** | Web3/NFT, Spatial Computing, Quantum Computing, Autonomous Drone Fleet |
+| Category          | Examples                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------ |
+| **Tech & SaaS**   | SaaS, Micro SaaS, B2B Service, Developer Tool / IDE, AI/Chatbot Platform, Cybersecurity Platform |
+| **Finance**       | Fintech/Crypto, Banking, Insurance, Personal Finance Tracker, Invoice & Billing Tool             |
+| **Healthcare**    | Medical Clinic, Pharmacy, Dental, Veterinary, Mental Health, Medication Reminder                 |
+| **E-commerce**    | General, Luxury, Marketplace (P2P), Subscription Box, Food Delivery                              |
+| **Services**      | Beauty/Spa, Restaurant, Hotel, Legal, Home Services, Booking & Appointment                       |
+| **Creative**      | Portfolio, Agency, Photography, Gaming, Music Streaming, Photo/Video Editor                      |
+| **Lifestyle**     | Habit Tracker, Recipe & Cooking, Meditation, Weather, Diary, Mood Tracker                        |
+| **Emerging Tech** | Web3/NFT, Spatial Computing, Quantum Computing, Autonomous Drone Fleet                           |
 
 Each rule includes:
+
 - **Recommended Pattern** - Landing page structure
 - **Style Priority** - Best matching UI styles
 - **Color Mood** - Industry-appropriate palettes
@@ -168,91 +169,91 @@ Each rule includes:
 <details>
 <summary><b>General Styles (49)</b></summary>
 
-| # | Style | Best For |
-|---|-------|----------|
-| 1 | Minimalism & Swiss Style | Enterprise apps, dashboards, documentation |
-| 2 | Neumorphism | Health/wellness apps, meditation platforms |
-| 3 | Glassmorphism | Modern SaaS, financial dashboards |
-| 4 | Brutalism | Design portfolios, artistic projects |
-| 5 | 3D & Hyperrealism | Gaming, product showcase, immersive |
-| 6 | Vibrant & Block-based | Startups, creative agencies, gaming |
-| 7 | Dark Mode (OLED) | Night-mode apps, coding platforms |
-| 8 | Accessible & Ethical | Government, healthcare, education |
-| 9 | Claymorphism | Educational apps, children's apps, SaaS |
-| 10 | Aurora UI | Modern SaaS, creative agencies |
-| 11 | Retro-Futurism | Gaming, entertainment, music platforms |
-| 12 | Flat Design | Web apps, mobile apps, startup MVPs |
-| 13 | Skeuomorphism | Legacy apps, gaming, premium products |
-| 14 | Liquid Glass | Premium SaaS, high-end e-commerce |
-| 15 | Motion-Driven | Portfolio sites, storytelling platforms |
-| 16 | Micro-interactions | Mobile apps, touchscreen UIs |
-| 17 | Inclusive Design | Public services, education, healthcare |
-| 18 | Zero Interface | Voice assistants, AI platforms |
-| 19 | Soft UI Evolution | Modern enterprise apps, SaaS |
-| 20 | Neubrutalism | Gen Z brands, startups, Figma-style |
-| 21 | Bento Box Grid | Dashboards, product pages, portfolios |
-| 22 | Y2K Aesthetic | Fashion brands, music, Gen Z |
-| 23 | Cyberpunk UI | Gaming, tech products, crypto apps |
-| 24 | Organic Biophilic | Wellness apps, sustainability brands |
-| 25 | AI-Native UI | AI products, chatbots, copilots |
-| 26 | Memphis Design | Creative agencies, music, youth brands |
-| 27 | Vaporwave | Music platforms, gaming, portfolios |
-| 28 | Dimensional Layering | Dashboards, card layouts, modals |
-| 29 | Exaggerated Minimalism | Fashion, architecture, portfolios |
-| 30 | Kinetic Typography | Hero sections, marketing sites |
-| 31 | Parallax Storytelling | Brand storytelling, product launches |
-| 32 | Swiss Modernism 2.0 | Corporate sites, architecture, editorial |
-| 33 | HUD / Sci-Fi FUI | Sci-fi games, space tech, cybersecurity |
-| 34 | Pixel Art | Indie games, retro tools, creative |
-| 35 | Bento Grids | Product features, dashboards, personal |
-| 36 | Spatial UI (VisionOS) | Spatial computing apps, VR/AR |
-| 37 | E-Ink / Paper | Reading apps, digital newspapers |
-| 38 | Gen Z Chaos / Maximalism | Gen Z lifestyle, music artists |
-| 39 | Biomimetic / Organic 2.0 | Sustainability tech, biotech, health |
-| 40 | Anti-Polish / Raw Aesthetic | Creative portfolios, artist sites |
-| 41 | Tactile Digital / Deformable UI | Modern mobile apps, playful brands |
-| 42 | Nature Distilled | Wellness brands, sustainable products |
-| 43 | Interactive Cursor Design | Creative portfolios, interactive |
-| 44 | Voice-First Multimodal | Voice assistants, accessibility apps |
-| 45 | 3D Product Preview | E-commerce, furniture, fashion |
-| 46 | Gradient Mesh / Aurora Evolved | Hero sections, backgrounds, creative |
-| 47 | Editorial Grid / Magazine | News sites, blogs, magazines |
-| 48 | Chromatic Aberration / RGB Split | Music platforms, gaming, tech |
-| 49 | Vintage Analog / Retro Film | Photography, music/vinyl brands |
+| #   | Style                            | Best For                                   |
+| --- | -------------------------------- | ------------------------------------------ |
+| 1   | Minimalism & Swiss Style         | Enterprise apps, dashboards, documentation |
+| 2   | Neumorphism                      | Health/wellness apps, meditation platforms |
+| 3   | Glassmorphism                    | Modern SaaS, financial dashboards          |
+| 4   | Brutalism                        | Design portfolios, artistic projects       |
+| 5   | 3D & Hyperrealism                | Gaming, product showcase, immersive        |
+| 6   | Vibrant & Block-based            | Startups, creative agencies, gaming        |
+| 7   | Dark Mode (OLED)                 | Night-mode apps, coding platforms          |
+| 8   | Accessible & Ethical             | Government, healthcare, education          |
+| 9   | Claymorphism                     | Educational apps, children's apps, SaaS    |
+| 10  | Aurora UI                        | Modern SaaS, creative agencies             |
+| 11  | Retro-Futurism                   | Gaming, entertainment, music platforms     |
+| 12  | Flat Design                      | Web apps, mobile apps, startup MVPs        |
+| 13  | Skeuomorphism                    | Legacy apps, gaming, premium products      |
+| 14  | Liquid Glass                     | Premium SaaS, high-end e-commerce          |
+| 15  | Motion-Driven                    | Portfolio sites, storytelling platforms    |
+| 16  | Micro-interactions               | Mobile apps, touchscreen UIs               |
+| 17  | Inclusive Design                 | Public services, education, healthcare     |
+| 18  | Zero Interface                   | Voice assistants, AI platforms             |
+| 19  | Soft UI Evolution                | Modern enterprise apps, SaaS               |
+| 20  | Neubrutalism                     | Gen Z brands, startups, Figma-style        |
+| 21  | Bento Box Grid                   | Dashboards, product pages, portfolios      |
+| 22  | Y2K Aesthetic                    | Fashion brands, music, Gen Z               |
+| 23  | Cyberpunk UI                     | Gaming, tech products, crypto apps         |
+| 24  | Organic Biophilic                | Wellness apps, sustainability brands       |
+| 25  | AI-Native UI                     | AI products, chatbots, copilots            |
+| 26  | Memphis Design                   | Creative agencies, music, youth brands     |
+| 27  | Vaporwave                        | Music platforms, gaming, portfolios        |
+| 28  | Dimensional Layering             | Dashboards, card layouts, modals           |
+| 29  | Exaggerated Minimalism           | Fashion, architecture, portfolios          |
+| 30  | Kinetic Typography               | Hero sections, marketing sites             |
+| 31  | Parallax Storytelling            | Brand storytelling, product launches       |
+| 32  | Swiss Modernism 2.0              | Corporate sites, architecture, editorial   |
+| 33  | HUD / Sci-Fi FUI                 | Sci-fi games, space tech, cybersecurity    |
+| 34  | Pixel Art                        | Indie games, retro tools, creative         |
+| 35  | Bento Grids                      | Product features, dashboards, personal     |
+| 36  | Spatial UI (VisionOS)            | Spatial computing apps, VR/AR              |
+| 37  | E-Ink / Paper                    | Reading apps, digital newspapers           |
+| 38  | Gen Z Chaos / Maximalism         | Gen Z lifestyle, music artists             |
+| 39  | Biomimetic / Organic 2.0         | Sustainability tech, biotech, health       |
+| 40  | Anti-Polish / Raw Aesthetic      | Creative portfolios, artist sites          |
+| 41  | Tactile Digital / Deformable UI  | Modern mobile apps, playful brands         |
+| 42  | Nature Distilled                 | Wellness brands, sustainable products      |
+| 43  | Interactive Cursor Design        | Creative portfolios, interactive           |
+| 44  | Voice-First Multimodal           | Voice assistants, accessibility apps       |
+| 45  | 3D Product Preview               | E-commerce, furniture, fashion             |
+| 46  | Gradient Mesh / Aurora Evolved   | Hero sections, backgrounds, creative       |
+| 47  | Editorial Grid / Magazine        | News sites, blogs, magazines               |
+| 48  | Chromatic Aberration / RGB Split | Music platforms, gaming, tech              |
+| 49  | Vintage Analog / Retro Film      | Photography, music/vinyl brands            |
 
 </details>
 
 <details>
 <summary><b>Landing Page Styles (8)</b></summary>
 
-| # | Style | Best For |
-|---|-------|----------|
-| 1 | Hero-Centric Design | Products with strong visual identity |
-| 2 | Conversion-Optimized | Lead generation, sales pages |
-| 3 | Feature-Rich Showcase | SaaS, complex products |
-| 4 | Minimal & Direct | Simple products, apps |
-| 5 | Social Proof-Focused | Services, B2C products |
-| 6 | Interactive Product Demo | Software, tools |
-| 7 | Trust & Authority | B2B, enterprise, consulting |
-| 8 | Storytelling-Driven | Brands, agencies, nonprofits |
+| #   | Style                    | Best For                             |
+| --- | ------------------------ | ------------------------------------ |
+| 1   | Hero-Centric Design      | Products with strong visual identity |
+| 2   | Conversion-Optimized     | Lead generation, sales pages         |
+| 3   | Feature-Rich Showcase    | SaaS, complex products               |
+| 4   | Minimal & Direct         | Simple products, apps                |
+| 5   | Social Proof-Focused     | Services, B2C products               |
+| 6   | Interactive Product Demo | Software, tools                      |
+| 7   | Trust & Authority        | B2B, enterprise, consulting          |
+| 8   | Storytelling-Driven      | Brands, agencies, nonprofits         |
 
 </details>
 
 <details>
 <summary><b>BI/Analytics Dashboard Styles (10)</b></summary>
 
-| # | Style | Best For |
-|---|-------|----------|
-| 1 | Data-Dense Dashboard | Complex data analysis |
-| 2 | Heat Map & Heatmap Style | Geographic/behavior data |
-| 3 | Executive Dashboard | C-suite summaries |
-| 4 | Real-Time Monitoring | Operations, DevOps |
-| 5 | Drill-Down Analytics | Detailed exploration |
-| 6 | Comparative Analysis Dashboard | Side-by-side comparisons |
-| 7 | Predictive Analytics | Forecasting, ML insights |
-| 8 | User Behavior Analytics | UX research, product analytics |
-| 9 | Financial Dashboard | Finance, accounting |
-| 10 | Sales Intelligence Dashboard | Sales teams, CRM |
+| #   | Style                          | Best For                       |
+| --- | ------------------------------ | ------------------------------ |
+| 1   | Data-Dense Dashboard           | Complex data analysis          |
+| 2   | Heat Map & Heatmap Style       | Geographic/behavior data       |
+| 3   | Executive Dashboard            | C-suite summaries              |
+| 4   | Real-Time Monitoring           | Operations, DevOps             |
+| 5   | Drill-Down Analytics           | Detailed exploration           |
+| 6   | Comparative Analysis Dashboard | Side-by-side comparisons       |
+| 7   | Predictive Analytics           | Forecasting, ML insights       |
+| 8   | User Behavior Analytics        | UX research, product analytics |
+| 9   | Financial Dashboard            | Finance, accounting            |
+| 10  | Sales Intelligence Dashboard   | Sales teams, CRM               |
 
 </details>
 
@@ -261,19 +262,21 @@ Each rule includes:
 Many users ask about the differences between the open-source and premium versions. Here is a detailed breakdown to help you choose the right fit for your workflow.
 
 ### 🟢 Basic Version (This Repository)
-* **Fully Open Source:** Perfect for individual developers, hobbyists, and standard projects.
-* **Core UI/UX Intelligence:** Full access to 67 UI styles, 161 product types, color palettes, and curated font pairings.
-* **Smart Recommendations:** Built-in BM25 search engine for highly accurate design matching.
-* **Cross-Platform Support:** Stack-specific guidelines supporting 13+ major frameworks (React, Vue, Tailwind, iOS, Android, etc.).
-* **Design System Generation:** Instantly generate tailored UI rules, patterns, and logic via CLI.
+
+- **Fully Open Source:** Perfect for individual developers, hobbyists, and standard projects.
+- **Core UI/UX Intelligence:** Full access to 67 UI styles, 161 product types, color palettes, and curated font pairings.
+- **Smart Recommendations:** Built-in BM25 search engine for highly accurate design matching.
+- **Cross-Platform Support:** Stack-specific guidelines supporting 13+ major frameworks (React, Vue, Tailwind, iOS, Android, etc.).
+- **Design System Generation:** Instantly generate tailored UI rules, patterns, and logic via CLI.
 
 ### 🟡 Premium Version
-* **Extended Brand Design Skills:** Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.
-* **Advanced Asset Creation:** Deep integration with AI-powered image generation to create real visual assets, not just placeholders.
-* **Enterprise Architecture:** A more comprehensive and scalable Design Token architecture, built for large-scale team deployments.
-* **Priority Support:** Dedicated technical assistance for teams and professionals who need an uninterrupted full design workflow.
 
-👉 *For more details on upgrading to the Premium tier, visit [uupm.cc](https://uupm.cc).*
+- **Extended Brand Design Skills:** Goes beyond UI/UX to include Brand Identity generation, Logo Design, Corporate Identity Programs (CIP), Banners, Presentation Slides, and custom Iconography.
+- **Advanced Asset Creation:** Deep integration with AI-powered image generation to create real visual assets, not just placeholders.
+- **Enterprise Architecture:** A more comprehensive and scalable Design Token architecture, built for large-scale team deployments.
+- **Priority Support:** Dedicated technical assistance for teams and professionals who need an uninterrupted full design workflow.
+
+👉 _For more details on upgrading to the Premium tier, visit [uupm.cc](https://uupm.cc)._
 
 ## Installation
 
@@ -399,18 +402,18 @@ Build a fintech banking app with dark theme
 
 The skill provides stack-specific guidelines for:
 
-| Category | Stacks |
-|----------|--------|
-| **Web (HTML)** | HTML + Tailwind (default) |
-| **React Ecosystem** | React, Next.js, shadcn/ui |
-| **Vue Ecosystem** | Vue, Nuxt.js, Nuxt UI |
-| **Angular** | Angular |
-| **PHP** | Laravel (Blade, Livewire, Inertia.js) |
-| **Other Web** | Svelte, Astro, Three.js |
-| **Desktop** | JavaFX |
-| **iOS** | SwiftUI |
-| **Android** | Jetpack Compose |
-| **Cross-Platform** | React Native, Flutter |
+| Category            | Stacks                                |
+| ------------------- | ------------------------------------- |
+| **Web (HTML)**      | HTML + Tailwind (default)             |
+| **React Ecosystem** | React, Next.js, shadcn/ui             |
+| **Vue Ecosystem**   | Vue, Nuxt.js, Nuxt UI                 |
+| **Angular**         | Angular                               |
+| **PHP**             | Laravel (Blade, Livewire, Inertia.js) |
+| **Other Web**       | Svelte, Astro, Three.js               |
+| **Desktop**         | JavaFX                                |
+| **iOS**             | SwiftUI                               |
+| **Android**         | Jetpack Compose                       |
+| **Cross-Platform**  | React Native, Flutter                 |
 
 Just mention your preferred stack in the prompt, or let it default to HTML + Tailwind.
 
@@ -462,11 +465,13 @@ design-system/
 ```
 
 **How hierarchical retrieval works:**
+
 1. When building a specific page (e.g., "Checkout"), first check `design-system/pages/checkout.md`
 2. If the page file exists, its rules **override** the Master file
 3. If not, use `design-system/MASTER.md` exclusively
 
 **Context-aware retrieval prompt:**
+
 ```
 I am building the [Page Name] page. Please read design-system/MASTER.md.
 Also check if design-system/pages/[page-name].md exists.
@@ -532,7 +537,6 @@ gh pr create
 ```
 
 See [CLAUDE.md](CLAUDE.md) for detailed development guidelines.
-
 
 ## Automated Releases
 
@@ -627,5 +631,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## Compatible Agents
 
 This skill works with:
+
 - [Claude Code](https://claude.com/product/claude-code)
 - [AdaL](https://sylph.ai/) - Self-evolving AI coding agent ([Docs](https://docs.sylph.ai/) | [GitHub](https://github.com/SylphAI-Inc/adal-cli))

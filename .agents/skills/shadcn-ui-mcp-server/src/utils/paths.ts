@@ -1,4 +1,4 @@
-import type { getAxiosImplementation } from './framework.js';
+import type { getAxiosImplementation } from "./framework.js";
 
 type AxiosImpl = Awaited<ReturnType<typeof getAxiosImplementation>>;
 type AxiosPaths = AxiosImpl["paths"];

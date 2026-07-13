@@ -55,7 +55,7 @@ export function getPageTypeSpecificInstructions(pageType: string): string {
  */
 export function getOptimizationInstructions(
   optimization: string,
-  framework: string
+  framework: string,
 ): string {
   const getPerformanceInstructions = (framework: string) => {
     switch (framework) {

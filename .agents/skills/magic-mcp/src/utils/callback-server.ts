@@ -24,14 +24,19 @@ export class CallbackServer {
     return this.port;
   }
 
-  private async findAvailablePort(startPort: number, maxAttempts = 10): Promise<number> {
+  private async findAvailablePort(
+    startPort: number,
+    maxAttempts = 10,
+  ): Promise<number> {
     for (let i = 0; i < maxAttempts; i++) {
       const port = startPort + i;
       if (await this.isPortAvailable(port)) {
         return port;
       }
     }
-    throw new Error(`No available port found in range ${startPort}-${startPort + maxAttempts - 1}`);
+    throw new Error(
+      `No available port found in range ${startPort}-${startPort + maxAttempts - 1}`,
+    );
   }
 
   private parseBody(req: IncomingMessage): Promise<string> {
@@ -59,10 +64,10 @@ export class CallbackServer {
 
     if (req.method === "POST" && req.url === "/data") {
       const body = await this.parseBody(req);
-      
+
       if (this.promiseResolve) {
         if (this.timeoutId) clearTimeout(this.timeoutId);
-        
+
         this.promiseResolve({ data: body });
         this.shutdown();
 
@@ -102,7 +107,9 @@ export class CallbackServer {
     });
   }
 
-  async waitForCallback(config: CallbackServerConfig = {}): Promise<CallbackResponse> {
+  async waitForCallback(
+    config: CallbackServerConfig = {},
+  ): Promise<CallbackResponse> {
     const { timeout = 600000 } = config;
 
     try {
@@ -129,7 +136,9 @@ export class CallbackServer {
           this.shutdown();
         }, timeout);
 
-        console.log(`Callback server listening on http://127.0.0.1:${this.port}/data`);
+        console.log(
+          `Callback server listening on http://127.0.0.1:${this.port}/data`,
+        );
       });
     } catch (error) {
       await this.shutdown();

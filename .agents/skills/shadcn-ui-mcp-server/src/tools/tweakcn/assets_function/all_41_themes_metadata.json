@@ -13,13 +13,7 @@
         "neutral"
       ],
       "primaryColor": "#3b82f6",
-      "vibes": [
-        "professional",
-        "tech",
-        "minimal",
-        "corporate",
-        "clean"
-      ]
+      "vibes": ["professional", "tech", "minimal", "corporate", "clean"]
     },
     "violet-bloom": {
       "name": "Violet Bloom",
@@ -33,13 +27,7 @@
         "artistic"
       ],
       "primaryColor": "#7033ff",
-      "vibes": [
-        "elegant",
-        "creative",
-        "modern",
-        "sophisticated",
-        "artistic"
-      ]
+      "vibes": ["elegant", "creative", "modern", "sophisticated", "artistic"]
     },
     "t3-chat": {
       "name": "T3 Chat",
@@ -54,13 +42,7 @@
         "vibrant"
       ],
       "primaryColor": "#a84370",
-      "vibes": [
-        "friendly",
-        "warm",
-        "social",
-        "chat",
-        "engaging"
-      ]
+      "vibes": ["friendly", "warm", "social", "chat", "engaging"]
     },
     "twitter": {
       "name": "Twitter",
@@ -74,13 +56,7 @@
         "media"
       ],
       "primaryColor": "#1e9df1",
-      "vibes": [
-        "social",
-        "content",
-        "minimal",
-        "bright",
-        "engaging"
-      ]
+      "vibes": ["social", "content", "minimal", "bright", "engaging"]
     },
     "mocha-mousse": {
       "name": "Mocha Mousse",
@@ -95,13 +71,7 @@
         "food"
       ],
       "primaryColor": "#A37764",
-      "vibes": [
-        "cozy",
-        "warm",
-        "organic",
-        "earthy",
-        "inviting"
-      ]
+      "vibes": ["cozy", "warm", "organic", "earthy", "inviting"]
     },
     "bubblegum": {
       "name": "Bubblegum",
@@ -116,13 +86,7 @@
         "bold"
       ],
       "primaryColor": "#d04f99",
-      "vibes": [
-        "playful",
-        "fun",
-        "youthful",
-        "vibrant",
-        "creative"
-      ]
+      "vibes": ["playful", "fun", "youthful", "vibrant", "creative"]
     },
     "amethyst-haze": {
       "name": "Amethyst Haze",
@@ -137,13 +101,7 @@
         "relaxing"
       ],
       "primaryColor": "#8a79ab",
-      "vibes": [
-        "calming",
-        "dreamy",
-        "wellness",
-        "soft",
-        "peaceful"
-      ]
+      "vibes": ["calming", "dreamy", "wellness", "soft", "peaceful"]
     },
     "notebook": {
       "name": "Notebook",
@@ -158,13 +116,7 @@
         "analog"
       ],
       "primaryColor": "#606060",
-      "vibes": [
-        "retro",
-        "nostalgic",
-        "journal",
-        "handwritten",
-        "analog"
-      ]
+      "vibes": ["retro", "nostalgic", "journal", "handwritten", "analog"]
     },
     "doom-64": {
       "name": "Doom 64",
@@ -179,13 +131,7 @@
         "gaming"
       ],
       "primaryColor": "#b71c1c",
-      "vibes": [
-        "retro",
-        "gaming",
-        "bold",
-        "nostalgic",
-        "energetic"
-      ]
+      "vibes": ["retro", "gaming", "bold", "nostalgic", "energetic"]
     },
     "catppuccin": {
       "name": "Catppuccin",
@@ -200,13 +146,7 @@
         "balanced"
       ],
       "primaryColor": "#8839ef",
-      "vibes": [
-        "aesthetic",
-        "pastel",
-        "smooth",
-        "popular",
-        "balanced"
-      ]
+      "vibes": ["aesthetic", "pastel", "smooth", "popular", "balanced"]
     },
     "graphite": {
       "name": "Graphite",
@@ -220,13 +160,7 @@
         "serious"
       ],
       "primaryColor": "#606060",
-      "vibes": [
-        "minimal",
-        "neutral",
-        "professional",
-        "muted",
-        "serious"
-      ]
+      "vibes": ["minimal", "neutral", "professional", "muted", "serious"]
     },
     "perpetuity": {
       "name": "Perpetuity",
@@ -241,13 +175,7 @@
         "developer"
       ],
       "primaryColor": "#06858e",
-      "vibes": [
-        "tech",
-        "futuristic",
-        "modern",
-        "cool",
-        "cutting-edge"
-      ]
+      "vibes": ["tech", "futuristic", "modern", "cool", "cutting-edge"]
     },
     "kodama-grove": {
       "name": "Kodama Grove",
@@ -262,13 +190,7 @@
         "environmental"
       ],
       "primaryColor": "#8d9d4f",
-      "vibes": [
-        "nature",
-        "organic",
-        "natural",
-        "forest",
-        "peaceful"
-      ]
+      "vibes": ["nature", "organic", "natural", "forest", "peaceful"]
     },
     "cosmic-night": {
       "name": "Cosmic Night",
@@ -283,13 +205,7 @@
         "mysterious"
       ],
       "primaryColor": "#6e56cf",
-      "vibes": [
-        "cosmic",
-        "mysterious",
-        "elegant",
-        "dark",
-        "inspired"
-      ]
+      "vibes": ["cosmic", "mysterious", "elegant", "dark", "inspired"]
     },
     "tangerine": {
       "name": "Tangerine",
@@ -304,13 +220,7 @@
         "uplifting"
       ],
       "primaryColor": "#e05d38",
-      "vibes": [
-        "warm",
-        "energetic",
-        "friendly",
-        "vibrant",
-        "uplifting"
-      ]
+      "vibes": ["warm", "energetic", "friendly", "vibrant", "uplifting"]
     },
     "quantum-rose": {
       "name": "Quantum Rose",
@@ -325,13 +235,7 @@
         "futuristic"
       ],
       "primaryColor": "#e6067a",
-      "vibes": [
-        "vibrant",
-        "bold",
-        "trendy",
-        "modern",
-        "futuristic"
-      ]
+      "vibes": ["vibrant", "bold", "trendy", "modern", "futuristic"]
     },
     "nature": {
       "name": "Nature",
@@ -346,13 +250,7 @@
         "environmental"
       ],
       "primaryColor": "#2e7d32",
-      "vibes": [
-        "eco",
-        "natural",
-        "organic",
-        "green",
-        "sustainable"
-      ]
+      "vibes": ["eco", "natural", "organic", "green", "sustainable"]
     },
     "bold-tech": {
       "name": "Bold Tech",
@@ -367,13 +265,7 @@
         "advanced"
       ],
       "primaryColor": "#8b5cf6",
-      "vibes": [
-        "bold",
-        "tech",
-        "developer",
-        "modern",
-        "advanced"
-      ]
+      "vibes": ["bold", "tech", "developer", "modern", "advanced"]
     },
     "elegant-luxury": {
       "name": "Elegant Luxury",
@@ -388,13 +280,7 @@
         "refined"
       ],
       "primaryColor": "#9b2c2c",
-      "vibes": [
-        "luxury",
-        "elegant",
-        "premium",
-        "sophisticated",
-        "refined"
-      ]
+      "vibes": ["luxury", "elegant", "premium", "sophisticated", "refined"]
     },
     "amber-minimal": {
       "name": "Amber Minimal",
@@ -409,13 +295,7 @@
         "balanced"
       ],
       "primaryColor": "#f59e0b",
-      "vibes": [
-        "warm",
-        "minimal",
-        "modern",
-        "inviting",
-        "balanced"
-      ]
+      "vibes": ["warm", "minimal", "modern", "inviting", "balanced"]
     },
     "supabase": {
       "name": "Supabase",
@@ -430,13 +310,7 @@
         "modern"
       ],
       "primaryColor": "#72e3ad",
-      "vibes": [
-        "fresh",
-        "bright",
-        "tech",
-        "backend",
-        "modern"
-      ]
+      "vibes": ["fresh", "bright", "tech", "backend", "modern"]
     },
     "claymorphism": {
       "name": "Claymorphism",
@@ -451,13 +325,7 @@
         "playful"
       ],
       "primaryColor": "#6366f1",
-      "vibes": [
-        "soft",
-        "modern",
-        "design",
-        "trendy",
-        "playful"
-      ]
+      "vibes": ["soft", "modern", "design", "trendy", "playful"]
     },
     "clean-slate": {
       "name": "Clean Slate",
@@ -472,13 +340,7 @@
         "versatile"
       ],
       "primaryColor": "#6366f1",
-      "vibes": [
-        "clean",
-        "simple",
-        "professional",
-        "fresh",
-        "versatile"
-      ]
+      "vibes": ["clean", "simple", "professional", "fresh", "versatile"]
     },
     "midnight-bloom": {
       "name": "Midnight Bloom",
@@ -493,13 +355,7 @@
         "creative"
       ],
       "primaryColor": "#6c5ce7",
-      "vibes": [
-        "dark",
-        "mysterious",
-        "elegant",
-        "moody",
-        "creative"
-      ]
+      "vibes": ["dark", "mysterious", "elegant", "moody", "creative"]
     },
     "candyland": {
       "name": "Candyland",
@@ -514,13 +370,7 @@
         "joyful"
       ],
       "primaryColor": "#ffc0cb",
-      "vibes": [
-        "playful",
-        "fun",
-        "bright",
-        "whimsical",
-        "joyful"
-      ]
+      "vibes": ["playful", "fun", "bright", "whimsical", "joyful"]
     },
     "northern-lights": {
       "name": "Northern Lights",
@@ -535,13 +385,7 @@
         "enchanting"
       ],
       "primaryColor": "#34a85a",
-      "vibes": [
-        "magical",
-        "natural",
-        "cool",
-        "peaceful",
-        "enchanting"
-      ]
+      "vibes": ["magical", "natural", "cool", "peaceful", "enchanting"]
     },
     "darkmatter": {
       "name": "Darkmatter",
@@ -556,13 +400,7 @@
         "sleek"
       ],
       "primaryColor": "#d87943",
-      "vibes": [
-        "dark",
-        "modern",
-        "tech",
-        "developer",
-        "sleek"
-      ]
+      "vibes": ["dark", "modern", "tech", "developer", "sleek"]
     },
     "oceanic": {
       "name": "Oceanic",
@@ -577,13 +415,7 @@
         "peaceful"
       ],
       "primaryColor": "#00a8cc",
-      "vibes": [
-        "calm",
-        "fluid",
-        "peaceful",
-        "natural",
-        "serene"
-      ]
+      "vibes": ["calm", "fluid", "peaceful", "natural", "serene"]
     },
     "sunset-glow": {
       "name": "Sunset Glow",
@@ -598,13 +430,7 @@
         "golden"
       ],
       "primaryColor": "#ff9a56",
-      "vibes": [
-        "romantic",
-        "dreamy",
-        "warm",
-        "golden",
-        "peaceful"
-      ]
+      "vibes": ["romantic", "dreamy", "warm", "golden", "peaceful"]
     },
     "forest-green": {
       "name": "Forest Green",
@@ -619,13 +445,7 @@
         "natural"
       ],
       "primaryColor": "#1b4332",
-      "vibes": [
-        "grounded",
-        "natural",
-        "earthy",
-        "peaceful",
-        "strong"
-      ]
+      "vibes": ["grounded", "natural", "earthy", "peaceful", "strong"]
     },
     "neon-future": {
       "name": "Neon Future",
@@ -640,13 +460,7 @@
         "gaming"
       ],
       "primaryColor": "#00ff00",
-      "vibes": [
-        "futuristic",
-        "tech",
-        "vibrant",
-        "edgy",
-        "cutting-edge"
-      ]
+      "vibes": ["futuristic", "tech", "vibrant", "edgy", "cutting-edge"]
     },
     "cherry-blossom": {
       "name": "Cherry Blossom",
@@ -661,13 +475,7 @@
         "beauty"
       ],
       "primaryColor": "#ff69b4",
-      "vibes": [
-        "feminine",
-        "delicate",
-        "elegant",
-        "romantic",
-        "beautiful"
-      ]
+      "vibes": ["feminine", "delicate", "elegant", "romantic", "beautiful"]
     },
     "steel-blue": {
       "name": "Steel Blue",
@@ -682,13 +490,7 @@
         "mechanical"
       ],
       "primaryColor": "#4682b4",
-      "vibes": [
-        "industrial",
-        "serious",
-        "strong",
-        "technical",
-        "reliable"
-      ]
+      "vibes": ["industrial", "serious", "strong", "technical", "reliable"]
     },
     "lavender-mist": {
       "name": "Lavender Mist",
@@ -703,13 +505,7 @@
         "relaxing"
       ],
       "primaryColor": "#b19cd9",
-      "vibes": [
-        "calm",
-        "meditative",
-        "soft",
-        "peaceful",
-        "relaxing"
-      ]
+      "vibes": ["calm", "meditative", "soft", "peaceful", "relaxing"]
     },
     "citrus-burst": {
       "name": "Citrus Burst",
@@ -724,13 +520,7 @@
         "food"
       ],
       "primaryColor": "#ff6b00",
-      "vibes": [
-        "energetic",
-        "fresh",
-        "vibrant",
-        "healthy",
-        "lively"
-      ]
+      "vibes": ["energetic", "fresh", "vibrant", "healthy", "lively"]
     },
     "slate-shadow": {
       "name": "Slate Shadow",
@@ -766,13 +556,7 @@
         "premium"
       ],
       "primaryColor": "#8b0000",
-      "vibes": [
-        "rich",
-        "sophisticated",
-        "luxury",
-        "premium",
-        "elegant"
-      ]
+      "vibes": ["rich", "sophisticated", "luxury", "premium", "elegant"]
     },
     "mint-frost": {
       "name": "Mint Frost",
@@ -787,13 +571,7 @@
         "refreshing"
       ],
       "primaryColor": "#98ff98",
-      "vibes": [
-        "fresh",
-        "modern",
-        "tech",
-        "innovative",
-        "cool"
-      ]
+      "vibes": ["fresh", "modern", "tech", "innovative", "cool"]
     },
     "charcoal-white": {
       "name": "Charcoal White",
@@ -808,13 +586,7 @@
         "dramatic"
       ],
       "primaryColor": "#333333",
-      "vibes": [
-        "bold",
-        "clean",
-        "dramatic",
-        "minimal",
-        "strong"
-      ]
+      "vibes": ["bold", "clean", "dramatic", "minimal", "strong"]
     },
     "silk-rose": {
       "name": "Silk Rose",
@@ -829,13 +601,7 @@
         "elegant"
       ],
       "primaryColor": "#e8a5c7",
-      "vibes": [
-        "luxurious",
-        "feminine",
-        "delicate",
-        "elegant",
-        "beautiful"
-      ]
+      "vibes": ["luxurious", "feminine", "delicate", "elegant", "beautiful"]
     },
     "thunder-storm": {
       "name": "Thunder Storm",
@@ -850,13 +616,7 @@
         "intense"
       ],
       "primaryColor": "#4a4a5e",
-      "vibes": [
-        "bold",
-        "dramatic",
-        "energetic",
-        "intense",
-        "moody"
-      ]
+      "vibes": ["bold", "dramatic", "energetic", "intense", "moody"]
     }
   },
   "total_themes": 41,
@@ -901,11 +661,7 @@
       "cherry-blossom",
       "citrus-burst"
     ],
-    "retro": [
-      "doom-64",
-      "notebook",
-      "catppuccin"
-    ],
+    "retro": ["doom-64", "notebook", "catppuccin"],
     "warm": [
       "tangerine",
       "amber-minimal",
@@ -929,33 +685,11 @@
       "clean-slate",
       "lavender-mist"
     ],
-    "luxury": [
-      "elegant-luxury",
-      "amethyst-haze",
-      "ruby-wine",
-      "silk-rose"
-    ],
-    "social": [
-      "twitter",
-      "t3-chat"
-    ],
-    "wellness": [
-      "amethyst-haze",
-      "lavender-mist",
-      "kodama-grove"
-    ],
-    "ocean": [
-      "oceanic",
-      "northern-lights"
-    ],
-    "romantic": [
-      "cherry-blossom",
-      "sunset-glow",
-      "silk-rose"
-    ],
-    "edgy": [
-      "neon-future",
-      "thunder-storm"
-    ]
+    "luxury": ["elegant-luxury", "amethyst-haze", "ruby-wine", "silk-rose"],
+    "social": ["twitter", "t3-chat"],
+    "wellness": ["amethyst-haze", "lavender-mist", "kodama-grove"],
+    "ocean": ["oceanic", "northern-lights"],
+    "romantic": ["cherry-blossom", "sunset-glow", "silk-rose"],
+    "edgy": ["neon-future", "thunder-storm"]
   }
 }

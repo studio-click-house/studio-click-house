@@ -15,7 +15,7 @@ window.addEventListener("load", () => {
     onComplete: () => {
       loading.classList.add("hidden");
       initAnimations();
-    }
+    },
   });
 });
 
@@ -75,8 +75,8 @@ function setupProgressBar() {
     scrollTrigger: {
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.3
-    }
+      scrub: 0.3,
+    },
   });
 }
 
@@ -103,7 +103,7 @@ function setupNavigation() {
       }
 
       lastScroll = currentScroll;
-    }
+    },
   });
 }
 
@@ -118,25 +118,37 @@ function animateHero() {
     opacity: 0,
     y: 100,
     duration: 1,
-    ease: "power3.out"
+    ease: "power3.out",
   })
-  .from(".hero-subtitle", {
-    opacity: 0,
-    y: 50,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.5")
-  .from(".cta-btn", {
-    scale: 0,
-    duration: 0.5,
-    ease: "back.out(1.7)"
-  }, "-=0.3")
-  .from(".scroll-indicator", {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.3");
+    .from(
+      ".hero-subtitle",
+      {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5",
+    )
+    .from(
+      ".cta-btn",
+      {
+        scale: 0,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      },
+      "-=0.3",
+    )
+    .from(
+      ".scroll-indicator",
+      {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3",
+    );
 
   // Parallax effect on hero background
   gsap.to(".hero-bg", {
@@ -146,8 +158,8 @@ function animateHero() {
       trigger: ".hero",
       start: "top top",
       end: "bottom top",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 
   // Fade out hero content on scroll
@@ -159,8 +171,8 @@ function animateHero() {
       trigger: ".hero",
       start: "top top",
       end: "bottom top",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 }
 
@@ -176,12 +188,12 @@ function animateFeatures() {
     ease: "power2.out",
     stagger: {
       each: 0.15,
-      from: "start"
+      from: "start",
     },
     scrollTrigger: {
       trigger: ".features-section",
-      start: "top 80%"
-    }
+      start: "top 80%",
+    },
   });
 }
 
@@ -197,8 +209,8 @@ function setupParallax() {
       trigger: ".parallax-section",
       start: "top bottom",
       end: "bottom top",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 
   gsap.from(".parallax-content", {
@@ -208,8 +220,8 @@ function setupParallax() {
       trigger: ".parallax-section",
       start: "top 80%",
       end: "top 50%",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 }
 
@@ -225,8 +237,8 @@ function setupPinSection() {
       end: "+=1000",
       pin: true,
       scrub: 1,
-      anticipatePin: 1
-    }
+      anticipatePin: 1,
+    },
   });
 
   tl.from(".pin-title", { opacity: 0, y: -50 })
@@ -235,15 +247,15 @@ function setupPinSection() {
       scale: 0,
       rotation: 180,
       stagger: 0.2,
-      ease: "back.out(1.7)"
+      ease: "back.out(1.7)",
     })
     .to(".pin-box", {
       y: -50,
       stagger: {
         each: 0.1,
         yoyo: true,
-        repeat: 1
-      }
+        repeat: 1,
+      },
     });
 }
 
@@ -260,12 +272,12 @@ function animateGallery() {
     stagger: {
       each: 0.15,
       from: "center",
-      grid: "auto"
+      grid: "auto",
     },
     scrollTrigger: {
       trigger: ".gallery-section",
-      start: "top 70%"
-    }
+      start: "top 70%",
+    },
   });
 }
 
@@ -286,10 +298,13 @@ function setupHorizontalScroll() {
       snap: {
         snapTo: 1 / (panels.length - 1),
         duration: { min: 0.2, max: 0.5 },
-        ease: "power1.inOut"
+        ease: "power1.inOut",
       },
-      end: () => "+=" + (document.querySelector(".horizontal-wrapper").offsetWidth * panels.length)
-    }
+      end: () =>
+        "+=" +
+        document.querySelector(".horizontal-wrapper").offsetWidth *
+          panels.length,
+    },
   });
 
   // Animate content within each panel
@@ -302,8 +317,8 @@ function setupHorizontalScroll() {
         containerAnimation: scrollTween,
         start: "left center",
         end: "center center",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
   });
 }
@@ -321,8 +336,8 @@ function animateTextReveal() {
     stagger: 0.2,
     scrollTrigger: {
       trigger: ".text-section",
-      start: "top 70%"
-    }
+      start: "top 70%",
+    },
   });
 }
 
@@ -339,8 +354,8 @@ function animateContactForm() {
     stagger: 0.15,
     scrollTrigger: {
       trigger: ".contact-form",
-      start: "top 80%"
-    }
+      start: "top 80%",
+    },
   });
 
   // Form submission animation (demo)
@@ -364,7 +379,7 @@ function animateContactForm() {
           submitBtn.style.background = "";
           form.reset();
         }, 3000);
-      }
+      },
     });
   });
 }
@@ -374,8 +389,8 @@ function animateContactForm() {
 // ============================
 
 function setupSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute("href"));
 
@@ -384,9 +399,9 @@ function setupSmoothScroll() {
           duration: 1,
           scrollTo: {
             y: target,
-            offsetY: 80 // Account for fixed header
+            offsetY: 80, // Account for fixed header
           },
-          ease: "power2.inOut"
+          ease: "power2.inOut",
         });
       }
     });
@@ -407,12 +422,12 @@ function trackActiveSection() {
       start: "top center",
       end: "bottom center",
       onEnter: () => setActiveNav(section.id),
-      onEnterBack: () => setActiveNav(section.id)
+      onEnterBack: () => setActiveNav(section.id),
     });
   });
 
   function setActiveNav(id) {
-    navItems.forEach(item => {
+    navItems.forEach((item) => {
       if (item.getAttribute("href") === `#${id}`) {
         item.classList.add("active");
       } else {
@@ -430,7 +445,7 @@ function trackActiveSection() {
 if (window.innerWidth < 768) {
   ScrollTrigger.config({
     limitCallbacks: true,
-    ignoreMobileResize: true
+    ignoreMobileResize: true,
   });
 }
 
@@ -452,7 +467,7 @@ window.addEventListener("resize", () => {
 
 // Add will-change to animated elements
 gsap.set(".fade-in, .card, .gallery-item, .pin-box", {
-  willChange: "transform, opacity"
+  willChange: "transform, opacity",
 });
 
 // Debug mode (set to false in production)
@@ -460,7 +475,7 @@ const DEBUG = false;
 
 if (DEBUG) {
   ScrollTrigger.defaults({
-    markers: true
+    markers: true,
   });
 }
 
@@ -470,9 +485,9 @@ if (DEBUG) {
 
 console.log(
   "%c🚀 GSAP ScrollTrigger Starter",
-  "font-size: 20px; font-weight: bold; color: #667eea;"
+  "font-size: 20px; font-weight: bold; color: #667eea;",
 );
 console.log(
   "%cBuilt with GSAP 3 & ScrollTrigger",
-  "font-size: 14px; color: #764ba2;"
+  "font-size: 14px; color: #764ba2;",
 );

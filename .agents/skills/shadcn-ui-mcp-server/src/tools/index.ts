@@ -1,21 +1,30 @@
-import { handleGetComponent } from './components/get-component.js';
-import { handleGetComponentDemo } from './components/get-component-demo.js';
-import { handleListComponents } from './components/list-components.js';
-import { handleGetComponentMetadata } from './components/get-component-metadata.js';
-import { handleGetDirectoryStructure } from './repository/get-directory-structure.js';
-import { handleGetBlock } from './blocks/get-block.js';
-import { handleListBlocks } from './blocks/list-blocks.js';
-import { handleApplyTheme, schema as applyThemeSchema } from './tweakcn/apply-theme.js';
-import { handleListThemes, schema as listThemesSchema } from './tweakcn/list-themes.js';
-import { handleGetTheme, schema as getThemeSchema } from './tweakcn/get-theme.js';
+import { handleGetComponent } from "./components/get-component.js";
+import { handleGetComponentDemo } from "./components/get-component-demo.js";
+import { handleListComponents } from "./components/list-components.js";
+import { handleGetComponentMetadata } from "./components/get-component-metadata.js";
+import { handleGetDirectoryStructure } from "./repository/get-directory-structure.js";
+import { handleGetBlock } from "./blocks/get-block.js";
+import { handleListBlocks } from "./blocks/list-blocks.js";
+import {
+  handleApplyTheme,
+  schema as applyThemeSchema,
+} from "./tweakcn/apply-theme.js";
+import {
+  handleListThemes,
+  schema as listThemesSchema,
+} from "./tweakcn/list-themes.js";
+import {
+  handleGetTheme,
+  schema as getThemeSchema,
+} from "./tweakcn/get-theme.js";
 
-import { schema as getComponentSchema } from './components/get-component.js';
-import { schema as getComponentDemoSchema } from './components/get-component-demo.js';
-import { schema as listComponentsSchema } from './components/list-components.js';
-import { schema as getComponentMetadataSchema } from './components/get-component-metadata.js';
-import { schema as getDirectoryStructureSchema } from './repository/get-directory-structure.js';
-import { schema as getBlockSchema } from './blocks/get-block.js';
-import { schema as listBlocksSchema } from './blocks/list-blocks.js';
+import { schema as getComponentSchema } from "./components/get-component.js";
+import { schema as getComponentDemoSchema } from "./components/get-component-demo.js";
+import { schema as listComponentsSchema } from "./components/list-components.js";
+import { schema as getComponentMetadataSchema } from "./components/get-component-metadata.js";
+import { schema as getDirectoryStructureSchema } from "./repository/get-directory-structure.js";
+import { schema as getBlockSchema } from "./blocks/get-block.js";
+import { schema as listBlocksSchema } from "./blocks/list-blocks.js";
 
 export const toolHandlers = {
   get_component: handleGetComponent,
@@ -27,7 +36,7 @@ export const toolHandlers = {
   list_blocks: handleListBlocks,
   apply_theme: handleApplyTheme,
   list_themes: handleListThemes,
-  get_theme: handleGetTheme
+  get_theme: handleGetTheme,
 };
 
 export const toolSchemas = {
@@ -40,93 +49,95 @@ export const toolSchemas = {
   list_blocks: listBlocksSchema,
   apply_theme: applyThemeSchema,
   list_themes: listThemesSchema,
-  get_theme: getThemeSchema
+  get_theme: getThemeSchema,
 };
 
 export const tools = {
-  'get_component': {
-    name: 'get_component',
-    description: 'Get the source code for a specific shadcn/ui v4 component',
+  get_component: {
+    name: "get_component",
+    description: "Get the source code for a specific shadcn/ui v4 component",
     inputSchema: {
-      type: 'object',
+      type: "object",
       properties: getComponentSchema,
-      required: ['componentName']
-    }
+      required: ["componentName"],
+    },
   },
-  'get_component_demo': {
-    name: 'get_component_demo',
-    description: 'Get demo code illustrating how a shadcn/ui v4 component should be used',
+  get_component_demo: {
+    name: "get_component_demo",
+    description:
+      "Get demo code illustrating how a shadcn/ui v4 component should be used",
     inputSchema: {
-      type: 'object',
+      type: "object",
       properties: getComponentDemoSchema,
-      required: ['componentName']
-    }
+      required: ["componentName"],
+    },
   },
-  'list_components': {
-    name: 'list_components',
-    description: 'Get all available shadcn/ui v4 components',
+  list_components: {
+    name: "list_components",
+    description: "Get all available shadcn/ui v4 components",
     inputSchema: {
-      type: 'object',
-      properties: {}
-    }
+      type: "object",
+      properties: {},
+    },
   },
-  'get_component_metadata': {
-    name: 'get_component_metadata',
-    description: 'Get metadata for a specific shadcn/ui v4 component',
+  get_component_metadata: {
+    name: "get_component_metadata",
+    description: "Get metadata for a specific shadcn/ui v4 component",
     inputSchema: {
-      type: 'object',
+      type: "object",
       properties: getComponentMetadataSchema,
-      required: ['componentName']
-    }
+      required: ["componentName"],
+    },
   },
-  'get_directory_structure': {
-    name: 'get_directory_structure',
-    description: 'Get the directory structure of the shadcn-ui v4 repository',
+  get_directory_structure: {
+    name: "get_directory_structure",
+    description: "Get the directory structure of the shadcn-ui v4 repository",
     inputSchema: {
-      type: 'object',
-      properties: getDirectoryStructureSchema
-    }
+      type: "object",
+      properties: getDirectoryStructureSchema,
+    },
   },
-  'get_block': {
-    name: 'get_block',
-    description: 'Get source code for a specific shadcn/ui v4 block (e.g., calendar-01, dashboard-01)',
+  get_block: {
+    name: "get_block",
+    description:
+      "Get source code for a specific shadcn/ui v4 block (e.g., calendar-01, dashboard-01)",
     inputSchema: {
-      type: 'object',
+      type: "object",
       properties: getBlockSchema,
-      required: ['blockName']
-    }
+      required: ["blockName"],
+    },
   },
-  'list_blocks': {
-    name: 'list_blocks',
-    description: 'Get all available shadcn/ui v4 blocks with categorization',
+  list_blocks: {
+    name: "list_blocks",
+    description: "Get all available shadcn/ui v4 blocks with categorization",
     inputSchema: {
-      type: 'object',
-      properties: listBlocksSchema
-    }
+      type: "object",
+      properties: listBlocksSchema,
+    },
   },
-  'apply_theme': {
-    name: 'apply_theme',
-    description: 'Apply a TweakCN theme preset to the project',
+  apply_theme: {
+    name: "apply_theme",
+    description: "Apply a TweakCN theme preset to the project",
     inputSchema: {
-      type: 'object',
-      properties: applyThemeSchema
-    }
+      type: "object",
+      properties: applyThemeSchema,
+    },
   },
-  'list_themes': {
-    name: 'list_themes',
-    description: 'List available tweakcn themes',
+  list_themes: {
+    name: "list_themes",
+    description: "List available tweakcn themes",
     inputSchema: {
-      type: 'object',
-      properties: listThemesSchema
-    }
+      type: "object",
+      properties: listThemesSchema,
+    },
   },
-  'get_theme': {
-    name: 'get_theme',
-    description: 'Get details of a specific tweakcn theme',
+  get_theme: {
+    name: "get_theme",
+    description: "Get details of a specific tweakcn theme",
     inputSchema: {
-      type: 'object',
+      type: "object",
       properties: getThemeSchema,
-      required: ['themeName']
-    }
-  }
-}; 
+      required: ["themeName"],
+    },
+  },
+};

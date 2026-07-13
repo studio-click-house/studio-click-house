@@ -5,9 +5,11 @@ This directory contains automation scripts for version management and npm publis
 ## 📁 Scripts Overview
 
 ### `publish.ps1` - Automated Publishing (Windows)
+
 Comprehensive publishing script that handles all pre-publish checks and npm publishing.
 
 **Usage:**
+
 ```powershell
 # Full automation with all checks and prompts
 .\scripts\publish.ps1
@@ -26,6 +28,7 @@ Comprehensive publishing script that handles all pre-publish checks and npm publ
 ```
 
 **NPM Scripts:**
+
 ```bash
 # Recommended: Full checks with prompts
 npm run publish:auto
@@ -35,6 +38,7 @@ npm run publish:quick
 ```
 
 **What it does:**
+
 1. ✅ Verifies project structure
 2. ✅ Checks npm authentication
 3. ✅ Runs security audit (npm audit + license check)
@@ -49,9 +53,11 @@ npm run publish:quick
 ---
 
 ### `bump-version.js` - Version Management
+
 Automatically bumps package version and creates git tags.
 
 **Usage:**
+
 ```bash
 # Bump patch version (1.1.4 → 1.1.5)
 npm run version:patch
@@ -64,6 +70,7 @@ npm run version:major
 ```
 
 **What it does:**
+
 1. ✅ Parses current version from package.json
 2. ✅ Calculates new version based on type
 3. ✅ Updates package.json
@@ -110,16 +117,19 @@ npm publish --access public
 The publishing script runs comprehensive security checks:
 
 ### npm audit
+
 - Scans for known vulnerabilities
 - Checks all dependencies
 - Fails on moderate+ severity issues
 
 ### License Compliance
+
 - Verifies all dependency licenses
 - Ensures compatibility with MIT license
 - Lists license distribution
 
 ### Snyk (optional)
+
 - Deep security analysis
 - Requires authentication: `snyk auth`
 - Non-blocking (continues if not authenticated)
@@ -146,6 +156,7 @@ The publishing script runs comprehensive security checks:
 None required - script uses current npm authentication.
 
 To login to npm:
+
 ```bash
 npm login
 ```
@@ -155,11 +166,13 @@ npm login
 ## 🛠️ Troubleshooting
 
 ### "Not logged in to npm"
+
 ```bash
 npm login
 ```
 
 ### "Build failed"
+
 ```bash
 # Clean and rebuild manually
 npm run clean
@@ -167,6 +180,7 @@ npm run build
 ```
 
 ### "Tests failed"
+
 ```bash
 # Run tests to see details
 npm run test
@@ -176,6 +190,7 @@ npm run publish:quick
 ```
 
 ### "Package already published"
+
 ```bash
 # Bump version first
 npm run version:patch
@@ -189,10 +204,12 @@ npm run publish:auto
 ## 📝 Files Modified
 
 ### `package.json`
+
 - Version number updated by `bump-version.js`
 - No manual editing required
 
 ### Git
+
 - Automatic commit for version bump
 - Automatic tag creation (e.g., `v1.1.5`)
 - Push tags separately: `git push --tags`
@@ -208,6 +225,7 @@ npm run publish:auto
    - Major for breaking changes (1.1.4 → 2.0.0)
 
 2. **Run full checks for production releases**
+
    ```bash
    npm run publish:auto
    ```
@@ -234,4 +252,3 @@ npm run publish:auto
 - [Semantic Versioning](https://semver.org/)
 - [npm Security Best Practices](https://docs.npmjs.com/packages-and-modules/securing-your-code)
 - [Snyk Documentation](https://docs.snyk.io/)
-

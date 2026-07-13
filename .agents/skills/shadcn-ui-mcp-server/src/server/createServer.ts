@@ -1,5 +1,5 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js"
-import { capabilities } from "./capabilities.js"
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { capabilities } from "./capabilities.js";
 
 export function createServer(version: string) {
   return new Server(
@@ -9,6 +9,6 @@ export function createServer(version: string) {
     },
     {
       capabilities,
-    }
-  )
+    },
+  );
 }

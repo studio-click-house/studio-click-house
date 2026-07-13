@@ -26,7 +26,7 @@ export function setupJsonConsole() {
           type: 3,
           message: message,
         },
-      })
+      }),
     );
   };
 
@@ -52,7 +52,7 @@ export function setupJsonConsole() {
           type: 1,
           message: message,
         },
-      })
+      }),
     );
   };
 }

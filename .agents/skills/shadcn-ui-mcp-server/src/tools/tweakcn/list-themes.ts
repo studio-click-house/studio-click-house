@@ -6,10 +6,12 @@ export const schema = {
   query: z.string().optional().describe("Search query to filter themes"),
 };
 
-export async function handleListThemes(args: z.infer<z.ZodObject<typeof schema>>) {
+export async function handleListThemes(
+  args: z.infer<z.ZodObject<typeof schema>>,
+) {
   try {
     const presets = await fetchPresetsFromGithub(DEFAULT_PRESETS_URL);
-    
+
     let results = Object.entries(presets).map(([id, theme]) => ({
       id,
       label: theme.label || theme.name || id,
@@ -21,8 +23,7 @@ export async function handleListThemes(args: z.infer<z.ZodObject<typeof schema>>
       const q = args.query.toLowerCase();
       results = results.filter(
         (t) =>
-          t.id.toLowerCase().includes(q) ||
-          t.label.toLowerCase().includes(q)
+          t.id.toLowerCase().includes(q) || t.label.toLowerCase().includes(q),
       );
     }
 

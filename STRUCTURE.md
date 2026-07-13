@@ -1,4 +1,5 @@
 # Studio Click House — Pro File Structure
+
 ## Stack: Next.js 14 (App Router) + Framer Motion + Lenis + Tailwind + shadcn
 
 ```
@@ -124,7 +125,9 @@ studio-click-house/
 ## Key Design Decisions
 
 ### Why `components/animations/` folder?
+
 Instead of writing Framer Motion code in every section, you wrap once:
+
 ```tsx
 // components/animations/FadeUp.tsx
 export function FadeUp({ children, delay = 0 }) {
@@ -137,18 +140,20 @@ export function FadeUp({ children, delay = 0 }) {
     >
       {children}
     </motion.div>
-  )
+  );
 }
 
 // Then use ANYWHERE like this:
 <FadeUp delay={0.2}>
   <h2>Your heading</h2>
-</FadeUp>
+</FadeUp>;
 ```
 
 ### Why `content/` folder?
+
 Your services, FAQs, pricing are the same data used on multiple pages.
 Keep it in one place, import everywhere:
+
 ```ts
 // content/services.ts
 export const services = [
@@ -160,31 +165,34 @@ export const services = [
 ```
 
 ### Why `lib/animations.ts`?
+
 Shared variants so all animations feel consistent:
+
 ```ts
 // lib/animations.ts
 export const fadeUp = {
   hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
-}
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
 export const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } }
-}
+  visible: { transition: { staggerChildren: 0.1 } },
+};
 ```
 
 ### Lenis Setup (layout.tsx)
+
 ```tsx
 // components/layout/SmoothScrollProvider.tsx
-"use client"
-import Lenis from "lenis"
-import { useEffect } from "react"
+"use client";
+import Lenis from "lenis";
+import { useEffect } from "react";
 
 export function SmoothScrollProvider({ children }) {
   useEffect(() => {
-    const lenis = new Lenis({ autoRaf: true })
-    return () => lenis.destroy()
-  }, [])
-  return <>{children}</>
+    const lenis = new Lenis({ autoRaf: true });
+    return () => lenis.destroy();
+  }, []);
+  return <>{children}</>;
 }
 ```
 
@@ -192,14 +200,14 @@ export function SmoothScrollProvider({ children }) {
 
 ## Pages → Sections Mapping
 
-| Page | Sections Used |
-|------|--------------|
-| `/` (Home) | Hero, StatsRow, ServicesGrid, PortfolioSlider, WhyUsGrid, ProcessSteps, CtaBanner, FaqAccordion |
-| `/about` | HeroSection, StatsRow, WhyUsGrid, TeamSection, CtaBanner |
-| `/services` | HeroSection, ServicesGrid |
-| `/services/[slug]` | ServiceHero, ServiceDetails, PortfolioSlider, CtaBanner |
-| `/portfolio` | HeroSection, PortfolioSlider (full), CtaBanner |
-| `/pricing` | HeroSection, PricingTable, FaqAccordion, CtaBanner |
-| `/blog` | HeroSection, BlogGrid |
-| `/blog/[slug]` | BlogPost, BlogGrid (related) |
-| `/contact` | HeroSection, ContactForm, StatsRow |
+| Page               | Sections Used                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| `/` (Home)         | Hero, StatsRow, ServicesGrid, PortfolioSlider, WhyUsGrid, ProcessSteps, CtaBanner, FaqAccordion |
+| `/about`           | HeroSection, StatsRow, WhyUsGrid, TeamSection, CtaBanner                                        |
+| `/services`        | HeroSection, ServicesGrid                                                                       |
+| `/services/[slug]` | ServiceHero, ServiceDetails, PortfolioSlider, CtaBanner                                         |
+| `/portfolio`       | HeroSection, PortfolioSlider (full), CtaBanner                                                  |
+| `/pricing`         | HeroSection, PricingTable, FaqAccordion, CtaBanner                                              |
+| `/blog`            | HeroSection, BlogGrid                                                                           |
+| `/blog/[slug]`     | BlogPost, BlogGrid (related)                                                                    |
+| `/contact`         | HeroSection, ContactForm, StatsRow                                                              |

@@ -26,6 +26,7 @@ This document describes the SSE extension added to the shadcn-ui-mcp-server, ena
 ## Transport Modes
 
 ### 1. stdio (Default)
+
 ```bash
 node build/index.js --mode stdio
 # or
@@ -33,11 +34,13 @@ node build/index.js  # default mode
 ```
 
 ### 2. sse (Server-Sent Events)
+
 ```bash
 node build/index.js --mode sse --port 7423 --host 0.0.0.0
 ```
 
 ### 3. dual (Both stdio and SSE)
+
 ```bash
 node build/index.js --mode dual --port 7423
 ```
@@ -45,6 +48,7 @@ node build/index.js --mode dual --port 7423
 ## Docker Compose Deployment
 
 ### Quick Start
+
 ```bash
 # Build and start the container
 docker-compose up --build -d
@@ -57,6 +61,7 @@ curl -N -H "Accept: text/event-stream" http://localhost:7423/sse
 ```
 
 ### Environment Variables
+
 - `MCP_TRANSPORT_MODE`: Transport mode (stdio|sse|dual)
 - `MCP_PORT`: Port for SSE server (default: 7423) - SHADCN on phone keypad (7-4-2-3)
 - `MCP_HOST`: Host binding (default: 0.0.0.0)
@@ -66,10 +71,13 @@ curl -N -H "Accept: text/event-stream" http://localhost:7423/sse
 ## API Endpoints
 
 ### Health Check
+
 ```http
 GET /health
 ```
+
 Response:
+
 ```json
 {
   "status": "healthy",
@@ -83,21 +91,27 @@ Response:
 ```
 
 ### SSE Connection
+
 ```http
 GET /sse
 Accept: text/event-stream
 ```
+
 Response:
+
 ```
 event: endpoint
 data: /message?sessionId=uuid-here
 ```
 
 ### Connection Status
+
 ```http
 GET /connections
 ```
+
 Response:
+
 ```json
 {
   "total": 2,
@@ -106,6 +120,7 @@ Response:
 ```
 
 ### MCP Message Handling
+
 ```http
 POST /message
 Content-Type: application/json
@@ -146,6 +161,7 @@ nginx.conf              # Optional reverse proxy
 ## Testing
 
 ### Manual Testing
+
 ```bash
 # Start server in SSE mode
 node build/index.js --mode sse --port 3001
@@ -159,6 +175,7 @@ curl http://localhost:3001/connections
 ```
 
 ### Docker Testing
+
 ```bash
 # Start with Docker Compose
 docker-compose up -d
@@ -176,12 +193,14 @@ docker logs shadcn-mcp-server
 ## Production Deployment
 
 ### With Nginx Proxy
+
 ```bash
 # Start with nginx proxy
 docker-compose --profile production up -d
 ```
 
 ### Health Checks
+
 - Container health check: `/health` endpoint every 30s
 - Kubernetes readiness: `GET /health` returns 200
 - Load balancer: Use `/health` for backend checks
@@ -197,6 +216,7 @@ The implementation maintains full backwards compatibility:
 ## Configuration Examples
 
 ### Development
+
 ```bash
 export MCP_TRANSPORT_MODE=sse
 export MCP_PORT=3001
@@ -205,6 +225,7 @@ node build/index.js
 ```
 
 ### Production
+
 ```yaml
 # docker-compose.override.yml
 services:
@@ -220,12 +241,14 @@ services:
 ## Troubleshooting
 
 ### Common Issues
+
 1. **Port conflicts**: Use `--port` or `MCP_PORT` to change port
 2. **CORS errors**: Configure `--cors` or `MCP_CORS_ORIGINS`
 3. **Connection drops**: Check container resources and health checks
 4. **Build failures**: Ensure dev dependencies are available during build
 
 ### Logs
+
 ```bash
 # Docker logs
 docker logs shadcn-mcp-server -f
@@ -237,12 +260,14 @@ node build/index.js --mode sse 2>&1 | grep -E "(ERROR|WARN|INFO)"
 ## Performance
 
 ### Benchmarks
+
 - **Memory**: ~50MB base + ~1MB per active connection
 - **CPU**: Minimal overhead, scales with request volume
 - **Connections**: Tested with 100+ concurrent SSE connections
 - **Latency**: <10ms local, <50ms over network
 
 ### Scaling
+
 - Horizontal: Multiple container instances behind load balancer
 - Vertical: Container resource limits in docker-compose.yml
 - Session Affinity: Required for SSE connections (sticky sessions)

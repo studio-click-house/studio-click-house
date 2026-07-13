@@ -26,7 +26,7 @@ export class RefineUiTool extends BaseTool {
     context: z
       .string()
       .describe(
-        "Extract the specific UI elements and aspects that need improvement based on user messages, code, and conversation history. Identify exactly which components (buttons, forms, modals, etc.) the user is referring to and what aspects (styling, layout, responsiveness, etc.) they want to enhance. Do not include generic improvements - focus only on what the user explicitly mentions or what can be reasonably inferred from the available context. If nothing specific is mentioned or you cannot determine what needs improvement, return an empty string."
+        "Extract the specific UI elements and aspects that need improvement based on user messages, code, and conversation history. Identify exactly which components (buttons, forms, modals, etc.) the user is referring to and what aspects (styling, layout, responsiveness, etc.) they want to enhance. Do not include generic improvements - focus only on what the user explicitly mentions or what can be reasonably inferred from the available context. If nothing specific is mentioned or you cannot determine what needs improvement, return an empty string.",
       ),
   });
 
@@ -42,7 +42,7 @@ export class RefineUiTool extends BaseTool {
           userMessage,
           fileContent: await getContentOfFile(absolutePathToRefiningFile),
           context,
-        }
+        },
       );
 
       return {

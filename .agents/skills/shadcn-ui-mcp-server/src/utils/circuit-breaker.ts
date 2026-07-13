@@ -1,12 +1,10 @@
-
-
 /**
  * Circuit Breaker states
  */
 export enum CircuitBreakerState {
-  CLOSED = 'CLOSED',
-  OPEN = 'OPEN',
-  HALF_OPEN = 'HALF_OPEN'
+  CLOSED = "CLOSED",
+  OPEN = "OPEN",
+  HALF_OPEN = "HALF_OPEN",
 }
 
 /**
@@ -32,7 +30,7 @@ export class CircuitBreaker {
     this.config = {
       failureThreshold: config.failureThreshold || 5,
       timeout: config.timeout || 60000, // 1 minute
-      successThreshold: config.successThreshold || 2
+      successThreshold: config.successThreshold || 2,
     };
   }
 
@@ -41,7 +39,9 @@ export class CircuitBreaker {
    */
   async execute<T>(fn: () => Promise<T>): Promise<T> {
     if (this.isOpen()) {
-      throw new Error('Service temporarily unavailable due to previous failures');
+      throw new Error(
+        "Service temporarily unavailable due to previous failures",
+      );
     }
 
     try {
@@ -74,7 +74,7 @@ export class CircuitBreaker {
    */
   private onSuccess(): void {
     this.failures = 0;
-    
+
     if (this.state === CircuitBreakerState.HALF_OPEN) {
       this.successes++;
       if (this.successes >= this.config.successThreshold) {
@@ -91,7 +91,10 @@ export class CircuitBreaker {
     this.failures++;
     this.lastFailureTime = Date.now();
 
-    if (this.state === CircuitBreakerState.CLOSED && this.failures >= this.config.failureThreshold) {
+    if (
+      this.state === CircuitBreakerState.CLOSED &&
+      this.failures >= this.config.failureThreshold
+    ) {
       this.state = CircuitBreakerState.OPEN;
     } else if (this.state === CircuitBreakerState.HALF_OPEN) {
       this.state = CircuitBreakerState.OPEN;
@@ -129,5 +132,5 @@ export class CircuitBreaker {
  */
 export const circuitBreakers = {
   github: new CircuitBreaker({ failureThreshold: 3, timeout: 30000 }),
-  external: new CircuitBreaker({ failureThreshold: 5, timeout: 60000 })
-}; 
+  external: new CircuitBreaker({ failureThreshold: 5, timeout: 60000 }),
+};

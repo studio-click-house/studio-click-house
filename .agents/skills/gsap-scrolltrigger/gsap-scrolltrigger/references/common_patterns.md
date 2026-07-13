@@ -36,8 +36,8 @@ gsap.from(".fade-in", {
   scrollTrigger: {
     trigger: ".fade-in",
     start: "top 80%", // When top of element hits 80% of viewport
-    toggleActions: "play none none none" // Play once
-  }
+    toggleActions: "play none none none", // Play once
+  },
 });
 ```
 
@@ -52,8 +52,8 @@ gsap.from(".fade-in-scrub", {
     trigger: ".fade-in-scrub",
     start: "top bottom",
     end: "top center",
-    scrub: true // Smooth scrubbing (boolean or number for lag)
-  }
+    scrub: true, // Smooth scrubbing (boolean or number for lag)
+  },
 });
 ```
 
@@ -62,15 +62,16 @@ gsap.from(".fade-in-scrub", {
 ```javascript
 // Efficiently animate many elements
 ScrollTrigger.batch(".batch-item", {
-  onEnter: batch => gsap.from(batch, {
-    opacity: 0,
-    y: 60,
-    stagger: 0.15,
-    duration: 0.8,
-    ease: "power2.out"
-  }),
+  onEnter: (batch) =>
+    gsap.from(batch, {
+      opacity: 0,
+      y: 60,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "power2.out",
+    }),
   start: "top 90%",
-  once: true // Only trigger once
+  once: true, // Only trigger once
 });
 ```
 
@@ -84,22 +85,22 @@ gsap.from(".from-left", {
   scrollTrigger: {
     trigger: ".from-left",
     start: "top 80%",
-    toggleActions: "play none none reverse"
-  }
+    toggleActions: "play none none reverse",
+  },
 });
 
 // Right
 gsap.from(".from-right", {
   x: 100,
   opacity: 0,
-  scrollTrigger: { trigger: ".from-right", start: "top 80%" }
+  scrollTrigger: { trigger: ".from-right", start: "top 80%" },
 });
 
 // Scale up
 gsap.from(".scale-in", {
   scale: 0.8,
   opacity: 0,
-  scrollTrigger: { trigger: ".scale-in", start: "top 80%" }
+  scrollTrigger: { trigger: ".scale-in", start: "top 80%" },
 });
 ```
 
@@ -114,7 +115,7 @@ ScrollTrigger.create({
   toggleClass: { targets: ".section", className: "active" },
   // Or specific onEnter/onLeave actions
   onEnter: () => document.querySelector(".section").classList.add("active"),
-  onLeave: () => document.querySelector(".section").classList.remove("active")
+  onLeave: () => document.querySelector(".section").classList.remove("active"),
 });
 ```
 
@@ -131,7 +132,7 @@ ScrollTrigger.create({
   start: "top top",
   end: "+=500", // Pin for 500px of scrolling
   pin: true,
-  markers: true // Debug markers (remove in production)
+  markers: true, // Debug markers (remove in production)
 });
 ```
 
@@ -145,8 +146,8 @@ const tl = gsap.timeline({
     start: "top top",
     end: "+=1000",
     pin: true,
-    scrub: 1
-  }
+    scrub: 1,
+  },
 });
 
 tl.from(".content h1", { opacity: 0, y: 100 })
@@ -164,7 +165,7 @@ ScrollTrigger.create({
   start: "top top",
   end: "top bottom", // When top of next-section hits viewport bottom
   pin: true,
-  pinSpacing: false // Don't add extra space
+  pinSpacing: false, // Don't add extra space
 });
 ```
 
@@ -177,7 +178,7 @@ gsap.utils.toArray(".panel").forEach((panel, i) => {
     trigger: panel,
     start: "top top",
     pin: true,
-    pinSpacing: false
+    pinSpacing: false,
   });
 });
 ```
@@ -196,9 +197,9 @@ gsap.timeline({
     snap: {
       snapTo: [0, 0.33, 0.66, 1], // Snap to 0%, 33%, 66%, 100%
       duration: { min: 0.2, max: 0.5 },
-      ease: "power1.inOut"
-    }
-  }
+      ease: "power1.inOut",
+    },
+  },
 });
 ```
 
@@ -211,7 +212,11 @@ gsap.timeline({
 ```javascript
 // Scroll horizontally when scrolling vertically
 gsap.to(".horizontal-section", {
-  x: () => -(document.querySelector(".horizontal-section").scrollWidth - window.innerWidth),
+  x: () =>
+    -(
+      document.querySelector(".horizontal-section").scrollWidth -
+      window.innerWidth
+    ),
   ease: "none",
   scrollTrigger: {
     trigger: ".horizontal-wrapper",
@@ -219,8 +224,8 @@ gsap.to(".horizontal-section", {
     end: () => "+=" + document.querySelector(".horizontal-section").scrollWidth,
     scrub: 1,
     pin: true,
-    anticipatePin: 1
-  }
+    anticipatePin: 1,
+  },
 });
 ```
 
@@ -236,8 +241,8 @@ const scrollTween = gsap.to(sections, {
     trigger: ".container",
     pin: true,
     scrub: 1,
-    end: () => "+=" + document.querySelector(".container").offsetWidth
-  }
+    end: () => "+=" + document.querySelector(".container").offsetWidth,
+  },
 });
 
 // Animate each panel individually
@@ -250,8 +255,8 @@ sections.forEach((section, i) => {
       containerAnimation: scrollTween, // Link to horizontal scroll
       start: "left center",
       end: "right center",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 });
 ```
@@ -267,8 +272,8 @@ gsap.to(".slides", {
     pin: true,
     scrub: 1,
     snap: 1 / (sections.length - 1), // Snap to each section
-    end: () => "+=" + document.querySelector(".slides").offsetWidth
-  }
+    end: () => "+=" + document.querySelector(".slides").offsetWidth,
+  },
 });
 ```
 
@@ -287,8 +292,8 @@ gsap.to(".bg", {
     trigger: ".parallax-section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // Foreground moves faster
@@ -299,8 +304,8 @@ gsap.to(".fg", {
     trigger: ".parallax-section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 ```
 
@@ -308,7 +313,7 @@ gsap.to(".fg", {
 
 ```javascript
 // Multiple layers with different speeds
-gsap.utils.toArray(".parallax-layer").forEach(layer => {
+gsap.utils.toArray(".parallax-layer").forEach((layer) => {
   const depth = layer.dataset.depth; // data-depth="0.2" in HTML
   const movement = -(layer.offsetHeight * depth);
 
@@ -319,8 +324,8 @@ gsap.utils.toArray(".parallax-layer").forEach(layer => {
       trigger: ".parallax-container",
       start: "top bottom",
       end: "bottom top",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 });
 ```
@@ -337,8 +342,8 @@ gsap.to(".hero-image", {
     trigger: ".hero",
     start: "top top",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // Hero text fades out
@@ -350,8 +355,8 @@ gsap.to(".hero-text", {
     trigger: ".hero",
     start: "top top",
     end: "center top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 ```
 
@@ -370,8 +375,8 @@ gsap.from(".card", {
   stagger: 0.2, // 0.2s delay between each
   scrollTrigger: {
     trigger: ".card-container",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
@@ -386,9 +391,9 @@ gsap.from(".item", {
   stagger: {
     each: 0.1,
     from: "center", // "start", "center", "end", "edges", "random"
-    ease: "power2.out"
+    ease: "power2.out",
   },
-  scrollTrigger: { trigger: ".grid", start: "top 80%" }
+  scrollTrigger: { trigger: ".grid", start: "top 80%" },
 });
 ```
 
@@ -403,9 +408,9 @@ gsap.from(".grid-item", {
   stagger: {
     grid: "auto", // Or [rows, columns] like [3, 4]
     from: "center",
-    amount: 1.5 // Total time for all staggers
+    amount: 1.5, // Total time for all staggers
   },
-  scrollTrigger: { trigger: ".grid", start: "top 80%" }
+  scrollTrigger: { trigger: ".grid", start: "top 80%" },
 });
 ```
 
@@ -420,7 +425,7 @@ gsap.from(text.words, {
   y: 50,
   rotationX: -90,
   stagger: 0.05,
-  scrollTrigger: { trigger: ".title", start: "top 80%" }
+  scrollTrigger: { trigger: ".title", start: "top 80%" },
 });
 
 // Split text into characters
@@ -431,7 +436,7 @@ gsap.from(chars.chars, {
   scale: 0,
   stagger: 0.02,
   ease: "back.out(1.7)",
-  scrollTrigger: { trigger: ".subtitle", start: "top 80%" }
+  scrollTrigger: { trigger: ".subtitle", start: "top 80%" },
 });
 ```
 
@@ -446,8 +451,8 @@ gsap.from(chars.chars, {
 const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".sequence-section",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 
 tl.from(".heading", { opacity: 0, y: -50, duration: 0.6 })
@@ -460,7 +465,7 @@ tl.from(".heading", { opacity: 0, y: -50, duration: 0.6 })
 ```javascript
 // Use labels for complex timing
 const tl = gsap.timeline({
-  scrollTrigger: { trigger: ".story", start: "top center" }
+  scrollTrigger: { trigger: ".story", start: "top center" },
 });
 
 tl.addLabel("start")
@@ -481,8 +486,8 @@ const tl = gsap.timeline({
     start: "top top",
     end: "+=1500",
     scrub: 1,
-    pin: true
-  }
+    pin: true,
+  },
 });
 
 tl.to(".box1", { x: 500, rotation: 360 })
@@ -505,7 +510,7 @@ gsap.from(split.lines, {
   y: 20,
   stagger: 0.1,
   duration: 0.6,
-  scrollTrigger: { trigger: ".text-reveal", start: "top 80%" }
+  scrollTrigger: { trigger: ".text-reveal", start: "top 80%" },
 });
 ```
 
@@ -518,9 +523,9 @@ gsap.to(".scramble", {
   scrambleText: {
     text: "REVEALED TEXT",
     chars: "lowerCase",
-    speed: 0.3
+    speed: 0.3,
   },
-  scrollTrigger: { trigger: ".scramble", start: "top 80%" }
+  scrollTrigger: { trigger: ".scramble", start: "top 80%" },
 });
 ```
 
@@ -535,7 +540,7 @@ gsap.to(element, {
   duration: text.length * 0.05,
   text: { value: text },
   ease: "none",
-  scrollTrigger: { trigger: element, start: "top 80%" }
+  scrollTrigger: { trigger: element, start: "top 80%" },
 });
 ```
 
@@ -550,8 +555,8 @@ gsap.to(".highlight", {
     trigger: ".highlight",
     start: "top 80%",
     end: "top 20%",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // CSS required:
@@ -572,7 +577,7 @@ gsap.to(".highlight", {
 <!-- HTML Structure -->
 <div class="img-curtain">
   <div class="curtain"></div>
-  <img src="image.jpg" alt="">
+  <img src="image.jpg" alt="" />
 </div>
 ```
 
@@ -584,8 +589,8 @@ gsap.to(".curtain", {
   ease: "power2.inOut",
   scrollTrigger: {
     trigger: ".img-curtain",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
@@ -617,8 +622,8 @@ gsap.from(".img-scale", {
   ease: "power2.out",
   scrollTrigger: {
     trigger: ".img-scale",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
@@ -633,8 +638,8 @@ gsap.to(".img-zoom img", {
     trigger: ".img-zoom",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 ```
 
@@ -663,7 +668,7 @@ ScrollTrigger.create({
     }
 
     lastScroll = currentScroll;
-  }
+  },
 });
 ```
 
@@ -679,7 +684,7 @@ sections.forEach((section, i) => {
     start: "top center",
     end: "bottom center",
     onEnter: () => setActiveNav(i),
-    onEnterBack: () => setActiveNav(i)
+    onEnterBack: () => setActiveNav(i),
   });
 });
 
@@ -694,15 +699,15 @@ function setActiveNav(index) {
 
 ```javascript
 // Click anchor link to smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function(e) {
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute("href"));
 
     gsap.to(window, {
       duration: 1,
       scrollTo: { y: target, offsetY: 100 }, // 100px offset for header
-      ease: "power2.inOut"
+      ease: "power2.inOut",
     });
   });
 });
@@ -716,13 +721,13 @@ function openDrawer() {
   gsap.to(".drawer", {
     x: 0,
     duration: 0.4,
-    ease: "power2.out"
+    ease: "power2.out",
   });
 
   gsap.to(".overlay", {
     opacity: 1,
     duration: 0.3,
-    pointerEvents: "all"
+    pointerEvents: "all",
   });
 }
 
@@ -731,13 +736,13 @@ function closeDrawer() {
   gsap.to(".drawer", {
     x: "100%", // Or -100% for left drawer
     duration: 0.4,
-    ease: "power2.in"
+    ease: "power2.in",
   });
 
   gsap.to(".overlay", {
     opacity: 0,
     duration: 0.3,
-    pointerEvents: "none"
+    pointerEvents: "none",
   });
 }
 ```
@@ -752,23 +757,26 @@ function closeDrawer() {
 // On link click
 function pageTransition(url) {
   const tl = gsap.timeline({
-    onComplete: () => window.location.href = url
+    onComplete: () => (window.location.href = url),
   });
 
   tl.to(".transition-overlay", {
     yPercent: 0,
     duration: 0.5,
-    ease: "power2.inOut"
-  })
-  .to(".transition-overlay", {
-    yPercent: -100,
-    duration: 0.5,
-    ease: "power2.inOut"
-  }, "+=0.1");
+    ease: "power2.inOut",
+  }).to(
+    ".transition-overlay",
+    {
+      yPercent: -100,
+      duration: 0.5,
+      ease: "power2.inOut",
+    },
+    "+=0.1",
+  );
 }
 
 // Attach to links
-document.querySelectorAll("a").forEach(link => {
+document.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     pageTransition(link.href);
@@ -786,7 +794,7 @@ function fadeTransition(url) {
     duration: 0.5,
     onComplete: () => {
       window.location.href = url;
-    }
+    },
   });
 }
 
@@ -794,7 +802,7 @@ function fadeTransition(url) {
 window.addEventListener("load", () => {
   gsap.from(".page-container", {
     opacity: 0,
-    duration: 0.5
+    duration: 0.5,
   });
 });
 ```
@@ -813,8 +821,8 @@ gsap.to(".progress-bar", {
   scrollTrigger: {
     start: "top top",
     end: "bottom bottom",
-    scrub: 0.3
-  }
+    scrub: 0.3,
+  },
 });
 
 // CSS: .progress-bar { transform-origin: left; }
@@ -830,7 +838,7 @@ const length = circle.getTotalLength();
 // Set up circle
 gsap.set(circle, {
   strokeDasharray: length,
-  strokeDashoffset: length
+  strokeDashoffset: length,
 });
 
 // Animate on scroll
@@ -840,8 +848,8 @@ gsap.to(circle, {
   scrollTrigger: {
     start: "top top",
     end: "bottom bottom",
-    scrub: 0.3
-  }
+    scrub: 0.3,
+  },
 });
 ```
 
@@ -858,7 +866,7 @@ sections.forEach((section, i) => {
     start: "top center",
     end: "bottom center",
     onEnter: () => activateDot(i),
-    onEnterBack: () => activateDot(i)
+    onEnterBack: () => activateDot(i),
   });
 });
 
@@ -891,7 +899,7 @@ const imageSeq = { frame: 0 };
 // Preload images
 for (let i = 0; i < frameCount; i++) {
   const img = new Image();
-  img.src = `./frames/frame_${String(i).padStart(4, '0')}.jpg`;
+  img.src = `./frames/frame_${String(i).padStart(4, "0")}.jpg`;
   images.push(img);
 }
 
@@ -912,8 +920,8 @@ gsap.to(imageSeq, {
     end: "+=3000",
     pin: true,
     scrub: 0.5,
-    onUpdate: render
-  }
+    onUpdate: render,
+  },
 });
 
 // Initial render
@@ -930,28 +938,28 @@ images[0].onload = render;
 // Use ScrollTrigger.matchMedia for responsive animations
 ScrollTrigger.matchMedia({
   // Desktop
-  "(min-width: 800px)": function() {
+  "(min-width: 800px)": function () {
     gsap.to(".element", {
       x: 500,
       scrollTrigger: {
         trigger: ".element",
         start: "top 80%",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
   },
 
   // Mobile
-  "(max-width: 799px)": function() {
+  "(max-width: 799px)": function () {
     gsap.to(".element", {
       y: 200, // Different animation on mobile
       scrollTrigger: {
         trigger: ".element",
         start: "top 80%",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
-  }
+  },
 });
 ```
 
@@ -966,8 +974,8 @@ if (window.innerWidth > 768) {
     y: 100,
     scrollTrigger: {
       trigger: ".desktop-animation",
-      start: "top 80%"
-    }
+      start: "top 80%",
+    },
   });
 } else {
   // Simple CSS fallback on mobile
@@ -991,16 +999,19 @@ gsap.registerPlugin(ScrollTrigger);
 function Component() {
   const containerRef = useRef();
 
-  useGSAP(() => {
-    gsap.from(".box", {
-      opacity: 0,
-      y: 50,
-      scrollTrigger: {
-        trigger: ".box",
-        start: "top 80%"
-      }
-    });
-  }, { scope: containerRef }); // Scope to container
+  useGSAP(
+    () => {
+      gsap.from(".box", {
+        opacity: 0,
+        y: 50,
+        scrollTrigger: {
+          trigger: ".box",
+          start: "top 80%",
+        },
+      });
+    },
+    { scope: containerRef },
+  ); // Scope to container
 
   return <div ref={containerRef}>...</div>;
 }
@@ -1017,8 +1028,8 @@ gsap.to(camera.position, {
     trigger: ".threejs-section",
     start: "top top",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // Animate object rotation
@@ -1027,8 +1038,8 @@ gsap.to(mesh.rotation, {
   ease: "none",
   scrollTrigger: {
     trigger: ".threejs-section",
-    scrub: 1
-  }
+    scrub: 1,
+  },
 });
 ```
 
@@ -1036,21 +1047,28 @@ gsap.to(mesh.rotation, {
 
 ```javascript
 // Use Locomotive Scroll as the scroller
-import LocomotiveScroll from 'locomotive-scroll';
+import LocomotiveScroll from "locomotive-scroll";
 
 const locoScroll = new LocomotiveScroll({
   el: document.querySelector(".smooth-scroll"),
-  smooth: true
+  smooth: true,
 });
 
 // Tell ScrollTrigger to use Locomotive Scroll
 ScrollTrigger.scrollerProxy(".smooth-scroll", {
   scrollTop(value) {
-    return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+    return arguments.length
+      ? locoScroll.scrollTo(value, 0, 0)
+      : locoScroll.scroll.instance.scroll.y;
   },
   getBoundingClientRect() {
-    return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-  }
+    return {
+      top: 0,
+      left: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  },
 });
 
 // Update ScrollTrigger when Locomotive Scroll updates
@@ -1069,17 +1087,17 @@ ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 gsap.set(".animated", { willChange: "transform, opacity" });
 
 // 2. Kill animations when not needed
-const st = ScrollTrigger.create({ /* ... */ });
+const st = ScrollTrigger.create({/* ... */});
 st.kill(); // Clean up
 
 // 3. Batch similar animations
-ScrollTrigger.batch(".item", { /* ... */ });
+ScrollTrigger.batch(".item", {/* ... */});
 
 // 4. Use scrub for smooth scroll-driven animations
-scrub: 1 // 1 second lag for smoothness
+scrub: 1; // 1 second lag for smoothness
 
 // 5. Limit markers in production
-markers: process.env.NODE_ENV === "development"
+markers: process.env.NODE_ENV === "development";
 ```
 
 ### Refresh After DOM Changes
@@ -1101,7 +1119,7 @@ imagesLoaded(".gallery", () => {
 ```javascript
 // React useEffect cleanup
 useEffect(() => {
-  const st = ScrollTrigger.create({ /* ... */ });
+  const st = ScrollTrigger.create({/* ... */});
 
   return () => {
     st.kill(); // Clean up on unmount
@@ -1118,12 +1136,12 @@ useEffect(() => {
 ```javascript
 // WRONG - ScrollTrigger won't work
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.to(".box", { scrollTrigger: { /* ... */ } }); // Error!
+gsap.to(".box", { scrollTrigger: {/* ... */} }); // Error!
 
 // CORRECT
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-gsap.to(".box", { scrollTrigger: { /* ... */ } }); // Works!
+gsap.to(".box", { scrollTrigger: {/* ... */} }); // Works!
 ```
 
 ### ❌ Animating Before DOM Ready
@@ -1171,9 +1189,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Wait for DOM
 document.addEventListener("DOMContentLoaded", () => {
-
   // Fade in on scroll
-  gsap.utils.toArray(".fade-in").forEach(element => {
+  gsap.utils.toArray(".fade-in").forEach((element) => {
     gsap.from(element, {
       opacity: 0,
       y: 50,
@@ -1181,8 +1198,8 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollTrigger: {
         trigger: element,
         start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
   });
 
@@ -1194,8 +1211,8 @@ document.addEventListener("DOMContentLoaded", () => {
       trigger: ".parallax-section",
       start: "top bottom",
       end: "bottom top",
-      scrub: true
-    }
+      scrub: true,
+    },
   });
 
   // Pin section
@@ -1203,14 +1220,13 @@ document.addEventListener("DOMContentLoaded", () => {
     trigger: ".pin-section",
     start: "top top",
     end: "+=500",
-    pin: true
+    pin: true,
   });
 
   // Refresh after images load
   window.addEventListener("load", () => {
     ScrollTrigger.refresh();
   });
-
 });
 ```
 

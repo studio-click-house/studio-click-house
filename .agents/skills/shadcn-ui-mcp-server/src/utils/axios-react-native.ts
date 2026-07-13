@@ -55,7 +55,7 @@ async function getComponentSource(componentName: string): Promise<string> {
     return response.data;
   } catch (error) {
     throw new Error(
-      `Component "${componentName}" not found in React Native registry`
+      `Component "${componentName}" not found in React Native registry`,
     );
   }
 }
@@ -79,7 +79,7 @@ async function getAvailableComponents(): Promise<string[]> {
   try {
     // First try the GitHub API
     const response = await githubApi.get(
-      `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${UI_PATH}`
+      `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${UI_PATH}`,
     );
 
     if (!response.data || !Array.isArray(response.data)) {
@@ -105,15 +105,15 @@ async function getAvailableComponents(): Promise<string[]> {
 
       if (status === 403 && message.includes("rate limit")) {
         throw new Error(
-          `GitHub API rate limit exceeded. Please set GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher limits. Error: ${message}`
+          `GitHub API rate limit exceeded. Please set GITHUB_PERSONAL_ACCESS_TOKEN environment variable for higher limits. Error: ${message}`,
         );
       } else if (status === 404) {
         throw new Error(
-          `Components directory not found. The path ${UI_PATH} may not exist in the repository.`
+          `Components directory not found. The path ${UI_PATH} may not exist in the repository.`,
         );
       } else if (status === 401) {
         throw new Error(
-          `Authentication failed. Please check your GITHUB_PERSONAL_ACCESS_TOKEN if provided.`
+          `Authentication failed. Please check your GITHUB_PERSONAL_ACCESS_TOKEN if provided.`,
         );
       } else {
         throw new Error(`GitHub API error (${status}): ${message}`);
@@ -127,7 +127,7 @@ async function getAvailableComponents(): Promise<string[]> {
       error.code === "ETIMEDOUT"
     ) {
       throw new Error(
-        `Network error: ${error.message}. Please check your internet connection.`
+        `Network error: ${error.message}. Please check your internet connection.`,
       );
     }
 
@@ -191,7 +191,7 @@ async function getComponentMetadata(componentName: string): Promise<any> {
     const registry = JSON.parse(response.data);
 
     const component = registry.find(
-      (item: any) => item.name === componentName.toLowerCase()
+      (item: any) => item.name === componentName.toLowerCase(),
     );
 
     if (!component) {
@@ -206,7 +206,7 @@ async function getComponentMetadata(componentName: string): Promise<any> {
     };
   } catch (error) {
     throw new Error(
-      `Failed to fetch metadata for component "${componentName}": ${error}`
+      `Failed to fetch metadata for component "${componentName}": ${error}`,
     );
   }
 }
@@ -219,7 +219,7 @@ async function getComponentMetadata(componentName: string): Promise<any> {
  */
 async function getBlockCode(
   blockName: string,
-  includeComponents = true
+  includeComponents = true,
 ): Promise<any> {
   // React Native registry currently doesn't provide blocks
   return {
@@ -250,12 +250,10 @@ async function getAvailableBlocks(category?: string): Promise<any> {
  */
 function setGitHubApiKey(apiKey: string): void {
   if (apiKey && apiKey.trim()) {
-    (githubApi.defaults.headers as any)[
-      "Authorization"
-    ] = `Bearer ${apiKey.trim()}`;
-    (githubRaw.defaults.headers as any)[
-      "Authorization"
-    ] = `Bearer ${apiKey.trim()}`;
+    (githubApi.defaults.headers as any)["Authorization"] =
+      `Bearer ${apiKey.trim()}`;
+    (githubRaw.defaults.headers as any)["Authorization"] =
+      `Bearer ${apiKey.trim()}`;
     logInfo("GitHub API key updated successfully");
   } else {
     delete (githubApi.defaults.headers as any)["Authorization"];
@@ -290,11 +288,11 @@ async function buildDirectoryTree(
   owner: string = REPO_OWNER,
   repo: string = REPO_NAME,
   path: string = NEW_YORK_V4_PATH,
-  branch: string = REPO_BRANCH
+  branch: string = REPO_BRANCH,
 ): Promise<any> {
   try {
     const response = await githubApi.get(
-      `/repos/${owner}/${repo}/contents/${path}?ref=${branch}`
+      `/repos/${owner}/${repo}/contents/${path}?ref=${branch}`,
     );
     return response.data;
   } catch (error) {
@@ -315,7 +313,7 @@ async function buildDirectoryTreeWithFallback(
   owner: string = REPO_OWNER,
   repo: string = REPO_NAME,
   path: string = NEW_YORK_V4_PATH,
-  branch: string = REPO_BRANCH
+  branch: string = REPO_BRANCH,
 ): Promise<any> {
   return buildDirectoryTree(owner, repo, path, branch);
 }

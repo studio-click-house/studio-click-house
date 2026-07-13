@@ -3,6 +3,7 @@
 ## Core GSAP Methods
 
 ### gsap.to()
+
 Animate FROM current state TO specified values.
 
 ```javascript
@@ -12,11 +13,12 @@ gsap.to(target, {
   rotation: 360,
   duration: 1,
   ease: "power2.inOut",
-  onComplete: callback
+  onComplete: callback,
 });
 ```
 
 ### gsap.from()
+
 Animate TO current state FROM specified values.
 
 ```javascript
@@ -24,27 +26,30 @@ gsap.from(target, {
   opacity: 0,
   y: -50,
   duration: 0.8,
-  ease: "back.out"
+  ease: "back.out",
 });
 ```
 
 ### gsap.fromTo()
+
 Define both starting and ending values.
 
 ```javascript
-gsap.fromTo(target,
+gsap.fromTo(
+  target,
   { opacity: 0, scale: 0.5 }, // FROM
-  { opacity: 1, scale: 1, duration: 1 } // TO
+  { opacity: 1, scale: 1, duration: 1 }, // TO
 );
 ```
 
 ### gsap.set()
+
 Immediately set properties (no animation).
 
 ```javascript
 gsap.set(target, {
   x: 100,
-  opacity: 0.5
+  opacity: 0.5,
 });
 ```
 
@@ -58,7 +63,7 @@ const tl = gsap.timeline({
   repeatDelay: 1,
   yoyo: true,
   paused: false,
-  onComplete: callback
+  onComplete: callback,
 });
 ```
 
@@ -131,47 +136,47 @@ tl.kill(); // Destroy timeline
 ### Power Easings (Most Common)
 
 ```javascript
-ease: "none" // Linear
-ease: "power1.in"
-ease: "power1.out"
-ease: "power1.inOut"
-ease: "power2.in"
-ease: "power2.out"
-ease: "power2.inOut"
-ease: "power3.in"
-ease: "power3.out"
-ease: "power3.inOut"
-ease: "power4.in"
-ease: "power4.out"
-ease: "power4.inOut"
+ease: "none"; // Linear
+ease: "power1.in";
+ease: "power1.out";
+ease: "power1.inOut";
+ease: "power2.in";
+ease: "power2.out";
+ease: "power2.inOut";
+ease: "power3.in";
+ease: "power3.out";
+ease: "power3.inOut";
+ease: "power4.in";
+ease: "power4.out";
+ease: "power4.inOut";
 ```
 
 ### Special Easings
 
 ```javascript
-ease: "back.in(1.7)" // Overshoot, parameter controls amount
-ease: "back.out(1.7)"
-ease: "back.inOut(1.7)"
+ease: "back.in(1.7)"; // Overshoot, parameter controls amount
+ease: "back.out(1.7)";
+ease: "back.inOut(1.7)";
 
-ease: "elastic.in(1, 0.3)" // Elastic bounce
-ease: "elastic.out(1, 0.3)"
-ease: "elastic.inOut(1, 0.3)"
+ease: "elastic.in(1, 0.3)"; // Elastic bounce
+ease: "elastic.out(1, 0.3)";
+ease: "elastic.inOut(1, 0.3)";
 
-ease: "bounce.in"
-ease: "bounce.out"
-ease: "bounce.inOut"
+ease: "bounce.in";
+ease: "bounce.out";
+ease: "bounce.inOut";
 
-ease: "circ.in" // Circular
-ease: "circ.out"
-ease: "circ.inOut"
+ease: "circ.in"; // Circular
+ease: "circ.out";
+ease: "circ.inOut";
 
-ease: "expo.in" // Exponential
-ease: "expo.out"
-ease: "expo.inOut"
+ease: "expo.in"; // Exponential
+ease: "expo.out";
+ease: "expo.inOut";
 
-ease: "sine.in" // Sinusoidal
-ease: "sine.out"
-ease: "sine.inOut"
+ease: "sine.in"; // Sinusoidal
+ease: "sine.out";
+ease: "sine.inOut";
 ```
 
 ## Stagger Configuration
@@ -179,7 +184,7 @@ ease: "sine.inOut"
 ### Simple Stagger
 
 ```javascript
-stagger: 0.1 // 0.1s between each element
+stagger: 0.1; // 0.1s between each element
 ```
 
 ### Advanced Stagger
@@ -226,7 +231,7 @@ ScrollTrigger.create({
     snapTo: "labels", // "labels", 0.1, [0, 0.5, 1], or function
     duration: { min: 0.2, max: 3 },
     delay: 0.2,
-    ease: "power1.inOut"
+    ease: "power1.inOut",
   },
 
   // Callbacks
@@ -247,7 +252,7 @@ ScrollTrigger.create({
   horizontal: false, // Horizontal scrolling
   scroller: ".container", // Custom scroll container
   containerAnimation: timeline, // For horizontal scrolling sections
-  fastScrollEnd: true // Better performance on fast scroll
+  fastScrollEnd: true, // Better performance on fast scroll
 });
 ```
 
@@ -256,20 +261,20 @@ ScrollTrigger.create({
 ```javascript
 // Format: "[trigger position] [viewport position]"
 
-start: "top top" // Trigger top hits viewport top
-start: "top center" // Trigger top hits viewport center
-start: "top bottom" // Trigger top hits viewport bottom
-start: "center center" // Trigger center hits viewport center
-start: "bottom top" // Trigger bottom hits viewport top
+start: "top top"; // Trigger top hits viewport top
+start: "top center"; // Trigger top hits viewport center
+start: "top bottom"; // Trigger top hits viewport bottom
+start: "center center"; // Trigger center hits viewport center
+start: "bottom top"; // Trigger bottom hits viewport top
 
 // With offsets
-start: "top top+=100" // 100px below viewport top
-start: "top 80%" // 80% down viewport
-start: "top-=50 center" // 50px above trigger top
+start: "top top+=100"; // 100px below viewport top
+start: "top 80%"; // 80% down viewport
+start: "top-=50 center"; // 50px above trigger top
 
 // Dynamic
-start: () => "top " + (window.innerHeight * 0.8)
-end: () => "+=" + element.offsetHeight
+start: () => "top " + window.innerHeight * 0.8;
+end: () => "+=" + element.offsetHeight;
 ```
 
 ## ScrollTrigger Methods
@@ -287,42 +292,42 @@ const triggers = ScrollTrigger.getAll();
 const st = ScrollTrigger.getById("myTrigger");
 
 // Kill all
-ScrollTrigger.getAll().forEach(t => t.kill());
+ScrollTrigger.getAll().forEach((t) => t.kill());
 
 // Global configuration
 ScrollTrigger.config({
   limitCallbacks: true, // Better performance
   syncInterval: 15, // Throttle scroll checks (ms)
-  ignoreMobileResize: true // Don't refresh on mobile resize
+  ignoreMobileResize: true, // Don't refresh on mobile resize
 });
 
 // Defaults for all ScrollTriggers
 ScrollTrigger.defaults({
   toggleActions: "play none none reverse",
-  markers: false
+  markers: false,
 });
 
 // Batch animations
 ScrollTrigger.batch(".element", {
-  onEnter: batch => gsap.to(batch, { opacity: 1, stagger: 0.1 }),
-  start: "top 80%"
+  onEnter: (batch) => gsap.to(batch, { opacity: 1, stagger: 0.1 }),
+  start: "top 80%",
 });
 
 // Match media queries
 ScrollTrigger.matchMedia({
-  "(min-width: 800px)": function() {
+  "(min-width: 800px)": function () {
     // Desktop animations
   },
-  "(max-width: 799px)": function() {
+  "(max-width: 799px)": function () {
     // Mobile animations
-  }
+  },
 });
 ```
 
 ### Instance Methods
 
 ```javascript
-const st = ScrollTrigger.create({ /* ... */ });
+const st = ScrollTrigger.create({/* ... */});
 
 // Control
 st.enable();
@@ -370,7 +375,7 @@ gsap.utils.distribute({
   base: 0,
   amount: 100,
   from: "center",
-  ease: "power2.out"
+  ease: "power2.out",
 });
 ```
 
@@ -384,8 +389,8 @@ gsap.from(".element", {
   scrollTrigger: {
     trigger: ".element",
     start: "top 80%",
-    scrub: 1
-  }
+    scrub: 1,
+  },
 });
 
 // Pin while scrolling
@@ -393,7 +398,7 @@ ScrollTrigger.create({
   trigger: ".panel",
   pin: true,
   start: "top top",
-  end: "+=500"
+  end: "+=500",
 });
 
 // Horizontal scroll
@@ -404,8 +409,8 @@ gsap.to(".panels", {
     trigger: ".container",
     pin: true,
     scrub: 1,
-    end: () => "+=" + document.querySelector(".panels").offsetWidth
-  }
+    end: () => "+=" + document.querySelector(".panels").offsetWidth,
+  },
 });
 
 // Parallax
@@ -416,13 +421,13 @@ gsap.to(".bg", {
     trigger: ".section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // Batch stagger
 ScrollTrigger.batch(".box", {
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
-  start: "top 80%"
+  onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+  start: "top 80%",
 });
 ```

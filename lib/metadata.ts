@@ -1,14 +1,14 @@
-import { Metadata } from "next"
-import { siteConfig } from "@/config/site"
+import { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 
 export function generatePageMetadata({
   title,
   description,
   path = "/",
 }: {
-  title: string
-  description?: string
-  path?: string
+  title: string;
+  description?: string;
+  path?: string;
 }): Metadata {
   return {
     title: `${title} | ${siteConfig.shortName}`,
@@ -25,5 +25,5 @@ export function generatePageMetadata({
       images: [{ url: siteConfig.ogImage }],
       type: "website",
     },
-  }
+  };
 }

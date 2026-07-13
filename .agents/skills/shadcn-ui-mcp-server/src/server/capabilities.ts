@@ -76,8 +76,7 @@ export const promptDefinitions = {
 // Tool definitions
 export const toolDefinitions = {
   get_component: {
-    description:
-      "Get the source code for a specific shadcn/ui v4 component",
+    description: "Get the source code for a specific shadcn/ui v4 component",
     inputSchema: {
       type: "object",
       properties: {
@@ -127,8 +126,7 @@ export const toolDefinitions = {
     },
   },
   get_directory_structure: {
-    description:
-      "Get the directory structure of the shadcn-ui v4 repository",
+    description: "Get the directory structure of the shadcn-ui v4 repository",
     inputSchema: {
       type: "object",
       properties: {
@@ -172,8 +170,7 @@ export const toolDefinitions = {
     },
   },
   list_blocks: {
-    description:
-      "Get all available shadcn/ui v4 blocks with categorization",
+    description: "Get all available shadcn/ui v4 blocks with categorization",
     inputSchema: {
       type: "object",
       properties: {
@@ -191,7 +188,10 @@ export const toolDefinitions = {
     inputSchema: {
       type: "object",
       properties: {
-        query: { type: "string", description: "Search keywords to filter presets" },
+        query: {
+          type: "string",
+          description: "Search keywords to filter presets",
+        },
       },
     },
   },
@@ -202,10 +202,23 @@ export const toolDefinitions = {
       type: "object",
       properties: {
         presetId: { type: "string", description: "ID of the preset to apply" },
-        query: { type: "string", description: "Search keywords to find a preset" },
-        tailwindVersion: { type: "string", description: "3 or 4", enum: ["3", "4"] },
-        cssPath: { type: "string", description: "Optional explicit path to global.css to write" },
-        dryRun: { type: "boolean", description: "If true, do not write files; just return preview" },
+        query: {
+          type: "string",
+          description: "Search keywords to find a preset",
+        },
+        tailwindVersion: {
+          type: "string",
+          description: "3 or 4",
+          enum: ["3", "4"],
+        },
+        cssPath: {
+          type: "string",
+          description: "Optional explicit path to global.css to write",
+        },
+        dryRun: {
+          type: "boolean",
+          description: "If true, do not write files; just return preview",
+        },
       },
       required: [],
     },
@@ -224,7 +237,10 @@ export const toolDefinitions = {
     inputSchema: {
       type: "object",
       properties: {
-        themeName: { type: "string", description: "Name or ID of the theme to retrieve" },
+        themeName: {
+          type: "string",
+          description: "Name or ID of the theme to retrieve",
+        },
       },
       required: ["themeName"],
     },

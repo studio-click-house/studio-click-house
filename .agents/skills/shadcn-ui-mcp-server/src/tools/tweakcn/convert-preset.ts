@@ -38,7 +38,8 @@ export function convertPresetToThemeStyles(preset: any): Record<string, any> {
     primary: "#3b82f6",
     "primary-foreground": "#ffffff",
     radius: "0.375rem",
-    "font-sans": "Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto",
+    "font-sans":
+      "Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto",
     "font-serif": "Georgia, 'Times New Roman', Times, serif",
     "font-mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono'",
   };
@@ -49,7 +50,12 @@ export function convertPresetToThemeStyles(preset: any): Record<string, any> {
   }
 
   for (let i = 1; i <= 5; i++) {
-    ensureToken(light, `chart-${i}`, light[`chart-${i}`] || `#${Math.floor(Math.random() * 16777215).toString(16)}`);
+    ensureToken(
+      light,
+      `chart-${i}`,
+      light[`chart-${i}`] ||
+        `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    );
     ensureToken(dark, `chart-${i}`, dark[`chart-${i}`] || light[`chart-${i}`]);
   }
 
@@ -76,7 +82,8 @@ export function convertPresetToThemeStyles(preset: any): Record<string, any> {
         try {
           // Attempt to normalize to a CSS-compatible HSL string where possible
           const normalized = colorFormatter(v, "hsl", "3");
-          if (typeof normalized === "string" && normalized.length > 0) obj[k] = normalized;
+          if (typeof normalized === "string" && normalized.length > 0)
+            obj[k] = normalized;
         } catch (err) {
           // keep original value on failure
           obj[k] = v;

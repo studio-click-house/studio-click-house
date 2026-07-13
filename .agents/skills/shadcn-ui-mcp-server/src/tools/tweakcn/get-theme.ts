@@ -6,11 +6,13 @@ export const schema = {
   themeName: z.string().describe("Name or ID of the theme to retrieve"),
 };
 
-export async function handleGetTheme(args: z.infer<z.ZodObject<typeof schema>>) {
+export async function handleGetTheme(
+  args: z.infer<z.ZodObject<typeof schema>>,
+) {
   try {
     const presets = await fetchPresetsFromGithub(DEFAULT_PRESETS_URL);
     const themeId = args.themeName;
-    
+
     // Direct match
     if (presets[themeId]) {
       return {
@@ -25,7 +27,10 @@ export async function handleGetTheme(args: z.infer<z.ZodObject<typeof schema>>) 
 
     // Search by label if ID not found
     const foundId = Object.keys(presets).find(
-      (id) => (presets[id].label && presets[id].label.toLowerCase() === themeId.toLowerCase()) || id.toLowerCase() === themeId.toLowerCase()
+      (id) =>
+        (presets[id].label &&
+          presets[id].label.toLowerCase() === themeId.toLowerCase()) ||
+        id.toLowerCase() === themeId.toLowerCase(),
     );
 
     if (foundId) {

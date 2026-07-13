@@ -25,12 +25,12 @@ export class CreateUiTool extends BaseTool {
     searchQuery: z
       .string()
       .describe(
-        "Generate a search query for 21st.dev (library for searching UI components) to find a UI component that matches the user's message. Must be a two-four words max or phrase"
+        "Generate a search query for 21st.dev (library for searching UI components) to find a UI component that matches the user's message. Must be a two-four words max or phrase",
       ),
     absolutePathToCurrentFile: z
       .string()
       .describe(
-        "Absolute path to the current file to which we want to apply changes"
+        "Absolute path to the current file to which we want to apply changes",
       ),
     absolutePathToProjectDirectory: z
       .string()
@@ -38,7 +38,7 @@ export class CreateUiTool extends BaseTool {
     standaloneRequestQuery: z
       .string()
       .describe(
-        "You need to formulate what component user wants to create, based on his message, possbile chat histroy and a place where he makes the request.Extract additional context about what should be done to create a ui component/page based on the user's message, search query, and conversation history, files. Don't halucinate and be on point."
+        "You need to formulate what component user wants to create, based on his message, possbile chat histroy and a place where he makes the request.Extract additional context about what should be done to create a ui component/page based on the user's message, search query, and conversation history, files. Don't halucinate and be on point.",
       ),
   });
 
@@ -55,7 +55,7 @@ export class CreateUiTool extends BaseTool {
       const port = server.getPort();
 
       let url: string = `http://21st.dev/magic-chat?q=${encodeURIComponent(
-        standaloneRequestQuery
+        standaloneRequestQuery,
       )}&mcp=true&port=${port}`;
 
       if (config.canvas) {
@@ -75,7 +75,7 @@ export class CreateUiTool extends BaseTool {
 
             const originalBranch = await git(
               projectDir,
-              "rev-parse --abbrev-ref HEAD"
+              "rev-parse --abbrev-ref HEAD",
             );
             const status = await git(projectDir, "status --porcelain");
             const hasLocalChanges = status.length > 0;
@@ -104,7 +104,7 @@ export class CreateUiTool extends BaseTool {
             await git(projectDir, "add -A");
             await git(
               projectDir,
-              `commit -m "WIP: magic-ui init" --allow-empty`
+              `commit -m "WIP: magic-ui init" --allow-empty`,
             );
 
             // 5. Push to origin (throws error if fails)
@@ -123,7 +123,7 @@ export class CreateUiTool extends BaseTool {
           } catch (error) {
             console.error(
               "Error with git operations, falling back to canvas without branch/repo",
-              error
+              error,
             );
           }
         }

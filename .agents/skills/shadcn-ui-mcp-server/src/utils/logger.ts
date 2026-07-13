@@ -27,4 +27,4 @@ export function logWarning(message: string): void {
  */
 export function logInfo(message: string): void {
   console.error(`INFO: ${message}`);
-} 
+}

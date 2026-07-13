@@ -72,11 +72,11 @@ Edit CSS variables in `style.css`:
 
 ```css
 :root {
-  --primary: #667eea;      /* Primary gradient color */
-  --secondary: #764ba2;    /* Secondary gradient color */
-  --text-dark: #333;       /* Main text color */
-  --text-light: #666;      /* Secondary text color */
-  --bg-light: #f9f9f9;     /* Light background */
+  --primary: #667eea; /* Primary gradient color */
+  --secondary: #764ba2; /* Secondary gradient color */
+  --text-dark: #333; /* Main text color */
+  --text-light: #666; /* Secondary text color */
+  --bg-light: #f9f9f9; /* Light background */
 }
 ```
 
@@ -89,12 +89,13 @@ In `main.js`, modify animation durations and easing:
 tl.from(".hero-title", {
   opacity: 0,
   y: 100,
-  duration: 1,        // Change duration
-  ease: "power3.out"  // Change easing
+  duration: 1, // Change duration
+  ease: "power3.out", // Change easing
 });
 ```
 
 **Common Easing Options**:
+
 - `power2.out` - Standard (most common)
 - `power3.out` - Dramatic
 - `back.out(1.7)` - Playful overshoot
@@ -115,6 +116,7 @@ scrollTrigger: {
 ```
 
 **Position Format**: `"[trigger position] [viewport position]"`
+
 - Examples: `"top top"`, `"center center"`, `"bottom 80%"`
 
 ### 4. Enable Debug Markers
@@ -122,7 +124,7 @@ scrollTrigger: {
 In `main.js`, set `DEBUG = true`:
 
 ```javascript
-const DEBUG = true;  // Shows visual scroll trigger markers
+const DEBUG = true; // Shows visual scroll trigger markers
 ```
 
 This displays colored markers showing trigger start/end points.
@@ -130,6 +132,7 @@ This displays colored markers showing trigger start/end points.
 ### 5. Add Your Own Sections
 
 **HTML**:
+
 ```html
 <section class="section my-section">
   <div class="container">
@@ -140,6 +143,7 @@ This displays colored markers showing trigger start/end points.
 ```
 
 **JavaScript**:
+
 ```javascript
 gsap.from(".my-section .fade-in", {
   opacity: 0,
@@ -147,8 +151,8 @@ gsap.from(".my-section .fade-in", {
   duration: 1,
   scrollTrigger: {
     trigger: ".my-section",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
@@ -165,8 +169,8 @@ gsap.from(".element", {
   duration: 1,
   scrollTrigger: {
     trigger: ".element",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
@@ -179,8 +183,8 @@ gsap.to(".element", {
     trigger: ".container",
     start: "top top",
     end: "bottom top",
-    scrub: true  // Animation tied to scroll position
-  }
+    scrub: true, // Animation tied to scroll position
+  },
 });
 ```
 
@@ -190,9 +194,9 @@ gsap.to(".element", {
 ScrollTrigger.create({
   trigger: ".section",
   start: "top top",
-  end: "+=1000",  // Pin for 1000px of scrolling
+  end: "+=1000", // Pin for 1000px of scrolling
   pin: true,
-  pinSpacing: true
+  pinSpacing: true,
 });
 ```
 
@@ -202,11 +206,11 @@ ScrollTrigger.create({
 gsap.from(".item", {
   opacity: 0,
   y: 50,
-  stagger: 0.15,  // 0.15s delay between each
+  stagger: 0.15, // 0.15s delay between each
   scrollTrigger: {
     trigger: ".container",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 ```
 
@@ -220,8 +224,8 @@ gsap.to(".bg", {
     trigger: ".section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 ```
 
@@ -241,14 +245,14 @@ Animations automatically adapt for mobile devices:
 ```javascript
 ScrollTrigger.matchMedia({
   // Desktop
-  "(min-width: 800px)": function() {
+  "(min-width: 800px)": function () {
     // Desktop-only animations
   },
 
   // Mobile
-  "(max-width: 799px)": function() {
+  "(max-width: 799px)": function () {
     // Mobile-only animations
-  }
+  },
 });
 ```
 
@@ -282,14 +286,14 @@ ScrollTrigger.batch(".item", {
 
 ```javascript
 scrollTrigger: {
-  scrub: 1  // Instead of true (smoother but less precise)
+  scrub: 1; // Instead of true (smoother but less precise)
 }
 ```
 
 3. **Disable Markers in Production**
 
 ```javascript
-const DEBUG = false;  // Removes visual markers
+const DEBUG = false; // Removes visual markers
 ```
 
 ---
@@ -308,7 +312,7 @@ const DEBUG = false;  // Removes visual markers
 ```javascript
 // Add to ScrollTrigger config
 ScrollTrigger.config({
-  ignoreMobileResize: true
+  ignoreMobileResize: true,
 });
 ```
 
@@ -317,7 +321,7 @@ ScrollTrigger.config({
 ```javascript
 ScrollTrigger.create({
   pin: true,
-  pinSpacing: true  // or false, depending on desired behavior
+  pinSpacing: true, // or false, depending on desired behavior
 });
 ```
 
@@ -337,8 +341,8 @@ ScrollTrigger.create({
 const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".section",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 
 tl.from(".title", { opacity: 0, y: -50 })
@@ -363,7 +367,7 @@ scrollTrigger: {
 
 ```javascript
 scrollTrigger: {
-  toggleActions: "play pause resume reset"
+  toggleActions: "play pause resume reset";
   // Format: onEnter onLeave onEnterBack onLeaveBack
   // Options: play, pause, resume, reset, restart, complete, reverse, none
 }
@@ -430,6 +434,7 @@ scrollTrigger: {
 ### Hosting
 
 Works with any static hosting:
+
 - **Netlify** - Drop folder, auto-deploy
 - **Vercel** - Git integration, instant deploys
 - **GitHub Pages** - Free hosting from repo
@@ -448,6 +453,7 @@ GSAP is licensed under [GreenSock License](https://gsap.com/licensing/). Free fo
 ## 🙏 Credits
 
 Built with:
+
 - [GSAP](https://gsap.com) - Animation library
 - [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger) - Scroll-driven animations
 - [ScrollToPlugin](https://gsap.com/docs/v3/Plugins/ScrollToPlugin) - Smooth scroll navigation

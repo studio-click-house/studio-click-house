@@ -1,5 +1,5 @@
-import { MetadataRoute } from "next"
-import { siteConfig } from "@/config/site"
+import { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -26,5 +26,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       priority: 0.6,
     },
-  ]
+  ];
 }

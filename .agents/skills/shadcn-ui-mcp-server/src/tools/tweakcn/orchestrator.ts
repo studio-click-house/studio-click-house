@@ -31,15 +31,23 @@ export async function applyPresetByIdOrQuery(options: {
     chosenId = matches[0].id;
   }
 
-  if (!chosenId) return { success: false, reason: "No presetId or query provided" };
+  if (!chosenId)
+    return { success: false, reason: "No presetId or query provided" };
 
   const preset = presets[chosenId];
-  if (!preset) return { success: false, reason: `Preset not found: ${chosenId}` };
+  if (!preset)
+    return { success: false, reason: `Preset not found: ${chosenId}` };
 
   const themeStyles = convertPresetToThemeStyles(preset);
-  const { css, tailwindConfig } = generateCssAndConfig(themeStyles, options.tailwindVersion || "3");
+  const { css, tailwindConfig } = generateCssAndConfig(
+    themeStyles,
+    options.tailwindVersion || "3",
+  );
 
-  const targetPath = options.cssPath || (await locateGlobalCss(root)) || path.join(root, "src", "styles", "globals.css");
+  const targetPath =
+    options.cssPath ||
+    (await locateGlobalCss(root)) ||
+    path.join(root, "src", "styles", "globals.css");
 
   if (options.dryRun) {
     return { success: true, preview: { css, tailwindConfig, targetPath } };

@@ -21,20 +21,21 @@ gsap.to(".box", {
   x: 200,
   rotation: 360,
   duration: 1,
-  ease: "power2.inOut"
+  ease: "power2.inOut",
 });
 
 // Animate FROM a state (to current)
 gsap.from(".box", {
   opacity: 0,
   y: -50,
-  duration: 0.8
+  duration: 0.8,
 });
 
 // Animate FROM-TO (define both start and end)
-gsap.fromTo(".box",
+gsap.fromTo(
+  ".box",
   { opacity: 0, scale: 0.5 }, // FROM
-  { opacity: 1, scale: 1, duration: 1 } // TO
+  { opacity: 1, scale: 1, duration: 1 }, // TO
 );
 ```
 
@@ -97,8 +98,8 @@ gsap.to(".box", {
     end: "bottom center",
     markers: true, // Development only - shows start/end positions
     scrub: true, // Links animation to scrollbar
-    toggleActions: "play none none reverse" // onEnter onLeave onEnterBack onLeaveBack
-  }
+    toggleActions: "play none none reverse", // onEnter onLeave onEnterBack onLeaveBack
+  },
 });
 ```
 
@@ -108,27 +109,27 @@ Format: `"[trigger position] [viewport position]"`
 
 ```javascript
 // Common patterns
-start: "top top"      // Trigger top hits viewport top
-start: "top center"   // Trigger top hits viewport center (default)
-start: "top bottom"   // Trigger top hits viewport bottom
-start: "center center" // Trigger center hits viewport center
+start: "top top"; // Trigger top hits viewport top
+start: "top center"; // Trigger top hits viewport center (default)
+start: "top bottom"; // Trigger top hits viewport bottom
+start: "center center"; // Trigger center hits viewport center
 
 // With offsets
-start: "top top+=100"   // 100px below viewport top
-start: "top 80%"        // 80% down the viewport
-end: "+=500"            // 500px after start position
-end: "bottom top"       // Trigger bottom hits viewport top
+start: "top top+=100"; // 100px below viewport top
+start: "top 80%"; // 80% down the viewport
+end: "+=500"; // 500px after start position
+end: "bottom top"; // Trigger bottom hits viewport top
 ```
 
 ### Scrubbing (Scroll-Synced Animation)
 
 ```javascript
 // Boolean: Direct link to scrollbar (immediate)
-scrub: true
+scrub: true;
 
 // Number: Smoothing delay in seconds
-scrub: 1  // Takes 1 second to "catch up" to scrollbar
-scrub: 0.5 // Faster, tighter feel
+scrub: 1; // Takes 1 second to "catch up" to scrollbar
+scrub: 0.5; // Faster, tighter feel
 ```
 
 ### Toggle Actions
@@ -136,18 +137,19 @@ scrub: 0.5 // Faster, tighter feel
 Control animation at four scroll points:
 
 ```javascript
-toggleActions: "play pause resume reset"
+toggleActions: "play pause resume reset";
 // onEnter | onLeave | onEnterBack | onLeaveBack
 
 // Actions: play, pause, resume, restart, reset, complete, reverse, none
 ```
 
 Common patterns:
+
 ```javascript
-toggleActions: "play none none none"       // Play once on enter
-toggleActions: "play none none reverse"    // Play forward, reverse back
-toggleActions: "play complete reverse reset" // Full control
-toggleActions: "restart pause resume pause"  // Restart on each enter
+toggleActions: "play none none none"; // Play once on enter
+toggleActions: "play none none reverse"; // Play forward, reverse back
+toggleActions: "play complete reverse reset"; // Full control
+toggleActions: "restart pause resume pause"; // Restart on each enter
 ```
 
 ## Common Patterns
@@ -164,8 +166,8 @@ gsap.from(".fade-in", {
     start: "top 80%",
     end: "top 50%",
     scrub: 1,
-    once: true // Only animate once
-  }
+    once: true, // Only animate once
+  },
 });
 ```
 
@@ -177,7 +179,7 @@ ScrollTrigger.create({
   start: "top top",
   end: "+=500", // Pin for 500px of scrolling
   pin: true,
-  pinSpacing: true // Add spacing (default true)
+  pinSpacing: true, // Add spacing (default true)
 });
 ```
 
@@ -193,8 +195,8 @@ gsap.to(sections, {
     trigger: ".container",
     pin: true,
     scrub: 1,
-    end: () => "+=" + document.querySelector(".container").offsetWidth
-  }
+    end: () => "+=" + document.querySelector(".container").offsetWidth,
+  },
 });
 ```
 
@@ -209,8 +211,8 @@ gsap.to(".bg", {
     trigger: ".section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // Faster movement (foreground layer)
@@ -221,8 +223,8 @@ gsap.to(".fg", {
     trigger: ".section",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 ```
 
@@ -240,9 +242,9 @@ const tl = gsap.timeline({
       snapTo: "labels", // Snap to timeline labels
       duration: { min: 0.2, max: 3 },
       delay: 0.2,
-      ease: "power1.inOut"
-    }
-  }
+      ease: "power1.inOut",
+    },
+  },
 });
 
 tl.addLabel("start")
@@ -266,17 +268,17 @@ gsap.utils.toArray(".box").forEach((box, i) => {
       trigger: box,
       start: "top 80%",
       end: "top 50%",
-      scrub: 1
-    }
+      scrub: 1,
+    },
   });
 });
 
 // Or use ScrollTrigger.batch
 ScrollTrigger.batch(".box", {
-  onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
-  onLeave: batch => gsap.set(batch, { opacity: 0 }),
+  onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+  onLeave: (batch) => gsap.set(batch, { opacity: 0 }),
   start: "top 80%",
-  once: true
+  once: true,
 });
 ```
 
@@ -290,8 +292,8 @@ gsap.from(".item", {
   stagger: 0.1, // 0.1s between each item
   scrollTrigger: {
     trigger: ".grid",
-    start: "top 80%"
-  }
+    start: "top 80%",
+  },
 });
 
 // Advanced stagger
@@ -302,8 +304,8 @@ gsap.from(".item", {
     each: 0.1,
     from: "center", // "start", "center", "end", "edges", or index number
     grid: "auto", // For grid layouts
-    ease: "power2.inOut"
-  }
+    ease: "power2.inOut",
+  },
 });
 ```
 
@@ -312,9 +314,9 @@ gsap.from(".item", {
 ### With Three.js / WebGL
 
 ```javascript
-import * as THREE from 'three';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import * as THREE from "three";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -328,8 +330,8 @@ gsap.to(camera.position, {
     start: "top top",
     end: "bottom top",
     scrub: 1,
-    onUpdate: () => camera.lookAt(scene.position)
-  }
+    onUpdate: () => camera.lookAt(scene.position),
+  },
 });
 
 // Animate mesh rotation
@@ -339,8 +341,8 @@ gsap.to(mesh.rotation, {
     trigger: "#section3",
     start: "top bottom",
     end: "bottom top",
-    scrub: true
-  }
+    scrub: true,
+  },
 });
 
 // Animate material properties
@@ -350,18 +352,18 @@ gsap.to(material, {
     trigger: "#section4",
     start: "top center",
     end: "center center",
-    scrub: 1
-  }
+    scrub: 1,
+  },
 });
 ```
 
 ### With React (useGSAP Hook)
 
 ```javascript
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -369,22 +371,27 @@ function Component() {
   const container = useRef();
   const box = useRef();
 
-  useGSAP(() => {
-    gsap.to(box.current, {
-      x: 200,
-      scrollTrigger: {
-        trigger: box.current,
-        start: "top center",
-        end: "bottom center",
-        scrub: true,
-        markers: true
-      }
-    });
-  }, { scope: container }); // Scoping for cleanup
+  useGSAP(
+    () => {
+      gsap.to(box.current, {
+        x: 200,
+        scrollTrigger: {
+          trigger: box.current,
+          start: "top center",
+          end: "bottom center",
+          scrub: true,
+          markers: true,
+        },
+      });
+    },
+    { scope: container },
+  ); // Scoping for cleanup
 
   return (
     <div ref={container}>
-      <div ref={box} className="box">Animated Box</div>
+      <div ref={box} className="box">
+        Animated Box
+      </div>
     </div>
   );
 }
@@ -423,21 +430,30 @@ function Box({ timeline, index }) {
 ### Locomotive Scroll Integration
 
 ```javascript
-import LocomotiveScroll from 'locomotive-scroll';
+import LocomotiveScroll from "locomotive-scroll";
 
 const scroller = new LocomotiveScroll({
-  el: document.querySelector('[data-scroll-container]'),
-  smooth: true
+  el: document.querySelector("[data-scroll-container]"),
+  smooth: true,
 });
 
 ScrollTrigger.scrollerProxy("[data-scroll-container]", {
   scrollTop(value) {
-    return arguments.length ? scroller.scrollTo(value, 0, 0) : scroller.scroll.instance.scroll.y;
+    return arguments.length
+      ? scroller.scrollTo(value, 0, 0)
+      : scroller.scroll.instance.scroll.y;
   },
   getBoundingClientRect() {
-    return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+    return {
+      top: 0,
+      left: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
   },
-  pinType: document.querySelector("[data-scroll-container]").style.transform ? "transform" : "fixed"
+  pinType: document.querySelector("[data-scroll-container]").style.transform
+    ? "transform"
+    : "fixed",
 });
 
 ScrollTrigger.addEventListener("refresh", () => scroller.update());
@@ -458,7 +474,7 @@ const currentFrame = { value: 0 };
 
 for (let i = 0; i < imageCount; i++) {
   const img = new Image();
-  img.src = `./frames/frame_${i.toString().padStart(4, '0')}.jpg`;
+  img.src = `./frames/frame_${i.toString().padStart(4, "0")}.jpg`;
   images.push(img);
 }
 
@@ -482,9 +498,9 @@ gsap.to(currentFrame, {
     start: "top top",
     end: "+=500%",
     scrub: true,
-    pin: true
+    pin: true,
   },
-  onUpdate: render
+  onUpdate: render,
 });
 ```
 
@@ -497,20 +513,20 @@ gsap.registerPlugin(ScrollToPlugin);
 gsap.to(window, {
   duration: 1,
   scrollTo: "#section2",
-  ease: "power2.inOut"
+  ease: "power2.inOut",
 });
 
 // With offset
 gsap.to(window, {
   duration: 1.5,
   scrollTo: { y: "#section2", offsetY: 50 },
-  ease: "expo.inOut"
+  ease: "expo.inOut",
 });
 
 // Horizontal scroll
 gsap.to(".container", {
   duration: 2,
-  scrollTo: { x: 1000, autoKill: true }
+  scrollTo: { x: 1000, autoKill: true },
 });
 ```
 
@@ -519,29 +535,29 @@ gsap.to(".container", {
 ```javascript
 ScrollTrigger.matchMedia({
   // Desktop
-  "(min-width: 800px)": function() {
+  "(min-width: 800px)": function () {
     gsap.to(".box", {
       x: 500,
       scrollTrigger: {
         trigger: ".box",
         start: "top center",
         end: "bottom top",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
   },
 
   // Mobile
-  "(max-width: 799px)": function() {
+  "(max-width: 799px)": function () {
     gsap.to(".box", {
       y: 200,
       scrollTrigger: {
         trigger: ".box",
         start: "top 80%",
-        scrub: 1
-      }
+        scrub: 1,
+      },
     });
-  }
+  },
 });
 ```
 
@@ -569,15 +585,15 @@ gsap.to(".box", { x: 100, opacity: 0.5 });
 
 ```javascript
 // Kill individual trigger
-const trigger = ScrollTrigger.create({ /* ... */ });
+const trigger = ScrollTrigger.create({/* ... */});
 trigger.kill();
 
 // Kill all triggers
-ScrollTrigger.getAll().forEach(t => t.kill());
+ScrollTrigger.getAll().forEach((t) => t.kill());
 
 // In React with cleanup
 useGSAP(() => {
-  const tween = gsap.to(".box", { /* ... */ });
+  const tween = gsap.to(".box", {/* ... */});
 
   return () => {
     tween.kill();
@@ -609,8 +625,8 @@ gsap.to(".box", {
   scrollTrigger: {
     trigger: ".box",
     start: "top center",
-    invalidateOnRefresh: true // Recalculate x on resize
-  }
+    invalidateOnRefresh: true, // Recalculate x on resize
+  },
 });
 ```
 
@@ -620,35 +636,34 @@ gsap.to(".box", {
 
 ```javascript
 // Problem: Second tween conflicts with first
-gsap.to('h1', { x: 100, scrollTrigger: { /* ... */ } });
-gsap.to('h1', { x: 200, scrollTrigger: { /* ... */ } }); // Jumps!
+gsap.to("h1", { x: 100, scrollTrigger: {/* ... */} });
+gsap.to("h1", { x: 200, scrollTrigger: {/* ... */} }); // Jumps!
 
 // Solution 1: Use fromTo
-gsap.fromTo('h1', { x: 100 }, { x: 200, scrollTrigger: { /* ... */ } });
+gsap.fromTo("h1", { x: 100 }, { x: 200, scrollTrigger: {/* ... */} });
 
 // Solution 2: Use immediateRender: false
-gsap.to('h1', { x: 200, immediateRender: false, scrollTrigger: { /* ... */ } });
+gsap.to("h1", { x: 200, immediateRender: false, scrollTrigger: {/* ... */} });
 
 // Solution 3: Apply ScrollTrigger to timeline
-const tl = gsap.timeline({ scrollTrigger: { /* ... */ } });
-tl.to('h1', { x: 100 })
-  .to('h1', { x: 200 });
+const tl = gsap.timeline({ scrollTrigger: {/* ... */} });
+tl.to("h1", { x: 100 }).to("h1", { x: 200 });
 ```
 
 ### 2. Not Using Loops for Multiple Elements
 
 ```javascript
 // Wrong: Animates all at once
-gsap.to('.section', {
+gsap.to(".section", {
   y: -100,
-  scrollTrigger: { trigger: '.section', scrub: true }
+  scrollTrigger: { trigger: ".section", scrub: true },
 });
 
 // Right: Loop for individual triggers
-gsap.utils.toArray('.section').forEach(section => {
+gsap.utils.toArray(".section").forEach((section) => {
   gsap.to(section, {
     y: -100,
-    scrollTrigger: { trigger: section, scrub: true }
+    scrollTrigger: { trigger: section, scrub: true },
   });
 });
 ```
@@ -656,9 +671,9 @@ gsap.utils.toArray('.section').forEach(section => {
 ### 3. Forgetting to Register Plugins
 
 ```javascript
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Must register!
 ```
@@ -668,35 +683,34 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Must register!
 ```javascript
 // Wrong: ScrollTriggers on individual tweens in timeline
 const tl = gsap.timeline();
-tl.to('.box1', { x: 100, scrollTrigger: { /* ... */ } }) // Don't do this!
-  .to('.box2', { y: 100, scrollTrigger: { /* ... */ } });
+tl.to(".box1", { x: 100, scrollTrigger: {/* ... */} }) // Don't do this!
+  .to(".box2", { y: 100, scrollTrigger: {/* ... */} });
 
 // Right: ScrollTrigger on parent timeline
 const tl = gsap.timeline({
-  scrollTrigger: { /* ... */ }
+  scrollTrigger: {/* ... */},
 });
-tl.to('.box1', { x: 100 })
-  .to('.box2', { y: 100 });
+tl.to(".box1", { x: 100 }).to(".box2", { y: 100 });
 ```
 
 ## Easing Reference
 
 ```javascript
 // Power easings (most common)
-ease: "power1.out"  // Subtle deceleration
-ease: "power2.inOut" // Smooth acceleration/deceleration
-ease: "power3.in"   // Strong acceleration
-ease: "power4.out"  // Very strong deceleration
+ease: "power1.out"; // Subtle deceleration
+ease: "power2.inOut"; // Smooth acceleration/deceleration
+ease: "power3.in"; // Strong acceleration
+ease: "power4.out"; // Very strong deceleration
 
 // Special easings
-ease: "elastic.out"  // Bouncy overshoot
-ease: "back.out"     // Slight overshoot
-ease: "bounce.out"   // Bouncing effect
-ease: "circ.inOut"   // Circular motion feel
-ease: "expo.inOut"   // Exponential (dramatic)
+ease: "elastic.out"; // Bouncy overshoot
+ease: "back.out"; // Slight overshoot
+ease: "bounce.out"; // Bouncing effect
+ease: "circ.inOut"; // Circular motion feel
+ease: "expo.inOut"; // Exponential (dramatic)
 
 // Linear (for scrubbed scroll animations)
-ease: "none"
+ease: "none";
 ```
 
 ## ScrollTrigger Methods
@@ -722,12 +736,12 @@ st.disable();
 // Global ScrollTrigger config
 ScrollTrigger.config({
   limitCallbacks: true, // Improve performance
-  syncInterval: 15 // Throttle scroll checks (ms)
+  syncInterval: 15, // Throttle scroll checks (ms)
 });
 
 // Debug mode
 ScrollTrigger.defaults({
-  markers: true // Show markers on all triggers
+  markers: true, // Show markers on all triggers
 });
 ```
 
@@ -736,15 +750,18 @@ ScrollTrigger.defaults({
 This skill includes bundled resources:
 
 ### references/
+
 - `api_reference.md`: Quick API reference (tween methods, timeline methods, ScrollTrigger properties)
 - `easing_guide.md`: Visual easing reference with use cases
 - `common_patterns.md`: Copy-paste patterns for common scenarios
 
 ### scripts/
+
 - `generate_animation.py`: Generate boilerplate GSAP code
 - `timeline_builder.py`: Interactive timeline sequence builder
 
 ### assets/
+
 - `starter_scroll/`: Complete scroll-driven site template
 - `easings/`: Easing visualization HTML tool
 - `examples/`: Real-world ScrollTrigger examples
@@ -752,6 +769,7 @@ This skill includes bundled resources:
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating smooth web animations
 - Building scroll-driven experiences
 - Implementing parallax effects

@@ -39,7 +39,11 @@ const parseColor = (colorValue: string): ParsedColor | null => {
   // Hex format (#RGB, #RRGGBB, #RGBA, #RRGGBBAA)
   if (trimmed.startsWith("#")) {
     const hex = trimmed.slice(1);
-    if (!/^[0-9A-Fa-f]{3}$|^[0-9A-Fa-f]{4}$|^[0-9A-Fa-f]{6}$|^[0-9A-Fa-f]{8}$/.test(hex)) {
+    if (
+      !/^[0-9A-Fa-f]{3}$|^[0-9A-Fa-f]{4}$|^[0-9A-Fa-f]{6}$|^[0-9A-Fa-f]{8}$/.test(
+        hex,
+      )
+    ) {
       return null;
     }
 
@@ -61,7 +65,7 @@ const parseColor = (colorValue: string): ParsedColor | null => {
 
   // RGB format (rgb(r, g, b) or rgba(r, g, b, a))
   const rgbMatch = trimmed.match(
-    /rgba?\s*\(\s*(\d+(?:\.\d+)?%?)\s*,\s*(\d+(?:\.\d+)?%?)\s*,\s*(\d+(?:\.\d+)?%?)\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/i
+    /rgba?\s*\(\s*(\d+(?:\.\d+)?%?)\s*,\s*(\d+(?:\.\d+)?%?)\s*,\s*(\d+(?:\.\d+)?%?)\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/i,
   );
   if (rgbMatch) {
     const toNormalized = (val: string) => {
@@ -78,18 +82,23 @@ const parseColor = (colorValue: string): ParsedColor | null => {
 
   // HSL format (hsl(h, s%, l%) or hsla(h, s%, l%, a))
   const hslMatch = trimmed.match(
-    /hsla?\s*\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)%\s*,\s*(\d+(?:\.\d+)?)%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/i
+    /hsla?\s*\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)%\s*,\s*(\d+(?:\.\d+)?)%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/i,
   );
   if (hslMatch) {
     const h = parseFloat(hslMatch[1]);
     const s = parseFloat(hslMatch[2]) / 100;
     const l = parseFloat(hslMatch[3]) / 100;
-    return hslToRgb({ h, s, l, a: hslMatch[4] ? parseFloat(hslMatch[4]) : undefined });
+    return hslToRgb({
+      h,
+      s,
+      l,
+      a: hslMatch[4] ? parseFloat(hslMatch[4]) : undefined,
+    });
   }
 
   // OKLCH format (oklch(l c h) or oklch(l c h / a))
   const oklchMatch = trimmed.match(
-    /oklch\s*\(\s*([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s*(?:\/\s*([0-9.]+)\s*)?\)/i
+    /oklch\s*\(\s*([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s*(?:\/\s*([0-9.]+)\s*)?\)/i,
   );
   if (oklchMatch) {
     const l = parseFloat(oklchMatch[1]);
@@ -173,7 +182,8 @@ const hslToRgb = (hsl: HSL): ParsedColor => {
  */
 const rgbToOklch = (color: ParsedColor): OKLCH => {
   // RGB to Linear RGB
-  const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+  const toLinear = (c: number) =>
+    c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
   const lr = toLinear(color.r);
   const lg = toLinear(color.g);
   const lb = toLinear(color.b);
@@ -223,7 +233,8 @@ const oklchToRgb = (oklch: OKLCH): ParsedColor => {
   let b_val = -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s;
 
   // Linear RGB to RGB
-  const toSrgb = (c: number) => (c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055);
+  const toSrgb = (c: number) =>
+    c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
 
   r = Math.max(0, Math.min(1, toSrgb(r)));
   g = Math.max(0, Math.min(1, toSrgb(g)));
@@ -272,7 +283,7 @@ export const formatHsl = (hsl: HSL) => {
 export const colorFormatter = (
   colorValue: string,
   format: ColorFormat = "hsl",
-  tailwindVersion: "3" | "4" = "3"
+  tailwindVersion: "3" | "4" = "3",
 ): string => {
   try {
     const rgb = parseColor(colorValue);
@@ -303,4 +314,5 @@ export const colorFormatter = (
   }
 };
 
-export const convertToHSL = (colorValue: string): string => colorFormatter(colorValue, "hsl");
+export const convertToHSL = (colorValue: string): string =>
+  colorFormatter(colorValue, "hsl");

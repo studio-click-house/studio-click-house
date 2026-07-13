@@ -6,6 +6,16 @@
     "name": "nextlevelbuilder"
   },
   "license": "MIT",
-  "keywords": ["ui", "ux", "design", "styles", "typography", "color-palette", "accessibility", "charts", "components"],
+  "keywords": [
+    "ui",
+    "ux",
+    "design",
+    "styles",
+    "typography",
+    "color-palette",
+    "accessibility",
+    "charts",
+    "components"
+  ],
   "skills": "./.claude/skills/"
 }

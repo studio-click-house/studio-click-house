@@ -3,9 +3,10 @@
  */
 export function filterPresets(
   presets: Record<string, any>,
-  keywords?: string
+  keywords?: string,
 ): Array<{ id: string; label: string; description?: string }> {
-  const results: Array<{ id: string; label: string; description?: string }> = [];
+  const results: Array<{ id: string; label: string; description?: string }> =
+    [];
   const lower = (s?: string) => (s || "").toLowerCase();
   const q = (keywords || "").toLowerCase();
 
@@ -18,7 +19,11 @@ export function filterPresets(
       continue;
     }
 
-    if (label.toLowerCase().includes(q) || lower(desc).includes(q) || id.toLowerCase().includes(q)) {
+    if (
+      label.toLowerCase().includes(q) ||
+      lower(desc).includes(q) ||
+      id.toLowerCase().includes(q)
+    ) {
       results.push({ id, label, description: desc });
     }
   }

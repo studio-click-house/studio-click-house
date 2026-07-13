@@ -11,7 +11,7 @@ export abstract class BaseTool {
       this.name,
       this.description,
       this.schema.shape,
-      this.execute.bind(this)
+      this.execute.bind(this),
     );
   }
 
