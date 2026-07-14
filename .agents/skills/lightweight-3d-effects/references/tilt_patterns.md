@@ -1062,8 +1062,8 @@ export class TiltCardComponent implements OnInit, OnDestroy {
 
 ```svelte
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import VanillaTilt from 'vanilla-tilt';
+  import { onMount, onDestroy } from "svelte";
+  import VanillaTilt from "vanilla-tilt";
 
   export let options = { max: 25, speed: 400 };
 

@@ -43,8 +43,8 @@
       const railBounds = workFieldsRail?.getBoundingClientRect();
       const isRailActive = Boolean(
         railBounds &&
-          railBounds.top <= 24 &&
-          railBounds.bottom > window.innerHeight * 0.5,
+        railBounds.top <= 24 &&
+        railBounds.bottom > window.innerHeight * 0.5,
       );
 
       if (isMenuOpen || currentScrollY <= 48) {

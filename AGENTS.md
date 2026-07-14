@@ -48,14 +48,14 @@ Do not move or rename files without explicit permission. New files must use the 
 
 ### Components — only in `src/lib/components/`
 
-| Folder | What goes here |
-| --- | --- |
-| `layout/` | Navbar, footer, page shell, navigation |
+| Folder        | What goes here                                         |
+| ------------- | ------------------------------------------------------ |
+| `layout/`     | Navbar, footer, page shell, navigation                 |
 | `animations/` | Small reusable GSAP-aware animation components/actions |
-| `sections/` | Full-width page sections |
-| `common/` | Small reusable pieces such as cards and headings |
-| `seo/` | Reusable JSON-LD/schema components or builders |
-| `ui/` | shadcn-svelte generated base components only |
+| `sections/`   | Full-width page sections                               |
+| `common/`     | Small reusable pieces such as cards and headings       |
+| `seo/`        | Reusable JSON-LD/schema components or builders         |
+| `ui/`         | shadcn-svelte generated base components only           |
 
 ### Data, configuration, and utilities
 
@@ -132,11 +132,11 @@ Do not move or rename files without explicit permission. New files must use the 
 
 ## Brand Tokens (Never hardcode these values in markup)
 
-| Token         | CSS Variable / Tailwind Class | Value                     |
-| ------------- | ----------------------------- | ------------------------- |
-| Primary green | `text-brand-green`            | `#7ea641`                 |
-| Dark          | `text-brand-dark`             | `#332E2D`                 |
-| Light         | `text-brand-light`            | `#f8f8f6`                 |
+| Token         | CSS Variable / Tailwind Class | Value     |
+| ------------- | ----------------------------- | --------- |
+| Primary green | `text-brand-green`            | `#7ea641` |
+| Dark          | `text-brand-dark`             | `#332E2D` |
+| Light         | `text-brand-light`            | `#f8f8f6` |
 
 ---
 

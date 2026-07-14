@@ -478,8 +478,8 @@ import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
 
 ```svelte
 <script lang="ts">
-  import { DotLottieSvelte } from '@lottiefiles/dotlottie-svelte';
-  import type { DotLottie } from '@lottiefiles/dotlottie-svelte';
+  import { DotLottieSvelte } from "@lottiefiles/dotlottie-svelte";
+  import type { DotLottie } from "@lottiefiles/dotlottie-svelte";
 
   let dotLottie: DotLottie | null = null;
 
@@ -492,7 +492,7 @@ import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
   src="animation.lottie"
   loop={true}
   autoplay={true}
-  dotLottieRefCallback={(ref) => dotLottie = ref}
+  dotLottieRefCallback={(ref) => (dotLottie = ref)}
 />
 
 <button on:click={play}>Play</button>

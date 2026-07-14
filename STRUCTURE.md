@@ -66,13 +66,13 @@ studio-click-house/
 
 ## Route conventions
 
-| File | Responsibility |
-| --- | --- |
-| `+page.svelte` | Route UI that composes sections |
-| `+layout.svelte` | Shared layout and route-level head content |
-| `+page.server.ts` | Server loading and Superforms actions |
-| `+server.ts` | HTTP endpoint |
-| `+error.svelte` | Route error UI when needed |
+| File              | Responsibility                             |
+| ----------------- | ------------------------------------------ |
+| `+page.svelte`    | Route UI that composes sections            |
+| `+layout.svelte`  | Shared layout and route-level head content |
+| `+page.server.ts` | Server loading and Superforms actions      |
+| `+server.ts`      | HTTP endpoint                              |
+| `+error.svelte`   | Route error UI when needed                 |
 
 ## Content and visual media
 
@@ -84,14 +84,14 @@ GSAP and ScrollTrigger are the site’s animation layer. Lenis provides one site
 
 ## Page to section mapping
 
-| Route | Planned sections |
-| --- | --- |
-| `/` | Hero, services, portfolio, process, proof, CTA |
-| `/about` | Studio story, values, team, CTA |
-| `/services` | Service overview and capability grid |
-| `/services/[slug]` | Service hero, details, selected work, CTA |
-| `/portfolio` | Filterable visual work and case studies |
-| `/pricing` | Packages, scope guidance, FAQs, CTA |
-| `/blog` | Article listing |
-| `/blog/[slug]` | Article content and related work |
-| `/contact` | Contact/consultation Superform |
+| Route              | Planned sections                               |
+| ------------------ | ---------------------------------------------- |
+| `/`                | Hero, services, portfolio, process, proof, CTA |
+| `/about`           | Studio story, values, team, CTA                |
+| `/services`        | Service overview and capability grid           |
+| `/services/[slug]` | Service hero, details, selected work, CTA      |
+| `/portfolio`       | Filterable visual work and case studies        |
+| `/pricing`         | Packages, scope guidance, FAQs, CTA            |
+| `/blog`            | Article listing                                |
+| `/blog/[slug]`     | Article content and related work               |
+| `/contact`         | Contact/consultation Superform                 |

@@ -785,9 +785,9 @@ export class VantaBgComponent implements OnInit, OnDestroy {
 
 ```svelte
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import * as THREE from 'three';
-  import WAVES from 'vanta/dist/vanta.waves.min.js';
+  import { onMount, onDestroy } from "svelte";
+  import * as THREE from "three";
+  import WAVES from "vanta/dist/vanta.waves.min.js";
 
   let vantaRef;
   let vantaEffect;
@@ -798,7 +798,7 @@ export class VantaBgComponent implements OnInit, OnDestroy {
       THREE: THREE,
       mouseControls: true,
       touchControls: true,
-      color: 0x23153c
+      color: 0x23153c,
     });
   });
 
