@@ -3,7 +3,6 @@
   import { resolve } from "$app/paths";
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
   import BrandMarquee from "$lib/components/sections/BrandMarquee.svelte";
-  import { previewMedia } from "$lib/content/media";
 
   let section: HTMLElement;
 
@@ -46,14 +45,18 @@
   bind:this={section}
   class="relative min-h-[100dvh] overflow-hidden bg-brand-dark text-brand-light"
 >
-  <img
-    src={previewMedia.studioPortrait.src}
-    alt={previewMedia.studioPortrait.alt}
-    width={previewMedia.studioPortrait.width}
-    height={previewMedia.studioPortrait.height}
-    fetchpriority="high"
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true"
+    tabindex="-1"
     class="hero-media absolute inset-0 size-full object-cover object-[58%_center] will-change-transform"
-  />
+  >
+    <source src="/videos/hero%20section.mp4" type="video/mp4" />
+  </video>
   <div
     class="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,33,31,0.92)_0%,rgba(32,33,31,0.48)_50%,rgba(32,33,31,0.12)_100%)]"
   ></div>

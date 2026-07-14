@@ -13,25 +13,16 @@
   aria-labelledby="creative-marquee-title"
   class="client-wall relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20"
 >
-  <div
-    class="site-shell relative z-10 mb-12 grid gap-6 lg:grid-cols-12 lg:items-end"
-  >
-    <div class="lg:col-span-8">
+  <div class="site-shell relative z-10 mb-12 text-center">
+    <div>
       <p class="eyebrow text-brand-green">Client marks · awaiting approval</p>
       <h2
         id="creative-marquee-title"
-        class="mt-7 max-w-4xl font-display text-[clamp(3.3rem,7vw,7.5rem)] leading-[0.88] tracking-[-0.045em]"
+        class="mt-7 font-display text-[clamp(3.3rem,7vw,7.5rem)] leading-[0.88] tracking-[-0.045em]"
       >
-        Made to hold the brands behind the work.
+        Our Clients
       </h2>
     </div>
-    <p
-      data-scroll-copy
-      class="max-w-sm text-sm leading-relaxed text-brand-dark/55 lg:col-span-4 lg:justify-self-end"
-    >
-      These numbered positions are ready for approved client artwork. Real SVG
-      or PNG marks replace each slot without changing the layout.
-    </p>
   </div>
 
   <div class="logo-rows relative z-10 border-y border-brand-dark/10">

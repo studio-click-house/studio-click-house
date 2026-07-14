@@ -6,6 +6,7 @@
   import { navigationItems } from "$lib/content/home";
 
   let isMenuOpen = $state(false);
+  let isLogoVisible = $state(true);
   let menuButton = $state<HTMLButtonElement>();
   let menuPanel = $state<HTMLDivElement>();
 
@@ -14,6 +15,9 @@
   }
 
   onMount(() => {
+    let scrollAnchorY = Math.max(window.scrollY, 0);
+    let scrollFrame: number | undefined;
+
     function handleKeydown(event: KeyboardEvent) {
       if (event.key !== "Escape" || !isMenuOpen) return;
       closeMenu();
@@ -30,12 +34,49 @@
       closeMenu();
     }
 
+    function updateLogoVisibility() {
+      scrollFrame = undefined;
+
+      const currentScrollY = Math.max(window.scrollY, 0);
+      const scrollDelta = currentScrollY - scrollAnchorY;
+      const workFieldsRail = document.getElementById("work-fields-rail");
+      const railBounds = workFieldsRail?.getBoundingClientRect();
+      const isRailActive = Boolean(
+        railBounds &&
+          railBounds.top <= 24 &&
+          railBounds.bottom > window.innerHeight * 0.5,
+      );
+
+      if (isMenuOpen || currentScrollY <= 48) {
+        isLogoVisible = true;
+        scrollAnchorY = currentScrollY;
+      } else if (isRailActive) {
+        isLogoVisible = false;
+        scrollAnchorY = currentScrollY;
+      } else if (scrollDelta > 8) {
+        isLogoVisible = false;
+        scrollAnchorY = currentScrollY;
+      } else if (scrollDelta < -8) {
+        isLogoVisible = true;
+        scrollAnchorY = currentScrollY;
+      }
+    }
+
+    function handleScroll() {
+      if (scrollFrame !== undefined) return;
+      scrollFrame = window.requestAnimationFrame(updateLogoVisibility);
+    }
+
     document.addEventListener("keydown", handleKeydown);
     document.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    updateLogoVisibility();
 
     return () => {
       document.removeEventListener("keydown", handleKeydown);
       document.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollFrame !== undefined) window.cancelAnimationFrame(scrollFrame);
     };
   });
 </script>
@@ -52,7 +93,8 @@
     <a
       href={resolve("/")}
       aria-label="Studio Click House home"
-      class="pointer-events-auto relative z-10 block shrink-0 transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+      class:logo-hidden={!isMenuOpen && !isLogoVisible}
+      class="site-logo pointer-events-auto relative z-10 block shrink-0 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
     >
       <img
         src="/images/brand/schl-logo.png"
@@ -80,7 +122,7 @@
         <button
           bind:this={menuButton}
           type="button"
-          class="menu-action group flex items-center gap-3 border border-transparent bg-brand-dark/95 px-4 font-mono text-[0.62rem] font-medium uppercase tracking-[0.16em] text-brand-light backdrop-blur-xl transition-colors hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green sm:px-5"
+          class="menu-action group flex items-center gap-3 border border-brand-light/30 bg-brand-dark/95 px-4 font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-light backdrop-blur-xl transition-colors hover:border-brand-green hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green active:scale-[0.98] sm:px-5"
           aria-expanded={isMenuOpen}
           aria-controls="primary-navigation-panel"
           onclick={() => (isMenuOpen = !isMenuOpen)}
@@ -123,7 +165,7 @@
             </div>
 
             <ol aria-label="Main routes" class="grid sm:grid-cols-2">
-              {#each navigationItems as item, index (item.href)}
+              {#each navigationItems as item (item.href)}
                 <li class="border-b border-brand-light/10 odd:sm:border-r">
                   <a
                     href={resolve(item.href)}
@@ -138,16 +180,11 @@
                     >
                       {item.label}
                     </span>
-                    <span
-                      class="flex items-center gap-3 font-mono text-[0.55rem] tracking-[0.12em] text-brand-light/35 transition-colors group-hover/link:text-brand-green"
-                    >
-                      0{index + 1}
-                      <ArrowUpRight
-                        size={14}
-                        strokeWidth={1.6}
-                        class="transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
-                      />
-                    </span>
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={1.6}
+                      class="shrink-0 text-brand-light/35 transition-all duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-brand-green"
+                    />
                   </a>
                 </li>
               {/each}
@@ -178,6 +215,24 @@
     min-width: 11.75rem;
   }
 
+  .site-logo {
+    transition:
+      opacity 220ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .site-logo.logo-hidden {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+
+  .site-logo.logo-hidden:focus-visible {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .menu-action {
     height: 2.9rem;
     min-width: 5.9rem;
@@ -201,6 +256,14 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .site-logo {
+      transition: none;
+    }
+
+    .site-logo.logo-hidden {
+      transform: none;
+    }
+
     .navigation-panel {
       animation: none;
     }

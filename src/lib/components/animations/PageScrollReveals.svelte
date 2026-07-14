@@ -19,6 +19,7 @@
           const excludedSections = new Set([
             "home-hero",
             "scroll-image-story",
+            "creative-direction",
             "selected-work",
           ]);
 

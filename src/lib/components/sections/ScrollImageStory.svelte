@@ -36,15 +36,15 @@
           () => {
             gsap.fromTo(
               ".story-image",
-              { yPercent: 7 },
+              { yPercent: 28 },
               {
-                yPercent: -7,
+                yPercent: -28,
                 ease: "none",
                 scrollTrigger: {
                   trigger: section,
                   start: "top bottom",
                   end: "bottom top",
-                  scrub: 0.8,
+                  scrub: 0.55,
                 },
               },
             );
