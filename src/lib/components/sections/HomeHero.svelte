@@ -95,11 +95,21 @@
       <div class="mt-7 flex flex-wrap items-center gap-5">
         <a
           href={resolve("/contact")}
-          class="inline-flex items-center gap-3 bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-transform active:scale-[0.98]"
-          >Start a project <ArrowUpRight size={17} /></a
+          class="group inline-flex items-center gap-3 bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
+          >Start a project
+          <ArrowUpRight
+            size={17}
+            strokeWidth={1.7}
+            class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+          /></a
         >
-        <a href={resolve("/#selected-work")} class="text-link text-brand-light"
-          >See the work <ArrowDown size={15} /></a
+        <a href={resolve("/#selected-work")} class="text-link text-brand-light group"
+          >See the work
+          <ArrowDown
+            size={15}
+            strokeWidth={1.7}
+            class="transition-transform duration-300 group-hover:translate-y-1"
+          /></a
         >
       </div>
     </div>
