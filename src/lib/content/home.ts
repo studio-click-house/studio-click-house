@@ -17,18 +17,6 @@ export const navigationItems = [
   { label: "Journal", href: "/blog" },
 ] as const satisfies readonly { label: string; href: RouteId }[];
 
-export const clientLogoItems: ClientLogoItem[] = Array.from(
-  { length: 15 },
-  (_, index) => {
-    const number = String(index + 1).padStart(2, "0");
-    return {
-      id: `client-logo-${number}`,
-      label: `Client logo ${number}`,
-      shortLabel: `CL / ${number}`,
-    };
-  },
-);
-
 export const services: ServiceItem[] = [
   {
     title: "Clipping path",

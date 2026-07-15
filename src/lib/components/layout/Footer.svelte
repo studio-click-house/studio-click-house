@@ -37,7 +37,7 @@
           alt="Studio Click House"
           width="180"
           height="95"
-          class="h-14 w-auto bg-brand-light px-2"
+          class="h-14 w-auto brightness-0 invert opacity-90"
         />
         <p class="mt-5 max-w-xs text-sm leading-relaxed text-brand-light/65">
           Image editing, retouching, and visual production shaped around the

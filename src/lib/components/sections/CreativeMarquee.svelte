@@ -1,11 +1,14 @@
 <script lang="ts">
-  import { clientLogoItems } from "$lib/content/home";
+  import type { ClientLogoItem } from "$lib/types/content";
 
-  const logoRows = [
-    clientLogoItems.slice(0, 5),
-    clientLogoItems.slice(5, 10),
-    clientLogoItems.slice(10, 15),
-  ];
+  let { items = [] }: { items: ClientLogoItem[] } = $props();
+
+  let itemsPerRow = $derived(Math.ceil(items.length / 3));
+  let logoRows = $derived([
+    items.slice(0, itemsPerRow),
+    items.slice(itemsPerRow, itemsPerRow * 2),
+    items.slice(itemsPerRow * 2),
+  ]);
 </script>
 
 <section
@@ -47,7 +50,11 @@
                       width={client.width}
                       height={client.height}
                       loading="lazy"
-                      class="max-h-12 max-w-[10rem] object-contain opacity-55 grayscale sm:max-w-[13rem]"
+                      class={`object-contain opacity-55 grayscale ${
+                        ['julie-benedetto-photography', 'maddy-pollard', 'manning-cartell'].includes(client.id)
+                          ? 'max-h-24 max-w-[14rem] scale-125 sm:max-h-28 sm:max-w-[18rem]'
+                          : 'max-h-16 max-w-[12rem] sm:max-h-20 sm:max-w-[16rem]'
+                      }`}
                     />
                   {:else}
                     <span class="placeholder-mark" aria-label={client.label}>

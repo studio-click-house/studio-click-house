@@ -16,6 +16,7 @@
   import { siteConfig } from "$lib/config/site";
   import { faqs } from "$lib/content/home";
 
+  let { data } = $props();
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -50,7 +51,7 @@
   <StudioIntroduction />
   <ScrollImageStory />
   <WorkFieldsRail />
-  <CreativeMarquee />
+  <CreativeMarquee items={data.clientLogoItems} />
   <ServicesSection />
   <TestimonialsSection />
   <CreativeDirection />
