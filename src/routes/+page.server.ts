@@ -32,6 +32,8 @@ function formatShortLabel(label: string): string {
   return label.substring(0, 2).toUpperCase();
 }
 
+export const prerender = true;
+
 export const load: PageServerLoad = async () => {
   const clientsDir = path.join(process.cwd(), 'static', 'images', 'clients');
   let files: string[] = [];
