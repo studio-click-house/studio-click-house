@@ -166,6 +166,13 @@
   <div class="absolute inset-x-0 top-0 h-px bg-brand-dark/10" aria-hidden="true"></div>
   <div class="absolute inset-x-0 bottom-0 h-px bg-brand-dark/10" aria-hidden="true"></div>
 
+  <!-- Vertical Stripes Grid -->
+  <div 
+    class="site-shell absolute inset-y-0 left-0 right-0 mx-auto pointer-events-none" 
+    style="background-image: linear-gradient(to right, rgb(51 46 45 / 0.045) 1px, transparent 1px); background-size: clamp(80px, 8vw, 160px) 100%;" 
+    aria-hidden="true"
+  ></div>
+
   <div class="site-shell">
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
       

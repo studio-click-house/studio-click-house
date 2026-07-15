@@ -76,16 +76,11 @@
   .client-wall::before {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(
-        circle at 50% 8%,
-        rgb(126 166 65 / 0.16),
-        transparent 38%
-      ),
-      linear-gradient(90deg, rgb(51 46 45 / 0.025) 1px, transparent 1px);
-    background-size:
-      auto,
-      8rem 100%;
+    background: radial-gradient(
+      circle at 50% 8%,
+      rgb(126 166 65 / 0.16),
+      transparent 38%
+    );
     content: "";
     pointer-events: none;
   }
