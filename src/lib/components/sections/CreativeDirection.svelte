@@ -3,38 +3,43 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { previewMedia } from "$lib/content/media";
 
-  const principles = [
-    [
-      "Image integrity",
-      "Preserve true texture, material, and light while removing only what distracts.",
-    ],
-    [
-      "Set consistency",
-      "Align color, contrast, scale, and finish so every frame belongs to one system.",
-    ],
-    [
-      "Purpose-led retouching",
-      "Make every correction serve the subject, the channel, and the final use.",
-    ],
-    [
-      "Brand continuity",
-      "Carry one visual language from an individual asset through the full campaign.",
-    ],
-    [
-      "Clear collaboration",
-      "Turn references and consolidated feedback into focused production decisions.",
-    ],
-    [
-      "Invisible craft",
-      "Refine the smallest details until the work feels resolved, never overworked.",
-    ],
+  const directionPasses = [
+    {
+      number: "01",
+      name: "Frame",
+      accent: "one",
+      statement: "Give the eye one clear place to land.",
+      detail:
+        "Composition, scale, and negative space establish the hierarchy before retouching begins.",
+    },
+    {
+      number: "02",
+      name: "Light",
+      accent: "light",
+      statement: "Protect the light that made the image believable.",
+      detail:
+        "Tone and contrast are aligned without flattening texture, reflection, or material character.",
+    },
+    {
+      number: "03",
+      name: "Finish",
+      accent: "personality.",
+      statement: "Remove distraction, not personality.",
+      detail:
+        "Every final correction supports the subject, the channel, and the wider visual system.",
+    },
   ];
 
-  let sequence: HTMLElement;
-  let imageFrame: HTMLElement;
-  let ghostWord: HTMLElement;
-  let handoff: HTMLElement;
-  let principleCards: HTMLElement[] = [];
+  let section: HTMLElement;
+  let scrollField: HTMLElement;
+  let imagePlate: HTMLElement;
+  let imageMedia: HTMLImageElement;
+  let cropFrame: HTMLElement;
+  let progressLine: HTMLElement;
+  let titleWords: HTMLElement[] = [];
+  let passPanels: HTMLElement[] = [];
+  let passMarkers: HTMLElement[] = [];
+  let proofLabel: HTMLElement;
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
@@ -44,89 +49,175 @@
       if (
         !active ||
         !runtime ||
-        !sequence ||
-        !imageFrame ||
-        !ghostWord ||
-        !handoff
+        !section ||
+        !scrollField ||
+        !imagePlate ||
+        !imageMedia ||
+        !cropFrame ||
+        !progressLine ||
+        !proofLabel
       )
         return;
 
-      const { gsap } = runtime;
+      const { gsap, ScrollTrigger } = runtime;
       context = gsap.context(() => {
         const media = gsap.matchMedia();
 
+        media.add("(prefers-reduced-motion: no-preference)", () => {
+          gsap.from(titleWords, {
+            yPercent: 112,
+            rotate: 2,
+            duration: 1.05,
+            stagger: 0.09,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 72%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+
         media.add(
-          "(min-width: 1024px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)",
+          "(min-width: 1024px) and (min-height: 680px) and (prefers-reduced-motion: no-preference)",
           () => {
             const timeline = gsap.timeline({
               scrollTrigger: {
-                trigger: sequence,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1.1,
+                trigger: scrollField,
+                start: "top 70%",
+                end: "bottom 35%",
+                scrub: 0.65,
                 invalidateOnRefresh: true,
               },
             });
 
             timeline
               .fromTo(
-                imageFrame,
+                imagePlate,
+                { xPercent: 5, yPercent: 4, rotation: 1.5, scale: 0.94 },
                 {
-                  scale: 0.84,
-                  rotation: -2,
-                  xPercent: -5,
-                  yPercent: 14,
+                  xPercent: -2,
+                  yPercent: -3,
+                  rotation: -0.5,
+                  scale: 1,
+                  duration: 1,
+                  ease: "none",
                 },
+                0,
+              )
+              .fromTo(
+                imageMedia,
+                { xPercent: -3, yPercent: 6, scale: 1.12 },
                 {
+                  xPercent: 2,
+                  yPercent: -6,
                   scale: 1.02,
-                  rotation: 0.35,
-                  xPercent: 3,
-                  yPercent: -8,
                   duration: 1,
                   ease: "none",
                 },
                 0,
               )
               .fromTo(
-                ghostWord,
-                { xPercent: -20, autoAlpha: 0.08 },
-                {
-                  xPercent: 20,
-                  autoAlpha: 0.12,
-                  duration: 1,
-                  ease: "none",
-                },
+                cropFrame,
+                { scale: 0.82, rotation: -1.5 },
+                { scale: 1, rotation: 0, duration: 1, ease: "none" },
                 0,
               )
               .fromTo(
-                principleCards,
-                {
-                  xPercent: (index) => (index % 2 === 0 ? -10 : 10),
-                  y: 24,
-                },
-                {
-                  xPercent: 0,
-                  y: -20,
-                  duration: 1,
-                  ease: "none",
-                },
-                0,
-              )
-              .fromTo(
-                handoff,
-                { y: 16 },
-                {
-                  y: -12,
-                  duration: 1,
-                  ease: "none",
-                },
+                progressLine,
+                { scaleY: 0 },
+                { scaleY: 1, duration: 1, ease: "none" },
                 0,
               );
+
+            passPanels.forEach((panel, index) => {
+              const eyebrow = panel.querySelector(".pass-eyebrow");
+              const words = panel.querySelectorAll(".pass-word");
+              const detail = panel.querySelector(".pass-detail");
+
+              const typeTimeline = gsap.timeline({
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "top 84%",
+                  end: "center 56%",
+                  scrub: 0.5,
+                },
+              });
+
+              if (eyebrow) {
+                typeTimeline.fromTo(
+                  eyebrow,
+                  { x: -18, autoAlpha: 0.25 },
+                  { x: 0, autoAlpha: 1, duration: 0.2, ease: "none" },
+                  0,
+                );
+              }
+
+              typeTimeline.fromTo(
+                words,
+                { yPercent: 115, rotation: 2, autoAlpha: 0.1 },
+                {
+                  yPercent: 0,
+                  rotation: 0,
+                  autoAlpha: 1,
+                  duration: 0.58,
+                  stagger: 0.065,
+                  ease: "none",
+                },
+                0.08,
+              );
+
+              if (detail) {
+                typeTimeline.fromTo(
+                  detail,
+                  { y: 18, autoAlpha: 0.2 },
+                  { y: 0, autoAlpha: 1, duration: 0.3, ease: "none" },
+                  0.48,
+                );
+              }
+
+              const marker = passMarkers[index];
+              if (!marker) return;
+
+              gsap.fromTo(
+                marker,
+                { scaleX: 0.2, opacity: 0.3 },
+                {
+                  scaleX: 1,
+                  opacity: 1,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: panel,
+                    start: "top 78%",
+                    end: "top 52%",
+                    scrub: 0.4,
+                  },
+                },
+              );
+            });
+
+            gsap.fromTo(
+              proofLabel,
+              { autoAlpha: 0, yPercent: 55 },
+              {
+                autoAlpha: 1,
+                yPercent: 0,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: passPanels[passPanels.length - 1],
+                  start: "center 65%",
+                  end: "bottom 42%",
+                  scrub: 0.45,
+                },
+              },
+            );
+
+            ScrollTrigger.refresh();
           },
         );
 
         return () => media.revert();
-      }, sequence);
+      }, section);
     });
 
     return () => {
@@ -138,236 +229,483 @@
 
 <section
   id="creative-direction"
+  bind:this={section}
   aria-labelledby="creative-direction-title"
-  class="direction-section overflow-hidden bg-brand-dark pt-16 text-brand-light sm:pt-20 lg:pt-24"
+  class="direction-section overflow-clip bg-brand-dark text-brand-light"
 >
-  <div
-    class="direction-intro site-shell grid gap-8 lg:grid-cols-[1fr_0.38fr] lg:items-end"
+  <header
+    class="direction-header site-shell grid gap-8 lg:grid-cols-12 lg:items-end"
   >
-    <div>
+    <div class="lg:col-span-3 lg:pb-3">
       <p class="eyebrow text-brand-green">Creative direction</p>
-      <h2
-        id="creative-direction-title"
-        class="mt-7 max-w-5xl font-display text-[clamp(3.5rem,6.2vw,6.75rem)] leading-[0.88] tracking-[-0.045em]"
+      <p
+        class="mt-4 max-w-[17rem] font-mono text-[0.58rem] uppercase leading-relaxed tracking-[0.14em] text-brand-light/42"
       >
-        Consistency is a creative decision.
-      </h2>
+        One image system<br />Three deliberate passes
+      </p>
     </div>
-    <p class="max-w-md pb-2 text-sm leading-relaxed text-brand-light/55">
-      Every image should feel intentional on its own—and unmistakably part of
-      the same visual world.
-    </p>
+
+    <h2
+      id="creative-direction-title"
+      class="direction-title lg:col-span-9 font-display tracking-[-0.052em]"
+    >
+      <span class="title-line"
+        ><span bind:this={titleWords[0]}>The work is decided</span></span
+      >
+      <span class="title-line title-line-indent"
+        ><span bind:this={titleWords[1]}>before it is finished.</span></span
+      >
+    </h2>
+  </header>
+
+  <div bind:this={scrollField} class="direction-scroll-field">
+    <div class="direction-sticky">
+      <div class="direction-stage site-shell">
+        <div class="direction-index" aria-hidden="true">
+          <span
+            class="font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-light/42"
+            >Decision path</span
+          >
+          <div class="index-track">
+            <span bind:this={progressLine} class="index-progress"></span>
+          </div>
+          <span class="font-mono text-[0.55rem] text-brand-light/35">03</span>
+        </div>
+
+        <div class="direction-copy">
+          {#each directionPasses as pass, index (pass.name)}
+            <article bind:this={passPanels[index]} class="pass-panel">
+              <p
+                class="pass-eyebrow font-mono text-[0.58rem] uppercase tracking-[0.17em] text-brand-green"
+              >
+                {pass.number} / {pass.name}
+              </p>
+              <h3
+                class="mt-5 max-w-xl font-display text-[clamp(2.8rem,4.8vw,5.6rem)] leading-[0.9] tracking-[-0.04em]"
+              >
+                {#each pass.statement.split(" ") as word, wordIndex (`${pass.name}-${wordIndex}`)}
+                  <span class="pass-word-mask"
+                    ><span
+                      class="pass-word"
+                      class:text-brand-green={word === pass.accent}>{word}</span
+                    ></span
+                  >
+                {/each}
+              </h3>
+              <p
+                class="pass-detail mt-6 max-w-md text-sm leading-relaxed text-brand-light/58 sm:text-base"
+              >
+                {pass.detail}
+              </p>
+            </article>
+          {/each}
+        </div>
+
+        <div class="direction-visual">
+          <div bind:this={cropFrame} class="crop-frame" aria-hidden="true">
+            <span class="crop-corner crop-corner-tl"></span>
+            <span class="crop-corner crop-corner-tr"></span>
+            <span class="crop-corner crop-corner-bl"></span>
+            <span class="crop-corner crop-corner-br"></span>
+            <span class="focus-line focus-line-x"></span>
+            <span class="focus-line focus-line-y"></span>
+          </div>
+
+          <figure bind:this={imagePlate} class="image-plate">
+            <img
+              bind:this={imageMedia}
+              src={previewMedia.perfumeStillLife.src}
+              alt={previewMedia.perfumeStillLife.alt}
+              width={previewMedia.perfumeStillLife.width}
+              height={previewMedia.perfumeStillLife.height}
+              loading="lazy"
+              class="direction-image"
+            />
+            <figcaption class="image-caption">
+              <span>Source → final study</span>
+              <span>Material / light / finish</span>
+            </figcaption>
+          </figure>
+
+          <p
+            bind:this={proofLabel}
+            class="proof-label font-display italic"
+            aria-hidden="true"
+          >
+            Proof
+          </p>
+        </div>
+
+        <div class="pass-rail" aria-label="Creative direction stages">
+          {#each directionPasses as pass, index (pass.name)}
+            <div class="pass-marker-row">
+              <span bind:this={passMarkers[index]} class="pass-marker"></span>
+              <span
+                class="font-mono text-[0.54rem] uppercase tracking-[0.15em] text-brand-light/48"
+                >{pass.name}</span
+              >
+            </div>
+          {/each}
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div bind:this={sequence} class="direction-sequence mt-14 lg:mt-20">
-    <div class="direction-sticky relative overflow-hidden">
-      <p
-        bind:this={ghostWord}
-        class="direction-ghost pointer-events-none font-display italic text-brand-light"
-        aria-hidden="true"
-      >
-        Direction
-      </p>
-
-      <div class="direction-image-anchor">
-        <figure
-          bind:this={imageFrame}
-          class="direction-image relative size-full overflow-hidden border border-brand-light/20 bg-brand-dark shadow-2xl shadow-black/35 will-change-transform"
-        >
-          <img
-            src={previewMedia.jewelryDetail.src}
-            alt={previewMedia.jewelryDetail.alt}
-            width={previewMedia.jewelryDetail.width}
-            height={previewMedia.jewelryDetail.height}
-            loading="lazy"
-            class="size-full object-cover"
-          />
-          <div
-            class="direction-image-shade absolute inset-0"
-            aria-hidden="true"
-          ></div>
-          <figcaption
-            class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-brand-light/15 bg-brand-dark/70 px-4 py-3 font-mono text-[0.52rem] uppercase tracking-[0.13em] text-brand-light/55 backdrop-blur-sm"
-          >
-            <span>Material and light study</span><span>Creative direction</span>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="direction-principles site-shell">
-        {#each principles as principle, index (principle[0])}
-          <article
-            bind:this={principleCards[index]}
-            class="principle-card border-t border-brand-light/20 py-5 will-change-transform"
-          >
-            <p
-              class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-brand-green"
-            >
-              Direction detail
-            </p>
-            <h3 class="mt-4 font-display text-2xl sm:text-3xl">
-              {principle[0]}
-            </h3>
-            <p
-              class="mt-3 text-xs leading-relaxed text-brand-light/55 sm:text-sm"
-            >
-              {principle[1]}
-            </p>
-          </article>
-        {/each}
-      </div>
-
-      <div
-        bind:this={handoff}
-        class="direction-handoff site-shell flex items-center justify-between gap-6 border-t border-brand-light/15 py-5 font-mono text-[0.56rem] uppercase tracking-[0.16em] text-brand-light/45"
-      >
-        <span>Direction established</span>
-        <span class="text-brand-green">See it resolved in the work ↓</span>
-      </div>
-    </div>
+  <div class="direction-handoff site-shell">
+    <p
+      class="font-mono text-[0.56rem] uppercase tracking-[0.16em] text-brand-light/42"
+    >
+      Direction established
+    </p>
+    <p class="handoff-statement font-display italic">
+      Now see every decision hold.
+    </p>
+    <span class="handoff-arrow text-brand-green" aria-hidden="true">↓</span>
   </div>
 </section>
 
 <style>
-  .direction-sequence {
-    padding-bottom: 2rem;
+  .direction-section {
+    padding-top: clamp(5rem, 8vw, 9rem);
   }
 
-  .direction-intro {
+  .direction-header {
     position: relative;
-    z-index: 3;
+    z-index: 2;
+  }
+
+  .direction-title {
+    font-size: clamp(3.4rem, 7.4vw, 8.6rem);
+    line-height: 0.84;
+    text-wrap: balance;
+  }
+
+  .title-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+  }
+
+  .title-line > span {
+    display: block;
+    transform-origin: left bottom;
+  }
+
+  .title-line-indent {
+    color: var(--color-brand-green);
+  }
+
+  .direction-scroll-field {
+    margin-top: clamp(4rem, 7vw, 8rem);
   }
 
   .direction-sticky {
     min-height: 100svh;
   }
 
-  .direction-ghost {
+  .direction-stage {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    padding-block: 2rem 4rem;
+  }
+
+  .direction-index,
+  .pass-rail {
     display: none;
   }
 
-  .direction-image-anchor {
-    width: min(calc(100% - 2rem), 36rem);
-    height: min(68svh, 46rem);
-    margin-inline: auto;
-  }
-
-  .direction-image-shade {
-    background: linear-gradient(
-      to top,
-      color-mix(in srgb, var(--color-brand-dark) 55%, transparent),
-      transparent 48%
-    );
-  }
-
-  .direction-principles {
+  .direction-copy {
     display: grid;
-    gap: 0;
-    margin-top: 2rem;
+    gap: 3rem;
+  }
+
+  .pass-panel {
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-brand-light) 18%, transparent);
+    padding-top: 1.5rem;
+  }
+
+  .pass-word-mask {
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 0.18em;
+    padding-bottom: 0.08em;
+    vertical-align: bottom;
+  }
+
+  .pass-word {
+    display: block;
+    transform-origin: left bottom;
+    will-change: transform, opacity;
+  }
+
+  .direction-visual {
+    position: relative;
+    min-height: 38rem;
+  }
+
+  .image-plate {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-light) 20%, transparent);
+    background: var(--color-brand-dark);
+  }
+
+  .direction-image {
+    position: absolute;
+    inset: -8%;
+    width: 116%;
+    height: 116%;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  .image-caption {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-brand-light) 15%, transparent);
+    background: color-mix(in srgb, var(--color-brand-dark) 76%, transparent);
+    padding: 0.9rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: color-mix(in srgb, var(--color-brand-light) 55%, transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .crop-frame {
+    position: absolute;
+    inset: 8%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .crop-corner {
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-color: var(--color-brand-green);
+  }
+
+  .crop-corner-tl {
+    left: 0;
+    top: 0;
+    border-left: 1px solid;
+    border-top: 1px solid;
+  }
+  .crop-corner-tr {
+    right: 0;
+    top: 0;
+    border-right: 1px solid;
+    border-top: 1px solid;
+  }
+  .crop-corner-bl {
+    left: 0;
+    bottom: 0;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+  }
+  .crop-corner-br {
+    right: 0;
+    bottom: 0;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+  }
+
+  .focus-line {
+    position: absolute;
+    background: color-mix(in srgb, var(--color-brand-green) 55%, transparent);
+  }
+
+  .focus-line-x {
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+  }
+  .focus-line-y {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+  }
+
+  .proof-label {
+    position: absolute;
+    right: -0.03em;
+    bottom: -0.06em;
+    z-index: 3;
+    font-size: clamp(6rem, 22vw, 13rem);
+    line-height: 0.7;
+    color: var(--color-brand-light);
+    opacity: 0.9;
+    pointer-events: none;
   }
 
   .direction-handoff {
-    margin-top: 2rem;
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-brand-light) 15%, transparent);
+    padding-block: 4rem 0;
+    text-align: center;
+  }
+
+  .direction-handoff::after {
+    width: 1px;
+    height: clamp(2.5rem, 4vw, 4rem);
+    background: var(--color-brand-green);
+    content: "";
+  }
+
+  .handoff-statement {
+    max-width: 14ch;
+    font-size: clamp(2.8rem, 6vw, 6.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+
+  .handoff-arrow {
+    font-size: 2rem;
   }
 
   @media (min-width: 640px) {
-    .direction-principles {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 2rem;
+    .title-line-indent {
+      padding-left: 10%;
+    }
+    .direction-visual {
+      min-height: 48rem;
     }
   }
 
-  @media (min-width: 1024px) and (min-height: 650px) and (prefers-reduced-motion: no-preference) {
-    .direction-sequence,
+  @media (min-width: 1024px) and (min-height: 680px) {
     .direction-sticky {
-      height: 100svh;
-      min-height: 650px;
+      min-height: 0;
     }
 
-    .direction-sequence {
-      margin-top: clamp(-2rem, -1.5vw, -1rem);
-      padding-bottom: 0;
+    .direction-stage {
+      grid-template-columns:
+        minmax(2rem, 0.45fr) minmax(17rem, 4fr) minmax(24rem, 6fr)
+        minmax(7rem, 1fr);
+      align-items: start;
+      gap: clamp(1.5rem, 3vw, 4rem);
+      padding-block: 0 clamp(3rem, 7vw, 7rem);
     }
 
-    .direction-ghost {
-      position: absolute;
-      left: -0.04em;
-      top: 6%;
-      display: block;
-      font-size: clamp(8rem, 18vw, 19rem);
-      line-height: 0.76;
-      letter-spacing: -0.055em;
-      white-space: nowrap;
-      will-change: transform, opacity;
+    .direction-index {
+      position: sticky;
+      top: 16svh;
+      display: flex;
+      height: min(68svh, 42rem);
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      writing-mode: vertical-rl;
     }
 
-    .direction-image-anchor {
-      position: absolute;
-      left: 50%;
-      top: 46%;
-      z-index: 1;
-      width: min(35vw, 35rem);
-      height: min(70svh, 47rem);
-      margin: 0;
-      transform: translate(-50%, -50%);
+    .index-track {
+      position: relative;
+      width: 1px;
+      flex: 1;
+      overflow: hidden;
+      background: color-mix(in srgb, var(--color-brand-light) 14%, transparent);
     }
 
-    .direction-image {
-      transform-origin: center;
-    }
-
-    .direction-principles {
+    .index-progress {
       position: absolute;
       inset: 0;
       display: block;
-      margin-top: 0;
-      pointer-events: none;
+      transform-origin: top;
+      background: var(--color-brand-green);
+      will-change: transform;
     }
 
-    .principle-card {
-      position: absolute;
-      z-index: 2;
-      width: min(23vw, 21rem);
+    .direction-copy {
+      display: grid;
+      gap: 0;
     }
 
-    .principle-card:nth-child(1) {
-      left: 0;
-      top: 12%;
-    }
-
-    .principle-card:nth-child(2) {
-      right: 0;
-      top: 12%;
-    }
-
-    .principle-card:nth-child(3) {
-      left: 0;
-      top: 43%;
-    }
-
-    .principle-card:nth-child(4) {
-      right: 0;
-      top: 43%;
-    }
-
-    .principle-card:nth-child(5) {
-      left: 0;
-      top: 74%;
-    }
-
-    .principle-card:nth-child(6) {
-      right: 0;
-      top: 74%;
-    }
-
-    .direction-handoff {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      z-index: 4;
-      margin-top: 0;
-      transform: translateX(-50%);
+    .pass-panel {
+      position: relative;
+      display: flex;
+      min-height: 46svh;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 1px solid
+        color-mix(in srgb, var(--color-brand-light) 18%, transparent);
+      padding-block: clamp(3rem, 7vh, 6rem);
       will-change: transform, opacity;
+    }
+
+    .pass-panel:last-child {
+      border-bottom: 1px solid
+        color-mix(in srgb, var(--color-brand-light) 18%, transparent);
+    }
+
+    .direction-visual {
+      position: sticky;
+      top: 10svh;
+      min-height: 0;
+      height: min(80svh, 52rem);
+    }
+
+    .image-plate,
+    .crop-frame {
+      will-change: transform, opacity;
+    }
+
+    .pass-rail {
+      position: sticky;
+      top: 34svh;
+      display: grid;
+      align-content: center;
+      gap: 1.4rem;
+    }
+
+    .pass-marker-row {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .pass-marker {
+      display: block;
+      width: 100%;
+      height: 1px;
+      transform-origin: left;
+      background: var(--color-brand-green);
+      will-change: transform, opacity;
+    }
+
+    .proof-label {
+      font-size: clamp(7rem, 11vw, 12rem);
+    }
+    .direction-handoff {
+      padding-top: 2.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .title-line > span,
+    .direction-image,
+    .image-plate,
+    .crop-frame,
+    .pass-panel,
+    .pass-marker,
+    .proof-label {
+      transform: none !important;
+      opacity: 1 !important;
     }
   }
 </style>

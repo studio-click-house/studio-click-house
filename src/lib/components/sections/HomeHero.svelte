@@ -72,7 +72,7 @@
         Image editing · Retouching · Visual production
       </p>
       <h1
-        class="max-w-[12ch] font-display text-[clamp(4rem,10.5vw,10.5rem)] leading-[0.82] tracking-[-0.05em]"
+        class="max-w-[12ch] font-display text-[clamp(3.5rem,8.8vw,8.75rem)] leading-[0.86] tracking-[-0.045em]"
       >
         <span class="block overflow-hidden"
           ><span class="hero-line block">Every image,</span></span
@@ -103,7 +103,9 @@
             class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
           /></a
         >
-        <a href={resolve("/#selected-work")} class="text-link text-brand-light group"
+        <a
+          href={resolve("/#selected-work")}
+          class="text-link text-brand-light group"
           >See the work
           <ArrowDown
             size={15}
