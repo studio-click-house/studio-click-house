@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import "../app.css";
+  import CursorOrb from "$lib/components/animations/CursorOrb.svelte";
   import Footer from "$lib/components/layout/Footer.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import { createLenis } from "$lib/animations/lenis";
@@ -36,5 +37,6 @@
   >Skip to content</a
 >
 <Navbar />
+<CursorOrb />
 {@render children()}
 <Footer />

@@ -1,7 +1,7 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import type { PageServerLoad } from './$types';
-import type { ClientLogoItem } from '$lib/types/content';
+import fs from "node:fs";
+import path from "node:path";
+import type { PageServerLoad } from "./$types";
+import type { ClientLogoItem } from "$lib/types/content";
 
 function formatLabel(name: string): string {
   const base = name.replace(/_logo$/, "");
@@ -35,11 +35,13 @@ function formatShortLabel(label: string): string {
 export const prerender = true;
 
 export const load: PageServerLoad = async () => {
-  const clientsDir = path.join(process.cwd(), 'static', 'images', 'clients');
+  const clientsDir = path.join(process.cwd(), "static", "images", "clients");
   let files: string[] = [];
-  
+
   try {
-    files = fs.readdirSync(clientsDir).filter((file: string) => file.endsWith('.png'));
+    files = fs
+      .readdirSync(clientsDir)
+      .filter((file: string) => file.endsWith(".png"));
   } catch (e) {
     console.error("Failed to read clients directory", e);
   }

@@ -5,12 +5,12 @@
   import { previewMedia } from "$lib/content/media";
 
   const faqImages = [
-    previewMedia.jewelryMacro,       // Q1: Formats
-    previewMedia.jewelryDetail,      // Q2: Turnaround
-    previewMedia.redStudioPortrait,  // Q3: Revisions
-    previewMedia.editingWorkspace,   // Q4: Transfer
-    previewMedia.perfumeShadow,      // Q5: Consistency
-    previewMedia.studioPortrait,     // Q6: Workflow
+    previewMedia.jewelryMacro, // Q1: Formats
+    previewMedia.jewelryDetail, // Q2: Turnaround
+    previewMedia.redStudioPortrait, // Q3: Revisions
+    previewMedia.editingWorkspace, // Q4: Transfer
+    previewMedia.perfumeShadow, // Q5: Consistency
+    previewMedia.studioPortrait, // Q6: Workflow
   ];
 
   const telemetryData = [
@@ -19,7 +19,7 @@
     { code: "VER.03 // ACTIVE" },
     { code: "SSH.ENCRYPTED" },
     { code: "ISO.CALIBRATED" },
-    { code: "CONV.INTEGRATED" }
+    { code: "CONV.INTEGRATED" },
   ];
 
   let activeIndex = $state(0);
@@ -42,7 +42,7 @@
             height: 0,
             duration: 0.4,
             ease: "power2.out",
-            overwrite: "auto"
+            overwrite: "auto",
           });
         }
       });
@@ -64,7 +64,7 @@
           height: 0,
           duration: 0.4,
           ease: "power2.out",
-          overwrite: "auto"
+          overwrite: "auto",
         });
       }
 
@@ -73,7 +73,7 @@
           height: "auto",
           duration: 0.45,
           ease: "power3.out",
-          overwrite: "auto"
+          overwrite: "auto",
         });
       }
     });
@@ -91,32 +91,41 @@
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          })
-          .from(".faq-reveal-left", {
-            autoAlpha: 0,
-            x: -24,
-            duration: 0.8,
-            ease: "power3.out",
-          })
-          .from(".faq-reveal-right", {
-            autoAlpha: 0,
-            x: 24,
-            duration: 0.8,
-            ease: "power3.out",
-          }, "-=0.8")
-          .from(".faq-item-reveal", {
-            autoAlpha: 0,
-            y: 20,
-            duration: 0.7,
-            stagger: 0.08,
-            ease: "power3.out",
-          }, "-=0.6");
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            })
+            .from(".faq-reveal-left", {
+              autoAlpha: 0,
+              x: -24,
+              duration: 0.8,
+              ease: "power3.out",
+            })
+            .from(
+              ".faq-reveal-right",
+              {
+                autoAlpha: 0,
+                x: 24,
+                duration: 0.8,
+                ease: "power3.out",
+              },
+              "-=0.8",
+            )
+            .from(
+              ".faq-item-reveal",
+              {
+                autoAlpha: 0,
+                y: 20,
+                duration: 0.7,
+                stagger: 0.08,
+                ease: "power3.out",
+              },
+              "-=0.6",
+            );
         });
 
         // Parallax image scroll trigger (matches scroll movement of Section 2)
@@ -137,7 +146,7 @@
                 },
               },
             );
-          }
+          },
         );
 
         return () => media.revert();
@@ -158,15 +167,19 @@
   class="section-space relative overflow-hidden bg-brand-light py-24 sm:py-32 text-brand-dark"
 >
   <!-- Background design accents -->
-  <div class="absolute inset-x-0 top-0 h-px bg-brand-dark/10" aria-hidden="true"></div>
-  <div class="absolute inset-x-0 bottom-0 h-px bg-brand-dark/10" aria-hidden="true"></div>
+  <div
+    class="absolute inset-x-0 top-0 h-px bg-brand-dark/10"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-x-0 bottom-0 h-px bg-brand-dark/10"
+    aria-hidden="true"
+  ></div>
 
   <div class="site-shell">
     <div class="grid gap-14 lg:grid-cols-12 lg:gap-16 items-start">
-      
       <!-- Left Column: Questions List (Columns 1-7) -->
       <div class="faq-reveal-left lg:col-span-7 space-y-10">
-        
         <!-- Header -->
         <div class="border-b border-brand-dark/10 pb-8">
           <p class="eyebrow text-brand-green">Working together</p>
@@ -179,7 +192,9 @@
         </div>
 
         <!-- Accordion List -->
-        <div class="divide-y divide-brand-dark/15 border-b border-brand-dark/15">
+        <div
+          class="divide-y divide-brand-dark/15 border-b border-brand-dark/15"
+        >
           {#each faqs as item, index (item.question)}
             <div class="faq-item-reveal">
               <button
@@ -194,7 +209,9 @@
                 <!-- Question heading -->
                 <div class="flex justify-between items-center gap-6">
                   <div class="flex items-start gap-4 sm:gap-6">
-                    <span class="font-mono text-[0.62rem] text-brand-green/75 tracking-wider font-bold mt-1.5 sm:mt-2.5">
+                    <span
+                      class="font-mono text-[0.62rem] text-brand-green/75 tracking-wider font-bold mt-1.5 sm:mt-2.5"
+                    >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <h3
@@ -204,14 +221,20 @@
                       {item.question}
                     </h3>
                   </div>
-                  
+
                   <!-- Crosshair expandable toggle icon -->
-                  <div class="relative size-6 flex items-center justify-center text-brand-dark/50" aria-hidden="true">
-                    <span class="absolute w-4 h-0.5 bg-current transition-transform duration-300" class:rotate-90={activeIndex !== index}></span>
+                  <div
+                    class="relative size-6 flex items-center justify-center text-brand-dark/50"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="absolute w-4 h-0.5 bg-current transition-transform duration-300"
+                      class:rotate-90={activeIndex !== index}
+                    ></span>
                     <span class="absolute w-4 h-0.5 bg-current"></span>
                   </div>
                 </div>
-                
+
                 <!-- Answer slide panel (controlled by GSAP height changes) -->
                 <div
                   id={`faq-panel-${index + 1}`}
@@ -221,7 +244,9 @@
                   role="region"
                   aria-labelledby={`faq-trigger-${index + 1}`}
                 >
-                  <p class="max-w-2xl pt-5 pb-2 pl-8 sm:pl-10 text-sm leading-relaxed text-brand-dark/65 sm:text-base">
+                  <p
+                    class="max-w-2xl pt-5 pb-2 pl-8 sm:pl-10 text-sm leading-relaxed text-brand-dark/65 sm:text-base"
+                  >
                     {item.answer}
                   </p>
                 </div>
@@ -229,17 +254,21 @@
             </div>
           {/each}
         </div>
-
       </div>
 
       <!-- Right Column: Dedicated Sticky Viewport Frame (Columns 8-12) -->
-      <div class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none">
-        <div class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-sm">
-          
+      <div
+        class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none"
+      >
+        <div
+          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-sm"
+        >
           <!-- Colored Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">
             <!-- Scroll Parallax Wrapper -->
-            <div class="faq-parallax-image absolute inset-x-0 top-[-15%] h-[130%] pointer-events-none">
+            <div
+              class="faq-parallax-image absolute inset-x-0 top-[-15%] h-[130%] pointer-events-none"
+            >
               {#each faqImages as img, idx (img.src)}
                 <img
                   src={img.src}
@@ -256,12 +285,8 @@
               {/each}
             </div>
           </div>
-
-
-
         </div>
       </div>
-      
     </div>
   </div>
 </section>

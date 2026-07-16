@@ -5,10 +5,68 @@
   import BrandMarquee from "$lib/components/sections/BrandMarquee.svelte";
 
   let section: HTMLElement;
+  let heroVideo: HTMLVideoElement;
+  let isVideoReady = $state(false);
+
+  function handleVideoCanPlay() {
+    isVideoReady = true;
+  }
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
+    let isHeroVisible = true;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    const startVideo = () => {
+      if (prefersReducedMotion.matches || !heroVideo) return;
+      heroVideo.preload = "metadata";
+      heroVideo.load();
+      void heroVideo.play().catch(() => {
+        // The poster remains visible if browser autoplay policy blocks playback.
+      });
+    };
+
+    let videoObserver: IntersectionObserver | undefined;
+
+    if (prefersReducedMotion.matches) {
+      heroVideo.pause();
+    } else if ("IntersectionObserver" in window) {
+      videoObserver = new IntersectionObserver(
+        ([entry]) => {
+          isHeroVisible = entry.isIntersecting;
+
+          if (isHeroVisible) {
+            if (heroVideo.preload === "none") startVideo();
+            else if (isVideoReady && !prefersReducedMotion.matches) {
+              void heroVideo.play().catch(() => {});
+            }
+          } else {
+            heroVideo.pause();
+          }
+        },
+        { rootMargin: "160px 0px", threshold: 0.05 },
+      );
+      videoObserver.observe(section);
+    } else {
+      startVideo();
+    }
+
+    const handleMotionPreferenceChange = () => {
+      if (prefersReducedMotion.matches) {
+        heroVideo.pause();
+        isVideoReady = false;
+      } else if (isHeroVisible) {
+        startVideo();
+      }
+    };
+
+    prefersReducedMotion.addEventListener(
+      "change",
+      handleMotionPreferenceChange,
+    );
 
     import("gsap").then(({ gsap }) => {
       if (!active || !section) return;
@@ -35,6 +93,11 @@
 
     return () => {
       active = false;
+      videoObserver?.disconnect();
+      prefersReducedMotion.removeEventListener(
+        "change",
+        handleMotionPreferenceChange,
+      );
       context?.revert();
     };
   });
@@ -45,23 +108,37 @@
   bind:this={section}
   class="relative min-h-[100dvh] overflow-hidden bg-brand-dark text-brand-light"
 >
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-    aria-hidden="true"
-    tabindex="-1"
-    class="hero-media absolute inset-0 size-full object-cover object-[58%_center] will-change-transform"
-  >
-    <source src="/videos/hero%20section.mp4" type="video/mp4" />
-  </video>
+  <div class="hero-media absolute inset-0 size-full will-change-transform">
+    <img
+      src="/images/hero/hero-poster.jpg"
+      alt=""
+      width="1440"
+      height="900"
+      fetchpriority="high"
+      decoding="async"
+      aria-hidden="true"
+      class="hero-poster absolute inset-0 size-full object-cover object-[58%_center]"
+    />
+    <video
+      bind:this={heroVideo}
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"
+      tabindex="-1"
+      oncanplay={handleVideoCanPlay}
+      class:video-ready={isVideoReady}
+      class="hero-video absolute inset-0 size-full object-cover object-[58%_center]"
+    >
+      <source src="/videos/hero%20section.webm" type="video/webm" />
+    </video>
+  </div>
   <div
-    class="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,33,31,0.92)_0%,rgba(32,33,31,0.48)_50%,rgba(32,33,31,0.12)_100%)]"
+    class="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,33,31,0.5)_0%,rgba(32,33,31,0.2)_50%,rgba(32,33,31,0)_100%)]"
   ></div>
   <div
-    class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-dark/70 to-transparent"
+    class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-dark/25 to-transparent"
   ></div>
 
   <div
@@ -69,19 +146,19 @@
   >
     <div>
       <p class="hero-detail eyebrow mb-6 text-brand-green">
-        Image editing · Retouching · Visual production
+        Image editing · Post-production · Visual production
       </p>
       <h1
-        class="max-w-[12ch] font-display text-[clamp(3.5rem,8.8vw,8.75rem)] leading-[0.86] tracking-[-0.045em]"
+        class="max-w-[12ch] font-display text-[clamp(2.75rem,6.8vw,6.25rem)] leading-[0.86] tracking-[-0.045em]"
       >
-        <span class="block overflow-hidden"
+        <span class="block overflow-hidden pb-4 -mb-4"
           ><span class="hero-line block">Every image,</span></span
         >
-        <span class="block overflow-hidden"
+        <span class="block overflow-hidden pb-4 -mb-4"
           ><span class="hero-line block italic text-brand-green">finished</span
           ></span
         >
-        <span class="block overflow-hidden"
+        <span class="block overflow-hidden pb-4 -mb-4"
           ><span class="hero-line block">with intent.</span></span
         >
       </h1>
@@ -125,3 +202,24 @@
     Preview media · replace with approved studio work
   </p>
 </section>
+
+<style>
+  .hero-poster {
+    background: var(--color-brand-dark);
+  }
+
+  .hero-video {
+    opacity: 0;
+    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-video.video-ready {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none;
+    }
+  }
+</style>

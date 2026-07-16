@@ -58,4 +58,18 @@ export const previewMedia = {
     height: 2400,
     credit: "Temporary preview photo by Alexey Demidov via Pexels",
   },
+  videoColorGrading: {
+    src: "https://images.pexels.com/photos/325111/pexels-photo-325111.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    alt: "Video timeline and color grading interface in editing suite",
+    width: 1800,
+    height: 1200,
+    credit: "Temporary preview photo via Pexels",
+  },
+  product3dModel: {
+    src: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    alt: "3D wireframe mesh modeling software interface",
+    width: 1800,
+    height: 1200,
+    credit: "Temporary preview photo via Pexels",
+  },
 } satisfies Record<string, PreviewMedia>;

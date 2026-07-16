@@ -11,6 +11,7 @@ export interface ServiceItem {
   slug: string;
   description: string;
   media: PreviewMedia;
+  category: "Image Editing" | "Video Editing" | "3D Modeling";
 }
 
 export interface FaqItem {

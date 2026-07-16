@@ -51,9 +51,13 @@
                       height={client.height}
                       loading="lazy"
                       class={`object-contain opacity-55 grayscale ${
-                        ['julie-benedetto-photography', 'maddy-pollard', 'manning-cartell'].includes(client.id)
-                          ? 'max-h-24 max-w-[14rem] scale-125 sm:max-h-28 sm:max-w-[18rem]'
-                          : 'max-h-16 max-w-[12rem] sm:max-h-20 sm:max-w-[16rem]'
+                        [
+                          "julie-benedetto-photography",
+                          "maddy-pollard",
+                          "manning-cartell",
+                        ].includes(client.id)
+                          ? "max-h-24 max-w-[14rem] scale-125 sm:max-h-28 sm:max-w-[18rem]"
+                          : "max-h-16 max-w-[12rem] sm:max-h-20 sm:max-w-[16rem]"
                       }`}
                     />
                   {:else}

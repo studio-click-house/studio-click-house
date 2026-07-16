@@ -12,18 +12,30 @@ import type { RouteId } from "$app/types";
 export const navigationItems = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Journal", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Events", href: "/events" },
+  { label: "CSR", href: "/csr" },
+  { label: "Careers", href: "/careers" },
 ] as const satisfies readonly { label: string; href: RouteId }[];
 
 export const services: ServiceItem[] = [
+  // Image Editing
+  {
+    title: "Background remove",
+    slug: "background-remove",
+    description: "Clean subject isolation and backdrop extraction.",
+    media: previewMedia.perfumeShadow,
+    category: "Image Editing",
+  },
   {
     title: "Clipping path",
     slug: "clipping-path",
     description:
       "Precise subject isolation for clean, flexible image production.",
     media: previewMedia.perfumeStillLife,
+    category: "Image Editing",
   },
   {
     title: "Ghost mannequin",
@@ -31,34 +43,23 @@ export const services: ServiceItem[] = [
     description:
       "Garment construction that keeps shape and fit visually clear.",
     media: previewMedia.monochromePortrait,
+    category: "Image Editing",
   },
   {
-    title: "High-end retouching",
-    slug: "high-end-retouching",
+    title: "Editorial retouching",
+    slug: "editorial-retouching",
     description:
-      "Detailed finishing guided by material, light, and brand context.",
+      "High-end, detailed finishing guided by material, light, and brand context.",
     media: previewMedia.studioPortrait,
+    category: "Image Editing",
   },
   {
-    title: "Shadow creation",
-    slug: "shadow-creation",
+    title: "Ecommerce retouching",
+    slug: "ecommerce-retouching",
     description:
-      "Grounded, natural-looking shadows built for consistent product sets.",
-    media: previewMedia.perfumeShadow,
-  },
-  {
-    title: "Color correction",
-    slug: "color-correction",
-    description:
-      "Controlled color alignment across individual frames and full batches.",
-    media: previewMedia.redStudioPortrait,
-  },
-  {
-    title: "Neck joint editing",
-    slug: "neck-joint-editing",
-    description:
-      "Clean garment reconstruction for invisible mannequin workflows.",
-    media: previewMedia.monochromePortrait,
+      "Polished image enhancement tailored for high-volume online store listings.",
+    media: previewMedia.jewelryDetail,
+    category: "Image Editing",
   },
   {
     title: "Jewelry retouching",
@@ -66,13 +67,75 @@ export const services: ServiceItem[] = [
     description:
       "Close-detail cleanup that protects reflections, texture, and form.",
     media: previewMedia.jewelryMacro,
+    category: "Image Editing",
   },
   {
-    title: "Image and video editing",
-    slug: "image-video-editing",
+    title: "Color correction",
+    slug: "color-correction",
     description:
-      "Flexible post-production support for still and moving campaigns.",
+      "Controlled color alignment across individual frames and full batches.",
+    media: previewMedia.redStudioPortrait,
+    category: "Image Editing",
+  },
+  {
+    title: "AI retouch",
+    slug: "ai-retouch",
+    description:
+      "Next-gen AI-assisted editing for rapid, high-quality bulk processing.",
     media: previewMedia.editingWorkspace,
+    category: "Image Editing",
+  },
+
+  // Video Editing
+  {
+    title: "Commercial editing",
+    slug: "commercial-editing",
+    description:
+      "Polished post-production for brand reels, commercial spots, and product campaigns.",
+    media: previewMedia.videoColorGrading,
+    category: "Video Editing",
+  },
+  {
+    title: "Color grading",
+    slug: "color-grading",
+    description:
+      "Calibrated color balance and aesthetic toning for cohesive video sets.",
+    media: previewMedia.redStudioPortrait,
+    category: "Video Editing",
+  },
+  {
+    title: "Social cutdowns",
+    slug: "social-cutdowns",
+    description:
+      "Punchy, fast-turnaround video revisions tailored for social platforms.",
+    media: previewMedia.editingWorkspace,
+    category: "Video Editing",
+  },
+
+  // 3D Modeling
+  {
+    title: "3D product modeling",
+    slug: "3d-product-modeling",
+    description:
+      "Accurate, lightweight 3D models built directly from reference designs.",
+    media: previewMedia.product3dModel,
+    category: "3D Modeling",
+  },
+  {
+    title: "Texturing & shading",
+    slug: "texturing-shading",
+    description:
+      "Custom PBR material maps depicting authentic metal, glass, and fabrics.",
+    media: previewMedia.jewelryMacro,
+    category: "3D Modeling",
+  },
+  {
+    title: "CGI rendering",
+    slug: "cgi-rendering",
+    description:
+      "Photorealistic 3D product renders with custom studio staging.",
+    media: previewMedia.perfumeStillLife,
+    category: "3D Modeling",
   },
 ];
 

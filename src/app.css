@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -8,7 +9,8 @@
   --color-brand-paper: #eeeee7;
   --color-brand-mist: #d9ddd6;
   --color-brand-coral: #d45d43;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-acid: #c9ff5a;
+  --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
   --font-display: "DM Serif Display", ui-serif, Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
@@ -22,11 +24,23 @@
     scroll-behavior: smooth;
     background: var(--color-brand-light);
     font-family: var(--font-sans);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
   }
 
   body {
-    @apply min-h-screen overflow-x-clip bg-brand-light text-brand-dark antialiased;
+    min-height: 100vh;
+    overflow-x: clip;
     margin: 0;
+    background: var(--color-brand-light);
+    color: var(--color-brand-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body::before {
@@ -72,17 +86,29 @@
   }
 
   .eyebrow {
-    @apply font-mono text-[0.68rem] font-medium uppercase tracking-[0.2em];
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
 
   .display-title {
-    @apply font-display font-normal tracking-[-0.035em];
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.035em;
     font-size: clamp(3rem, 7vw, 7.5rem);
     line-height: 0.91;
   }
 
   .text-link {
-    @apply inline-flex items-center gap-2 border-b border-current pb-1 text-sm font-semibold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid currentColor;
+    font-size: 0.875rem;
+    font-weight: 600;
     transition: gap 250ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
