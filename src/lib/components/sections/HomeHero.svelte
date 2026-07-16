@@ -145,9 +145,6 @@
     class="site-shell relative grid min-h-[100dvh] content-end pb-24 pt-32 sm:pb-28 lg:grid-cols-[1fr_19rem] lg:items-end lg:gap-10"
   >
     <div>
-      <p class="hero-detail eyebrow mb-6 text-brand-green">
-        Image editing · Post-production · Visual production
-      </p>
       <h1
         class="max-w-[12ch] font-display text-[clamp(2.75rem,6.8vw,6.25rem)] leading-[0.86] tracking-[-0.045em]"
       >
@@ -164,7 +161,7 @@
       </h1>
     </div>
 
-    <div class="hero-detail mt-10 border-t border-brand-light/30 pt-6 lg:mt-0">
+    <div class="hero-detail mt-10 pt-6 lg:mt-0">
       <p class="text-sm leading-relaxed text-brand-light/75 sm:text-base">
         Studio Click House shapes still and moving images for brands, studios,
         and production teams that care about the final frame.
@@ -172,7 +169,7 @@
       <div class="mt-7 flex flex-wrap items-center gap-5">
         <a
           href={resolve("/contact")}
-          class="group inline-flex items-center gap-3 bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
+          class="group inline-flex items-center gap-3 rounded-[0.2rem] bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
           >Start a project
           <ArrowUpRight
             size={17}
@@ -196,11 +193,6 @@
 
   <BrandMarquee />
 
-  <p
-    class="absolute right-4 top-1/2 hidden -translate-y-1/2 rotate-90 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-brand-light/55 xl:block"
-  >
-    Preview media · replace with approved studio work
-  </p>
 </section>
 
 <style>

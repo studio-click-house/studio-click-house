@@ -18,6 +18,7 @@
         media.add("(prefers-reduced-motion: no-preference)", () => {
           const excludedSections = new Set([
             "home-hero",
+            "studio-introduction",
             "scroll-image-story",
             "creative-direction",
             "selected-work",

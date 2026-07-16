@@ -90,7 +90,7 @@
     </div>
 
     <figure class="story-image will-change-transform">
-      <div class="overflow-hidden">
+      <div class="overflow-hidden rounded-[1.5rem]">
         <img
           src={previewMedia.perfumeStillLife.src}
           alt={previewMedia.perfumeStillLife.alt}
