@@ -73,3 +73,30 @@ export const previewMedia = {
     credit: "Temporary preview photo via Pexels",
   },
 } satisfies Record<string, PreviewMedia>;
+
+export const studioDressColorways = [
+  {
+    id: "emerald",
+    label: "Emerald",
+    src: "/images/about/colorways/dress-color-emerald.png",
+    alt: "Studio portrait demonstrating an emerald outfit color correction",
+    width: 1024,
+    height: 1536,
+  },
+  {
+    id: "cobalt",
+    label: "Cobalt",
+    src: "/images/about/colorways/dress-color-cobalt.png",
+    alt: "Studio portrait demonstrating a cobalt outfit color correction",
+    width: 1024,
+    height: 1536,
+  },
+  {
+    id: "plum",
+    label: "Plum",
+    src: "/images/about/colorways/dress-color-plum.png",
+    alt: "Studio portrait demonstrating a plum outfit color correction",
+    width: 1024,
+    height: 1536,
+  },
+] as const;

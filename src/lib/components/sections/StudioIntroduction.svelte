@@ -1,23 +1,40 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { ArrowLeftRight, ArrowUpRight } from "lucide-svelte";
+  import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { previewMedia } from "$lib/content/media";
+  import { studioDressColorways } from "$lib/content/media";
 
   let section: HTMLElement;
   let comparisonFrame: HTMLElement;
   let aboutCopy: HTMLElement;
-  let revealPercent = $state(50);
-  let hasInteracted = false;
+  let colorwaysReady = $state(false);
+  let selectedColorwayId =
+    $state<(typeof studioDressColorways)[number]["id"]>("emerald");
 
-  function markComparisonInteraction() {
-    hasInteracted = true;
+  function selectColorway(
+    colorwayId: (typeof studioDressColorways)[number]["id"],
+  ) {
+    if (!colorwaysReady || colorwayId === selectedColorwayId) return;
+
+    selectedColorwayId = colorwayId;
   }
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
+    const colorwayPreloads = studioDressColorways.map((colorway) => {
+      const preload = new Image();
+      preload.decoding = "async";
+      preload.src = colorway.src;
+      return preload;
+    });
+
+    void Promise.allSettled(
+      colorwayPreloads.map((preload) => preload.decode()),
+    ).then(() => {
+      if (active) colorwaysReady = true;
+    });
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !section || !comparisonFrame || !aboutCopy)
@@ -29,9 +46,6 @@
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          const revealProgress = { value: 28 };
-          revealPercent = revealProgress.value;
-
           const revealTimeline = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
@@ -42,35 +56,23 @@
             },
           });
 
-          revealTimeline
-            .fromTo(
-              comparisonFrame,
-              {
-                autoAlpha: 0.45,
-                y: 54,
-                scale: 0.92,
-                clipPath: "inset(9% 7% 9% 7% round 2rem)",
-              },
-              {
-                autoAlpha: 1,
-                y: 0,
-                scale: 1,
-                clipPath: "inset(0% 0% 0% 0% round 1.5rem)",
-                duration: 0.7,
-              },
-              0,
-            )
-            .to(
-              revealProgress,
-              {
-                value: 50,
-                duration: 0.42,
-                onUpdate: () => {
-                  if (!hasInteracted) revealPercent = revealProgress.value;
-                },
-              },
-              0.2,
-            );
+          revealTimeline.fromTo(
+            comparisonFrame,
+            {
+              autoAlpha: 0.45,
+              y: 54,
+              scale: 0.92,
+              clipPath: "inset(9% 7% 9% 7% round 2rem)",
+            },
+            {
+              autoAlpha: 1,
+              y: 0,
+              scale: 1,
+              clipPath: "inset(0% 0% 0% 0% round 1.5rem)",
+              duration: 0.7,
+            },
+            0,
+          );
 
           gsap
             .timeline({
@@ -209,9 +211,18 @@
     return () => {
       active = false;
       context?.revert();
+      colorwayPreloads.forEach((preload) => {
+        preload.src = "";
+      });
     };
   });
 </script>
+
+<svelte:head>
+  {#each studioDressColorways as colorway}
+    <link rel="preload" as="image" href={colorway.src} />
+  {/each}
+</svelte:head>
 
 <section
   id="studio-introduction"
@@ -236,60 +247,47 @@
           bind:this={comparisonFrame}
           class="comparison-frame"
           role="group"
-          aria-label="Before and after image comparison"
+          aria-label="Interactive outfit color-correction preview"
         >
           <div class="comparison-media">
-            <img
-              src={previewMedia.redStudioPortrait.src}
-              alt="Editorial portrait shown before and after final color treatment"
-              width={previewMedia.redStudioPortrait.width}
-              height={previewMedia.redStudioPortrait.height}
-              loading="lazy"
-              class="comparison-image comparison-before"
-            />
-
-            <div
-              class="comparison-after-layer"
-              style:clip-path={`inset(0 ${100 - revealPercent}% 0 0)`}
-              aria-hidden="true"
-            >
+            {#each studioDressColorways as colorway}
               <img
-                src={previewMedia.redStudioPortrait.src}
-                alt=""
-                width={previewMedia.redStudioPortrait.width}
-                height={previewMedia.redStudioPortrait.height}
-                loading="lazy"
-                class="comparison-image"
+                src={colorway.src}
+                alt={colorway.id === selectedColorwayId ? colorway.alt : ""}
+                width={colorway.width}
+                height={colorway.height}
+                loading="eager"
+                decoding="async"
+                aria-hidden={colorway.id !== selectedColorwayId}
+                class:colorway-image-active={colorway.id === selectedColorwayId}
+                class="colorway-image"
               />
-            </div>
+            {/each}
           </div>
+        </div>
 
-          <input
-            class="comparison-range"
-            type="range"
-            min="0"
-            max="100"
-            step="1"
-            bind:value={revealPercent}
-            onpointerdown={markComparisonInteraction}
-            oninput={markComparisonInteraction}
-            onkeydown={markComparisonInteraction}
-            aria-label="Move the divider to compare the before and after image"
-            aria-valuetext={`After image ${revealPercent}% visible`}
-          />
-
-          <div
-            class="comparison-divider"
-            style:left={`${revealPercent}%`}
-            aria-hidden="true"
-          >
-            <span class="comparison-handle">
-              <ArrowLeftRight size={18} strokeWidth={1.8} />
-            </span>
-          </div>
-
-          <span class="comparison-label comparison-label-after">After</span>
-          <span class="comparison-label comparison-label-before">Before</span>
+        <div
+          class="colorway-controls"
+          role="group"
+          aria-label="Choose an outfit color correction"
+        >
+          {#each studioDressColorways as colorway}
+            <button
+              type="button"
+              class:colorway-control-active={colorway.id === selectedColorwayId}
+              class="colorway-control"
+              aria-label={`Show ${colorway.label} color correction`}
+              aria-pressed={colorway.id === selectedColorwayId}
+              disabled={!colorwaysReady}
+              onclick={() => selectColorway(colorway.id)}
+            >
+              <span
+                class="colorway-swatch"
+                data-colorway={colorway.id}
+                aria-hidden="true"
+              ></span>
+            </button>
+          {/each}
         </div>
       </figure>
 
@@ -370,7 +368,8 @@
   }
 
   .about-comparison {
-    width: min(100%, 44rem);
+    position: relative;
+    width: min(calc(100% - 4rem), 44rem);
     margin: 0 auto;
   }
 
@@ -393,104 +392,84 @@
     will-change: transform;
   }
 
-  .comparison-image,
-  .comparison-after-layer {
+  .colorway-image {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-  }
-
-  .comparison-image {
     object-fit: cover;
     object-position: 50% 24%;
+    opacity: 0;
     user-select: none;
     pointer-events: none;
   }
 
-  .comparison-before {
-    filter: grayscale(1) contrast(0.8) brightness(0.82);
+  .colorway-image-active {
+    z-index: 1;
+    opacity: 1;
   }
 
-  .comparison-after-layer {
-    overflow: hidden;
-    will-change: clip-path;
-  }
-
-  .comparison-range {
+  .colorway-controls {
+    --colorway-emerald: oklch(38% 0.1 165deg);
+    --colorway-cobalt: oklch(42% 0.18 265deg);
+    --colorway-plum: oklch(34% 0.11 330deg);
     position: absolute;
-    inset: 0;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    cursor: ew-resize;
-    opacity: 0;
-  }
-
-  .comparison-divider {
-    position: absolute;
-    inset-block: 0;
-    z-index: 6;
-    width: 1px;
-    background: color-mix(in srgb, var(--color-brand-light) 88%, transparent);
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-
-  .comparison-handle {
-    position: absolute;
+    z-index: 7;
     top: 50%;
-    left: 50%;
+    right: -4rem;
     display: flex;
-    width: 3.25rem;
-    height: 3.25rem;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
+    flex-direction: column;
+    gap: 0.25rem;
+    transform: translateY(-50%);
+  }
+
+  .colorway-control {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    padding: 0;
+    border: 0;
     border-radius: 9999px;
-    background: var(--color-brand-light);
-    color: var(--color-brand-dark);
-    box-shadow: 0 0.75rem 2rem
-      color-mix(in srgb, var(--color-brand-dark) 24%, transparent);
-    translate: -50% -50%;
-    transition:
-      color 200ms ease,
-      background 200ms ease,
-      box-shadow 200ms ease;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
   }
 
-  .comparison-range:focus-visible + .comparison-divider .comparison-handle {
-    outline: 3px solid var(--color-brand-green);
-    outline-offset: 4px;
+  .colorway-control:focus-visible {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 1px;
   }
 
-  .comparison-frame:hover .comparison-handle {
-    background: var(--color-brand-green);
-    color: var(--color-brand-light);
+  .colorway-control-active {
+    background: transparent;
+    box-shadow: none;
   }
 
-  .comparison-label {
-    position: absolute;
-    z-index: 5;
-    top: 1rem;
-    padding: 0.55rem 0.75rem;
-    background: color-mix(in srgb, var(--color-brand-dark) 78%, transparent);
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-brand-light);
-    pointer-events: none;
+  .colorway-swatch {
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-light) 42%, transparent);
+    border-radius: 9999px;
   }
 
-  .comparison-label-after {
-    left: 1rem;
+  .colorway-control-active .colorway-swatch {
+    box-shadow:
+      0 0 0 2px var(--color-brand-paper),
+      0 0 0 4px var(--color-brand-green);
   }
 
-  .comparison-label-before {
-    right: 1rem;
+  .colorway-swatch[data-colorway="emerald"] {
+    background: var(--colorway-emerald);
+  }
+
+  .colorway-swatch[data-colorway="cobalt"] {
+    background: var(--colorway-cobalt);
+  }
+
+  .colorway-swatch[data-colorway="plum"] {
+    background: var(--colorway-plum);
   }
 
   .about-title-line {
@@ -635,7 +614,7 @@
     }
 
     .about-comparison {
-      width: 100%;
+      width: min(100%, calc(76svh * 4 / 5));
       margin: 0;
     }
 
@@ -654,9 +633,9 @@
       gap: 3.75rem;
     }
 
-    .comparison-handle {
-      width: 2.85rem;
-      height: 2.85rem;
+    .colorway-control {
+      width: 2.75rem;
+      height: 2.75rem;
     }
 
     .grading-orbit {
@@ -681,10 +660,13 @@
 
   @media (prefers-reduced-motion: reduce) {
     .comparison-media,
-    .comparison-after-layer,
     .grading-orbit,
     .grading-orb,
     .about-title-line > span {
+      will-change: auto;
+    }
+
+    .colorway-image {
       will-change: auto;
     }
   }
