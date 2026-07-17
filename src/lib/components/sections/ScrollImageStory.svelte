@@ -114,6 +114,63 @@
             );
         });
 
+        media.add(
+          "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+          () => {
+            const logoDrift = [
+              { x: 10, y: -8, scale: 1.02, rotation: 1.2, duration: 5.8 },
+              { x: -8, y: 10, scale: 0.98, rotation: -1.1, duration: 6.4 },
+              { x: 9, y: 7, scale: 1.02, rotation: 1, duration: 5.2 },
+              { x: -7, y: -9, scale: 0.98, rotation: -1.2, duration: 6.8 },
+              { x: 8, y: 6, scale: 1.02, rotation: 1.1, duration: 5.6 },
+            ];
+
+            gsap.utils
+              .toArray<HTMLElement>(".ai-logo-bubble")
+              .forEach((bubble, index) => {
+                const drift = logoDrift[index] ?? logoDrift[0];
+
+                gsap.to(bubble, {
+                  ...drift,
+                  ease: "sine.inOut",
+                  repeat: -1,
+                  yoyo: true,
+                });
+              });
+
+            gsap.to(".ai-panel-orb-shadow", {
+              x: 22,
+              y: 18,
+              scale: 1.025,
+              rotation: 4,
+              duration: 4.8,
+              ease: "sine.inOut",
+              repeat: -1,
+              yoyo: true,
+            });
+            gsap.to(".ai-panel-orb-midtone", {
+              x: -20,
+              y: -22,
+              scale: 0.97,
+              rotation: -3,
+              duration: 3.1,
+              ease: "power1.inOut",
+              repeat: -1,
+              yoyo: true,
+            });
+            gsap.to(".ai-panel-orb-highlight", {
+              x: 14,
+              y: 24,
+              scale: 1.06,
+              rotation: 6,
+              duration: 1.9,
+              ease: "sine.inOut",
+              repeat: -1,
+              yoyo: true,
+            });
+          },
+        );
+
         return () => media.revert();
       }, section);
     });
@@ -207,7 +264,7 @@
         </h2>
       </div>
 
-      <div class="ai-panel-support">
+      <div class="ai-panel-support w-full max-w-2xl text-left">
         <p
           class="mt-6 max-w-2xl text-sm leading-relaxed text-brand-dark/78 sm:text-base"
         >
@@ -217,7 +274,7 @@
         </p>
         <a
           href={resolve("/services/ai-retouch")}
-          class="mt-9 inline-flex items-center gap-3 border-b border-brand-dark/30 pb-2 font-display text-sm font-normal tracking-[0.02em] text-brand-dark/85 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+          class="mt-9 inline-flex items-center gap-3 border-b border-brand-green/40 pb-2 font-display text-sm font-normal tracking-[0.02em] text-brand-green transition-colors hover:border-brand-dark/40 hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
           Explore AI image editing
           <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -439,13 +496,11 @@
     width: 100%;
     max-width: none;
     pointer-events: none;
-    will-change: transform;
   }
 
   .ai-logo-orbit {
     position: absolute;
     pointer-events: auto;
-    will-change: transform;
   }
 
   .ai-logo-preview {

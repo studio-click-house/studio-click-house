@@ -71,14 +71,14 @@
             velocityX: scrollVelocityX * 0.85,
             velocityY: scrollVelocityY * 0.85,
           });
-          if (trailPoints.length > 48) trailPoints.shift();
+          if (trailPoints.length > 64) trailPoints.shift();
           scrollVelocityX *= 0.9;
           scrollVelocityY *= 0.9;
         }
 
         for (let index = trailPoints.length - 1; index >= 0; index -= 1) {
           const point = trailPoints[index];
-          point.age += 0.055;
+          point.age += 0.04;
           point.x += point.velocityX;
           point.y += point.velocityY;
           point.velocityX *= 0.94;
@@ -94,7 +94,7 @@
             (1 - point.age) * 0.88 * interactionBoost,
             1,
           );
-          const radius = (2.6 - point.age * 1.3) * interactionBoost;
+          const radius = (3.7 - point.age * 1.6) * interactionBoost;
 
           trailContext.beginPath();
           trailContext.arc(point.x, point.y, radius, 0, Math.PI * 2);
@@ -185,7 +185,7 @@
         const scrollIsActive =
           Math.abs(scrollVelocityX) > 0.2 || Math.abs(scrollVelocityY) > 0.2;
 
-        if (trailDistance >= 10 && !scrollIsActive) {
+        if (trailDistance >= 7 && !scrollIsActive) {
           trailPoints.push({
             x: event.clientX,
             y: event.clientY,
@@ -193,7 +193,7 @@
             velocityX: 0,
             velocityY: 0,
           });
-          if (trailPoints.length > 24) trailPoints.shift();
+          if (trailPoints.length > 40) trailPoints.shift();
           lastTrailX = event.clientX;
           lastTrailY = event.clientY;
           startTrail();
@@ -376,8 +376,8 @@
   .bubble-shell {
     display: none;
     position: relative;
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
     margin-top: 0;
     margin-left: 0;
     border-radius: 999px;
@@ -399,7 +399,7 @@
   }
 
   .cursor-interactive {
-    transform: scale(1.32);
+    transform: scale(1.03);
     background: color-mix(
       in srgb,
       var(--color-brand-green) 72%,
@@ -410,7 +410,7 @@
   }
 
   .cursor-pressed {
-    transform: scale(0.6);
+    transform: scale(0.5);
     background: color-mix(
       in srgb,
       var(--color-brand-green) 48%,
