@@ -296,7 +296,7 @@
                   {String(sIndex + 1).padStart(2, "0")}
                 </span>
                 <span
-                  class="font-sans text-[0.72rem] font-bold uppercase tracking-wider transition-all duration-300 ease-out {service.slug ===
+                  class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out {service.slug ===
                   activeServiceSlug
                     ? 'text-brand-green translate-x-1'
                     : 'text-brand-light/80'}"

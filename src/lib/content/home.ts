@@ -13,11 +13,11 @@ export const navigationItems = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Events", href: "/events" },
   { label: "CSR", href: "/csr" },
   { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" },
 ] as const satisfies readonly { label: string; href: RouteId }[];
 
 export const services: ServiceItem[] = [

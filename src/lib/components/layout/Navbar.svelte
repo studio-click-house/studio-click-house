@@ -16,31 +16,15 @@
 
   let isScrolled = $state(false);
   let isMegaMenuOpen = $state(false);
-  let isCompanyMenuOpen = $state(false);
   let isMenuOpen = $state(false);
   let headerElement: HTMLElement;
   let megaMenuCloseTimeout: ReturnType<typeof setTimeout> | undefined;
-  let companyMenuCloseTimeout: ReturnType<typeof setTimeout> | undefined;
-
-  const primaryNavigationItems = navigationItems.filter(
-    (item) =>
-      item.label !== "Events" &&
-      item.label !== "CSR" &&
-      item.label !== "Careers",
-  );
-  const companyNavigationItems = navigationItems.filter(
-    (item) =>
-      item.label === "Events" ||
-      item.label === "CSR" ||
-      item.label === "Careers",
-  );
 
   function openMegaMenu() {
     if (megaMenuCloseTimeout) {
       clearTimeout(megaMenuCloseTimeout);
       megaMenuCloseTimeout = undefined;
     }
-    isCompanyMenuOpen = false;
     isMegaMenuOpen = true;
   }
 
@@ -51,25 +35,8 @@
     }, 220);
   }
 
-  function openCompanyMenu() {
-    if (companyMenuCloseTimeout) {
-      clearTimeout(companyMenuCloseTimeout);
-      companyMenuCloseTimeout = undefined;
-    }
-    isMegaMenuOpen = false;
-    isCompanyMenuOpen = true;
-  }
-
-  function closeCompanyMenuWithGrace() {
-    companyMenuCloseTimeout = setTimeout(() => {
-      isCompanyMenuOpen = false;
-      companyMenuCloseTimeout = undefined;
-    }, 180);
-  }
-
   function closeNavigationMenus() {
     isMegaMenuOpen = false;
-    isCompanyMenuOpen = false;
   }
 
   onMount(() => {
@@ -111,6 +78,17 @@
                 ease: "back.out(1.8)",
               },
               "-=0.35",
+            )
+            .from(
+              ".brand-mark",
+              {
+                scale: 0.86,
+                rotation: -3,
+                autoAlpha: 0,
+                duration: 0.8,
+                ease: "power3.out",
+              },
+              "-=0.6",
             );
 
           ScrollTrigger.create({
@@ -139,7 +117,6 @@
     return () => {
       active = false;
       if (megaMenuCloseTimeout) clearTimeout(megaMenuCloseTimeout);
-      if (companyMenuCloseTimeout) clearTimeout(companyMenuCloseTimeout);
       revertMedia?.();
       context?.revert();
     };
@@ -180,7 +157,7 @@
     <div
       class="nav-reveal nav-links hidden xl:flex items-center justify-center"
     >
-      {#each primaryNavigationItems as item (item.href)}
+      {#each navigationItems as item (item.href)}
         {#if item.label === "Services"}
           <div
             class="relative"
@@ -201,7 +178,15 @@
               class:active={isMegaMenuOpen || page.url.pathname === item.href}
               class="nav-link inline-flex items-center gap-1.5 py-2 outline-none"
             >
-              {item.label}
+              <span class="nav-label">
+                {#each item.label.split("") as letter, letterIndex (letterIndex)}
+                  <span
+                    class="nav-letter"
+                    data-letter={letter}
+                    style={`--letter-index: ${letterIndex}`}>{letter}</span
+                  >
+                {/each}
+              </span>
               <ChevronDown
                 size={11}
                 strokeWidth={1.8}
@@ -220,59 +205,18 @@
             class:active={page.url.pathname === item.href}
             class="nav-link inline-flex items-center py-2"
           >
-            {item.label}
+            <span class="nav-label">
+              {#each item.label.split("") as letter, letterIndex (letterIndex)}
+                <span
+                  class="nav-letter"
+                  data-letter={letter}
+                  style={`--letter-index: ${letterIndex}`}>{letter}</span
+                >
+              {/each}
+            </span>
           </a>
         {/if}
       {/each}
-
-      <div
-        class="relative"
-        role="none"
-        onmouseenter={openCompanyMenu}
-        onmouseleave={closeCompanyMenuWithGrace}
-      >
-        <button
-          type="button"
-          aria-expanded={isCompanyMenuOpen}
-          aria-controls="company-navigation-menu"
-          class:active={isCompanyMenuOpen ||
-            companyNavigationItems.some(
-              (item) => page.url.pathname === item.href,
-            )}
-          class="nav-link inline-flex items-center gap-1.5 py-2 outline-none"
-          onclick={() => (isCompanyMenuOpen = !isCompanyMenuOpen)}
-        >
-          Company
-          <ChevronDown
-            size={11}
-            strokeWidth={1.8}
-            class="block shrink-0 transition-transform duration-300 {isCompanyMenuOpen
-              ? 'rotate-180'
-              : ''}"
-          />
-        </button>
-
-        {#if isCompanyMenuOpen}
-          <div
-            id="company-navigation-menu"
-            class="company-menu absolute left-1/2 top-full z-[60] mt-7 w-36 -translate-x-1/2 rounded-lg border border-brand-light/12 p-1.5 shadow-xl shadow-brand-dark/25 before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-['']"
-          >
-            {#each companyNavigationItems as item (item.href)}
-              <a
-                href={resolve(item.href)}
-                aria-current={page.url.pathname === item.href
-                  ? "page"
-                  : undefined}
-                onclick={closeNavigationMenus}
-                class="flex items-center justify-between px-3 py-2 font-sans text-[0.72rem] font-medium tracking-[0.018em] text-brand-light/80 transition-colors hover:bg-brand-light/8 hover:text-brand-green"
-              >
-                {item.label}
-                <ArrowUpRight size={12} strokeWidth={1.7} />
-              </a>
-            {/each}
-          </div>
-        {/if}
-      </div>
     </div>
 
     <div class="nav-actions relative z-50 flex items-center justify-end">
@@ -418,28 +362,25 @@
   }
 
   .brand-block {
-    height: 3.05rem;
+    height: 3.35rem;
     padding-inline: 0.5rem 1rem;
   }
 
   .brand-mark {
-    height: 2.15rem;
-    transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .brand-block:hover .brand-mark {
-    transform: translateY(-0.1rem);
+    height: 3rem;
+    transform-origin: left center;
   }
 
   .nav-links {
-    gap: clamp(1rem, 1.6vw, 1.75rem);
+    gap: clamp(0.75rem, 1.1vw, 1.35rem);
     padding-inline: clamp(1rem, 2vw, 2rem);
   }
 
   .nav-link {
     position: relative;
+    isolation: isolate;
     font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-size: 1rem;
     font-weight: 500;
     line-height: 1;
     letter-spacing: 0.018em;
@@ -447,13 +388,37 @@
     transition: color 220ms ease;
   }
 
+  .nav-label {
+    color: color-mix(in srgb, var(--color-brand-light) 78%, transparent);
+  }
+
+  .nav-letter {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+  }
+
+  .nav-letter::after {
+    position: absolute;
+    inset: 0;
+    content: attr(data-letter);
+    color: var(--color-brand-green);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 210ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover .nav-letter::after {
+    clip-path: inset(0 0 0 0);
+    transition-delay: calc(var(--letter-index) * 60ms);
+  }
+
+  .nav-link.active .nav-letter::after {
+    clip-path: inset(0 0 0 0);
+  }
+
   .nav-link:hover,
   .nav-link.active {
     color: var(--color-brand-green);
-  }
-
-  .company-menu {
-    background: var(--navbar-surface);
   }
 
   .nav-action-group {
@@ -465,15 +430,14 @@
     min-width: 8.5rem;
     gap: 0.8rem;
     padding-inline: 0.85rem;
-    background: color-mix(in srgb, var(--color-brand-light) 5%, transparent);
-    color: var(--color-brand-light);
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 26%, transparent);
+    background: var(--color-brand-green);
+    color: var(--color-brand-dark);
+    border: 1px solid var(--color-brand-green);
     border-radius: 0.2rem;
     font-family: var(--font-sans);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.035em;
+    letter-spacing: 0.018em;
     text-transform: uppercase;
     transition:
       color 280ms ease,
@@ -483,8 +447,8 @@
 
   .project-action:hover {
     color: var(--color-brand-dark);
-    border-color: var(--color-brand-green);
-    background: var(--color-brand-green);
+    border-color: var(--color-brand-light);
+    background: var(--color-brand-light);
   }
 
   .login-action {
@@ -495,9 +459,9 @@
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
     border-radius: 0.2rem;
     font-family: var(--font-sans);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.035em;
+    letter-spacing: 0.018em;
     text-transform: uppercase;
     color: var(--color-brand-light);
     background: transparent;
@@ -522,9 +486,9 @@
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
     border-radius: 0.2rem;
     font-family: var(--font-sans);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.035em;
+    letter-spacing: 0.018em;
     text-transform: uppercase;
     color: var(--color-brand-light);
     background: transparent;
@@ -554,7 +518,7 @@
       color-mix(in srgb, var(--color-brand-light) 28%, transparent);
     border-radius: 0.2rem;
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -614,12 +578,12 @@
     }
 
     .brand-block {
-      height: 2.75rem;
+      height: 3.05rem;
       padding-inline: 0.35rem 0.7rem;
     }
 
     .brand-mark {
-      height: 1.8rem;
+      height: 2.4rem;
     }
 
     .nav-actions {

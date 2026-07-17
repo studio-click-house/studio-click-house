@@ -192,7 +192,6 @@
   </div>
 
   <BrandMarquee />
-
 </section>
 
 <style>

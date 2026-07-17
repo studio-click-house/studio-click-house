@@ -18,7 +18,6 @@
 >
   <div class="site-shell relative z-10 mb-12 text-center">
     <div>
-      <p class="eyebrow text-brand-green">Client marks · awaiting approval</p>
       <h2
         id="creative-marquee-title"
         class="mt-7 font-display text-[clamp(3.3rem,7vw,7.5rem)] leading-[0.88] tracking-[-0.045em]"

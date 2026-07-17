@@ -228,7 +228,7 @@
   id="studio-introduction"
   bind:this={section}
   aria-labelledby="studio-introduction-title"
-  class="about-section relative overflow-hidden bg-brand-paper py-24 text-brand-dark sm:py-32"
+  class="about-section relative overflow-hidden bg-brand-paper pt-24 pb-8 text-brand-dark sm:pt-32 sm:pb-12"
 >
   <div
     class="absolute inset-x-0 top-0 h-px bg-brand-dark/10"
@@ -343,11 +343,6 @@
       </div>
     </div>
   </div>
-
-  <div
-    class="absolute inset-x-0 bottom-0 h-px bg-brand-dark/10"
-    aria-hidden="true"
-  ></div>
 </section>
 
 <style>
