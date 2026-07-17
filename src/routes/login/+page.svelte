@@ -2,6 +2,9 @@
   import { ArrowLeft, ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import { Button } from "$lib/components/ui/button";
+  import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
 
   let email = $state("");
   let password = $state("");
@@ -73,31 +76,31 @@
         {/if}
 
         <div class="space-y-2">
-          <label
+          <Label
             for="email"
-            class="block font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/60"
+            class="!block font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/60"
           >
             Email address
-          </label>
-          <input
+          </Label>
+          <Input
             id="email"
             type="email"
             bind:value={email}
             autocomplete="email"
             required
             placeholder="name@company.com"
-            class="w-full border border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus:border-brand-green focus:outline-none transition-colors"
+            class="h-auto w-full rounded-none border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus-visible:border-brand-green focus-visible:ring-0"
           />
         </div>
 
         <div class="space-y-2">
           <div class="flex justify-between items-center">
-            <label
+            <Label
               for="password"
-              class="block font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/60"
+              class="!block font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/60"
             >
               Password
-            </label>
+            </Label>
             <a
               href="#reset"
               class="font-mono text-[0.52rem] uppercase tracking-[0.12em] text-brand-dark/45 hover:text-brand-green"
@@ -105,23 +108,23 @@
               Forgot?
             </a>
           </div>
-          <input
+          <Input
             id="password"
             type="password"
             bind:value={password}
             autocomplete="current-password"
             required
             placeholder="••••••••••••"
-            class="w-full border border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus:border-brand-green focus:outline-none transition-colors"
+            class="h-auto w-full rounded-none border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus-visible:border-brand-green focus-visible:ring-0"
           />
         </div>
 
-        <button
+        <Button
           type="submit"
-          class="w-full bg-brand-dark py-4 text-center font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-light hover:bg-brand-green hover:text-brand-dark transition-colors flex items-center justify-center gap-2"
+          class="h-auto w-full rounded-none bg-brand-dark py-4 text-center font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
         >
           Sign In to Hub <ArrowUpRight size={14} />
-        </button>
+        </Button>
       </form>
 
       <div

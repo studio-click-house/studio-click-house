@@ -1,6 +1,8 @@
 <script lang="ts">
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
+  import { Button } from "$lib/components/ui/button";
+  import { Input } from "$lib/components/ui/input";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
 
   const events = [
@@ -138,16 +140,18 @@
               sessions and e-commerce labs.
             </p>
             <div class="mt-5 flex gap-2">
-              <input
+              <Input
                 type="email"
+                aria-label="Email address for event updates"
                 placeholder="Enter email"
-                class="min-w-0 flex-1 border border-brand-dark/20 bg-brand-light px-3 py-2 text-xs font-sans placeholder:text-brand-dark/35 focus:border-brand-green focus:outline-none"
+                class="h-auto min-w-0 flex-1 rounded-none border-brand-dark/20 bg-brand-light px-3 py-2 text-xs font-sans placeholder:text-brand-dark/35 focus-visible:border-brand-green focus-visible:ring-0"
               />
-              <button
-                class="bg-brand-dark px-4 py-2 font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-brand-light hover:bg-brand-green hover:text-brand-dark transition-colors"
+              <Button
+                type="button"
+                class="h-auto rounded-none bg-brand-dark px-4 py-2 font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
               >
                 Join
-              </button>
+              </Button>
             </div>
           </div>
         </div>
