@@ -41,81 +41,129 @@
 
   onMount(() => {
     let active = true;
+    let hasStarted = false;
+    let hasLogoLanded = false;
+    const waitsForPreloader = Boolean(document.querySelector(".site-preloader"));
     let context: { revert: () => void } | undefined;
     let revertMedia: (() => void) | undefined;
+    let startNavigation: (() => void) | undefined;
+
+    const handlePreloaderLogoLanded = () => {
+      hasLogoLanded = true;
+      startNavigation?.();
+    };
+
+    if (waitsForPreloader) {
+      window.addEventListener(
+        "site-preloader-logo-landed",
+        handlePreloaderLogoLanded,
+        { once: true },
+      );
+    }
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !headerElement) return;
 
       const { gsap, ScrollTrigger } = runtime;
 
-      context = gsap.context(() => {
-        const media = gsap.matchMedia();
-        revertMedia = () => media.revert();
+      if (waitsForPreloader) gsap.set(headerElement, { yPercent: -100 });
 
-        media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap
-            .timeline({ defaults: { ease: "power4.out" } })
-            .set(headerElement, { yPercent: -100 })
-            .to(headerElement, { yPercent: 0, duration: 1 })
-            .from(
-              ".nav-reveal",
-              {
-                y: 18,
-                autoAlpha: 0,
-                duration: 0.7,
-                stagger: 0.08,
-                ease: "power3.out",
-              },
-              "-=0.45",
-            )
-            .from(
-              ".project-action",
-              {
-                scale: 0.82,
-                autoAlpha: 0,
-                duration: 0.55,
-                ease: "back.out(1.8)",
-              },
-              "-=0.35",
-            )
-            .from(
-              ".brand-mark",
-              {
-                scale: 0.86,
-                rotation: -3,
-                autoAlpha: 0,
-                duration: 0.8,
-                ease: "power3.out",
-              },
-              "-=0.6",
-            );
+      startNavigation = () => {
+        if (!active || hasStarted) return;
+        hasStarted = true;
 
-          ScrollTrigger.create({
-            id: "studio-navigation",
-            start: 0,
-            end: "max",
-            onUpdate: (self) => {
-              isScrolled = self.scroll() > 36;
-            },
+        context = gsap.context(() => {
+          const media = gsap.matchMedia();
+          revertMedia = () => media.revert();
+
+          media.add("(prefers-reduced-motion: no-preference)", () => {
+            const headerDuration = waitsForPreloader ? 0.72 : 1;
+            const revealDuration = waitsForPreloader ? 0.5 : 0.7;
+
+            const timeline = gsap
+              .timeline({
+                defaults: { ease: "power4.out" },
+                onComplete: () => {
+                  if (waitsForPreloader) {
+                    window.dispatchEvent(new CustomEvent("site-header-ready"));
+                  }
+                },
+              })
+              .set(headerElement, { yPercent: -100 })
+              .to(headerElement, { yPercent: 0, duration: headerDuration })
+              .from(
+                ".nav-reveal",
+                {
+                  y: 18,
+                  autoAlpha: 0,
+                  duration: revealDuration,
+                  stagger: waitsForPreloader ? 0.055 : 0.08,
+                  ease: "power3.out",
+                },
+                waitsForPreloader ? "-=0.34" : "-=0.45",
+              )
+              .from(
+                ".project-action",
+                {
+                  scale: 0.82,
+                  autoAlpha: 0,
+                  duration: waitsForPreloader ? 0.4 : 0.55,
+                  ease: "back.out(1.8)",
+                },
+                waitsForPreloader ? "-=0.28" : "-=0.35",
+              );
+
+            if (!waitsForPreloader) {
+              timeline.from(
+                ".brand-mark",
+                {
+                  scale: 0.86,
+                  rotation: -3,
+                  autoAlpha: 0,
+                  duration: 0.8,
+                  ease: "power3.out",
+                },
+                "-=0.6",
+              );
+            }
+
+            ScrollTrigger.create({
+              id: "studio-navigation",
+              start: 0,
+              end: "max",
+              onUpdate: (self) => {
+                isScrolled = self.scroll() > 36;
+              },
+            });
           });
-        });
 
-        media.add("(prefers-reduced-motion: reduce)", () => {
-          ScrollTrigger.create({
-            id: "studio-navigation-reduced-motion",
-            start: 0,
-            end: "max",
-            onUpdate: (self) => {
-              isScrolled = self.scroll() > 36;
-            },
+          media.add("(prefers-reduced-motion: reduce)", () => {
+            gsap.set(headerElement, { yPercent: 0 });
+            ScrollTrigger.create({
+              id: "studio-navigation-reduced-motion",
+              start: 0,
+              end: "max",
+              onUpdate: (self) => {
+                isScrolled = self.scroll() > 36;
+              },
+            });
+
+            if (waitsForPreloader) {
+              window.dispatchEvent(new CustomEvent("site-header-ready"));
+            }
           });
-        });
-      }, headerElement);
+        }, headerElement);
+      };
+
+      if (!waitsForPreloader || hasLogoLanded) startNavigation();
     });
 
     return () => {
       active = false;
+      window.removeEventListener(
+        "site-preloader-logo-landed",
+        handlePreloaderLogoLanded,
+      );
       if (megaMenuCloseTimeout) clearTimeout(megaMenuCloseTimeout);
       revertMedia?.();
       context?.revert();
