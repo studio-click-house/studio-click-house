@@ -14,13 +14,13 @@
 <section
   id="creative-marquee"
   aria-labelledby="creative-marquee-title"
-  class="client-wall relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20"
+  class="client-wall relative overflow-hidden bg-brand-light py-12 text-brand-dark sm:py-16"
 >
-  <div class="site-shell relative z-10 mb-12 text-center">
+  <div class="site-shell relative z-10 mb-10 text-center">
     <div>
       <h2
         id="creative-marquee-title"
-        class="mt-7 font-display text-[clamp(3.3rem,7vw,7.5rem)] leading-[0.88] tracking-[-0.045em]"
+        class="mt-7 font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] tracking-[-0.045em]"
       >
         Our Clients
       </h2>
@@ -40,7 +40,7 @@
             <div class="flex" aria-hidden={repeatIndex === 1}>
               {#each row as client (client.id)}
                 <div
-                  class="logo-slot flex h-28 w-[15rem] shrink-0 items-center justify-center border-r border-brand-dark/10 px-8 sm:h-36 sm:w-[20rem]"
+                  class="logo-slot flex h-20 w-[12rem] shrink-0 items-center justify-center border-r border-brand-dark/10 px-6 sm:h-24 sm:w-[15rem]"
                 >
                   {#if client.logoSrc && client.width && client.height}
                     <img
@@ -55,8 +55,8 @@
                           "maddy-pollard",
                           "manning-cartell",
                         ].includes(client.id)
-                          ? "max-h-24 max-w-[14rem] scale-125 sm:max-h-28 sm:max-w-[18rem]"
-                          : "max-h-16 max-w-[12rem] sm:max-h-20 sm:max-w-[16rem]"
+                          ? "max-h-20 max-w-[11rem] scale-[1.15] sm:max-h-24 sm:max-w-[13rem]"
+                          : "max-h-14 max-w-[9.5rem] sm:max-h-16 sm:max-w-[12rem]"
                       }`}
                     />
                   {:else}
@@ -80,9 +80,9 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(
-      circle at 50% 8%,
-      rgb(126 166 65 / 0.16),
-      transparent 38%
+      circle at 50% 10%,
+      rgb(126 166 65 / 0.25),
+      transparent 45%
     );
     content: "";
     pointer-events: none;
