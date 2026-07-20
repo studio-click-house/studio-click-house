@@ -1,9 +1,10 @@
-import { previewMedia } from "$lib/content/media";
+import { previewMedia, studioDressColorways } from "$lib/content/media";
 import type {
   ClientLogoItem,
   ClientLocationMarker,
   FaqItem,
   ServiceItem,
+  ServiceShowcase,
   TestimonialItem,
   WorkGalleryItem,
 } from "$lib/types/content";
@@ -136,6 +137,56 @@ export const services: ServiceItem[] = [
       "Photorealistic 3D product renders with custom studio staging.",
     media: previewMedia.perfumeStillLife,
     category: "3D Modeling",
+  },
+];
+
+export const serviceShowcases: ServiceShowcase[] = [
+  {
+    category: "Image Editing",
+    displayTitle: "Image editing",
+    description:
+      "Isolation, retouching, color, and detail work for individual frames or complete production batches.",
+    media: {
+      kind: "comparison",
+      beforeLabel: "Before",
+      afterLabel: "After",
+      before: {
+        src: "/images/about/colorways/dress-color-original.jpg",
+        alt: "Original studio portrait before color correction",
+        width: 1024,
+        height: 1536,
+        credit: "Studio Click House local preview asset",
+      },
+      after: {
+        ...studioDressColorways[0],
+        credit: "Studio Click House local preview asset",
+      },
+    },
+  },
+  {
+    category: "Video Editing",
+    displayTitle: "Video editing",
+    description:
+      "Commercial edits, social cutdowns, and controlled grading shaped for each format and viewing context.",
+    media: {
+      kind: "video",
+      src: "/videos/ai section video.mp4",
+      poster: previewMedia.editingWorkspace,
+      alt: "Studio video editing and post-production preview",
+    },
+  },
+  {
+    category: "3D Modeling",
+    displayTitle: "3D & CGI",
+    description:
+      "Product modeling, material development, and CGI rendering for believable commercial imagery.",
+    media: {
+      kind: "comparison",
+      beforeLabel: "Model",
+      afterLabel: "Render",
+      before: previewMedia.product3dModel,
+      after: previewMedia.perfumeStillLife,
+    },
   },
 ];
 

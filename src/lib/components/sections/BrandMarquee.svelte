@@ -1,11 +1,36 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { services } from "$lib/content/home";
 
   const serviceNames = services.map((service) => service.title);
   const loopItems = [...serviceNames, ...serviceNames];
+  let marquee: HTMLElement;
+
+  onMount(() => {
+    const serviceLabels = marquee.querySelectorAll<HTMLElement>(
+      ".marquee-service-name",
+    );
+    const centerObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          entry.target.classList.toggle("is-centered", entry.isIntersecting);
+        }
+      },
+      {
+        root: marquee,
+        rootMargin: "0px -49.5% 0px -49.5%",
+        threshold: 0,
+      },
+    );
+
+    serviceLabels.forEach((label) => centerObserver.observe(label));
+
+    return () => centerObserver.disconnect();
+  });
 </script>
 
 <div
+  bind:this={marquee}
   id="hero-services-marquee"
   role="region"
   aria-label="Studio services"
@@ -22,7 +47,7 @@
         <span class="mx-5 size-1 bg-brand-green sm:mx-8" aria-hidden="true"
         ></span>
         <span
-          class="font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
+          class="marquee-service-name font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
         >
           {item}
         </span>
@@ -44,6 +69,14 @@
     animation: marquee 34s linear infinite;
   }
 
+  .marquee-service-name {
+    transition: color 220ms ease;
+  }
+
+  :global(.marquee-service-name.is-centered) {
+    color: var(--color-brand-green);
+  }
+
   #hero-services-marquee:hover .marquee-track {
     animation-play-state: paused;
   }
@@ -57,6 +90,10 @@
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none;
+    }
+
+    .marquee-service-name {
+      transition: none;
     }
   }
 </style>

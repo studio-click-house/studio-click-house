@@ -1,283 +1,503 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
-  import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { services } from "$lib/content/home";
+  import { services, serviceShowcases } from "$lib/content/home";
 
-  let serviceGrid: HTMLOListElement;
-  let serviceItems: HTMLElement[] = [];
-  let serviceCards: HTMLAnchorElement[] = [];
-  let serviceMedia: HTMLElement[] = [];
-  let serviceCopy: HTMLElement[] = [];
-  let serviceImages: HTMLImageElement[] = [];
+  let activeShowcaseIndex = $state(0);
+  let activeServiceIndex = $state(0);
+  let comparisonPosition = $state(52);
+  let activeShowcase = $derived(
+    serviceShowcases[activeShowcaseIndex] ?? serviceShowcases[0],
+  );
+  let activeServices = $derived(
+    services.filter((service) => service.category === activeShowcase?.category),
+  );
+  let activeService = $derived(
+    activeServices[activeServiceIndex] ?? activeServices[0],
+  );
 
-  onMount(() => {
-    let context: { revert: () => void } | undefined;
-    let revertMedia: (() => void) | undefined;
-    let active = true;
+  function activateShowcase(index: number) {
+    activeShowcaseIndex = index;
+    activeServiceIndex = 0;
+    comparisonPosition = 52;
+  }
 
-    registerScrollTrigger().then((runtime) => {
-      if (!active || !runtime || !serviceGrid) return;
+  function activateService(index: number) {
+    if (activeServiceIndex === index) return;
 
-      const { gsap } = runtime;
-      const mediaContext = gsap.matchMedia();
-      revertMedia = () => mediaContext.revert();
+    activeServiceIndex = index;
+    comparisonPosition = 52;
+  }
 
-      context = gsap.context(() => {
-        mediaContext.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.set(serviceCards, { autoAlpha: 0 });
+  function updateComparison(event: Event) {
+    const input = event.currentTarget;
+    if (!(input instanceof HTMLInputElement)) return;
 
-          serviceItems.forEach((item, index) => {
-            const card = serviceCards[index];
-            const media = serviceMedia[index];
-            const copy = serviceCopy[index];
-            const image = serviceImages[index];
-            if (!card || !media || !copy || !image) return;
+    comparisonPosition = Number(input.value);
+  }
 
-            const reveal = gsap.timeline({
-              scrollTrigger: {
-                trigger: item,
-                start: "top 88%",
-                once: true,
-                refreshPriority: -20,
-              },
-            });
+  function previewComparison(event: PointerEvent) {
+    if (event.pointerType !== "mouse") return;
 
-            reveal
-              .fromTo(
-                card,
-                { autoAlpha: 0, y: 38 },
-                {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: 0.85,
-                  ease: "power3.out",
-                },
-              )
-              .fromTo(
-                media,
-                {
-                  scaleX: 0.72,
-                  transformOrigin:
-                    index % 2 === 0 ? "left center" : "right center",
-                },
-                {
-                  scaleX: 1,
-                  duration: 0.95,
-                  ease: "power3.out",
-                },
-                0,
-              )
-              .fromTo(
-                copy,
-                { x: index % 2 === 0 ? 28 : -28 },
-                { x: 0, duration: 0.85, ease: "power3.out" },
-                0.08,
-              );
+    const control = event.currentTarget;
+    if (!(control instanceof HTMLInputElement)) return;
 
-            gsap.fromTo(
-              image,
-              { yPercent: -7, scale: 1.1 },
-              {
-                yPercent: 7,
-                scale: 1.03,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: item,
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: 1.05,
-                  refreshPriority: -20,
-                },
-              },
-            );
-          });
-        });
-      }, serviceGrid);
-    });
-
-    return () => {
-      active = false;
-      revertMedia?.();
-      context?.revert();
-    };
-  });
+    const bounds = control.getBoundingClientRect();
+    const pointerPosition =
+      ((event.clientX - bounds.left) / bounds.width) * 100;
+    comparisonPosition = Math.min(100, Math.max(0, pointerPosition));
+  }
 </script>
 
 <section
   id="studio-services"
   aria-labelledby="studio-services-title"
-  class="section-space overflow-hidden bg-brand-light text-brand-dark"
+  class="service-section bg-brand-dark text-brand-paper"
 >
-  <div class="site-shell">
-    <div
-      class="grid gap-8 border-b border-brand-dark/15 pb-10 lg:grid-cols-[1fr_0.72fr] lg:items-end"
-    >
-      <div>
-        <p class="eyebrow text-brand-green">Capabilities</p>
-        <h2
-          id="studio-services-title"
-          class="mt-7 max-w-4xl text-balance font-display text-[clamp(3.5rem,6vw,6.5rem)] leading-[0.88] tracking-[-0.04em]"
-        >
-          Built around the image.
-        </h2>
-      </div>
+  <div class="service-shell site-shell">
+    <header class="service-header">
+      <h2 id="studio-services-title" class="service-title font-display">
+        Our services
+      </h2>
+    </header>
 
-      <div class="max-w-lg lg:justify-self-end">
-        <p
-          class="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-brand-dark/40"
+    <div
+      class="category-tabs"
+      role="tablist"
+      aria-label="Studio service categories"
+    >
+      {#each serviceShowcases as showcase, index (showcase.category)}
+        <button
+          id={`service-tab-${index}`}
+          type="button"
+          role="tab"
+          aria-selected={activeShowcaseIndex === index}
+          aria-controls="service-workspace"
+          class:active={activeShowcaseIndex === index}
+          class="category-tab"
+          onclick={() => activateShowcase(index)}
+          onmouseenter={() => activateShowcase(index)}
+          onfocus={() => activateShowcase(index)}
         >
-          Image production · eight capabilities
-        </p>
-        <p class="mt-4 text-sm leading-relaxed text-brand-dark/65 sm:text-base">
-          Precise production services for clean assets, considered finishing,
-          and consistent delivery across every frame.
-        </p>
-      </div>
+          {showcase.displayTitle}
+        </button>
+      {/each}
     </div>
 
-    <ol
-      id="capabilities-service-list"
-      bind:this={serviceGrid}
-      class="service-grid mt-10 border-t border-brand-dark/15 lg:mt-14"
-    >
-      {#each services as service, index (service.slug)}
-        <li
-          bind:this={serviceItems[index]}
-          class="service-item border-b border-brand-dark/15"
+    {#if activeShowcase}
+      <div
+        id="service-workspace"
+        role="tabpanel"
+        aria-labelledby={`service-tab-${activeShowcaseIndex}`}
+        class="service-workspace"
+      >
+        <nav
+          class="service-index"
+          aria-label={`${activeShowcase.displayTitle} services`}
         >
-          <a
-            bind:this={serviceCards[index]}
-            id={`capability-${service.slug}`}
-            href={resolve("/services/[slug]", { slug: service.slug })}
-            class="service-card group grid items-stretch focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
-            aria-describedby={`service-description-${index}`}
-          >
-            <span
-              bind:this={serviceMedia[index]}
-              class="service-media relative block overflow-hidden bg-brand-paper"
+          {#each activeServices as service, index (service.slug)}
+            <a
+              id={`capability-${service.slug}`}
+              href={resolve("/services/[slug]", { slug: service.slug })}
+              class="service-row"
+              class:active-service={activeServiceIndex === index}
+              onmouseenter={() => activateService(index)}
+              onfocus={() => activateService(index)}
             >
-              <img
-                bind:this={serviceImages[index]}
-                src={service.media.src}
-                alt={service.media.alt}
-                width={service.media.width}
-                height={service.media.height}
-                loading="lazy"
-                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035] motion-reduce:transition-none"
-              />
-              <span
-                class="absolute left-3 top-3 bg-brand-dark px-2.5 py-1.5 font-mono text-[0.5rem] uppercase tracking-[0.14em] text-brand-light"
-              >
-                {String(index + 1).padStart(2, "0")}
+              <span class="service-row-content">
+                <span class="service-main">
+                  <span class="service-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span class="service-name">{service.title}</span>
+                </span>
+                <ArrowUpRight size={16} strokeWidth={1.45} aria-hidden="true" />
               </span>
-            </span>
+            </a>
+          {/each}
+        </nav>
 
-            <span
-              bind:this={serviceCopy[index]}
-              class="service-copy flex min-w-0 flex-col justify-between p-5 sm:p-6"
-            >
-              <span>
-                <span
-                  class="block font-mono text-[0.52rem] uppercase tracking-[0.15em] text-brand-green"
-                >
-                  Studio service
-                </span>
-                <span
-                  class="service-title mt-3 block text-balance font-display text-[clamp(1.65rem,2.2vw,2.35rem)] leading-[0.98] tracking-[-0.025em]"
-                >
-                  {service.title}
-                </span>
-                <span
-                  id={`service-description-${index}`}
-                  class="mt-3 block max-w-sm text-[0.78rem] leading-relaxed text-brand-dark/55 sm:text-sm"
-                >
-                  {service.description}
-                </span>
-              </span>
+        {#if activeService}
+          <div class="preview-column" aria-live="polite">
+            {#key activeService.slug}
+              <div class="media-preview comparison-preview">
+                <figure class="comparison-image comparison-before">
+                  <img
+                    src={activeService.media.src}
+                    alt=""
+                    aria-hidden="true"
+                    width={activeService.media.width}
+                    height={activeService.media.height}
+                  />
+                </figure>
 
-              <span
-                class="mt-5 flex items-center justify-between border-t border-brand-dark/12 pt-3 font-mono text-[0.5rem] uppercase tracking-[0.14em] text-brand-dark/45"
-              >
-                View service
-                <ArrowUpRight
-                  size={15}
-                  strokeWidth={1.5}
-                  class="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                <figure
+                  class="comparison-image comparison-after"
+                  style={`--comparison-position: ${comparisonPosition}%`}
+                >
+                  <img
+                    src={activeService.media.src}
+                    alt={activeService.media.alt}
+                    width={activeService.media.width}
+                    height={activeService.media.height}
+                  />
+                </figure>
+
+                <span class="media-label media-label-before">Before</span>
+                <span class="media-label media-label-after">After</span>
+
+                <span
+                  class="comparison-divider"
+                  style={`--comparison-position: ${comparisonPosition}%`}
+                  aria-hidden="true"
+                >
+                  <span>↔</span>
+                </span>
+
+                <input
+                  class="comparison-control"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={comparisonPosition}
+                  aria-label={`Compare before and after for ${activeService.title}`}
+                  oninput={updateComparison}
+                  onpointermove={previewComparison}
                 />
-              </span>
-            </span>
-          </a>
-        </li>
-      {/each}
-    </ol>
+              </div>
+            {/key}
+          </div>
+        {/if}
+      </div>
+    {/if}
   </div>
 </section>
 
 <style>
-  .service-card {
-    grid-template-columns: minmax(7.5rem, 36%) minmax(0, 1fr);
-    min-height: 13rem;
+  .service-section {
+    position: relative;
   }
 
-  .service-media img {
-    will-change: transform;
+  .service-shell {
+    display: grid;
+    padding-top: clamp(3rem, 5vw, 5rem);
+    padding-bottom: clamp(3rem, 5vw, 5rem);
+  }
+
+  .service-header {
+    padding-bottom: clamp(0.85rem, 1.4vw, 1.25rem);
   }
 
   .service-title {
+    font-size: clamp(2.5rem, 4.4vw, 4.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+  }
+
+  .category-tabs {
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-top: clamp(1rem, 1.8vw, 1.5rem);
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-paper) 28%, transparent);
+    border-radius: 0.2rem;
+    overflow: hidden;
+    scrollbar-width: none;
+  }
+
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-tab {
+    flex: 0 0 auto;
+    min-width: clamp(8.75rem, 13vw, 11.5rem);
+    padding: 0.72rem clamp(0.9rem, 1.6vw, 1.4rem);
+    border-right: 1px solid
+      color-mix(in srgb, var(--color-brand-paper) 28%, transparent);
+    color: color-mix(in srgb, var(--color-brand-paper) 58%, transparent);
+    font-family: var(--font-mono);
+    font-size: clamp(0.65rem, 0.9vw, 0.78rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
     transition:
-      color 250ms ease,
-      transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+      background-color 240ms ease,
+      color 240ms ease;
   }
 
-  .service-card:hover .service-title,
-  .service-card:focus-visible .service-title {
+  .category-tab:last-child {
+    border-right: 0;
+  }
+
+  .category-tab:hover,
+  .category-tab:focus-visible {
+    background: color-mix(in srgb, var(--color-brand-green) 14%, transparent);
+    color: var(--color-brand-paper);
+  }
+
+  .category-tab.active {
+    background: var(--color-brand-green);
+    color: var(--color-brand-dark);
+  }
+
+  .service-workspace {
+    display: grid;
+    gap: clamp(2.25rem, 4.5vw, 5rem);
+    align-items: start;
+    margin-top: clamp(1.5rem, 2.5vw, 2.25rem);
+  }
+
+  .service-index {
+    min-width: 0;
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-brand-paper) 16%, transparent);
+  }
+
+  .service-row {
+    position: relative;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    padding: clamp(0.68rem, 1vw, 0.88rem) 0;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-brand-paper) 16%, transparent);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    transition: color 220ms ease;
+  }
+
+  .service-row-content {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .service-main {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: clamp(0.75rem, 1.4vw, 1.25rem);
+    align-items: center;
+    transform-origin: left center;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .service-number {
+    color: color-mix(in srgb, var(--color-brand-paper) 38%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    transition: color 220ms ease;
+  }
+
+  .service-name {
+    min-width: 0;
+  }
+
+  .service-row :global(svg) {
+    flex: none;
+    color: color-mix(in srgb, var(--color-brand-paper) 42%, transparent);
+    transition:
+      color 220ms ease,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .service-row:hover,
+  .service-row:focus-visible,
+  .service-row.active-service {
+    z-index: 1;
     color: var(--color-brand-green);
-    transform: translateX(0.25rem);
   }
 
-  @media (min-width: 768px) {
-    .service-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    }
+  .service-row:hover .service-main,
+  .service-row:focus-visible .service-main,
+  .service-row.active-service .service-main {
+    transform: scale(1.08);
+  }
 
-    .service-item:nth-child(odd) {
-      padding-right: clamp(1.25rem, 2.5vw, 3rem);
-      border-right: 1px solid
-        color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
-    }
+  .service-row:hover :global(svg),
+  .service-row:focus-visible :global(svg),
+  .service-row.active-service :global(svg) {
+    color: var(--color-brand-green);
+    transform: none;
+  }
 
-    .service-item:nth-child(even) {
-      padding-left: clamp(1.25rem, 2.5vw, 3rem);
-    }
+  .service-row:hover .service-number,
+  .service-row:focus-visible .service-number,
+  .service-row.active-service .service-number {
+    color: var(--color-brand-green);
+  }
 
-    .service-item:nth-child(4n + 2) .service-card,
-    .service-item:nth-child(4n + 3) .service-card {
-      grid-template-columns: minmax(0, 1fr) minmax(7.5rem, 36%);
-    }
+  .preview-column {
+    width: min(100%, 30rem);
+    justify-self: center;
+  }
 
-    .service-item:nth-child(4n + 2) .service-media,
-    .service-item:nth-child(4n + 3) .service-media {
-      order: 2;
-    }
+  .media-preview {
+    position: relative;
+    isolation: isolate;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: clamp(0.85rem, 1.5vw, 1.25rem);
+    background: var(--color-brand-dark);
+    color: var(--color-brand-light);
+    margin: 0;
+    animation: preview-enter 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 
-    .service-item:nth-child(4n + 2) .service-copy,
-    .service-item:nth-child(4n + 3) .service-copy {
-      order: 1;
+  .comparison-image,
+  .comparison-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .comparison-image {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .comparison-image img {
+    object-fit: cover;
+    transform: scale(1.02);
+  }
+
+  .comparison-before img {
+    filter: saturate(0.5) contrast(0.9) brightness(0.92);
+  }
+
+  .comparison-after {
+    z-index: 2;
+    clip-path: inset(0 0 0 var(--comparison-position));
+    will-change: clip-path;
+  }
+
+  .media-label {
+    position: absolute;
+    z-index: 5;
+    top: 0.8rem;
+    padding: 0.38rem 0.75rem;
+    border: 1px solid rgb(248 248 246 / 0.28);
+    border-radius: 9999px;
+    background: rgb(32 33 31 / 0.38);
+    color: var(--color-brand-light);
+    font-family: var(--font-mono);
+    font-size: 0.46rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    backdrop-filter: blur(0.35rem);
+  }
+
+  .media-label-before {
+    left: 0.8rem;
+  }
+
+  .media-label-after {
+    right: 0.8rem;
+  }
+
+  .comparison-divider {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    bottom: 0;
+    left: var(--comparison-position);
+    width: 1px;
+    background: rgb(248 248 246 / 0.78);
+    pointer-events: none;
+    will-change: left;
+  }
+
+  .comparison-divider > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 2.25rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid rgb(248 248 246 / 0.58);
+    border-radius: 50%;
+    background: rgb(32 33 31 / 0.58);
+    color: var(--color-brand-light);
+    font-size: 0.65rem;
+    backdrop-filter: blur(0.35rem);
+    transform: translate(-50%, -50%);
+  }
+
+  .comparison-control {
+    position: absolute;
+    z-index: 6;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+
+  .comparison-control:focus {
+    outline: none;
+  }
+
+  .comparison-preview:has(.comparison-control:focus-visible)
+    .comparison-divider
+    > span {
+    background: color-mix(
+      in srgb,
+      var(--color-brand-green) 72%,
+      var(--color-brand-dark)
+    );
+  }
+
+  @keyframes preview-enter {
+    from {
+      opacity: 0;
+      transform: translateY(0.6rem) scale(0.988);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
-  @media (min-width: 1280px) {
-    .service-card {
-      min-height: 15rem;
+  @media (min-width: 64rem) {
+    .service-workspace {
+      grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+    }
+
+    .preview-column {
+      justify-self: end;
+      margin-top: -5rem;
+    }
+  }
+
+  @media (max-width: 63.999rem) {
+    .preview-column {
+      grid-row: 1;
+      justify-self: start;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .service-title {
+    .category-tab,
+    .service-row,
+    .service-main,
+    .service-row :global(svg) {
       transition: none;
+    }
+
+    .media-preview {
+      animation: none;
     }
   }
 </style>

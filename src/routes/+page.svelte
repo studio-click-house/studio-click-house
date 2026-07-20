@@ -50,9 +50,9 @@
   <HomeHero />
   <StudioIntroduction />
   <ScrollImageStory />
+  <ServicesSection />
   <WorkFieldsRail />
   <CreativeMarquee items={data.clientLogoItems} />
-  <ServicesSection />
   <TestimonialsSection />
   <CreativeDirection />
   <SelectedWork />

@@ -14,6 +14,28 @@ export interface ServiceItem {
   category: "Image Editing" | "Video Editing" | "3D Modeling";
 }
 
+export type ServiceShowcaseMedia =
+  | {
+      kind: "comparison";
+      before: PreviewMedia;
+      after: PreviewMedia;
+      beforeLabel: string;
+      afterLabel: string;
+    }
+  | {
+      kind: "video";
+      src: string;
+      poster: PreviewMedia;
+      alt: string;
+    };
+
+export interface ServiceShowcase {
+  category: ServiceItem["category"];
+  displayTitle: string;
+  description: string;
+  media: ServiceShowcaseMedia;
+}
+
 export interface FaqItem {
   question: string;
   answer: string;

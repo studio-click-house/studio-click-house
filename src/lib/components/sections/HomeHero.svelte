@@ -191,6 +191,17 @@
     </div>
   </div>
 
+  <div
+    class="scroll-indicator absolute bottom-[5.5rem] left-1/2 -translate-x-1/2 z-25 flex flex-col items-center gap-2 pointer-events-none"
+  >
+    <span class="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-brand-light/45">
+      Scroll
+    </span>
+    <div class="scroll-mouse flex justify-center items-start w-[20px] h-[34px] border border-brand-light/35 rounded-full">
+      <div class="scroll-wheel w-[3px] h-[8px] mt-1.5 bg-brand-green rounded-full"></div>
+    </div>
+  </div>
+
   <BrandMarquee />
 </section>
 
@@ -208,9 +219,53 @@
     opacity: 1;
   }
 
+  .scroll-indicator {
+    animation: scroll-fade-in 1s ease 1s both;
+  }
+
+  .scroll-wheel {
+    animation: scroll-wheel-dot 2.2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  }
+
+  @keyframes scroll-wheel-dot {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(12px);
+      opacity: 1;
+    }
+    65%, 100% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes scroll-fade-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-video {
       display: none;
+    }
+    .scroll-indicator,
+    .scroll-wheel {
+      animation: none;
+    }
+    .scroll-indicator {
+      opacity: 0.6;
     }
   }
 </style>
