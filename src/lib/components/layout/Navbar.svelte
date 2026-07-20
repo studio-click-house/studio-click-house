@@ -621,21 +621,32 @@
 
   @media (max-width: 39.999rem) {
     .nav-surface {
-      min-height: 3.9rem;
-      padding-inline: 0.45rem;
+      width: 100%;
+      min-height: 3.5rem;
+      padding-inline: 0.75rem;
     }
 
     .brand-block {
-      height: 3.05rem;
-      padding-inline: 0.35rem 0.7rem;
+      height: 3.5rem;
+      padding-inline: 0;
     }
 
     .brand-mark {
-      height: 2.4rem;
+      height: 2.55rem;
     }
 
     .nav-actions {
+      margin-left: auto;
       gap: 0.4rem;
+    }
+
+    .menu-action {
+      width: 2.5rem;
+      min-width: 2.5rem;
+      height: 2.5rem;
+      min-height: 2.5rem;
+      padding-inline: 0;
+      justify-content: center;
     }
 
     .mobile-route-grid {

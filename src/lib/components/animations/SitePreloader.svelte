@@ -237,11 +237,6 @@
   >
     <div class="preloader-backdrop" bind:this={backdropElement} aria-hidden="true"></div>
 
-    <div class="preloader-atmosphere" aria-hidden="true">
-      <span class="preloader-glow preloader-glow-left"></span>
-      <span class="preloader-glow preloader-glow-right"></span>
-    </div>
-
     <div
       class:preloader-drawing-ready={isDrawingReady}
       class="preloader-logo"
@@ -327,48 +322,6 @@
     background: var(--color-brand-dark);
   }
 
-  .preloader-atmosphere {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
-    transition: opacity 220ms ease;
-  }
-
-  .site-preloader-exiting .preloader-atmosphere {
-    opacity: 0;
-  }
-
-  .preloader-glow {
-    position: absolute;
-    width: clamp(20rem, 38vw, 36rem);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--color-brand-green) 18%, transparent);
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-brand-green) 24%, transparent) 0%,
-      color-mix(in srgb, var(--color-brand-green) 9%, transparent) 38%,
-      transparent 70%
-    );
-    will-change: transform, opacity;
-  }
-
-  .preloader-glow-left {
-    left: -10%;
-    bottom: -34%;
-    opacity: 0.65;
-    animation: drift-left-glow 4.8s ease-in-out infinite alternate;
-  }
-
-  .preloader-glow-right {
-    top: -38%;
-    right: -8%;
-    opacity: 0.42;
-    animation: drift-right-glow 5.4s ease-in-out infinite alternate;
-  }
-
   .preloader-logo {
     position: absolute;
     top: 50%;
@@ -437,34 +390,7 @@
     stroke-dashoffset: 270;
   }
 
-  @keyframes drift-left-glow {
-    from {
-      transform: translate3d(-4%, 5%, 0) scale(0.92);
-    }
-    to {
-      transform: translate3d(12%, -8%, 0) scale(1.08);
-    }
-  }
-
-  @keyframes drift-right-glow {
-    from {
-      transform: translate3d(7%, -5%, 0) scale(1.05);
-    }
-    to {
-      transform: translate3d(-10%, 10%, 0) scale(0.9);
-    }
-  }
-
   @media (max-width: 39.999rem) {
-    .preloader-glow-right {
-      display: none;
-    }
-
-    .preloader-glow-left {
-      width: 26rem;
-      opacity: 0.48;
-    }
-
     .preloader-logo {
       width: min(54vw, 13rem);
     }
@@ -472,8 +398,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .logo-draw-path,
-    .preloader-logo-complete,
-    .preloader-glow {
+    .preloader-logo-complete {
       animation: none;
     }
 
