@@ -14,25 +14,25 @@
     {
       title: "Specialist routing",
       description:
-        "Each brief moves to the people whose craft matches the image, format, and finishing requirement.",
+        "Each brief moves to the people whose craft matches the image, format, and finishing requirement. Your project is matched with specialists in high-end retouching, color correction, or product masking to ensure optimal quality.",
       icon: UsersRound,
     },
     {
       title: "Reference-led batches",
       description:
-        "An agreed first frame and shared finishing rules keep larger sets visually connected.",
+        "An agreed first frame and shared finishing rules keep larger sets visually connected. We establish strict visual alignment parameters from the start so that thousands of images maintain consistent grading, lighting, and detail.",
       icon: Layers3,
     },
     {
       title: "Review checkpoints",
       description:
-        "Quality review happens within the workflow, before final files are organised for handoff.",
+        "Quality review happens within the workflow, before final files are organised for handoff. Dedicated QC leads inspect every asset individually to verify dimensions, naming structures, and reference-matching prior to delivery.",
       icon: ShieldCheck,
     },
     {
       title: "Workflow fit",
       description:
-        "The studio can work with established naming, review, transfer, and delivery conventions.",
+        "The studio can work with established naming, review, transfer, and delivery conventions. We seamlessly integrate with your existing file management systems, custom metadata requirements, and server structures.",
       icon: Route,
     },
   ] as const;
@@ -76,9 +76,9 @@
             const timeline = gsap.timeline({
               scrollTrigger: {
                 trigger: section,
-                start: "top 92%",
-                end: "top 28%",
-                scrub: 0.82,
+                start: "top 85%",
+                end: "center 50%",
+                scrub: 0.6,
                 invalidateOnRefresh: true,
               },
             });

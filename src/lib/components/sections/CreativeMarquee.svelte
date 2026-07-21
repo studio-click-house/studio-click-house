@@ -14,13 +14,13 @@
 <section
   id="creative-marquee"
   aria-labelledby="creative-marquee-title"
-  class="client-wall relative overflow-hidden bg-brand-light py-32 text-brand-dark sm:py-40"
+  class="client-wall relative -mt-px overflow-x-clip bg-brand-light py-32 text-brand-dark sm:py-40"
 >
   <div class="site-shell relative z-10 mb-10 text-center">
     <div>
       <h2
         id="creative-marquee-title"
-        class="mt-7 font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] tracking-[-0.045em]"
+        class="font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] tracking-[-0.045em]"
       >
         Our Clients
       </h2>
@@ -80,11 +80,29 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(
-      circle at 50% 10%,
-      rgb(126 166 65 / 0.25),
-      transparent 45%
+      ellipse 62% 100% at 50% 0%,
+      color-mix(in srgb, var(--color-brand-green) 20%, transparent),
+      transparent 68%
     );
     content: "";
+    pointer-events: none;
+  }
+
+  .client-wall::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: clamp(9rem, 18vw, 15rem);
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-brand-dark) 7%, transparent) 1px,
+      transparent 1px
+    );
+    background-position: center top;
+    background-size: clamp(7rem, 8vw, 10rem) 100%;
+    content: "";
+    mask-image: linear-gradient(to bottom, black, transparent);
     pointer-events: none;
   }
 

@@ -160,7 +160,7 @@
             });
             gsap.to(".ai-panel-orb-highlight", {
               x: 14,
-              y: 24,
+              y: 10,
               scale: 1.06,
               rotation: 6,
               duration: 1.9,
@@ -434,6 +434,22 @@
     background-size: clamp(7rem, 8vw, 10rem) 100%;
   }
 
+  .ai-panel::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    height: clamp(12rem, 25vw, 22rem);
+    background: radial-gradient(
+      ellipse 62% 100% at 50% 100%,
+      color-mix(in srgb, var(--color-brand-green) 20%, transparent),
+      transparent 68%
+    );
+    content: "";
+    pointer-events: none;
+  }
+
   .ai-panel-orbits {
     position: absolute;
     z-index: 0;
@@ -471,7 +487,7 @@
 
   .ai-panel-orb-highlight {
     right: 34%;
-    bottom: 3%;
+    bottom: clamp(5rem, 6vw, 7rem);
     width: 4rem;
     height: 4rem;
     border: 1px solid
@@ -592,7 +608,7 @@
   }
 
   .ai-logo-claude {
-    bottom: 3%;
+    bottom: clamp(5rem, 6vw, 7rem);
     left: 53%;
     color: var(--logo-claude);
   }
