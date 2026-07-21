@@ -22,6 +22,9 @@
             "scroll-image-story",
             "creative-direction",
             "selected-work",
+            "studio-team",
+            "production-process",
+            "why-trust-us",
           ]);
 
           const sections = Array.from(

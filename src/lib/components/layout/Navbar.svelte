@@ -42,18 +42,30 @@
   onMount(() => {
     let active = true;
     let hasStarted = false;
+    let shouldRevealHeader = false;
     let hasLogoLanded = false;
     const waitsForPreloader = Boolean(document.querySelector(".site-preloader"));
     let context: { revert: () => void } | undefined;
     let revertMedia: (() => void) | undefined;
+    let resumeNavigation: (() => void) | undefined;
     let startNavigation: (() => void) | undefined;
 
-    const handlePreloaderLogoLanded = () => {
-      hasLogoLanded = true;
+    const handlePreloaderHeaderReveal = () => {
+      shouldRevealHeader = true;
       startNavigation?.();
     };
 
+    const handlePreloaderLogoLanded = () => {
+      hasLogoLanded = true;
+      resumeNavigation?.();
+    };
+
     if (waitsForPreloader) {
+      window.addEventListener(
+        "site-preloader-header-reveal",
+        handlePreloaderHeaderReveal,
+        { once: true },
+      );
       window.addEventListener(
         "site-preloader-logo-landed",
         handlePreloaderLogoLanded,
@@ -77,7 +89,7 @@
           revertMedia = () => media.revert();
 
           media.add("(prefers-reduced-motion: no-preference)", () => {
-            const headerDuration = waitsForPreloader ? 0.72 : 1;
+            const headerDuration = waitsForPreloader ? 0.52 : 1;
             const revealDuration = waitsForPreloader ? 0.5 : 0.7;
 
             const timeline = gsap
@@ -90,7 +102,16 @@
                 },
               })
               .set(headerElement, { yPercent: -100 })
-              .to(headerElement, { yPercent: 0, duration: headerDuration })
+              .to(headerElement, { yPercent: 0, duration: headerDuration });
+
+            if (waitsForPreloader) {
+              timeline.addPause(">", () => {
+                if (hasLogoLanded) timeline.play();
+              });
+              resumeNavigation = () => timeline.play();
+            }
+
+            timeline
               .from(
                 ".nav-reveal",
                 {
@@ -100,7 +121,7 @@
                   stagger: waitsForPreloader ? 0.055 : 0.08,
                   ease: "power3.out",
                 },
-                waitsForPreloader ? "-=0.34" : "-=0.45",
+                waitsForPreloader ? ">" : "-=0.45",
               )
               .from(
                 ".project-action",
@@ -149,17 +170,24 @@
             });
 
             if (waitsForPreloader) {
-              window.dispatchEvent(new CustomEvent("site-header-ready"));
+              resumeNavigation = () => {
+                window.dispatchEvent(new CustomEvent("site-header-ready"));
+              };
+              if (hasLogoLanded) resumeNavigation();
             }
           });
         }, headerElement);
       };
 
-      if (!waitsForPreloader || hasLogoLanded) startNavigation();
+      if (!waitsForPreloader || shouldRevealHeader || hasLogoLanded) startNavigation();
     });
 
     return () => {
       active = false;
+      window.removeEventListener(
+        "site-preloader-header-reveal",
+        handlePreloaderHeaderReveal,
+      );
       window.removeEventListener(
         "site-preloader-logo-landed",
         handlePreloaderLogoLanded,

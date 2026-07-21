@@ -205,7 +205,7 @@
     <!-- Left Column: 3 Category Selectors -->
     <div class="flex flex-col gap-4">
       <p
-        class="font-sans text-[0.55rem] uppercase tracking-[0.2em] text-brand-green font-semibold"
+        class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green font-semibold"
       >
         Our Divisions
       </p>
@@ -260,7 +260,7 @@
     <!-- Middle Column: Dynamic Services List -->
     <div class="border-l border-r border-brand-light/5 px-6">
       <p
-        class="font-sans text-[0.55rem] uppercase tracking-[0.2em] text-brand-green mb-5 font-semibold"
+        class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green mb-5 font-semibold"
       >
         Services
       </p>

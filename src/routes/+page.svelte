@@ -1,15 +1,15 @@
 <script lang="ts">
   import PageScrollReveals from "$lib/components/animations/PageScrollReveals.svelte";
   import ClientLocations from "$lib/components/sections/ClientLocations.svelte";
-  import CreativeDirection from "$lib/components/sections/CreativeDirection.svelte";
   import CreativeMarquee from "$lib/components/sections/CreativeMarquee.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import HomeHero from "$lib/components/sections/HomeHero.svelte";
+  import ProductionProcess from "$lib/components/sections/ProductionProcess.svelte";
   import ScrollImageStory from "$lib/components/sections/ScrollImageStory.svelte";
-  import SelectedWork from "$lib/components/sections/SelectedWork.svelte";
   import ServicesSection from "$lib/components/sections/ServicesSection.svelte";
   import StudioIntroduction from "$lib/components/sections/StudioIntroduction.svelte";
   import TestimonialsSection from "$lib/components/sections/TestimonialsSection.svelte";
+  import WhyChooseUs from "$lib/components/sections/WhyChooseUs.svelte";
   import WorkFieldsRail from "$lib/components/sections/WorkFieldsRail.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
@@ -54,8 +54,8 @@
   <WorkFieldsRail />
   <CreativeMarquee items={data.clientLogoItems} />
   <TestimonialsSection />
-  <CreativeDirection />
-  <SelectedWork />
+  <ProductionProcess />
+  <WhyChooseUs />
   <FaqSection />
   <ClientLocations />
 </main>

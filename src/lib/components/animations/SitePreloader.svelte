@@ -9,6 +9,8 @@
 
   onMount(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const drawingDuration = 2580;
+    const drawingTimeScale = drawingDuration / 1580;
     const animations: Animation[] = [];
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
     let headerReadyTimer: ReturnType<typeof setTimeout> | undefined;
@@ -56,6 +58,7 @@
     const beginExit = () => {
       if (isExiting) return;
       isExiting = true;
+      window.dispatchEvent(new CustomEvent("site-preloader-header-reveal"));
 
       if (!targetLogo) prepareHeaderLogo();
 
@@ -111,7 +114,7 @@
     const scheduleExit = () => {
       if (!isPageLoaded || !isDrawingReady || isExitScheduled) return;
       isExitScheduled = true;
-      const minimumDuration = reduceMotion ? 160 : 1580;
+      const minimumDuration = reduceMotion ? 160 : drawingDuration;
       const remaining = Math.max(0, minimumDuration - (performance.now() - drawingStartedAt));
       hideTimer = setTimeout(beginExit, remaining);
     };
@@ -140,8 +143,8 @@
           path.animate(
             [{ strokeDashoffset: `${distance}` }, { strokeDashoffset: "0" }],
             {
-              duration,
-              delay,
+              duration: duration * drawingTimeScale,
+              delay: delay * drawingTimeScale,
               easing: "cubic-bezier(0.65, 0, 0.35, 1)",
               fill: "forwards",
             },
@@ -153,8 +156,8 @@
       if (completeLogo) {
         animations.push(
           completeLogo.animate([{ opacity: 0 }, { opacity: 1 }], {
-            duration: 140,
-            delay: 1380,
+            duration: 140 * drawingTimeScale,
+            delay: 1380 * drawingTimeScale,
             easing: "linear",
             fill: "forwards",
           }),

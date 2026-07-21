@@ -261,7 +261,7 @@
         class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none"
       >
         <div
-          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-sm"
+          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[1.5rem]"
         >
           <!-- Colored Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">

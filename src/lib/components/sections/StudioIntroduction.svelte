@@ -280,6 +280,7 @@
               aria-pressed={colorway.id === selectedColorwayId}
               disabled={!colorwaysReady}
               onclick={() => selectColorway(colorway.id)}
+              onmouseenter={() => selectColorway(colorway.id)}
             >
               <span
                 class="colorway-swatch"

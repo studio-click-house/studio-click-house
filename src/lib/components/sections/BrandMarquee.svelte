@@ -7,23 +7,26 @@
   let marquee: HTMLElement;
 
   onMount(() => {
-    const serviceLabels = marquee.querySelectorAll<HTMLElement>(
-      ".marquee-service-name",
+    const centerProbes = marquee.querySelectorAll<HTMLElement>(
+      ".marquee-center-probe",
     );
     const centerObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          entry.target.classList.toggle("is-centered", entry.isIntersecting);
+          const serviceLabel = entry.target.closest<HTMLElement>(
+            ".marquee-service-name",
+          );
+          serviceLabel?.classList.toggle("is-centered", entry.isIntersecting);
         }
       },
       {
         root: marquee,
-        rootMargin: "0px -49.5% 0px -49.5%",
+        rootMargin: "0px -48.5% 0px -48.5%",
         threshold: 0,
       },
     );
 
-    serviceLabels.forEach((label) => centerObserver.observe(label));
+    centerProbes.forEach((probe) => centerObserver.observe(probe));
 
     return () => centerObserver.disconnect();
   });
@@ -50,6 +53,7 @@
           class="marquee-service-name font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
         >
           {item}
+          <span class="marquee-center-probe" aria-hidden="true"></span>
         </span>
       </span>
     {/each}
@@ -70,7 +74,17 @@
   }
 
   .marquee-service-name {
+    position: relative;
     transition: color 220ms ease;
+  }
+
+  .marquee-center-probe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
   }
 
   :global(.marquee-service-name.is-centered) {

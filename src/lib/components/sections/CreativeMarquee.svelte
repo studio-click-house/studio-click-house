@@ -14,7 +14,7 @@
 <section
   id="creative-marquee"
   aria-labelledby="creative-marquee-title"
-  class="client-wall relative overflow-hidden bg-brand-light py-12 text-brand-dark sm:py-16"
+  class="client-wall relative overflow-hidden bg-brand-light py-32 text-brand-dark sm:py-40"
 >
   <div class="site-shell relative z-10 mb-10 text-center">
     <div>

@@ -178,9 +178,9 @@
           /></a
         >
         <a
-          href={resolve("/#selected-work")}
+          href={resolve("/#studio-services")}
           class="text-link text-brand-light group"
-          >See the work
+          >Explore services
           <ArrowDown
             size={15}
             strokeWidth={1.7}
