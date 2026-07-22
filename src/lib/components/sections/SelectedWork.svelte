@@ -9,6 +9,7 @@
 
   let section: HTMLElement;
   let workHeader: HTMLElement;
+  let scrollField: HTMLElement;
   let headingLines: HTMLElement[] = [];
   let projectEntries: HTMLElement[] = [];
   let projectPlates: HTMLElement[] = [];
@@ -159,13 +160,13 @@
   id="selected-work"
   bind:this={section}
   aria-labelledby="selected-work-title"
-  class="selected-work overflow-clip bg-brand-dark text-brand-light"
+  class="selected-work overflow-clip bg-brand-paper text-brand-dark"
 >
   <header bind:this={workHeader} class="work-header site-shell">
     <div class="work-header-line">
       <p class="eyebrow text-brand-green">Selected work</p>
       <p
-        class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-brand-light/42"
+        class="font-mono text-[0.55rem] uppercase tracking-[0.15em] text-brand-dark/45"
       >
         Direction becomes proof
       </p>
@@ -196,7 +197,7 @@
     </div>
   </header>
 
-  <div class="work-scroll-field">
+  <div bind:this={scrollField} class="work-scroll-field">
     <div class="work-stage site-shell">
       <div class="project-field">
         {#each selectedProjects as project, index (project.id)}
@@ -229,7 +230,7 @@
 
             <div bind:this={projectCopies[index]} class="project-copy">
               <p
-                class="font-mono text-[0.56rem] uppercase tracking-[0.17em] text-brand-green"
+                class="font-mono text-[0.56rem] uppercase tracking-[0.17em] text-brand-green font-semibold"
               >
                 Proof {String(index + 1).padStart(2, "0")} / {project.category}
               </p>
@@ -243,7 +244,7 @@
                 {/each}
               </h3>
               <p
-                class="mt-6 max-w-md text-sm leading-relaxed text-brand-light/58 sm:text-base"
+                class="mt-6 max-w-md text-sm leading-relaxed text-brand-dark/75 sm:text-base"
               >
                 {project.description}
               </p>
@@ -264,7 +265,7 @@
       Preview media · final client-approved case studies will replace these
       studies
     </p>
-    <a href={resolve("/portfolio")} class="text-brand-green">View all work ↗</a>
+    <a href={resolve("/portfolio")} class="text-brand-green font-semibold">View all work ↗</a>
   </footer>
 </section>
 
@@ -284,7 +285,7 @@
     justify-content: space-between;
     gap: 1rem;
     border-block: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 15%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
     padding-block: 1.1rem;
   }
 
@@ -316,7 +317,7 @@
     padding-bottom: 0.55rem;
     font-size: 0.82rem;
     font-weight: 600;
-    color: var(--color-brand-light);
+    color: var(--color-brand-dark);
     transition: color 250ms ease;
   }
 
@@ -338,7 +339,7 @@
     display: grid;
     gap: 2rem;
     border-bottom: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 14%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
     padding-block: 2rem 4rem;
   }
 
@@ -351,8 +352,8 @@
     min-height: 32rem;
     overflow: hidden;
     border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 20%, transparent);
-    background: var(--color-brand-dark);
+      color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
+    background: var(--color-brand-light);
   }
 
   .project-image {
@@ -372,7 +373,7 @@
     font-size: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.13em;
-    color: color-mix(in srgb, var(--color-brand-light) 78%, transparent);
+    color: color-mix(in srgb, var(--color-brand-light) 90%, transparent);
     text-shadow: 0 1px 14px var(--color-brand-dark);
   }
 
@@ -418,19 +419,19 @@
 
   .project-copy {
     border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 17%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 17%, transparent);
     padding-top: 1.75rem;
   }
 
   .project-tag {
     border-bottom: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 22%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 22%, transparent);
     padding-bottom: 0.3rem;
     font-family: var(--font-mono);
     font-size: 0.52rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: color-mix(in srgb, var(--color-brand-light) 58%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
   }
 
   .work-footer {
@@ -439,13 +440,13 @@
     justify-content: space-between;
     gap: 1rem;
     border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 15%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
     padding-block: 1.5rem 3rem;
     font-family: var(--font-mono);
     font-size: 0.52rem;
     text-transform: uppercase;
     letter-spacing: 0.13em;
-    color: color-mix(in srgb, var(--color-brand-light) 38%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 55%, transparent);
   }
 
   @media (min-width: 640px) {
@@ -478,8 +479,8 @@
       line-height: 0.7;
       text-align: right;
       letter-spacing: -0.055em;
-      color: var(--color-brand-light);
-      opacity: 0.1;
+      color: var(--color-brand-dark);
+      opacity: 0.05;
       pointer-events: none;
       will-change: transform, opacity;
     }

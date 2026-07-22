@@ -189,7 +189,7 @@
   id="scroll-image-story"
   bind:this={section}
   aria-labelledby="scroll-image-story-title"
-  class="relative overflow-hidden bg-brand-dark text-brand-dark"
+  class="relative overflow-hidden bg-brand-light text-brand-dark"
 >
   <figure
     class="ai-visual relative h-[26rem] overflow-hidden sm:h-[34rem] lg:h-[42rem]"

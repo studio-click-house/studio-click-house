@@ -138,7 +138,7 @@
     class="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,33,31,0.5)_0%,rgba(32,33,31,0.2)_50%,rgba(32,33,31,0)_100%)]"
   ></div>
   <div
-    class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-dark/25 to-transparent"
+    class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-light/35 to-transparent"
   ></div>
 
   <div

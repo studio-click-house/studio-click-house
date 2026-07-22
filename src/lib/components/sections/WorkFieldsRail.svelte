@@ -104,7 +104,7 @@
     >
       {#each workGalleryItems as item (item.id)}
         <article
-          class="work-card relative w-[78vw] max-w-[30rem] shrink-0 snap-start overflow-hidden bg-brand-light/5 md:h-full md:w-[clamp(22rem,36vw,38rem)] md:max-w-none"
+          class="work-card relative w-[78vw] max-w-[30rem] shrink-0 snap-start overflow-hidden bg-brand-light/5 md:h-full md:w-[clamp(22rem,36vw,38rem)] md:max-w-none border border-brand-light/10"
         >
           <img
             src={item.media.src}
@@ -121,19 +121,19 @@
           <div class="work-card-copy absolute inset-x-0 bottom-0 p-5 sm:p-7">
             <div class="work-card-detail">
               <h3
-                class="mt-5 max-w-sm font-display text-3xl leading-[0.95] tracking-[-0.025em] sm:text-4xl"
+                class="mt-5 max-w-sm font-display text-3xl leading-[0.95] tracking-[-0.025em] sm:text-4xl text-brand-light"
               >
                 {item.title}
               </h3>
               <p
-                class="mt-4 max-w-sm text-sm leading-relaxed text-brand-light/70"
+                class="mt-4 max-w-sm text-sm leading-relaxed text-brand-light/80"
               >
                 {item.description}
               </p>
               <ul class="mt-5 flex flex-wrap gap-2" aria-label="Work tags">
                 {#each item.tags as tag (tag)}
                   <li
-                    class="border border-brand-light/25 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.12em] text-brand-light/75"
+                    class="border border-brand-light/25 px-3 py-1.5 font-mono text-[0.55rem] uppercase tracking-[0.12em] text-brand-light/80"
                   >
                     {tag}
                   </li>
@@ -174,8 +174,8 @@
   .work-card-shade {
     background: linear-gradient(
       to top,
-      rgb(18 17 17 / 0.9),
-      rgb(18 17 17 / 0.1) 62%,
+      rgba(18, 17, 17, 0.92),
+      rgba(18, 17, 17, 0.3) 62%,
       transparent
     );
   }

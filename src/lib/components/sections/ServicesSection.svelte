@@ -292,7 +292,7 @@
   id="studio-services"
   bind:this={sectionElement}
   aria-labelledby="studio-services-title"
-  class="service-section bg-brand-dark text-brand-paper"
+  class="service-section bg-brand-light text-brand-dark"
 >
   <div class="service-shell site-shell">
     <header class="service-header">
@@ -487,17 +487,19 @@
   .category-tabs {
     position: relative;
     display: flex;
+    align-items: center;
     width: fit-content;
     max-width: 100%;
     overflow-x: auto;
     margin-top: clamp(1rem, 1.8vw, 1.5rem);
     border: 1px solid
-      color-mix(in srgb, var(--color-brand-paper) 15%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
     border-radius: 0.35rem;
     overflow: hidden;
     scrollbar-width: none;
-    background: color-mix(in srgb, var(--color-brand-dark) 45%, transparent);
+    background: var(--color-brand-paper);
     padding: 0.25rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .category-tabs::-webkit-scrollbar {
@@ -523,7 +525,7 @@
     min-width: clamp(8.75rem, 13vw, 11.5rem);
     padding: 0.65rem clamp(0.9rem, 1.6vw, 1.4rem);
     border-radius: 0.25rem;
-    color: color-mix(in srgb, var(--color-brand-paper) 50%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 68%, transparent);
     font-family: var(--font-mono);
     font-size: clamp(0.65rem, 0.9vw, 0.75rem);
     font-weight: 600;
@@ -539,11 +541,12 @@
 
   .category-tab:hover,
   .category-tab:focus-visible {
-    color: var(--color-brand-paper);
+    color: var(--color-brand-dark);
   }
 
   .category-tab.active {
     color: var(--color-brand-dark);
+    font-weight: 700;
   }
 
   .service-workspace {
@@ -556,7 +559,7 @@
   .service-index {
     min-width: 0;
     border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-paper) 16%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 16%, transparent);
   }
 
   .service-row {
@@ -566,7 +569,7 @@
     width: 100%;
     padding: clamp(0.68rem, 1vw, 0.88rem) 0;
     border-bottom: 1px solid
-      color-mix(in srgb, var(--color-brand-paper) 16%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 16%, transparent);
     font-size: clamp(0.95rem, 1.2vw, 1.1rem);
     font-weight: 500;
     letter-spacing: -0.015em;
@@ -591,7 +594,7 @@
   }
 
   .service-number {
-    color: color-mix(in srgb, var(--color-brand-paper) 38%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 45%, transparent);
     font-family: var(--font-mono);
     font-size: 0.58rem;
     letter-spacing: 0.14em;
@@ -604,7 +607,7 @@
 
   .service-row :global(svg) {
     flex: none;
-    color: color-mix(in srgb, var(--color-brand-paper) 42%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 45%, transparent);
     transition:
       color 220ms ease,
       transform 320ms cubic-bezier(0.22, 1, 0.36, 1);

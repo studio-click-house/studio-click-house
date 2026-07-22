@@ -231,7 +231,7 @@
   id="creative-direction"
   bind:this={section}
   aria-labelledby="creative-direction-title"
-  class="direction-section overflow-clip bg-brand-dark text-brand-light"
+  class="direction-section overflow-clip bg-brand-light text-brand-dark"
 >
   <header
     class="direction-header site-shell grid gap-8 lg:grid-cols-12 lg:items-end"
@@ -239,7 +239,7 @@
     <div class="lg:col-span-3 lg:pb-3">
       <p class="eyebrow text-brand-green">Creative direction</p>
       <p
-        class="mt-4 max-w-[17rem] font-mono text-[0.58rem] uppercase leading-relaxed tracking-[0.14em] text-brand-light/42"
+        class="mt-4 max-w-[17rem] font-mono text-[0.58rem] uppercase leading-relaxed tracking-[0.14em] text-brand-dark/45"
       >
         One image system<br />Three deliberate passes
       </p>
@@ -263,20 +263,20 @@
       <div class="direction-stage site-shell">
         <div class="direction-index" aria-hidden="true">
           <span
-            class="font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-light/42"
+            class="font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-dark/45"
             >Decision path</span
           >
           <div class="index-track">
             <span bind:this={progressLine} class="index-progress"></span>
           </div>
-          <span class="font-mono text-[0.55rem] text-brand-light/35">03</span>
+          <span class="font-mono text-[0.55rem] text-brand-dark/40">03</span>
         </div>
 
         <div class="direction-copy">
           {#each directionPasses as pass, index (pass.name)}
             <article bind:this={passPanels[index]} class="pass-panel">
               <p
-                class="pass-eyebrow font-mono text-[0.58rem] uppercase tracking-[0.17em] text-brand-green"
+                class="pass-eyebrow font-mono text-[0.58rem] uppercase tracking-[0.17em] text-brand-green font-semibold"
               >
                 {pass.number} / {pass.name}
               </p>
@@ -293,7 +293,7 @@
                 {/each}
               </h3>
               <p
-                class="pass-detail mt-6 max-w-md text-sm leading-relaxed text-brand-light/58 sm:text-base"
+                class="pass-detail mt-6 max-w-md text-sm leading-relaxed text-brand-dark/75 sm:text-base"
               >
                 {pass.detail}
               </p>
@@ -341,7 +341,7 @@
             <div class="pass-marker-row">
               <span bind:this={passMarkers[index]} class="pass-marker"></span>
               <span
-                class="font-mono text-[0.54rem] uppercase tracking-[0.15em] text-brand-light/48"
+                class="font-mono text-[0.54rem] uppercase tracking-[0.15em] text-brand-dark/50"
                 >{pass.name}</span
               >
             </div>
@@ -450,8 +450,8 @@
     inset: 0;
     overflow: hidden;
     border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 20%, transparent);
-    background: var(--color-brand-dark);
+      color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
+    background: var(--color-brand-light);
   }
 
   .direction-image {
@@ -471,14 +471,14 @@
     justify-content: space-between;
     gap: 1rem;
     border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 15%, transparent);
-    background: color-mix(in srgb, var(--color-brand-dark) 76%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
+    background: color-mix(in srgb, var(--color-brand-light) 85%, transparent);
     padding: 0.9rem 1rem;
     font-family: var(--font-mono);
     font-size: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.13em;
-    color: color-mix(in srgb, var(--color-brand-light) 55%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 70%, transparent);
     backdrop-filter: blur(8px);
   }
 
@@ -546,8 +546,8 @@
     z-index: 3;
     font-size: clamp(6rem, 22vw, 13rem);
     line-height: 0.7;
-    color: var(--color-brand-light);
-    opacity: 0.9;
+    color: var(--color-brand-dark);
+    opacity: 0.08;
     pointer-events: none;
   }
 
@@ -557,7 +557,7 @@
     justify-items: center;
     gap: 1.5rem;
     border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 15%, transparent);
+      color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
     padding-block: 4rem 0;
     text-align: center;
   }
@@ -620,7 +620,7 @@
       width: 1px;
       flex: 1;
       overflow: hidden;
-      background: color-mix(in srgb, var(--color-brand-light) 14%, transparent);
+      background: color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
     }
 
     .index-progress {
@@ -644,14 +644,14 @@
       flex-direction: column;
       justify-content: center;
       border-top: 1px solid
-        color-mix(in srgb, var(--color-brand-light) 18%, transparent);
+        color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
       padding-block: clamp(3rem, 7vh, 6rem);
       will-change: transform, opacity;
     }
 
     .pass-panel:last-child {
       border-bottom: 1px solid
-        color-mix(in srgb, var(--color-brand-light) 18%, transparent);
+        color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
     }
 
     .direction-visual {

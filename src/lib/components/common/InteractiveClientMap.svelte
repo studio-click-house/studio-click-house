@@ -138,7 +138,7 @@
 
   {#if mapStatus === "ready"}
     <div
-      class="absolute right-4 top-4 z-10 border border-brand-light/15 bg-brand-dark/90 backdrop-blur-sm"
+      class="absolute right-4 top-4 z-10 border border-brand-light/15 bg-brand-dark/90 text-brand-light backdrop-blur-sm"
     >
       <button
         class="map-control"
@@ -186,7 +186,7 @@
           type="button"
           class="flex min-w-max items-center gap-2 border px-3 py-2 font-mono text-[0.58rem] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green {selectedLocation?.id ===
           location.id
-            ? 'border-brand-green bg-brand-green text-brand-dark'
+            ? 'border-brand-green bg-brand-green text-brand-dark font-bold'
             : 'border-brand-light/15 text-brand-light/65 hover:border-brand-green/60 hover:text-brand-green'}"
           onclick={() => focusLocation(location)}
         >
