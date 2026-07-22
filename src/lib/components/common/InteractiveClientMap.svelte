@@ -41,9 +41,9 @@
               defaults: { ease: "none" },
               scrollTrigger: {
                 trigger: sectionRoot,
-                start: "top 92%",
-                end: "top 30%",
-                scrub: 0.7,
+                start: "top 98%",
+                end: "top 8%",
+                scrub: 0.9,
               },
             });
 
@@ -193,7 +193,6 @@
         />
       </div>
     </div>
-
   </div>
 </div>
 

@@ -22,9 +22,12 @@
             "scroll-image-story",
             "creative-direction",
             "selected-work",
+            "studio-services",
+            "work-fields-rail",
             "studio-team",
             "production-process",
             "why-trust-us",
+            "faq-section",
             "client-locations",
           ]);
 
@@ -50,7 +53,7 @@
               scrollTrigger: {
                 trigger: section,
                 start: "top 82%",
-                once: true,
+                toggleActions: "play none none reverse",
               },
             });
 

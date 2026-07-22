@@ -18,7 +18,7 @@
         Proof belongs to the people who commissioned the work.
       </h2>
     </div>
-    <div class="lg:col-span-8 lg:pt-14">
+    <div data-scroll-visual class="lg:col-span-8 lg:pt-14">
       {#if testimonials.length}
         <div
           class="divide-y divide-brand-dark/15 border-y border-brand-dark/15"
@@ -45,13 +45,16 @@
                 <footer class="text-sm flex items-center gap-3">
                   <div class="h-px w-6 bg-brand-green/60"></div>
                   <div>
-                    <cite class="not-italic font-bold text-brand-dark block sm:inline">
+                    <cite
+                      class="not-italic font-bold text-brand-dark block sm:inline"
+                    >
                       {testimonial.name}
                     </cite>
                     <span
                       class="text-brand-dark/65 text-xs block sm:inline sm:before:content-['//_'] sm:before:mx-1 font-mono"
                     >
-                      {#if testimonial.role}{testimonial.role}, {/if}{testimonial.company}
+                      {#if testimonial.role}{testimonial.role},
+                      {/if}{testimonial.company}
                     </span>
                   </div>
                 </footer>
@@ -73,9 +76,7 @@
             <p class="font-display text-4xl sm:text-5xl">
               Client stories will live here.
             </p>
-            <p
-              class="mt-4 max-w-xl text-sm leading-relaxed text-brand-dark/65"
-            >
+            <p class="mt-4 max-w-xl text-sm leading-relaxed text-brand-dark/65">
               Verified testimonials, names, and companies will be added only
               after they are supplied and approved. The section is ready for
               that content now.

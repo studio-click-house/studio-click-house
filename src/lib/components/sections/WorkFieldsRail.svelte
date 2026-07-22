@@ -19,7 +19,7 @@
         const media = gsap.matchMedia();
 
         media.add(
-          "(min-width: 768px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)",
+          "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
           () => {
             const navbar = document.querySelector<HTMLElement>(".site-header");
             const navbarHeight = () =>
@@ -50,7 +50,7 @@
                 pin: true,
                 pinSpacing: true,
                 scrub: true,
-                anticipatePin: 0,
+                anticipatePin: 1,
                 invalidateOnRefresh: true,
               },
             });
@@ -148,7 +148,7 @@
 </section>
 
 <style>
-  @media (min-width: 48rem) and (min-height: 40.625rem) {
+  @media (min-width: 48rem) {
     #work-fields-rail {
       height: var(--rail-viewport-height, calc(100dvh - 4.35rem));
       min-height: var(--rail-viewport-height, calc(100dvh - 4.35rem));

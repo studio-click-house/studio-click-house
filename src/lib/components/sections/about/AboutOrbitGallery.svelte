@@ -112,20 +112,23 @@
           const cards = gsap.utils.toArray<HTMLElement>(".orbit-card-item");
           const totalCards = cards.length;
 
-          // Initial stack setup
+          // Initial Fanned Stack Setup
           cards.forEach((card, index) => {
-            const initialRotation = (index - Math.floor(totalCards / 2)) * 5;
+            const fanOffset = (index - Math.floor(totalCards / 2)) * 32;
+            const fanRotation = (index - Math.floor(totalCards / 2)) * 4.5;
+            const fanY = Math.abs(index - Math.floor(totalCards / 2)) * 4;
+
             gsap.set(card, {
-              x: 0,
-              y: 0,
-              rotation: initialRotation,
-              scale: 0.88,
+              x: fanOffset,
+              y: fanY,
+              rotation: fanRotation,
+              scale: 0.9,
               zIndex: totalCards - index,
             });
           });
 
           if (centerTextRef) {
-            gsap.set(centerTextRef, { autoAlpha: 0, scale: 0.92, y: 15 });
+            gsap.set(centerTextRef, { autoAlpha: 0.45, scale: 0.95, y: 10 });
           }
 
           // Main scrubbed timeline
@@ -133,23 +136,29 @@
             scrollTrigger: {
               trigger: sectionRef,
               start: "top top",
-              end: "+=220%",
+              end: "+=120%",
               pin: true,
-              scrub: 1,
+              scrub: 0.5,
               anticipatePin: 1,
             },
           });
 
-          // Phase 1: Expand cards in a circular orbit
+          // Phase 1: Expand cards outwards
           cards.forEach((card, index) => {
-            const isDesktop = window.innerWidth >= 1024;
-            const radius = isDesktop ? 340 : 220;
+            const width = window.innerWidth;
+            let radius = 480;
+            if (width < 768) {
+              radius = 230;
+            } else if (width < 1024) {
+              radius = 350;
+            } else if (width >= 1400) {
+              radius = 520;
+            }
 
-            // Start angle from top (-90 deg or -PI/2) distributed evenly around 360 deg
             const angle = (index / totalCards) * (2 * Math.PI) - Math.PI / 2;
             const targetX = Math.round(Math.cos(angle) * radius);
-            const targetY = Math.round(Math.sin(angle) * radius);
-            const targetRotation = Math.round((angle * (180 / Math.PI)) * 0.15);
+            const targetY = Math.round(Math.sin(angle) * (radius * 0.82));
+            const targetRotation = Math.round((angle * (180 / Math.PI)) * 0.1);
 
             tl.to(
               card,
@@ -157,7 +166,7 @@
                 x: targetX,
                 y: targetY,
                 rotation: targetRotation,
-                scale: isDesktop ? 1 : 0.82,
+                scale: width >= 768 ? 1 : 0.82,
                 ease: "power2.out",
                 duration: 1,
               },
@@ -165,7 +174,7 @@
             );
           });
 
-          // Phase 2: Fade in center text inside the orbit ring
+          // Phase 2: Fade in center text inside orbit ring
           if (centerTextRef) {
             tl.to(
               centerTextRef,
@@ -174,9 +183,9 @@
                 scale: 1,
                 y: 0,
                 ease: "power2.out",
-                duration: 0.5,
+                duration: 0.4,
               },
-              0.45,
+              0.15,
             );
           }
         });
@@ -194,25 +203,40 @@
   id="about-orbit-gallery"
   aria-label="Studio Work Orbit Showcase"
   bind:this={sectionRef}
-  class="relative min-h-screen overflow-hidden bg-brand-dark py-20 text-brand-light"
+  class="relative min-h-screen overflow-x-clip bg-brand-light pt-8 pb-16 text-brand-dark"
 >
-  <!-- Background Ambient Mesh -->
+  <!-- Background Ambient Radial Pattern -->
   <div
-    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(126,166,65,0.08)_0%,transparent_70%)]"
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(126,166,65,0.06)_0%,transparent_70%)]"
     aria-hidden="true"
   ></div>
 
+  <!-- Subtle Grid Background -->
+  <div
+    class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(51,46,45,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(51,46,45,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Top Connection Badge -->
+  <div class="relative z-20 flex w-full justify-center pt-2">
+    <div class="inline-flex items-center gap-3 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-dark/50">
+      <span class="h-px w-8 bg-brand-dark/20"></span>
+      <span>Studio Work Showcase</span>
+      <span class="h-px w-8 bg-brand-dark/20"></span>
+    </div>
+  </div>
+
   <!-- Pinned Content Outer Frame -->
-  <div class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4">
+  <div class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 pt-4">
     <!-- Center Orbit Container -->
-    <div class="relative flex h-[34rem] w-full max-w-5xl items-center justify-center sm:h-[40rem]">
+    <div class="relative flex h-[34rem] w-full max-w-7xl items-center justify-center sm:h-[40rem] lg:h-[44rem]">
       
-      <!-- Cards Stack / Ring -->
+      <!-- Pure Full-Bleed Image Cards (Fanned Arc Initial State) -->
       {#each orbitCards as card, index (card.id)}
         <div
-          class="orbit-card-item absolute aspect-[4/5] w-48 overflow-hidden rounded-2xl border border-brand-light/15 bg-brand-dark/90 p-1.5 shadow-2xl backdrop-blur-md sm:w-60 md:w-64"
+          class="orbit-card-item absolute aspect-[4/5] w-44 overflow-hidden rounded-2xl shadow-xl transition-shadow duration-300 hover:shadow-2xl sm:w-56 md:w-60 lg:w-64"
         >
-          <figure class="relative h-full w-full overflow-hidden rounded-xl">
+          <figure class="relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark">
             <img
               src={card.media.src}
               alt={card.media.alt}
@@ -222,24 +246,6 @@
               decoding="async"
               class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
             />
-            <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-transparent to-transparent"
-              aria-hidden="true"
-            ></div>
-            <figcaption
-              class="absolute bottom-3 left-3 right-3 flex flex-col gap-0.5"
-            >
-              <span
-                class="font-mono text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
-              >
-                {card.category}
-              </span>
-              <p
-                class="font-display text-xs font-medium leading-tight text-brand-light sm:text-sm"
-              >
-                {card.title}
-              </p>
-            </figcaption>
           </figure>
         </div>
       {/each}
@@ -247,28 +253,23 @@
       <!-- Center Text Reveal -->
       <div
         bind:this={centerTextRef}
-        class="relative z-30 max-w-sm px-6 text-center sm:max-w-md"
+        class="relative z-30 max-w-sm px-6 text-center sm:max-w-md md:max-w-lg"
       >
-        <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-brand-green/30 bg-brand-green/10 px-3 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-brand-green">
-          <span class="h-1.5 w-1.5 rounded-full bg-brand-green animate-pulse"></span>
-          Visual Masterclass
-        </div>
-
         <h2
-          class="font-display text-3xl font-light leading-tight tracking-[-0.03em] text-brand-light sm:text-4xl md:text-5xl"
+          class="font-display text-3xl font-light leading-tight tracking-[-0.035em] text-brand-dark sm:text-4xl md:text-5xl lg:text-6xl"
         >
           Post-production <br />
           <span class="italic text-brand-green">at full momentum.</span>
         </h2>
 
-        <p class="mt-3 text-xs leading-relaxed text-brand-light/70 sm:text-sm">
+        <p class="mt-4 text-xs leading-relaxed text-brand-dark/75 sm:text-sm md:text-base">
           From high-end editorial skin retouching to complex 3D CGI rendering, our dual-shift Dhaka studio turns creative concepts into flawless campaign assets.
         </p>
 
         <div class="mt-6 flex items-center justify-center gap-4">
           <a
             href="/portfolio"
-            class="inline-flex items-center rounded-lg bg-brand-green px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-brand-dark transition-all hover:bg-brand-green/90 focus-visible:outline-2 focus-visible:outline-brand-green"
+            class="inline-flex items-center rounded-lg bg-brand-dark px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-brand-light transition-all hover:bg-brand-dark/90 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-brand-dark"
           >
             Explore Work →
           </a>

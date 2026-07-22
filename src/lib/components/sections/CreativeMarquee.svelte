@@ -27,7 +27,10 @@
     </div>
   </div>
 
-  <div class="logo-rows relative z-10 border-y border-brand-dark/10">
+  <div
+    data-scroll-visual
+    class="logo-rows relative z-10 border-y border-brand-dark/10"
+  >
     {#each logoRows as row, rowIndex (`logo-row-${rowIndex}`)}
       <div
         class="logo-row overflow-hidden border-b border-brand-dark/10 last:border-b-0"
