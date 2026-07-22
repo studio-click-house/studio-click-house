@@ -499,6 +499,8 @@
             tabindex={indicatorIndex === index ? 0 : -1}
             class:active={indicatorIndex === index}
             onclick={() => showStep(index)}
+            onmouseenter={() => showStep(index)}
+            onfocus={() => showStep(index)}
             onkeydown={(event) => handleTabKeydown(event, index)}
           >
             <span>{step.navTitle}</span>
