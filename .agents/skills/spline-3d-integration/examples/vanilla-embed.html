@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+  vanilla-embed.html
+  Minimal production-ready Spline embed — vanilla HTML/JS
+  Features: transparent background, mobile skip, GPU check, load timeout fallback, no scroll hijacking
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spline Background</title>
+
+  <!-- Preload scene for faster perceived load -->
+  <link rel="preload" href="https://prod.spline.design/REPLACE_ME/scene.splinecode" as="fetch" crossorigin>
+
+  <!-- Load Spline viewer web component -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      /* IMPORTANT: Do NOT set overflow: hidden here.
+         Spline's generated code tries to add this — it will break page scroll.
+         If it appears anywhere in your CSS, remove it. */
+      overflow: auto;
+      background: #0a0a0a;
+    }
+
+    /* Spline background wrapper */
+    .spline-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+
+      /* Reserve space to prevent layout shift */
+      contain: strict;
+
+      /* Fade in when loaded */
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .spline-bg.loaded {
+      opacity: 1;
+    }
+
+    /* Fallback shown before load or on fallback devices */
+    .spline-fallback {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: #0a0a0a;
+      /* Optional: background image fallback
+      background: url('fallback.jpg') center/cover no-repeat;
+      */
+    }
+
+    /* Your actual page content */
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      font-family: system-ui, sans-serif;
+      padding: 4rem 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fallback static background -->
+  <div id="spline-fallback" class="spline-fallback"></div>
+
+  <!-- Spline Container (populated dynamically if device passes check) -->
+  <div id="spline-container" class="spline-bg"></div>
+
+  <!-- Page Content -->
+  <main class="content">
+    <h1>Your Headline</h1>
+    <p>Subheading or copy here...</p>
+  </main>
+
+  <script>
+    const SCENE_URL = 'https://prod.spline.design/REPLACE_ME/scene.splinecode';
+    const LOAD_TIMEOUT_MS = 8000;
+
+    // --- Device / Performance check ---
+    function shouldLoadSpline() {
+      const isMobile = window.innerWidth < 768;
+      const isLowEnd = navigator.hardwareConcurrency <= 2;
+
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+      const noWebGL = !gl;
+
+      return !isMobile && !isLowEnd && !noWebGL;
+    }
+
+    // --- Load Spline dynamically ---
+    if (shouldLoadSpline()) {
+      const container = document.getElementById('spline-container');
+
+      // Create viewer element
+      const viewer = document.createElement('spline-viewer');
+      viewer.setAttribute('url', SCENE_URL);
+      viewer.setAttribute('background', 'transparent');
+
+      // Uncomment to allow mouse-following events across full page:
+      // viewer.setAttribute('events-target', 'global');
+
+      container.appendChild(viewer);
+
+      // Fade in when loaded
+      viewer.addEventListener('load', () => {
+        container.classList.add('loaded');
+      });
+
+      // Safety timeout — if Spline stalls, keep fallback visible
+      setTimeout(() => {
+        if (!container.classList.contains('loaded')) {
+          console.warn('Spline load timed out — keeping fallback active');
+        }
+      }, LOAD_TIMEOUT_MS);
+
+    } else {
+      console.log('Skipping Spline 3D load — low performance device or mobile viewport');
+    }
+  </script>
+</body>
+</html>

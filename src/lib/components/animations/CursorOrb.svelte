@@ -21,6 +21,7 @@
 
       const trailContext = trailCanvas?.getContext("2d");
       if (!trailContext) return;
+      document.documentElement.classList.add("custom-cursor-active");
       const trailColor = getComputedStyle(document.documentElement)
         .getPropertyValue("--color-brand-acid")
         .trim();
@@ -124,14 +125,8 @@
 
       resizeTrail();
 
-      const moveX = gsap.quickTo(cursorElement, "x", {
-        duration: 0.75,
-        ease: "power2.out",
-      });
-      const moveY = gsap.quickTo(cursorElement, "y", {
-        duration: 0.75,
-        ease: "power2.out",
-      });
+      const moveX = gsap.quickSetter(cursorElement, "x", "px");
+      const moveY = gsap.quickSetter(cursorElement, "y", "px");
       const settleScaleX = gsap.quickTo(cursorElement, "scaleX", {
         duration: 0.34,
         ease: "power2.out",
@@ -140,11 +135,6 @@
         duration: 0.34,
         ease: "power2.out",
       });
-      const settleRotation = gsap.quickTo(cursorElement, "rotation", {
-        duration: 0.4,
-        ease: "power2.out",
-      });
-      const bubbleOffset = 36;
       let previousX: number | undefined;
       let previousY: number | undefined;
       let lastTrailX: number | undefined;
@@ -152,27 +142,40 @@
       let lastPointerX: number | undefined;
       let lastPointerY: number | undefined;
       let settleTimeout: ReturnType<typeof setTimeout> | undefined;
+      let isTrailSuppressed = false;
 
       gsap.set(cursorElement, {
-        xPercent: -50,
-        yPercent: -50,
+        xPercent: -18,
+        yPercent: -18,
         scaleX: 1,
         scaleY: 1,
         rotation: 0,
-        transformOrigin: "50% 50%",
+        force3D: true,
+        transformOrigin: "18% 18%",
       });
 
       const handlePointerMove = (event: PointerEvent) => {
-        isVisible = true;
+        const target = event.target as Element | null;
+        isTrailSuppressed = Boolean(
+          target?.closest("[data-cursor-trail='off']"),
+        );
+        if (isTrailSuppressed) {
+          trailPoints.length = 0;
+          trailContext.clearRect(0, 0, trailWidth, trailHeight);
+        }
+        const isTextEntry = Boolean(
+          target?.closest("input, textarea, select, [contenteditable='true']"),
+        );
+        isVisible = !isTextEntry;
         lastPointerX = event.clientX;
         lastPointerY = event.clientY;
         isInteractive = Boolean(
-          (event.target as Element | null)?.closest(
+          target?.closest(
             "a, button, input, textarea, select, summary, [role='button']",
           ),
         );
-        moveX(event.clientX + bubbleOffset);
-        moveY(event.clientY + bubbleOffset);
+        moveX(event.clientX);
+        moveY(event.clientY);
 
         const trailDistance =
           lastTrailX === undefined || lastTrailY === undefined
@@ -185,7 +188,7 @@
         const scrollIsActive =
           Math.abs(scrollVelocityX) > 0.2 || Math.abs(scrollVelocityY) > 0.2;
 
-        if (trailDistance >= 7 && !scrollIsActive) {
+        if (trailDistance >= 7 && !scrollIsActive && !isTrailSuppressed) {
           trailPoints.push({
             x: event.clientX,
             y: event.clientY,
@@ -204,9 +207,8 @@
           const deltaY = event.clientY - previousY;
           const movement = Math.min(Math.hypot(deltaX, deltaY) / 22, 1);
 
-          settleScaleX(1 + movement * 0.18);
-          settleScaleY(1 - movement * 0.08);
-          settleRotation(Math.atan2(deltaY, deltaX) * (180 / Math.PI) * 0.35);
+          settleScaleX(1 + movement * 0.025);
+          settleScaleY(1 - movement * 0.012);
         }
 
         previousX = event.clientX;
@@ -216,13 +218,17 @@
         settleTimeout = setTimeout(() => {
           settleScaleX(1);
           settleScaleY(1);
-          settleRotation(0);
           settleTimeout = undefined;
         }, 90);
       };
 
       const handleScroll = () => {
-        if (lastPointerX === undefined || lastPointerY === undefined) return;
+        if (
+          isTrailSuppressed ||
+          lastPointerX === undefined ||
+          lastPointerY === undefined
+        )
+          return;
 
         const now = performance.now();
         const elapsed = Math.max(now - lastScrollTime, 16);
@@ -264,16 +270,17 @@
         lastScrollX = window.scrollX;
         lastScrollY = window.scrollY;
         lastScrollTime = performance.now();
+        isTrailSuppressed = false;
         if (settleTimeout) clearTimeout(settleTimeout);
         settleScaleX(1);
         settleScaleY(1);
-        settleRotation(0);
         trailPoints.length = 0;
         trailContext.clearRect(0, 0, trailWidth, trailHeight);
       };
 
       const handlePointerDown = (event: PointerEvent) => {
         isPressed = true;
+        if (isTrailSuppressed) return;
 
         const burstCount = 12;
         for (let index = 0; index < burstCount; index += 1) {
@@ -295,7 +302,12 @@
       };
 
       const handleMediaChange = () => {
-        if (!canUseCursorOrb.matches) handlePointerLeave();
+        if (!canUseCursorOrb.matches) {
+          document.documentElement.classList.remove("custom-cursor-active");
+          handlePointerLeave();
+        } else {
+          document.documentElement.classList.add("custom-cursor-active");
+        }
       };
 
       window.addEventListener("pointermove", handlePointerMove, {
@@ -316,6 +328,7 @@
       window.addEventListener("pointerup", handlePointerUp, { passive: true });
       canUseCursorOrb.addEventListener("change", handleMediaChange);
       removeMediaListener = () => {
+        document.documentElement.classList.remove("custom-cursor-active");
         if (settleTimeout) clearTimeout(settleTimeout);
         window.removeEventListener("pointermove", handlePointerMove);
         window.removeEventListener("scroll", handleScroll);
@@ -352,8 +365,51 @@
     class:cursor-visible={isVisible}
     class:cursor-interactive={isInteractive}
     class:cursor-pressed={isPressed}
-    class="bubble-shell"
+    class="cursor-tool"
   >
+    <svg viewBox="0 0 24 24" role="presentation">
+      <defs>
+        <linearGradient
+          id="cursor-upper-depth"
+          x1="3"
+          y1="4"
+          x2="23"
+          y2="12"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop class="cursor-depth-highlight" offset="0" />
+          <stop class="cursor-depth-mid" offset="0.56" />
+          <stop class="cursor-depth-shadow" offset="1" />
+        </linearGradient>
+        <linearGradient
+          id="cursor-lower-depth"
+          x1="7.5"
+          y1="21"
+          x2="23"
+          y2="12"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop class="cursor-depth-deep" offset="0" />
+          <stop class="cursor-depth-dark" offset="0.62" />
+          <stop class="cursor-depth-edge" offset="1" />
+        </linearGradient>
+      </defs>
+      <path
+        class="cursor-send-face cursor-send-face-gray"
+        d="M3 4 23 12 7.5 21 10 12z"
+        transform="translate(24 0) scale(-1 1)"
+      />
+      <path
+        class="cursor-send-face cursor-send-face-dark"
+        d="M7.5 21 23 12 10 12z"
+        transform="translate(24 0) scale(-1 1)"
+      />
+      <path
+        class="cursor-send-ridge"
+        d="M10 12 23 12"
+        transform="translate(24 0) scale(-1 1)"
+      />
+    </svg>
   </span>
 </div>
 
@@ -373,24 +429,99 @@
     height: 100vh;
   }
 
-  .bubble-shell {
-    display: none;
+  .cursor-tool {
     position: relative;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-top: 0;
-    margin-left: 0;
-    border-radius: 999px;
-    background: var(--color-brand-green);
-    box-shadow: 0 0 1rem
-      color-mix(in srgb, var(--color-brand-green) 46%, transparent);
+    display: block;
+    width: 1.4rem;
+    height: 1.4rem;
     opacity: 0;
-    transform: scale(0.72);
+    filter: drop-shadow(
+      0.04rem 0.1rem 0.09rem
+        color-mix(in srgb, var(--color-brand-dark) 42%, transparent)
+    );
+    transform: scale(0.78);
     transition:
       opacity 180ms ease,
-      transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-      background 220ms ease,
-      box-shadow 220ms ease;
+      transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      color 220ms ease;
+  }
+
+  .cursor-tool svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+
+  .cursor-send-face {
+    stroke: none;
+    shape-rendering: geometricPrecision;
+  }
+
+  .cursor-send-face-dark {
+    fill: url(#cursor-lower-depth);
+  }
+
+  .cursor-send-face-gray {
+    fill: url(#cursor-upper-depth);
+  }
+
+  .cursor-depth-highlight {
+    stop-color: color-mix(
+      in srgb,
+      var(--color-brand-light) 68%,
+      var(--color-brand-dark)
+    );
+  }
+
+  .cursor-depth-mid {
+    stop-color: color-mix(
+      in srgb,
+      var(--color-brand-light) 42%,
+      var(--color-brand-dark)
+    );
+  }
+
+  .cursor-depth-shadow {
+    stop-color: color-mix(
+      in srgb,
+      var(--color-brand-light) 12%,
+      var(--color-brand-dark)
+    );
+  }
+
+  .cursor-depth-dark {
+    stop-color: color-mix(
+      in srgb,
+      var(--color-brand-light) 6%,
+      var(--color-brand-dark)
+    );
+  }
+
+  .cursor-depth-deep {
+    stop-color: var(--color-brand-dark);
+  }
+
+  .cursor-depth-edge {
+    stop-color: color-mix(
+      in srgb,
+      var(--color-brand-light) 24%,
+      var(--color-brand-dark)
+    );
+  }
+
+  .cursor-send-ridge {
+    fill: none;
+    stroke: color-mix(
+      in srgb,
+      var(--color-brand-light) 62%,
+      var(--color-brand-dark)
+    );
+    stroke-width: 0.55;
+    stroke-linecap: square;
+    opacity: 0.48;
   }
 
   .cursor-visible {
@@ -400,30 +531,30 @@
 
   .cursor-interactive {
     transform: scale(1.03);
-    background: color-mix(
-      in srgb,
-      var(--color-brand-green) 72%,
-      var(--color-brand-dark)
-    );
-    box-shadow: 0 0 1.2rem
-      color-mix(in srgb, var(--color-brand-green) 58%, transparent);
   }
 
   .cursor-pressed {
-    transform: scale(0.5);
-    background: color-mix(
-      in srgb,
-      var(--color-brand-green) 48%,
-      var(--color-brand-dark)
-    );
-    box-shadow: 0 0 1rem
-      color-mix(in srgb, var(--color-brand-green) 42%, transparent);
+    transform: scale(0.82);
+  }
+
+  :global(html.custom-cursor-active),
+  :global(html.custom-cursor-active body),
+  :global(html.custom-cursor-active body *) {
+    cursor: none !important;
+  }
+
+  :global(html.custom-cursor-active input),
+  :global(html.custom-cursor-active textarea),
+  :global(html.custom-cursor-active select),
+  :global(html.custom-cursor-active [contenteditable="true"]) {
+    cursor: text !important;
   }
 
   @media (pointer: coarse),
     (max-width: 63.999rem),
     (prefers-reduced-motion: reduce) {
-    .cursor-bubble {
+    .cursor-bubble,
+    .cursor-trail {
       display: none;
     }
   }

@@ -25,6 +25,7 @@
             "studio-team",
             "production-process",
             "why-trust-us",
+            "client-locations",
           ]);
 
           const sections = Array.from(

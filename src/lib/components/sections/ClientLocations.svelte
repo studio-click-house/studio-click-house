@@ -7,7 +7,7 @@
   aria-label="Client locations map"
   class="overflow-hidden bg-brand-dark text-brand-light"
 >
-  <div class="border-y border-brand-green/60">
+  <div class="border-y border-brand-light/10">
     <InteractiveClientMap />
   </div>
 </section>
