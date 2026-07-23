@@ -5,17 +5,19 @@
 ## React / Vite
 
 Install:
+
 ```bash
 npm install @splinetool/react-spline
 ```
 
 Basic:
+
 ```jsx
-import Spline from '@splinetool/react-spline';
+import Spline from "@splinetool/react-spline";
 
 export default function App() {
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
+    <div style={{ width: "100%", height: "100vh" }}>
       <Spline scene="https://prod.spline.design/REPLACE_ME/scene.splinecode" />
     </div>
   );
@@ -23,9 +25,10 @@ export default function App() {
 ```
 
 With object interaction + event listeners:
+
 ```jsx
-import { useRef } from 'react';
-import Spline from '@splinetool/react-spline';
+import { useRef } from "react";
+import Spline from "@splinetool/react-spline";
 
 export default function App() {
   const splineRef = useRef();
@@ -35,11 +38,11 @@ export default function App() {
   }
 
   function triggerAnimation() {
-    splineRef.current.emitEvent('mouseHover', 'Cube');
+    splineRef.current.emitEvent("mouseHover", "Cube");
   }
 
   function onSplineEvent(e) {
-    console.log('Object interacted:', e.target.name);
+    console.log("Object interacted:", e.target.name);
   }
 
   return (
@@ -56,14 +59,21 @@ export default function App() {
 ```
 
 **Lazy loading (recommended for performance):**
-```jsx
-import { lazy, Suspense } from 'react';
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
+```jsx
+import { lazy, Suspense } from "react";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 export default function Hero() {
   return (
-    <Suspense fallback={<div style={{ background: '#0a0a0a', width: '100%', height: '100vh' }} />}>
+    <Suspense
+      fallback={
+        <div
+          style={{ background: "#0a0a0a", width: "100%", height: "100vh" }}
+        />
+      }
+    >
       <Spline scene="https://prod.spline.design/REPLACE_ME/scene.splinecode" />
     </Suspense>
   );
@@ -75,13 +85,15 @@ export default function Hero() {
 ## Next.js
 
 Install:
+
 ```bash
 npm install @splinetool/react-spline
 ```
 
 **Use the `/next` import** for SSR support + auto blurred placeholder:
+
 ```jsx
-import Spline from '@splinetool/react-spline/next';
+import Spline from "@splinetool/react-spline/next";
 
 export default function Page() {
   return (

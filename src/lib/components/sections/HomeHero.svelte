@@ -194,11 +194,17 @@
   <div
     class="scroll-indicator absolute bottom-[5.5rem] left-1/2 -translate-x-1/2 z-25 flex flex-col items-center gap-2 pointer-events-none"
   >
-    <span class="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-brand-light/45">
+    <span
+      class="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-brand-light/45"
+    >
       Scroll
     </span>
-    <div class="scroll-mouse flex justify-center items-start w-[20px] h-[34px] border border-brand-light/35 rounded-full">
-      <div class="scroll-wheel w-[3px] h-[8px] mt-1.5 bg-brand-green rounded-full"></div>
+    <div
+      class="scroll-mouse flex justify-center items-start w-[20px] h-[34px] border border-brand-light/35 rounded-full"
+    >
+      <div
+        class="scroll-wheel w-[3px] h-[8px] mt-1.5 bg-brand-green rounded-full"
+      ></div>
     </div>
   </div>
 
@@ -239,7 +245,8 @@
       transform: translateY(12px);
       opacity: 1;
     }
-    65%, 100% {
+    65%,
+    100% {
       transform: translateY(12px);
       opacity: 0;
     }

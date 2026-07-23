@@ -15,6 +15,7 @@ These are the real-world issues that only surface after integration. Read this b
 **Why:** Spline's auto-generated vanilla JS exports inject `overflow: hidden` into `<body>` CSS by default. This is baked into their generated code.
 
 **Fix:**
+
 ```css
 /* Add this to your CSS — overrides Spline's injection */
 body {
@@ -35,11 +36,13 @@ Or in Play Settings (Spline editor → Export → Play Settings), **disable "Pag
 **Why:** The background color is set to white by default in Spline's export settings.
 
 **Fix:**
+
 1. In Spline editor → Export → Play Settings → toggle **Hide Background** ON
 2. Click **Generate Draft** or **Promote to Production** — the URL does NOT auto-update with new settings
 3. Copy the new URL
 
 For the web component you can also override inline:
+
 ```html
 <spline-viewer url="..." background="transparent"></spline-viewer>
 ```
@@ -53,13 +56,14 @@ For the web component you can also override inline:
 **Why:** The `prod.spline.design` CDN occasionally has latency or drops requests. There's no built-in retry or error handling.
 
 **Fix — add a timeout fallback:**
+
 ```js
 const TIMEOUT_MS = 8000;
 
 const timeoutId = setTimeout(() => {
   // Spline didn't load in time — show fallback
-  document.getElementById('spline-fallback').style.display = 'block';
-  document.querySelector('.spline-wrapper').style.display = 'none';
+  document.getElementById("spline-fallback").style.display = "block";
+  document.querySelector(".spline-wrapper").style.display = "none";
 }, TIMEOUT_MS);
 
 // If using Runtime API, clear the timeout on successful load:
@@ -79,14 +83,15 @@ spline.load(sceneUrl).then(() => {
 **Why:** Spline uses WebGL which runs on the GPU. Apple Silicon Macs have exceptional GPU performance. Most Windows laptops and Android devices do not have dedicated GPUs.
 
 **Fix — detect capability before loading:**
+
 ```js
 function shouldLoadSpline() {
   const isMobile = window.innerWidth < 768;
   const isLowEnd = navigator.hardwareConcurrency <= 2;
 
   // Optional: test WebGL support
-  const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+  const canvas = document.createElement("canvas");
+  const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
   const noWebGL = !gl;
 
   return !isMobile && !isLowEnd && !noWebGL;
@@ -108,8 +113,10 @@ if (shouldLoadSpline()) {
 **Why:** The canvas has no reserved height before loading, so the browser doesn't know how much space to allocate. HTML renders → space collapses → scene loads → everything jumps. This tanks your CLS (Cumulative Layout Shift) Core Web Vitals score.
 
 **Fix — pre-allocate space:**
+
 ```css
-spline-viewer, canvas.spline-canvas {
+spline-viewer,
+canvas.spline-canvas {
   display: block;
   width: 100%;
   height: 100vh; /* or whatever your target height is */

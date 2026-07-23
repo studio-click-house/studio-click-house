@@ -20,10 +20,13 @@
 
   // Dynamic back cards images: next and previous in category list
   let backLeftMedia = $derived(
-    activeServices[(activeServiceIndex - 1 + activeServices.length) % activeServices.length]?.media ?? activeService?.media
+    activeServices[
+      (activeServiceIndex - 1 + activeServices.length) % activeServices.length
+    ]?.media ?? activeService?.media,
   );
   let backRightMedia = $derived(
-    activeServices[(activeServiceIndex + 1) % activeServices.length]?.media ?? activeService?.media
+    activeServices[(activeServiceIndex + 1) % activeServices.length]?.media ??
+      activeService?.media,
   );
 
   // DOM elements for animation bindings

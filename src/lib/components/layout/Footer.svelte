@@ -16,12 +16,14 @@
   }
 </script>
 
-<footer id="site-footer" class="footer-container text-brand-light relative overflow-hidden">
+<footer
+  id="site-footer"
+  class="footer-container text-brand-light relative overflow-hidden"
+>
   <!-- Top glow design accent -->
   <div class="footer-glow" aria-hidden="true"></div>
 
   <div class="site-shell pb-8 pt-24 sm:pt-32 relative z-10">
-
     <!-- Main Navigation Grid -->
     <div class="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
       <!-- Col 1: Branding (Span 4) -->
@@ -40,17 +42,27 @@
         </p>
         <div class="flex items-center gap-2.5 pt-2">
           <span class="relative flex size-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
-            <span class="relative inline-flex rounded-full size-2 bg-brand-green"></span>
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full size-2 bg-brand-green"
+            ></span>
           </span>
-          <span class="font-mono text-[0.62rem] uppercase tracking-wider text-brand-light/45">
+          <span
+            class="font-mono text-[0.62rem] uppercase tracking-wider text-brand-light/45"
+          >
             System Operational // Global Studio
           </span>
         </div>
       </div>
 
       <!-- Col 2: Navigation Links (Span 3) -->
-      <nav id="footer-navigation" aria-label="Footer navigation" class="lg:col-span-3 space-y-6">
+      <nav
+        id="footer-navigation"
+        aria-label="Footer navigation"
+        class="lg:col-span-3 space-y-6"
+      >
         <p class="eyebrow text-brand-light/40 tracking-[0.15em]">Explore</p>
         <ul class="grid grid-cols-2 gap-x-4 gap-y-3.5 text-xs">
           {#each navigationItems as item (item.href)}
@@ -153,8 +165,12 @@
     </div>
 
     <!-- Outlined Watermark (Huge) -->
-    <div class="watermark-container pointer-events-none select-none overflow-hidden py-4 border-t border-brand-light/5">
-      <div class="watermark-text text-[clamp(2.5rem,8.8vw,9.5rem)] font-display font-extrabold text-center tracking-tight leading-none uppercase">
+    <div
+      class="watermark-container pointer-events-none select-none overflow-hidden py-4 border-t border-brand-light/5"
+    >
+      <div
+        class="watermark-text text-[clamp(2.5rem,8.8vw,9.5rem)] font-display font-extrabold text-center tracking-tight leading-none uppercase"
+      >
         Studio Click House
       </div>
     </div>
@@ -164,10 +180,18 @@
       id="footer-legal"
       class="flex flex-col gap-4 border-t border-brand-light/10 pt-6 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-brand-light/45 sm:flex-row sm:items-center sm:justify-between"
     >
-      <p>&copy; {new Date().getFullYear()} Studio Click House. All rights reserved.</p>
+      <p>
+        &copy; {new Date().getFullYear()} Studio Click House. All rights reserved.
+      </p>
       <div class="flex items-center gap-6">
-        <a href={resolve("/privacy")} class="hover:text-brand-light transition-colors">Privacy</a>
-        <a href={resolve("/terms")} class="hover:text-brand-light transition-colors">Terms</a>
+        <a
+          href={resolve("/privacy")}
+          class="hover:text-brand-light transition-colors">Privacy</a
+        >
+        <a
+          href={resolve("/terms")}
+          class="hover:text-brand-light transition-colors">Terms</a
+        >
         <a
           href="#top"
           onclick={scrollToTop}
@@ -193,7 +217,11 @@
     width: min(45rem, 80vw);
     height: 35rem;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(126, 166, 65, 0.065) 0%, transparent 68%);
+    background: radial-gradient(
+      circle,
+      rgba(126, 166, 65, 0.065) 0%,
+      transparent 68%
+    );
     filter: blur(40px);
     pointer-events: none;
     user-select: none;
@@ -211,7 +239,7 @@
   }
 
   .hover-underline-anim::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     transform: scaleX(0);

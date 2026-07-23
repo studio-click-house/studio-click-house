@@ -141,29 +141,46 @@
             const titleTexts = gsap.utils.toArray<HTMLElement>(
               ".breakdown-title-text",
             );
-            const details = gsap.utils.toArray<HTMLElement>(
-              ".breakdown-panel-details",
+            const descriptions = gsap.utils.toArray<HTMLElement>(
+              ".breakdown-description",
             );
+            const featuresLists = gsap.utils.toArray<HTMLElement>(
+              ".breakdown-features",
+            );
+            const links = gsap.utils.toArray<HTMLElement>(".breakdown-link");
 
             gsap.set(images, {
               autoAlpha: 0,
-              clipPath: "inset(0% 0% 100% 0%)",
-              scale: 1.025,
             });
             gsap.set(panels, { autoAlpha: 0 });
             gsap.set(titleTexts, {
-              yPercent: 112,
-              transformOrigin: "left bottom",
+              autoAlpha: 0,
+              y: 15,
             });
-            gsap.set(details, { autoAlpha: 0, y: 24 });
+            gsap.set([descriptions, featuresLists, links], {
+              autoAlpha: 0,
+              y: 15,
+            });
+
             gsap.set(images[0], {
               autoAlpha: 1,
-              clipPath: "inset(0% 0% 0% 0%)",
-              scale: 1,
             });
             gsap.set(panels[0], { autoAlpha: 1 });
-            gsap.set(titleTexts[0], { yPercent: 0 });
-            gsap.set(details[0], { autoAlpha: 1, y: 0 });
+            gsap.set(titleTexts[0], {
+              autoAlpha: 1,
+              y: 0,
+            });
+            gsap.set([descriptions[0], links[0]], {
+              autoAlpha: 1,
+              y: 0,
+            });
+            const firstFeatures = gsap.utils.toArray<HTMLElement>(
+              featuresLists[0].querySelectorAll("li"),
+            );
+            gsap.set(firstFeatures, {
+              autoAlpha: 1,
+              y: 0,
+            });
 
             const timeline = gsap.timeline({
               defaults: { ease: "none" },
@@ -187,61 +204,38 @@
 
             for (let index = 1; index < stages.length; index += 1) {
               const transitionStart = index - 0.25;
+              const prevFeatures = gsap.utils.toArray<HTMLElement>(
+                featuresLists[index - 1].querySelectorAll("li"),
+              );
+              const currFeatures = gsap.utils.toArray<HTMLElement>(
+                featuresLists[index].querySelectorAll("li"),
+              );
 
               timeline
-                .set(
-                  images[index],
-                  {
-                    autoAlpha: 1,
-                    clipPath: "inset(0% 0% 100% 0%)",
-                    scale: 1.025,
-                  },
-                  transitionStart,
-                )
+                .set(panels[index], { autoAlpha: 1 }, transitionStart + 0.25)
+                // 1. Image instant change (no transition, no scale, no opacity animate)
+                .set(images[index - 1], { autoAlpha: 0 }, transitionStart)
+                .set(images[index], { autoAlpha: 1 }, transitionStart)
+                // 2. Outgoing Copy fading out (still and clean)
                 .to(
-                  images[index],
-                  {
-                    clipPath: "inset(0% 0% 0% 0%)",
-                    scale: 1,
-                    duration: 0.5,
-                    ease: "power2.inOut",
-                  },
-                  transitionStart,
-                )
-                .set(images[index - 1], { autoAlpha: 0 }, transitionStart + 0.5)
-                .to(
-                  titleTexts[index - 1],
-                  {
-                    yPercent: -112,
-                    duration: 0.3,
-                    ease: "power2.in",
-                  },
-                  transitionStart,
-                )
-                .to(
-                  details[index - 1],
+                  [
+                    titleTexts[index - 1],
+                    descriptions[index - 1],
+                    prevFeatures,
+                    links[index - 1],
+                  ],
                   {
                     autoAlpha: 0,
-                    y: -18,
-                    duration: 0.3,
+                    y: -15,
+                    duration: 0.35,
                     ease: "power2.in",
                   },
                   transitionStart,
                 )
-                .set(panels[index], { autoAlpha: 1 }, transitionStart + 0.25)
+                // 3. Incoming Copy fading in (still and clean)
                 .fromTo(
                   titleTexts[index],
-                  { yPercent: 112 },
-                  {
-                    yPercent: 0,
-                    duration: 0.5,
-                    ease: "power2.out",
-                  },
-                  transitionStart + 0.25,
-                )
-                .fromTo(
-                  details[index],
-                  { autoAlpha: 0, y: 24 },
+                  { autoAlpha: 0, y: 15 },
                   {
                     autoAlpha: 1,
                     y: 0,
@@ -249,6 +243,40 @@
                     ease: "power2.out",
                   },
                   transitionStart + 0.25,
+                )
+                .fromTo(
+                  descriptions[index],
+                  { autoAlpha: 0, y: 15 },
+                  {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                  },
+                  transitionStart + 0.3,
+                )
+                .fromTo(
+                  currFeatures,
+                  { autoAlpha: 0, y: 10 },
+                  {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.4,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                  },
+                  transitionStart + 0.35,
+                )
+                .fromTo(
+                  links[index],
+                  { autoAlpha: 0, y: 10 },
+                  {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "power2.out",
+                  },
+                  transitionStart + 0.4,
                 );
             }
 
@@ -506,6 +534,11 @@
     transform: translateY(-50%);
   }
 
+  .breakdown-title-text {
+    display: block;
+    will-change: transform;
+  }
+
   .breakdown-title {
     max-width: 10ch;
     font-family: var(--font-display);
@@ -519,11 +552,6 @@
     overflow: hidden;
     padding: 0 0.08em 0.16em;
     margin: 0 -0.08em -0.16em;
-  }
-
-  .breakdown-title-text {
-    display: block;
-    will-change: transform;
   }
 
   .breakdown-panel-details {
@@ -568,8 +596,7 @@
     gap: 0.7rem;
     margin-top: 1.75rem;
     padding-bottom: 0.35rem;
-    border-bottom: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 38%, transparent);
+    position: relative;
     font-family: var(--font-mono);
     font-size: 0.62rem;
     font-weight: 500;
@@ -577,14 +604,31 @@
     text-transform: uppercase;
     transition:
       gap 240ms ease,
-      color 240ms ease,
-      border-color 240ms ease;
+      color 240ms ease;
+  }
+
+  .breakdown-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-brand-dark) 38%, transparent);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .breakdown-link:hover {
     gap: 0.95rem;
-    border-color: var(--color-brand-green);
     color: var(--color-brand-green);
+  }
+
+  .breakdown-link:hover::after {
+    background-color: var(--color-brand-green);
+    transform: scaleX(1);
+    transform-origin: left center;
   }
 
   @media (min-width: 48rem) and (prefers-reduced-motion: no-preference) {

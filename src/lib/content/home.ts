@@ -384,14 +384,15 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     year: "2026",
     category: "Raw capture",
     title: "Archidomo",
-    description: "Untouched camera files showcasing original lighting, color, and raw studio backdrop.",
+    description:
+      "Untouched camera files showcasing original lighting, color, and raw studio backdrop.",
     bgColor: "rgb(155, 172, 179)",
     media: {
       src: "/images/portfolio/model-raw.png",
       alt: "Raw camera capture",
       width: 1200,
       height: 1600,
-      credit: "Studio Click House"
+      credit: "Studio Click House",
     },
     href: "/portfolio",
   },
@@ -400,14 +401,15 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     year: "2026",
     category: "Precision clipping",
     title: "Orlinski",
-    description: "Point-by-point hand-drawn vector paths tracing silhouettes with absolute precision.",
+    description:
+      "Point-by-point hand-drawn vector paths tracing silhouettes with absolute precision.",
     bgColor: "rgb(193, 154, 162)",
     media: {
       src: "/images/portfolio/model-clipping.png",
       alt: "Precision clipping path work",
       width: 1200,
       height: 1600,
-      credit: "Studio Click House"
+      credit: "Studio Click House",
     },
     href: "/portfolio",
   },
@@ -416,16 +418,16 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     year: "2025",
     category: "Clean isolation",
     title: "Pikko",
-    description: "Subjects separated cleanly from the studio background, prepared for white or transparent layouts.",
+    description:
+      "Subjects separated cleanly from the studio background, prepared for white or transparent layouts.",
     bgColor: "rgb(147, 168, 149)",
     media: {
       src: "/images/portfolio/model-isolated.png",
       alt: "Isolated fashion portrait",
       width: 1200,
       height: 1600,
-      credit: "Studio Click House"
+      credit: "Studio Click House",
     },
     href: "/portfolio",
   },
 ];
-

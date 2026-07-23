@@ -26,16 +26,22 @@
         media.add(
           "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
           () => {
-            const intro = localStage.querySelector<HTMLElement>(".showcase-intro");
+            const intro =
+              localStage.querySelector<HTMLElement>(".showcase-intro");
             const panels = gsap.utils.toArray<HTMLElement>(".project-panel");
             const bodies = gsap.utils.toArray<HTMLElement>(".project-body");
-            const mediaReveals = gsap.utils.toArray<HTMLElement>(".project-media-reveal");
-            const mediaContents = gsap.utils.toArray<HTMLElement>(".project-media-content");
+            const mediaReveals = gsap.utils.toArray<HTMLElement>(
+              ".project-media-reveal",
+            );
+            const mediaContents = gsap.utils.toArray<HTMLElement>(
+              ".project-media-content",
+            );
             const images = gsap.utils.toArray<HTMLElement>(".project-image");
             const revealLines = panels.map((panel) =>
               gsap.utils.toArray<HTMLElement>(".detail-reveal-inner", panel),
             );
-            const projectLinks = gsap.utils.toArray<HTMLElement>(".project-link");
+            const projectLinks =
+              gsap.utils.toArray<HTMLElement>(".project-link");
 
             if (!intro || panels.length === 0) return;
 
@@ -46,7 +52,8 @@
 
             panels.forEach((panel, index) => {
               gsap.set(panel, {
-                x: () => viewportWidth() * (initialPanelPositions[index] ?? 0.94),
+                x: () =>
+                  viewportWidth() * (initialPanelPositions[index] ?? 0.94),
                 zIndex: index + 2,
                 force3D: true,
               });
@@ -97,9 +104,21 @@
               .to(panels[1], { x: () => viewportWidth() * 0.666 }, 0)
               .to(panels[2], { x: () => viewportWidth() * 0.89 }, 0)
               .to(bodies[0], { y: 0, duration: 0.86, ease: "power1.out" }, 0.58)
-              .to(mediaReveals[0], { scaleY: 1, duration: 0.86, ease: "power1.out" }, 0.62)
-              .to(mediaContents[0], { scaleY: 1, duration: 0.86, ease: "power1.out" }, 0.62)
-              .to(images[0], { scale: 1.045, duration: 0.9, ease: "power1.out" }, 0.62)
+              .to(
+                mediaReveals[0],
+                { scaleY: 1, duration: 0.86, ease: "power1.out" },
+                0.62,
+              )
+              .to(
+                mediaContents[0],
+                { scaleY: 1, duration: 0.86, ease: "power1.out" },
+                0.62,
+              )
+              .to(
+                images[0],
+                { scale: 1.045, duration: 0.9, ease: "power1.out" },
+                0.62,
+              )
               .to(
                 revealLines[0],
                 {
@@ -113,13 +132,26 @@
               )
               .to(
                 projectLinks[0],
-                { scale: 1, autoAlpha: 1, duration: 0.22, ease: "back.out(1.5)" },
+                {
+                  scale: 1,
+                  autoAlpha: 1,
+                  duration: 0.22,
+                  ease: "back.out(1.5)",
+                },
                 1.2,
               )
               .addLabel("secondProject", 1.44)
-              .to(panels[0], { x: () => viewportWidth() * -0.666 }, "secondProject")
+              .to(
+                panels[0],
+                { x: () => viewportWidth() * -0.666 },
+                "secondProject",
+              )
               .to(panels[1], { x: 0 }, "secondProject")
-              .to(panels[2], { x: () => viewportWidth() * 0.666 }, "secondProject")
+              .to(
+                panels[2],
+                { x: () => viewportWidth() * 0.666 },
+                "secondProject",
+              )
               .to(
                 revealLines[0],
                 {
@@ -169,11 +201,20 @@
               )
               .to(
                 projectLinks[1],
-                { scale: 1, autoAlpha: 1, duration: 0.22, ease: "back.out(1.5)" },
+                {
+                  scale: 1,
+                  autoAlpha: 1,
+                  duration: 0.22,
+                  ease: "back.out(1.5)",
+                },
                 "secondProject+=1.04",
               )
               .addLabel("thirdProject", 2.72)
-              .to(panels[1], { x: () => viewportWidth() * -0.666 }, "thirdProject")
+              .to(
+                panels[1],
+                { x: () => viewportWidth() * -0.666 },
+                "thirdProject",
+              )
               .to(panels[2], { x: 0 }, "thirdProject")
               .to(
                 revealLines[1],
@@ -224,7 +265,12 @@
               )
               .to(
                 projectLinks[2],
-                { scale: 1, autoAlpha: 1, duration: 0.22, ease: "back.out(1.5)" },
+                {
+                  scale: 1,
+                  autoAlpha: 1,
+                  duration: 0.22,
+                  ease: "back.out(1.5)",
+                },
                 "thirdProject+=1.04",
               )
               .to({}, { duration: 0.12 }, "thirdProject+=1.3");
@@ -261,7 +307,9 @@
       class="showcase-intro absolute inset-y-0 left-0 z-[1] flex w-1/2 flex-col justify-between border-r border-brand-dark/15 bg-brand-light px-[clamp(1.5rem,3vw,3.5rem)] pb-[clamp(1.25rem,3vh,2rem)] pt-[clamp(2rem,5vh,3.5rem)] text-brand-dark"
     >
       <div>
-        <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.24em] text-brand-dark/55">
+        <p
+          class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.24em] text-brand-dark/55"
+        >
           Selected works · 2025–26
         </p>
         <h3
@@ -272,8 +320,9 @@
         <p
           class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[38rem] text-[clamp(0.82rem,1vw,1rem)] leading-[1.4] text-brand-dark/78"
         >
-          From raw capture to finished campaign assets, every frame is shaped with restraint,
-          precision, and a close eye for the detail that makes it believable.
+          From raw capture to finished campaign assets, every frame is shaped
+          with restraint, precision, and a close eye for the detail that makes
+          it believable.
         </p>
       </div>
 
@@ -312,7 +361,11 @@
                   class="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-[clamp(1rem,2vw,2rem)] font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-brand-light mix-blend-difference"
                 >
                   <span>Studio Click House</span>
-                  <span>{String(index + 1).padStart(2, "0")} / {String(showcaseProjects.length).padStart(2, "0")}</span>
+                  <span
+                    >{String(index + 1).padStart(2, "0")} / {String(
+                      showcaseProjects.length,
+                    ).padStart(2, "0")}</span
+                  >
                 </div>
               </div>
             </div>
@@ -332,16 +385,21 @@
               <p
                 class="detail-reveal font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
               >
-                <span class="detail-reveal-inner block">{project.category}</span>
+                <span class="detail-reveal-inner block">{project.category}</span
+                >
               </p>
               <p
                 class="detail-reveal max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
               >
-                <span class="detail-reveal-inner block">{project.description}</span>
+                <span class="detail-reveal-inner block"
+                  >{project.description}</span
+                >
               </p>
             </div>
 
-            <div class="flex flex-1 items-center justify-center px-20 text-center">
+            <div
+              class="flex flex-1 items-center justify-center px-20 text-center"
+            >
               <h3
                 id="project-title-{project.id}"
                 class="detail-reveal pb-[0.08em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.8] tracking-[-0.06em]"

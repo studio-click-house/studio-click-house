@@ -57,7 +57,9 @@
 
   <div class="site-shell relative z-10">
     <!-- Top Eyebrow -->
-    <div class="hero-text-anim flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-dark/50">
+    <div
+      class="hero-text-anim flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-dark/50"
+    >
       <span class="h-px w-8 bg-brand-dark/20"></span>
       <span>Selected Work & Case Studies</span>
     </div>
@@ -71,17 +73,23 @@
       <span class="italic text-brand-green">in every frame.</span>
     </h1>
 
-    <p class="hero-text-anim mt-6 max-w-2xl text-sm leading-relaxed text-brand-dark/78 sm:text-base md:text-lg">
-      Explore our studio portfolio across high-end editorial skin retouching, precision clipping path, background removal, and 3D CGI rendering.
+    <p
+      class="hero-text-anim mt-6 max-w-2xl text-sm leading-relaxed text-brand-dark/78 sm:text-base md:text-lg"
+    >
+      Explore our studio portfolio across high-end editorial skin retouching,
+      precision clipping path, background removal, and 3D CGI rendering.
     </p>
 
     <!-- Filter Pills -->
-    <div class="hero-text-anim mt-10 flex flex-wrap items-center gap-2 sm:gap-3">
+    <div
+      class="hero-text-anim mt-10 flex flex-wrap items-center gap-2 sm:gap-3"
+    >
       {#each categories as category (category.id)}
         <button
           type="button"
           onclick={() => (activeFilter = category.id)}
-          class="rounded-full px-5 py-2.5 font-mono text-xs font-semibold tracking-wider transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-dark {activeFilter === category.id
+          class="rounded-full px-5 py-2.5 font-mono text-xs font-semibold tracking-wider transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-dark {activeFilter ===
+          category.id
             ? 'bg-brand-dark text-brand-light shadow-md'
             : 'bg-brand-dark/5 text-brand-dark/70 hover:bg-brand-dark/10 hover:text-brand-dark'}"
         >

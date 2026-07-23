@@ -5,9 +5,9 @@
 // Usage:
 //   <SplineBackground sceneUrl="https://prod.spline.design/XXXXX/scene.splinecode" />
 
-import { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import { lazy, Suspense, useState, useEffect, useRef } from "react";
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 interface SplineBackgroundProps {
   sceneUrl: string;
@@ -19,14 +19,14 @@ interface SplineBackgroundProps {
 }
 
 function shouldLoadSpline(mobileBreakpoint: number): boolean {
-  if (typeof window === 'undefined') return false; // SSR guard
+  if (typeof window === "undefined") return false; // SSR guard
 
   const isMobile = window.innerWidth < mobileBreakpoint;
   const isLowEnd = navigator.hardwareConcurrency <= 2;
 
   // Check WebGL support
-  const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+  const canvas = document.createElement("canvas");
+  const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
   const noWebGL = !gl;
 
   return !isMobile && !isLowEnd && !noWebGL;
@@ -34,10 +34,10 @@ function shouldLoadSpline(mobileBreakpoint: number): boolean {
 
 export default function SplineBackground({
   sceneUrl,
-  fallbackColor = '#0a0a0a',
+  fallbackColor = "#0a0a0a",
   fallbackImageUrl,
   mobileBreakpoint = 768,
-  className = '',
+  className = "",
   children,
 }: SplineBackgroundProps) {
   const [splineLoaded, setSplineLoaded] = useState(false);
@@ -84,7 +84,7 @@ export default function SplineBackground({
       {canLoad && !splineFailed && (
         <div
           className={`absolute inset-0 z-0 transition-opacity duration-700 ${
-            splineLoaded ? 'opacity-100' : 'opacity-0'
+            splineLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
           <Suspense fallback={null}>

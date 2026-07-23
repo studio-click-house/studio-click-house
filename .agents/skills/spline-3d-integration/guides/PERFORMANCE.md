@@ -16,6 +16,7 @@ Spline scenes are WebGL — they run on the GPU. A poorly optimized scene will t
 To check: in Spline editor → Export → Code Export → the file size is shown before generating the URL.
 
 **If the scene is too heavy, tell the user to:**
+
 1. In Export → Play Settings, set **Geometry Quality** to "Performance"
 2. Reduce subdivision levels (1 is usually enough, max 2)
 3. Delete objects that are hidden or never visible
@@ -42,12 +43,20 @@ Go through these before writing any embed code:
 ## Loading Strategy
 
 ### 1. Preload the scene file
+
 Add to `<head>` to start fetching before scripts execute:
+
 ```html
-<link rel="preload" href="https://prod.spline.design/REPLACE_ME/scene.splinecode" as="fetch" crossorigin>
+<link
+  rel="preload"
+  href="https://prod.spline.design/REPLACE_ME/scene.splinecode"
+  as="fetch"
+  crossorigin
+/>
 ```
 
 ### 2. Show a fallback while loading
+
 Never leave users staring at a blank space. Always render a background color or static image as a placeholder:
 
 ```css
@@ -59,13 +68,17 @@ Never leave users staring at a blank space. Always render a background color or 
 ```
 
 ### 3. Lazy load (React)
+
 Don't load Spline until it's needed:
+
 ```jsx
-const Spline = lazy(() => import('@splinetool/react-spline'));
+const Spline = lazy(() => import("@splinetool/react-spline"));
 ```
 
 ### 4. Intersection Observer (load only when visible)
+
 For Spline scenes below the fold:
+
 ```js
 const observer = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting) {

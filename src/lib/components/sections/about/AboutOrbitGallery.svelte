@@ -189,7 +189,7 @@
                   const y = targetY + (1 - p) * initialOffset.y;
 
                   const targetRotation = Math.round(
-                    (currentAngle * (180 / Math.PI)) * 0.12,
+                    currentAngle * (180 / Math.PI) * 0.12,
                   );
                   const rotation =
                     targetRotation + (1 - p) * initialOffset.rotation;
@@ -235,7 +235,7 @@
             const angle = (index / totalCards) * (2 * Math.PI) - Math.PI / 2;
             const targetX = Math.round(Math.cos(angle) * radius);
             const targetY = Math.round(Math.sin(angle) * (radius * 0.82));
-            const targetRotation = Math.round((angle * (180 / Math.PI)) * 0.1);
+            const targetRotation = Math.round(angle * (180 / Math.PI) * 0.1);
 
             gsap.set(card, {
               x: targetX,
@@ -285,7 +285,9 @@
 
   <!-- Top Connection Badge -->
   <div class="relative z-20 flex w-full justify-center pt-2">
-    <div class="inline-flex items-center gap-3 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-dark/50">
+    <div
+      class="inline-flex items-center gap-3 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-dark/50"
+    >
       <span class="h-px w-8 bg-brand-dark/20"></span>
       <span>Studio Work Showcase</span>
       <span class="h-px w-8 bg-brand-dark/20"></span>
@@ -293,16 +295,21 @@
   </div>
 
   <!-- Pinned Content Outer Frame -->
-  <div class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 pt-4">
+  <div
+    class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 pt-4"
+  >
     <!-- Center Orbit Container -->
-    <div class="relative flex h-[34rem] w-full max-w-7xl items-center justify-center sm:h-[40rem] lg:h-[44rem]">
-      
+    <div
+      class="relative flex h-[34rem] w-full max-w-7xl items-center justify-center sm:h-[40rem] lg:h-[44rem]"
+    >
       <!-- Pure Full-Bleed Image Cards (Fanned Arc Initial State) -->
       {#each orbitCards as card, index (card.id)}
         <div
           class="orbit-card-item absolute aspect-[4/5] w-44 overflow-hidden rounded-2xl shadow-xl transition-shadow duration-300 hover:shadow-2xl sm:w-56 md:w-60 lg:w-64"
         >
-          <figure class="relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark">
+          <figure
+            class="relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark"
+          >
             <img
               src={card.media.src}
               alt={card.media.alt}
@@ -328,8 +335,12 @@
           <span class="italic text-brand-green">at full momentum.</span>
         </h2>
 
-        <p class="mt-4 text-xs leading-relaxed text-brand-dark/75 sm:text-sm md:text-base">
-          From high-end editorial skin retouching to complex 3D CGI rendering, our dual-shift Dhaka studio turns creative concepts into flawless campaign assets.
+        <p
+          class="mt-4 text-xs leading-relaxed text-brand-dark/75 sm:text-sm md:text-base"
+        >
+          From high-end editorial skin retouching to complex 3D CGI rendering,
+          our dual-shift Dhaka studio turns creative concepts into flawless
+          campaign assets.
         </p>
 
         <div class="mt-6 flex items-center justify-center gap-4">
@@ -341,7 +352,6 @@
           </a>
         </div>
       </div>
-
     </div>
   </div>
 </section>

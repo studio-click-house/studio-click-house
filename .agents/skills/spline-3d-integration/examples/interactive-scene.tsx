@@ -4,28 +4,28 @@
 //
 // Usage: drop this into a React/Next.js project and replace the scene URL
 
-import { useRef, useState, useCallback } from 'react';
-import Spline from '@splinetool/react-spline';
-import type { Application } from '@splinetool/runtime';
+import { useRef, useState, useCallback } from "react";
+import Spline from "@splinetool/react-spline";
+import type { Application } from "@splinetool/runtime";
 
-const SCENE_URL = 'https://prod.spline.design/REPLACE_ME/scene.splinecode';
+const SCENE_URL = "https://prod.spline.design/REPLACE_ME/scene.splinecode";
 
 export default function InteractiveScene() {
   const splineApp = useRef<Application>();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [lastEvent, setLastEvent] = useState<string>('');
+  const [lastEvent, setLastEvent] = useState<string>("");
 
   // --- Called when scene finishes loading ---
   function onLoad(app: Application) {
     splineApp.current = app;
     setIsLoaded(true);
-    console.log('Scene loaded');
+    console.log("Scene loaded");
   }
 
   // --- Listen to events from inside the Spline scene ---
   function onMouseDown(e: any) {
     setLastEvent(`mouseDown on: ${e.target?.name}`);
-    console.log('mouseDown event:', e.target);
+    console.log("mouseDown event:", e.target);
   }
 
   function onMouseHover(e: any) {
@@ -36,8 +36,11 @@ export default function InteractiveScene() {
   const moveObject = useCallback(() => {
     if (!splineApp.current) return;
 
-    const obj = splineApp.current.findObjectByName('Cube');
-    if (!obj) return console.warn('Object "Cube" not found — check the name in Spline editor');
+    const obj = splineApp.current.findObjectByName("Cube");
+    if (!obj)
+      return console.warn(
+        'Object "Cube" not found — check the name in Spline editor',
+      );
 
     obj.position.x += 50; // move right
   }, []);
@@ -45,19 +48,19 @@ export default function InteractiveScene() {
   // --- Trigger an animation event ---
   const triggerAnimation = useCallback(() => {
     if (!splineApp.current) return;
-    splineApp.current.emitEvent('mouseHover', 'Cube'); // triggers the mouseHover event on 'Cube'
+    splineApp.current.emitEvent("mouseHover", "Cube"); // triggers the mouseHover event on 'Cube'
   }, []);
 
   // --- Trigger animation in reverse (useful for toggle effects) ---
   const reverseAnimation = useCallback(() => {
     if (!splineApp.current) return;
-    splineApp.current.emitEventReverse('mouseHover', 'Cube');
+    splineApp.current.emitEventReverse("mouseHover", "Cube");
   }, []);
 
   // --- Rotate object (RADIANS not degrees!) ---
   const rotateObject = useCallback(() => {
     if (!splineApp.current) return;
-    const obj = splineApp.current.findObjectByName('Cube');
+    const obj = splineApp.current.findObjectByName("Cube");
     if (obj) obj.rotation.y += Math.PI / 4;
   }, []);
 
@@ -75,7 +78,8 @@ export default function InteractiveScene() {
 
       {/* Status Info */}
       <p className="text-sm text-neutral-400">
-        Status: {isLoaded ? 'Loaded' : 'Loading...'} | Last Event: {lastEvent || 'None'}
+        Status: {isLoaded ? "Loaded" : "Loading..."} | Last Event:{" "}
+        {lastEvent || "None"}
       </p>
 
       {/* Control Buttons */}

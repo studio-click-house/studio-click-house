@@ -8,7 +8,9 @@
   let logoElement = $state<HTMLDivElement>();
 
   onMount(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const drawingDuration = 2580;
     const drawingTimeScale = drawingDuration / 1580;
     const animations: Animation[] = [];
@@ -25,8 +27,11 @@
     let targetHeader: HTMLElement | null = null;
 
     const prepareHeaderLogo = () => {
-      targetLogo = document.querySelector<HTMLElement>("#site-header .brand-mark");
-      targetBrandBlock = targetLogo?.closest<HTMLElement>(".brand-block") ?? null;
+      targetLogo = document.querySelector<HTMLElement>(
+        "#site-header .brand-mark",
+      );
+      targetBrandBlock =
+        targetLogo?.closest<HTMLElement>(".brand-block") ?? null;
       targetHeader = targetLogo?.closest<HTMLElement>("#site-header") ?? null;
       targetLogo?.classList.add("preloader-logo-target");
       targetBrandBlock?.classList.add("preloader-brand-target");
@@ -71,17 +76,19 @@
       targetHeader?.classList.add("preloader-measure-target");
       const targetRect = targetLogo.getBoundingClientRect();
       targetHeader?.classList.remove("preloader-measure-target");
-      const translateX = targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2);
-      const translateY = targetRect.top + targetRect.height / 2 - (sourceRect.top + sourceRect.height / 2);
+      const translateX =
+        targetRect.left +
+        targetRect.width / 2 -
+        (sourceRect.left + sourceRect.width / 2);
+      const translateY =
+        targetRect.top +
+        targetRect.height / 2 -
+        (sourceRect.top + sourceRect.height / 2);
       const targetScale = targetRect.width / sourceRect.width;
 
       animations.push(
         backdropElement.animate(
-          [
-            { opacity: 1 },
-            { opacity: 1, offset: 0.18 },
-            { opacity: 0 },
-          ],
+          [{ opacity: 1 }, { opacity: 1, offset: 0.18 }, { opacity: 0 }],
           {
             duration: 720,
             easing: "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -109,13 +116,18 @@
     };
 
     prepareHeaderLogo();
-    window.addEventListener("site-header-ready", handleHeaderReady, { once: true });
+    window.addEventListener("site-header-ready", handleHeaderReady, {
+      once: true,
+    });
 
     const scheduleExit = () => {
       if (!isPageLoaded || !isDrawingReady || isExitScheduled) return;
       isExitScheduled = true;
       const minimumDuration = reduceMotion ? 160 : drawingDuration;
-      const remaining = Math.max(0, minimumDuration - (performance.now() - drawingStartedAt));
+      const remaining = Math.max(
+        0,
+        minimumDuration - (performance.now() - drawingStartedAt),
+      );
       hideTimer = setTimeout(beginExit, remaining);
     };
 
@@ -128,11 +140,31 @@
       if (!logoElement || reduceMotion) return;
 
       const drawingSteps = [
-        { selector: ".logo-draw-monogram", distance: 760, duration: 450, delay: 30 },
+        {
+          selector: ".logo-draw-monogram",
+          distance: 760,
+          duration: 450,
+          delay: 30,
+        },
         { selector: ".logo-draw-h", distance: 560, duration: 360, delay: 220 },
-        { selector: ".logo-draw-base", distance: 190, duration: 180, delay: 600 },
-        { selector: ".logo-draw-flight", distance: 390, duration: 350, delay: 790 },
-        { selector: ".logo-draw-plane", distance: 270, duration: 220, delay: 1150 },
+        {
+          selector: ".logo-draw-base",
+          distance: 190,
+          duration: 180,
+          delay: 600,
+        },
+        {
+          selector: ".logo-draw-flight",
+          distance: 390,
+          duration: 350,
+          delay: 790,
+        },
+        {
+          selector: ".logo-draw-plane",
+          distance: 270,
+          duration: 220,
+          delay: 1150,
+        },
       ];
 
       drawingSteps.forEach(({ selector, distance, duration, delay }) => {
@@ -152,7 +184,9 @@
         );
       });
 
-      const completeLogo = logoElement.querySelector<HTMLElement>(".preloader-logo-complete");
+      const completeLogo = logoElement.querySelector<HTMLElement>(
+        ".preloader-logo-complete",
+      );
       if (completeLogo) {
         animations.push(
           completeLogo.animate([{ opacity: 0 }, { opacity: 1 }], {
@@ -238,7 +272,11 @@
     aria-label="Loading Studio Click House"
     aria-live="polite"
   >
-    <div class="preloader-backdrop" bind:this={backdropElement} aria-hidden="true"></div>
+    <div
+      class="preloader-backdrop"
+      bind:this={backdropElement}
+      aria-hidden="true"
+    ></div>
 
     <div
       class:preloader-drawing-ready={isDrawingReady}
@@ -265,10 +303,7 @@
           </mask>
           <mask id="schl-gray-draw-mask" class="logo-reveal-mask">
             <rect width="715" height="377" fill="transparent" />
-            <path
-              class="logo-draw-path logo-draw-base"
-              d="M48 315H221"
-            />
+            <path class="logo-draw-path logo-draw-base" d="M48 315H221" />
             <path
               class="logo-draw-path logo-draw-flight"
               d="M241 210C305 135 402 89 548 61"

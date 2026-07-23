@@ -10,22 +10,31 @@
 />
 
 <main class="min-h-screen bg-brand-dark text-brand-light">
-  <div class="site-shell flex flex-col items-center justify-center py-20 text-center">
+  <div
+    class="site-shell flex flex-col items-center justify-center py-20 text-center"
+  >
     <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-green">
       Design Demo
     </span>
-    <h1 class="mt-2 font-display text-4xl font-light text-brand-light sm:text-6xl">
+    <h1
+      class="mt-2 font-display text-4xl font-light text-brand-light sm:text-6xl"
+    >
       Radial Orbit Scroll Showcase
     </h1>
     <p class="mt-3 max-w-md text-sm text-brand-light/60">
-      Scroll down below to see the interactive radial card expansion & center text reveal.
+      Scroll down below to see the interactive radial card expansion & center
+      text reveal.
     </p>
   </div>
 
   <AboutOrbitGallery />
 
-  <div class="site-shell flex flex-col items-center justify-center py-24 text-center border-t border-brand-light/10">
-    <p class="font-mono text-xs uppercase tracking-[0.16em] text-brand-light/50">
+  <div
+    class="site-shell flex flex-col items-center justify-center py-24 text-center border-t border-brand-light/10"
+  >
+    <p
+      class="font-mono text-xs uppercase tracking-[0.16em] text-brand-light/50"
+    >
       End of Demo
     </p>
     <a

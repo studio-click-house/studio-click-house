@@ -91,9 +91,7 @@
       -((location.position.lng + 180) * (Math.PI / 180)) + Math.PI / 2;
     targetRotationY =
       focusedRotationY +
-      Math.round(
-        (targetRotationY - focusedRotationY) / (Math.PI * 2),
-      ) *
+      Math.round((targetRotationY - focusedRotationY) / (Math.PI * 2)) *
         Math.PI *
         2;
     targetRotationX = location.position.lat * (Math.PI / 180) * 0.7;
@@ -908,8 +906,7 @@
     text-shadow:
       0 1px 2px var(--color-brand-dark),
       0 0 0.5rem var(--color-brand-dark),
-      0 0 0.75rem
-        color-mix(in srgb, var(--color-brand-green) 54%, transparent);
+      0 0 0.75rem color-mix(in srgb, var(--color-brand-green) 54%, transparent);
   }
 
   .location-leader {
@@ -943,5 +940,4 @@
       var(--color-brand-light)
     );
   }
-
 </style>

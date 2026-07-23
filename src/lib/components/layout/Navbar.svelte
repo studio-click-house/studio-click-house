@@ -44,7 +44,9 @@
     let hasStarted = false;
     let shouldRevealHeader = false;
     let hasLogoLanded = false;
-    const waitsForPreloader = Boolean(document.querySelector(".site-preloader"));
+    const waitsForPreloader = Boolean(
+      document.querySelector(".site-preloader"),
+    );
     let context: { revert: () => void } | undefined;
     let revertMedia: (() => void) | undefined;
     let resumeNavigation: (() => void) | undefined;
@@ -179,7 +181,8 @@
         }, headerElement);
       };
 
-      if (!waitsForPreloader || shouldRevealHeader || hasLogoLanded) startNavigation();
+      if (!waitsForPreloader || shouldRevealHeader || hasLogoLanded)
+        startNavigation();
     });
 
     return () => {

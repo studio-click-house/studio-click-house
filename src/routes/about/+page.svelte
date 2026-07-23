@@ -17,32 +17,32 @@
       {
         "@type": "AboutPage",
         "@id": `${siteConfig.url}/about#webpage`,
-        "url": `${siteConfig.url}/about`,
-        "name": `About Us | ${siteConfig.name}`,
-        "description":
+        url: `${siteConfig.url}/about`,
+        name: `About Us | ${siteConfig.name}`,
+        description:
           "The company story, team collective, values, and journey of Studio Click House in Dhaka, Bangladesh.",
-        "isPartOf": {
+        isPartOf: {
           "@type": "WebSite",
           "@id": `${siteConfig.url}/#website`,
-          "url": siteConfig.url,
-          "name": siteConfig.name,
+          url: siteConfig.url,
+          name: siteConfig.name,
         },
       },
       {
         "@type": "Organization",
         "@id": `${siteConfig.url}/#organization`,
-        "name": siteConfig.name,
-        "url": siteConfig.url,
-        "logo": `${siteConfig.url}${siteConfig.ogImage}`,
-        "foundingDate": "2015",
-        "description":
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}${siteConfig.ogImage}`,
+        foundingDate: "2015",
+        description:
           "A specialized post-production studio delivering photo retouching, video editing, and 3D CGI for e-commerce, fashion brands, and global studios.",
-        "address": {
+        address: {
           "@type": "PostalAddress",
-          "addressLocality": "Dhaka",
-          "addressCountry": "Bangladesh",
+          addressLocality: "Dhaka",
+          addressCountry: "Bangladesh",
         },
-        "sameAs": [
+        sameAs: [
           siteConfig.links.linkedin,
           siteConfig.links.instagram,
           siteConfig.links.vimeo,

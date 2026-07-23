@@ -265,7 +265,9 @@
       Preview media · final client-approved case studies will replace these
       studies
     </p>
-    <a href={resolve("/portfolio")} class="text-brand-green font-semibold">View all work ↗</a>
+    <a href={resolve("/portfolio")} class="text-brand-green font-semibold"
+      >View all work ↗</a
+    >
   </footer>
 </section>
 

@@ -37,5 +37,3 @@
   <SelectedWork />
   <AboutClosingCta closingCta={aboutPageData.closingCta} />
 </main>
-
-
