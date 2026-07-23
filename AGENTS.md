@@ -2,7 +2,7 @@
 
 # Applies to Cursor AI, Claude, Copilot, and any AI assistant working on this project.
 
-# Stack: SvelteKit · Svelte 5 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger + Lenis · shadcn-svelte · Cloudflare R2 · Bun
+# Stack: SvelteKit · Svelte 5 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger + Lenis + Three.js · shadcn-svelte · Cloudflare R2 · Bun
 
 ---
 
@@ -90,7 +90,7 @@ Do not move or rename files without explicit permission. New files must use the 
 - Respect `prefers-reduced-motion`; provide a still, fully usable experience when motion is reduced.
 - Avoid pinned sections and continuous scroll effects on small screens unless they are tested and justified.
 - Lazy-load below-the-fold images and video. Use responsive sources, compressed formats, poster images, and pause video when it is offscreen.
-- Do not add 3D/WebGL libraries or effects unless the user explicitly asks.
+- Three.js is approved for 3D/WebGL effects (e.g., scroll distortion, shader transitions) as requested by the user. Ensure all WebGL contexts, renderers, geometries, materials, textures, and event listeners are properly disposed of/cleaned up in the onMount cleanup.
 
 ---
 

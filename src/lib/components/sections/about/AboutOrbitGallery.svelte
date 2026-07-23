@@ -103,7 +103,7 @@
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !sectionRef) return;
-      const { gsap } = runtime;
+      const { gsap, ScrollTrigger } = runtime;
 
       context = gsap.context(() => {
         const mm = gsap.matchMedia();
@@ -112,72 +112,106 @@
           const cards = gsap.utils.toArray<HTMLElement>(".orbit-card-item");
           const totalCards = cards.length;
 
-          // Initial Fanned Stack Setup
-          cards.forEach((card, index) => {
-            const fanOffset = (index - Math.floor(totalCards / 2)) * 32;
-            const fanRotation = (index - Math.floor(totalCards / 2)) * 4.5;
-            const fanY = Math.abs(index - Math.floor(totalCards / 2)) * 4;
+          // Pre-calculate stack positions for seamless blending
+          const stackOffsets = cards.map((_, index) => ({
+            x: (index - Math.floor(totalCards / 2)) * 4,
+            y: (index - Math.floor(totalCards / 2)) * 2,
+            rotation: (index - Math.floor(totalCards / 2)) * 2.5,
+          }));
 
+          // Tight Central Card Stack (Reference Image 1)
+          cards.forEach((card, index) => {
+            const offset = stackOffsets[index];
             gsap.set(card, {
-              x: fanOffset,
-              y: fanY,
-              rotation: fanRotation,
+              x: offset.x,
+              y: offset.y,
+              rotation: offset.rotation,
               scale: 0.9,
               zIndex: totalCards - index,
             });
           });
 
           if (centerTextRef) {
-            gsap.set(centerTextRef, { autoAlpha: 0.45, scale: 0.95, y: 10 });
+            gsap.set(centerTextRef, { autoAlpha: 0, scale: 0.9, y: 20 });
           }
 
-          // Main scrubbed timeline
+          // Main scrubbed timeline ("Gariri chaka gore")
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: sectionRef,
               start: "top top",
-              end: "+=120%",
+              end: "+=160%",
               pin: true,
-              scrub: 0.5,
+              scrub: 0.85,
               anticipatePin: 1,
             },
           });
 
-          // Phase 1: Expand cards outwards
-          cards.forEach((card, index) => {
-            const width = window.innerWidth;
-            let radius = 480;
-            if (width < 768) {
-              radius = 230;
-            } else if (width < 1024) {
-              radius = 350;
-            } else if (width >= 1400) {
-              radius = 520;
-            }
+          // Proxy object to drive wheel rotation and radial expansion together in a spiral arc
+          const orbitProxy = { progress: 0 };
+          const totalSpinAngle = Math.PI * 0.75; // Wheel spins 135 degrees while expanding
 
-            const angle = (index / totalCards) * (2 * Math.PI) - Math.PI / 2;
-            const targetX = Math.round(Math.cos(angle) * radius);
-            const targetY = Math.round(Math.sin(angle) * (radius * 0.82));
-            const targetRotation = Math.round((angle * (180 / Math.PI)) * 0.1);
+          tl.to(
+            orbitProxy,
+            {
+              progress: 1,
+              duration: 1,
+              ease: "power2.out",
+              onUpdate: () => {
+                const p = orbitProxy.progress;
+                const width = window.innerWidth;
+                let radius = 480;
+                if (width < 768) {
+                  radius = 230;
+                } else if (width < 1024) {
+                  radius = 350;
+                } else if (width >= 1400) {
+                  radius = 530;
+                }
 
-            tl.to(
-              card,
-              {
-                x: targetX,
-                y: targetY,
-                rotation: targetRotation,
-                scale: width >= 768 ? 1 : 0.82,
-                ease: "power2.out",
-                duration: 1,
+                const spinAngle = p * totalSpinAngle;
+
+                cards.forEach((card, index) => {
+                  const baseAngle =
+                    (index / totalCards) * (2 * Math.PI) - Math.PI / 2;
+                  const currentAngle = baseAngle + spinAngle;
+                  const currentRadius = p * radius;
+
+                  const targetX = Math.round(
+                    Math.cos(currentAngle) * currentRadius,
+                  );
+                  const targetY = Math.round(
+                    Math.sin(currentAngle) * (currentRadius * 0.82),
+                  );
+
+                  const initialOffset = stackOffsets[index];
+                  const x = targetX + (1 - p) * initialOffset.x;
+                  const y = targetY + (1 - p) * initialOffset.y;
+
+                  const targetRotation = Math.round(
+                    (currentAngle * (180 / Math.PI)) * 0.12,
+                  );
+                  const rotation =
+                    targetRotation + (1 - p) * initialOffset.rotation;
+                  const scale = 0.9 + p * ((width >= 768 ? 1 : 0.84) - 0.9);
+
+                  gsap.set(card, {
+                    x,
+                    y,
+                    rotation,
+                    scale,
+                  });
+                });
               },
-              0,
-            );
-          });
+            },
+            0,
+          );
 
-          // Phase 2: Fade in center text inside orbit ring
+          // Phase 2: Fade in center text inside orbit ring once cards clear the center (Reference Image 5)
           if (centerTextRef) {
-            tl.to(
+            tl.fromTo(
               centerTextRef,
+              { autoAlpha: 0, scale: 0.9, y: 20 },
               {
                 autoAlpha: 1,
                 scale: 1,
@@ -185,11 +219,43 @@
                 ease: "power2.out",
                 duration: 0.4,
               },
-              0.15,
+              0.55,
             );
           }
         });
+
+        // Reduced motion fallback
+        mm.add("(prefers-reduced-motion: reduce)", () => {
+          const cards = gsap.utils.toArray<HTMLElement>(".orbit-card-item");
+          const totalCards = cards.length;
+          const width = window.innerWidth;
+          let radius = width < 768 ? 230 : width < 1024 ? 350 : 480;
+
+          cards.forEach((card, index) => {
+            const angle = (index / totalCards) * (2 * Math.PI) - Math.PI / 2;
+            const targetX = Math.round(Math.cos(angle) * radius);
+            const targetY = Math.round(Math.sin(angle) * (radius * 0.82));
+            const targetRotation = Math.round((angle * (180 / Math.PI)) * 0.1);
+
+            gsap.set(card, {
+              x: targetX,
+              y: targetY,
+              rotation: targetRotation,
+              scale: width >= 768 ? 1 : 0.82,
+            });
+          });
+
+          if (centerTextRef) {
+            gsap.set(centerTextRef, { autoAlpha: 1, scale: 1, y: 0 });
+          }
+          ScrollTrigger.refresh();
+          return () => mm.revert();
+        });
+
+        ScrollTrigger.refresh();
       }, sectionRef);
+
+      ScrollTrigger.refresh();
     });
 
     return () => {

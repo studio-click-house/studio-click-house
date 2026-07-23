@@ -77,3 +77,15 @@ export interface WorkGalleryItem {
   tags: readonly string[];
   media: PreviewMedia;
 }
+
+export interface ShowcaseProjectItem {
+  id: string;
+  year: string;
+  category: string;
+  title: string;
+  description: string;
+  bgColor: string;
+  media: PreviewMedia;
+  href: string;
+}
+
