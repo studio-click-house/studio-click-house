@@ -96,10 +96,10 @@
               .to(panels[0], { x: 0 }, 0)
               .to(panels[1], { x: () => viewportWidth() * 0.666 }, 0)
               .to(panels[2], { x: () => viewportWidth() * 0.89 }, 0)
-              .to(bodies[0], { y: 0 }, 0.14)
-              .to(mediaReveals[0], { scaleY: 1 }, 0.2)
-              .to(mediaContents[0], { scaleY: 1 }, 0.2)
-              .to(images[0], { scale: 1.045 }, 0.2)
+              .to(bodies[0], { y: 0, duration: 0.86, ease: "power1.out" }, 0.58)
+              .to(mediaReveals[0], { scaleY: 1, duration: 0.86, ease: "power1.out" }, 0.62)
+              .to(mediaContents[0], { scaleY: 1, duration: 0.86, ease: "power1.out" }, 0.62)
+              .to(images[0], { scale: 1.045, duration: 0.9, ease: "power1.out" }, 0.62)
               .to(
                 revealLines[0],
                 {
@@ -109,17 +109,17 @@
                   duration: 0.3,
                   ease: "power3.out",
                 },
-                0.6,
+                1.08,
               )
               .to(
                 projectLinks[0],
                 { scale: 1, autoAlpha: 1, duration: 0.22, ease: "back.out(1.5)" },
-                0.72,
+                1.2,
               )
-              .to({}, { duration: 0.12 })
-              .to(panels[0], { x: () => viewportWidth() * -0.666 })
-              .to(panels[1], { x: 0 }, "<")
-              .to(panels[2], { x: () => viewportWidth() * 0.666 }, "<")
+              .addLabel("secondProject", 1.44)
+              .to(panels[0], { x: () => viewportWidth() * -0.666 }, "secondProject")
+              .to(panels[1], { x: 0 }, "secondProject")
+              .to(panels[2], { x: () => viewportWidth() * 0.666 }, "secondProject")
               .to(
                 revealLines[0],
                 {
@@ -129,13 +129,33 @@
                   duration: 0.24,
                   ease: "power2.in",
                 },
-                "<",
+                "secondProject",
               )
-              .to(projectLinks[0], { scale: 0, autoAlpha: 0, duration: 0.2 }, "<")
-              .to(bodies[1], { y: 0 }, "<")
-              .to(mediaReveals[1], { scaleY: 1 }, "<")
-              .to(mediaContents[1], { scaleY: 1 }, "<")
-              .to(images[1], { scale: 1.045 }, "<")
+              .to(
+                projectLinks[0],
+                { scale: 0, autoAlpha: 0, duration: 0.2 },
+                "secondProject",
+              )
+              .to(
+                bodies[1],
+                { y: 0, duration: 0.92, ease: "power1.out" },
+                "secondProject+=0.32",
+              )
+              .to(
+                mediaReveals[1],
+                { scaleY: 1, duration: 0.92, ease: "power1.out" },
+                "secondProject+=0.36",
+              )
+              .to(
+                mediaContents[1],
+                { scaleY: 1, duration: 0.92, ease: "power1.out" },
+                "secondProject+=0.36",
+              )
+              .to(
+                images[1],
+                { scale: 1.045, duration: 0.96, ease: "power1.out" },
+                "secondProject+=0.36",
+              )
               .to(
                 revealLines[1],
                 {
@@ -145,16 +165,16 @@
                   duration: 0.3,
                   ease: "power3.out",
                 },
-                ">-0.3",
+                "secondProject+=0.92",
               )
               .to(
                 projectLinks[1],
                 { scale: 1, autoAlpha: 1, duration: 0.22, ease: "back.out(1.5)" },
-                "<+0.12",
+                "secondProject+=1.04",
               )
-              .to({}, { duration: 0.12 })
-              .to(panels[1], { x: () => viewportWidth() * -0.666 })
-              .to(panels[2], { x: 0 }, "<")
+              .addLabel("thirdProject", 2.72)
+              .to(panels[1], { x: () => viewportWidth() * -0.666 }, "thirdProject")
+              .to(panels[2], { x: 0 }, "thirdProject")
               .to(
                 revealLines[1],
                 {
@@ -164,13 +184,33 @@
                   duration: 0.24,
                   ease: "power2.in",
                 },
-                "<",
+                "thirdProject",
               )
-              .to(projectLinks[1], { scale: 0, autoAlpha: 0, duration: 0.2 }, "<")
-              .to(bodies[2], { y: 0 }, "<")
-              .to(mediaReveals[2], { scaleY: 1 }, "<")
-              .to(mediaContents[2], { scaleY: 1 }, "<")
-              .to(images[2], { scale: 1.045 }, "<")
+              .to(
+                projectLinks[1],
+                { scale: 0, autoAlpha: 0, duration: 0.2 },
+                "thirdProject",
+              )
+              .to(
+                bodies[2],
+                { y: 0, duration: 0.92, ease: "power1.out" },
+                "thirdProject+=0.32",
+              )
+              .to(
+                mediaReveals[2],
+                { scaleY: 1, duration: 0.92, ease: "power1.out" },
+                "thirdProject+=0.36",
+              )
+              .to(
+                mediaContents[2],
+                { scaleY: 1, duration: 0.92, ease: "power1.out" },
+                "thirdProject+=0.36",
+              )
+              .to(
+                images[2],
+                { scale: 1.045, duration: 0.96, ease: "power1.out" },
+                "thirdProject+=0.36",
+              )
               .to(
                 revealLines[2],
                 {
@@ -180,14 +220,14 @@
                   duration: 0.3,
                   ease: "power3.out",
                 },
-                ">-0.3",
+                "thirdProject+=0.92",
               )
               .to(
                 projectLinks[2],
                 { scale: 1, autoAlpha: 1, duration: 0.22, ease: "back.out(1.5)" },
-                "<+0.12",
+                "thirdProject+=1.04",
               )
-              .to({}, { duration: 0.18 });
+              .to({}, { duration: 0.12 }, "thirdProject+=1.3");
 
             document.fonts.ready.then(() => {
               if (active) ScrollTrigger.refresh();
@@ -252,7 +292,7 @@
         aria-labelledby="project-title-{project.id}"
       >
         <div class="project-body h-full w-full will-change-transform">
-          <div class="project-media relative h-[70%] overflow-hidden bg-brand-dark/10">
+          <div class="project-media relative h-[70%] overflow-hidden">
             <div
               class="project-media-reveal absolute inset-0 origin-top overflow-hidden will-change-transform"
             >

@@ -340,6 +340,42 @@ export const clientLocations: ClientLocationMarker[] = [
     clientCount: 1050,
     position: { lat: -25.27, lng: 133.775 },
   },
+  {
+    id: "united-kingdom",
+    country: "United Kingdom",
+    flag: "🇬🇧",
+    position: { lat: 54.8, lng: -3.4 },
+  },
+  {
+    id: "denmark",
+    country: "Denmark",
+    flag: "🇩🇰",
+    position: { lat: 56.26, lng: 9.5 },
+  },
+  {
+    id: "norway",
+    country: "Norway",
+    flag: "🇳🇴",
+    position: { lat: 60.47, lng: 8.47 },
+  },
+  {
+    id: "spain",
+    country: "Spain",
+    flag: "🇪🇸",
+    position: { lat: 40.46, lng: -3.75 },
+  },
+  {
+    id: "france",
+    country: "France",
+    flag: "🇫🇷",
+    position: { lat: 46.23, lng: 2.21 },
+  },
+  {
+    id: "sweden",
+    country: "Sweden",
+    flag: "🇸🇪",
+    position: { lat: 60.13, lng: 18.64 },
+  },
 ];
 
 export const showcaseProjects: ShowcaseProjectItem[] = [
@@ -392,5 +428,4 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     href: "/portfolio",
   },
 ];
-
 

@@ -53,7 +53,7 @@ export interface ClientLocationMarker {
   id: string;
   country: string;
   flag: string;
-  clientCount: number;
+  clientCount?: number;
   position: {
     lat: number;
     lng: number;
@@ -88,4 +88,3 @@ export interface ShowcaseProjectItem {
   media: PreviewMedia;
   href: string;
 }
-

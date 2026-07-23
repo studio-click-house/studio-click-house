@@ -11,7 +11,7 @@
   let globeStage: HTMLDivElement;
 
   const totalClients = clientLocations.reduce(
-    (sum, item) => sum + item.clientCount,
+    (sum, item) => sum + (item.clientCount ?? 0),
     0,
   );
 
@@ -95,7 +95,7 @@
 <div
   bind:this={sectionRoot}
   data-cursor-trail="off"
-  class="network-section relative overflow-hidden bg-brand-dark px-4 py-8 text-brand-light sm:px-8 sm:py-12 lg:py-14"
+  class="network-section relative overflow-hidden bg-brand-dark px-4 py-20 text-brand-light sm:px-8 sm:py-28 lg:py-36"
 >
   <div class="site-shell relative z-10 mx-auto max-w-7xl">
     <div
@@ -135,7 +135,7 @@
             <dt
               class="mt-2 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-light/48"
             >
-              Client countries
+              Global regions
             </dt>
           </div>
           <div class="pl-4">
@@ -163,9 +163,11 @@
                 </span>
                 <p class="mt-1 text-sm text-brand-light">
                   {selectedLocation.country}
-                  <span class="ml-2 text-brand-green"
-                    >{selectedLocation.clientCount.toLocaleString()} clients</span
-                  >
+                  <span class="ml-2 text-brand-green">
+                    {selectedLocation.clientCount !== undefined
+                      ? `${selectedLocation.clientCount.toLocaleString()} clients`
+                      : "Target market"}
+                  </span>
                 </p>
               </div>
               <button
@@ -203,8 +205,8 @@
     background:
       radial-gradient(
         circle at 76% 34%,
-        color-mix(in srgb, var(--color-brand-green) 18%, transparent) 0,
-        color-mix(in srgb, var(--color-brand-green) 7%, transparent) 28%,
+        color-mix(in srgb, var(--color-brand-green) 26%, transparent) 0,
+        color-mix(in srgb, var(--color-brand-green) 11%, transparent) 30%,
         transparent 58%
       ),
       radial-gradient(
@@ -212,6 +214,31 @@
         color-mix(in srgb, var(--color-brand-light) 4%, transparent),
         transparent 46%
       );
+    pointer-events: none;
+    content: "";
+  }
+
+  .network-section::after {
+    position: absolute;
+    right: -8%;
+    bottom: -10%;
+    left: -8%;
+    height: 54%;
+    background:
+      radial-gradient(
+        ellipse at 70% 100%,
+        color-mix(in srgb, var(--color-brand-green) 58%, transparent),
+        color-mix(in srgb, var(--color-brand-green) 20%, transparent) 42%,
+        transparent 72%
+      ),
+      linear-gradient(
+        to top,
+        color-mix(in srgb, var(--color-brand-green) 48%, transparent),
+        color-mix(in srgb, var(--color-brand-green) 17%, transparent) 56%,
+        transparent
+      );
+    filter: blur(1.8rem);
+    opacity: 1;
     pointer-events: none;
     content: "";
   }
@@ -229,8 +256,8 @@
     border-radius: 9999px;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--color-brand-green) 26%, transparent) 0,
-      color-mix(in srgb, var(--color-brand-green) 11%, transparent) 34%,
+      color-mix(in srgb, var(--color-brand-green) 40%, transparent) 0,
+      color-mix(in srgb, var(--color-brand-green) 17%, transparent) 36%,
       transparent 70%
     );
     pointer-events: none;
