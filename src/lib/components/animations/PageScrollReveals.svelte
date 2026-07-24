@@ -29,6 +29,9 @@
             "why-trust-us",
             "faq-section",
             "client-locations",
+            "pricing-configurator",
+            "pricing-details",
+            "pricing-faq",
           ]);
 
           const sections = Array.from(

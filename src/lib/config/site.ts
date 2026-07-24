@@ -10,4 +10,10 @@ export const siteConfig = {
     linkedin: "",
     vimeo: "",
   },
+  contact: {
+    email: "hello@studioclickhouse.com",
+    location: "Demra, Dhaka",
+    country: "Bangladesh",
+    timezone: "UTC+6",
+  },
 };

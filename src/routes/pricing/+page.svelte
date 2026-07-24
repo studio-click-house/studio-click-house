@@ -2,6 +2,10 @@
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import AboutClosingCta from "$lib/components/sections/about/AboutClosingCta.svelte";
+  import PageScrollReveals from "$lib/components/animations/PageScrollReveals.svelte";
+  import PricingCalculator from "$lib/components/sections/pricing/PricingCalculator.svelte";
+  import PricingDetails from "$lib/components/sections/pricing/PricingDetails.svelte";
+  import PricingFaq from "$lib/components/sections/pricing/PricingFaq.svelte";
   import { ArrowLeft, ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { siteConfig } from "$lib/config/site";
@@ -31,6 +35,8 @@
 <JsonLd data={pricingSchema} />
 
 <main id="pricing-page" class="relative bg-brand-light text-brand-dark pt-32">
+  <PageScrollReveals />
+  
   <header
     class="site-shell grid min-h-[50dvh] content-between gap-16 px-5 pb-16 pt-12 sm:px-10 lg:px-16"
   >
@@ -69,7 +75,15 @@
     </div>
   </header>
 
+  <!-- Interactive Configurator & Viewport -->
+  <PricingCalculator />
 
+  <!-- Detailed Service Rate Matrix -->
+  <PricingDetails />
 
+  <!-- Pricing FAQs -->
+  <PricingFaq />
+
+  <!-- Closing Call-to-Action -->
   <AboutClosingCta closingCta={aboutPageData.closingCta} />
 </main>

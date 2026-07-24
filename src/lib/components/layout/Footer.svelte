@@ -93,17 +93,17 @@
           <div class="flex items-start gap-2.5">
             <MapPin size={14} class="text-brand-green/80 mt-0.5 shrink-0" />
             <span>
-              Demra, Dhaka<br />
-              Bangladesh // UTC+6
+              {siteConfig.contact.location}<br />
+              {siteConfig.contact.country} // {siteConfig.contact.timezone}
             </span>
           </div>
           <div class="flex items-center gap-2.5">
             <Mail size={14} class="text-brand-green/80 shrink-0" />
             <a
-              href="mailto:hello@studioclickhouse.com"
+              href={`mailto:${siteConfig.contact.email}`}
               class="hover:text-brand-green transition-colors hover-underline-anim"
             >
-              hello@studioclickhouse.com
+              {siteConfig.contact.email}
             </a>
           </div>
         </div>
