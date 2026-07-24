@@ -31,7 +31,7 @@
       title: "DaVinci Skin Tone Grading",
       category: "Video Suite",
       media: {
-        src: "https://images.pexels.com/photos/325111/pexels-photo-325111.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "https://images.pexels.com/photos/306088/pexels-photo-306088.jpeg?auto=compress&cs=tinysrgb&w=1200",
         alt: "Video color grading panel",
         width: 1200,
         height: 800,
@@ -42,7 +42,7 @@
       title: "3D CGI Product Modeling",
       category: "3D Studio",
       media: {
-        src: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=1200",
         alt: "3D render interface",
         width: 1200,
         height: 800,

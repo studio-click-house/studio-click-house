@@ -3,7 +3,6 @@
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import AboutHero from "$lib/components/sections/about/AboutHero.svelte";
   import AboutPeople from "$lib/components/sections/about/AboutPeople.svelte";
-  import AboutOrbitGallery from "$lib/components/sections/about/AboutOrbitGallery.svelte";
   import AboutTimeline from "$lib/components/sections/about/AboutTimeline.svelte";
   import AboutCareersBanner from "$lib/components/sections/about/AboutCareersBanner.svelte";
   import AboutLeadership from "$lib/components/sections/about/AboutLeadership.svelte";
@@ -63,7 +62,6 @@
 <main class="relative bg-brand-light text-brand-dark">
   <AboutHero hero={aboutPageData.hero} />
   <AboutPeople people={aboutPageData.people} />
-  <AboutOrbitGallery />
   <AboutTimeline journey={aboutPageData.journey} />
   <AboutCareersBanner careers={aboutPageData.careers} />
   <AboutLeadership leadership={aboutPageData.leadership} />

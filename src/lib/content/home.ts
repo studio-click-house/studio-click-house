@@ -16,6 +16,7 @@ export const navigationItems = [
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Section", href: "/section" },
   { label: "Events", href: "/events" },
   { label: "CSR", href: "/csr" },
   { label: "Careers", href: "/careers" },

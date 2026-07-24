@@ -53,7 +53,7 @@ export const aboutPageData: AboutPageData = {
         title: "Precision Color Grading",
         category: "Video Suite",
         media: {
-          src: "https://images.pexels.com/photos/325111/pexels-photo-325111.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "https://images.pexels.com/photos/306088/pexels-photo-306088.jpeg?auto=compress&cs=tinysrgb&w=1200",
           alt: "Senior colorist calibrating skin tones on a DaVinci Resolve suite",
           width: 1200,
           height: 800,
@@ -77,7 +77,7 @@ export const aboutPageData: AboutPageData = {
         title: "3D & CGI Rendering",
         category: "3D Department",
         media: {
-          src: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=1200",
           alt: "3D artist modeling luxury product lighting in Blender and Maya",
           width: 1200,
           height: 800,
@@ -192,7 +192,7 @@ export const aboutPageData: AboutPageData = {
           "Launched our dedicated video post-production suite, offering broadcast color grading, video retouching, and commercial reel editing.",
         statsHighlight: "Video Suite · 10-Bit Color Workstations",
         media: {
-          src: "https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg?auto=compress&cs=tinysrgb&w=1000",
+          src: "https://images.pexels.com/photos/11156896/pexels-photo-11156896.jpeg?auto=compress&cs=tinysrgb&w=1000",
           alt: "Color grading panel setup in video editing suite",
           width: 1000,
           height: 667,
@@ -207,7 +207,7 @@ export const aboutPageData: AboutPageData = {
           "Introduced 3D product modeling and CGI scene composition to serve jewelry, cosmetics, and footwear brands seeking virtual studio shoots.",
         statsHighlight: "3D Dept · Maya & Blender Pipeline",
         media: {
-          src: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1000",
+          src: "https://images.pexels.com/photos/6976094/pexels-photo-6976094.jpeg?auto=compress&cs=tinysrgb&w=1000",
           alt: "3D mesh product rendering on screen",
           width: 1000,
           height: 667,

@@ -1,7 +1,6 @@
 <script lang="ts">
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
-  import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
   import AboutClosingCta from "$lib/components/sections/about/AboutClosingCta.svelte";
   import { ArrowLeft, ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
@@ -70,8 +69,7 @@
     </div>
   </header>
 
-  <!-- WebGL Pinned Horizontal Projects Showcase -->
-  <HorizontalProjectsShowcase />
+
 
   <AboutClosingCta closingCta={aboutPageData.closingCta} />
 </main>
