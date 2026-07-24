@@ -110,11 +110,6 @@
 
     <div class="careers-banner-content flex items-center lg:order-1">
       <div class="w-full px-5 py-20 sm:px-10 md:py-28 lg:px-[max(3rem,8vw)]">
-        <div class="mb-10 flex items-center gap-3">
-          <span class="h-px w-8 bg-brand-green"></span>
-          <p class="eyebrow text-brand-green">{careers.eyebrow}</p>
-        </div>
-
         <h2
           class="max-w-[10ch] font-display text-[clamp(3.25rem,5.5vw,6.5rem)] leading-[0.84] tracking-[-0.05em] text-white"
         >

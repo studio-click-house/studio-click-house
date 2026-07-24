@@ -100,14 +100,8 @@
   <div class="site-shell">
     <!-- Header -->
     <div class="mb-16 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-24">
-      <div
-        class="journey-header-reveal flex items-center gap-3 lg:col-span-3 lg:self-start"
-      >
-        <span class="h-px w-8 bg-brand-green"></span>
-        <p class="eyebrow text-brand-dark/70">{journey.eyebrow}</p>
-      </div>
       <h2
-        class="journey-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-6"
+        class="journey-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-8"
       >
         {journey.heading}
       </h2>

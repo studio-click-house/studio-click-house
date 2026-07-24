@@ -17,11 +17,14 @@ export const portfolioPageData: PortfolioPageData = {
     },
     categories: [
       { id: "all", label: "All Work" },
-      { id: "fashion", label: "Fashion & Editorial" },
-      { id: "ecommerce", label: "E-Commerce" },
-      { id: "3d-cgi", label: "3D CGI" },
-      { id: "color", label: "Color Grading" },
-      { id: "clipping", label: "Clipping Path" },
+      { id: "clipping-path", label: "Clipping Path (CP)" },
+      { id: "multipath", label: "Multipath" },
+      { id: "ghost-mannequin", label: "Ghost Mannequin & 3D Neck" },
+      { id: "retouching", label: "High-End Retouch" },
+      { id: "color-correction", label: "Color Correction & Change" },
+      { id: "background-erase", label: "Background Erase & Shadow" },
+      { id: "pattern-change", label: "Pattern & Language Change" },
+      { id: "illustrator-banner", label: "Illustrator & Banner" },
     ],
   },
 
@@ -66,12 +69,12 @@ export const portfolioPageData: PortfolioPageData = {
 
   gallery: [
     {
-      id: "gallery-portrait-studio",
-      category: "fashion",
-      title: "Studio portrait finishing",
+      id: "gallery-retouch-model-portrait",
+      category: "retouching",
+      title: "Model studio beauty retouch",
       media: {
         src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Studio portrait under custom soft light settings",
+        alt: "Fashion model studio beauty portrait skin retouching",
         width: 1200,
         height: 1600,
         credit: "Pexels"
@@ -79,51 +82,25 @@ export const portfolioPageData: PortfolioPageData = {
       aspectRatio: "tall",
     },
     {
-      id: "gallery-cosmetics-product",
-      category: "ecommerce",
-      title: "Skincare product serum",
+      id: "gallery-jewelry-ring",
+      category: "retouching",
+      title: "Diamond ring luxury retouch",
       media: {
-        src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Premium skincare glass bottle macro shot",
+        src: "https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Macro diamond ring polishing and sparkle enhancement",
         width: 1200,
-        height: 1600,
+        height: 800,
         credit: "Pexels"
       },
-      aspectRatio: "tall",
+      aspectRatio: "wide",
     },
     {
-      id: "gallery-jewelry-macro",
-      category: "ecommerce",
-      title: "Luxury watch macro",
-      media: {
-        src: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "High-end mechanical watch dial close up",
-        width: 1200,
-        height: 1200,
-        credit: "Pexels"
-      },
-      aspectRatio: "square",
-    },
-    {
-      id: "gallery-red-editorial",
-      category: "fashion",
-      title: "Red studio editorial",
-      media: {
-        src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Fashion model posing against saturated background",
-        width: 1200,
-        height: 1600,
-        credit: "Pexels"
-      },
-      aspectRatio: "tall",
-    },
-    {
-      id: "gallery-niche-perfume",
-      category: "ecommerce",
-      title: "Glass perfume bottle still life",
+      id: "gallery-product-perfume",
+      category: "background-erase",
+      title: "Perfume bottle background erase",
       media: {
         src: "https://images.pexels.com/photos/3989394/pexels-photo-3989394.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Perfume bottle photographed with soft gradient shadows",
+        alt: "Glass perfume bottle isolated with natural drop shadow",
         width: 1200,
         height: 800,
         credit: "Pexels"
@@ -131,12 +108,12 @@ export const portfolioPageData: PortfolioPageData = {
       aspectRatio: "wide",
     },
     {
-      id: "gallery-monochrome",
-      category: "fashion",
-      title: "Monochrome high-fashion",
+      id: "gallery-model-editorial-red",
+      category: "color-correction",
+      title: "Editorial model color grading",
       media: {
-        src: "https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Dramatic high contrast black and white fashion portrait",
+        src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Fashion model posing under color corrected studio lights",
         width: 1200,
         height: 1600,
         credit: "Pexels"
@@ -144,25 +121,12 @@ export const portfolioPageData: PortfolioPageData = {
       aspectRatio: "tall",
     },
     {
-      id: "gallery-3d-model",
-      category: "3d-cgi",
-      title: "CGI abstract glass refraction",
+      id: "gallery-jewelry-watch-chronograph",
+      category: "multipath",
+      title: "Luxury watch multipath isolation",
       media: {
-        src: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Abstract 3D generated transparent glass ripples",
-        width: 1200,
-        height: 800,
-        credit: "Pexels"
-      },
-      aspectRatio: "wide",
-    },
-    {
-      id: "gallery-handbag-detail",
-      category: "ecommerce",
-      title: "Leather handbag details",
-      media: {
-        src: "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Close up details of designer leather bag stitches",
+        src: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Mechanical chronograph watch dial separated into vector paths",
         width: 1200,
         height: 1200,
         credit: "Pexels"
@@ -170,12 +134,51 @@ export const portfolioPageData: PortfolioPageData = {
       aspectRatio: "square",
     },
     {
-      id: "gallery-sunglasses-product",
-      category: "ecommerce",
-      title: "Modern designer sunglasses",
+      id: "gallery-ghost-suit-model",
+      category: "ghost-mannequin",
+      title: "Tailored suit ghost mannequin 3D neck",
       media: {
-        src: "https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Sunglasses photographed on reflective studio surface",
+        src: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Hollow suit jacket with 3D neck joint creation",
+        width: 1200,
+        height: 1600,
+        credit: "Pexels"
+      },
+      aspectRatio: "tall",
+    },
+    {
+      id: "gallery-model-skincare",
+      category: "retouching",
+      title: "Model skincare serum retouch",
+      media: {
+        src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Female model skincare high-end facial skin retouching",
+        width: 1200,
+        height: 1600,
+        credit: "Pexels"
+      },
+      aspectRatio: "tall",
+    },
+    {
+      id: "gallery-product-heels",
+      category: "clipping-path",
+      title: "Designer heels clipping path",
+      media: {
+        src: "https://images.pexels.com/photos/1460838/pexels-photo-1460838.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "High heels luxury shoes isolated with vector clipping path",
+        width: 1200,
+        height: 1200,
+        credit: "Pexels"
+      },
+      aspectRatio: "square",
+    },
+    {
+      id: "gallery-jewelry-necklace",
+      category: "retouching",
+      title: "Gold necklace jewelry retouch",
+      media: {
+        src: "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Luxury gold necklace macro shine & surface retouching",
         width: 1200,
         height: 800,
         credit: "Pexels"
@@ -183,17 +186,95 @@ export const portfolioPageData: PortfolioPageData = {
       aspectRatio: "wide",
     },
     {
-      id: "gallery-workspace",
-      category: "color",
-      title: "Color grading workstation",
+      id: "gallery-model-dress-recolor",
+      category: "color-correction",
+      title: "Garment color change & shade shift",
       media: {
-        src: "https://images.pexels.com/photos/325111/pexels-photo-325111.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Video color grading workspace with control panels",
+        src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Model wearing color corrected silk evening dress",
+        width: 1200,
+        height: 1600,
+        credit: "Pexels"
+      },
+      aspectRatio: "tall",
+    },
+    {
+      id: "gallery-product-sneaker",
+      category: "clipping-path",
+      title: "Athletic sneaker vector CP",
+      media: {
+        src: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Sneaker product isolated with clean clipping path",
+        width: 1200,
+        height: 1200,
+        credit: "Pexels"
+      },
+      aspectRatio: "square",
+    },
+    {
+      id: "gallery-model-pattern-dress",
+      category: "pattern-change",
+      title: "Model dress pattern replacement",
+      media: {
+        src: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Model wearing custom pattern swatch replaced dress",
+        width: 1200,
+        height: 1600,
+        credit: "Pexels"
+      },
+      aspectRatio: "tall",
+    },
+    {
+      id: "gallery-product-cosmetics",
+      category: "background-erase",
+      title: "Cosmetic bottle background removal",
+      media: {
+        src: "https://images.pexels.com/photos/3685530/pexels-photo-3685530.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Skincare product bottle transparent background removal",
         width: 1200,
         height: 800,
         credit: "Pexels"
       },
       aspectRatio: "wide",
+    },
+    {
+      id: "gallery-ghost-shirt",
+      category: "ghost-mannequin",
+      title: "Invisible mannequin shirt 3D neck",
+      media: {
+        src: "https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Apparel shirt ghost mannequin joint insert",
+        width: 1200,
+        height: 1600,
+        credit: "Pexels"
+      },
+      aspectRatio: "tall",
+    },
+    {
+      id: "gallery-illustrator-campaign",
+      category: "illustrator-banner",
+      title: "E-Commerce banner & vector layout",
+      media: {
+        src: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Product advertising campaign banner graphic design",
+        width: 1200,
+        height: 800,
+        credit: "Pexels"
+      },
+      aspectRatio: "wide",
+    },
+    {
+      id: "gallery-model-monochrome",
+      category: "retouching",
+      title: "Monochrome fashion retouching",
+      media: {
+        src: "https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Black and white fashion model portrait retouch",
+        width: 1200,
+        height: 1600,
+        credit: "Pexels"
+      },
+      aspectRatio: "tall",
     },
   ],
 

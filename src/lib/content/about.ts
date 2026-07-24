@@ -268,17 +268,17 @@ export const aboutPageData: AboutPageData = {
       "Our leadership combines deep technical post-production craft with international agency operational experience.",
     members: [
       {
-        id: "leader-1",
-        name: "Tanvir Rahman",
-        role: "Founder & Creative Director",
-        bio: "Over 14 years of editorial photo retouching and creative direction experience leading campaign post for international luxury brands.",
+        id: "leader-md-jilhaj",
+        name: "Jilhaj",
+        role: "Managing Director (MD)",
+        bio: "Directs strategic growth, international client partnerships, and enterprise post-production operations for Studio Click House.",
         linkedinUrl: "https://linkedin.com",
         media: {
-          src: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
-          alt: "Tanvir Rahman - Founder & Creative Director",
+          src: "/images/profile image/MD/Jilhaj.png",
+          alt: "Jilhaj - Managing Director (MD)",
           width: 800,
           height: 1000,
-          credit: "Studio portrait",
+          credit: "Studio Click House Leadership",
         },
       },
       {
@@ -288,7 +288,7 @@ export const aboutPageData: AboutPageData = {
         bio: "Spearheads daily 24/7 production scheduling, client SLA compliance, and quality control pipelines for our 150+ artist team.",
         linkedinUrl: "https://linkedin.com",
         media: {
-          src: "https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800",
+          src: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=800",
           alt: "Nusrat Jahan - Head of Operations",
           width: 800,
           height: 1000,

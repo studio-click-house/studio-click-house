@@ -245,9 +245,9 @@ export const testimonials: TestimonialItem[] = [
     quote:
       "Studio Click House has been a very good help to speed up the day to day process at our Studio. Very dedicated and always ready to take challenges.",
     name: "Jilhaj",
-    role: "Chief Executive Officer",
+    role: "Managing Director",
     company: "Studio Click House",
-    avatar: "/images/profile%20image/CEO/Jilhaj.jpg",
+    avatar: "/images/profile image/MD/Jilhaj.png",
   },
 ];
 

@@ -2,20 +2,10 @@
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PortfolioCinematicHero from "$lib/components/sections/portfolio/PortfolioCinematicHero.svelte";
-  import FeaturedCaseStudies from "$lib/components/sections/portfolio/FeaturedCaseStudies.svelte";
   import WorkGrid from "$lib/components/sections/portfolio/WorkGrid.svelte";
-  import BeforeAfterShowcase from "$lib/components/sections/portfolio/BeforeAfterShowcase.svelte";
-  import CapabilitiesBand from "$lib/components/sections/portfolio/CapabilitiesBand.svelte";
   import PortfolioCta from "$lib/components/sections/portfolio/PortfolioCta.svelte";
   import { siteConfig } from "$lib/config/site";
   import { portfolioPageData } from "$lib/content/portfolio";
-  import type { PortfolioCategory } from "$lib/types/portfolio";
-
-  let activeFilter = $state<PortfolioCategory>("all");
-
-  function handleFilterChange(id: PortfolioCategory) {
-    activeFilter = id;
-  }
 
   const portfolioSchema = {
     "@context": "https://schema.org",
@@ -41,17 +31,7 @@
 <JsonLd data={portfolioSchema} />
 
 <main id="main-content" class="relative">
-  <PortfolioCinematicHero
-    hero={portfolioPageData.hero}
-    {activeFilter}
-    onFilterChange={handleFilterChange}
-  />
-  <FeaturedCaseStudies projects={portfolioPageData.featured} />
-  <WorkGrid items={portfolioPageData.gallery} {activeFilter} />
-  <BeforeAfterShowcase comparison={portfolioPageData.comparison} />
-  <CapabilitiesBand
-    capabilities={portfolioPageData.capabilities}
-    stats={portfolioPageData.stats}
-  />
+  <PortfolioCinematicHero hero={portfolioPageData.hero} />
+  <WorkGrid items={portfolioPageData.gallery} />
   <PortfolioCta cta={portfolioPageData.cta} />
 </main>

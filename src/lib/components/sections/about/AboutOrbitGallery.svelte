@@ -283,16 +283,7 @@
     aria-hidden="true"
   ></div>
 
-  <!-- Top Connection Badge -->
-  <div class="relative z-20 flex w-full justify-center pt-2">
-    <div
-      class="inline-flex items-center gap-3 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-dark/50"
-    >
-      <span class="h-px w-8 bg-brand-dark/20"></span>
-      <span>Studio Work Showcase</span>
-      <span class="h-px w-8 bg-brand-dark/20"></span>
-    </div>
-  </div>
+
 
   <!-- Pinned Content Outer Frame -->
   <div

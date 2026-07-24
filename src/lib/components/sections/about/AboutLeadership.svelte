@@ -86,14 +86,8 @@
 >
   <div class="site-shell">
     <div class="mb-16 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-24">
-      <div
-        class="leadership-header-reveal flex items-center gap-3 lg:col-span-3 lg:self-start"
-      >
-        <span class="h-px w-8 bg-brand-green"></span>
-        <p class="eyebrow text-brand-dark/70">{leadership.eyebrow}</p>
-      </div>
       <h2
-        class="leadership-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-6"
+        class="leadership-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-8"
       >
         {leadership.heading}
       </h2>

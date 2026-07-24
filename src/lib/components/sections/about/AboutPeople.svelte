@@ -66,16 +66,10 @@
 >
   <div class="site-shell">
     <div
-      class="mb-12 grid gap-7 border-t border-brand-dark/25 pt-5 lg:grid-cols-12 lg:items-end md:mb-16"
+      class="mb-12 grid gap-7 pt-5 lg:grid-cols-12 lg:items-end md:mb-16"
     >
-      <div
-        class="people-header-reveal flex items-center gap-3 lg:col-span-3 lg:self-start"
-      >
-        <span class="h-px w-8 bg-brand-green"></span>
-        <p class="eyebrow text-brand-dark/70">{people.eyebrow}</p>
-      </div>
       <h2
-        class="people-header-reveal max-w-[11ch] font-display text-[clamp(3rem,5vw,6rem)] leading-[0.86] tracking-[-0.045em] text-brand-dark lg:col-span-6"
+        class="people-header-reveal max-w-[11ch] font-display text-[clamp(3rem,5vw,6rem)] leading-[0.86] tracking-[-0.045em] text-brand-dark lg:col-span-8"
       >
         {people.heading}
       </h2>

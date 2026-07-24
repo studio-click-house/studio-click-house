@@ -70,10 +70,6 @@
     <div
       class="lg:sticky lg:top-1/2 lg:col-span-5 lg:self-start lg:-translate-y-1/2"
     >
-      <div class="values-header-reveal mb-4 flex items-center gap-3">
-        <span class="h-px w-8 bg-brand-green"></span>
-        <p class="eyebrow text-brand-dark/70">{values.eyebrow}</p>
-      </div>
       <h2
         class="values-header-reveal mb-6 max-w-[7ch] font-display text-[clamp(3.5rem,6.4vw,7.5rem)] leading-[0.82] tracking-[-0.05em] text-brand-dark"
       >

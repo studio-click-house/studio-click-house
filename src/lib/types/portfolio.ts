@@ -22,11 +22,14 @@ export interface PortfolioGalleryItem {
 
 export type PortfolioCategory =
   | "all"
-  | "fashion"
-  | "ecommerce"
-  | "3d-cgi"
-  | "color"
-  | "clipping";
+  | "clipping-path"
+  | "multipath"
+  | "ghost-mannequin"
+  | "retouching"
+  | "color-correction"
+  | "background-erase"
+  | "pattern-change"
+  | "illustrator-banner";
 
 export interface PortfolioCategoryFilter {
   id: PortfolioCategory;

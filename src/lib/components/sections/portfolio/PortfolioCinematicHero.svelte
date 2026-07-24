@@ -2,15 +2,12 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { PortfolioPageData } from "$lib/types/portfolio";
-  import type { PortfolioCategory } from "$lib/types/portfolio";
 
   interface Props {
     hero: PortfolioPageData["hero"];
-    activeFilter: PortfolioCategory;
-    onFilterChange: (id: PortfolioCategory) => void;
   }
 
-  let { hero, activeFilter, onFilterChange }: Props = $props();
+  let { hero }: Props = $props();
 
   let section: HTMLElement;
   let canvasContainer: HTMLElement;
@@ -20,7 +17,7 @@
   onMount(() => {
     let active = true;
     let gsapContext: { revert: () => void } | undefined;
-    let renderer: { dispose: () => void; domElement: HTMLCanvasElement; setSize: (w: number, h: number) => void; setPixelRatio: (r: number) => void; render: (scene: unknown, camera: unknown) => void } | undefined;
+    let renderer: import("three").WebGLRenderer | undefined;
     let animationFrameId: number | undefined;
 
     const prefersReducedMotion = window.matchMedia(
@@ -83,6 +80,7 @@
           antialias: false,
           powerPreference: "low-power",
         });
+        if (!renderer) return;
         renderer.setSize(rect.width, rect.height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         canvasContainer.appendChild(renderer.domElement);
@@ -107,14 +105,12 @@
           void main() {
             vec2 uv = vUv;
 
-            float dist = distance(uv, uMouse);
-            float ripple = sin(dist * 22.0 - uTime * 2.8) * 0.012;
-            float falloff = smoothstep(0.55, 0.0, dist);
+            // Gentle, subtle wave applied across the ENTIRE image
+            float globalWave = sin(uv.y * 6.0 + uTime * 0.6) * 0.002;
+            float mouseRipple = sin(distance(uv, uMouse) * 10.0 - uTime * 1.5) * 0.0025;
 
-            float wave = sin(uv.y * 6.0 + uTime * 0.6) * 0.003;
-
-            uv.x += ripple * falloff + wave;
-            uv.y += ripple * falloff * 0.7;
+            uv.x += globalWave + mouseRipple;
+            uv.y += globalWave * 0.5 + mouseRipple * 0.5;
 
             vec4 tex = texture2D(uTexture, uv);
             gl_FragColor = tex;
@@ -239,8 +235,6 @@
   <div class="hero-gradient" aria-hidden="true"></div>
 
   <div class="hero-content site-shell">
-    <p class="hero-eyebrow eyebrow">{hero.eyebrow}</p>
-
     <h1 id="portfolio-hero-title" class="hero-heading">
       <span class="hero-heading-line"
         ><span bind:this={headingLines[0]}>{hero.headingLine1}</span></span
@@ -256,25 +250,7 @@
       {hero.description}
     </p>
 
-    <nav
-      bind:this={detailElements[1]}
-      aria-label="Portfolio category filters"
-      class="hero-filters"
-    >
-      {#each hero.categories as category (category.id)}
-        <button
-          type="button"
-          onclick={() => onFilterChange(category.id)}
-          class="hero-filter-pill"
-          class:active={activeFilter === category.id}
-          aria-pressed={activeFilter === category.id}
-        >
-          {category.label}
-        </button>
-      {/each}
-    </nav>
-
-    <div bind:this={detailElements[2]} class="hero-scroll-hint">
+    <div bind:this={detailElements[1]} class="hero-scroll-hint">
       <span>Scroll to explore</span>
       <div class="hero-scroll-mouse">
         <div class="hero-scroll-wheel"></div>
@@ -333,10 +309,6 @@
     padding-top: 8rem;
   }
 
-  .hero-eyebrow {
-    color: color-mix(in srgb, var(--color-brand-light) 55%, transparent);
-    margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
-  }
 
   .hero-heading {
     font-family: var(--font-display);
@@ -367,42 +339,6 @@
     color: color-mix(in srgb, var(--color-brand-light) 72%, transparent);
   }
 
-  .hero-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: clamp(1.75rem, 3.5vh, 2.75rem);
-  }
-
-  .hero-filter-pill {
-    padding: 0.55rem 1.25rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 22%, transparent);
-    border-radius: 999px;
-    background: transparent;
-    color: color-mix(in srgb, var(--color-brand-light) 65%, transparent);
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition:
-      background 280ms ease,
-      color 280ms ease,
-      border-color 280ms ease;
-  }
-
-  .hero-filter-pill:hover {
-    border-color: var(--color-brand-light);
-    color: var(--color-brand-light);
-  }
-
-  .hero-filter-pill.active {
-    background: var(--color-brand-green);
-    border-color: var(--color-brand-green);
-    color: var(--color-brand-light);
-  }
 
   .hero-scroll-hint {
     display: flex;

@@ -85,12 +85,6 @@
       class="grid gap-10 border-b border-brand-dark/25 pb-12 lg:grid-cols-12 lg:items-end lg:gap-12 md:pb-16"
     >
       <div class="closing-cta-reveal lg:col-span-8">
-        <p
-          class="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-green"
-        >
-          <span class="h-px w-10 bg-brand-green"></span>
-          Start a conversation
-        </p>
         <h2
           class="max-w-5xl font-display text-[clamp(3rem,6vw,7rem)] leading-[0.87] tracking-[-0.05em] text-brand-dark"
         >

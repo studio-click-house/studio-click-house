@@ -93,8 +93,8 @@
           <div class="flex items-start gap-2.5">
             <MapPin size={14} class="text-brand-green/80 mt-0.5 shrink-0" />
             <span>
-              Uttara, Sector 3<br />
-              Dhaka, Bangladesh // UTC+6
+              Demra, Dhaka<br />
+              Bangladesh // UTC+6
             </span>
           </div>
           <div class="flex items-center gap-2.5">
