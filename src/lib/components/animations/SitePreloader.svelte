@@ -24,7 +24,7 @@
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const formationDuration = 1600;
+    const minimumDisplayDuration = reduceMotion ? 180 : 1900;
     const animations: Animation[] = [];
     let formationTimeline: { kill: () => void } | undefined;
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
@@ -32,7 +32,8 @@
     let formationFrame: number | undefined;
     let hasFinished = false;
     let isDisposed = false;
-    let isPageLoaded = document.readyState === "complete";
+    let isPageReady = document.readyState !== "loading";
+    let hasFormationCompleted = false;
     let isExitScheduled = false;
     let formationStartedAt = performance.now();
     let targetLogo: HTMLElement | null = null;
@@ -134,18 +135,23 @@
     });
 
     const scheduleExit = () => {
-      if (!isPageLoaded || !isFormationReady || isExitScheduled) return;
+      if (!isPageReady || !hasFormationCompleted || isExitScheduled) return;
       isExitScheduled = true;
-      const minimumDuration = reduceMotion ? 160 : formationDuration;
       const remaining = Math.max(
         0,
-        minimumDuration - (performance.now() - formationStartedAt),
+        minimumDisplayDuration - (performance.now() - formationStartedAt),
       );
       hideTimer = setTimeout(beginExit, remaining);
     };
 
-    const handleWindowLoad = () => {
-      isPageLoaded = true;
+    const completeFormation = () => {
+      if (hasFormationCompleted || isDisposed) return;
+      hasFormationCompleted = true;
+      scheduleExit();
+    };
+
+    const handleDocumentReady = () => {
+      isPageReady = true;
       scheduleExit();
     };
 
@@ -169,7 +175,8 @@
         sampleCanvas.width,
         sampleCanvas.height,
       );
-      const sampleStep = window.innerWidth < 640 ? 11 : 8;
+      const sampleStep =
+        window.innerWidth < 640 ? 14 : window.innerWidth < 1024 ? 11 : 9;
       const particles: LogoParticle[] = [];
 
       for (
@@ -218,6 +225,7 @@
         reduceMotion ||
         isDisposed
       ) {
+        completeFormation();
         return;
       }
 
@@ -227,10 +235,14 @@
       );
       if (!context || !completeLogo) {
         completeLogo?.style.setProperty("opacity", "1");
+        completeFormation();
         return;
       }
 
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const pixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        window.innerWidth < 640 ? 1.5 : 2,
+      );
       particleCanvasElement.width = Math.round(window.innerWidth * pixelRatio);
       particleCanvasElement.height = Math.round(
         window.innerHeight * pixelRatio,
@@ -284,10 +296,10 @@
         if (isDisposed) return;
 
         formationTimeline = gsap
-          .timeline()
+          .timeline({ onComplete: completeFormation })
           .to(formation, {
             progress: 1,
-            duration: 1.22,
+            duration: 1.46,
             ease: "none",
             onUpdate: renderParticles,
           })
@@ -312,6 +324,7 @@
       } catch {
         completeLogo.style.setProperty("opacity", "1");
         particleCanvasElement.style.setProperty("opacity", "0");
+        completeFormation();
       }
     };
 
@@ -356,18 +369,20 @@
         logoElement
           ?.querySelector<HTMLElement>(".preloader-logo-complete")
           ?.style.setProperty("opacity", "1");
-        scheduleExit();
+        completeFormation();
       }
     };
 
-    if (!isPageLoaded) {
-      window.addEventListener("load", handleWindowLoad, { once: true });
+    if (!isPageReady) {
+      document.addEventListener("DOMContentLoaded", handleDocumentReady, {
+        once: true,
+      });
     }
     void waitForCriticalLogoAsset();
 
     return () => {
       isDisposed = true;
-      window.removeEventListener("load", handleWindowLoad);
+      document.removeEventListener("DOMContentLoaded", handleDocumentReady);
       window.removeEventListener("site-header-ready", handleHeaderReady);
       if (formationFrame) cancelAnimationFrame(formationFrame);
       if (hideTimer) clearTimeout(hideTimer);
@@ -436,6 +451,7 @@
     overflow: hidden;
     color: var(--color-brand-light);
     background: var(--color-brand-dark);
+    will-change: opacity;
   }
 
   .preloader-particle-field {
@@ -446,6 +462,8 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+    contain: strict;
+    will-change: opacity;
   }
 
   .preloader-logo {

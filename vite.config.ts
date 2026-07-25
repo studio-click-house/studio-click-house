@@ -24,10 +24,18 @@ export default defineConfig({
       },
       output: {
         manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            if (id.includes("three")) return "vendor-three";
-            if (id.includes("gsap")) return "vendor-gsap";
-          }
+          const normalizedId = id.replaceAll("\\", "/");
+          if (!normalizedId.includes("/node_modules/")) return;
+
+          if (
+            normalizedId.includes("/three/build/three.webgpu.js") ||
+            normalizedId.includes("/three/build/three.tsl.js")
+          )
+            return "vendor-three-webgpu";
+          if (normalizedId.includes("/three-globe/"))
+            return "vendor-three-globe";
+          if (normalizedId.includes("/three/")) return "vendor-three-core";
+          if (normalizedId.includes("/gsap/")) return "vendor-gsap";
         },
       },
     },

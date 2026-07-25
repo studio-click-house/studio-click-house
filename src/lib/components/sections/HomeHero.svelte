@@ -16,12 +16,20 @@
     let context: { revert: () => void } | undefined;
     let active = true;
     let isHeroVisible = true;
+    let isPreloaderComplete = !document.querySelector(".site-preloader");
+    let startHeroMotion: (() => void) | undefined;
+    let videoStartTimer: ReturnType<typeof setTimeout> | undefined;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
 
     const startVideo = () => {
-      if (prefersReducedMotion.matches || !heroVideo) return;
+      if (
+        !isPreloaderComplete ||
+        prefersReducedMotion.matches ||
+        !heroVideo
+      )
+        return;
       heroVideo.preload = "metadata";
       heroVideo.load();
       void heroVideo.play().catch(() => {
@@ -39,6 +47,7 @@
           isHeroVisible = entry.isIntersecting;
 
           if (isHeroVisible) {
+            if (!isPreloaderComplete) return;
             if (heroVideo.preload === "none") startVideo();
             else if (isVideoReady && !prefersReducedMotion.matches) {
               void heroVideo.play().catch(() => {});
@@ -68,13 +77,32 @@
       handleMotionPreferenceChange,
     );
 
+    const handlePreloaderComplete = () => {
+      isPreloaderComplete = true;
+      startHeroMotion?.();
+      if (isHeroVisible) {
+        videoStartTimer = setTimeout(startVideo, 450);
+      }
+    };
+
+    if (!isPreloaderComplete) {
+      window.addEventListener(
+        "site-preloader-complete",
+        handlePreloaderComplete,
+        { once: true },
+      );
+    }
+
     import("gsap").then(({ gsap }) => {
       if (!active || !section) return;
       context = gsap.context(() => {
         const media = gsap.matchMedia();
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap
-            .timeline({ defaults: { ease: "power3.out" } })
+          const timeline = gsap
+            .timeline({
+              paused: true,
+              defaults: { ease: "power3.out" },
+            })
             .from(".hero-media", { scale: 1.08, duration: 1.6 })
             .from(
               ".hero-line",
@@ -86,6 +114,9 @@
               { autoAlpha: 0, y: 20, duration: 0.7, stagger: 0.08 },
               0.65,
             );
+
+          startHeroMotion = () => timeline.play();
+          if (isPreloaderComplete) startHeroMotion();
         });
         return () => media.revert();
       }, section);
@@ -98,6 +129,11 @@
         "change",
         handleMotionPreferenceChange,
       );
+      window.removeEventListener(
+        "site-preloader-complete",
+        handlePreloaderComplete,
+      );
+      if (videoStartTimer) clearTimeout(videoStartTimer);
       context?.revert();
     };
   });

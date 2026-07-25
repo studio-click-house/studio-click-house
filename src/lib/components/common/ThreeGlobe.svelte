@@ -1,7 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as THREE from "three";
-  import type ThreeGlobe from "three-globe";
   import type { ClientLocationMarker } from "$lib/types/content";
 
   interface Props {
@@ -97,29 +95,29 @@
   }
 
   function createPointData(arcs: GlobeArc[]) {
-    const pointMap = new Map<string, GlobePoint>();
+    const pointsByLocation: Record<string, GlobePoint> = {};
 
     for (const arc of arcs) {
       const startKey = `${arc.startLat}:${arc.startLng}`;
       const endKey = `${arc.endLat}:${arc.endLng}`;
 
-      if (!pointMap.has(startKey)) {
-        pointMap.set(startKey, {
+      if (!(startKey in pointsByLocation)) {
+        pointsByLocation[startKey] = {
           lat: arc.startLat,
           lng: arc.startLng,
           color: arc.color,
-        });
+        };
       }
-      if (!pointMap.has(endKey)) {
-        pointMap.set(endKey, {
+      if (!(endKey in pointsByLocation)) {
+        pointsByLocation[endKey] = {
           lat: arc.endLat,
           lng: arc.endLng,
           color: arc.color,
-        });
+        };
       }
     }
 
-    return [...pointMap.values()];
+    return Object.values(pointsByLocation);
   }
 
   function createRingData(arcs: GlobeArc[], cycle: number) {
@@ -188,9 +186,13 @@
   onMount(() => {
     let active = true;
     let destroyRuntime: (() => void) | undefined;
+    let initializationObserver: IntersectionObserver | undefined;
 
     async function initializeGlobe() {
-      const { default: ThreeGlobeConstructor } = await import("three-globe");
+      const [THREE, { default: ThreeGlobeConstructor }] = await Promise.all([
+        import("three"),
+        import("three-globe"),
+      ]);
       if (!active || !containerElement || !canvasElement) return;
 
       const prefersReducedMotion = window.matchMedia(
@@ -429,10 +431,27 @@
       };
     }
 
-    void initializeGlobe();
+    const beginInitialization = () => {
+      initializationObserver?.disconnect();
+      initializationObserver = undefined;
+      void initializeGlobe();
+    };
+
+    if ("IntersectionObserver" in window) {
+      initializationObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) beginInitialization();
+        },
+        { rootMargin: "800px 0px", threshold: 0.01 },
+      );
+      initializationObserver.observe(containerElement);
+    } else {
+      beginInitialization();
+    }
 
     return () => {
       active = false;
+      initializationObserver?.disconnect();
       destroyRuntime?.();
     };
   });
