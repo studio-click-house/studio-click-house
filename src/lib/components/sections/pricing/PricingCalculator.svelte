@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import * as THREE from "three";
-  import { gsap } from "gsap";
   import { Check, Sparkles, Zap, ArrowRight } from "lucide-svelte";
   import { pricingCategories, pricingPageData } from "$lib/content/pricing";
   import { cn } from "$lib/utils";
@@ -68,14 +67,27 @@
   $effect(() => {
     const target = calculatedPrice;
     const obj = { val: animatedPrice };
-    gsap.to(obj, {
-      val: target,
-      duration: 0.35,
-      ease: "power2.out",
-      onUpdate: () => {
-        animatedPrice = Math.round(obj.val);
-      }
+    let isCancelled = false;
+    let activeTween: any = null;
+
+    import("gsap").then(({ gsap }) => {
+      if (isCancelled) return;
+      activeTween = gsap.to(obj, {
+        val: target,
+        duration: 0.35,
+        ease: "power2.out",
+        onUpdate: () => {
+          animatedPrice = Math.round(obj.val);
+        }
+      });
     });
+
+    return () => {
+      isCancelled = true;
+      if (activeTween) {
+        activeTween.kill();
+      }
+    };
   });
 
   // Elements

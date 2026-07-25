@@ -2,26 +2,15 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { clientLocations } from "$lib/content/home";
-  import type { ClientLocationMarker } from "$lib/types/content";
-  import { RotateCcw } from "lucide-svelte";
   import ThreeGlobe from "./ThreeGlobe.svelte";
 
-  let selectedLocation = $state<ClientLocationMarker | null>(null);
-  let sectionRoot: HTMLDivElement;
+  let sectionRoot: HTMLElement;
   let globeStage: HTMLDivElement;
 
   const totalClients = clientLocations.reduce(
     (sum, item) => sum + (item.clientCount ?? 0),
     0,
   );
-
-  function handleSelectLocation(location: ClientLocationMarker | null) {
-    selectedLocation = location;
-  }
-
-  function handleReset() {
-    selectedLocation = null;
-  }
 
   onMount(() => {
     let active = true;
@@ -92,17 +81,20 @@
   });
 </script>
 
-<div
+<section
+  id="global-production-network"
+  aria-labelledby="global-production-heading"
   bind:this={sectionRoot}
   data-cursor-trail="off"
-  class="network-section relative overflow-hidden bg-brand-dark px-4 py-20 text-brand-light sm:px-8 sm:py-28 lg:py-36"
+  class="network-section relative min-h-[100dvh] overflow-hidden bg-black px-4 py-20 text-brand-light sm:px-8 sm:py-24 lg:py-0"
 >
-  <div class="site-shell relative z-10 mx-auto max-w-7xl">
+  <div class="site-shell relative z-10 mx-auto max-w-7xl lg:min-h-[100dvh]">
     <div
-      class="grid items-center gap-5 lg:min-h-[40rem] lg:grid-cols-12 lg:gap-6"
+      class="grid items-center gap-5 lg:min-h-[100dvh] lg:grid-cols-12 lg:gap-6"
     >
       <div class="z-20 flex flex-col lg:col-span-4 lg:py-6">
         <h2
+          id="global-production-heading"
           class="network-copy-step max-w-[12ch] font-display text-[clamp(2.35rem,3.35vw,3.75rem)] font-light leading-[0.95] tracking-[-0.035em]"
         >
           Creative production, <span class="text-brand-light/72"
@@ -149,54 +141,18 @@
             </dt>
           </div>
         </dl>
-
-        {#if selectedLocation}
-          <div
-            class="network-copy-step mt-5 min-h-10 border-l border-brand-green/55 pl-4"
-          >
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <span
-                  class="font-mono text-[0.55rem] uppercase tracking-[0.18em] text-brand-light/42"
-                >
-                  Selected region
-                </span>
-                <p class="mt-1 text-sm text-brand-light">
-                  {selectedLocation.country}
-                  <span class="ml-2 text-brand-green">
-                    {selectedLocation.clientCount !== undefined
-                      ? `${selectedLocation.clientCount.toLocaleString()} clients`
-                      : "Target market"}
-                  </span>
-                </p>
-              </div>
-              <button
-                type="button"
-                onclick={handleReset}
-                class="mt-1 text-brand-light/45 transition-colors hover:text-brand-green focus-visible:outline-2 focus-visible:outline-brand-green"
-                aria-label="Reset selected location"
-              >
-                <RotateCcw size={14} />
-              </button>
-            </div>
-          </div>
-        {/if}
       </div>
 
       <div
         bind:this={globeStage}
-        class="globe-stage relative flex min-h-[32rem] items-center justify-center lg:col-span-8 lg:min-h-[40rem]"
+        class="globe-stage relative flex min-h-[36rem] items-center justify-center lg:col-span-8 lg:min-h-0"
       >
         <div class="globe-ambient" aria-hidden="true"></div>
-        <ThreeGlobe
-          locations={clientLocations}
-          {selectedLocation}
-          onSelectLocation={handleSelectLocation}
-        />
+        <ThreeGlobe locations={clientLocations} />
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <style>
   .network-section::before {
@@ -204,43 +160,28 @@
     inset: 0;
     background:
       radial-gradient(
-        circle at 76% 34%,
-        color-mix(in srgb, var(--color-brand-green) 26%, transparent) 0,
-        color-mix(in srgb, var(--color-brand-green) 11%, transparent) 30%,
-        transparent 58%
+        circle at 76% 42%,
+        color-mix(in srgb, var(--color-brand-green) 24%, transparent) 0,
+        color-mix(in srgb, var(--color-brand-green) 9%, transparent) 34%,
+        transparent 62%
       ),
       radial-gradient(
-        ellipse at 58% 92%,
-        color-mix(in srgb, var(--color-brand-light) 4%, transparent),
-        transparent 46%
+        ellipse at 18% 54%,
+        color-mix(in srgb, var(--color-brand-green) 6%, transparent) 0,
+        transparent 48%
+      ),
+      radial-gradient(
+        circle at 76% 42%,
+        rgb(6 32 86 / 0.3) 0,
+        rgb(6 32 86 / 0.12) 34%,
+        transparent 68%
       );
     pointer-events: none;
     content: "";
   }
 
   .network-section::after {
-    position: absolute;
-    right: -8%;
-    bottom: -10%;
-    left: -8%;
-    height: 54%;
-    background:
-      radial-gradient(
-        ellipse at 70% 100%,
-        color-mix(in srgb, var(--color-brand-green) 58%, transparent),
-        color-mix(in srgb, var(--color-brand-green) 20%, transparent) 42%,
-        transparent 72%
-      ),
-      linear-gradient(
-        to top,
-        color-mix(in srgb, var(--color-brand-green) 48%, transparent),
-        color-mix(in srgb, var(--color-brand-green) 17%, transparent) 56%,
-        transparent
-      );
-    filter: blur(1.8rem);
-    opacity: 1;
-    pointer-events: none;
-    content: "";
+    content: none;
   }
 
   .globe-stage {
@@ -256,10 +197,12 @@
     border-radius: 9999px;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--color-brand-green) 40%, transparent) 0,
-      color-mix(in srgb, var(--color-brand-green) 17%, transparent) 36%,
+      color-mix(in srgb, var(--color-brand-green) 38%, transparent) 0,
+      color-mix(in srgb, var(--color-brand-green) 16%, transparent) 38%,
       transparent 70%
     );
+    filter: blur(1.1rem);
+    opacity: 0.9;
     pointer-events: none;
     will-change: transform, opacity;
   }

@@ -2,6 +2,7 @@
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PortfolioCinematicHero from "$lib/components/sections/portfolio/PortfolioCinematicHero.svelte";
+  import Infinite3DGallery from "$lib/components/sections/portfolio/Infinite3DGallery.svelte";
   import WorkGrid from "$lib/components/sections/portfolio/WorkGrid.svelte";
   import PortfolioCta from "$lib/components/sections/portfolio/PortfolioCta.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -20,6 +21,17 @@
       url: siteConfig.url,
     },
   };
+
+  const galleryImages = $derived(
+    portfolioPageData.gallery.map((item) => {
+      const src = item.media.src;
+      const webglSrc = src.includes("?") ? `${src}&webgl=1` : `${src}?webgl=1`;
+      return {
+        src: webglSrc,
+        alt: item.media.alt || item.title,
+      };
+    })
+  );
 </script>
 
 <PageMeta
@@ -32,6 +44,7 @@
 
 <main id="main-content" class="relative">
   <PortfolioCinematicHero hero={portfolioPageData.hero} />
+  <Infinite3DGallery images={galleryImages} />
   <WorkGrid items={portfolioPageData.gallery} />
   <PortfolioCta cta={portfolioPageData.cta} />
 </main>

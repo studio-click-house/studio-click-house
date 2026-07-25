@@ -1,27 +1,40 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
+  type LogoParticle = {
+    color: string;
+    delay: number;
+    drift: number;
+    phase: number;
+    size: number;
+    startX: number;
+    startY: number;
+    targetX: number;
+    targetY: number;
+  };
+
   let isVisible = $state(true);
   let isExiting = $state(false);
-  let isDrawingReady = $state(false);
+  let isFormationReady = $state(false);
   let backdropElement = $state<HTMLDivElement>();
+  let particleCanvasElement = $state<HTMLCanvasElement>();
   let logoElement = $state<HTMLDivElement>();
 
   onMount(() => {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const drawingDuration = 2580;
-    const drawingTimeScale = drawingDuration / 1580;
+    const formationDuration = 1600;
     const animations: Animation[] = [];
+    let formationTimeline: { kill: () => void } | undefined;
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
     let headerReadyTimer: ReturnType<typeof setTimeout> | undefined;
-    let drawingFrame: number | undefined;
+    let formationFrame: number | undefined;
     let hasFinished = false;
     let isDisposed = false;
     let isPageLoaded = document.readyState === "complete";
     let isExitScheduled = false;
-    let drawingStartedAt = performance.now();
+    let formationStartedAt = performance.now();
     let targetLogo: HTMLElement | null = null;
     let targetBrandBlock: HTMLElement | null = null;
     let targetHeader: HTMLElement | null = null;
@@ -121,12 +134,12 @@
     });
 
     const scheduleExit = () => {
-      if (!isPageLoaded || !isDrawingReady || isExitScheduled) return;
+      if (!isPageLoaded || !isFormationReady || isExitScheduled) return;
       isExitScheduled = true;
-      const minimumDuration = reduceMotion ? 160 : drawingDuration;
+      const minimumDuration = reduceMotion ? 160 : formationDuration;
       const remaining = Math.max(
         0,
-        minimumDuration - (performance.now() - drawingStartedAt),
+        minimumDuration - (performance.now() - formationStartedAt),
       );
       hideTimer = setTimeout(beginExit, remaining);
     };
@@ -136,128 +149,230 @@
       scheduleExit();
     };
 
-    const playDrawingSequence = () => {
-      if (!logoElement || reduceMotion) return;
-
-      const drawingSteps = [
-        {
-          selector: ".logo-draw-monogram",
-          distance: 760,
-          duration: 450,
-          delay: 30,
-        },
-        { selector: ".logo-draw-h", distance: 560, duration: 360, delay: 220 },
-        {
-          selector: ".logo-draw-base",
-          distance: 190,
-          duration: 180,
-          delay: 600,
-        },
-        {
-          selector: ".logo-draw-flight",
-          distance: 390,
-          duration: 350,
-          delay: 790,
-        },
-        {
-          selector: ".logo-draw-plane",
-          distance: 270,
-          duration: 220,
-          delay: 1150,
-        },
-      ];
-
-      drawingSteps.forEach(({ selector, distance, duration, delay }) => {
-        const path = logoElement?.querySelector<SVGPathElement>(selector);
-        if (!path) return;
-
-        animations.push(
-          path.animate(
-            [{ strokeDashoffset: `${distance}` }, { strokeDashoffset: "0" }],
-            {
-              duration: duration * drawingTimeScale,
-              delay: delay * drawingTimeScale,
-              easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-              fill: "forwards",
-            },
-          ),
-        );
+    const createParticles = (
+      logoImage: HTMLImageElement,
+      logoRect: DOMRect,
+    ) => {
+      const sampleCanvas = document.createElement("canvas");
+      const sampleContext = sampleCanvas.getContext("2d", {
+        willReadFrequently: true,
       });
+      if (!sampleContext) return [];
 
+      sampleCanvas.width = logoImage.naturalWidth;
+      sampleCanvas.height = logoImage.naturalHeight;
+      sampleContext.drawImage(logoImage, 0, 0);
+
+      const { data } = sampleContext.getImageData(
+        0,
+        0,
+        sampleCanvas.width,
+        sampleCanvas.height,
+      );
+      const sampleStep = window.innerWidth < 640 ? 11 : 8;
+      const particles: LogoParticle[] = [];
+
+      for (
+        let sourceY = 0;
+        sourceY < sampleCanvas.height;
+        sourceY += sampleStep
+      ) {
+        for (
+          let sourceX = 0;
+          sourceX < sampleCanvas.width;
+          sourceX += sampleStep
+        ) {
+          const pixelIndex = (sourceY * sampleCanvas.width + sourceX) * 4;
+          const alpha = data[pixelIndex + 3];
+          if (alpha < 96) continue;
+
+          const targetX =
+            logoRect.left + (sourceX / sampleCanvas.width) * logoRect.width;
+          const targetY =
+            logoRect.top + (sourceY / sampleCanvas.height) * logoRect.height;
+          const horizontalProgress = sourceX / sampleCanvas.width;
+          const travelDistance =
+            logoRect.left + 90 + Math.random() * window.innerWidth * 0.58;
+
+          particles.push({
+            color: `rgba(${data[pixelIndex]}, ${data[pixelIndex + 1]}, ${data[pixelIndex + 2]}, ${alpha / 255})`,
+            delay: horizontalProgress * 0.22 + Math.random() * 0.06,
+            drift: 12 + Math.random() * 34,
+            phase: Math.random() * Math.PI * 2,
+            size: 1.1 + Math.random() * 2.2,
+            startX: targetX - travelDistance,
+            startY: targetY + (Math.random() - 0.5) * window.innerHeight * 0.78,
+            targetX,
+            targetY,
+          });
+        }
+      }
+
+      return particles;
+    };
+
+    const playParticleFormation = async (logoImage: HTMLImageElement) => {
+      if (
+        !logoElement ||
+        !particleCanvasElement ||
+        reduceMotion ||
+        isDisposed
+      ) {
+        return;
+      }
+
+      const context = particleCanvasElement.getContext("2d");
       const completeLogo = logoElement.querySelector<HTMLElement>(
         ".preloader-logo-complete",
       );
-      if (completeLogo) {
-        animations.push(
-          completeLogo.animate([{ opacity: 0 }, { opacity: 1 }], {
-            duration: 140 * drawingTimeScale,
-            delay: 1380 * drawingTimeScale,
-            easing: "linear",
-            fill: "forwards",
-          }),
-        );
+      if (!context || !completeLogo) {
+        completeLogo?.style.setProperty("opacity", "1");
+        return;
+      }
+
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      particleCanvasElement.width = Math.round(window.innerWidth * pixelRatio);
+      particleCanvasElement.height = Math.round(
+        window.innerHeight * pixelRatio,
+      );
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const particles = createParticles(
+        logoImage,
+        logoElement.getBoundingClientRect(),
+      );
+      const formation = { progress: 0 };
+
+      const renderParticles = () => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        for (const particle of particles) {
+          const localProgress = Math.min(
+            1,
+            Math.max(0, (formation.progress - particle.delay) / 0.58),
+          );
+          if (localProgress <= 0) continue;
+
+          const easedProgress = 1 - Math.pow(1 - localProgress, 3);
+          const remainingMotion = 1 - easedProgress;
+          const wave =
+            Math.sin(particle.phase + localProgress * Math.PI * 4) *
+            particle.drift *
+            remainingMotion;
+          const x =
+            particle.startX +
+            (particle.targetX - particle.startX) * easedProgress;
+          const y =
+            particle.startY +
+            (particle.targetY - particle.startY) * easedProgress +
+            wave;
+          const alpha = Math.min(1, localProgress / 0.16);
+          const width =
+            particle.size * (1.8 - Math.min(0.8, localProgress * 0.8));
+          const height = particle.size * (0.52 + localProgress * 0.48);
+
+          context.globalAlpha = alpha;
+          context.fillStyle = particle.color;
+          context.fillRect(x, y, width, height);
+        }
+
+        context.globalAlpha = 1;
+      };
+
+      try {
+        const { gsap } = await import("gsap");
+        if (isDisposed) return;
+
+        formationTimeline = gsap
+          .timeline()
+          .to(formation, {
+            progress: 1,
+            duration: 1.22,
+            ease: "none",
+            onUpdate: renderParticles,
+          })
+          .to(
+            completeLogo,
+            {
+              autoAlpha: 1,
+              duration: 0.12,
+              ease: "power2.out",
+            },
+            "-=0.16",
+          )
+          .to(
+            particleCanvasElement,
+            {
+              autoAlpha: 0,
+              duration: 0.14,
+              ease: "power2.out",
+            },
+            "<",
+          );
+      } catch {
+        completeLogo.style.setProperty("opacity", "1");
+        particleCanvasElement.style.setProperty("opacity", "0");
       }
     };
 
-    const startDrawing = () => {
-      drawingFrame = requestAnimationFrame(() => {
+    const startFormation = (logoImage: HTMLImageElement) => {
+      formationFrame = requestAnimationFrame(() => {
         if (isDisposed) return;
-        drawingStartedAt = performance.now();
-        isDrawingReady = true;
-        playDrawingSequence();
+        formationStartedAt = performance.now();
+        isFormationReady = true;
+        void playParticleFormation(logoImage);
         scheduleExit();
       });
     };
 
-    const waitForCriticalLogoAssets = async () => {
-      const sources = [
-        "/images/brand/schl-logo-green.png",
-        "/images/brand/schl-logo-gray.png",
-        "/images/brand/schl-logo.png",
-      ];
-
-      const decodePromises = sources.map(
-        (source) =>
-          new Promise<void>((resolve) => {
-            const image = new Image();
-            image.decoding = "async";
-            image.onload = () => {
-              void image
-                .decode()
-                .catch(() => undefined)
-                .then(() => resolve());
-            };
-            image.onerror = () => resolve();
-            image.src = source;
-            if (image.complete) {
-              void image
-                .decode()
-                .catch(() => undefined)
-                .then(() => resolve());
-            }
-          }),
-      );
+    const waitForCriticalLogoAsset = async () => {
+      const logoImage = new Image();
+      logoImage.decoding = "async";
+      logoImage.src = "/images/brand/schl-logo.png";
 
       await Promise.race([
-        Promise.all(decodePromises),
-        new Promise<void>((resolve) => setTimeout(resolve, 140)),
+        new Promise<void>((resolve) => {
+          logoImage.onload = () => {
+            void logoImage
+              .decode()
+              .catch(() => undefined)
+              .then(() => resolve());
+          };
+          logoImage.onerror = () => resolve();
+          if (logoImage.complete) {
+            void logoImage
+              .decode()
+              .catch(() => undefined)
+              .then(() => resolve());
+          }
+        }),
+        new Promise<void>((resolve) => setTimeout(resolve, 180)),
       ]);
 
-      if (!isDisposed) startDrawing();
+      if (!isDisposed && logoImage.naturalWidth > 0) {
+        startFormation(logoImage);
+      } else if (!isDisposed) {
+        isFormationReady = true;
+        logoElement
+          ?.querySelector<HTMLElement>(".preloader-logo-complete")
+          ?.style.setProperty("opacity", "1");
+        scheduleExit();
+      }
     };
 
     if (!isPageLoaded) {
       window.addEventListener("load", handleWindowLoad, { once: true });
     }
-    void waitForCriticalLogoAssets();
+    void waitForCriticalLogoAsset();
 
     return () => {
       isDisposed = true;
       window.removeEventListener("load", handleWindowLoad);
       window.removeEventListener("site-header-ready", handleHeaderReady);
-      if (drawingFrame) cancelAnimationFrame(drawingFrame);
+      if (formationFrame) cancelAnimationFrame(formationFrame);
       if (hideTimer) clearTimeout(hideTimer);
       if (headerReadyTimer) clearTimeout(headerReadyTimer);
+      formationTimeline?.kill();
       animations.forEach((animation) => animation.cancel());
       restoreHeaderLogo();
     };
@@ -278,55 +393,18 @@
       aria-hidden="true"
     ></div>
 
+    <canvas
+      class="preloader-particle-field"
+      bind:this={particleCanvasElement}
+      aria-hidden="true"
+    ></canvas>
+
     <div
-      class:preloader-drawing-ready={isDrawingReady}
+      class:preloader-formation-ready={isFormationReady}
       class="preloader-logo"
       bind:this={logoElement}
       aria-hidden="true"
     >
-      <svg
-        class="preloader-logo-drawing"
-        viewBox="0 0 715 377"
-        role="presentation"
-      >
-        <defs>
-          <mask id="schl-green-draw-mask" class="logo-reveal-mask">
-            <rect width="715" height="377" fill="transparent" />
-            <path
-              class="logo-draw-path logo-draw-monogram"
-              d="M260 158H96C38 158 34 224 95 224H211C245 224 256 238 256 263C256 303 301 315 350 315H456"
-            />
-            <path
-              class="logo-draw-path logo-draw-h"
-              d="M451 157V316M451 231H642M642 157V316"
-            />
-          </mask>
-          <mask id="schl-gray-draw-mask" class="logo-reveal-mask">
-            <rect width="715" height="377" fill="transparent" />
-            <path class="logo-draw-path logo-draw-base" d="M48 315H221" />
-            <path
-              class="logo-draw-path logo-draw-flight"
-              d="M241 210C305 135 402 89 548 61"
-            />
-            <path
-              class="logo-draw-path logo-draw-plane"
-              d="M562 20L682 47L590 89"
-            />
-          </mask>
-        </defs>
-        <image
-          href="/images/brand/schl-logo-green.png"
-          width="715"
-          height="377"
-          mask="url(#schl-green-draw-mask)"
-        />
-        <image
-          href="/images/brand/schl-logo-gray.png"
-          width="715"
-          height="377"
-          mask="url(#schl-gray-draw-mask)"
-        />
-      </svg>
       <img
         class="preloader-logo-complete"
         src="/images/brand/schl-logo.png"
@@ -360,6 +438,16 @@
     background: var(--color-brand-dark);
   }
 
+  .preloader-particle-field {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
   .preloader-logo {
     position: absolute;
     top: 50%;
@@ -372,60 +460,11 @@
     will-change: transform;
   }
 
-  .preloader-logo-drawing,
   .preloader-logo-complete {
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  .preloader-logo-complete {
-    position: absolute;
-    inset: 0;
     opacity: 0;
-  }
-
-  .logo-draw-path {
-    fill: none;
-    stroke: white;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .logo-reveal-mask {
-    mask-type: alpha;
-  }
-
-  .logo-draw-monogram {
-    stroke-width: 62;
-    stroke-dasharray: 760;
-    stroke-dashoffset: 760;
-  }
-
-  .logo-draw-h {
-    stroke-width: 66;
-    stroke-linecap: square;
-    stroke-dasharray: 560;
-    stroke-dashoffset: 560;
-  }
-
-  .logo-draw-base {
-    stroke-width: 62;
-    stroke-linecap: square;
-    stroke-dasharray: 190;
-    stroke-dashoffset: 190;
-  }
-
-  .logo-draw-flight {
-    stroke-width: 52;
-    stroke-dasharray: 390;
-    stroke-dashoffset: 390;
-  }
-
-  .logo-draw-plane {
-    stroke-width: 64;
-    stroke-dasharray: 270;
-    stroke-dashoffset: 270;
   }
 
   @media (max-width: 39.999rem) {
@@ -435,17 +474,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .logo-draw-path,
-    .preloader-logo-complete {
-      animation: none;
+    .preloader-particle-field {
+      display: none;
     }
 
     .preloader-logo-complete {
       opacity: 1;
-    }
-
-    .preloader-logo-drawing {
-      display: none;
     }
   }
 

@@ -23,6 +23,7 @@
     "sveltekit-superforms": "^2.30.0",
     "tailwind-merge": "^3.6.0",
     "three": "^0.185.1",
+    "three-globe": "^2.45.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {

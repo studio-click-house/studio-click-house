@@ -1,6 +1,9 @@
 <script lang="ts">
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
+  import ImageTrailSection from "$lib/components/sections/ImageTrailSection.svelte";
+  import ScrollChoreography from "$lib/components/sections/ScrollChoreography.svelte";
+  import CollectionSurfer from "$lib/components/sections/CollectionSurfer.svelte";
   import ServiceBreakdownRail from "$lib/components/sections/portfolio/ServiceBreakdownRail.svelte";
   import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
   import AboutOrbitGallery from "$lib/components/sections/about/AboutOrbitGallery.svelte";
@@ -29,7 +32,10 @@
 <JsonLd data={schemaData} />
 
 <main class="relative bg-brand-light text-brand-dark">
+  <ScrollChoreography />
   <ServiceBreakdownRail />
   <HorizontalProjectsShowcase />
   <AboutOrbitGallery />
+  <ImageTrailSection />
+  <CollectionSurfer />
 </main>
