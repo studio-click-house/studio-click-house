@@ -64,6 +64,7 @@
               start: "top top",
               end: "bottom bottom",
               scrub: 1,
+              refreshPriority: 100,
               invalidateOnRefresh: true,
             },
           });
@@ -95,6 +96,7 @@
               start: "top top",
               end: "bottom bottom",
               scrub: 1,
+              refreshPriority: 100,
               invalidateOnRefresh: true,
             },
           });

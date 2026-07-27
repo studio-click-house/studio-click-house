@@ -19,6 +19,7 @@
           const excludedSections = new Set([
             "home-hero",
             "studio-introduction",
+            "about-orbit-gallery",
             "scroll-image-story",
             "creative-direction",
             "selected-work",

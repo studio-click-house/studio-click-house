@@ -91,23 +91,6 @@
     pointer-events: none;
   }
 
-  .client-wall::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: clamp(9rem, 18vw, 15rem);
-    background-image: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--color-brand-dark) 7%, transparent) 1px,
-      transparent 1px
-    );
-    background-position: center top;
-    background-size: clamp(7rem, 8vw, 10rem) 100%;
-    content: "";
-    mask-image: linear-gradient(to bottom, black, transparent);
-    pointer-events: none;
-  }
 
   .logo-track {
     animation: logo-drift 42s linear infinite;

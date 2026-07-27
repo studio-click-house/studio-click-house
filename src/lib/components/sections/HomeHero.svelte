@@ -214,7 +214,7 @@
           /></a
         >
         <a
-          href={resolve("/#studio-services")}
+          href={resolve("/#horizontal-projects-showcase")}
           class="text-link text-brand-light group"
           >Explore services
           <ArrowDown

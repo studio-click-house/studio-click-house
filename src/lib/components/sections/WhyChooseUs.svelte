@@ -1,14 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import {
-    ArrowUpRight,
-    Layers3,
-    Route,
-    ShieldCheck,
-    UsersRound,
-  } from "lucide-svelte";
-  import { resolve } from "$app/paths";
+  import { Layers3, Route, ShieldCheck, UsersRound } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { aboutOrbitCards } from "$lib/content/about-orbit";
 
   const assurances = [
     {
@@ -40,6 +34,8 @@
   let section: HTMLElement;
   let pathLine: HTMLElement;
   let pathSignal: HTMLElement;
+  let landingStage: HTMLElement;
+  let landingCards: HTMLElement[] = [];
   let assuranceRows: HTMLElement[] = [];
 
   onMount(() => {
@@ -47,7 +43,15 @@
     let active = true;
 
     registerScrollTrigger().then((runtime) => {
-      if (!active || !runtime || !section || !pathLine || !pathSignal) return;
+      if (
+        !active ||
+        !runtime ||
+        !section ||
+        !landingStage ||
+        !pathLine ||
+        !pathSignal
+      )
+        return;
 
       const { gsap } = runtime;
       context = gsap.context(() => {
@@ -59,19 +63,36 @@
             gsap
               .timeline({
                 scrollTrigger: {
-                  trigger: ".trust-copy",
-                  start: "top 82%",
-                  once: true,
+                  trigger: section,
+                  start: "top 98%",
+                  end: "top 30%",
+                  scrub: 0.72,
+                  refreshPriority: 90,
+                  invalidateOnRefresh: true,
                 },
               })
-              .from(".trust-copy > *", {
-                x: -38,
-                y: 30,
-                autoAlpha: 0,
-                duration: 0.82,
-                stagger: 0.11,
-                ease: "power3.out",
-              });
+              .from(landingStage, {
+                x: () => Math.min(window.innerWidth * 0.12, 170),
+                y: () => -Math.min(window.innerHeight * 0.32, 280),
+                scale: 0.86,
+                rotation: 3,
+                duration: 0.9,
+                ease: "power2.out",
+              })
+              .from(
+                landingCards,
+                {
+                  x: (index) => 52 + index * 3,
+                  y: (index) => -150 - index * 8,
+                  rotation: (index) => (index % 2 === 0 ? 7 : -6),
+                  scale: 0.76,
+                  autoAlpha: 0,
+                  duration: 0.76,
+                  stagger: 0.018,
+                  ease: "power2.out",
+                },
+                0,
+              );
 
             const timeline = gsap.timeline({
               scrollTrigger: {
@@ -79,6 +100,7 @@
                 start: "top 85%",
                 end: "center 50%",
                 scrub: 0.6,
+                refreshPriority: 89,
                 invalidateOnRefresh: true,
               },
             });
@@ -137,28 +159,48 @@
               .timeline({
                 scrollTrigger: {
                   trigger: section,
-                  start: "top 84%",
-                  once: true,
+                  start: "top 94%",
+                  end: "top 42%",
+                  scrub: 0.6,
+                  refreshPriority: 90,
+                  invalidateOnRefresh: true,
                 },
               })
-              .from(".trust-copy > *", {
-                y: 28,
+              .from(landingStage, {
+                x: 46,
+                y: -180,
+                scale: 0.84,
+                rotation: 3,
                 autoAlpha: 0,
-                duration: 0.64,
-                stagger: 0.075,
-                ease: "power3.out",
+                duration: 0.9,
+                ease: "power2.out",
               })
               .from(
-                assuranceRows,
+                landingCards,
                 {
-                  y: 24,
+                  y: (index) => -90 - index * 5,
+                  rotation: (index) => (index % 2 === 0 ? 6 : -5),
                   autoAlpha: 0,
-                  duration: 0.62,
-                  stagger: 0.1,
-                  ease: "power3.out",
+                  duration: 0.72,
+                  stagger: 0.018,
+                  ease: "power2.out",
                 },
-                "-=0.34",
+                0,
               );
+
+            gsap.from(assuranceRows, {
+              y: 24,
+              autoAlpha: 0,
+              duration: 0.62,
+              stagger: 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: ".assurance-list",
+                start: "top 86%",
+                once: true,
+                refreshPriority: 89,
+              },
+            });
           },
         );
 
@@ -180,25 +222,30 @@
   class="trust-section overflow-hidden bg-brand-paper text-brand-dark"
 >
   <div class="site-shell trust-layout">
-    <div class="trust-copy">
-      <h2 id="why-trust-us-title">
-        Built for visual production that has to stay consistent.
-      </h2>
-      <p>
-        Human judgment, clear checkpoints, and a workflow that can meet the way
-        your team already works.
-      </p>
-      <a href={resolve("/contact")} class="trust-link group">
-        Discuss a project
-        <ArrowUpRight
-          size={16}
-          strokeWidth={1.6}
-          class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-        />
-      </a>
+    <div class="trust-visual" aria-hidden="true">
+      <div bind:this={landingStage} class="landing-stage">
+        <div class="landing-halo"></div>
+        {#each aboutOrbitCards as card, index (card.id)}
+          <div bind:this={landingCards[index]} class="landing-card-shell">
+            <figure class="landing-card">
+              <img
+                src={card.media.src}
+                alt=""
+                width={card.media.width}
+                height={card.media.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        {/each}
+      </div>
     </div>
 
     <div class="assurance-system">
+      <h2 id="why-trust-us-title" class="sr-only">
+        Why choose Studio Click House
+      </h2>
       <div bind:this={pathLine} class="quality-path" aria-hidden="true">
         <span bind:this={pathSignal} class="quality-signal"></span>
       </div>
@@ -227,6 +274,10 @@
 <style>
   .trust-section {
     position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: calc(100dvh - 4.35rem);
+    align-items: center;
     border-top: 1px solid
       color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
     padding-block: clamp(4rem, 6vw, 6.5rem);
@@ -249,40 +300,114 @@
     position: relative;
     z-index: 1;
     display: grid;
+    width: 100%;
     gap: clamp(3rem, 7vw, 8rem);
   }
 
-  .trust-copy {
-    align-self: start;
+  .trust-visual {
+    min-width: 0;
   }
 
-  .trust-copy h2 {
-    max-width: 13ch;
-    font-family: var(--font-sans);
-    font-size: clamp(2.25rem, 4vw, 4.15rem);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.052em;
+  .landing-stage {
+    position: relative;
+    width: min(100%, 33rem);
+    height: clamp(27rem, 45vw, 38rem);
+    margin-inline: auto;
+    transform-origin: 42% 32%;
+    will-change: transform, opacity;
   }
 
-  .trust-copy > p {
-    max-width: 28rem;
-    margin-top: 1.4rem;
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: color-mix(in srgb, var(--color-brand-dark) 56%, transparent);
+  .landing-halo {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    width: 68%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-brand-green) 12%, transparent);
+    filter: blur(4rem);
+    transform: translate(-50%, -50%);
   }
 
-  .trust-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 2rem;
-    border-bottom: 1px solid var(--color-brand-green);
-    padding-bottom: 0.4rem;
-    color: var(--color-brand-green);
-    font-size: 0.82rem;
-    font-weight: 600;
+  .landing-card-shell {
+    position: absolute;
+    width: clamp(6.5rem, 12vw, 10.5rem);
+    aspect-ratio: 4 / 5;
+    will-change: transform, opacity;
+  }
+
+  .landing-card {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-paper) 54%, transparent);
+    border-radius: 0.65rem;
+    background: var(--color-brand-dark);
+    box-shadow: 0 1.5rem 3.5rem
+      color-mix(in srgb, var(--color-brand-dark) 20%, transparent);
+  }
+
+  .landing-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .landing-card-shell:nth-of-type(2) {
+    top: 5%;
+    left: 9%;
+    z-index: 2;
+    transform: rotate(-12deg) scale(0.84);
+  }
+
+  .landing-card-shell:nth-of-type(3) {
+    top: 2%;
+    right: 7%;
+    z-index: 1;
+    transform: rotate(9deg) scale(0.78);
+  }
+
+  .landing-card-shell:nth-of-type(4) {
+    top: 32%;
+    left: 0;
+    z-index: 4;
+    transform: rotate(-7deg) scale(0.92);
+  }
+
+  .landing-card-shell:nth-of-type(5) {
+    top: 29%;
+    right: 0;
+    z-index: 3;
+    transform: rotate(11deg) scale(0.86);
+  }
+
+  .landing-card-shell:nth-of-type(6) {
+    bottom: 3%;
+    left: 10%;
+    z-index: 5;
+    transform: rotate(-5deg) scale(0.8);
+  }
+
+  .landing-card-shell:nth-of-type(7) {
+    right: 7%;
+    bottom: 1%;
+    z-index: 4;
+    transform: rotate(8deg) scale(0.76);
+  }
+
+  .landing-card-shell:nth-of-type(8) {
+    top: 20%;
+    left: 34%;
+    z-index: 8;
+    transform: rotate(2deg) scale(1.04);
+  }
+
+  .landing-card-shell:nth-of-type(9) {
+    bottom: 8%;
+    left: 38%;
+    z-index: 7;
+    transform: rotate(-2deg) scale(0.86);
   }
 
   .assurance-system {
@@ -359,12 +484,13 @@
 
   @media (min-width: 768px) {
     .trust-layout {
-      grid-template-columns: minmax(18rem, 0.72fr) minmax(28rem, 1.28fr);
+      grid-template-columns: minmax(21rem, 0.82fr) minmax(28rem, 1.18fr);
     }
 
-    .trust-copy {
+    .trust-visual {
       position: sticky;
-      top: 9rem;
+      top: 6.5rem;
+      align-self: start;
     }
 
     .assurance-system {
@@ -418,10 +544,17 @@
     }
 
     .assurance-row,
-    .assurance-icon {
+    .assurance-icon,
+    .landing-stage,
+    .landing-card-shell {
       transform: none !important;
       opacity: 1 !important;
       transition: none;
+    }
+
+    .landing-stage,
+    .landing-card-shell {
+      will-change: auto;
     }
   }
 </style>

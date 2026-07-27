@@ -51,6 +51,8 @@
                 start: "top 88%",
                 end: "center 48%",
                 scrub: 0.95,
+                refreshPriority: 90,
+                invalidateOnRefresh: true,
               },
             })
             .from(
@@ -94,6 +96,8 @@
                 start: "top 88%",
                 end: "top 48%",
                 scrub: 0.9,
+                refreshPriority: 89,
+                invalidateOnRefresh: true,
               },
             })
             .from(".ai-panel-copy-heading", {
@@ -215,9 +219,7 @@
       </video>
       <div class="ai-visual-shade absolute inset-0" aria-hidden="true"></div>
     </div>
-    <div class="ai-visual-curve" aria-hidden="true">
-      <div class="ai-visual-curve-grid site-shell"></div>
-    </div>
+    <div class="ai-visual-curve" aria-hidden="true"></div>
     <div
       class="ai-visual-copy site-shell absolute inset-0 z-[3] flex items-center"
     >
@@ -244,9 +246,7 @@
   </figure>
 
   <div class="ai-panel relative z-10 bg-brand-light">
-    <div class="ai-panel-curve" aria-hidden="true">
-      <div class="ai-panel-curve-grid site-shell"></div>
-    </div>
+    <div class="ai-panel-curve" aria-hidden="true"></div>
     <div class="ai-panel-orbits" aria-hidden="true">
       <span class="ai-panel-orb ai-panel-orb-shadow"></span>
       <span class="ai-panel-orb ai-panel-orb-midtone"></span>
@@ -428,13 +428,6 @@
   .ai-panel {
     isolation: isolate;
     padding-bottom: 2rem;
-    background-image: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--color-brand-dark) 7%, transparent) 1px,
-      transparent 1px
-    );
-    background-position: center top;
-    background-size: clamp(7rem, 8vw, 10rem) 100%;
   }
 
   .ai-panel::after {
@@ -655,20 +648,6 @@
     mask-size: 100% 100%;
   }
 
-  .ai-panel-curve-grid {
-    position: absolute;
-    inset-block: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-image: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--color-brand-dark) 7%, transparent) 1px,
-      transparent 1px
-    );
-    background-position: center top;
-    background-size: clamp(7rem, 8vw, 10rem) 100%;
-  }
-
   .ai-visual-curve {
     position: absolute;
     top: 0;
@@ -687,20 +666,6 @@
     mask-size: 100% 100%;
   }
 
-  .ai-visual-curve-grid {
-    position: absolute;
-    inset-block: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-image: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--color-brand-dark) 7%, transparent) 1px,
-      transparent 1px
-    );
-    background-position: center top;
-    background-size: clamp(7rem, 8vw, 10rem) 100%;
-  }
-
   .ai-panel-content {
     position: relative;
     z-index: 3;
@@ -714,7 +679,6 @@
 
     .ai-panel {
       padding-bottom: 2rem;
-      background-size: 6rem 100%;
     }
 
     .ai-panel-orb-shadow,

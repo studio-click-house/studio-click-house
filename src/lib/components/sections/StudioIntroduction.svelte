@@ -235,11 +235,6 @@
     aria-hidden="true"
   ></div>
 
-  <div
-    class="about-grid site-shell pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2"
-    aria-hidden="true"
-  ></div>
-
   <div class="site-shell relative z-10">
     <div class="about-layout">
       <figure class="about-comparison">
@@ -347,15 +342,7 @@
 </section>
 
 <style>
-  .about-grid {
-    background-image: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--color-brand-dark) 7%, transparent) 1px,
-      transparent 1px
-    );
-    background-position: center top;
-    background-size: clamp(7rem, 8vw, 10rem) 100%;
-  }
+
 
   .about-layout {
     display: grid;

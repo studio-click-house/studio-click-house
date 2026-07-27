@@ -138,16 +138,6 @@
     <div class="absolute inset-0 bg-gradient-to-r from-brand-light via-brand-light/60 to-transparent"></div>
   </div>
 
-  <!-- Background Layout Grid Lines (Subtle Editorial Depth) -->
-  <div class="pointer-events-none absolute inset-0 select-none opacity-20" aria-hidden="true">
-    <div class="site-shell h-full border-x border-brand-dark/10">
-      <div class="grid h-full grid-cols-12">
-        <div class="border-r border-brand-dark/10 col-span-3"></div>
-        <div class="border-r border-brand-dark/10 col-span-6"></div>
-      </div>
-    </div>
-  </div>
-
   <div class="site-shell relative z-10">
     <div class="pt-5">
       <div>

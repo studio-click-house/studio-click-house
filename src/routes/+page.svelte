@@ -1,16 +1,14 @@
 <script lang="ts">
   import PageScrollReveals from "$lib/components/animations/PageScrollReveals.svelte";
+  import AboutOrbitGallery from "$lib/components/sections/about/AboutOrbitGallery.svelte";
   import ClientLocations from "$lib/components/sections/ClientLocations.svelte";
   import CreativeMarquee from "$lib/components/sections/CreativeMarquee.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import HomeHero from "$lib/components/sections/HomeHero.svelte";
+  import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
   import ProductionProcess from "$lib/components/sections/ProductionProcess.svelte";
-  import ScrollImageStory from "$lib/components/sections/ScrollImageStory.svelte";
-  import ServicesSection from "$lib/components/sections/ServicesSection.svelte";
   import StudioIntroduction from "$lib/components/sections/StudioIntroduction.svelte";
   import TestimonialsSection from "$lib/components/sections/TestimonialsSection.svelte";
-  import WhyChooseUs from "$lib/components/sections/WhyChooseUs.svelte";
-  import WorkFieldsRail from "$lib/components/sections/WorkFieldsRail.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -49,12 +47,10 @@
   <PageScrollReveals />
   <HomeHero />
   <StudioIntroduction />
-  <ScrollImageStory />
+  <AboutOrbitGallery />
+  <HorizontalProjectsShowcase />
   <CreativeMarquee items={data.clientLogoItems} />
-  <ServicesSection />
-  <WorkFieldsRail />
   <ProductionProcess />
-  <WhyChooseUs />
   <TestimonialsSection />
   <FaqSection />
   <ClientLocations />

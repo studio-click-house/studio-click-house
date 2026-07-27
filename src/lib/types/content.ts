@@ -1,3 +1,5 @@
+import type { RouteId } from "$app/types";
+
 export interface PreviewMedia {
   src: string;
   alt: string;
@@ -78,6 +80,20 @@ export interface WorkGalleryItem {
   media: PreviewMedia;
 }
 
+export type ShowcaseProjectMedia =
+  | (PreviewMedia & {
+      kind: "image";
+    })
+  | {
+      kind: "video";
+      src: string;
+      poster: string;
+      alt: string;
+      width: number;
+      height: number;
+      credit: string;
+    };
+
 export interface ShowcaseProjectItem {
   id: string;
   year: string;
@@ -85,6 +101,6 @@ export interface ShowcaseProjectItem {
   title: string;
   description: string;
   bgColor: string;
-  media: PreviewMedia;
-  href: string;
+  media: ShowcaseProjectMedia;
+  href: RouteId;
 }

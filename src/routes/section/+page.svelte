@@ -5,8 +5,8 @@
   import ScrollChoreography from "$lib/components/sections/ScrollChoreography.svelte";
   import CollectionSurfer from "$lib/components/sections/CollectionSurfer.svelte";
   import ServiceBreakdownRail from "$lib/components/sections/portfolio/ServiceBreakdownRail.svelte";
-  import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
-  import AboutOrbitGallery from "$lib/components/sections/about/AboutOrbitGallery.svelte";
+  import ScrollImageStory from "$lib/components/sections/ScrollImageStory.svelte";
+  import ServicesSection from "$lib/components/sections/ServicesSection.svelte";
   import { siteConfig } from "$lib/config/site";
 
   const schemaData = {
@@ -33,9 +33,9 @@
 
 <main class="relative bg-brand-light text-brand-dark">
   <ScrollChoreography />
+  <ScrollImageStory />
+  <ServicesSection />
   <ServiceBreakdownRail />
-  <HorizontalProjectsShowcase />
-  <AboutOrbitGallery />
   <ImageTrailSection />
   <CollectionSurfer />
 </main>

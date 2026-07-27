@@ -1,6 +1,5 @@
 import { previewMedia, studioDressColorways } from "$lib/content/media";
 import type {
-  ClientLogoItem,
   ClientLocationMarker,
   FaqItem,
   ServiceItem,
@@ -381,57 +380,53 @@ export const clientLocations: ClientLocationMarker[] = [
 
 export const showcaseProjects: ShowcaseProjectItem[] = [
   {
-    id: "editorial-finish",
-    year: "2026",
-    category: "Editorial retouching",
-    title: "Editorial finish",
+    id: "photo-editing",
+    year: "01",
+    category: "Image post-production",
+    title: "Photo editing",
     description:
-      "Skin detail stays natural while color, fabric, and background distractions are carefully balanced.",
+      "Retouching, color correction, clipping, and clean finishing for polished campaign and e-commerce imagery.",
     bgColor:
       "color-mix(in srgb, var(--color-brand-coral) 32%, var(--color-brand-paper))",
     media: {
-      src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Fashion portrait in a green dress",
-      width: 1200,
-      height: 1800,
-      credit: "Pexels",
+      kind: "image",
+      ...previewMedia.photoEditingShowcase,
     },
-    href: "/portfolio",
+    href: "/services",
   },
   {
-    id: "precision-detail",
-    year: "2026",
-    category: "Jewelry retouching",
-    title: "Precision detail",
+    id: "video-editing",
+    year: "02",
+    category: "Motion post-production",
+    title: "Video editing",
     description:
-      "Fine reflections, metal tone, and gemstone detail refined for a clean high-resolution finish.",
+      "Commercial edits, social cutdowns, retouching, and controlled color grading shaped for every viewing format.",
     bgColor:
       "color-mix(in srgb, var(--color-brand-green) 38%, var(--color-brand-paper))",
     media: {
-      src: "https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Gold ring with a clear gemstone",
-      width: 1200,
-      height: 800,
-      credit: "Pexels",
+      kind: "video",
+      src: "/videos/ai section video.mp4",
+      poster: previewMedia.editingWorkspace.src,
+      alt: "Studio video editing and post-production preview",
+      width: 1920,
+      height: 1080,
+      credit: "Studio Click House",
     },
-    href: "/portfolio",
+    href: "/services",
   },
   {
-    id: "object-and-light",
-    year: "2025",
-    category: "Product finishing",
-    title: "Object & light",
+    id: "3d-cgi",
+    year: "03",
+    category: "Digital production",
+    title: "3D & CGI",
     description:
-      "Shape, glass, and highlights tuned together to keep the product crisp without losing material character.",
+      "Product modeling, material development, lighting, and photorealistic CGI rendering for commercial imagery.",
     bgColor:
       "color-mix(in srgb, var(--color-brand-dark) 17%, var(--color-brand-mist))",
     media: {
-      src: "https://images.pexels.com/photos/3989394/pexels-photo-3989394.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Perfume bottle arranged in soft studio light",
-      width: 1200,
-      height: 1800,
-      credit: "Pexels",
+      kind: "image",
+      ...previewMedia.cgiProductShowcase,
     },
-    href: "/portfolio",
+    href: "/services",
   },
 ];

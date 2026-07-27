@@ -10,6 +10,40 @@
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
+    let lastPointerX = -1;
+    let lastPointerY = -1;
+    let activeHoverCard: HTMLElement | null = null;
+
+    function handlePointerMove(event: PointerEvent) {
+      lastPointerX = event.clientX;
+      lastPointerY = event.clientY;
+    }
+
+    function syncHoverToPointer() {
+      if (lastPointerX < 0 || !track) return;
+      const elementUnderPointer = document.elementFromPoint(
+        lastPointerX,
+        lastPointerY,
+      );
+      const cardUnderPointer =
+        elementUnderPointer instanceof Element
+          ? elementUnderPointer.closest<HTMLElement>(".work-card")
+          : null;
+
+      if (cardUnderPointer === activeHoverCard) return;
+
+      activeHoverCard?.classList.remove("is-scroll-hover");
+      if (cardUnderPointer && track.contains(cardUnderPointer)) {
+        cardUnderPointer.classList.add("is-scroll-hover");
+        activeHoverCard = cardUnderPointer;
+      } else {
+        activeHoverCard = null;
+      }
+    }
+
+    window.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !section || !viewport || !track) return;
@@ -35,22 +69,23 @@
               );
             };
             const horizontalDistance = () =>
-              Math.max(0, track.scrollWidth - viewport.clientWidth + 32);
-            const introDistance = () =>
-              Math.min(Math.max(window.innerHeight * 0.06, 64), 96);
+              Math.max(0, track.scrollWidth - viewport.clientWidth);
+            ScrollTrigger.getById("work-fields-rail-pin")?.kill();
 
             syncRailHeight();
             ScrollTrigger.addEventListener("refreshInit", syncRailHeight);
 
             const railTimeline = gsap.timeline({
               scrollTrigger: {
+                id: "work-fields-rail-pin",
                 trigger: section,
                 start: () => `top ${navbarHeight()}px`,
-                end: () => `+=${horizontalDistance() + introDistance()}`,
+                end: () => `+=${horizontalDistance()}`,
                 pin: true,
                 pinSpacing: true,
                 scrub: true,
                 anticipatePin: 1,
+                refreshPriority: 90,
                 invalidateOnRefresh: true,
               },
             });
@@ -63,13 +98,19 @@
                 force3D: true,
                 duration: 1,
               },
-              0.06,
+              0,
             );
 
-            ScrollTrigger.refresh();
+            function tickHover() {
+              if (!railTimeline.scrollTrigger?.isActive) return;
+              syncHoverToPointer();
+            }
+
+            gsap.ticker.add(tickHover);
 
             return () => {
               ScrollTrigger.removeEventListener("refreshInit", syncRailHeight);
+              gsap.ticker.remove(tickHover);
               section.style.removeProperty("--rail-viewport-height");
             };
           },
@@ -81,6 +122,8 @@
 
     return () => {
       active = false;
+      window.removeEventListener("pointermove", handlePointerMove);
+      activeHoverCard?.classList.remove("is-scroll-hover");
       context?.revert();
     };
   });
@@ -100,7 +143,7 @@
   >
     <div
       bind:this={track}
-      class="rail-track flex w-max snap-x snap-mandatory gap-3 px-0 md:h-full md:snap-none md:pr-12 md:pl-0"
+      class="rail-track flex w-max snap-x snap-mandatory gap-3 px-0 md:h-full md:snap-none md:pr-0 md:pl-0"
     >
       {#each workGalleryItems as item (item.id)}
         <article
@@ -205,17 +248,20 @@
     transition-delay: 220ms;
   }
 
-  .work-card:hover .work-card-image {
+  .work-card:hover .work-card-image,
+  .work-card:global(.is-scroll-hover) .work-card-image {
     transform: scale(1.06);
   }
 
-  .work-card:hover .work-card-detail {
+  .work-card:hover .work-card-detail,
+  .work-card:global(.is-scroll-hover) .work-card-detail {
     transform: translateY(0);
     visibility: visible;
     transition-delay: 0s;
   }
 
-  .work-card:hover .work-card-detail > * {
+  .work-card:hover .work-card-detail > *,
+  .work-card:global(.is-scroll-hover) .work-card-detail > * {
     opacity: 1;
     transform: translateY(0);
   }

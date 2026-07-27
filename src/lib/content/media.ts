@@ -72,6 +72,20 @@ export const previewMedia = {
     height: 1200,
     credit: "Temporary preview photo via Pexels",
   },
+  photoEditingShowcase: {
+    src: "/images/portfolio/photo-editing-showcase.png",
+    alt: "High-end editorial fashion portrait showing professional color-correction and skin retouching",
+    width: 1024,
+    height: 1024,
+    credit: "Studio Click House",
+  },
+  cgiProductShowcase: {
+    src: "/images/portfolio/cgi-product-showcase.png",
+    alt: "Photorealistic 3D CGI product render of a luxury glass perfume bottle",
+    width: 1024,
+    height: 1024,
+    credit: "Studio Click House",
+  },
 } satisfies Record<string, PreviewMedia>;
 
 export const studioDressColorways = [

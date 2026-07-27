@@ -550,6 +550,17 @@
     cursor: text !important;
   }
 
+  :global(html.custom-cursor-active [data-native-cursor]),
+  :global(html.custom-cursor-active [data-native-cursor] *) {
+    cursor: default !important;
+  }
+
+  :global(html.custom-cursor-active [data-native-cursor] a),
+  :global(html.custom-cursor-active [data-native-cursor] button),
+  :global(html.custom-cursor-active [data-native-cursor] [role="button"]) {
+    cursor: pointer !important;
+  }
+
   @media (pointer: coarse),
     (max-width: 63.999rem),
     (prefers-reduced-motion: reduce) {

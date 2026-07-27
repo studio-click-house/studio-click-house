@@ -3,6 +3,7 @@
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PortfolioCinematicHero from "$lib/components/sections/portfolio/PortfolioCinematicHero.svelte";
   import Infinite3DGallery from "$lib/components/sections/portfolio/Infinite3DGallery.svelte";
+  import OpposingScrollGallery from "$lib/components/sections/portfolio/OpposingScrollGallery.svelte";
   import WorkGrid from "$lib/components/sections/portfolio/WorkGrid.svelte";
   import PortfolioCta from "$lib/components/sections/portfolio/PortfolioCta.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -30,7 +31,7 @@
         src: webglSrc,
         alt: item.media.alt || item.title,
       };
-    })
+    }),
   );
 </script>
 
@@ -45,6 +46,7 @@
 <main id="main-content" class="relative">
   <PortfolioCinematicHero hero={portfolioPageData.hero} />
   <Infinite3DGallery images={galleryImages} />
+  <OpposingScrollGallery items={portfolioPageData.gallery} />
   <WorkGrid items={portfolioPageData.gallery} />
   <PortfolioCta cta={portfolioPageData.cta} />
 </main>
