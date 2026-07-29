@@ -46,7 +46,7 @@
       let lastScrollTime = performance.now();
 
       const resizeTrail = () => {
-        trailPixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        trailPixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
         trailWidth = window.innerWidth;
         trailHeight = window.innerHeight;
         trailCanvas.width = trailWidth * trailPixelRatio;
@@ -72,7 +72,7 @@
             velocityX: scrollVelocityX * 0.85,
             velocityY: scrollVelocityY * 0.85,
           });
-          if (trailPoints.length > 64) trailPoints.shift();
+          if (trailPoints.length > 48) trailPoints.shift();
           scrollVelocityX *= 0.9;
           scrollVelocityY *= 0.9;
         }
@@ -156,24 +156,28 @@
 
       const handlePointerMove = (event: PointerEvent) => {
         const target = event.target as Element | null;
-        isTrailSuppressed = Boolean(
+        const nextTrailSuppressed = Boolean(
           target?.closest("[data-cursor-trail='off']"),
         );
-        if (isTrailSuppressed) {
+        if (nextTrailSuppressed && !isTrailSuppressed) {
           trailPoints.length = 0;
           trailContext.clearRect(0, 0, trailWidth, trailHeight);
         }
+        isTrailSuppressed = nextTrailSuppressed;
         const isTextEntry = Boolean(
           target?.closest("input, textarea, select, [contenteditable='true']"),
         );
-        isVisible = !isTextEntry;
+        const nextIsVisible = !isTextEntry;
+        if (isVisible !== nextIsVisible) isVisible = nextIsVisible;
         lastPointerX = event.clientX;
         lastPointerY = event.clientY;
-        isInteractive = Boolean(
+        const nextIsInteractive = Boolean(
           target?.closest(
             "a, button, input, textarea, select, summary, [role='button']",
           ),
         );
+        if (isInteractive !== nextIsInteractive)
+          isInteractive = nextIsInteractive;
         moveX(event.clientX);
         moveY(event.clientY);
 
@@ -196,7 +200,7 @@
             velocityX: 0,
             velocityY: 0,
           });
-          if (trailPoints.length > 40) trailPoints.shift();
+          if (trailPoints.length > 32) trailPoints.shift();
           lastTrailX = event.clientX;
           lastTrailY = event.clientY;
           startTrail();
@@ -214,12 +218,13 @@
         previousX = event.clientX;
         previousY = event.clientY;
 
-        if (settleTimeout) clearTimeout(settleTimeout);
-        settleTimeout = setTimeout(() => {
-          settleScaleX(1);
-          settleScaleY(1);
-          settleTimeout = undefined;
-        }, 90);
+        if (!settleTimeout) {
+          settleTimeout = setTimeout(() => {
+            settleScaleX(1);
+            settleScaleY(1);
+            settleTimeout = undefined;
+          }, 90);
+        }
       };
 
       const handleScroll = () => {
@@ -293,6 +298,9 @@
             velocityX: Math.cos(angle) * speed,
             velocityY: Math.sin(angle) * speed,
           });
+        }
+        if (trailPoints.length > 48) {
+          trailPoints.splice(0, trailPoints.length - 48);
         }
         startTrail();
       };

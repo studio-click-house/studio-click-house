@@ -405,7 +405,7 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
       "color-mix(in srgb, var(--color-brand-green) 38%, var(--color-brand-paper))",
     media: {
       kind: "video",
-      src: "/videos/ai section video.mp4",
+      src: "/videos/editing_video.mp4",
       poster: previewMedia.editingWorkspace.src,
       alt: "Studio video editing and post-production preview",
       width: 1920,
@@ -425,7 +425,7 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
       "color-mix(in srgb, var(--color-brand-dark) 17%, var(--color-brand-mist))",
     media: {
       kind: "image",
-      ...previewMedia.cgiProductShowcase,
+      ...previewMedia.cgiProductShowcaseV2,
     },
     href: "/services",
   },

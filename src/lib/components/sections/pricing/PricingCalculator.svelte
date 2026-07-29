@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import * as THREE from "three";
-  import { Check, Sparkles, Zap, ArrowRight } from "lucide-svelte";
+  import { Check, Sparkles, ArrowRight, ShieldCheck } from "lucide-svelte";
   import { pricingCategories, pricingPageData } from "$lib/content/pricing";
   import { cn } from "$lib/utils";
 
@@ -14,13 +12,6 @@
 
   // Active Category Data
   let activeCategory = $derived(pricingCategories[activeCatIndex]);
-
-  // Dynamic texture paths based on selected category
-  const categoryImages = [
-    "/images/portfolio/model-retouched.png",
-    "/images/hero/hero-poster.jpg",
-    "/images/portfolio/model-shadowed.png"
-  ];
 
   // Initialize selected services when category changes
   $effect(() => {
@@ -42,8 +33,12 @@
 
     if (baseSum === 0) return 0;
 
-    const compMultiplier = pricingPageData.calculator.complexityOptions[selectedComplexity].multiplier;
-    const turnMultiplier = pricingPageData.calculator.turnaroundOptions[selectedTurnaround].multiplier;
+    const compMultiplier =
+      pricingPageData.calculator.complexityOptions[selectedComplexity]
+        .multiplier;
+    const turnMultiplier =
+      pricingPageData.calculator.turnaroundOptions[selectedTurnaround]
+        .multiplier;
 
     // Volume Discount factor
     let discount = 1.0;
@@ -59,7 +54,9 @@
       else if (volume > 3) discount = 0.9;
     }
 
-    return Math.round(baseSum * volume * compMultiplier * turnMultiplier * discount);
+    return Math.round(
+      baseSum * volume * compMultiplier * turnMultiplier * discount,
+    );
   });
 
   // Animate price changes
@@ -68,7 +65,7 @@
     const target = calculatedPrice;
     const obj = { val: animatedPrice };
     let isCancelled = false;
-    let activeTween: any = null;
+    let activeTween: { kill: () => void } | null = null;
 
     import("gsap").then(({ gsap }) => {
       if (isCancelled) return;
@@ -78,7 +75,7 @@
         ease: "power2.out",
         onUpdate: () => {
           animatedPrice = Math.round(obj.val);
-        }
+        },
       });
     });
 
@@ -89,436 +86,307 @@
       }
     };
   });
-
-  // Elements
-  let canvasContainer: HTMLDivElement;
-  let canvasElement: HTMLCanvasElement;
-
-  // Three.js Viewport Runtime
-  let threeRuntime: {
-    setImage: (src: string) => void;
-    setMode: (mode: number) => void;
-  } | null = null;
-
-  onMount(() => {
-    if (!canvasContainer || !canvasElement) return;
-
-    let width = canvasContainer.clientWidth || 450;
-    let height = canvasContainer.clientHeight || 550;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas: canvasElement,
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-    renderer.setSize(width, height, false);
-
-    // Custom Shader for Refractive Loupe & Image Analysis
-    const customShader = new THREE.ShaderMaterial({
-      uniforms: {
-        uTexture: { value: null },
-        uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-        uResolution: { value: new THREE.Vector2(width, height) },
-        uMode: { value: 0.0 }, // 0: Image (Loupe + Retouch split), 1: Video (Viewport zoom + Grid), 2: 3D (Displacement)
-        uTime: { value: 0.0 }
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform sampler2D uTexture;
-        uniform vec2 uMouse;
-        uniform vec2 uResolution;
-        uniform float uMode;
-        uniform float uTime;
-
-        varying vec2 vUv;
-
-        void main() {
-          vec2 mouseUV = uMouse;
-          vec2 aspectUV = vUv;
-          
-          // Lens / Loupe distortion center
-          float dist = distance(vUv, mouseUV);
-          vec2 distortedUv = vUv;
-
-          // 1. Interactive loupe lens distortion
-          if (dist < 0.28) {
-            float strength = (0.28 - dist) * 0.45;
-            distortedUv = vUv - normalize(vUv - mouseUV) * strength;
-          }
-
-          vec4 color = texture2D(uTexture, distortedUv);
-
-          // Mode 0: Image Editing — Retouching Sweep & Pen Vector path overlay
-          if (uMode == 0.0) {
-            // Sweep line moving slowly
-            float sweepX = 0.5 + sin(uTime * 1.2) * 0.22;
-            float isRight = step(sweepX, vUv.x);
-
-            // Left side is raw/desaturated, right side is clean/tinted
-            float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-            vec3 rawColor = vec3(gray * 0.95);
-            vec3 polishedColor = color.rgb * vec3(1.02, 1.05, 0.98);
-
-            color.rgb = mix(rawColor, polishedColor, isRight);
-
-            // Draw thin divider line
-            float lineGlow = exp(-pow(vUv.x - sweepX, 2.0) / 0.00001);
-            color.rgb += vec3(0.494, 0.651, 0.255) * lineGlow * 0.7;
-
-            // Draw abstract vector pen line inside loupe
-            if (dist < 0.28) {
-              // Simulated pen path: a smooth mathematical wave
-              float wave = 0.5 + sin(vUv.x * 24.0 + uTime * 0.5) * 0.08;
-              float pathGlow = exp(-pow(vUv.y - wave, 2.0) / 0.000035);
-              color.rgb = mix(color.rgb, vec3(0.79, 1.0, 0.35), pathGlow * 0.8);
-            }
-          }
-          // Mode 1: Video Editing — Views & Viewfinder Overlay
-          else if (uMode == 1.0) {
-            // Apply zoom-in and slight tint
-            vec2 zoomedUv = mouseUV + (vUv - mouseUV) * 0.92;
-            color = texture2D(uTexture, zoomedUv);
-
-            // Viewfinder reticle overlay (corners & center mark)
-            float lineWidth = 0.002;
-            float lineLength = 0.04;
-            
-            // Draw crosshair at cursor
-            float crosshairX = step(mouseUV.x - lineWidth, vUv.x) * step(vUv.x, mouseUV.x + lineWidth) * step(mouseUV.y - lineLength, vUv.y) * step(vUv.y, mouseUV.y + lineLength);
-            float crosshairY = step(mouseUV.y - lineWidth, vUv.y) * step(vUv.y, mouseUV.y + lineWidth) * step(mouseUV.x - lineLength, vUv.x) * step(vUv.x, mouseUV.x + lineLength);
-            
-            // Red dot
-            float redDot = smoothstep(0.008, 0.004, distance(vUv, vec2(0.08, 0.9)));
-            float blink = step(0.5, fract(uTime * 1.5));
-            color.rgb = mix(color.rgb, vec3(0.9, 0.2, 0.2), redDot * blink);
-
-            color.rgb = mix(color.rgb, vec3(1.0), max(crosshairX, crosshairY) * 0.45);
-          }
-          // Mode 2: 3D Modeling — Technical Grid Displacement
-          else {
-            // Stylized 3D depth-map wireframe
-            float gridScale = 55.0;
-            vec2 grid = abs(fract(vUv * gridScale - 0.5) - 0.5) / fwidth(vUv * gridScale);
-            float minGrid = min(grid.x, grid.y);
-            float isGridLine = 1.0 - min(minGrid, 1.0);
-
-            // Displacement waves centered at mouse
-            float wave = sin(dist * 35.0 - uTime * 6.0) * 0.025;
-            vec2 displacedUV = vUv + normalize(vUv - mouseUV) * wave;
-            vec4 imgColor = texture2D(uTexture, displacedUV);
-
-            // Draw a green blueprint grid overlay
-            vec3 gridColor = vec3(0.494, 0.651, 0.255) * 0.38;
-            color.rgb = mix(imgColor.rgb * 0.45, gridColor, isGridLine * 0.55);
-          }
-
-          gl_FragColor = color;
-        }
-      `
-    });
-
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), customShader);
-    scene.add(mesh);
-
-    const textureLoader = new THREE.TextureLoader();
-    let currentTexture: THREE.Texture | null = null;
-
-    const setImage = (src: string) => {
-      textureLoader.load(src, (tex) => {
-        tex.minFilter = THREE.LinearFilter;
-        tex.generateMipmaps = false;
-        
-        if (currentTexture) currentTexture.dispose();
-        currentTexture = tex;
-
-        customShader.uniforms.uTexture.value = tex;
-      });
-    };
-
-    const setMode = (mode: number) => {
-      customShader.uniforms.uMode.value = mode;
-    };
-
-    // Load initial image
-    setImage(categoryImages[activeCatIndex]);
-
-    // Handle mouse interaction
-    let mouse = new THREE.Vector2(0.5, 0.5);
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvasElement.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.clientY - rect.top) / rect.height; // invert Y
-      mouse.set(x, y);
-    };
-    canvasElement.addEventListener("mousemove", handleMouseMove);
-
-    let animationFrameId: number;
-    let clock = new THREE.Clock();
-
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-
-      // Smooth mouse follow
-      customShader.uniforms.uMouse.value.lerp(mouse, 0.08);
-      customShader.uniforms.uTime.value = clock.getElapsedTime();
-
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    const resizeObserver = new ResizeObserver(([entry]) => {
-      if (!entry) return;
-      width = canvasContainer.clientWidth || 300;
-      height = canvasContainer.clientHeight || 450;
-      renderer.setSize(width, height, false);
-      customShader.uniforms.uResolution.value.set(width, height);
-    });
-    resizeObserver.observe(canvasContainer);
-
-    threeRuntime = { setImage, setMode };
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      resizeObserver.disconnect();
-      canvasElement.removeEventListener("mousemove", handleMouseMove);
-      mesh.geometry.dispose();
-      customShader.dispose();
-      if (currentTexture) currentTexture.dispose();
-      renderer.dispose();
-    };
-  });
-
-  // Watch selected category
-  $effect(() => {
-    if (threeRuntime) {
-      threeRuntime.setMode(activeCatIndex);
-      threeRuntime.setImage(categoryImages[activeCatIndex]);
-    }
-  });
 </script>
 
-<section id="pricing-configurator" class="relative bg-brand-light text-brand-dark px-5 py-24 sm:px-10 lg:px-16 border-b border-brand-dark/14">
-  <div class="site-shell grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-    
-    <!-- Left Column: Refractive Lightbox Desk -->
-    <div class="lg:col-span-5 w-full relative flex flex-col justify-center items-center">
-      <div 
-        bind:this={canvasContainer} 
-        class="w-full aspect-[4/5] bg-brand-paper border border-brand-dark/10 relative overflow-hidden flex items-center justify-center cursor-crosshair"
-      >
-        <canvas bind:this={canvasElement} class="w-full h-full absolute inset-0 outline-none"></canvas>
-        
-        <!-- Live Lightbox HUD -->
-        <div class="absolute bottom-4 left-4 right-4 flex justify-between font-mono text-[0.68rem] uppercase tracking-widest text-brand-dark/50 pointer-events-none">
-          <span>PIPELINE: {activeCategory.categoryName.replace(' ', '_')}</span>
-          <span>FPS: 60.0_Hz</span>
-        </div>
-
-        <div class="absolute top-4 left-4 font-mono text-[0.68rem] text-brand-green flex items-center gap-1.5 pointer-events-none bg-brand-light border border-brand-dark/10 px-2 py-0.5 uppercase tracking-widest">
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse"></span>
-          Interactive_Desk
-        </div>
-      </div>
-      <p class="mt-4 font-mono text-[0.68rem] text-center text-brand-dark/45 uppercase tracking-widest pointer-events-none">
-        Move pointer over image to inspect finish
-      </p>
-    </div>
-
-    <!-- Right Column: Fine Estimate Configurator -->
-    <div class="lg:col-span-7 flex flex-col justify-start w-full lg:pl-6">
-      <header class="mb-12">
-        <div class="flex items-center gap-3">
-          <span class="h-px w-8 bg-brand-green"></span>
-          <span class="eyebrow text-brand-dark/50">{pricingPageData.intro.eyebrow}</span>
-        </div>
-        <h2 class="display-title mt-6 mb-6 leading-[0.88] tracking-tight">{pricingPageData.intro.title}</h2>
-        <p class="max-w-xl text-brand-dark/72 text-base leading-relaxed">
-          {pricingPageData.intro.description}
-        </p>
-      </header>
-
-      <!-- Step 1: Selection Rows -->
-      <div class="border-b border-brand-dark/10 pb-8 mb-8">
-        <span role="heading" aria-level="3" class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-brand-dark/45 block mb-4">
-          01. Select Pipeline
-        </span>
-        <div class="flex flex-wrap gap-3">
-          {#each pricingCategories as category, index}
-            <button
-              class={cn(
-                "py-3 px-5 border font-mono text-[0.68rem] uppercase tracking-wider transition-all duration-200 cursor-pointer",
-                activeCatIndex === index 
-                  ? "border-brand-dark bg-brand-dark text-brand-light font-bold" 
-                  : "border-brand-dark/20 text-brand-dark/75 hover:border-brand-dark hover:text-brand-dark bg-transparent"
-              )}
-              onclick={() => activeCatIndex = index}
-            >
-              {category.categoryName}
-            </button>
-          {/each}
-        </div>
-      </div>
-
-      <!-- Step 2: Checklist with subtle line styles -->
-      <div class="border-b border-brand-dark/10 pb-8 mb-8">
-        <span role="heading" aria-level="3" class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-brand-dark/45 block mb-4">
-          02. Select Modules
-        </span>
-        <div class="flex flex-col gap-2">
-          {#each activeCategory.rates as rate}
-            <button
-              class={cn(
-                "py-4 px-5 border flex justify-between items-center transition-all duration-200 text-left bg-transparent rounded-none cursor-pointer",
-                selectedServices[rate.slug]
-                  ? "border-brand-green/80 bg-brand-green/5 text-brand-dark"
-                  : "border-brand-dark/10 hover:border-brand-dark/30 text-brand-dark/75"
-              )}
-              onclick={() => {
-                selectedServices[rate.slug] = !selectedServices[rate.slug];
-              }}
-            >
-              <div class="max-w-[70%]">
-                <span class="block text-sm font-semibold tracking-tight leading-none">{rate.name}</span>
-                <span class="block text-xs text-brand-dark/58 mt-1.5 leading-snug">{rate.description}</span>
-              </div>
-              <div class="flex items-center gap-6">
-                <span class="font-mono text-xs font-semibold text-brand-dark/80">
-                  ${rate.basePrice.toFixed(2)}<span class="text-[0.68rem] text-brand-dark/45">/{rate.unit}</span>
-                </span>
-                <div class={cn(
-                  "w-4 h-4 border flex items-center justify-center transition-colors rounded-none",
-                  selectedServices[rate.slug] ? "border-brand-green bg-brand-green text-brand-light" : "border-brand-dark/20"
-                )}>
-                  {#if selectedServices[rate.slug]}
-                    <Check size={10} strokeWidth={4} />
-                  {/if}
-                </div>
-              </div>
-            </button>
-          {/each}
-        </div>
-      </div>
-
-      <!-- Step 3: Volume & Complexity -->
-      <div class="border-b border-brand-dark/10 pb-8 mb-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <!-- Volume -->
+<div id="pricing-configurator" class="relative bg-brand-light text-brand-dark">
+  <div class="site-shell">
+    <div
+      class="grid grid-cols-1 overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm lg:grid-cols-12"
+    >
+      <!-- Compact configuration controls -->
+      <div class="flex flex-col gap-8 p-6 sm:p-8 lg:col-span-8 lg:p-10">
+        <!-- Pipeline Category Selection -->
         <div>
-          <div class="flex justify-between items-center mb-4">
-            <span role="heading" aria-level="3" class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-brand-dark/45">
-              03. Est. Volume
-            </span>
-            <span class="font-mono text-[0.68rem] font-bold border border-brand-dark/10 px-2 py-0.5 bg-brand-paper">
-              {volume} {activeCategory.rates[0]?.unit ?? "units"}
-            </span>
-          </div>
-          <input
-            id="volume-slider"
-            type="range"
-            min="1"
-            max={activeCategory.categoryName === "Image Editing" ? "300" : activeCategory.categoryName === "Video Editing" ? "40" : "20"}
-            bind:value={volume}
-            class="w-full accent-brand-green bg-brand-dark/10 h-0.5 cursor-pointer outline-none"
-          />
-          <div class="flex justify-between text-[0.68rem] font-mono text-brand-dark/45 mt-2">
-            <span>Min: 1</span>
-            <span>Max: {activeCategory.categoryName === "Image Editing" ? "300" : activeCategory.categoryName === "Video Editing" ? "40" : "20"}</span>
-          </div>
-        </div>
-
-        <!-- Complexity -->
-        <div>
-          <span role="heading" aria-level="3" class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-brand-dark/45 block mb-4">
-            04. Complexity Level
-          </span>
-          <div class="grid grid-cols-3 gap-2 border border-brand-dark/10 p-1 bg-brand-paper/50">
-            {#each pricingPageData.calculator.complexityOptions as option, index}
+          <h3
+            class="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-dark/55"
+          >
+            Pipeline Category
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            {#each pricingCategories as category, index}
               <button
+                type="button"
                 class={cn(
-                  "py-2 font-mono text-[0.68rem] uppercase tracking-wider transition-all duration-200 cursor-pointer",
-                  selectedComplexity === index
-                    ? "bg-brand-dark text-brand-light font-bold"
-                    : "hover:bg-brand-dark/5 text-brand-dark/70"
+                  "rounded-full border px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-wider transition-all duration-200 cursor-pointer",
+                  activeCatIndex === index
+                    ? "border-brand-dark bg-brand-dark text-brand-light font-bold shadow-sm"
+                    : "border-brand-dark/20 text-brand-dark/75 hover:border-brand-dark hover:text-brand-dark bg-transparent",
                 )}
-                onclick={() => selectedComplexity = index}
+                onclick={() => (activeCatIndex = index)}
               >
-                {option.label}
+                {category.categoryName}
               </button>
             {/each}
           </div>
-          <p class="text-[0.68rem] text-brand-dark/50 mt-2.5 leading-relaxed italic">
-            * {pricingPageData.calculator.complexityOptions[selectedComplexity].description}
-          </p>
         </div>
-      </div>
 
-      <!-- Step 5: Turnaround and Quote Box -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <!-- Turnaround -->
+        <!-- Modules Selection -->
         <div>
-          <span role="heading" aria-level="3" class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-brand-dark/45 block mb-4">
-            05. Priority
-          </span>
-          <div class="flex flex-col gap-2">
+          <h3
+            class="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-dark/55"
+          >
+            Services
+          </h3>
+          <div class="grid gap-2 sm:grid-cols-2">
+            {#each activeCategory.rates as rate}
+              <button
+                type="button"
+                class={cn(
+                  "flex min-h-16 items-center justify-between gap-4 rounded-xl border bg-transparent px-4 py-3 text-left transition-all duration-200 cursor-pointer",
+                  selectedServices[rate.slug]
+                    ? "border-brand-green bg-brand-green/5 text-brand-dark shadow-sm"
+                    : "border-brand-dark/15 hover:border-brand-dark/30 text-brand-dark/75",
+                )}
+                onclick={() => {
+                  selectedServices[rate.slug] = !selectedServices[rate.slug];
+                }}
+              >
+                <div class="min-w-0">
+                  <span
+                    class="block text-sm font-semibold leading-tight tracking-tight text-brand-dark"
+                  >
+                    {rate.name}
+                  </span>
+                  <span
+                    class="mt-1 block font-mono text-[0.62rem] text-brand-dark/52"
+                  >
+                    ${rate.basePrice.toFixed(2)}/{rate.unit}
+                  </span>
+                </div>
+                <div class="flex items-center">
+                  <div
+                    class={cn(
+                      "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
+                      selectedServices[rate.slug]
+                        ? "border-brand-green bg-brand-green text-brand-light"
+                        : "border-brand-dark/25",
+                    )}
+                  >
+                    {#if selectedServices[rate.slug]}
+                      <Check size={12} strokeWidth={3} />
+                    {/if}
+                  </div>
+                </div>
+              </button>
+            {/each}
+          </div>
+        </div>
+
+        <!-- Volume & Complexity in a clean 2-column grid -->
+        <div
+          class="grid grid-cols-1 gap-3 border-t border-brand-dark/10 pt-8 md:grid-cols-2"
+        >
+          <!-- Volume -->
+          <div
+            class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5"
+          >
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-sm font-semibold text-brand-dark">
+                Estimated Volume
+              </h3>
+              <span
+                class="font-mono text-xs font-bold bg-brand-green/15 text-brand-green px-2.5 py-1 rounded-md"
+              >
+                {volume}
+                {activeCategory.rates[0]?.unit ?? "units"}
+              </span>
+            </div>
+            <input
+              id="volume-slider"
+              type="range"
+              min="1"
+              max={activeCategory.categoryName === "Image Editing"
+                ? "300"
+                : activeCategory.categoryName === "Video Editing"
+                  ? "40"
+                  : "20"}
+              bind:value={volume}
+              class="w-full accent-brand-green bg-brand-dark/15 h-1 rounded-lg cursor-pointer outline-none"
+            />
+            <div
+              class="flex justify-between text-xs font-mono text-brand-dark/55 mt-3"
+            >
+              <span>Min: 1</span>
+              <span
+                >Max: {activeCategory.categoryName === "Image Editing"
+                  ? "300"
+                  : activeCategory.categoryName === "Video Editing"
+                    ? "40"
+                    : "20"}</span
+              >
+            </div>
+          </div>
+
+          <!-- Complexity -->
+          <div
+            class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5"
+          >
+            <h3 class="mb-4 text-sm font-semibold text-brand-dark">
+              Production Complexity
+            </h3>
+            <div class="grid grid-cols-3 gap-2">
+              {#each pricingPageData.calculator.complexityOptions as option, index}
+                <button
+                  type="button"
+                  class={cn(
+                    "py-2.5 rounded-lg font-mono text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer text-center",
+                    selectedComplexity === index
+                      ? "bg-brand-dark text-brand-light font-bold"
+                      : "border border-brand-dark/15 hover:bg-brand-dark/5 text-brand-dark/75",
+                  )}
+                  onclick={() => (selectedComplexity = index)}
+                >
+                  {option.label}
+                </button>
+              {/each}
+            </div>
+            <p class="text-xs text-brand-dark/65 mt-3 leading-relaxed">
+              {pricingPageData.calculator.complexityOptions[selectedComplexity]
+                .description}
+            </p>
+          </div>
+        </div>
+
+        <!-- Priority / Turnaround -->
+        <div class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5">
+          <h3 class="mb-4 text-sm font-semibold text-brand-dark">
+            Delivery Priority
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {#each pricingPageData.calculator.turnaroundOptions as option, index}
               <button
+                type="button"
                 class={cn(
-                  "p-3 text-left border font-mono text-xs flex justify-between items-center transition-all duration-200 cursor-pointer",
+                  "p-3.5 rounded-xl text-left border flex flex-col justify-between transition-all duration-200 cursor-pointer",
                   selectedTurnaround === index
-                    ? "border-brand-dark bg-brand-dark text-brand-light font-semibold"
-                    : "border-brand-dark/10 text-brand-dark/75 hover:border-brand-dark/30 bg-transparent"
+                    ? "border-brand-dark bg-brand-dark text-brand-light font-semibold shadow-sm"
+                    : "border-brand-dark/15 text-brand-dark/75 hover:border-brand-dark/30 bg-transparent",
                 )}
-                onclick={() => selectedTurnaround = index}
+                onclick={() => (selectedTurnaround = index)}
               >
-                <span>{option.label}</span>
-                <span class={cn(
-                  "text-[0.65rem]",
-                  selectedTurnaround === index ? "text-brand-green" : "text-brand-dark/45"
-                )}>
-                  {option.multiplier === 1.0 ? "Base" : `+${Math.round((option.multiplier - 1.0) * 100)}%`}
+                <span class="text-sm font-medium">{option.label}</span>
+                <span
+                  class={cn(
+                    "text-xs font-mono mt-1",
+                    selectedTurnaround === index
+                      ? "text-brand-green"
+                      : "text-brand-dark/55",
+                  )}
+                >
+                  {option.multiplier === 1.0
+                    ? "Base Rate"
+                    : `+${Math.round((option.multiplier - 1.0) * 100)}%`}
                 </span>
               </button>
             {/each}
           </div>
         </div>
+      </div>
 
-        <!-- Quote Box -->
-        <div class="border border-brand-dark/10 p-6 flex flex-col justify-between min-h-[11rem] bg-brand-paper relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-mono text-[0.68rem] uppercase tracking-[0.15em] text-brand-dark/45">Scope Estimate</span>
-              <Sparkles size={11} class="text-brand-green" />
+      <!-- Live estimate summary -->
+      <div
+        class="border-t border-brand-dark/10 bg-brand-paper p-6 sm:p-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:p-10"
+      >
+        <div class="flex h-full flex-col">
+          <div
+            class="flex items-center justify-between border-b border-brand-dark/15 pb-6"
+          >
+            <div>
+              <p
+                class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-green"
+              >
+                Real-Time Calculation
+              </p>
+              <h3
+                class="mt-1 font-display text-2xl font-normal text-brand-dark"
+              >
+                Investment Summary
+              </h3>
             </div>
-            <div class="flex items-baseline gap-1 mt-3">
-              <span class="font-display text-4xl sm:text-5xl font-normal text-brand-dark leading-none">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green"
+            >
+              <Sparkles size={18} />
+            </div>
+          </div>
+
+          <!-- Price display -->
+          <div class="py-8 border-b border-brand-dark/15">
+            <div class="flex items-baseline gap-2">
+              <span
+                class="font-display text-5xl font-bold tracking-tight text-brand-dark"
+              >
                 ${animatedPrice}
               </span>
-              <span class="font-mono text-[0.68rem] text-brand-dark/45 uppercase tracking-wider ml-1">USD</span>
+              <span
+                class="font-mono text-sm font-semibold uppercase text-brand-dark/60"
+              >
+                USD
+              </span>
             </div>
-            <p class="text-[0.68rem] text-brand-dark/50 leading-relaxed mt-3 uppercase tracking-wider font-mono">
-              *Estimated cost of work. Subject to final review.
+            <p class="mt-2 text-xs text-brand-dark/65 leading-relaxed">
+              Estimated total based on selected volume, complexity, and
+              priority.
             </p>
           </div>
 
-          <a
-            href="/contact?service={activeCategory.categoryName.toLowerCase().replace(' ', '-')}&volume={volume}&complexity={selectedComplexity}&turnaround={selectedTurnaround}"
-            class="w-full py-3.5 px-4 mt-6 bg-brand-green text-white text-center font-mono text-[0.68rem] font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors duration-300 flex items-center justify-center gap-2 rounded-[0.2rem]"
+          <!-- Active Selections Summary List -->
+          <div class="py-6 space-y-4 border-b border-brand-dark/15 text-sm">
+            <div class="flex justify-between items-center">
+              <span class="text-brand-dark/70">Selected Pipeline:</span>
+              <span class="font-semibold text-brand-dark"
+                >{activeCategory.categoryName}</span
+              >
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-brand-dark/70">Estimated Units:</span>
+              <span class="font-semibold text-brand-dark"
+                >{volume} {activeCategory.rates[0]?.unit ?? "units"}</span
+              >
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-brand-dark/70">Complexity Level:</span>
+              <span class="font-semibold text-brand-dark"
+                >{pricingPageData.calculator.complexityOptions[
+                  selectedComplexity
+                ].label}</span
+              >
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-brand-dark/70">Turnaround SLA:</span>
+              <span class="font-semibold text-brand-green"
+                >{pricingPageData.calculator.turnaroundOptions[
+                  selectedTurnaround
+                ].label}</span
+              >
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="pt-8 flex flex-col gap-3">
+            <a
+              href={`/contact?service=${encodeURIComponent(activeCategory.categoryName.toLowerCase().replace(" ", "-"))}&volume=${volume}&complexity=${selectedComplexity}&turnaround=${selectedTurnaround}`}
+              class="w-full py-4 px-6 bg-brand-green text-white text-center font-mono text-xs font-bold uppercase tracking-widest hover:bg-brand-dark transition-colors duration-300 flex items-center justify-center gap-2 rounded-xl shadow-sm"
+            >
+              Request Custom Proposal <ArrowRight size={16} />
+            </a>
+            <a
+              href="/contact"
+              class="w-full py-3.5 px-6 border border-brand-dark/20 text-brand-dark text-center font-mono text-xs font-semibold uppercase tracking-widest hover:border-brand-dark hover:bg-brand-dark/5 transition-colors duration-300 rounded-xl"
+            >
+              Book a Consultation
+            </a>
+          </div>
+
+          <!-- Guarantee pill -->
+          <div
+            class="mt-6 flex items-center justify-center gap-2 text-xs text-brand-dark/65"
           >
-            Submit Estimate <ArrowRight size={13} />
-          </a>
+            <ShieldCheck size={14} class="text-brand-green" />
+            <span>Dedicated project manager & SLA guarantee included.</span>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
-</section>
+</div>

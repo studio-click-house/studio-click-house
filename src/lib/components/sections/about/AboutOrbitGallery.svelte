@@ -1,7 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { onMount } from "svelte";
-  import { Layers3, Route, ShieldCheck, UsersRound } from "lucide-svelte";
+  import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { aboutOrbitCards } from "$lib/content/about-orbit";
 
@@ -20,28 +20,24 @@
 
   const assurances = [
     {
-      title: "Specialist routing",
+      title: "Direction",
       description:
-        "Each brief moves to the people whose craft matches the image, format, and finishing requirement.",
-      icon: UsersRound,
+        "References, finishing standards and campaign requirements aligned.",
     },
     {
-      title: "Reference-led batches",
+      title: "Specialist craft",
       description:
-        "An agreed first frame and shared finishing rules keep larger sets visually connected.",
-      icon: Layers3,
+        "Retouching, colour and compositing expertise matched to every image.",
     },
     {
-      title: "Review checkpoints",
+      title: "Production control",
       description:
-        "Quality review happens within the workflow, before final files are organised for handoff.",
-      icon: ShieldCheck,
+        "Every asset reviewed for accuracy, consistency and visual continuity.",
     },
     {
-      title: "Workflow fit",
+      title: "Delivery",
       description:
-        "We work with established naming, review, transfer, and delivery conventions.",
-      icon: Route,
+        "Organised, production-ready files prepared for every required channel.",
     },
   ] as const;
 
@@ -50,9 +46,9 @@
   let stackGroupRef: HTMLElement;
   let centerTextRef: HTMLElement;
   let assurancePanelRef: HTMLElement;
-  let pathLineRef: HTMLElement;
-  let pathSignalRef: HTMLElement;
-  let stackHoverRef: HTMLElement;
+  let workflowHeaderRef: HTMLElement;
+  let workflowOutcomeRef: HTMLElement;
+  let workflowLinkRef: HTMLAnchorElement;
   let assuranceRows: HTMLElement[] = [];
 
   onMount(() => {
@@ -68,13 +64,16 @@
         !stackGroupRef ||
         !centerTextRef ||
         !assurancePanelRef ||
-        !pathLineRef ||
-        !pathSignalRef ||
-        !stackHoverRef
+        !workflowHeaderRef ||
+        !workflowOutcomeRef ||
+        !workflowLinkRef
       )
         return;
 
       const { gsap, ScrollTrigger } = runtime;
+
+      ScrollTrigger.getById("about-orbit-gallery-entrance")?.kill(true);
+      ScrollTrigger.getById("about-orbit-gallery-pin")?.kill(true);
 
       context = gsap.context(() => {
         const cards = gsap.utils.toArray<HTMLElement>(".orbit-card-item");
@@ -142,7 +141,7 @@
             motionProgress,
           );
           const cardScale = gsap.utils.interpolate(1, 0.58, motionProgress);
-          const stackBaseScale = gsap.utils.clamp(1.6, 2.1, 1900 / width);
+          const stackBaseScale = gsap.utils.clamp(1.85, 2.15, 2250 / width);
           const spinAngle = spinProgress * totalSpinAngle;
 
           cards.forEach((card, index) => {
@@ -186,99 +185,8 @@
           () => {
             cards.forEach(placeFrame);
             gsap.set(centerTextRef, { autoAlpha: 1, scale: 1, y: 0 });
-            gsap.set(stackHoverRef, { pointerEvents: "none" });
-
-            const frontVisual = cardVisuals[3];
-            const depthVisuals = [
-              cardVisuals[0],
-              cardVisuals[1],
-              cardVisuals[2],
-              cardVisuals[4],
-            ];
-            const depthDirections = [
-              { x: -8, y: -4 },
-              { x: 8, y: -4 },
-              { x: -10, y: 5 },
-              { x: 10, y: 5 },
-            ] as const;
-
-            const groupTiltX = gsap.quickTo(stackGroupRef, "rotationX", {
-              duration: 0.35,
-              ease: "power2.out",
-            });
-            const groupTiltY = gsap.quickTo(stackGroupRef, "rotationY", {
-              duration: 0.35,
-              ease: "power2.out",
-            });
-            const groupScale = gsap.quickTo(stackGroupRef, "scale", {
-              duration: 0.35,
-              ease: "power2.out",
-            });
-            const frontScale = gsap.quickTo(frontVisual, "scale", {
-              duration: 0.35,
-              ease: "power2.out",
-            });
-            const layerDepth = cards.map((card) => ({
-              z: gsap.quickTo(card, "z", {
-                duration: 0.4,
-                ease: "power2.out",
-              }),
-            }));
-            const depthControls = depthVisuals.map((visual) => ({
-              x: gsap.quickTo(visual, "x", {
-                duration: 0.4,
-                ease: "power2.out",
-              }),
-              y: gsap.quickTo(visual, "y", {
-                duration: 0.4,
-                ease: "power2.out",
-              }),
-            }));
-
-            const handleStackPointerMove = (event: PointerEvent) => {
-              if (event.pointerType !== "mouse") return;
-
-              const bounds = stackHoverRef.getBoundingClientRect();
-              const normX = (event.clientX - bounds.left) / bounds.width - 0.5;
-              const normY = (event.clientY - bounds.top) / bounds.height - 0.5;
-
-              groupTiltX(-normY * 8);
-              groupTiltY(normX * 8);
-              groupScale(1.015);
-              frontScale(1.012);
-
-              layerDepth.forEach((control, index) => {
-                control.z(index === 3 ? 28 : -(index % 3) * 3);
-              });
-
-              depthControls.forEach((control, index) => {
-                const direction = depthDirections[index];
-                control.x(direction.x + normX * 5);
-                control.y(direction.y + normY * 4);
-              });
-            };
-
-            const resetStackHover = () => {
-              groupTiltX(0);
-              groupTiltY(0);
-              groupScale(1);
-              frontScale(1);
-
-              layerDepth.forEach((control) => {
-                control.z(0);
-              });
-
-              depthControls.forEach((control) => {
-                control.x(0);
-                control.y(0);
-              });
-            };
-
-            stackHoverRef.addEventListener(
-              "pointermove",
-              handleStackPointerMove,
-            );
-            stackHoverRef.addEventListener("pointerleave", resetStackHover);
+            gsap.set(stackGroupRef, { pointerEvents: "none" });
+            gsap.set(cards, { pointerEvents: "none" });
 
             gsap
               .timeline({
@@ -287,7 +195,7 @@
                   trigger: sectionRef,
                   start: "top 88%",
                   end: "top top+=70",
-                  scrub: 0.55,
+                  scrub: true,
                   refreshPriority: 120,
                   invalidateOnRefresh: true,
                 },
@@ -332,15 +240,55 @@
               );
 
             const orbitProxy = { motion: 0, spin: 0, stack: 0 };
+            const frontCard = cards[3];
+            const animateStackFan = (expanded: boolean) => {
+              if (orbitProxy.stack < 0.9) return;
+
+              const { width } = getStageSize();
+              const stackCenterX = -Math.min(width * 0.27, 405);
+              const stackBaseScale = gsap.utils.clamp(1.85, 2.15, 2250 / width);
+
+              cards.forEach((card, index) => {
+                const layer = stackLayout[index];
+                const side =
+                  layer.x === 0
+                    ? index % 2 === 0
+                      ? -1
+                      : 1
+                    : Math.sign(layer.x);
+                const fanOffset =
+                  index === 3 || !expanded ? 0 : side * (48 + (index % 3) * 12);
+
+                gsap.to(card, {
+                  x: stackCenterX + layer.x + fanOffset,
+                  y: layer.y,
+                  rotation:
+                    layer.rotation + (expanded && index !== 3 ? side * 2.5 : 0),
+                  scale:
+                    stackBaseScale *
+                    layer.scale *
+                    (expanded && index === 3 ? 1.015 : 1),
+                  duration: 0.42,
+                  ease: "power3.out",
+                  overwrite: "auto",
+                });
+              });
+            };
+            const expandStack = () => animateStackFan(true);
+            const collapseStack = () => animateStackFan(false);
+
+            frontCard.addEventListener("pointerenter", expandStack);
+            frontCard.addEventListener("pointerleave", collapseStack);
+
             const timeline = gsap.timeline({
               scrollTrigger: {
                 id: "about-orbit-gallery-pin",
                 trigger: sectionRef,
                 start: "top top+=70",
-                end: "+=250%",
+                end: () => `+=${window.innerHeight * 1.9}`,
                 pin: true,
                 pinSpacing: true,
-                scrub: 0.5,
+                scrub: true,
                 anticipatePin: 1,
                 refreshPriority: 110,
                 invalidateOnRefresh: true,
@@ -356,7 +304,7 @@
                 orbitProxy,
                 {
                   spin: 1,
-                  duration: 1.12,
+                  duration: 0.96,
                   ease: "none",
                   onUpdate: renderCards,
                 },
@@ -366,17 +314,17 @@
                 orbitProxy,
                 {
                   stack: 1,
-                  duration: 0.5,
+                  duration: 0.44,
                   ease: "power3.inOut",
                   onUpdate: renderCards,
                 },
-                0.62,
+                0.48,
               )
               .to(
                 orbitProxy,
                 {
                   motion: 1,
-                  duration: 1.12,
+                  duration: 0.96,
                   ease: "power2.inOut",
                   onUpdate: renderCards,
                 },
@@ -388,10 +336,10 @@
                   autoAlpha: 0,
                   y: -18,
                   scale: 0.97,
-                  duration: 0.34,
+                  duration: 0.3,
                   ease: "power2.out",
                 },
-                0.14,
+                0.12,
               )
               .fromTo(
                 assurancePanelRef,
@@ -406,67 +354,81 @@
                   xPercent: 0,
                   y: 0,
                   yPercent: -50,
-                  duration: 0.5,
-                  ease: "power2.inOut",
-                },
-                0.54,
-              )
-              .fromTo(
-                pathLineRef,
-                {
-                  scaleY: 0,
-                },
-                {
-                  scaleY: 1,
-                  duration: 0.5,
+                  duration: 0.08,
                   ease: "none",
                 },
-                0.62,
+                0.46,
+              )
+              .fromTo(
+                workflowHeaderRef,
+                {
+                  autoAlpha: 0,
+                  x: 52,
+                  clipPath: "inset(0 100% 0 0)",
+                },
+                {
+                  autoAlpha: 1,
+                  x: 0,
+                  clipPath: "inset(0 0% 0 0)",
+                  duration: 0.08,
+                  ease: "none",
+                },
+                0.48,
               )
               .fromTo(
                 assuranceRows,
                 {
                   autoAlpha: 0,
-                  x: 18,
-                  y: 68,
+                  x: (index) => (index % 2 === 0 ? 54 : -34),
+                  clipPath: (index) =>
+                    index % 2 === 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
                 },
                 {
                   autoAlpha: 1,
                   x: 0,
-                  y: 0,
-                  duration: 0.32,
-                  stagger: 0.06,
-                  ease: "power3.out",
-                },
-                0.68,
-              )
-              .fromTo(
-                pathSignalRef,
-                {
-                  y: 0,
-                },
-                {
-                  y: () =>
-                    Math.max(
-                      0,
-                      pathLineRef.clientHeight - pathSignalRef.offsetHeight,
-                    ),
-                  duration: 0.5,
+                  clipPath: "inset(0 0% 0 0)",
+                  duration: 0.08,
+                  stagger: 0.09,
                   ease: "none",
                 },
-                0.62,
+                0.55,
               )
-              .set(stackHoverRef, { pointerEvents: "auto" }, 0.9);
+              .fromTo(
+                workflowOutcomeRef,
+                {
+                  autoAlpha: 0,
+                  y: 14,
+                  clipPath: "inset(0 0 100% 0)",
+                },
+                {
+                  autoAlpha: 1,
+                  y: 0,
+                  clipPath: "inset(0 0 0% 0)",
+                  duration: 0.08,
+                  ease: "none",
+                },
+                0.84,
+              )
+              .fromTo(
+                workflowLinkRef,
+                {
+                  autoAlpha: 0,
+                  x: 20,
+                },
+                {
+                  autoAlpha: 1,
+                  x: 0,
+                  duration: 0.06,
+                  ease: "none",
+                },
+                0.9,
+              )
+              .set(frontCard, { pointerEvents: "auto" }, 0.92);
 
             return () => {
-              stackHoverRef.removeEventListener(
-                "pointermove",
-                handleStackPointerMove,
-              );
-              stackHoverRef.removeEventListener(
-                "pointerleave",
-                resetStackHover,
-              );
+              frontCard.removeEventListener("pointerenter", expandStack);
+              frontCard.removeEventListener("pointerleave", collapseStack);
+              gsap.killTweensOf(cards);
               gsap.killTweensOf(cardVisuals);
             };
           },
@@ -484,9 +446,22 @@
               y: 0,
               yPercent: -50,
             });
-            gsap.set(assuranceRows, { autoAlpha: 1, x: 0, y: 0 });
-            gsap.set(pathLineRef, { scaleY: 1 });
-            gsap.set(pathSignalRef, { autoAlpha: 0 });
+            gsap.set(
+              [
+                workflowHeaderRef,
+                assuranceRows,
+                workflowOutcomeRef,
+                workflowLinkRef,
+              ],
+              {
+                autoAlpha: 1,
+                x: 0,
+                y: 0,
+                clipPath: "inset(0 0 0 0)",
+              },
+            );
+            gsap.set(cards, { pointerEvents: "none" });
+            gsap.set(cards[3], { pointerEvents: "auto" });
           },
         );
 
@@ -511,7 +486,7 @@
   id="about-orbit-gallery"
   aria-label="Studio work and production advantages"
   bind:this={sectionRef}
-  class="orbit-story relative min-h-[calc(100dvh-4.35rem)] overflow-visible bg-brand-paper text-brand-dark"
+  class="orbit-story relative min-h-[calc(100dvh-4.35rem)] overflow-visible bg-brand-light text-brand-dark"
 >
   <div
     class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(126,166,65,0.06)_0%,transparent_70%)]"
@@ -526,13 +501,13 @@
       class="orbit-stage relative flex h-[34rem] w-full max-w-[92rem] items-center justify-center sm:h-[40rem] lg:h-[44rem]"
     >
       <div bind:this={stackGroupRef} class="orbit-stack-group">
-        {#each aboutOrbitCards as card (card.id)}
+        {#each aboutOrbitCards as card, index (card.id)}
           <div
             data-shape={card.shape}
-            class="orbit-card-item absolute overflow-hidden rounded-xl shadow-xl transition-shadow duration-300 hover:shadow-2xl"
+            class="orbit-card-item absolute rounded-xl"
           >
             <figure
-              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark"
+              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark shadow-xl transition-shadow duration-300 hover:shadow-2xl"
             >
               <img
                 src={card.media.src}
@@ -547,12 +522,6 @@
           </div>
         {/each}
       </div>
-
-      <div
-        bind:this={stackHoverRef}
-        class="stack-hover-zone"
-        aria-hidden="true"
-      ></div>
 
       <div
         bind:this={centerTextRef}
@@ -588,31 +557,46 @@
         class="assurance-panel"
         aria-labelledby="why-trust-us-title"
       >
-        <h2 id="why-trust-us-title" class="sr-only">
-          Why choose Studio Click House
-        </h2>
+        <header bind:this={workflowHeaderRef} class="workflow-header">
+          <h2 id="why-trust-us-title">Why choose us</h2>
+          <p>Specialist craft. <em>One controlled workflow.</em></p>
+        </header>
 
-        <div bind:this={pathLineRef} class="quality-path" aria-hidden="true">
-          <span bind:this={pathSignalRef} class="quality-signal"></span>
-        </div>
-
-        <div class="assurance-list">
+        <div class="assurance-list" aria-label="Our production workflow">
           {#each assurances as assurance, index (assurance.title)}
-            {@const Icon = assurance.icon}
             <article bind:this={assuranceRows[index]} class="assurance-row">
-              <div class="assurance-icon">
-                <Icon size={20} strokeWidth={1.45} aria-hidden="true" />
-              </div>
+              <span class="assurance-index">
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <div>
                 <h3>{assurance.title}</h3>
                 <p>{assurance.description}</p>
               </div>
-              <span class="assurance-index">
-                {String(index + 1).padStart(2, "0")}
-              </span>
             </article>
           {/each}
         </div>
+
+        <div bind:this={workflowOutcomeRef} class="workflow-outcome">
+          <p>
+            One brief. One specialist workflow.
+            <strong>One consistent visual system.</strong>
+          </p>
+          <span>
+            Scalable image post-production for ecommerce, fashion, beauty and
+            jewellery brands.
+          </span>
+        </div>
+
+        <a
+          bind:this={workflowLinkRef}
+          href={resolve("/contact")}
+          class="workflow-link"
+        >
+          <span>Start a project</span>
+          <span class="workflow-link-icon">
+            <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+          </span>
+        </a>
       </div>
     </div>
   </div>
@@ -624,7 +608,7 @@
   }
 
   .orbit-story {
-    margin-top: clamp(5rem, 10vh, 8rem);
+    padding-top: clamp(5rem, 10vh, 8rem);
   }
 
   .orbit-stack-group {
@@ -641,7 +625,7 @@
   }
 
   .orbit-card-item {
-    width: clamp(7rem, 13vw, 12rem);
+    width: clamp(8rem, 14vw, 14rem);
     aspect-ratio: 4 / 5;
     border-radius: 0.5rem;
     backface-visibility: hidden;
@@ -655,116 +639,179 @@
     will-change: transform, opacity;
   }
 
-  .stack-hover-zone {
-    position: absolute;
-    z-index: 80;
-    top: 50%;
-    left: 23%;
-    width: clamp(19rem, 38vw, 30rem);
-    height: clamp(23rem, 45vw, 34rem);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
   .assurance-panel {
     position: absolute;
     top: 50%;
     right: clamp(0.5rem, 1.5vw, 1.75rem);
-    width: min(46%, 42rem);
-    padding-left: clamp(2rem, 3vw, 3.25rem);
+    width: min(44%, 39rem);
+    padding-left: 0;
     transform: translateY(-50%);
     will-change: transform, opacity;
   }
 
-  .quality-path {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    transform-origin: top;
-    background: color-mix(in srgb, var(--color-brand-green) 28%, transparent);
-    will-change: transform;
+  .workflow-header {
+    margin-bottom: clamp(1rem, 2vh, 1.5rem);
+    will-change: transform, opacity, clip-path;
   }
 
-  .quality-signal {
-    position: absolute;
-    top: 0;
-    left: -0.3rem;
-    width: 0.65rem;
-    height: 0.65rem;
-    border-radius: 50%;
-    background: color-mix(
-      in srgb,
-      var(--color-brand-green) 68%,
-      var(--color-brand-light)
-    );
-    box-shadow: 0 0 1.4rem
-      color-mix(in srgb, var(--color-brand-green) 24%, transparent);
-    will-change: transform;
+  .workflow-header > h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.2vw, 3.65rem);
+    font-weight: 300;
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+  }
+
+  .workflow-header > p {
+    margin-top: 0.65rem;
+    font-size: clamp(0.78rem, 1vw, 0.95rem);
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--color-brand-dark) 62%, transparent);
+  }
+
+  .workflow-header > p em {
+    color: var(--color-brand-green);
+    font-style: normal;
+    font-weight: 600;
   }
 
   .assurance-list {
     display: grid;
-    border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
+    gap: 0.15rem;
   }
 
   .assurance-row {
     position: relative;
     display: grid;
-    min-height: clamp(6.7rem, 14vh, 8.5rem);
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 1.15rem;
-    align-items: start;
-    border-bottom: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
-    padding-block: clamp(1rem, 1.8vh, 1.35rem);
-    will-change: transform, opacity;
-  }
-
-  .assurance-icon {
-    display: grid;
-    width: 2.65rem;
-    height: 2.65rem;
-    place-items: center;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-green) 18%, transparent);
-    border-radius: 0.55rem;
-    background: color-mix(in srgb, var(--color-brand-green) 6%, transparent);
-    color: color-mix(
-      in srgb,
-      var(--color-brand-green) 72%,
-      var(--color-brand-dark)
-    );
+    min-height: clamp(3.7rem, 7.5vh, 4.5rem);
+    grid-template-columns: 2.15rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: center;
+    padding-block: 0.55rem;
+    will-change: transform, opacity, clip-path;
   }
 
   .assurance-row h3 {
-    font-size: 0.98rem;
+    font-size: 0.92rem;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
   .assurance-row p {
-    max-width: 34rem;
-    margin-top: 0.55rem;
-    font-size: 0.76rem;
-    line-height: 1.58;
+    max-width: 31rem;
+    margin-top: 0.22rem;
+    font-size: 0.7rem;
+    line-height: 1.45;
     color: color-mix(in srgb, var(--color-brand-dark) 54%, transparent);
   }
 
   .assurance-index {
-    padding-top: 0.2rem;
+    align-self: start;
+    padding-top: 0.18rem;
     font-family: var(--font-mono);
-    font-size: 0.48rem;
-    letter-spacing: 0.12em;
+    font-size: 0.52rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     color: var(--color-brand-green);
+  }
+
+  .workflow-outcome {
+    margin-top: clamp(0.75rem, 1.5vh, 1rem);
+    border-radius: 0.65rem;
+    padding: clamp(0.85rem, 1.5vw, 1.15rem);
+    background: var(--color-brand-dark);
+    color: var(--color-brand-light);
+    will-change: transform, opacity, clip-path;
+  }
+
+  .workflow-outcome > p {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.35vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+
+  .workflow-outcome strong {
+    display: block;
+    color: color-mix(
+      in srgb,
+      var(--color-brand-green) 72%,
+      var(--color-brand-light)
+    );
+    font-weight: 400;
+  }
+
+  .workflow-outcome > span {
+    display: block;
+    max-width: 30rem;
+    margin-top: 0.55rem;
+    color: color-mix(in srgb, var(--color-brand-light) 65%, transparent);
+    font-size: 0.66rem;
+    line-height: 1.5;
+  }
+
+  .workflow-link {
+    display: inline-flex;
+    min-height: 3rem;
+    min-width: 10.5rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    border: 1px solid var(--color-brand-dark);
+    border-radius: 0.2rem;
+    padding-inline: 1rem;
+    background: var(--color-brand-dark);
+    color: var(--color-brand-light);
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    transition:
+      color 280ms ease,
+      background 280ms ease,
+      border-color 280ms ease,
+      transform 280ms ease;
+    will-change: transform, opacity;
+  }
+
+  .workflow-link-icon {
+    display: grid;
+    place-items: center;
+    color: currentColor;
+  }
+
+  .workflow-link :global(svg) {
+    transition: transform 280ms ease;
+  }
+
+  .workflow-link:hover {
+    border-color: var(--color-brand-green);
+    background: var(--color-brand-green);
+    color: var(--color-brand-dark);
+  }
+
+  .workflow-link:hover .workflow-link-icon,
+  .workflow-link:focus-visible .workflow-link-icon {
+    transform: translate(0.15rem, -0.15rem);
+  }
+
+  .workflow-link:active {
+    transform: scale(0.98);
+  }
+
+  .workflow-link:focus-visible {
+    border-radius: 0.25rem;
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 3px;
   }
 
   @media (max-width: 767px) {
     .orbit-story {
       min-height: auto;
-      margin-top: 3rem;
+      margin-top: 0;
       padding-block: 4rem;
     }
 
@@ -812,10 +859,6 @@
       visibility: visible !important;
     }
 
-    .quality-path {
-      display: none;
-    }
-
     .assurance-row {
       min-height: auto;
       gap: 0.85rem;
@@ -834,9 +877,10 @@
     .orbit-card-item,
     .orbit-card-visual,
     .assurance-panel,
+    .workflow-header,
     .assurance-row,
-    .quality-path,
-    .quality-signal {
+    .workflow-outcome,
+    .workflow-link {
       will-change: auto;
     }
   }

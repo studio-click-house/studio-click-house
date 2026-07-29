@@ -1,5 +1,10 @@
 <script lang="ts">
   import InteractiveClientMap from "$lib/components/common/InteractiveClientMap.svelte";
+  import type { AboutPageData } from "$lib/types/about";
+
+  let { closingCta } = $props<{
+    closingCta: AboutPageData["closingCta"];
+  }>();
 </script>
 
 <section
@@ -7,5 +12,5 @@
   aria-label="Client locations map"
   class="overflow-hidden bg-black text-brand-light"
 >
-  <InteractiveClientMap />
+  <InteractiveClientMap {closingCta} />
 </section>

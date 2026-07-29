@@ -20,6 +20,7 @@
             "home-hero",
             "studio-introduction",
             "about-orbit-gallery",
+            "horizontal-projects-showcase",
             "scroll-image-story",
             "creative-direction",
             "selected-work",

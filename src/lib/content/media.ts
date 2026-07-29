@@ -86,6 +86,13 @@ export const previewMedia = {
     height: 1024,
     credit: "Studio Click House",
   },
+  cgiProductShowcaseV2: {
+    src: "/images/portfolio/3d-cgi-showcase-v2.jpg",
+    alt: "3D fragrance bottle transitioning from wireframe model to photorealistic CGI render",
+    width: 1536,
+    height: 1024,
+    credit: "Studio Click House AI-assisted concept image",
+  },
 } satisfies Record<string, PreviewMedia>;
 
 export const studioDressColorways = [

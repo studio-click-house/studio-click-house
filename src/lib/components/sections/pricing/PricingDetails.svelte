@@ -1,132 +1,210 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { pricingCategories } from "$lib/content/pricing";
-  import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { Check, ArrowUpRight } from "lucide-svelte";
+  import {
+    Check,
+    Layers,
+    Sliders,
+    Box,
+    Sparkles,
+    ArrowRight,
+  } from "lucide-svelte";
   import { cn } from "$lib/utils";
 
-  let sectionEl: HTMLElement;
-
-  onMount(() => {
-    let ctx: any;
-    registerScrollTrigger().then((gsapRuntime) => {
-      if (!gsapRuntime || !sectionEl) return;
-      const { gsap, ScrollTrigger } = gsapRuntime;
-
-      ctx = gsap.context(() => {
-        // Fade in headers
-        gsap.from(".details-header", {
-          scrollTrigger: {
-            trigger: ".details-header",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          },
-          opacity: 0,
-          y: 40,
-          duration: 0.8,
-          ease: "power3.out"
-        });
-
-        // Stagger categories fade-in
-        gsap.utils.toArray(".category-block").forEach((block: any) => {
-          gsap.from(block.querySelectorAll(".rate-row"), {
-            scrollTrigger: {
-              trigger: block,
-              start: "top 75%",
-              toggleActions: "play none none reverse"
-            },
-            opacity: 0,
-            x: -20,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "power2.out"
-          });
-        });
-      }, sectionEl);
-    });
-
-    return () => {
-      ctx?.revert();
-    };
-  });
+  const standards = [
+    {
+      id: "editorial",
+      title: "High-End Editorial & Retouching",
+      description:
+        "Precision post-production for luxury fashion, beauty campaigns, and commercial print advertising.",
+      icon: Sparkles,
+      fileStandards: "16-bit TIFF // Master PSD (Layered)",
+      colorSpace: "Adobe RGB (1998) // ProPhoto // sRGB",
+      turnaround: "24–48 Hours Standard",
+      specs: [
+        "Non-destructive frequency separation workflow",
+        "Micro-dodge & burn skin and fabric refinement",
+        "Natural skin texture and film grain preservation",
+        "Stray hair removal & background cleanup",
+        "Color-matched to physical brand samples",
+      ],
+    },
+    {
+      id: "ecommerce",
+      title: "E-Commerce & High-Volume Studio",
+      description:
+        "Scalable image processing for digital catalogs, fashion retailers, and lookbook releases.",
+      icon: Layers,
+      fileStandards: "Multi-Path PSD // PNG-24 Alpha // JPEG",
+      colorSpace: "Calibrated sRGB Web Profile",
+      turnaround: "Overnight 12–24 Hours",
+      specs: [
+        "100% hand-drawn pen tool clipping paths",
+        "Natural drop, cast, and reflection shadows",
+        "Ghost mannequin neck joint & symmetry assembly",
+        "Strict batch-to-batch color consistency",
+        "Automated crop & aspect ratio formatting",
+      ],
+    },
+    {
+      id: "cgi",
+      title: "3D CGI & Product Visualization",
+      description:
+        "Photorealistic 3D rendering, CAD conversion, and interactive web 3D assets for commercial campaigns.",
+      icon: Box,
+      fileStandards: "4K/8K 32-bit EXR // glTF // USDZ",
+      colorSpace: "ACEScg Linear Rendering Pipeline",
+      turnaround: "48–72 Hours per Asset Set",
+      specs: [
+        "CAD/STEP geometry cleaning & UV unwrapping",
+        "Custom PBR photorealistic material surfacing",
+        "Studio lighting matched to physical photography",
+        "360° interactive turntable & WebXR exports",
+        "High-resolution still & animated video renders",
+      ],
+    },
+    {
+      id: "color",
+      title: "Color Grading & Look Development",
+      description:
+        "Cinematic color correction and look LUT engineering for video campaigns and digital motion.",
+      icon: Sliders,
+      fileStandards: "ProRes 4444 XQ // .cube LUT // XML/EDL",
+      colorSpace: "Rec.709 // DCI-P3 // DaVinci Wide Gamut",
+      turnaround: "24 Hours Priority",
+      specs: [
+        "Custom brand look LUT engineering & grading",
+        "Multi-camera shot-to-shot continuity matching",
+        "Skin tone isolation and protective grading",
+        "Broadcast legal saturation & luminance checks",
+        "Master delivery for web, broadcast, and print",
+      ],
+    },
+  ];
 </script>
 
-<section 
-  bind:this={sectionEl} 
-  id="pricing-details" 
-  class="relative bg-brand-light text-brand-dark px-5 py-24 sm:px-10 lg:px-16"
+<section
+  id="production-standards"
+  class="section-space relative bg-brand-light text-brand-dark py-24 md:py-36 border-b border-brand-dark/15"
 >
   <div class="site-shell">
-    
-    <!-- Header -->
-    <header class="details-header max-w-3xl mb-20">
-      <span class="eyebrow text-brand-green block mb-3">Service Matrix</span>
-      <h2 class="display-title mb-6 leading-none">Rate Structure</h2>
-      <p class="text-brand-dark/70 text-base sm:text-lg leading-relaxed">
-        Browse our comprehensive rate matrix across image post-production, video finishing, and 3D CGI pipelines. Final rates are adapted based on volume and complexity.
+    <!-- Clean Header without Short Text / Eyebrow labels -->
+    <header class="max-w-3xl mb-16">
+      <h2
+        class="font-display text-[clamp(2.75rem,5vw,5rem)] font-bold tracking-[-0.04em] leading-[0.9] text-brand-dark"
+      >
+        Production Standards & Deliverables
+      </h2>
+      <p class="mt-6 text-base sm:text-lg leading-relaxed text-brand-dark/70">
+        Every project at Studio Click House is delivered to strict technical
+        specifications. Below are the file standards, color profiles, and quality
+        assurance parameters included with each production discipline.
       </p>
     </header>
 
-    <!-- Categories Grid -->
-    <div class="grid grid-cols-1 gap-20">
-      {#each pricingCategories as category}
-        <div class="category-block border-t border-brand-mist pt-10">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            
-            <!-- Category Meta -->
-            <div class="lg:col-span-4 lg:sticky lg:top-24">
-              <span class="font-mono text-xs text-brand-green uppercase tracking-widest font-semibold block mb-2">
-                Department
-              </span>
-              <h3 class="font-display text-4xl mb-4 font-normal">{category.categoryName}</h3>
-              <p class="text-sm text-brand-dark/70 leading-relaxed max-w-sm">
-                {category.description}
-              </p>
-              <a 
-                href="/contact?service={category.categoryName.toLowerCase().replace(' ', '-')}" 
-                class="group inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase font-bold tracking-widest text-brand-dark hover:text-brand-green transition-colors mt-6"
+    <!-- 2x2 Responsive Grid of Technical Standards -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch"
+    >
+      {#each standards as item}
+        <article
+          class="flex flex-col justify-between rounded-2xl border border-brand-dark/15 bg-brand-paper p-8 lg:p-10 transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm"
+        >
+          <div>
+            <!-- Icon & Title -->
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-dark/5 text-brand-dark"
               >
-                Inquire for pipeline <ArrowUpRight size={14} class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
+                {#if item.icon}
+                  <item.icon size={24} strokeWidth={1.75} />
+                {/if}
+              </div>
+              <div>
+                <h3
+                  class="font-display text-2xl sm:text-3xl font-normal text-brand-dark tracking-tight"
+                >
+                  {item.title}
+                </h3>
+              </div>
             </div>
 
-            <!-- Rates List -->
-            <div class="lg:col-span-8 flex flex-col gap-6">
-              {#each category.rates as rate}
-                <div class="rate-row group border-b border-brand-mist/40 pb-6 transition-all duration-200">
-                  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div class="max-w-xl">
-                      <div class="flex items-center gap-3">
-                        <h4 class="font-display text-2xl font-normal group-hover:text-brand-green transition-colors">
-                          {rate.name}
-                        </h4>
-                        <span class="font-mono text-[0.68rem] text-brand-dark/40 border border-brand-mist/55 px-2 py-0.5 uppercase tracking-wider">
-                          From ${rate.basePrice.toFixed(2)}/{rate.unit}
-                        </span>
-                      </div>
-                      <p class="text-sm text-brand-dark/60 mt-2 leading-relaxed">
-                        {rate.description}
-                      </p>
-                    </div>
-                  </div>
+            <p
+              class="text-base leading-relaxed text-brand-dark/75 mb-8 max-w-xl"
+            >
+              {item.description}
+            </p>
 
-                  <!-- Deliverables Grid -->
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4 pl-0 transition-opacity">
-                    {#each rate.features as feature}
-                      <div class="flex items-center gap-2 text-xs text-brand-dark/70 font-mono">
-                        <Check size={12} class="text-brand-green flex-shrink-0" />
-                        <span>{feature}</span>
-                      </div>
-                    {/each}
-                  </div>
-                </div>
+            <!-- Technical Specification Badges / Table -->
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 rounded-xl border border-brand-dark/10 bg-brand-light p-4 text-xs font-mono"
+            >
+              <div>
+                <span class="block text-brand-dark/55 uppercase tracking-wider"
+                  >File Deliverables</span
+                >
+                <span class="mt-1 block font-semibold text-brand-dark"
+                  >{item.fileStandards}</span
+                >
+              </div>
+              <div>
+                <span class="block text-brand-dark/55 uppercase tracking-wider"
+                  >Color Space</span
+                >
+                <span class="mt-1 block font-semibold text-brand-dark"
+                  >{item.colorSpace}</span
+                >
+              </div>
+            </div>
+
+            <!-- Deliverable Checklist -->
+            <h4
+              class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark/80 mb-4"
+            >
+              Technical Specifications Included:
+            </h4>
+            <ul class="space-y-3 mb-8">
+              {#each item.specs as spec}
+                <li class="flex items-start gap-3 text-sm text-brand-dark/75">
+                  <span
+                    class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-green/15 text-brand-green"
+                  >
+                    <Check size={11} strokeWidth={3} />
+                  </span>
+                  <span>{spec}</span>
+                </li>
               {/each}
-            </div>
-
+            </ul>
           </div>
-        </div>
+
+          <!-- Footer / SLA -->
+          <div
+            class="pt-5 border-t border-brand-dark/10 flex items-center justify-between text-xs font-mono"
+          >
+            <span class="text-brand-dark/60">Typical SLA Turnaround:</span>
+            <span class="font-bold text-brand-green">{item.turnaround}</span>
+          </div>
+        </article>
       {/each}
     </div>
 
+    <!-- Bottom Guidance Banner -->
+    <div
+      class="mt-12 rounded-2xl border border-brand-dark/15 bg-brand-dark text-brand-light p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6"
+    >
+      <div class="max-w-2xl">
+        <h3 class="font-display text-2xl sm:text-3xl font-normal">
+          Need a Custom Production SLA or Trial Batch?
+        </h3>
+        <p class="mt-2 text-sm sm:text-base text-brand-light/75 leading-relaxed">
+          We offer complimentary test batch retouching and custom technical SLA
+          agreements for new agency partners and eCommerce studios.
+        </p>
+      </div>
+      <a
+        href="/contact?subject=trial-batch"
+        class="shrink-0 py-4 px-8 bg-brand-green text-white font-mono text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-white hover:text-brand-dark transition-colors duration-300 flex items-center gap-2 shadow-sm"
+      >
+        Request Free Trial Batch <ArrowRight size={16} />
+      </a>
+    </div>
   </div>
 </section>

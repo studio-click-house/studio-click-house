@@ -91,7 +91,6 @@
     pointer-events: none;
   }
 
-
   .logo-track {
     animation: logo-drift 42s linear infinite;
   }

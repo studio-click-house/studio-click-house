@@ -1,16 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { clientLocations } from "$lib/content/home";
+  import type { AboutPageData } from "$lib/types/about";
   import ThreeGlobe from "./ThreeGlobe.svelte";
+
+  let { closingCta } = $props<{
+    closingCta: AboutPageData["closingCta"];
+  }>();
 
   let sectionRoot: HTMLElement;
   let globeStage: HTMLDivElement;
-
-  const totalClients = clientLocations.reduce(
-    (sum, item) => sum + (item.clientCount ?? 0),
-    0,
-  );
 
   onMount(() => {
     let active = true;
@@ -97,55 +98,27 @@
           id="global-production-heading"
           class="network-copy-step max-w-[12ch] font-display text-[clamp(2.35rem,3.35vw,3.75rem)] font-light leading-[0.95] tracking-[-0.035em]"
         >
-          Creative production, <span class="text-brand-light/72"
-            >without borders.</span
-          >
+          {closingCta.heading}
         </h2>
 
         <p
           class="network-copy-step mt-4 max-w-md text-sm leading-6 text-brand-light/62"
         >
-          Studio Click House connects image retouching, video post-production,
-          and 3D production through one coordinated global workflow.
+          {closingCta.description}
         </p>
 
-        <dl
-          class="network-copy-step mt-6 grid grid-cols-3 divide-x divide-brand-green/30 border-y border-brand-light/12 py-3.5"
+        <a
+          href={closingCta.primaryCtaHref}
+          class="network-copy-step mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
-          <div class="pr-4">
-            <dd class="font-display text-2xl text-brand-green">24/7</dd>
-            <dt
-              class="mt-2 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-light/48"
-            >
-              Production
-            </dt>
-          </div>
-          <div class="px-4">
-            <dd class="font-display text-2xl text-brand-green">
-              {clientLocations.length.toString().padStart(2, "0")}
-            </dd>
-            <dt
-              class="mt-2 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-light/48"
-            >
-              Global regions
-            </dt>
-          </div>
-          <div class="pl-4">
-            <dd class="font-display text-2xl text-brand-green">
-              {totalClients.toLocaleString()}+
-            </dd>
-            <dt
-              class="mt-2 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-brand-light/48"
-            >
-              Client network
-            </dt>
-          </div>
-        </dl>
+          <span>{closingCta.primaryCtaLabel}</span>
+          <ArrowRight class="h-5 w-5" />
+        </a>
       </div>
 
       <div
         bind:this={globeStage}
-        class="globe-stage relative flex min-h-[36rem] items-center justify-center lg:col-span-8 lg:min-h-0"
+        class="globe-stage relative flex min-h-[36rem] items-center justify-center lg:col-span-8 lg:min-h-0 lg:translate-x-12 xl:translate-x-20"
       >
         <div class="globe-ambient" aria-hidden="true"></div>
         <ThreeGlobe locations={clientLocations} />

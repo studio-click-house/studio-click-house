@@ -182,10 +182,9 @@
       <div class="faq-reveal-left lg:col-span-7 space-y-10">
         <!-- Header -->
         <div class="border-b border-brand-dark/10 pb-8">
-          <p class="eyebrow text-brand-green">Working together</p>
           <h2
             id="faq-section-title"
-            class="mt-6 font-display text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[0.92] tracking-[-0.040em] text-brand-dark"
+            class="font-display text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[0.92] tracking-[-0.040em] text-brand-dark"
           >
             Questions.
           </h2>

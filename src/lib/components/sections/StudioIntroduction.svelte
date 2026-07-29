@@ -228,7 +228,7 @@
   id="studio-introduction"
   bind:this={section}
   aria-labelledby="studio-introduction-title"
-  class="about-section relative overflow-hidden bg-brand-paper pt-24 pb-8 text-brand-dark sm:pt-32 sm:pb-12"
+  class="about-section relative overflow-hidden bg-brand-light pt-24 pb-8 text-brand-dark sm:pt-32 sm:pb-12"
 >
   <div
     class="absolute inset-x-0 top-0 h-px bg-brand-dark/10"
@@ -439,7 +439,7 @@
 
   .colorway-control-active .colorway-swatch {
     box-shadow:
-      0 0 0 2px var(--color-brand-paper),
+      0 0 0 2px var(--color-brand-light),
       0 0 0 4px var(--color-brand-green);
   }
 

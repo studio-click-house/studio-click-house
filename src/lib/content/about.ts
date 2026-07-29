@@ -263,7 +263,7 @@ export const aboutPageData: AboutPageData = {
   },
   leadership: {
     eyebrow: "Leadership Team",
-    heading: "Meet the Minds Guiding SCH",
+    heading: "Meet the Minds Guiding SCHL",
     subheading:
       "Our leadership combines deep technical post-production craft with international agency operational experience.",
     members: [
@@ -318,6 +318,62 @@ export const aboutPageData: AboutPageData = {
         media: {
           src: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800",
           alt: "Farhana Yasmin - Head of 3D",
+          width: 800,
+          height: 1000,
+          credit: "Studio portrait",
+        },
+      },
+      {
+        id: "leader-5",
+        name: "Tanvir Rahman",
+        role: "Senior Retouching Supervisor",
+        bio: "Directs high-end commercial photo retouching, color grading consistency, and luxury fashion beauty pipelines.",
+        linkedinUrl: "https://linkedin.com",
+        media: {
+          src: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800",
+          alt: "Tanvir Rahman - Retouching Supervisor",
+          width: 800,
+          height: 1000,
+          credit: "Studio portrait",
+        },
+      },
+      {
+        id: "leader-6",
+        name: "Sadia Islam",
+        role: "Lead VFX & Compositing Supervisor",
+        bio: "Oversees rotoscoping, clean plate generation, chroma keying, and multi-pass CGI integration for global film and commercial spots.",
+        linkedinUrl: "https://linkedin.com",
+        media: {
+          src: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=800",
+          alt: "Sadia Islam - VFX Supervisor",
+          width: 800,
+          height: 1000,
+          credit: "Studio portrait",
+        },
+      },
+      {
+        id: "leader-7",
+        name: "Kamrul Hassan",
+        role: "Head of Quality Assurance & SLA",
+        bio: "Manages multi-stage technical inspection and pixel-level quality validation across all 24/7 client deliverables.",
+        linkedinUrl: "https://linkedin.com",
+        media: {
+          src: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800",
+          alt: "Kamrul Hassan - Head of QA",
+          width: 800,
+          height: 1000,
+          credit: "Studio portrait",
+        },
+      },
+      {
+        id: "leader-8",
+        name: "Nafisa Chowdhury",
+        role: "Senior Motion Designer & Editor",
+        bio: "Leads commercial video editing, brand motion graphics, and dynamic short-form campaigns for global advertising agencies.",
+        linkedinUrl: "https://linkedin.com",
+        media: {
+          src: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
+          alt: "Nafisa Chowdhury - Senior Editor",
           width: 800,
           height: 1000,
           credit: "Studio portrait",

@@ -12,6 +12,7 @@
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { siteConfig } from "$lib/config/site";
+  import { aboutPageData } from "$lib/content/about";
   import { faqs } from "$lib/content/home";
 
   let { data } = $props();
@@ -53,5 +54,5 @@
   <ProductionProcess />
   <TestimonialsSection />
   <FaqSection />
-  <ClientLocations />
+  <ClientLocations closingCta={aboutPageData.closingCta} />
 </main>

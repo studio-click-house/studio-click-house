@@ -41,6 +41,14 @@
     color: string;
   }
 
+  interface ActiveLabel {
+    id: string;
+    country: string;
+    x: number;
+    y: number;
+    visible: boolean;
+  }
+
   const INITIAL_ROTATION_X = 0.12;
   const INITIAL_ROTATION_Y = -1.92;
   const ROUTE_COLORS = ["#7ea641", "#9aca54", "#63adb0", "#06b6d4"];
@@ -49,7 +57,7 @@
   const POLYGON_COLOR = "rgba(255,255,255,0.7)";
   const ARC_TIME = 1350;
   const ARC_LENGTH = 0.46;
-  const MAX_RINGS = 3;
+  const MAX_RINGS = 1.35;
   const RING_PROPAGATION_SPEED = 3;
 
   let { locations }: Props = $props();
@@ -57,6 +65,7 @@
   let containerElement: HTMLDivElement;
   let canvasElement: HTMLCanvasElement;
   let isDragging = $state(false);
+  let activeLabels = $state<ActiveLabel[]>([]);
 
   let targetRotationX = INITIAL_ROTATION_X;
   let targetRotationY = INITIAL_ROTATION_Y;
@@ -261,7 +270,7 @@
         .pointColor("color")
         .pointsMerge(true)
         .pointAltitude(0)
-        .pointRadius(2)
+        .pointRadius(0.85)
         .ringsData(createRingData(arcs, ringCycle))
         .ringLat("lat")
         .ringLng("lng")
@@ -281,6 +290,8 @@
       pointLight.position.set(-200, 500, 200);
       scene.add(pointLight);
 
+      // Hover event handlers removed to display labels permanently instead.
+
       async function loadCountries() {
         try {
           const response = await fetch(
@@ -296,7 +307,26 @@
             .hexPolygonsData(worldMap.features)
             .hexPolygonResolution(3)
             .hexPolygonMargin(0.7)
-            .hexPolygonColor(() => POLYGON_COLOR);
+            .hexPolygonColor((feature: any) => {
+              const props = feature?.properties;
+              if (props) {
+                const isoA2 = String(props.ISO_A2 || props.iso_a2 || "").toUpperCase();
+                const name = String(props.NAME || props.name || "").toUpperCase();
+                const admin = String(props.ADMIN || props.admin || "").toUpperCase();
+
+                const listedIsoCodes = ["US", "BR", "AR", "ZA", "AE", "BD", "CN", "AU", "GB", "DK", "NO", "ES", "FR", "SE"];
+                const listedNames = [
+                  "UNITED STATES", "UNITED STATES OF AMERICA", "BRAZIL", "ARGENTINA",
+                  "SOUTH AFRICA", "UNITED ARAB EMIRATES", "BANGLADESH", "CHINA",
+                  "AUSTRALIA", "UNITED KINGDOM", "DENMARK", "NORWAY", "SPAIN", "FRANCE", "SWEDEN"
+                ];
+
+                if (listedIsoCodes.includes(isoA2) || listedNames.includes(name) || listedNames.includes(admin)) {
+                  return "#8ccb2e"; // Calibrated Brand Green
+                }
+              }
+              return POLYGON_COLOR;
+            });
         } catch (error) {
           if (!(error instanceof DOMException && error.name === "AbortError")) {
             return;
@@ -359,6 +389,71 @@
           0.1,
         );
         globeGroup.rotation.set(currentRotationX, currentRotationY, 0);
+
+        // --- UPDATE HTML LABELS PROJECTED POSITIONS ---
+        globeGroup.updateMatrixWorld(true);
+        camera.updateMatrixWorld(true);
+
+        const labels: ActiveLabel[] = [];
+        const tempV = new THREE.Vector3();
+        const toCam = new THREE.Vector3();
+
+        for (const loc of locations) {
+          const coords = globe.getCoords(loc.position.lat, loc.position.lng);
+          tempV.set(coords.x, coords.y, coords.z);
+          tempV.applyMatrix4(globeGroup.matrixWorld);
+
+          toCam.copy(camera.position).sub(tempV).normalize();
+          const dot = tempV.clone().normalize().dot(toCam);
+          const visible = dot > 0.15;
+
+          if (visible) {
+            tempV.project(camera);
+
+            const labelX = (tempV.x * 0.5 + 0.5) * width;
+            const labelY = (-(tempV.y * 0.5) + 0.5) * height;
+
+            let offsetX = 8;
+            let offsetY = -4;
+
+            if (loc.id === "norway") {
+              offsetX = -24;
+              offsetY = -28;
+            } else if (loc.id === "sweden") {
+              offsetX = 14;
+              offsetY = -18;
+            } else if (loc.id === "denmark") {
+              offsetX = 20;
+              offsetY = 12;
+            } else if (loc.id === "united-kingdom") {
+              offsetX = -38;
+              offsetY = 0;
+            } else if (loc.id === "france") {
+              offsetX = -26;
+              offsetY = 22;
+            } else if (loc.id === "spain") {
+              offsetX = -28;
+              offsetY = 22;
+            }
+
+            labels.push({
+              id: loc.id,
+              country: loc.country,
+              x: labelX + offsetX,
+              y: labelY + offsetY,
+              visible: true,
+            });
+          } else {
+            labels.push({
+              id: loc.id,
+              country: loc.country,
+              x: 0,
+              y: 0,
+              visible: false,
+            });
+          }
+        }
+        activeLabels = labels;
 
         renderer.render(scene, camera);
         animationFrameId = requestAnimationFrame(renderFrame);
@@ -474,4 +569,15 @@
     bind:this={canvasElement}
     class="relative z-10 block h-full w-full cursor-grab touch-none bg-transparent active:cursor-grabbing"
   ></canvas>
+
+  {#each activeLabels as label (label.id)}
+    {#if label.visible}
+      <div
+        class="pointer-events-none absolute z-20 text-[10px] sm:text-xs font-bold tracking-tight text-brand-light drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.92)] whitespace-nowrap"
+        style="left: {label.x}px; top: {label.y}px; transform: translate(0, -50%);"
+      >
+        {label.country}
+      </div>
+    {/if}
+  {/each}
 </div>
