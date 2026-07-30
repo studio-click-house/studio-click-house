@@ -246,7 +246,7 @@ export const testimonials: TestimonialItem[] = [
     name: "Jilhaj",
     role: "Managing Director",
     company: "Studio Click House",
-    avatar: "/images/profile image/MD/Jilhaj.png",
+    avatar: "/images/profile image/MD/Jilhaj.webp",
   },
 ];
 
@@ -405,11 +405,11 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
       "color-mix(in srgb, var(--color-brand-green) 38%, var(--color-brand-paper))",
     media: {
       kind: "video",
-      src: "/videos/editing_video.mp4",
+      src: "/videos/editing-video-720p.webm",
       poster: previewMedia.editingWorkspace.src,
       alt: "Studio video editing and post-production preview",
-      width: 1920,
-      height: 1080,
+      width: 1280,
+      height: 720,
       credit: "Studio Click House",
     },
     href: "/services",

@@ -274,10 +274,10 @@ export const aboutPageData: AboutPageData = {
         bio: "Directs strategic growth, international client partnerships, and enterprise post-production operations for Studio Click House.",
         linkedinUrl: "https://linkedin.com",
         media: {
-          src: "/images/profile image/MD/Jilhaj.png",
+          src: "/images/profile image/MD/Jilhaj.webp",
           alt: "Jilhaj - Managing Director (MD)",
-          width: 800,
-          height: 1000,
+          width: 848,
+          height: 1264,
           credit: "Studio Click House Leadership",
         },
       },

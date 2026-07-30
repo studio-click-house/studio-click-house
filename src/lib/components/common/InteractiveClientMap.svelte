@@ -31,9 +31,9 @@
               defaults: { ease: "none" },
               scrollTrigger: {
                 trigger: sectionRoot,
-                start: "top 98%",
-                end: "top 8%",
-                scrub: 0.9,
+                start: "top 90%",
+                end: "top 24%",
+                scrub: 0.35,
               },
             });
 

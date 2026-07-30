@@ -60,6 +60,7 @@
       if (hasFinished) return;
       hasFinished = true;
       restoreHeaderLogo();
+      document.documentElement.dataset.preloaderComplete = "true";
       window.dispatchEvent(new CustomEvent("site-preloader-complete"));
       isVisible = false;
     };

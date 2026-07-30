@@ -280,7 +280,12 @@
             frontCard.addEventListener("pointerenter", expandStack);
             frontCard.addEventListener("pointerleave", collapseStack);
 
+            const renderCards = () => {
+              placeWheel(orbitProxy.motion, orbitProxy.spin, orbitProxy.stack);
+            };
+
             const timeline = gsap.timeline({
+              onUpdate: renderCards,
               scrollTrigger: {
                 id: "about-orbit-gallery-pin",
                 trigger: sectionRef,
@@ -295,18 +300,13 @@
               },
             });
 
-            const renderCards = () => {
-              placeWheel(orbitProxy.motion, orbitProxy.spin, orbitProxy.stack);
-            };
-
             timeline
               .to(
                 orbitProxy,
                 {
                   spin: 1,
-                  duration: 0.96,
+                  duration: 0.84,
                   ease: "none",
-                  onUpdate: renderCards,
                 },
                 0,
               )
@@ -314,19 +314,17 @@
                 orbitProxy,
                 {
                   stack: 1,
-                  duration: 0.44,
+                  duration: 0.34,
                   ease: "power3.inOut",
-                  onUpdate: renderCards,
                 },
-                0.48,
+                0.38,
               )
               .to(
                 orbitProxy,
                 {
                   motion: 1,
-                  duration: 0.96,
+                  duration: 0.84,
                   ease: "power2.inOut",
-                  onUpdate: renderCards,
                 },
                 0,
               )
@@ -354,60 +352,53 @@
                   xPercent: 0,
                   y: 0,
                   yPercent: -50,
-                  duration: 0.08,
+                  duration: 0.18,
                   ease: "none",
                 },
-                0.46,
+                0.32,
               )
               .fromTo(
                 workflowHeaderRef,
                 {
                   autoAlpha: 0,
                   x: 52,
-                  clipPath: "inset(0 100% 0 0)",
                 },
                 {
                   autoAlpha: 1,
                   x: 0,
-                  clipPath: "inset(0 0% 0 0)",
-                  duration: 0.08,
+                  duration: 0.18,
                   ease: "none",
                 },
-                0.48,
+                0.38,
               )
               .fromTo(
                 assuranceRows,
                 {
                   autoAlpha: 0,
                   x: (index) => (index % 2 === 0 ? 54 : -34),
-                  clipPath: (index) =>
-                    index % 2 === 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
                 },
                 {
                   autoAlpha: 1,
                   x: 0,
-                  clipPath: "inset(0 0% 0 0)",
-                  duration: 0.08,
-                  stagger: 0.09,
+                  duration: 0.14,
+                  stagger: 0.055,
                   ease: "none",
                 },
-                0.55,
+                0.46,
               )
               .fromTo(
                 workflowOutcomeRef,
                 {
                   autoAlpha: 0,
                   y: 14,
-                  clipPath: "inset(0 0 100% 0)",
                 },
                 {
                   autoAlpha: 1,
                   y: 0,
-                  clipPath: "inset(0 0 0% 0)",
-                  duration: 0.08,
+                  duration: 0.16,
                   ease: "none",
                 },
-                0.84,
+                0.72,
               )
               .fromTo(
                 workflowLinkRef,
@@ -418,12 +409,12 @@
                 {
                   autoAlpha: 1,
                   x: 0,
-                  duration: 0.06,
+                  duration: 0.14,
                   ease: "none",
                 },
-                0.9,
+                0.82,
               )
-              .set(frontCard, { pointerEvents: "auto" }, 0.92);
+              .set(frontCard, { pointerEvents: "auto" }, 0.9);
 
             return () => {
               frontCard.removeEventListener("pointerenter", expandStack);
@@ -457,7 +448,6 @@
                 autoAlpha: 1,
                 x: 0,
                 y: 0,
-                clipPath: "inset(0 0 0 0)",
               },
             );
             gsap.set(cards, { pointerEvents: "none" });
@@ -651,7 +641,7 @@
 
   .workflow-header {
     margin-bottom: clamp(1rem, 2vh, 1.5rem);
-    will-change: transform, opacity, clip-path;
+    will-change: transform, opacity;
   }
 
   .workflow-header > h2 {
@@ -688,7 +678,7 @@
     gap: 0.75rem;
     align-items: center;
     padding-block: 0.55rem;
-    will-change: transform, opacity, clip-path;
+    will-change: transform, opacity;
   }
 
   .assurance-row h3 {
@@ -721,7 +711,7 @@
     padding: clamp(0.85rem, 1.5vw, 1.15rem);
     background: var(--color-brand-dark);
     color: var(--color-brand-light);
-    will-change: transform, opacity, clip-path;
+    will-change: transform, opacity;
   }
 
   .workflow-outcome > p {

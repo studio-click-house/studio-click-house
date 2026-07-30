@@ -196,6 +196,9 @@
     let active = true;
     let destroyRuntime: (() => void) | undefined;
     let initializationObserver: IntersectionObserver | undefined;
+    let initializationIdleId: number | undefined;
+    let initializationTimeoutId: ReturnType<typeof setTimeout> | undefined;
+    let initializationStarted = false;
 
     async function initializeGlobe() {
       const [THREE, { default: ThreeGlobeConstructor }] = await Promise.all([
@@ -310,23 +313,71 @@
             .hexPolygonColor((feature: any) => {
               const props = feature?.properties;
               if (props) {
-                const isoA2 = String(props.ISO_A2 || props.iso_a2 || "").toUpperCase();
-                const name = String(props.NAME || props.name || "").toUpperCase();
-                const admin = String(props.ADMIN || props.admin || "").toUpperCase();
+                const isoA2 = String(
+                  props.ISO_A2 || props.iso_a2 || "",
+                ).toUpperCase();
+                const name = String(
+                  props.NAME || props.name || "",
+                ).toUpperCase();
+                const admin = String(
+                  props.ADMIN || props.admin || "",
+                ).toUpperCase();
 
-                const listedIsoCodes = ["US", "BR", "AR", "ZA", "AE", "BD", "CN", "AU", "GB", "DK", "NO", "ES", "FR", "SE"];
+                const listedIsoCodes = [
+                  "US",
+                  "BR",
+                  "AR",
+                  "ZA",
+                  "AE",
+                  "BD",
+                  "CN",
+                  "AU",
+                  "GB",
+                  "DK",
+                  "NO",
+                  "ES",
+                  "FR",
+                  "SE",
+                ];
                 const listedNames = [
-                  "UNITED STATES", "UNITED STATES OF AMERICA", "BRAZIL", "ARGENTINA",
-                  "SOUTH AFRICA", "UNITED ARAB EMIRATES", "BANGLADESH", "CHINA",
-                  "AUSTRALIA", "UNITED KINGDOM", "DENMARK", "NORWAY", "SPAIN", "FRANCE", "SWEDEN"
+                  "UNITED STATES",
+                  "UNITED STATES OF AMERICA",
+                  "BRAZIL",
+                  "ARGENTINA",
+                  "SOUTH AFRICA",
+                  "UNITED ARAB EMIRATES",
+                  "BANGLADESH",
+                  "CHINA",
+                  "AUSTRALIA",
+                  "UNITED KINGDOM",
+                  "DENMARK",
+                  "NORWAY",
+                  "SPAIN",
+                  "FRANCE",
+                  "SWEDEN",
                 ];
 
-                if (listedIsoCodes.includes(isoA2) || listedNames.includes(name) || listedNames.includes(admin)) {
+                if (
+                  listedIsoCodes.includes(isoA2) ||
+                  listedNames.includes(name) ||
+                  listedNames.includes(admin)
+                ) {
                   return "#8ccb2e"; // Calibrated Brand Green
                 }
               }
               return POLYGON_COLOR;
             });
+
+          await new Promise<void>((resolve) => {
+            requestAnimationFrame(() => resolve());
+          });
+          await new Promise<void>((resolve) => {
+            requestAnimationFrame(() => resolve());
+          });
+          if (!active) return;
+
+          await renderer.compileAsync(scene, camera);
+          if (active) renderer.render(scene, camera);
         } catch (error) {
           if (!(error instanceof DOMException && error.name === "AbortError")) {
             return;
@@ -337,7 +388,7 @@
       void loadCountries();
 
       const ringInterval = window.setInterval(() => {
-        if (prefersReducedMotion || !active) return;
+        if (prefersReducedMotion || !active || !isInViewport) return;
         ringCycle = (ringCycle + 1) % 5;
         globe.ringsData(createRingData(arcs, ringCycle));
       }, 2000);
@@ -354,6 +405,10 @@
         globe.setPointOfView(camera);
         renderer.render(scene, camera);
       }
+
+      const labelPosition = new THREE.Vector3();
+      const cameraDirection = new THREE.Vector3();
+      const labelNormal = new THREE.Vector3();
 
       function renderFrame(time: number) {
         animationFrameId = undefined;
@@ -390,70 +445,74 @@
         );
         globeGroup.rotation.set(currentRotationX, currentRotationY, 0);
 
-        // --- UPDATE HTML LABELS PROJECTED POSITIONS ---
-        globeGroup.updateMatrixWorld(true);
-        camera.updateMatrixWorld(true);
+        {
+          globeGroup.updateMatrixWorld(true);
+          camera.updateMatrixWorld(true);
 
-        const labels: ActiveLabel[] = [];
-        const tempV = new THREE.Vector3();
-        const toCam = new THREE.Vector3();
+          const labels: ActiveLabel[] = [];
+          for (const loc of locations) {
+            const coords = globe.getCoords(loc.position.lat, loc.position.lng);
+            labelPosition.set(coords.x, coords.y, coords.z);
+            labelPosition.applyMatrix4(globeGroup.matrixWorld);
 
-        for (const loc of locations) {
-          const coords = globe.getCoords(loc.position.lat, loc.position.lng);
-          tempV.set(coords.x, coords.y, coords.z);
-          tempV.applyMatrix4(globeGroup.matrixWorld);
+            cameraDirection
+              .copy(camera.position)
+              .sub(labelPosition)
+              .normalize();
+            const dot = labelNormal
+              .copy(labelPosition)
+              .normalize()
+              .dot(cameraDirection);
+            const visible = dot > 0.15;
 
-          toCam.copy(camera.position).sub(tempV).normalize();
-          const dot = tempV.clone().normalize().dot(toCam);
-          const visible = dot > 0.15;
+            if (visible) {
+              labelPosition.project(camera);
 
-          if (visible) {
-            tempV.project(camera);
+              const labelX = (labelPosition.x * 0.5 + 0.5) * width;
+              const labelY = (-(labelPosition.y * 0.5) + 0.5) * height;
 
-            const labelX = (tempV.x * 0.5 + 0.5) * width;
-            const labelY = (-(tempV.y * 0.5) + 0.5) * height;
+              let offsetX = 8;
+              let offsetY = -4;
 
-            let offsetX = 8;
-            let offsetY = -4;
+              if (loc.id === "norway") {
+                offsetX = -24;
+                offsetY = -28;
+              } else if (loc.id === "sweden") {
+                offsetX = 14;
+                offsetY = -18;
+              } else if (loc.id === "denmark") {
+                offsetX = 20;
+                offsetY = 12;
+              } else if (loc.id === "united-kingdom") {
+                offsetX = -38;
+                offsetY = 0;
+              } else if (loc.id === "france") {
+                offsetX = -26;
+                offsetY = 22;
+              } else if (loc.id === "spain") {
+                offsetX = -28;
+                offsetY = 22;
+              }
 
-            if (loc.id === "norway") {
-              offsetX = -24;
-              offsetY = -28;
-            } else if (loc.id === "sweden") {
-              offsetX = 14;
-              offsetY = -18;
-            } else if (loc.id === "denmark") {
-              offsetX = 20;
-              offsetY = 12;
-            } else if (loc.id === "united-kingdom") {
-              offsetX = -38;
-              offsetY = 0;
-            } else if (loc.id === "france") {
-              offsetX = -26;
-              offsetY = 22;
-            } else if (loc.id === "spain") {
-              offsetX = -28;
-              offsetY = 22;
+              labels.push({
+                id: loc.id,
+                country: loc.country,
+                x: labelX + offsetX,
+                y: labelY + offsetY,
+                visible: true,
+              });
+            } else {
+              labels.push({
+                id: loc.id,
+                country: loc.country,
+                x: 0,
+                y: 0,
+                visible: false,
+              });
             }
-
-            labels.push({
-              id: loc.id,
-              country: loc.country,
-              x: labelX + offsetX,
-              y: labelY + offsetY,
-              visible: true,
-            });
-          } else {
-            labels.push({
-              id: loc.id,
-              country: loc.country,
-              x: 0,
-              y: 0,
-              visible: false,
-            });
           }
+          activeLabels = labels;
         }
-        activeLabels = labels;
 
         renderer.render(scene, camera);
         animationFrameId = requestAnimationFrame(renderFrame);
@@ -527,10 +586,59 @@
     }
 
     const beginInitialization = () => {
+      if (initializationStarted || !active) return;
+      initializationStarted = true;
       initializationObserver?.disconnect();
       initializationObserver = undefined;
+      if (initializationIdleId !== undefined) {
+        window.cancelIdleCallback(initializationIdleId);
+        initializationIdleId = undefined;
+      }
+      if (initializationTimeoutId !== undefined) {
+        clearTimeout(initializationTimeoutId);
+        initializationTimeoutId = undefined;
+      }
       void initializeGlobe();
     };
+
+    const scheduleIdleInitialization = () => {
+      if (initializationStarted || !active) return;
+
+      if ("requestIdleCallback" in window) {
+        initializationIdleId = window.requestIdleCallback(
+          () => beginInitialization(),
+          { timeout: 1800 },
+        );
+      } else {
+        initializationTimeoutId = setTimeout(beginInitialization, 400);
+      }
+    };
+
+    const handlePreloaderComplete = () => {
+      scheduleIdleInitialization();
+    };
+
+    const handlePreloaderExit = () => {
+      beginInitialization();
+    };
+
+    const preloaderElement = document.querySelector(".site-preloader");
+    const isPreloaderComplete =
+      document.documentElement.dataset.preloaderComplete === "true";
+    if (preloaderElement && !isPreloaderComplete) {
+      window.addEventListener(
+        "site-preloader-header-reveal",
+        handlePreloaderExit,
+        { once: true },
+      );
+      window.addEventListener(
+        "site-preloader-complete",
+        handlePreloaderComplete,
+        { once: true },
+      );
+    } else {
+      scheduleIdleInitialization();
+    }
 
     if ("IntersectionObserver" in window) {
       initializationObserver = new IntersectionObserver(
@@ -546,7 +654,21 @@
 
     return () => {
       active = false;
+      window.removeEventListener(
+        "site-preloader-complete",
+        handlePreloaderComplete,
+      );
+      window.removeEventListener(
+        "site-preloader-header-reveal",
+        handlePreloaderExit,
+      );
       initializationObserver?.disconnect();
+      if (initializationIdleId !== undefined) {
+        window.cancelIdleCallback(initializationIdleId);
+      }
+      if (initializationTimeoutId !== undefined) {
+        clearTimeout(initializationTimeoutId);
+      }
       destroyRuntime?.();
     };
   });
@@ -581,3 +703,10 @@
     {/if}
   {/each}
 </div>
+
+<style>
+  .globe-container {
+    contain: layout paint;
+    isolation: isolate;
+  }
+</style>

@@ -116,49 +116,78 @@
   let section: HTMLElement | null = null;
   let stage: HTMLElement | null = null;
   let workFieldsTrack: HTMLElement | null = null;
-  let introVideo = $state<HTMLVideoElement | null>(null);
 
   onMount(() => {
     let active = true;
     let context: { revert: () => void } | undefined;
     let videoObserver: IntersectionObserver | undefined;
+    const stageVideos = Array.from(
+      stage?.querySelectorAll<HTMLVideoElement>("video") ?? [],
+    );
+    let isSectionNearViewport = false;
+    let videoStartTimers: number[] = [];
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
 
+    const clearVideoStartTimers = () => {
+      videoStartTimers.forEach((timerId) => window.clearTimeout(timerId));
+      videoStartTimers = [];
+    };
+
+    const pauseStageVideos = () => {
+      clearVideoStartTimers();
+      stageVideos.forEach((video) => video.pause());
+    };
+
+    const playVisibleStageVideos = () => {
+      clearVideoStartTimers();
+      const visibleStageVideos = stageVideos.filter(
+        (video) => video.offsetParent !== null,
+      );
+
+      visibleStageVideos.forEach((video, index) => {
+        const timerId = window.setTimeout(() => {
+          if (
+            isSectionNearViewport &&
+            !prefersReducedMotion.matches &&
+            video.offsetParent !== null
+          ) {
+            void video.play().catch(() => {});
+          }
+        }, index * 180);
+        videoStartTimers.push(timerId);
+      });
+    };
+
     const handleMotionChange = (e: MediaQueryListEvent) => {
-      if (!introVideo) return;
       if (e.matches) {
-        introVideo.pause();
-      } else if (
-        !("IntersectionObserver" in window) ||
-        (videoObserver && section)
-      ) {
-        void introVideo.play().catch(() => {});
+        pauseStageVideos();
+      } else if (isSectionNearViewport) {
+        playVisibleStageVideos();
       }
     };
     prefersReducedMotion.addEventListener("change", handleMotionChange);
 
-    // Initial check for video playback
-    if (introVideo) {
-      if (prefersReducedMotion.matches) {
-        introVideo.pause();
-      } else if ("IntersectionObserver" in window && section) {
-        videoObserver = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting && !prefersReducedMotion.matches) {
-              void introVideo?.play().catch(() => {});
-            } else {
-              introVideo?.pause();
-            }
-          },
-          { rootMargin: "100px 0px", threshold: 0.05 },
-        );
-        videoObserver.observe(section);
-      } else {
-        void introVideo.play().catch(() => {});
-      }
+    if (prefersReducedMotion.matches) {
+      pauseStageVideos();
+    } else if ("IntersectionObserver" in window && section) {
+      videoObserver = new IntersectionObserver(
+        ([entry]) => {
+          isSectionNearViewport = Boolean(entry?.isIntersecting);
+          if (isSectionNearViewport && !prefersReducedMotion.matches) {
+            playVisibleStageVideos();
+          } else {
+            pauseStageVideos();
+          }
+        },
+        { rootMargin: "800px 0px", threshold: 0.01 },
+      );
+      videoObserver.observe(section);
+    } else {
+      isSectionNearViewport = true;
+      playVisibleStageVideos();
     }
 
     registerScrollTrigger().then((runtime) => {
@@ -323,7 +352,9 @@
             gsap.set(workFieldsMediaExitWash, { autoAlpha: 0 });
             gsap.set(handoffDetails, {
               top: "70%",
+              y: 0,
               autoAlpha: 1,
+              force3D: true,
             });
             gsap.set(workFieldsCopy, {
               x: () => viewportWidth() / 3,
@@ -526,9 +557,10 @@
               .to(
                 handoffDetails,
                 {
-                  top: "100%",
+                  y: () => stageHeight() * 0.3,
                   duration: 0.9,
                   ease: "none",
+                  force3D: true,
                 },
                 "workFields",
               )
@@ -644,6 +676,7 @@
 
     return () => {
       active = false;
+      pauseStageVideos();
       prefersReducedMotion.removeEventListener("change", handleMotionChange);
       videoObserver?.disconnect();
       context?.revert();
@@ -669,14 +702,13 @@
       <!-- Background Video playing editing workflow, full opacity for rich colors -->
       <div class="absolute inset-0 z-0 opacity-100 pointer-events-none">
         <video
-          bind:this={introVideo}
           muted
           loop
           playsinline
           preload="metadata"
           class="h-full w-full object-cover"
         >
-          <source src="/videos/editing_video.mp4" type="video/mp4" />
+          <source src="/videos/editing-video-720p.webm" type="video/webm" />
         </video>
         <!-- Dark gradient overlay to pop the white text -->
         <div
@@ -722,7 +754,6 @@
                     poster={project.media.poster}
                     width={project.media.width}
                     height={project.media.height}
-                    autoplay
                     muted
                     loop
                     playsinline
@@ -902,7 +933,6 @@
                         poster={item.media.poster}
                         width={item.media.width}
                         height={item.media.height}
-                        autoplay
                         muted
                         loop
                         playsinline
@@ -1061,7 +1091,6 @@
                 poster={item.media.poster}
                 width={item.media.width}
                 height={item.media.height}
-                autoplay
                 muted
                 loop
                 playsinline
@@ -1105,6 +1134,10 @@
 </section>
 
 <style>
+  .project-stage {
+    contain: layout paint;
+  }
+
   .showcase-intro,
   .project-panel,
   .project-body,
