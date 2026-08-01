@@ -228,6 +228,10 @@
               localStage.querySelector<HTMLElement>(
                 ".work-fields-media-viewport",
               );
+            const workFieldsMediaContent =
+              localStage.querySelector<HTMLElement>(
+                ".work-fields-media-content",
+              );
             const workFieldsMediaExitWash =
               localStage.querySelector<HTMLElement>(
                 ".work-fields-media-exit-wash",
@@ -264,6 +268,7 @@
               !localWorkFieldsStage ||
               !workFieldsMediaTrack ||
               !workFieldsMediaViewport ||
+              !workFieldsMediaContent ||
               !workFieldsMediaExitWash ||
               !workFieldsCopy ||
               !workFieldsIntroPanel ||
@@ -347,7 +352,14 @@
               force3D: true,
             });
             gsap.set(workFieldsMediaViewport, {
-              width: "66.6%",
+              scaleX: 1,
+              transformOrigin: "left center",
+              force3D: true,
+            });
+            gsap.set(workFieldsMediaContent, {
+              scaleX: 1,
+              transformOrigin: "left center",
+              force3D: true,
             });
             gsap.set(workFieldsMediaExitWash, { autoAlpha: 0 });
             gsap.set(handoffDetails, {
@@ -376,6 +388,29 @@
               autoAlpha: 0,
               force3D: true,
             });
+            const animationLayers = [
+              intro,
+              ...panels,
+              ...bodies,
+              ...mediaReveals,
+              ...mediaContents,
+              ...images,
+              localWorkFieldsStage,
+              workFieldsMediaViewport,
+              workFieldsMediaContent,
+              workFieldsMediaTrack,
+              workFieldsCopy,
+              handoffSlide,
+              handoffMedia,
+              handoffDetails,
+              ...workFieldImages,
+              ...workFieldProgressItems,
+            ];
+            const setAnimationLayerHints = (enabled: boolean) => {
+              for (const layer of animationLayers) {
+                layer.style.willChange = enabled ? "transform, opacity" : "";
+              }
+            };
 
             const timeline = gsap.timeline({
               defaults: { duration: 1, ease: "none" },
@@ -391,6 +426,7 @@
                 anticipatePin: 1,
                 refreshPriority: 100,
                 invalidateOnRefresh: true,
+                onToggle: (self) => setAnimationLayerHints(self.isActive),
               },
             });
 
@@ -557,14 +593,14 @@
               .to(
                 handoffDetails,
                 {
-                  y: () => stageHeight() * 0.3,
+                  top: "100%",
+                  paddingTop: 0,
+                  paddingBottom: 0,
                   duration: 0.9,
                   ease: "none",
-                  force3D: true,
                 },
                 "workFields",
               )
-              .set(handoffDetails, { autoAlpha: 0 }, "workFields+=0.9")
               .to(
                 handoffCounter,
                 {
@@ -617,9 +653,20 @@
               .to(
                 workFieldsMediaViewport,
                 {
-                  width: "33.333%",
+                  scaleX: 0.5,
                   duration: 0.9,
                   ease: "none",
+                  force3D: true,
+                },
+                "workFields",
+              )
+              .to(
+                workFieldsMediaContent,
+                {
+                  scaleX: 2,
+                  duration: 0.9,
+                  ease: "none",
+                  force3D: true,
                 },
                 "workFields",
               )
@@ -664,11 +711,7 @@
               );
             }
 
-            document.fonts.ready.then(() => {
-              if (!active) return;
-              ScrollTrigger.sort();
-              ScrollTrigger.refresh();
-            });
+            return () => setAnimationLayerHints(false);
           },
         );
       }, localSection);
@@ -738,15 +781,13 @@
         style:background-color={project.bgColor}
         aria-labelledby="project-title-{project.id}"
       >
-        <div
-          class="project-body relative z-[1] h-full w-full will-change-transform"
-        >
+        <div class="project-body relative z-[1] h-full w-full">
           <div class="project-media relative h-[70%] overflow-hidden">
             <div
-              class="project-media-reveal absolute inset-0 origin-top overflow-hidden will-change-transform"
+              class="project-media-reveal absolute inset-0 origin-top overflow-hidden"
             >
               <div
-                class="project-media-content relative h-full w-full origin-top will-change-transform"
+                class="project-media-content relative h-full w-full origin-top"
               >
                 {#if project.media.kind === "video"}
                   <video
@@ -759,7 +800,9 @@
                     playsinline
                     preload="metadata"
                     aria-label={project.media.alt}
-                    class="project-image h-full w-full object-cover object-center will-change-transform"
+                    class="project-image h-full w-full object-cover"
+                    style:object-position={project.media.objectPosition ||
+                      "center"}
                   ></video>
                 {:else}
                   <img
@@ -768,7 +811,9 @@
                     width={project.media.width}
                     height={project.media.height}
                     loading="lazy"
-                    class="project-image h-full w-full object-cover object-center will-change-transform"
+                    class="project-image h-full w-full object-cover"
+                    style:object-position={project.media.objectPosition ||
+                      "center"}
                   />
                 {/if}
 
@@ -855,143 +900,145 @@
         <div
           class="work-fields-media-viewport absolute inset-y-0 left-0 h-full w-[66.6%] overflow-hidden bg-brand-dark"
         >
-          <div class="work-fields-media-track h-full will-change-transform">
-            {#each workFieldItems as item, index (item.id)}
-              <figure
-                class:work-field-handoff-slide={index === 0}
-                class="work-field-slide relative overflow-hidden"
-              >
-                {#if index === 0 && finalShowcaseProject?.media.kind === "image"}
-                  <div
-                    class="work-field-handoff-media relative h-[70%] overflow-hidden"
-                  >
-                    <img
-                      src={finalShowcaseProject.media.src}
-                      alt=""
-                      width={finalShowcaseProject.media.width}
-                      height={finalShowcaseProject.media.height}
-                      loading="lazy"
-                      class="work-field-image h-full w-full object-cover object-center will-change-transform"
-                    />
+          <div class="work-fields-media-content h-full w-full">
+            <div class="work-fields-media-track h-full">
+              {#each workFieldItems as item, index (item.id)}
+                <figure
+                  class:work-field-handoff-slide={index === 0}
+                  class="work-field-slide relative overflow-hidden"
+                >
+                  {#if index === 0 && finalShowcaseProject?.media.kind === "image"}
                     <div
-                      class="work-field-handoff-counter pointer-events-none absolute inset-x-0 top-0 flex items-center justify-end p-[clamp(1rem,2vw,2rem)] font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-brand-light mix-blend-difference"
+                      class="work-field-handoff-media relative h-[70%] overflow-hidden"
                     >
-                      <span
-                        >{String(showcaseProjects.length).padStart(2, "0")} / {String(
-                          showcaseProjects.length,
-                        ).padStart(2, "0")}</span
-                      >
-                    </div>
-                  </div>
-
-                  <div
-                    class="work-field-handoff-details absolute inset-x-0 bottom-0 top-[70%] z-[2] flex flex-col overflow-hidden px-[clamp(1.25rem,2.4vw,2.75rem)] py-[clamp(0.75rem,1.5vh,1.1rem)] text-brand-dark"
-                    style:background-color={finalShowcaseProject.bgColor}
-                  >
-                    <div
-                      class="grid grid-cols-[auto_1fr_1.35fr] items-start gap-[clamp(1rem,3vw,4rem)] border-b border-brand-dark/20 pb-4"
-                    >
-                      <span
-                        class="rounded-full border border-brand-dark/50 px-3 py-1 font-mono text-[0.58rem] font-bold"
-                      >
-                        {finalShowcaseProject.year}
-                      </span>
-                      <p
-                        class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
-                      >
-                        {finalShowcaseProject.category}
-                      </p>
-                      <p
-                        class="max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
-                      >
-                        {finalShowcaseProject.description}
-                      </p>
-                    </div>
-
-                    <div
-                      class="flex flex-1 items-center justify-center px-20 text-center"
-                    >
-                      <h3
-                        class="pb-[0.08em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.8] tracking-[-0.06em]"
-                      >
-                        {finalShowcaseProject.title}
-                      </h3>
-                      <span
-                        class="absolute bottom-4 right-4 flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-full border border-brand-dark bg-brand-dark text-brand-light"
-                      >
-                        <ArrowUpRight class="h-5 w-5" />
-                      </span>
-                    </div>
-                  </div>
-                {:else}
-                  <div
-                    class="work-field-image-shell h-full w-full will-change-transform"
-                  >
-                    {#if item.media.kind === "video"}
-                      <video
-                        src={item.media.src}
-                        poster={item.media.poster}
-                        width={item.media.width}
-                        height={item.media.height}
-                        muted
-                        loop
-                        playsinline
-                        preload="metadata"
-                        aria-label={item.media.alt}
-                        class="work-field-image h-full w-full object-cover will-change-transform"
-                      ></video>
-                    {:else}
                       <img
-                        src={item.media.src}
-                        alt={item.media.alt}
-                        width={item.media.width}
-                        height={item.media.height}
+                        src={finalShowcaseProject.media.src}
+                        alt=""
+                        width={finalShowcaseProject.media.width}
+                        height={finalShowcaseProject.media.height}
                         loading="lazy"
-                        class="work-field-image h-full w-full object-cover will-change-transform"
+                        class="work-field-image h-full w-full object-cover object-center"
                       />
-                    {/if}
-                  </div>
-                  <div
-                    class="work-field-hover-shade pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-brand-dark/35 opacity-0"
-                    aria-hidden="true"
-                  ></div>
-                  <div
-                    class="work-field-hover-copy pointer-events-none absolute inset-0 text-brand-light"
-                  >
-                    <div
-                      class="work-field-hover-detail absolute inset-x-0 top-0 flex items-center justify-between gap-5 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.5vh,1.2rem)]"
-                    >
-                      <p
-                        class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.14em]"
+                      <div
+                        class="work-field-handoff-counter pointer-events-none absolute inset-x-0 top-0 flex items-center justify-end p-[clamp(1rem,2vw,2rem)] font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-brand-light mix-blend-difference"
                       >
-                        {item.category}
-                      </p>
-                      <span
-                        class="rounded-full border border-brand-light/80 px-3 py-1 font-mono text-[0.54rem] font-bold"
-                      >
-                        {String(index).padStart(2, "0")} / {String(
-                          workFieldGalleryItems.length,
-                        ).padStart(2, "0")}
-                      </span>
+                        <span
+                          >{String(showcaseProjects.length).padStart(2, "0")} /
+                          {String(showcaseProjects.length).padStart(
+                            2,
+                            "0",
+                          )}</span
+                        >
+                      </div>
                     </div>
-                    <h3
-                      class="work-field-hover-detail absolute bottom-[clamp(1rem,2vw,1.5rem)] left-[clamp(1rem,2vw,1.5rem)] max-w-[70%] font-display text-[clamp(1.3rem,1.8vw,2rem)] leading-[0.95] tracking-[-0.035em]"
+
+                    <div
+                      class="work-field-handoff-details absolute inset-x-0 bottom-0 top-[70%] z-[2] flex flex-col overflow-hidden px-[clamp(1.25rem,2.4vw,2.75rem)] py-[clamp(0.75rem,1.5vh,1.1rem)] text-brand-dark"
+                      style:background-color={finalShowcaseProject.bgColor}
                     >
-                      {item.title}
-                    </h3>
-                    <a
-                      href={resolve("/services")}
-                      class="work-field-slide-arrow pointer-events-auto absolute bottom-[clamp(0.75rem,1.5vw,1.25rem)] right-[clamp(0.75rem,1.5vw,1.25rem)] flex h-[clamp(3.5rem,4.6vw,4.5rem)] w-[clamp(3.5rem,4.6vw,4.5rem)] items-center justify-center rounded-full border border-brand-light text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-light"
-                      aria-label="Explore {item.title}"
+                      <div
+                        class="grid grid-cols-[auto_1fr_1.35fr] items-start gap-[clamp(1rem,3vw,4rem)] border-b border-brand-dark/20 pb-4"
+                      >
+                        <span
+                          class="rounded-full border border-brand-dark/50 px-3 py-1 font-mono text-[0.58rem] font-bold"
+                        >
+                          {finalShowcaseProject.year}
+                        </span>
+                        <p
+                          class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
+                        >
+                          {finalShowcaseProject.category}
+                        </p>
+                        <p
+                          class="max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
+                        >
+                          {finalShowcaseProject.description}
+                        </p>
+                      </div>
+
+                      <div
+                        class="flex flex-1 items-center justify-center px-20 text-center"
+                      >
+                        <h3
+                          class="pb-[0.08em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.8] tracking-[-0.06em]"
+                        >
+                          {finalShowcaseProject.title}
+                        </h3>
+                        <span
+                          class="absolute bottom-4 right-4 flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-full border border-brand-dark bg-brand-dark text-brand-light"
+                        >
+                          <ArrowUpRight class="h-5 w-5" />
+                        </span>
+                      </div>
+                    </div>
+                  {:else}
+                    <div class="work-field-image-shell h-full w-full">
+                      {#if item.media.kind === "video"}
+                        <video
+                          src={item.media.src}
+                          poster={item.media.poster}
+                          width={item.media.width}
+                          height={item.media.height}
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          aria-label={item.media.alt}
+                          class="work-field-image h-full w-full object-cover"
+                        ></video>
+                      {:else}
+                        <img
+                          src={item.media.src}
+                          alt={item.media.alt}
+                          width={item.media.width}
+                          height={item.media.height}
+                          loading="lazy"
+                          class="work-field-image h-full w-full object-cover"
+                        />
+                      {/if}
+                    </div>
+                    <div
+                      class="work-field-hover-shade pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-brand-dark/35 opacity-0"
+                      aria-hidden="true"
+                    ></div>
+                    <div
+                      class="work-field-hover-copy pointer-events-none absolute inset-0 text-brand-light"
                     >
-                      <span class="work-field-slide-arrow-icon">
-                        <ArrowUpRight class="h-5 w-5" />
-                      </span>
-                    </a>
-                  </div>
-                {/if}
-              </figure>
-            {/each}
+                      <div
+                        class="work-field-hover-detail absolute inset-x-0 top-0 flex items-center justify-between gap-5 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.5vh,1.2rem)]"
+                      >
+                        <p
+                          class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.14em]"
+                        >
+                          {item.category}
+                        </p>
+                        <span
+                          class="rounded-full border border-brand-light/80 px-3 py-1 font-mono text-[0.54rem] font-bold"
+                        >
+                          {String(index).padStart(2, "0")} / {String(
+                            workFieldGalleryItems.length,
+                          ).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <h3
+                        class="work-field-hover-detail absolute bottom-[clamp(1rem,2vw,1.5rem)] left-[clamp(1rem,2vw,1.5rem)] max-w-[70%] font-display text-[clamp(1.3rem,1.8vw,2rem)] leading-[0.95] tracking-[-0.035em]"
+                      >
+                        {item.title}
+                      </h3>
+                      <a
+                        href={resolve("/services")}
+                        class="work-field-slide-arrow pointer-events-auto absolute bottom-[clamp(0.75rem,1.5vw,1.25rem)] right-[clamp(0.75rem,1.5vw,1.25rem)] flex h-[clamp(3.5rem,4.6vw,4.5rem)] w-[clamp(3.5rem,4.6vw,4.5rem)] items-center justify-center rounded-full border border-brand-light text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-light"
+                        aria-label="Explore {item.title}"
+                      >
+                        <span class="work-field-slide-arrow-icon">
+                          <ArrowUpRight class="h-5 w-5" />
+                        </span>
+                      </a>
+                    </div>
+                  {/if}
+                </figure>
+              {/each}
+            </div>
           </div>
           <div
             class="work-fields-media-exit-wash pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[24%] bg-gradient-to-b from-transparent to-brand-light"
@@ -1000,7 +1047,7 @@
         </div>
 
         <aside
-          class="work-fields-copy absolute inset-y-0 left-[33.333%] right-0 flex h-full min-w-0 flex-col overflow-hidden bg-brand-light text-brand-dark will-change-transform"
+          class="work-fields-copy absolute inset-y-0 left-[33.333%] right-0 flex h-full min-w-0 flex-col overflow-hidden bg-brand-light text-brand-dark"
           aria-label="Studio Click House image and video post-production services"
         >
           <div class="relative min-h-0 flex-1 overflow-hidden">
@@ -1138,24 +1185,8 @@
     contain: layout paint;
   }
 
-  .showcase-intro,
-  .project-panel,
-  .project-body,
-  .project-image,
-  .project-details {
-    will-change: transform;
-  }
-
   .detail-reveal {
     overflow: hidden;
-  }
-
-  .detail-reveal-inner {
-    will-change: transform;
-  }
-
-  .work-fields-track {
-    will-change: transform;
   }
 
   @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
@@ -1186,12 +1217,6 @@
 
   .work-fields-mobile {
     display: none;
-  }
-
-  .work-fields-media-track,
-  .work-field-image,
-  .work-field-progress-item {
-    will-change: transform;
   }
 
   .work-field-slide {

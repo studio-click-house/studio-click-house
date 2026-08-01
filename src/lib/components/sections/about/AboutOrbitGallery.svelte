@@ -187,6 +187,21 @@
             gsap.set(centerTextRef, { autoAlpha: 1, scale: 1, y: 0 });
             gsap.set(stackGroupRef, { pointerEvents: "none" });
             gsap.set(cards, { pointerEvents: "none" });
+            const entranceLayers = [...cardVisuals, centerTextRef];
+            const storyLayers = [
+              ...cards,
+              stackGroupRef,
+              assurancePanelRef,
+              workflowHeaderRef,
+              ...assuranceRows,
+              workflowOutcomeRef,
+              workflowLinkRef,
+            ];
+            const setLayerHints = (layers: HTMLElement[], enabled: boolean) => {
+              for (const layer of layers) {
+                layer.style.willChange = enabled ? "transform, opacity" : "";
+              }
+            };
 
             gsap
               .timeline({
@@ -198,6 +213,8 @@
                   scrub: true,
                   refreshPriority: 120,
                   invalidateOnRefresh: true,
+                  onToggle: (self) =>
+                    setLayerHints(entranceLayers, self.isActive),
                 },
               })
               .fromTo(
@@ -297,6 +314,7 @@
                 anticipatePin: 1,
                 refreshPriority: 110,
                 invalidateOnRefresh: true,
+                onToggle: (self) => setLayerHints(storyLayers, self.isActive),
               },
             });
 
@@ -421,6 +439,8 @@
               frontCard.removeEventListener("pointerleave", collapseStack);
               gsap.killTweensOf(cards);
               gsap.killTweensOf(cardVisuals);
+              setLayerHints(entranceLayers, false);
+              setLayerHints(storyLayers, false);
             };
           },
         );
@@ -457,12 +477,6 @@
 
         return () => media.revert();
       }, sectionRef);
-
-      requestAnimationFrame(() => {
-        if (!active) return;
-        ScrollTrigger.sort();
-        ScrollTrigger.refresh();
-      });
     });
 
     return () => {
@@ -611,7 +625,6 @@
     transform-origin: 23% 50%;
     transform-style: preserve-3d;
     pointer-events: none;
-    will-change: transform;
   }
 
   .orbit-card-item {
@@ -621,12 +634,10 @@
     backface-visibility: hidden;
     transform-origin: center;
     transform-style: preserve-3d;
-    will-change: transform;
   }
 
   .orbit-card-visual {
     transform-style: preserve-3d;
-    will-change: transform, opacity;
   }
 
   .assurance-panel {
@@ -636,12 +647,10 @@
     width: min(44%, 39rem);
     padding-left: 0;
     transform: translateY(-50%);
-    will-change: transform, opacity;
   }
 
   .workflow-header {
     margin-bottom: clamp(1rem, 2vh, 1.5rem);
-    will-change: transform, opacity;
   }
 
   .workflow-header > h2 {
@@ -678,7 +687,6 @@
     gap: 0.75rem;
     align-items: center;
     padding-block: 0.55rem;
-    will-change: transform, opacity;
   }
 
   .assurance-row h3 {
@@ -711,7 +719,6 @@
     padding: clamp(0.85rem, 1.5vw, 1.15rem);
     background: var(--color-brand-dark);
     color: var(--color-brand-light);
-    will-change: transform, opacity;
   }
 
   .workflow-outcome > p {
@@ -764,7 +771,6 @@
       background 280ms ease,
       border-color 280ms ease,
       transform 280ms ease;
-    will-change: transform, opacity;
   }
 
   .workflow-link-icon {

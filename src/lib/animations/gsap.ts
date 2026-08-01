@@ -19,3 +19,24 @@ export async function registerScrollTrigger() {
 
   return { gsap, ScrollTrigger };
 }
+
+let initialRefreshPromise: Promise<void> | undefined;
+
+export function refreshScrollTriggersAfterFonts() {
+  if (!browser) return Promise.resolve();
+  if (initialRefreshPromise) return initialRefreshPromise;
+
+  initialRefreshPromise = (async () => {
+    const runtime = await registerScrollTrigger();
+    if (!runtime) return;
+
+    await document.fonts.ready;
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    });
+    runtime.ScrollTrigger.sort();
+    runtime.ScrollTrigger.refresh();
+  })();
+
+  return initialRefreshPromise;
+}

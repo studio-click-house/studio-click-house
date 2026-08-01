@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { onLenisScroll } from "$lib/animations/lenis";
 
   let cursorElement: HTMLDivElement;
   let trailCanvas: HTMLCanvasElement;
@@ -35,7 +36,7 @@
       };
 
       const trailPoints: TrailPoint[] = [];
-      let trailFrame: number | undefined;
+      let isTrailActive = false;
       let trailWidth = 0;
       let trailHeight = 0;
       let trailPixelRatio = 1;
@@ -55,6 +56,8 @@
       };
 
       const drawTrail = () => {
+        if (!isTrailActive) return;
+
         trailContext.clearRect(0, 0, trailWidth, trailHeight);
         trailContext.shadowColor = "transparent";
         trailContext.shadowBlur = 0;
@@ -111,16 +114,14 @@
           Math.abs(scrollVelocityX) > 0.05 ||
           Math.abs(scrollVelocityY) > 0.05
         ) {
-          trailFrame = window.requestAnimationFrame(drawTrail);
+          isTrailActive = true;
         } else {
-          trailFrame = undefined;
+          isTrailActive = false;
         }
       };
 
       const startTrail = () => {
-        if (trailFrame === undefined) {
-          trailFrame = window.requestAnimationFrame(drawTrail);
-        }
+        isTrailActive = true;
       };
 
       resizeTrail();
@@ -321,7 +322,8 @@
       window.addEventListener("pointermove", handlePointerMove, {
         passive: true,
       });
-      window.addEventListener("scroll", handleScroll, { passive: true });
+      const removeLenisScrollListener = onLenisScroll(handleScroll);
+      gsap.ticker.add(drawTrail);
       window.addEventListener("resize", resizeTrail);
       document.addEventListener("pointerover", handlePointerOver, {
         passive: true,
@@ -339,7 +341,8 @@
         document.documentElement.classList.remove("custom-cursor-active");
         if (settleTimeout) clearTimeout(settleTimeout);
         window.removeEventListener("pointermove", handlePointerMove);
-        window.removeEventListener("scroll", handleScroll);
+        removeLenisScrollListener();
+        gsap.ticker.remove(drawTrail);
         window.removeEventListener("resize", resizeTrail);
         document.removeEventListener("pointerover", handlePointerOver);
         document.documentElement.removeEventListener(
@@ -349,7 +352,7 @@
         window.removeEventListener("pointerdown", handlePointerDown);
         window.removeEventListener("pointerup", handlePointerUp);
         canUseCursorOrb.removeEventListener("change", handleMediaChange);
-        if (trailFrame !== undefined) window.cancelAnimationFrame(trailFrame);
+        isTrailActive = false;
         trailPoints.length = 0;
         scrollVelocityX = 0;
         scrollVelocityY = 0;

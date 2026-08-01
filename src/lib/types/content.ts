@@ -83,6 +83,7 @@ export interface WorkGalleryItem {
 export type ShowcaseProjectMedia =
   | (PreviewMedia & {
       kind: "image";
+      objectPosition?: string;
     })
   | {
       kind: "video";
@@ -92,6 +93,7 @@ export type ShowcaseProjectMedia =
       width: number;
       height: number;
       credit: string;
+      objectPosition?: string;
     };
 
 export interface ShowcaseProjectItem {

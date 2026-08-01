@@ -3,8 +3,9 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { faqs } from "$lib/content/home";
   import { previewMedia } from "$lib/content/media";
+  import type { FaqItem, PreviewMedia } from "$lib/types/content";
 
-  const faqImages = [
+  const defaultFaqImages = [
     previewMedia.jewelryMacro, // Q1: Formats
     previewMedia.jewelryDetail, // Q2: Turnaround
     previewMedia.redStudioPortrait, // Q3: Revisions
@@ -12,6 +13,14 @@
     previewMedia.perfumeShadow, // Q5: Consistency
     previewMedia.studioPortrait, // Q6: Workflow
   ];
+
+  let { 
+    items = faqs, 
+    images = defaultFaqImages 
+  } = $props<{ 
+    items?: FaqItem[]; 
+    images?: PreviewMedia[]; 
+  }>();
 
   const telemetryData = [
     { code: "FMT.RAW // PSB // TIFF" },
@@ -194,7 +203,7 @@
         <div
           class="divide-y divide-brand-dark/15 border-b border-brand-dark/15"
         >
-          {#each faqs as item, index (item.question)}
+          {#each items as item, index (item.question)}
             <div class="faq-item-reveal">
               <button
                 id={`faq-trigger-${index + 1}`}
@@ -268,7 +277,7 @@
             <div
               class="faq-parallax-image absolute inset-x-0 top-[-15%] h-[130%] pointer-events-none"
             >
-              {#each faqImages as img, idx (img.src)}
+              {#each images as img, idx (img.src)}
                 <img
                   src={img.src}
                   alt={img.alt}

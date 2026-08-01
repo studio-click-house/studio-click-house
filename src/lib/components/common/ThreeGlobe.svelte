@@ -201,10 +201,12 @@
     let initializationStarted = false;
 
     async function initializeGlobe() {
-      const [THREE, { default: ThreeGlobeConstructor }] = await Promise.all([
-        import("three"),
-        import("three-globe"),
-      ]);
+      const [THREE, { default: ThreeGlobeConstructor }, { gsap }] =
+        await Promise.all([
+          import("three"),
+          import("three-globe"),
+          import("gsap"),
+        ]);
       if (!active || !containerElement || !canvasElement) return;
 
       const prefersReducedMotion = window.matchMedia(
@@ -229,9 +231,10 @@
       let ringCycle = 0;
       let width = 600;
       let height = 540;
-      let animationFrameId: number | undefined;
+      let isRendering = false;
       let isInViewport = false;
       let lastFrameTime = 0;
+      let labelFrame = 0;
 
       camera.position.z = 284;
       renderer.setClearColor(0x000000, 0);
@@ -411,11 +414,11 @@
       const labelNormal = new THREE.Vector3();
 
       function renderFrame(time: number) {
-        animationFrameId = undefined;
         if (!active || !isInViewport || document.hidden) return;
 
-        const delta = Math.min(time - lastFrameTime || 16, 40);
-        lastFrameTime = time;
+        const timeMs = time * 1000;
+        const delta = Math.min(timeMs - lastFrameTime || 16, 40);
+        lastFrameTime = timeMs;
 
         if (!prefersReducedMotion) {
           targetRotationY += delta * 0.000052;
@@ -445,7 +448,8 @@
         );
         globeGroup.rotation.set(currentRotationX, currentRotationY, 0);
 
-        {
+        labelFrame += 1;
+        if (labelFrame % 2 === 0) {
           globeGroup.updateMatrixWorld(true);
           camera.updateMatrixWorld(true);
 
@@ -515,18 +519,20 @@
         }
 
         renderer.render(scene, camera);
-        animationFrameId = requestAnimationFrame(renderFrame);
       }
 
       function startRendering() {
-        if (
-          animationFrameId === undefined &&
-          isInViewport &&
-          !document.hidden
-        ) {
+        if (!isRendering && isInViewport && !document.hidden) {
+          isRendering = true;
           lastFrameTime = performance.now();
-          animationFrameId = requestAnimationFrame(renderFrame);
+          gsap.ticker.add(renderFrame);
         }
+      }
+
+      function stopRendering() {
+        if (!isRendering) return;
+        isRendering = false;
+        gsap.ticker.remove(renderFrame);
       }
 
       requestRender = startRendering;
@@ -542,10 +548,7 @@
             startRendering();
           } else {
             globe.pauseAnimation();
-            if (animationFrameId !== undefined) {
-              cancelAnimationFrame(animationFrameId);
-              animationFrameId = undefined;
-            }
+            stopRendering();
           }
         },
         { rootMargin: "160px 0px", threshold: 0.01 },
@@ -555,10 +558,7 @@
       const handleVisibilityChange = () => {
         if (document.hidden) {
           globe.pauseAnimation();
-          if (animationFrameId !== undefined) {
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = undefined;
-          }
+          stopRendering();
         } else {
           globe.resumeAnimation();
           startRendering();
@@ -570,9 +570,7 @@
         mapRequestController.abort();
         window.clearInterval(ringInterval);
         requestRender = undefined;
-        if (animationFrameId !== undefined) {
-          cancelAnimationFrame(animationFrameId);
-        }
+        stopRendering();
         resizeObserver.disconnect();
         viewportObserver.disconnect();
         document.removeEventListener(

@@ -1,5 +1,12 @@
 import { browser } from "$app/environment";
 
+const scrollListeners = new Set<() => void>();
+
+export function onLenisScroll(listener: () => void) {
+  scrollListeners.add(listener);
+  return () => scrollListeners.delete(listener);
+}
+
 export async function createLenis() {
   if (!browser) {
     return null;
@@ -18,15 +25,19 @@ export async function createLenis() {
     syncTouch: false,
   });
   const updateLenis = (time: number) => lenis.raf(time * 1000);
+  const handleScroll = () => {
+    ScrollTrigger.update();
+    scrollListeners.forEach((listener) => listener());
+  };
 
-  lenis.on("scroll", ScrollTrigger.update);
+  lenis.on("scroll", handleScroll);
   gsap.ticker.add(updateLenis);
   gsap.ticker.lagSmoothing(0);
 
   return {
     lenis,
     destroy() {
-      lenis.off("scroll", ScrollTrigger.update);
+      lenis.off("scroll", handleScroll);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     },

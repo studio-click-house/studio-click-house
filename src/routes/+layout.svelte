@@ -6,6 +6,7 @@
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import SitePreloader from "$lib/components/animations/SitePreloader.svelte";
   import { createLenis } from "$lib/animations/lenis";
+  import { refreshScrollTriggersAfterFonts } from "$lib/animations/gsap";
 
   let { children } = $props();
 
@@ -22,6 +23,7 @@
           return;
         }
         runtime = createdRuntime;
+        void refreshScrollTriggersAfterFonts();
       });
     };
 

@@ -248,8 +248,10 @@
               href={resolve(item.href)}
               onmouseenter={openMegaMenu}
               onclick={(event) => {
-                event.preventDefault();
-                isMegaMenuOpen = !isMegaMenuOpen;
+                if (!isMegaMenuOpen) {
+                  event.preventDefault();
+                  isMegaMenuOpen = true;
+                }
               }}
               aria-current={page.url.pathname === item.href
                 ? "page"
@@ -430,6 +432,9 @@
     box-shadow: 0 0.75rem 2.5rem rgb(0 0 0 / 0.35);
     -webkit-backdrop-filter: blur(18px) saturate(130%);
     backdrop-filter: blur(18px) saturate(130%);
+    isolation: isolate;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     will-change: transform;
   }
 

@@ -391,6 +391,7 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     media: {
       kind: "image",
       ...previewMedia.photoEditingShowcase,
+      objectPosition: "top",
     },
     href: "/services",
   },
