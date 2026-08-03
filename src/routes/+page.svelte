@@ -8,7 +8,7 @@
   import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
   import ProductionProcess from "$lib/components/sections/ProductionProcess.svelte";
   import StudioIntroduction from "$lib/components/sections/StudioIntroduction.svelte";
-  import TestimonialsSection from "$lib/components/sections/TestimonialsSection.svelte";
+  import DirectorsMessage from "$lib/components/sections/DirectorsMessage.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -38,7 +38,7 @@
 
 <PageMeta
   title="Studio Click House | Image Editing, Retouching & Visual Production"
-  description="Studio Click House provides image editing, retouching, and visual production for brands, studios, and production teams."
+  description="Studio Click House is a creative studio providing professional image, video, 3D, and CGI production services for brands, eCommerce businesses, photographers, and agencies worldwide. Since 2015, we have delivered high-quality results with fast turnaround times."
   canonicalPath="/"
 />
 <JsonLd data={organizationData} />
@@ -51,8 +51,8 @@
   <AboutOrbitGallery />
   <HorizontalProjectsShowcase />
   <CreativeMarquee items={data.clientLogoItems} />
-  <ProductionProcess />
-  <TestimonialsSection />
+  <ProductionProcess />        
+  <DirectorsMessage />
   <FaqSection />
   <ClientLocations closingCta={aboutPageData.closingCta} />
 </main>

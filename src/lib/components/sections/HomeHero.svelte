@@ -215,14 +215,13 @@
         >
         <a
           href={resolve("/#horizontal-projects-showcase")}
-          class="text-link text-brand-light group"
-          >Explore services
-          <ArrowDown
-            size={15}
-            strokeWidth={1.7}
-            class="transition-transform duration-300 group-hover:translate-y-1"
-          /></a
+          class="inline-flex items-center gap-2 text-sm font-semibold text-brand-light group"
         >
+          <span class="border-b border-current pb-1">Explore services</span>
+          <span class="flex transition-transform duration-300 group-hover:translate-y-1">
+            <ArrowDown size={15} strokeWidth={1.7} />
+          </span>
+        </a>
       </div>
     </div>
   </div>

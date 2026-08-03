@@ -8,11 +8,11 @@ export const siteConfig = {
   links: {
     instagram: "",
     linkedin: "",
-    vimeo: "",
+    facebook: "",
   },
   contact: {
-    email: "hello@studioclickhouse.com",
-    location: "Demra, Dhaka",
+    email: "info@studioclickhouse.com",
+    location: "AB Tower, Demra, Dhaka,",
     country: "Bangladesh",
     timezone: "UTC+6",
   },

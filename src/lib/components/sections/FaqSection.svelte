@@ -173,7 +173,7 @@
   id="faq-section"
   bind:this={section}
   aria-labelledby="faq-section-title"
-  class="section-space relative overflow-hidden bg-brand-light py-24 sm:py-32 text-brand-dark"
+  class="section-space relative overflow-hidden bg-brand-light text-brand-dark"
 >
   <!-- Background design accents -->
   <div
@@ -193,9 +193,9 @@
         <div class="border-b border-brand-dark/10 pb-8">
           <h2
             id="faq-section-title"
-            class="font-display text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[0.92] tracking-[-0.040em] text-brand-dark"
+            class="font-display text-[clamp(2.6rem,5vw,4.75rem)] leading-[0.9] tracking-[-0.045em] text-brand-dark"
           >
-            Questions.
+            Common Questions
           </h2>
         </div>
 
@@ -216,11 +216,11 @@
               >
                 <!-- Question heading -->
                 <div class="flex justify-between items-center gap-6">
-                  <div class="flex items-start gap-4 sm:gap-6">
+                  <div class="flex items-center gap-4 sm:gap-6">
                     <span
-                      class="font-mono text-[0.62rem] text-brand-green/75 tracking-wider font-bold mt-1.5 sm:mt-2.5"
+                      class="font-mono text-xl text-brand-green/75 tracking-wider font-bold"
                     >
-                      {String(index + 1).padStart(2, "0")}
+                      &raquo
                     </span>
                     <h3
                       class="font-display text-[1.35rem] tracking-[-0.02em] sm:text-2xl lg:text-[1.65rem] text-brand-dark transition-colors duration-300 group-hover:text-brand-green"

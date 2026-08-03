@@ -388,30 +388,6 @@
               autoAlpha: 0,
               force3D: true,
             });
-            const animationLayers = [
-              intro,
-              ...panels,
-              ...bodies,
-              ...mediaReveals,
-              ...mediaContents,
-              ...images,
-              localWorkFieldsStage,
-              workFieldsMediaViewport,
-              workFieldsMediaContent,
-              workFieldsMediaTrack,
-              workFieldsCopy,
-              handoffSlide,
-              handoffMedia,
-              handoffDetails,
-              ...workFieldImages,
-              ...workFieldProgressItems,
-            ];
-            const setAnimationLayerHints = (enabled: boolean) => {
-              for (const layer of animationLayers) {
-                layer.style.willChange = enabled ? "transform, opacity" : "";
-              }
-            };
-
             const timeline = gsap.timeline({
               defaults: { duration: 1, ease: "none" },
               scrollTrigger: {
@@ -423,10 +399,8 @@
                 pin: localStage,
                 pinSpacing: true,
                 scrub: true,
-                anticipatePin: 1,
                 refreshPriority: 100,
                 invalidateOnRefresh: true,
-                onToggle: (self) => setAnimationLayerHints(self.isActive),
               },
             });
 
@@ -470,9 +444,18 @@
                   duration: 0.2,
                   ease: "back.out(1.5)",
                 },
-                0.5,
+                0.2,
               )
               .addLabel("secondProject", 0.92)
+              .to(
+                projectLinks[0],
+                {
+                  scale: 0,
+                  autoAlpha: 0,
+                  duration: 0.15,
+                },
+                "secondProject+=0.5",
+              )
               .to(
                 panels[0],
                 { x: () => viewportWidth() * -0.666 },
@@ -523,9 +506,18 @@
                   duration: 0.2,
                   ease: "back.out(1.5)",
                 },
-                "secondProject+=0.36",
+                "secondProject+=0.16",
               )
               .addLabel("thirdProject", "secondProject+=0.82")
+              .to(
+                projectLinks[1],
+                {
+                  scale: 0,
+                  autoAlpha: 0,
+                  duration: 0.15,
+                },
+                "thirdProject+=0.5",
+              )
               .to(
                 panels[1],
                 { x: () => viewportWidth() * -0.666 },
@@ -571,9 +563,18 @@
                   duration: 0.2,
                   ease: "back.out(1.5)",
                 },
-                "thirdProject+=0.36",
+                "thirdProject+=0.16",
               )
               .addLabel("workFields", "thirdProject+=1.05")
+              .to(
+                projectLinks[2],
+                {
+                  scale: 0,
+                  autoAlpha: 0,
+                  duration: 0.15,
+                },
+                "workFields",
+              )
               .set(
                 panels[2],
                 {
@@ -711,7 +712,7 @@
               );
             }
 
-            return () => setAnimationLayerHints(false);
+            return;
           },
         );
       }, localSection);
@@ -817,15 +818,7 @@
                   />
                 {/if}
 
-                <div
-                  class="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-end p-[clamp(1rem,2vw,2rem)] font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-brand-light mix-blend-difference"
-                >
-                  <span
-                    >{String(index + 1).padStart(2, "0")} / {String(
-                      showcaseProjects.length,
-                    ).padStart(2, "0")}</span
-                  >
-                </div>
+
               </div>
             </div>
           </div>
@@ -857,32 +850,32 @@
             </div>
 
             <div
-              class="flex flex-1 items-center justify-center px-20 text-center"
+              class="flex flex-1 items-center justify-center px-6 text-center"
             >
-              <h3
-                id="project-title-{project.id}"
-                class="detail-reveal pb-[0.08em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.8] tracking-[-0.06em]"
-              >
-                <span class="detail-reveal-inner block">{project.title}</span>
-              </h3>
               <a
                 href={resolve(project.href as "/services")}
-                class="project-link group absolute bottom-4 right-4 flex h-[4.75rem] w-[4.75rem] shrink-0 items-center justify-center rounded-full border border-brand-dark bg-brand-dark text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-dark"
+                class="group text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-dark"
                 aria-label="Explore {project.title} services"
               >
-                <ArrowUpRight
-                  class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
+                <h3
+                  id="project-title-{project.id}"
+                  class="detail-reveal pb-[0.16em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.95] tracking-[-0.06em]"
+                >
+                  <span class="detail-reveal-inner block align-middle">
+                    {project.title}
+                    <span
+                      class="project-link inline-flex align-middle ml-[0.15em]"
+                    >
+                      <ArrowUpRight
+                        class="h-[0.58em] w-[0.58em] transition-transform duration-300 group-hover:translate-x-[0.08em] group-hover:-translate-y-[0.08em]"
+                      />
+                    </span>
+                  </span>
+                </h3>
               </a>
             </div>
           </div>
         </div>
-
-        <span
-          class="pointer-events-none absolute bottom-4 left-4 z-[4] font-mono text-[0.6rem] font-bold text-brand-dark"
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
       </article>
     {/each}
 
@@ -919,17 +912,7 @@
                         loading="lazy"
                         class="work-field-image h-full w-full object-cover object-center"
                       />
-                      <div
-                        class="work-field-handoff-counter pointer-events-none absolute inset-x-0 top-0 flex items-center justify-end p-[clamp(1rem,2vw,2rem)] font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-brand-light mix-blend-difference"
-                      >
-                        <span
-                          >{String(showcaseProjects.length).padStart(2, "0")} /
-                          {String(showcaseProjects.length).padStart(
-                            2,
-                            "0",
-                          )}</span
-                        >
-                      </div>
+                      <div class="work-field-handoff-counter hidden" aria-hidden="true"></div>
                     </div>
 
                     <div
@@ -957,18 +940,20 @@
                       </div>
 
                       <div
-                        class="flex flex-1 items-center justify-center px-20 text-center"
+                        class="flex flex-1 items-center justify-center px-6 text-center"
                       >
                         <h3
-                          class="pb-[0.08em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.8] tracking-[-0.06em]"
+                          class="pb-[0.16em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.95] tracking-[-0.06em]"
                         >
                           {finalShowcaseProject.title}
+                          <span
+                            class="inline-flex align-middle ml-[0.15em] text-brand-dark"
+                          >
+                            <ArrowUpRight
+                              class="h-[0.58em] w-[0.58em]"
+                            />
+                          </span>
                         </h3>
-                        <span
-                          class="absolute bottom-4 right-4 flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-full border border-brand-dark bg-brand-dark text-brand-light"
-                        >
-                          <ArrowUpRight class="h-5 w-5" />
-                        </span>
                       </div>
                     </div>
                   {:else}

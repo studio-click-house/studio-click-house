@@ -87,7 +87,7 @@
   aria-labelledby="global-production-heading"
   bind:this={sectionRoot}
   data-cursor-trail="off"
-  class="network-section relative min-h-[100dvh] overflow-hidden bg-black px-4 py-20 text-brand-light sm:px-8 sm:py-24 lg:py-0"
+  class="network-section relative min-h-[100dvh] overflow-hidden bg-black px-4 text-brand-light lg:py-0"
 >
   <div class="site-shell relative z-10 mx-auto max-w-7xl lg:min-h-[100dvh]">
     <div
@@ -178,6 +178,16 @@
     opacity: 0.9;
     pointer-events: none;
     will-change: transform, opacity;
+  }
+
+  .network-section {
+    padding-block: clamp(4rem, 7vw, 7rem);
+  }
+
+  @media (min-width: 1024px) {
+    .network-section {
+      padding-block: 0;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

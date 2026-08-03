@@ -419,7 +419,7 @@
   id="production-process"
   bind:this={section}
   aria-labelledby="production-process-title"
-  class="process-section overflow-hidden bg-brand-light text-brand-dark"
+  class="process-section overflow-hidden bg-brand-light text-brand-dark section-space pt-0"
 >
   <div class="process-orb process-orb-left" aria-hidden="true"></div>
   <div class="process-orb process-orb-right" aria-hidden="true"></div>
@@ -524,7 +524,6 @@
 <style>
   .process-section {
     position: relative;
-    padding-block: clamp(3.75rem, 6vw, 6.25rem);
   }
 
   .process-shell {
@@ -630,11 +629,11 @@
   .process-intro h2 {
     max-width: 16ch;
     margin: 1.2rem auto 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: clamp(2.15rem, 4vw, 4.25rem);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.02;
-    letter-spacing: -0.052em;
+    letter-spacing: -0.035em;
   }
 
   .process-rule {

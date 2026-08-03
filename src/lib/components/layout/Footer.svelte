@@ -8,7 +8,7 @@
     Activity,
     Instagram,
     Linkedin,
-    Video,
+    Facebook,
   } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { siteConfig } from "$lib/config/site";
@@ -133,24 +133,9 @@
           />
         </div>
         <p class="max-w-xs text-sm leading-relaxed text-brand-light/60 font-sans">
-          High-end visual production, retouching, and CGI built around the work.
+          Studio Click House is a creative studio providing professional image, video, 3D, and CGI production services for brands, eCommerce businesses, photographers, and agencies worldwide. Since 2015, we have delivered high-quality results with fast turnaround times.
         </p>
-        <!-- System Operational Readout -->
-        <div class="flex items-center gap-2.5 pt-2">
-          <span class="relative flex size-2">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"
-            ></span>
-            <span
-              class="relative inline-flex rounded-full size-2 bg-brand-green"
-            ></span>
-          </span>
-          <span
-            class="font-mono text-[0.62rem] uppercase tracking-wider text-brand-light/45"
-          >
-            System Operational // Global Studio
-          </span>
-        </div>
+
       </div>
 
       <!-- Col 2: Navigation Links (Span 3) -->
@@ -205,9 +190,9 @@
           <!-- Live Studio Clock readout -->
           {#if timeString}
             <div class="flex items-center gap-2.5 pt-2 border-t border-brand-light/5 font-mono text-[0.68rem] text-brand-light/50">
-              <Clock size={12} class="text-brand-green/75 animate-pulse" />
+              <Clock size={12} class="text-brand-green/75" />
               <span class="uppercase tracking-wider">Studio Time:</span>
-              <span class="text-brand-light/80 font-medium tabular-nums">{timeString} (Dhaka)</span>
+              <span class="text-brand-light/80 font-medium tabular-nums">{timeString} (UTC+6)</span>
             </div>
           {/if}
         </div>
@@ -230,8 +215,8 @@
                     <Instagram size={14} class="opacity-70 group-hover:opacity-100 transition-opacity" />
                   {:else if label.toLowerCase() === 'linkedin'}
                     <Linkedin size={14} class="opacity-70 group-hover:opacity-100 transition-opacity" />
-                  {:else if label.toLowerCase() === 'vimeo'}
-                    <Video size={14} class="opacity-70 group-hover:opacity-100 transition-opacity" />
+                  {:else if label.toLowerCase() === 'facebook'}
+                    <Facebook size={14} class="opacity-70 group-hover:opacity-100 transition-opacity" />
                   {/if}
                   <span>{label}</span>
                   <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 text-[0.65rem] opacity-0 group-hover:opacity-100">↗</span>
@@ -267,13 +252,13 @@
             </li>
             <li>
               <a
-                href="https://vimeo.com"
+                href="https://facebook.com"
                 rel="noreferrer"
                 target="_blank"
                 class="text-brand-light/75 hover:text-brand-green transition-colors hover-underline-anim inline-flex items-center gap-2 group"
               >
-                <Video size={14} class="opacity-70 group-hover:opacity-100 transition-opacity" />
-                <span>Vimeo</span>
+                <Facebook size={14} class="opacity-70 group-hover:opacity-100 transition-opacity" />
+                <span>Facebook</span>
                 <span class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 text-[0.65rem] opacity-0 group-hover:opacity-100">↗</span>
               </a>
             </li>
@@ -287,7 +272,7 @@
       class="watermark-container pointer-events-none select-none overflow-hidden py-10"
     >
       <div
-        class="watermark-text text-[clamp(2.5rem,8.8vw,9.5rem)] font-display font-extrabold text-center tracking-tight leading-none uppercase whitespace-nowrap"
+        class="watermark-text text-[clamp(2rem,6.8vw,8rem)] font-display font-extrabold text-center tracking-tight leading-none uppercase whitespace-nowrap"
       >
         Studio Click House
       </div>
@@ -397,7 +382,6 @@
   /* Custom underline hover animation for premium look */
   .hover-underline-anim {
     position: relative;
-    display: inline-block;
   }
 
   .hover-underline-anim::after {

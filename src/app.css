@@ -82,8 +82,9 @@
   }
 
   .section-space {
-    padding-block: clamp(4rem, 7vw, 7rem);
+    padding-block: clamp(6rem, 9vw, 9.5rem);
   }
+
 
   .eyebrow {
     font-family: var(--font-mono);

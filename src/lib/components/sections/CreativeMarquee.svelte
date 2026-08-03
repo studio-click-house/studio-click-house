@@ -14,13 +14,13 @@
 <section
   id="creative-marquee"
   aria-labelledby="creative-marquee-title"
-  class="client-wall relative -mt-px overflow-x-clip bg-brand-light py-32 text-brand-dark sm:py-40"
+  class="client-wall relative -mt-px overflow-x-clip bg-brand-light section-space text-brand-dark"
 >
   <div class="site-shell relative z-10 mb-10 text-center">
     <div>
       <h2
         id="creative-marquee-title"
-        class="font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] tracking-[-0.045em]"
+        class="font-display text-[clamp(2.6rem,5vw,4.75rem)] leading-[0.9] tracking-[-0.045em]"
       >
         Our Clients
       </h2>

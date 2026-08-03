@@ -1,43 +1,43 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { onMount } from "svelte";
-  import { ArrowUpRight } from "lucide-svelte";
+  import { ArrowUpRight, Compass, Wand2, ShieldCheck, Check } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { aboutOrbitCards } from "$lib/content/about-orbit";
 
   const frameRotations = [-2, 1, -1.5, 3, -2, 1.5, -1, 2] as const;
   const stackLayout = [
-    { x: -38, y: -30, rotation: -7, scale: 0.88, zIndex: 44 },
-    { x: 34, y: -28, rotation: 6, scale: 0.86, zIndex: 43 },
-    { x: -54, y: 18, rotation: -10, scale: 0.84, zIndex: 42 },
-    { x: 0, y: 0, rotation: 0, scale: 1, zIndex: 50 },
-    { x: 52, y: 20, rotation: 9, scale: 0.82, zIndex: 41 },
-    { x: -12, y: 8, rotation: -3, scale: 0.78, zIndex: 38 },
-    { x: 10, y: 12, rotation: 3, scale: 0.76, zIndex: 37 },
-    { x: 0, y: 18, rotation: 1, scale: 0.74, zIndex: 36 },
+    { x: -20, y: -16, rotation: -4, scale: 0.90, zIndex: 44, z: 24 },
+    { x: 18, y: -15, rotation: 3.5, scale: 0.88, zIndex: 43, z: 20 },
+    { x: -28, y: 10, rotation: -5.5, scale: 0.86, zIndex: 42, z: 16 },
+    { x: 0, y: 0, rotation: 0, scale: 1, zIndex: 50, z: 80 },
+    { x: 26, y: 12, rotation: 5, scale: 0.84, zIndex: 41, z: 12 },
+    { x: -6, y: 5, rotation: -1.5, scale: 0.82, zIndex: 38, z: 8 },
+    { x: 5, y: 6, rotation: 1.5, scale: 0.80, zIndex: 37, z: 4 },
+    { x: 0, y: 10, rotation: 0.5, scale: 0.78, zIndex: 36, z: 0 },
   ] as const;
   const totalSpinAngle = Math.PI * 0.75;
 
   const assurances = [
     {
       title: "Direction",
-      description:
-        "References, finishing standards and campaign requirements aligned.",
+      description: "Every project starts with clear references, technical specifications and creative goals.",
+      icon: Compass,
     },
     {
       title: "Specialist craft",
-      description:
-        "Retouching, colour and compositing expertise matched to every image.",
+      description: "Dedicated editors matched to your project.",
+      icon: Wand2,
     },
     {
-      title: "Production control",
-      description:
-        "Every asset reviewed for accuracy, consistency and visual continuity.",
+      title: "Quality control",
+      description: "Every file reviewed before delivery.",
+      icon: ShieldCheck,
     },
     {
       title: "Delivery",
-      description:
-        "Organised, production-ready files prepared for every required channel.",
+      description: "Production-ready assets delivered on time.",
+      icon: Check,
     },
   ] as const;
 
@@ -81,6 +81,13 @@
           gsap.utils.toArray<HTMLElement>(".orbit-card-visual");
         const totalCards = cards.length;
         const media = gsap.matchMedia();
+        const frontCard = cards[3];
+
+        let stackReady = false;
+        let isHovering = false;
+        type QuickToFn = ReturnType<typeof gsap.quickTo>;
+        let cardQuickX: QuickToFn[] = [];
+        let cardQuickY: QuickToFn[] = [];
 
         const getStageSize = () => ({
           width: orbitStageRef.clientWidth,
@@ -141,7 +148,7 @@
             motionProgress,
           );
           const cardScale = gsap.utils.interpolate(1, 0.58, motionProgress);
-          const stackBaseScale = gsap.utils.clamp(1.85, 2.15, 2250 / width);
+          const stackBaseScale = gsap.utils.clamp(1.5, 1.85, 2000 / width);
           const spinAngle = spinProgress * totalSpinAngle;
 
           cards.forEach((card, index) => {
@@ -163,7 +170,8 @@
                 wheelCenterX + layer.x,
                 stackProgress,
               ),
-              y: gsap.utils.interpolate(wheelY, layer.y, stackProgress),
+              y: gsap.utils.interpolate(wheelY, layer.y - 36, stackProgress),
+              z: gsap.utils.interpolate(0, layer.z, stackProgress),
               rotation: gsap.utils.interpolate(
                 wheelRotation,
                 layer.rotation,
@@ -178,6 +186,26 @@
               autoAlpha: 1,
             });
           });
+
+          // Reactively manage pointer-events and hover states based on stackProgress
+          const isStacked = stackProgress > 0.92;
+          if (isStacked !== stackReady) {
+            stackReady = isStacked;
+            gsap.set(frontCard, { pointerEvents: isStacked ? "auto" : "none" });
+            if (isStacked) {
+              if (cardQuickX.length === 0) {
+                cards.forEach((card) => {
+                  gsap.set(card, { transformPerspective: 1000 });
+                  cardQuickX.push(gsap.quickTo(card, "rotateX", { duration: 0.5, ease: "power2.out" }));
+                  cardQuickY.push(gsap.quickTo(card, "rotateY", { duration: 0.5, ease: "power2.out" }));
+                });
+              }
+            } else {
+              isHovering = false;
+              cardQuickX.forEach((fn) => fn(0));
+              cardQuickY.forEach((fn) => fn(0));
+            }
+          }
         };
 
         media.add(
@@ -197,12 +225,6 @@
               workflowOutcomeRef,
               workflowLinkRef,
             ];
-            const setLayerHints = (layers: HTMLElement[], enabled: boolean) => {
-              for (const layer of layers) {
-                layer.style.willChange = enabled ? "transform, opacity" : "";
-              }
-            };
-
             gsap
               .timeline({
                 scrollTrigger: {
@@ -213,8 +235,6 @@
                   scrub: true,
                   refreshPriority: 120,
                   invalidateOnRefresh: true,
-                  onToggle: (self) =>
-                    setLayerHints(entranceLayers, self.isActive),
                 },
               })
               .fromTo(
@@ -257,45 +277,50 @@
               );
 
             const orbitProxy = { motion: 0, spin: 0, stack: 0 };
-            const frontCard = cards[3];
-            const animateStackFan = (expanded: boolean) => {
-              if (orbitProxy.stack < 0.9) return;
 
-              const { width } = getStageSize();
-              const stackCenterX = -Math.min(width * 0.27, 405);
-              const stackBaseScale = gsap.utils.clamp(1.85, 2.15, 2250 / width);
+            const handlePointerEnter = (event: PointerEvent) => {
+              if (!stackReady || event.pointerType !== "mouse") return;
+              isHovering = true;
+            };
 
-              cards.forEach((card, index) => {
-                const layer = stackLayout[index];
-                const side =
-                  layer.x === 0
-                    ? index % 2 === 0
-                      ? -1
-                      : 1
-                    : Math.sign(layer.x);
-                const fanOffset =
-                  index === 3 || !expanded ? 0 : side * (48 + (index % 3) * 12);
+            // Use orbitStageRef (no GSAP transforms) as stable coordinate space.
+            const handlePointerMove = (event: PointerEvent) => {
+              if (!stackReady || !isHovering || event.pointerType !== "mouse") return;
+              if (cardQuickX.length === 0) return;
 
-                gsap.to(card, {
-                  x: stackCenterX + layer.x + fanOffset,
-                  y: layer.y,
-                  rotation:
-                    layer.rotation + (expanded && index !== 3 ? side * 2.5 : 0),
-                  scale:
-                    stackBaseScale *
-                    layer.scale *
-                    (expanded && index === 3 ? 1.015 : 1),
-                  duration: 0.42,
-                  ease: "power3.out",
-                  overwrite: "auto",
-                });
+              const stageBounds = orbitStageRef.getBoundingClientRect();
+              const halfWidth = stageBounds.width * 0.5;
+              const normX = gsap.utils.clamp(
+                -0.5, 0.5,
+                (event.clientX - stageBounds.left - halfWidth * 0.5) / halfWidth,
+              );
+              const normY = gsap.utils.clamp(
+                -0.5, 0.5,
+                (event.clientY - stageBounds.top - stageBounds.height * 0.5) / stageBounds.height,
+              );
+
+              // Front card (index 3): full tilt
+              // Back cards: opposite tilt scaled down to create parallax depth
+              cards.forEach((_card, index) => {
+                const isFront = index === 3;
+                const tiltScale = isFront ? 1 : -(0.3 + (index % 3) * 0.1);
+                cardQuickX[index]?.(-normY * 8 * tiltScale);
+                cardQuickY[index]?.(normX * 8 * tiltScale);
               });
             };
-            const expandStack = () => animateStackFan(true);
-            const collapseStack = () => animateStackFan(false);
 
-            frontCard.addEventListener("pointerenter", expandStack);
-            frontCard.addEventListener("pointerleave", collapseStack);
+            const handlePointerLeave = (event: PointerEvent) => {
+              if (!stackReady || event.pointerType !== "mouse") return;
+              isHovering = false;
+              cardQuickX.forEach((fn) => fn(0));
+              cardQuickY.forEach((fn) => fn(0));
+            };
+
+            // Listeners on window so they fire regardless of which child receives the pointer.
+            // frontCard receives pointerenter/leave naturally for the enter/exit gate.
+            frontCard.addEventListener("pointerenter", handlePointerEnter);
+            window.addEventListener("pointermove", handlePointerMove);
+            frontCard.addEventListener("pointerleave", handlePointerLeave);
 
             const renderCards = () => {
               placeWheel(orbitProxy.motion, orbitProxy.spin, orbitProxy.stack);
@@ -311,10 +336,8 @@
                 pin: true,
                 pinSpacing: true,
                 scrub: true,
-                anticipatePin: 1,
                 refreshPriority: 110,
                 invalidateOnRefresh: true,
-                onToggle: (self) => setLayerHints(storyLayers, self.isActive),
               },
             });
 
@@ -431,16 +454,18 @@
                   ease: "none",
                 },
                 0.82,
-              )
-              .set(frontCard, { pointerEvents: "auto" }, 0.9);
+              );
 
             return () => {
-              frontCard.removeEventListener("pointerenter", expandStack);
-              frontCard.removeEventListener("pointerleave", collapseStack);
+              stackReady = false;
+              isHovering = false;
+              cardQuickX = [];
+              cardQuickY = [];
+              frontCard.removeEventListener("pointerenter", handlePointerEnter);
+              window.removeEventListener("pointermove", handlePointerMove);
+              frontCard.removeEventListener("pointerleave", handlePointerLeave);
               gsap.killTweensOf(cards);
               gsap.killTweensOf(cardVisuals);
-              setLayerHints(entranceLayers, false);
-              setLayerHints(storyLayers, false);
             };
           },
         );
@@ -500,10 +525,39 @@
   <div
     class="orbit-story-shell relative z-10 flex min-h-[calc(100dvh-4.35rem)] w-full items-center justify-center px-4"
   >
+    <!-- MOBILE HEADER (visible on mobile, hidden on desktop) -->
+    <header class="w-full pb-6 mb-6 block md:hidden">
+      <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green">
+        Our Production System
+      </span>
+      <h2
+        class="font-display text-2xl font-light leading-tight tracking-[-0.03em] text-brand-dark mt-2"
+      >
+        Quality isn't the last step. It's every step.
+      </h2>
+    </header>
+
     <div
       bind:this={orbitStageRef}
       class="orbit-stage relative flex h-[34rem] w-full max-w-[92rem] items-center justify-center sm:h-[40rem] lg:h-[44rem]"
     >
+      <!-- DESKTOP HEADER (Absolute positioned on the right top, hidden on mobile) -->
+      <header
+        bind:this={workflowHeaderRef}
+        class="workflow-header absolute top-0 pb-4 hidden md:block"
+        style="right: clamp(0.5rem, 1.5vw, 1.75rem); width: min(44%, 39rem);"
+      >
+        <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green">
+          Our Production System
+        </span>
+        <h2
+          class="font-display text-[clamp(1.8rem,3vw,2.8rem)] font-light leading-[1.05] tracking-[-0.045em] text-brand-dark mt-2"
+        >
+          Quality isn't the last step. It's every step.
+        </h2>
+      </header>
+
+      <!-- Left: Stacked cards -->
       <div bind:this={stackGroupRef} class="orbit-stack-group">
         {#each aboutOrbitCards as card, index (card.id)}
           <div
@@ -511,7 +565,7 @@
             class="orbit-card-item absolute rounded-xl"
           >
             <figure
-              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark shadow-xl transition-shadow duration-300 hover:shadow-2xl"
+              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark shadow-xl transition-shadow duration-300 hover:shadow-2xl border border-brand-dark/5"
             >
               <img
                 src={card.media.src}
@@ -527,6 +581,7 @@
         {/each}
       </div>
 
+      <!-- Center: Orbit copy (only visible during spinning phase) -->
       <div
         bind:this={centerTextRef}
         class="orbit-center-copy relative z-30 max-w-[11rem] px-1 text-center sm:max-w-md sm:px-6"
@@ -548,53 +603,112 @@
         <div class="mt-6 flex items-center justify-center gap-4">
           <a
             href={resolve("/portfolio")}
-            class="inline-flex items-center rounded-lg bg-brand-dark px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-brand-light transition-all hover:bg-brand-dark/90 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-brand-dark"
+            class="group inline-flex min-h-[3rem] min-w-[10.5rem] items-center justify-between gap-4 border border-brand-dark rounded-[0.2rem] bg-brand-dark px-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.045em] text-brand-light transition-all duration-[280ms] ease-out hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] focus-visible:outline-3 focus-visible:outline-brand-green focus-visible:outline-offset-[3px]"
           >
-            Explore Work →
+            <span>Explore Work</span>
+            <ArrowUpRight
+              size={15}
+              strokeWidth={1.7}
+              class="transition-transform duration-[280ms] group-hover:translate-x-[0.15rem] group-hover:-translate-y-[0.15rem]"
+            />
           </a>
         </div>
       </div>
 
+      <!-- Right: Process Timeline Milestones (slides in on scroll collapse) -->
       <div
         id="why-trust-us"
         bind:this={assurancePanelRef}
         class="assurance-panel"
-        aria-labelledby="why-trust-us-title"
+        aria-label="Our Process"
       >
-        <header bind:this={workflowHeaderRef} class="workflow-header">
-          <h2 id="why-trust-us-title">Why choose us</h2>
-          <p>Specialist craft. <em>One controlled workflow.</em></p>
-        </header>
 
-        <div class="assurance-list" aria-label="Our production workflow">
+        <div class="assurance-list" aria-label="Our production milestones">
           {#each assurances as assurance, index (assurance.title)}
+            {@const Icon = assurance.icon}
             <article bind:this={assuranceRows[index]} class="assurance-row">
               <span class="assurance-index">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <div>
-                <h3>{assurance.title}</h3>
+              <div class="assurance-content">
+                <div class="assurance-title-row">
+                  <span class="assurance-row-icon"><Icon size={15} strokeWidth={1.5} /></span>
+                  <h3>{assurance.title}</h3>
+                </div>
                 <p>{assurance.description}</p>
               </div>
             </article>
           {/each}
         </div>
+      </div>
 
-        <div bind:this={workflowOutcomeRef} class="workflow-outcome">
-          <p>
-            One brief. One specialist workflow.
-            <strong>One consistent visual system.</strong>
-          </p>
-          <span>
-            Scalable image post-production for ecommerce, fashion, beauty and
-            jewellery brands.
-          </span>
+      <!-- DESKTOP FOOTER (Absolute positioned, hidden on mobile) -->
+      <footer
+        bind:this={workflowOutcomeRef}
+        class="workflow-footer absolute bottom-0 left-0 w-full border-t border-brand-dark/10 pt-4 flex flex-row items-center justify-between gap-8 hidden md:flex"
+      >
+        <!-- Metrics Grid -->
+        <div class="flex-1 grid grid-cols-4 gap-6 text-left">
+          <div class="metric-item">
+            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">150+</span>
+            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">Creative Specialists</span>
+          </div>
+          <div class="metric-item">
+            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">10+ Years</span>
+            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">Proven Experience</span>
+          </div>
+          <div class="metric-item">
+            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">24/7</span>
+            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">Production Studio</span>
+          </div>
+          <div class="metric-item">
+            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">99%</span>
+            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">On-Time Delivery</span>
+          </div>
         </div>
 
+        <!-- Action Button -->
+        <div class="flex justify-end">
+          <a
+            bind:this={workflowLinkRef}
+            href={resolve("/contact")}
+            class="workflow-link !mt-0"
+          >
+            <span>Start a project</span>
+            <span class="workflow-link-icon">
+              <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+            </span>
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- MOBILE FOOTER (visible on mobile, hidden on desktop) -->
+    <footer
+      class="w-full border-t border-brand-dark/10 pt-8 mt-8 flex flex-col gap-6 block md:hidden"
+    >
+      <div class="grid grid-cols-2 gap-6 text-left">
+        <div class="metric-item">
+          <span class="block font-display text-2xl font-light leading-none text-brand-dark">150+</span>
+          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">Creative Specialists</span>
+        </div>
+        <div class="metric-item">
+          <span class="block font-display text-2xl font-light leading-none text-brand-dark">10+ Years</span>
+          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">Proven Experience</span>
+        </div>
+        <div class="metric-item">
+          <span class="block font-display text-2xl font-light leading-none text-brand-dark">24/7</span>
+          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">Production Studio</span>
+        </div>
+        <div class="metric-item">
+          <span class="block font-display text-2xl font-light leading-none text-brand-dark">99%</span>
+          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">On-Time Delivery</span>
+        </div>
+      </div>
+      <div class="flex justify-start mt-2">
         <a
-          bind:this={workflowLinkRef}
           href={resolve("/contact")}
-          class="workflow-link"
+          class="workflow-link !mt-0"
         >
           <span>Start a project</span>
           <span class="workflow-link-icon">
@@ -602,7 +716,7 @@
           </span>
         </a>
       </div>
-    </div>
+    </footer>
   </div>
 </section>
 
@@ -612,7 +726,22 @@
   }
 
   .orbit-story {
-    padding-top: clamp(5rem, 10vh, 8rem);
+    padding-block: clamp(4rem, 7vw, 7rem);
+    background-image: radial-gradient(color-mix(in srgb, var(--color-brand-dark) 5%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+    position: relative;
+  }
+
+  .orbit-story::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 10% 30%, rgba(201, 255, 90, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 90% 70%, rgba(126, 166, 65, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 120px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 120px);
   }
 
   .orbit-stack-group {
@@ -628,9 +757,9 @@
   }
 
   .orbit-card-item {
-    width: clamp(8rem, 14vw, 14rem);
+    width: clamp(8.5rem, 14vw, 15rem);
     aspect-ratio: 4 / 5;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
     backface-visibility: hidden;
     transform-origin: center;
     transform-style: preserve-3d;
@@ -649,103 +778,69 @@
     transform: translateY(-50%);
   }
 
-  .workflow-header {
-    margin-bottom: clamp(1rem, 2vh, 1.5rem);
-  }
-
-  .workflow-header > h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3.2vw, 3.65rem);
-    font-weight: 300;
-    line-height: 0.94;
-    letter-spacing: -0.045em;
-  }
-
-  .workflow-header > p {
-    margin-top: 0.65rem;
-    font-size: clamp(0.78rem, 1vw, 0.95rem);
-    line-height: 1.4;
-    color: color-mix(in srgb, var(--color-brand-dark) 62%, transparent);
-  }
-
-  .workflow-header > p em {
-    color: var(--color-brand-green);
-    font-style: normal;
-    font-weight: 600;
-  }
-
   .assurance-list {
-    display: grid;
-    gap: 0.15rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
   }
 
   .assurance-row {
     position: relative;
     display: grid;
-    min-height: clamp(3.7rem, 7.5vh, 4.5rem);
-    grid-template-columns: 2.15rem minmax(0, 1fr);
-    gap: 0.75rem;
-    align-items: center;
-    padding-block: 0.55rem;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    padding-block: 1.35rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), background-color 320ms ease;
   }
 
-  .assurance-row h3 {
-    font-size: 0.92rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  .assurance-row p {
-    max-width: 31rem;
-    margin-top: 0.22rem;
-    font-size: 0.7rem;
-    line-height: 1.45;
-    color: color-mix(in srgb, var(--color-brand-dark) 54%, transparent);
+  .assurance-row:hover {
+    transform: translateX(0.5rem);
+    background-color: color-mix(in srgb, var(--color-brand-green) 4%, transparent);
   }
 
   .assurance-index {
     align-self: start;
-    padding-top: 0.18rem;
+    padding-top: 0.15rem;
     font-family: var(--font-mono);
-    font-size: 0.52rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    font-weight: 500;
     color: var(--color-brand-green);
   }
 
-  .workflow-outcome {
-    margin-top: clamp(0.75rem, 1.5vh, 1rem);
-    border-radius: 0.65rem;
-    padding: clamp(0.85rem, 1.5vw, 1.15rem);
-    background: var(--color-brand-dark);
-    color: var(--color-brand-light);
+  .assurance-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
   }
 
-  .workflow-outcome > p {
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 1.35vw, 1.3rem);
-    font-weight: 300;
-    line-height: 1.12;
-    letter-spacing: -0.025em;
+  .assurance-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .workflow-outcome strong {
-    display: block;
-    color: color-mix(
-      in srgb,
-      var(--color-brand-green) 72%,
-      var(--color-brand-light)
-    );
-    font-weight: 400;
+  .assurance-row-icon {
+    display: inline-flex;
+    color: var(--color-brand-green);
   }
 
-  .workflow-outcome > span {
-    display: block;
-    max-width: 30rem;
-    margin-top: 0.55rem;
-    color: color-mix(in srgb, var(--color-brand-light) 65%, transparent);
-    font-size: 0.66rem;
+  .assurance-row h3 {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-transform: capitalize;
+    color: var(--color-brand-dark);
+  }
+
+  .assurance-row p {
+    font-size: 0.76rem;
     line-height: 1.5;
+    color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
+    max-width: 32rem;
   }
 
   .workflow-link {
@@ -808,7 +903,6 @@
     .orbit-story {
       min-height: auto;
       margin-top: 0;
-      padding-block: 4rem;
     }
 
     .orbit-story-shell {
@@ -875,7 +969,6 @@
     .assurance-panel,
     .workflow-header,
     .assurance-row,
-    .workflow-outcome,
     .workflow-link {
       will-change: auto;
     }

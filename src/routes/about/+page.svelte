@@ -44,7 +44,7 @@
         sameAs: [
           siteConfig.links.linkedin,
           siteConfig.links.instagram,
-          siteConfig.links.vimeo,
+          siteConfig.links.facebook,
         ].filter(Boolean),
       },
     ],

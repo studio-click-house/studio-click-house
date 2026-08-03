@@ -73,8 +73,8 @@ export const previewMedia = {
     credit: "Temporary preview photo via Pexels",
   },
   photoEditingShowcase: {
-    src: "/images/portfolio/photo-editing-before-after.png",
-    alt: "Before-and-after split comparison of a luxury fashion editorial portrait showcasing professional photo editing and retouching",
+    src: "/images/portfolio/photo-editing-showcase.png",
+    alt: "Finished luxury fashion editorial portrait showcasing professional retouching and color grading",
     width: 1024,
     height: 1024,
     credit: "Studio Click House",
