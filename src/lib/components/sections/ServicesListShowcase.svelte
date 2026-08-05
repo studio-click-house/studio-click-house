@@ -16,6 +16,8 @@
         afterAlt: string;
         beforeLabel: string;
         afterLabel: string;
+        width: number;
+        height: number;
       }
     | {
         kind: "video";
@@ -56,6 +58,8 @@
           "Finished editorial portrait after professional color correction and skin retouching",
         beforeLabel: "Raw image",
         afterLabel: "Retouched",
+        width: 1024,
+        height: 1024,
       },
     },
     {
@@ -224,7 +228,7 @@
         </div>
 
         <div
-          class="chapter-media chapter-scroll-media w-full max-w-[28rem] justify-self-center"
+          class="chapter-media chapter-scroll-media relative w-full max-w-[28rem] justify-self-center"
         >
           {#if division.media.kind === "comparison"}
             <BeforeAfterSlider
@@ -234,7 +238,11 @@
               afterAlt={division.media.afterAlt}
               beforeLabel={division.media.beforeLabel}
               afterLabel={division.media.afterLabel}
-              aspectRatio="aspect-[4/5]"
+              width={division.media.width}
+              height={division.media.height}
+              beforeWidth={division.media.width}
+              beforeHeight={division.media.height}
+              ariaLabel="Compare the raw and retouched studio portrait"
             />
           {:else if division.media.kind === "video"}
             <figure
