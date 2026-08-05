@@ -13,6 +13,10 @@
     targetY: number;
   };
 
+  type LandingParticle = LogoParticle & {
+    targetSize: number;
+  };
+
   let isVisible = $state(true);
   let isExiting = $state(false);
   let isFormationReady = $state(false);
@@ -25,8 +29,8 @@
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const minimumDisplayDuration = reduceMotion ? 180 : 1900;
-    const animations: Animation[] = [];
     let formationTimeline: { kill: () => void } | undefined;
+    let landingTimeline: { kill: () => void } | undefined;
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
     let headerReadyTimer: ReturnType<typeof setTimeout> | undefined;
     let formationFrame: number | undefined;
@@ -39,6 +43,7 @@
     let targetLogo: HTMLElement | null = null;
     let targetBrandBlock: HTMLElement | null = null;
     let targetHeader: HTMLElement | null = null;
+    let criticalLogoImage: HTMLImageElement | undefined;
 
     const prepareHeaderLogo = () => {
       targetLogo = document.querySelector<HTMLElement>(
@@ -75,6 +80,113 @@
       finish();
     };
 
+    const playParticleLanding = async (
+      sourceRect: DOMRect,
+      targetRect: DOMRect,
+    ) => {
+      const logoImage = criticalLogoImage;
+      const canvas = particleCanvasElement;
+      const logo = logoElement;
+      const backdrop = backdropElement;
+      const completeLogo = logo?.querySelector<HTMLElement>(
+        ".preloader-logo-complete",
+      );
+      const context = canvas?.getContext("2d");
+
+      if (!logoImage || !canvas || !backdrop || !completeLogo || !context) {
+        completeLogoFlight();
+        return;
+      }
+
+      const pixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        window.innerWidth < 640 ? 1.5 : 2,
+      );
+      canvas.width = Math.round(window.innerWidth * pixelRatio);
+      canvas.height = Math.round(window.innerHeight * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const particles = createLandingParticles(
+        logoImage,
+        sourceRect,
+        targetRect,
+      );
+      const landing = { progress: 0 };
+
+      const renderLandingParticles = () => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        for (const particle of particles) {
+          const localProgress = Math.min(
+            1,
+            Math.max(
+              0,
+              (landing.progress - particle.delay) / (1 - particle.delay),
+            ),
+          );
+          const easedProgress = 1 - Math.pow(1 - localProgress, 3);
+          const scatter = Math.sin(easedProgress * Math.PI) * particle.drift;
+          const x =
+            particle.startX +
+            (particle.targetX - particle.startX) * easedProgress +
+            Math.cos(particle.phase) * scatter;
+          const y =
+            particle.startY +
+            (particle.targetY - particle.startY) * easedProgress +
+            Math.sin(particle.phase) * scatter;
+          const size =
+            particle.size +
+            (particle.targetSize - particle.size) * easedProgress;
+
+          context.fillStyle = particle.color;
+          context.fillRect(x, y, size, size);
+        }
+      };
+
+      renderLandingParticles();
+
+      try {
+        const { gsap } = await import("gsap");
+        if (isDisposed) return;
+
+        landingTimeline = gsap
+          .timeline({ onComplete: completeLogoFlight })
+          .set(canvas, { autoAlpha: 1 })
+          .to(
+            completeLogo,
+            {
+              autoAlpha: 0,
+              duration: 0.14,
+              ease: "power1.out",
+            },
+            0,
+          )
+          .to(
+            landing,
+            {
+              progress: 1,
+              duration: 0.96,
+              ease: "none",
+              onUpdate: renderLandingParticles,
+            },
+            0,
+          )
+          .to(
+            backdrop,
+            {
+              autoAlpha: 0,
+              duration: 0.9,
+              ease: "power3.out",
+            },
+            0.08,
+          );
+      } catch {
+        backdrop.style.setProperty("opacity", "0");
+        completeLogo.style.setProperty("opacity", "0");
+        completeLogoFlight();
+      }
+    };
+
     const beginExit = () => {
       if (isExiting) return;
       isExiting = true;
@@ -91,43 +203,7 @@
       targetHeader?.classList.add("preloader-measure-target");
       const targetRect = targetLogo.getBoundingClientRect();
       targetHeader?.classList.remove("preloader-measure-target");
-      const translateX =
-        targetRect.left +
-        targetRect.width / 2 -
-        (sourceRect.left + sourceRect.width / 2);
-      const translateY =
-        targetRect.top +
-        targetRect.height / 2 -
-        (sourceRect.top + sourceRect.height / 2);
-      const targetScale = targetRect.width / sourceRect.width;
-
-      animations.push(
-        backdropElement.animate(
-          [{ opacity: 1 }, { opacity: 1, offset: 0.18 }, { opacity: 0 }],
-          {
-            duration: 720,
-            easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-            fill: "forwards",
-          },
-        ),
-      );
-
-      const logoAnimation = logoElement.animate(
-        [
-          { transform: "translate(-50%, -50%) scale(1)" },
-          {
-            transform: `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) scale(${targetScale})`,
-          },
-        ],
-        {
-          duration: 720,
-          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-          fill: "forwards",
-        },
-      );
-
-      animations.push(logoAnimation);
-      logoAnimation.finished.then(completeLogoFlight).catch(finish);
+      void playParticleLanding(sourceRect, targetRect);
     };
 
     prepareHeaderLogo();
@@ -212,6 +288,73 @@
             startY: targetY + (Math.random() - 0.5) * window.innerHeight * 0.78,
             targetX,
             targetY,
+          });
+        }
+      }
+
+      return particles;
+    };
+
+    const createLandingParticles = (
+      logoImage: HTMLImageElement,
+      sourceRect: DOMRect,
+      targetRect: DOMRect,
+    ) => {
+      const sampleCanvas = document.createElement("canvas");
+      const sampleContext = sampleCanvas.getContext("2d", {
+        willReadFrequently: true,
+      });
+      if (!sampleContext) return [];
+
+      sampleCanvas.width = logoImage.naturalWidth;
+      sampleCanvas.height = logoImage.naturalHeight;
+      sampleContext.drawImage(logoImage, 0, 0);
+
+      const { data } = sampleContext.getImageData(
+        0,
+        0,
+        sampleCanvas.width,
+        sampleCanvas.height,
+      );
+      const sampleStep = window.innerWidth < 640 ? 13 : 9;
+      const sourceSize = Math.max(
+        1,
+        (sampleStep / sampleCanvas.width) * sourceRect.width * 0.94,
+      );
+      const targetSize = Math.max(
+        0.8,
+        (sampleStep / sampleCanvas.width) * targetRect.width * 1.08,
+      );
+      const particles: LandingParticle[] = [];
+
+      for (
+        let sourceY = 0;
+        sourceY < sampleCanvas.height;
+        sourceY += sampleStep
+      ) {
+        for (
+          let sourceX = 0;
+          sourceX < sampleCanvas.width;
+          sourceX += sampleStep
+        ) {
+          const pixelIndex = (sourceY * sampleCanvas.width + sourceX) * 4;
+          const alpha = data[pixelIndex + 3];
+          if (alpha < 96) continue;
+
+          const horizontalProgress = sourceX / sampleCanvas.width;
+          const verticalProgress = sourceY / sampleCanvas.height;
+
+          particles.push({
+            color: `rgba(${data[pixelIndex]}, ${data[pixelIndex + 1]}, ${data[pixelIndex + 2]}, ${alpha / 255})`,
+            delay: horizontalProgress * 0.1 + Math.random() * 0.045,
+            drift: 14 + Math.random() * 32,
+            phase: Math.random() * Math.PI * 2,
+            size: sourceSize,
+            startX: sourceRect.left + horizontalProgress * sourceRect.width,
+            startY: sourceRect.top + verticalProgress * sourceRect.height,
+            targetSize,
+            targetX: targetRect.left + horizontalProgress * targetRect.width,
+            targetY: targetRect.top + verticalProgress * targetRect.height,
           });
         }
       }
@@ -364,6 +507,7 @@
       ]);
 
       if (!isDisposed && logoImage.naturalWidth > 0) {
+        criticalLogoImage = logoImage;
         startFormation(logoImage);
       } else if (!isDisposed) {
         isFormationReady = true;
@@ -389,7 +533,7 @@
       if (hideTimer) clearTimeout(hideTimer);
       if (headerReadyTimer) clearTimeout(headerReadyTimer);
       formationTimeline?.kill();
-      animations.forEach((animation) => animation.cancel());
+      landingTimeline?.kill();
       restoreHeaderLogo();
     };
   });
