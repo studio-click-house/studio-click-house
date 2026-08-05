@@ -13,7 +13,6 @@
   import { resolve } from "$app/paths";
   import { siteConfig } from "$lib/config/site";
   import { navigationItems } from "$lib/content/home";
-  import { registerScrollTrigger } from "$lib/animations/gsap";
 
   const socialLinks = Object.entries(siteConfig.links).filter(
     ([, href]) => href,
@@ -44,42 +43,8 @@
     updateClock();
     const interval = setInterval(updateClock, 1000);
 
-    // GSAP ScrollTrigger Parallax for Watermark
-    let active = true;
-    let context: { revert: () => void } | undefined;
-
-    registerScrollTrigger().then((runtime) => {
-      if (!active || !runtime || !footerElement) return;
-      const { gsap } = runtime;
-
-      context = gsap.context(() => {
-        const media = gsap.matchMedia();
-
-        media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.fromTo(
-            ".watermark-text",
-            { xPercent: -10 },
-            {
-              xPercent: 10,
-              ease: "none",
-              scrollTrigger: {
-                trigger: footerElement,
-                start: "top bottom",
-                end: "bottom bottom",
-                scrub: 0.5,
-              },
-            },
-          );
-        });
-
-        return () => media.revert();
-      }, footerElement);
-    });
-
     return () => {
       clearInterval(interval);
-      active = false;
-      context?.revert();
     };
   });
 </script>

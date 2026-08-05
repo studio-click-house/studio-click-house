@@ -75,7 +75,7 @@
     style="left: {sliderPosition}%"
   >
     <div
-      class="comparison-handle pointer-events-none absolute left-1/2 top-1/2 size-11 -translate-x-1/2 -translate-y-1/2 rounded-full"
+      class="comparison-handle pointer-events-none absolute left-1/2 top-1/2 h-12 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
     ></div>
   </div>
 
@@ -93,29 +93,18 @@
 <style>
   .before-after-container {
     border-radius: clamp(0.85rem, 1.5vw, 1.25rem);
-    box-shadow: 0 1.25rem 3.5rem rgb(51 46 45 / 0.08);
+    box-shadow: inset 0 0 0 1.5px rgb(248 248 246 / 0.82);
+    clip-path: inset(0 round clamp(0.85rem, 1.5vw, 1.25rem));
   }
 
   .comparison-label,
   .comparison-handle {
-    border: 1px solid rgb(248 248 246 / 0.42);
-    background: rgb(51 46 45 / 0.3);
+    border: 1px solid rgb(248 248 246 / 0.3);
+    background: rgb(51 46 45 / 0.24);
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.28),
       0 0.5rem 1.5rem rgb(31 29 28 / 0.16);
     backdrop-filter: blur(12px) saturate(1.18);
-  }
-
-  .comparison-handle::after {
-    position: absolute;
-    inset: 50% auto auto 50%;
-    width: 0.28rem;
-    height: 0.28rem;
-    border-radius: 999px;
-    background: rgb(248 248 246 / 0.9);
-    box-shadow: 0 0 0 0.28rem rgb(248 248 246 / 0.14);
-    content: "";
-    transform: translate(-50%, -50%);
   }
 
   input[type="range"]::-webkit-slider-runnable-track {

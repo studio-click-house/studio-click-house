@@ -1,8 +1,22 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { previewMedia } from "$lib/content/media";
   import { serviceStandards } from "$lib/content/services";
+
+  const productionGallery = [
+    {
+      src: "/images/work-fields/gallery/product-retouching.jpg",
+      alt: "Product image production with controlled water and lighting effects",
+    },
+    {
+      src: "/images/work-fields/gallery/jewelry-retouching.jpg",
+      alt: "Jewelry and cosmetics arranged for detailed commercial retouching",
+    },
+    {
+      src: "/images/work-fields/gallery/fashion-color.jpg",
+      alt: "Fashion production scene under controlled studio lighting",
+    },
+  ] as const;
 
   let section = $state<HTMLElement>();
 
@@ -31,21 +45,29 @@
             },
           });
 
-          gsap.fromTo(
-            ".standards-image",
-            { yPercent: -5, scale: 1.04 },
-            {
-              yPercent: 5,
-              scale: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
+          const galleryImages = gsap.utils.toArray<HTMLElement>(
+            ".standards-gallery-image",
           );
+
+          galleryImages.forEach((image, index) => {
+            const direction = index % 2 === 0 ? 1 : -1;
+
+            gsap.fromTo(
+              image,
+              { yPercent: 7 * direction, scale: 1.08 },
+              {
+                yPercent: -7 * direction,
+                scale: 1.01,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              },
+            );
+          });
         });
 
         return () => media.revert();
@@ -66,55 +88,68 @@
   class="relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20 lg:py-24"
 >
   <div class="site-shell">
-    <header class="grid gap-8 pb-10 lg:grid-cols-12 lg:items-end lg:pb-12">
-      <div class="standards-reveal lg:col-span-8">
-        <h2
-          id="services-standards-title"
-          class="max-w-[18ch] font-display text-[clamp(2.6rem,3.6vw,4rem)] leading-[0.92] tracking-[-0.04em]"
-        >
-          Quality is a system, not a final check.
-        </h2>
+    <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+      <div
+        class="standards-reveal standards-gallery grid grid-cols-2 gap-3 lg:col-span-7 lg:h-[37rem] lg:grid-cols-7 lg:grid-rows-2"
+      >
+        {#each productionGallery as image, index (image.src)}
+          <figure
+            class="standards-gallery-frame relative overflow-hidden rounded-[1rem] {index ===
+            0
+              ? 'col-span-2 aspect-[4/3] lg:col-span-4 lg:row-span-2 lg:aspect-auto'
+              : 'aspect-[4/3] lg:col-span-3 lg:aspect-auto'}"
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              width="1920"
+              height="1080"
+              loading="lazy"
+              class="standards-gallery-image absolute inset-x-0 -top-[8%] h-[116%] w-full object-cover"
+            />
+          </figure>
+        {/each}
       </div>
 
-      <p
-        class="standards-reveal max-w-[35ch] text-sm leading-[1.7] text-brand-dark/65 lg:col-span-4 lg:justify-self-end lg:text-base"
-      >
-        Every asset moves through calibrated production, secure transfer, and
-        senior review before it leaves the studio.
-      </p>
-    </header>
+      <div class="lg:col-span-5">
+        <header>
+          <div class="standards-reveal">
+            <h2
+              id="services-standards-title"
+              class="max-w-[12ch] font-display text-[clamp(2.6rem,3.6vw,4rem)] leading-[0.92] tracking-[-0.04em]"
+            >
+              Quality is a system, not a final check.
+            </h2>
+          </div>
 
-    <figure
-      class="standards-reveal relative aspect-[16/8] max-h-[22rem] overflow-hidden rounded-[1.25rem] sm:aspect-[16/6] lg:aspect-[16/4]"
-    >
-      <img
-        src={previewMedia.editingWorkspace.src}
-        alt={previewMedia.editingWorkspace.alt}
-        width={previewMedia.editingWorkspace.width}
-        height={previewMedia.editingWorkspace.height}
-        loading="lazy"
-        class="standards-image absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover"
-      />
-    </figure>
-
-    <div class="mt-12 grid gap-x-14 gap-y-10 sm:grid-cols-2 lg:mt-14">
-      {#each serviceStandards as standard, index (standard.title)}
-        <article
-          id={`service-standard-${index + 1}`}
-          class="standards-reveal group"
-        >
-          <h3
-            class="font-display text-[clamp(1.65rem,2.4vw,2.65rem)] leading-[0.95] tracking-[-0.03em] transition-colors duration-300 group-hover:text-brand-green"
-          >
-            {standard.title}
-          </h3>
           <p
-            class="mt-3 max-w-[42ch] text-sm leading-[1.65] text-brand-dark/60"
+            class="standards-reveal mt-6 max-w-[38ch] text-sm leading-[1.7] text-brand-dark/65 lg:text-base"
           >
-            {standard.description}
+            Every asset moves through calibrated production, secure transfer,
+            and senior review before it leaves the studio.
           </p>
-        </article>
-      {/each}
+        </header>
+
+        <div class="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-1 lg:gap-6">
+          {#each serviceStandards as standard, index (standard.title)}
+            <article
+              id={`service-standard-${index + 1}`}
+              class="standards-reveal group"
+            >
+              <h3
+                class="text-[1rem] font-semibold tracking-[-0.02em] transition-colors duration-300 group-hover:text-brand-green sm:text-[1.05rem]"
+              >
+                {standard.title}
+              </h3>
+              <p
+                class="mt-2 max-w-[46ch] text-sm leading-[1.6] text-brand-dark/58"
+              >
+                {standard.description}
+              </p>
+            </article>
+          {/each}
+        </div>
+      </div>
     </div>
   </div>
 </section>
