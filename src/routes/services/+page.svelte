@@ -38,8 +38,8 @@
 </script>
 
 <PageMeta
-  title="Our Services | Image Editing, Retouching & Visual Production"
-  description="Explore our high-end visual post-production capabilities. From high-volume clipping path and ghost mannequin to fashion retouching, video grading, and photorealistic 3D CGI renders."
+  title="Our Services | Image Editing, Retouching & CGI — Studio Click House (SCHL)"
+  description="Explore the Studio Click House (SCHL) post-production capabilities: high-end photo retouching, clipping path cutouts, video color grading, and photorealistic 3D CGI renders."
   canonicalPath="/services"
 />
 

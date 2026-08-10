@@ -26,8 +26,8 @@
 </script>
 
 <PageMeta
-  title="Pricing | Project Scope & Visual Production — Studio Click House"
-  description="Explore Studio Click House's project scope estimates, photo retouching rates, and premium visual production packages."
+  title="Pricing & Project Scope | Studio Click House (SCHL)"
+  description="Get pricing estimates and project scope guides for high-volume image editing, fashion retouching, video grading, and custom 3D CGI product modeling at Studio Click House (SCHL)."
   canonicalPath="/pricing"
 />
 

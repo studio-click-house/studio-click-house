@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Studio Click House",
-  shortName: "SCH",
+  shortName: "SCHL",
   url: "https://studioclickhouse.com",
   description:
     "Studio Click House provides image editing, retouching, and visual production for brands, studios, and production teams.",

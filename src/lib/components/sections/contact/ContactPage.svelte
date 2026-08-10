@@ -24,6 +24,7 @@
   } from "$lib/content/contact";
   import { siteConfig } from "$lib/config/site";
   import ContactSignalField from "./ContactSignalField.svelte";
+  import ContactHeroCard from "./ContactHeroCard.svelte";
 
   let pageRoot: HTMLElement;
   let heroSection: HTMLElement;
@@ -93,11 +94,6 @@
           });
 
           entrance
-            .from(".contact-hero-kicker", {
-              autoAlpha: 0,
-              y: 14,
-              duration: 0.55,
-            })
             .from(
               ".contact-title-line",
               {
@@ -123,25 +119,15 @@
                 autoAlpha: 0,
                 clipPath: "inset(0 0 100% 0)",
                 duration: 1.15,
+                clearProps: "clipPath",
               },
               "-=0.95",
+            )
+            .from(
+              ".contact-handoff-media",
+              { scale: 1.08, duration: 1.6 },
+              "-=0.75",
             );
-
-          gsap.fromTo(
-            ".contact-handoff-image",
-            { scale: 1.06, yPercent: -2 },
-            {
-              scale: 1.01,
-              yPercent: 5,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroSection,
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
 
           gsap.from(".contact-input-row", {
             y: 24,
@@ -211,37 +197,40 @@
     id="contact-hero"
     bind:this={heroSection}
     aria-labelledby="contact-page-title"
-    class="relative overflow-hidden border-b border-brand-dark/14 pb-14 pt-32 sm:pt-36 lg:pb-20 lg:pt-40"
+    class="relative min-h-dvh overflow-hidden border-b border-brand-dark/14 bg-brand-paper pb-20 pt-40 sm:pt-44 lg:pb-28 lg:pt-48"
   >
     <div class="site-shell">
-      <div class="grid gap-10 lg:grid-cols-12 lg:gap-8">
-        <div class="flex flex-col lg:col-span-7 lg:min-h-[42rem]">
-          <div class="contact-hero-kicker flex items-center gap-4">
-            <span class="h-px w-10 bg-brand-green" aria-hidden="true"></span>
-            <p class="font-mono text-[0.64rem] uppercase tracking-[0.18em] text-brand-dark/58">
-              New work begins here
-            </p>
-          </div>
-
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <div
+          class="flex flex-col lg:col-span-6 lg:min-h-[36rem] lg:justify-center"
+        >
           <h1
             id="contact-page-title"
-            class="mt-12 max-w-5xl font-display text-[clamp(3.6rem,7.4vw,6rem)] leading-[0.86] tracking-[-0.038em]"
+            class="mt-9 max-w-4xl font-display text-[clamp(3rem,5.8vw,5.2rem)] leading-[0.86] tracking-[-0.04em]"
           >
             <span class="contact-title-mask">
               <span class="contact-title-line">Bring the work</span>
             </span>
             <span class="contact-title-mask">
-              <span class="contact-title-line text-brand-dark/46">before it is finished.</span>
+              <span class="contact-title-line text-brand-dark/46"
+                >before it is finished.</span
+              >
             </span>
           </h1>
 
-          <div class="mt-auto grid gap-9 pt-14 sm:grid-cols-2 lg:max-w-3xl lg:pt-20">
-            <p class="contact-hero-copy max-w-md text-lg leading-[1.55] text-brand-dark/72">
+          <div
+            class="mt-10 grid gap-7 pt-6 sm:grid-cols-2 lg:max-w-3xl lg:pt-7"
+          >
+            <p
+              class="contact-hero-copy max-w-md text-base leading-7 text-brand-dark/72 lg:text-[1.05rem]"
+            >
               Share the frame, sequence, model, or production problem. We will
               start with the material and shape the clearest route forward.
             </p>
 
-            <div class="contact-hero-actions flex flex-col items-start sm:justify-end">
+            <div
+              class="contact-hero-actions flex flex-col items-start sm:justify-end"
+            >
               <a
                 href={`mailto:${siteConfig.contact.email}`}
                 class="group inline-flex items-center gap-3 border-b border-brand-dark/32 pb-2 text-sm font-semibold transition-colors hover:border-brand-green hover:text-brand-green"
@@ -254,7 +243,7 @@
               </a>
               <a
                 href="#project-brief"
-                class="mt-8 inline-flex items-center gap-3 font-mono text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-brand-green"
+                class="mt-6 inline-flex items-center gap-3 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-brand-green"
               >
                 Prepare the handoff
                 <ArrowDown size={15} />
@@ -265,24 +254,43 @@
 
         <figure
           id="contact-project-handoff"
-          class="contact-handoff-frame relative min-h-[34rem] overflow-hidden bg-brand-light/8 lg:col-span-5 lg:min-h-[42rem]"
+          class="contact-handoff-frame relative flex items-center lg:col-span-6 lg:col-start-7"
         >
-          <img
-            src="/images/contact/project-handoff.png"
-            alt="Creative collaborators handing over fashion contact sheets and a marked proof sleeve"
-            width="1024"
-            height="1536"
-            loading="eager"
-            class="contact-handoff-image absolute inset-0 h-full w-full object-cover"
-          />
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/55 via-transparent to-transparent"></div>
-          <div class="absolute left-5 top-5 size-8 border-l border-t border-brand-green" aria-hidden="true"></div>
-          <div class="absolute bottom-5 right-5 size-8 border-b border-r border-brand-green" aria-hidden="true"></div>
-          <figcaption class="absolute bottom-7 left-7 right-7">
-            <p class="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-brand-light/68">
-              The handoff / where context becomes production
-            </p>
-          </figcaption>
+          <div
+            class="contact-handoff-media flex w-full max-w-[40rem] items-stretch gap-3 sm:gap-4 lg:ml-auto"
+          >
+            <!-- Card 1: Handoff Desk (Main Left, aspect 2/3) -->
+            <div class="w-[61%] shrink-0">
+              <ContactHeroCard
+                src="/images/contact/project-handoff.png"
+                alt="Creative collaborators handing over fashion contact sheets and marked proof sheets"
+                width={1024}
+                height={1536}
+                loading="eager"
+                aspectClass="aspect-[2/3] w-full"
+              />
+            </div>
+
+            <!-- Right Column Stack (Cards 2 & 3) -->
+            <div class="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4 justify-between">
+              <ContactHeroCard
+                src="/images/portfolio/photo-editing-showcase.png"
+                alt="Finished luxury fashion editorial portrait showcasing professional skin retouching and color grading"
+                width={1024}
+                height={1024}
+                loading="lazy"
+                aspectClass="flex-1 min-h-0 w-full"
+              />
+              <ContactHeroCard
+                src="/images/portfolio/cgi-product-showcase.png"
+                alt="Luxury fragrance glass bottle photorealistic 3D CGI render"
+                width={1024}
+                height={1024}
+                loading="lazy"
+                aspectClass="flex-1 min-h-0 w-full"
+              />
+            </div>
+          </div>
         </figure>
       </div>
     </div>
@@ -291,17 +299,14 @@
   <section
     id="contact-inputs"
     aria-labelledby="contact-inputs-title"
-    class="bg-brand-paper py-20 text-brand-dark sm:py-24 lg:py-32"
+    class="bg-brand-paper py-14 text-brand-dark sm:py-16 lg:py-20"
   >
     <div class="site-shell">
       <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-4">
-          <p class="font-mono text-[0.64rem] uppercase tracking-[0.18em] text-brand-green">
-            A useful first message
-          </p>
           <h2
             id="contact-inputs-title"
-            class="mt-7 max-w-md font-display text-[clamp(3rem,5vw,5.5rem)] leading-[0.9] tracking-[-0.035em]"
+            class="max-w-md font-display text-[clamp(2.5rem,4vw,4.4rem)] leading-[0.92] tracking-[-0.035em]"
           >
             Give us something real to hold.
           </h2>
@@ -309,12 +314,11 @@
 
         <div class="lg:col-span-7 lg:col-start-6">
           {#each projectInputs as input, index (input.label)}
-            <article class="contact-input-row grid gap-5 border-t border-brand-dark/22 py-8 sm:grid-cols-[5rem_1fr] lg:py-9">
-              <p class="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-brand-green">
-                {input.label}
-              </p>
+            <article class="contact-input-row grid gap-4 py-6 lg:py-7">
               <div class="grid gap-3 md:grid-cols-2 md:gap-8">
-                <h3 class="font-display text-[clamp(1.8rem,2.8vw,2.7rem)] leading-[0.98] tracking-[-0.025em]">
+                <h3
+                  class="font-display text-[clamp(1.8rem,2.8vw,2.7rem)] leading-[0.98] tracking-[-0.025em]"
+                >
                   {input.title}
                 </h3>
                 <p class="max-w-md text-sm leading-7 text-brand-dark/68">
@@ -333,21 +337,20 @@
     id="contact-signal"
     bind:this={signalSection}
     aria-labelledby="contact-signal-title"
-    class="relative min-h-[35rem] overflow-hidden bg-brand-green text-brand-dark"
+    class="relative min-h-[28rem] overflow-hidden bg-brand-green text-brand-dark"
   >
     <ContactSignalField />
-    <div class="site-shell relative z-10 flex min-h-[35rem] items-center py-24">
+    <div class="site-shell relative z-10 flex min-h-[28rem] items-center py-16">
       <div class="contact-signal-copy max-w-4xl">
-        <p class="font-mono text-[0.64rem] uppercase tracking-[0.18em] text-brand-dark/62">
-          Material → direction → finish
-        </p>
         <h2
           id="contact-signal-title"
-          class="mt-7 max-w-4xl font-display text-[clamp(3.4rem,7vw,6rem)] leading-[0.88] tracking-[-0.038em]"
+          class="max-w-4xl font-display text-[clamp(2.8rem,5.4vw,5rem)] leading-[0.9] tracking-[-0.038em]"
         >
           A clear brief turns scattered inputs into one production signal.
         </h2>
-        <p class="mt-8 max-w-xl text-base leading-7 text-brand-dark/72 sm:text-lg">
+        <p
+          class="mt-6 max-w-xl text-sm leading-6 text-brand-dark/72 sm:text-base"
+        >
           You do not need to solve the workflow before writing. Bring the
           material and the intended finish; we can shape the route together.
         </p>
@@ -359,27 +362,33 @@
     id="project-brief"
     bind:this={briefSection}
     aria-labelledby="project-brief-title"
-    class="relative bg-brand-paper py-20 text-brand-dark sm:py-24 lg:py-32"
+    class="relative bg-brand-paper py-14 text-brand-dark sm:py-16 lg:py-20"
   >
     <div class="site-shell">
-      <header class="contact-brief-reveal grid gap-8 lg:grid-cols-12 lg:items-end">
+      <header
+        class="contact-brief-reveal grid gap-8 lg:grid-cols-12 lg:items-end"
+      >
         <h2
           id="project-brief-title"
-          class="max-w-4xl font-display text-[clamp(3rem,5vw,4.8rem)] leading-[0.9] tracking-[-0.035em] lg:col-span-8"
+          class="max-w-4xl font-display text-[clamp(2.6rem,4.3vw,4.4rem)] leading-[0.92] tracking-[-0.035em] lg:col-span-8"
         >
           Tell us what you are making—and where the work feels unresolved.
         </h2>
-        <p class="max-w-md text-base leading-7 text-brand-dark/68 lg:col-span-4 lg:pb-2">
+        <p
+          class="max-w-md text-base leading-7 text-brand-dark/68 lg:col-span-4 lg:pb-2"
+        >
           The strongest starting point is not a perfect brief. It is a clear
           view of the source material, the intended result, and the production
           decision that still needs to be made.
         </p>
       </header>
 
-      <div class="contact-brief-reveal mt-10 grid gap-8 lg:grid-cols-12 lg:gap-8">
+      <div
+        class="contact-brief-reveal mt-8 grid gap-6 lg:grid-cols-12 lg:gap-8"
+      >
         <form
           id="contact-form"
-          class="bg-brand-light p-5 sm:p-7 lg:col-span-8 lg:p-9"
+          class="bg-brand-light p-4 sm:p-6 lg:col-span-8 lg:p-7"
           onsubmit={handleSubmit}
         >
           <div class="grid gap-4 sm:grid-cols-2">
@@ -454,7 +463,9 @@
             <span class="brief-note-corner" aria-hidden="true"></span>
           </label>
 
-          <div class="mt-5 flex flex-col gap-5 bg-brand-dark p-5 text-brand-light sm:flex-row sm:items-center sm:justify-between">
+          <div
+            class="mt-4 flex flex-col gap-4 bg-brand-dark p-4 text-brand-light sm:flex-row sm:items-center sm:justify-between"
+          >
             <div class="max-w-md text-xs leading-6" aria-live="polite">
               {#if briefPrepared}
                 <p class="flex items-start gap-2 text-brand-light/82">
@@ -490,7 +501,9 @@
                 loading="lazy"
                 class="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.025]"
               />
-              <figcaption class="absolute inset-x-0 bottom-0 bg-brand-green p-5 text-brand-dark">
+              <figcaption
+                class="absolute inset-x-0 bottom-0 bg-brand-green p-5 text-brand-dark"
+              >
                 <p class="font-display text-3xl tracking-[-0.025em]">
                   {selectedServiceDetail.name}
                 </p>
@@ -526,9 +539,14 @@
                   {/if}
                 </button>
               </div>
-              <p class="mt-4 flex items-start gap-2 text-sm leading-6 text-brand-dark/62">
+              <p
+                class="mt-4 flex items-start gap-2 text-sm leading-6 text-brand-dark/62"
+              >
                 <MapPin size={14} class="mt-1 shrink-0 text-brand-green" />
-                <span>{siteConfig.contact.location}, {siteConfig.contact.country}</span>
+                <span
+                  >{siteConfig.contact.location}, {siteConfig.contact
+                    .country}</span
+                >
               </p>
             </div>
           </div>
@@ -540,30 +558,28 @@
   <section
     id="contact-next"
     aria-labelledby="contact-next-title"
-    class="border-t border-brand-dark/14 bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
+    class="bg-brand-light py-14 text-brand-dark sm:py-16 lg:py-20"
   >
     <div class="site-shell">
       <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-4">
-          <p class="font-mono text-[0.64rem] uppercase tracking-[0.18em] text-brand-green">
-            After the handoff
-          </p>
           <h2
             id="contact-next-title"
-            class="mt-7 max-w-md font-display text-[clamp(3rem,5vw,5.4rem)] leading-[0.9] tracking-[-0.035em]"
+            class="max-w-md font-display text-[clamp(2.5rem,4vw,4.4rem)] leading-[0.92] tracking-[-0.035em]"
           >
             What happens next.
           </h2>
         </div>
 
         <div class="lg:col-span-7 lg:col-start-6">
-          {#each contactProcess as step, index (step.title)}
-            <article class="contact-process-step grid gap-5 border-t border-brand-dark/18 bg-brand-light py-8 sm:grid-cols-[3rem_1fr]">
-              <p class="font-mono text-[0.62rem] tracking-[0.14em] text-brand-green">
-                0{index + 1}
-              </p>
+          {#each contactProcess as step (step.title)}
+            <article
+              class="contact-process-step grid gap-4 bg-brand-light py-6"
+            >
               <div class="grid gap-3 md:grid-cols-2 md:gap-8">
-                <h3 class="font-display text-2xl tracking-[-0.02em] text-brand-dark">
+                <h3
+                  class="font-display text-2xl tracking-[-0.02em] text-brand-dark"
+                >
                   {step.title}
                 </h3>
                 <p class="max-w-md text-sm leading-7 text-brand-dark/66">
@@ -575,8 +591,12 @@
         </div>
       </div>
 
-      <div class="mt-16 flex flex-col gap-6 border-t border-brand-dark/18 pt-10 sm:flex-row sm:items-end sm:justify-between">
-        <p class="max-w-2xl font-display text-[clamp(2.4rem,4.5vw,4.8rem)] leading-[0.92] tracking-[-0.035em]">
+      <div
+        class="mt-12 flex flex-col gap-6 pt-8 sm:flex-row sm:items-end sm:justify-between"
+      >
+        <p
+          class="max-w-2xl font-display text-[clamp(2.2rem,3.8vw,4rem)] leading-[0.94] tracking-[-0.035em]"
+        >
           The unfinished work is enough to begin.
         </p>
         <a
@@ -601,15 +621,15 @@
     padding-bottom: 0.08em;
   }
 
-  .contact-title-line,
-  .contact-handoff-image {
+  .contact-title-line {
     display: block;
     will-change: transform;
   }
 
-  .contact-handoff-frame {
-    clip-path: inset(0);
+  .contact-handoff-media {
+    will-change: transform;
   }
+
 
   .brief-field-label {
     display: block;
@@ -648,11 +668,7 @@
 
   .brief-field:focus-within {
     border-color: var(--color-brand-green);
-    background: color-mix(
-      in srgb,
-      var(--color-brand-green) 9%,
-      transparent
-    );
+    background: color-mix(in srgb, var(--color-brand-green) 9%, transparent);
   }
 
   .brief-field-label {
@@ -822,7 +838,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .contact-title-line,
-    .contact-handoff-image {
+    .contact-handoff-media {
       will-change: auto;
     }
   }

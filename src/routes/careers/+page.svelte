@@ -5,8 +5,8 @@
 </script>
 
 <PageMeta
-  title="Careers | Studio Click House"
-  description="Career opportunities at Studio Click House."
+  title="Careers & Opportunities | Studio Click House (SCHL)"
+  description="Explore career opportunities and join the production team at Studio Click House (SCHL). Learn about openings for image retouchers, CGI artists, and editors."
   canonicalPath="/careers"
 />
 

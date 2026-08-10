@@ -40,8 +40,8 @@
 </script>
 
 <PageMeta
-  title="Studio Events & Masterclasses | Studio Click House"
-  description="Explore upcoming events, masterclasses, and workshops hosted by Studio Click House, covering advanced image post-production and retouching."
+  title="Events & Masterclasses | Studio Click House (SCHL)"
+  description="Explore upcoming masterclasses and workshops hosted by Studio Click House (SCHL), covering advanced image post-production, shadow mapping, and e-commerce retouching."
   canonicalPath="/events"
 />
 

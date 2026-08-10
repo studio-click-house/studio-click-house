@@ -367,7 +367,7 @@
           <p
             class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-light/40"
           >
-            SCH · Navigation
+            SCHL · Navigation
           </p>
         </div>
 

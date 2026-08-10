@@ -26,8 +26,8 @@
 </script>
 
 <PageMeta
-  title="Contact Studio Click House | Start a Project"
-  description="Start a conversation with Studio Click House about image editing, video post-production, and 3D CGI work for your next visual project."
+  title="Contact Studio Click House (SCHL) | Start a Project"
+  description="Bring your unfinished visual material to the studio. Plan image editing, fashion retouching, or CGI product modeling workflows with the Studio Click House (SCHL) team."
   canonicalPath="/contact"
 />
 

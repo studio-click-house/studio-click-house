@@ -4,6 +4,21 @@ export const contactServices = [
   "3D & CGI",
 ] as const;
 
+export const contactHeroImages = [
+  {
+    src: "/images/contact/project-handoff.png",
+    alt: "Creative collaborators handing over fashion contact sheets and a marked proof sleeve",
+  },
+  {
+    src: "/images/portfolio/model-retouched.png",
+    alt: "Finished fashion portrait after image retouching",
+  },
+  {
+    src: "/images/portfolio/cgi-product-showcase.png",
+    alt: "Finished product image from a 3D CGI production",
+  },
+] as const;
+
 export const contactServiceDetails = [
   {
     name: contactServices[0],
