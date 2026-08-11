@@ -39,3 +39,4 @@ yarn-error.log*
 
 # agent customizations
 /.agents/
+/.codex/
