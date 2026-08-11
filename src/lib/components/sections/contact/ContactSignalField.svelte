@@ -54,37 +54,59 @@
         );
 
         const material = new THREE.PointsMaterial({
-          color: 0xf7f7f2,
+          color: 0x20211f,
           size: 0.045,
           transparent: true,
-          opacity: 0.72,
+          opacity: 0.52,
           sizeAttenuation: true,
         });
         const points = new THREE.Points(geometry, material);
         points.rotation.z = Math.PI / 2;
         scene.add(points);
 
-        const lineGeometry = new THREE.BufferGeometry();
-        const linePositions = new Float32Array(84 * 3);
-        for (let index = 0; index < 84; index += 1) {
-          const progress = index / 83;
-          const positionIndex = index * 3;
-          const angle = progress * Math.PI * 4;
-          linePositions[positionIndex] = (progress - 0.5) * 6.4;
-          linePositions[positionIndex + 1] = Math.sin(angle) * 0.78;
-          linePositions[positionIndex + 2] = Math.cos(angle) * 0.36;
-        }
-        lineGeometry.setAttribute(
-          "position",
-          new THREE.BufferAttribute(linePositions, 3),
-        );
-        const lineMaterial = new THREE.LineBasicMaterial({
-          color: 0x20211f,
-          transparent: true,
-          opacity: 0.42,
+        // Draw a multi-harmonic oscilloscope signal bundle with 3 overlapping lines
+        const signalGroup = new THREE.Group();
+        scene.add(signalGroup);
+
+        const harmonics = [
+          { freq: 4.0, ampY: 0.78, ampZ: 0.36, opacity: 0.58, color: 0x20211f, speed: 2.2 }, // Primary Dark
+          { freq: 5.5, ampY: 0.52, ampZ: 0.24, opacity: 0.32, color: 0x20211f, speed: -1.6 }, // Secondary Dark
+          { freq: 3.0, ampY: 0.95, ampZ: 0.48, opacity: 0.16, color: 0x20211f, speed: 1.1 }, // Sub-harmonic Dark
+        ];
+
+        const lineGeometries: InstanceType<typeof THREE.BufferGeometry>[] = [];
+        const lines: InstanceType<typeof THREE.Line>[] = [];
+
+        harmonics.forEach((h) => {
+          const geom = new THREE.BufferGeometry();
+          const positions = new Float32Array(84 * 3);
+          
+          for (let index = 0; index < 84; index += 1) {
+            const progress = index / 83;
+            const positionIndex = index * 3;
+            const angle = progress * Math.PI * h.freq;
+            positions[positionIndex] = (progress - 0.5) * 6.4;
+            positions[positionIndex + 1] = Math.sin(angle) * h.ampY;
+            positions[positionIndex + 2] = Math.cos(angle) * h.ampZ;
+          }
+          
+          geom.setAttribute(
+            "position",
+            new THREE.BufferAttribute(positions, 3),
+          );
+          
+          const mat = new THREE.LineBasicMaterial({
+            color: h.color,
+            transparent: true,
+            opacity: h.opacity,
+          });
+          
+          const lineObj = new THREE.Line(geom, mat);
+          signalGroup.add(lineObj);
+          
+          lineGeometries.push(geom);
+          lines.push(lineObj);
         });
-        const signalLine = new THREE.Line(lineGeometry, lineMaterial);
-        scene.add(signalLine);
 
         const clock = new THREE.Clock();
         const reducedMotion = window.matchMedia(
@@ -109,6 +131,22 @@
             }
             positionAttribute.needsUpdate = true;
             points.rotation.x = Math.sin(elapsed * 0.18) * 0.08;
+
+            // Animate each wave harmonic dynamically to shift phase over time
+            harmonics.forEach((h, hIdx) => {
+              const geom = lineGeometries[hIdx];
+              const posAttr = geom.getAttribute("position") as InstanceType<typeof THREE.BufferAttribute>;
+              const arr = posAttr.array as Float32Array;
+              
+              for (let index = 0; index < 84; index += 1) {
+                const progress = index / 83;
+                const positionIndex = index * 3;
+                const angle = progress * Math.PI * h.freq + elapsed * h.speed;
+                arr[positionIndex + 1] = Math.sin(angle) * h.ampY;
+                arr[positionIndex + 2] = Math.cos(angle) * h.ampZ;
+              }
+              posAttr.needsUpdate = true;
+            });
           }
 
           renderer.render(scene, camera);
@@ -168,7 +206,7 @@
               },
             );
             gsap.fromTo(
-              signalLine.position,
+              signalGroup.position,
               { x: -0.65 },
               {
                 x: 0.65,
@@ -207,8 +245,12 @@
             cancelAnimationFrame(animationFrameId);
           geometry.dispose();
           material.dispose();
-          lineGeometry.dispose();
-          lineMaterial.dispose();
+          lineGeometries.forEach((geom) => geom.dispose());
+          lines.forEach((lineObj) => {
+            if (lineObj.material instanceof THREE.Material) {
+              lineObj.material.dispose();
+            }
+          });
           renderer.renderLists.dispose();
           renderer.dispose();
         };

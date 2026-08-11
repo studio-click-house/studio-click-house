@@ -1,18 +1,105 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PlaceholderPage from "$lib/components/common/PlaceholderPage.svelte";
+  import ServiceDetailHero from "$lib/components/sections/service-detail/ServiceDetailHero.svelte";
+  import ServiceDetailIntro from "$lib/components/sections/service-detail/ServiceDetailIntro.svelte";
+  import ServiceDetailBeforeAfter from "$lib/components/sections/service-detail/ServiceDetailBeforeAfter.svelte";
+  import ServiceDetailShowcase from "$lib/components/sections/service-detail/ServiceDetailShowcase.svelte";
+  import ServiceDetailFeatures from "$lib/components/sections/service-detail/ServiceDetailFeatures.svelte";
+  import ServiceDetailAudience from "$lib/components/sections/service-detail/ServiceDetailAudience.svelte";
+  import ServiceDetailCta from "$lib/components/sections/service-detail/ServiceDetailCta.svelte";
+  import FaqSection from "$lib/components/sections/FaqSection.svelte";
+  import { siteConfig } from "$lib/config/site";
+  import { colorCorrectionPage } from "$lib/content/color-correction";
+  import type { ServicePageData } from "$lib/types/service-detail";
+
   const serviceSlug = $derived(page.params.slug ?? "service");
+
+  const servicePages: Record<string, ServicePageData> = {
+    "color-correction": colorCorrectionPage,
+  };
+
+  const pageData = $derived(servicePages[serviceSlug]);
+
   const serviceTitle = $derived(
     serviceSlug
       .split("-")
       .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
       .join(" "),
   );
+
+  const serviceSchemaData = $derived(
+    pageData
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: `Color Correction Service`,
+          url: `${siteConfig.url}/services/${pageData.slug}`,
+          description: pageData.seo.description,
+          provider: {
+            "@type": "Organization",
+            name: siteConfig.name,
+            url: siteConfig.url,
+          },
+        }
+      : null,
+  );
+
+  const faqSchemaData = $derived(
+    pageData
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: pageData.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null,
+  );
 </script>
 
-<PlaceholderPage
-  title={serviceTitle}
-  eyebrow="Service detail"
-  description="Detailed service scope, deliverables, workflow, and approved examples will be added here without inventing project claims."
-  canonicalPath={`/services/${serviceSlug}`}
-/>
+{#if pageData}
+  <PageMeta
+    title={pageData.seo.title}
+    description={pageData.seo.description}
+    canonicalPath={`/services/${pageData.slug}`}
+  />
+
+  {#if serviceSchemaData}
+    <JsonLd data={serviceSchemaData} />
+  {/if}
+  {#if faqSchemaData}
+    <JsonLd data={faqSchemaData} />
+  {/if}
+
+  <main id="service-detail-page" class="relative min-h-screen">
+    <ServiceDetailHero data={pageData.hero} />
+    <ServiceDetailIntro data={pageData.intro} />
+    <ServiceDetailBeforeAfter data={pageData.beforeAfter} />
+    <ServiceDetailShowcase data={pageData.showcase} />
+    <ServiceDetailFeatures
+      heading={pageData.features.heading}
+      items={pageData.features.items}
+    />
+    <ServiceDetailAudience
+      heading={pageData.audience.heading}
+      items={pageData.audience.items}
+    />
+    <FaqSection items={pageData.faqs} />
+    <ServiceDetailCta data={pageData.cta} />
+  </main>
+{:else}
+  <PlaceholderPage
+    title={serviceTitle}
+    eyebrow="Service detail"
+    description="Detailed service scope, deliverables, workflow, and approved examples will be added here without inventing project claims."
+    canonicalPath={`/services/${serviceSlug}`}
+  />
+{/if}

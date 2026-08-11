@@ -30,8 +30,8 @@
     const relativeX = event.clientX - bounds.left;
     const relativeY = event.clientY - bounds.top;
 
-    const normalizedX = (relativeX / bounds.width) - 0.5;
-    const normalizedY = (relativeY / bounds.height) - 0.5;
+    const normalizedX = relativeX / bounds.width - 0.5;
+    const normalizedY = relativeY / bounds.height - 0.5;
 
     import("gsap").then(({ gsap }) => {
       if (!active) return;
@@ -75,10 +75,10 @@
   aria-label="3D tilt visual card"
   onpointermove={handlePointerMove}
   onpointerleave={handlePointerLeave}
-  class="contact-hero-tilt-card relative overflow-hidden rounded-2xl bg-brand-dark shadow-md select-none [perspective:1000px] [transform-style:preserve-3d] will-change-transform transition-shadow duration-300 hover:shadow-xl {aspectClass}"
+  class="contact-hero-tilt-card relative overflow-hidden rounded-[0.75rem] border border-brand-mist/40 bg-brand-dark select-none [perspective:1000px] [transform-style:preserve-3d] will-change-transform {aspectClass}"
 >
   <img
-    src={src}
+    {src}
     {alt}
     {width}
     {height}

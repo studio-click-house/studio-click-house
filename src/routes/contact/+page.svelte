@@ -16,11 +16,22 @@
       name: siteConfig.name,
       url: siteConfig.url,
       email: siteConfig.contact.email,
+      telephone: siteConfig.contact.phone,
       address: {
         "@type": "PostalAddress",
+        streetAddress:
+          "Level 1, West Boxnagar, Holding: 112/11, Ward: 67, Sarulia, Demra",
         addressLocality: "Dhaka",
+        postalCode: "1361",
         addressCountry: "Bangladesh",
       },
+      contactPoint: siteConfig.contact.offices.map((office) => ({
+        "@type": "ContactPoint",
+        telephone: office.phone,
+        email: office.email,
+        areaServed: office.country,
+        contactType: "customer support",
+      })),
     },
   };
 </script>
