@@ -49,7 +49,7 @@
   let active = true;
 
   const backCardClass =
-    "pointer-events-none absolute inset-0 m-0 size-full overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] bg-brand-dark opacity-[0.42] shadow-[0_1rem_3rem_rgb(0_0_0/0.24)] [filter:saturate(0.68)_brightness(0.8)] [transition:transform_0.45s_cubic-bezier(0.16,1,0.3,1),opacity_0.45s_ease] [will-change:transform,opacity] motion-reduce:transition-none";
+    "pointer-events-none absolute inset-0 m-0 size-full overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] bg-brand-dark opacity-[0.38] [filter:saturate(0.68)_brightness(0.8)] [transition:transform_0.45s_cubic-bezier(0.16,1,0.3,1),opacity_0.45s_ease] [will-change:transform,opacity] motion-reduce:transition-none";
   const comparisonImageClass = "absolute inset-0 m-0 size-full overflow-hidden";
   const comparisonMediaClass =
     "absolute inset-0 size-full scale-[1.02] object-cover";
@@ -205,12 +205,6 @@
 </script>
 
 <div
-  bind:this={glowElement}
-  class="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,color-mix(in_srgb,var(--color-brand-green)_12%,transparent)_0%,transparent_70%)] blur-[30px] will-change-transform"
-  aria-hidden="true"
-></div>
-
-<div
   class="preview-stack relative z-[1] aspect-[4/5] w-full [perspective:1000px] [transform-style:preserve-3d] motion-reduce:animate-none"
 >
   <figure
@@ -249,7 +243,7 @@
     aria-label={ariaLabel}
     onpointermove={handlePointerMove}
     onpointerleave={handlePointerLeave}
-    class="comparison-preview group relative z-[2] isolate m-0 aspect-[4/5] overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] bg-brand-dark text-brand-light shadow-[0_2rem_5rem_rgb(0_0_0/0.42)] [backface-visibility:hidden] [transform-style:preserve-3d] will-change-transform"
+    class="comparison-preview group relative z-[2] isolate m-0 aspect-[4/5] overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] text-brand-light [backface-visibility:hidden] [transform-style:preserve-3d] will-change-transform"
   >
     <figure class={comparisonImageClass}>
       <img

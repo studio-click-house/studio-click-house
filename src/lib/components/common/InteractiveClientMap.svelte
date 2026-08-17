@@ -109,7 +109,7 @@
 
         <a
           href={closingCta.primaryCtaHref}
-          class="network-copy-step mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+          class="network-copy-step mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-[0.55rem] bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
           <span>{closingCta.primaryCtaLabel}</span>
           <ArrowRight class="h-5 w-5" />

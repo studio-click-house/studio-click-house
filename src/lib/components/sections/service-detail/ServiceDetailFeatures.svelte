@@ -2,9 +2,33 @@
   import { onMount } from "svelte";
   import {
     BadgeDollarSign,
+    BadgePercent,
+    CheckCircle,
+    CheckCircle2,
+    Clock,
+    Cpu,
+    Eye,
+    FileCheck,
+    Focus,
+    FolderTree,
+    Gem,
+    Headphones,
+    Layers,
+    Lock,
+    Maximize2,
     Palette,
+    PenTool,
+    Scale,
+    Scissors,
+    ShieldAlert,
     ShieldCheck,
+    Shirt,
+    Sliders,
+    Sparkles,
+    Sun,
     TicketCheck,
+    UserCheck,
+    Wand2,
     Zap,
   } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
@@ -15,12 +39,36 @@
     items: ServiceFeatureItem[];
   }>();
 
-  const iconMap: Record<string, typeof Palette> = {
-    Palette,
+  const iconMap: Record<string, any> = {
     BadgeDollarSign,
+    BadgePercent,
+    CheckCircle,
+    CheckCircle2,
+    Clock,
+    Cpu,
+    Eye,
+    FileCheck,
+    Focus,
+    FolderTree,
+    Gem,
+    Headphones,
+    Layers,
+    Lock,
+    Maximize2,
+    Palette,
+    PenTool,
+    Scale,
+    Scissors,
+    ShieldAlert,
     ShieldCheck,
-    Zap,
+    Shirt,
+    Sliders,
+    Sparkles,
+    Sun,
     TicketCheck,
+    UserCheck,
+    Wand2,
+    Zap,
   };
 
   let section = $state<HTMLElement>();
@@ -78,22 +126,13 @@
   bind:this={section}
   id="service-detail-features"
   aria-labelledby="service-detail-features-title"
-  class="relative isolate overflow-hidden bg-brand-paper py-16 text-brand-dark sm:py-20 lg:py-24"
+  class="relative isolate overflow-hidden py-16 text-brand-dark sm:py-20 lg:py-24"
 >
-  <div
-    class="pointer-events-none absolute -bottom-48 left-[16%] size-[30rem] rounded-full bg-brand-green/10 blur-[115px]"
-    aria-hidden="true"
-  ></div>
   <div class="site-shell relative z-10">
     <div class="sd-features-heading mb-9 lg:mb-11">
-      <p
-        class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-brand-green"
-      >
-        Service advantages
-      </p>
       <h2
         id="service-detail-features-title"
-        class="mt-4 max-w-[14ch] font-display text-[clamp(2.7rem,4.6vw,4.8rem)] leading-[0.9] tracking-[-0.04em]"
+        class="max-w-2xl font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
       >
         {heading}
       </h2>
@@ -101,7 +140,7 @@
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {#each items as item (item.title)}
-        {@const IconComponent = iconMap[item.icon]}
+        {@const IconComponent = iconMap[item.icon] || Sparkles}
         <article
           class="sd-feature-card group rounded-[0.9rem] border border-brand-dark/10 bg-brand-light p-6 transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-brand-green/35 hover:shadow-[0_14px_34px_rgb(32_33_31_/_0.06)] sm:p-7"
         >

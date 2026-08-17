@@ -199,7 +199,7 @@
             </p>
             <a
               href={resolve("/contact")}
-              class="mt-6 inline-flex items-center gap-2 rounded-full border border-brand-dark/25 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-light"
+              class="mt-6 inline-flex items-center gap-2 rounded-[0.55rem] border border-brand-dark/25 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-light"
             >
               Plan this workflow
               <ArrowUpRight class="h-3.5 w-3.5" />

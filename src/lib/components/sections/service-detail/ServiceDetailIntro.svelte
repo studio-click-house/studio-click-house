@@ -46,6 +46,16 @@
                 stagger: 0.1,
               },
               "-=0.45",
+            )
+            .from(
+              ".sd-study-focus",
+              {
+                autoAlpha: 0,
+                scale: 0.88,
+                duration: 0.65,
+                stagger: 0.12,
+              },
+              "-=0.3",
             );
 
           gsap.from(".sd-study-frame", {
@@ -97,18 +107,6 @@
                 },
                 0,
               )
-              .fromTo(
-                ".sd-study-focus",
-                { autoAlpha: 0.18, scale: 0.94 },
-                {
-                  autoAlpha: 1,
-                  scale: 1,
-                  stagger: 0.24,
-                  ease: "power1.out",
-                  duration: 0.22,
-                },
-                0.08,
-              )
               .to(
                 ".sd-study-image",
                 {
@@ -149,29 +147,15 @@
   bind:this={section}
   id="service-detail-intro"
   aria-labelledby="service-detail-intro-title"
-  class="relative isolate overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
 >
-  <div
-    class="sd-study-glow pointer-events-none absolute -left-56 top-[34%] size-[38rem] rounded-full bg-brand-green/15 blur-[125px]"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="pointer-events-none absolute -right-40 bottom-[8%] size-[27rem] rounded-full bg-brand-green/8 blur-[110px]"
-    aria-hidden="true"
-  ></div>
-
   <div class="site-shell relative z-10">
     <div class="grid gap-14 lg:grid-cols-12 lg:gap-16">
       <div class="lg:col-span-5">
         <div class="lg:sticky lg:top-28">
-          <p
-            class="sd-intro-copy font-mono text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-brand-green"
-          >
-            The color foundation
-          </p>
           <h2
             id="service-detail-intro-title"
-            class="sd-intro-copy mt-4 max-w-[10ch] font-display text-[clamp(2.8rem,5.2vw,5.15rem)] leading-[0.89] tracking-[-0.045em]"
+            class="sd-intro-copy max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
           >
             {data.heading}
           </h2>
@@ -232,7 +216,7 @@
       {#if studyMedia && stages.length > 0}
         <div class="lg:sticky lg:top-28 lg:col-span-7 lg:self-start lg:pt-6">
           <figure
-            class="sd-study-frame relative mx-auto aspect-square w-full max-w-[43rem] overflow-hidden rounded-[1.25rem] border border-brand-dark/10 bg-brand-dark shadow-[0_2.5rem_7rem_rgb(32_33_31/0.16)] [transform-style:preserve-3d]"
+            class="sd-study-frame relative mx-auto aspect-[4/5] w-full max-w-[29rem] overflow-hidden rounded-[1.25rem] border border-brand-dark/10 shadow-[0_20px_50px_rgba(0,0,0,0.12)] [transform-style:preserve-3d]"
           >
             <img
               src={studyMedia.src}
@@ -244,11 +228,11 @@
             />
 
             <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/62 via-transparent to-brand-dark/8"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/30 via-transparent to-brand-dark/10"
               aria-hidden="true"
             ></div>
             <div
-              class="sd-study-scan pointer-events-none absolute inset-x-[-12%] top-1/2 h-40 bg-gradient-to-b from-transparent via-brand-green/24 to-transparent blur-2xl"
+              class="sd-study-scan pointer-events-none absolute inset-x-[-12%] top-1/2 h-40 bg-gradient-to-b from-transparent via-brand-green/20 to-transparent blur-2xl"
               aria-hidden="true"
             ></div>
 
@@ -263,21 +247,6 @@
                 </div>
               {/each}
             </div>
-
-            <figcaption
-              class="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 sm:inset-x-7 sm:bottom-7"
-            >
-              <span
-                class="max-w-[22ch] font-mono text-[0.52rem] font-semibold uppercase leading-5 tracking-[0.15em] text-brand-light/72"
-              >
-                Color is corrected as one connected system
-              </span>
-              <span
-                class="rounded-full border border-brand-light/22 bg-brand-dark/40 px-3 py-1.5 font-mono text-[0.48rem] uppercase tracking-[0.14em] text-brand-light backdrop-blur-md"
-              >
-                Study 01
-              </span>
-            </figcaption>
           </figure>
         </div>
       {/if}
@@ -290,8 +259,9 @@
     position: absolute;
     display: flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.6rem;
     transform-origin: center;
+    z-index: 10;
   }
 
   .sd-study-focus[data-focus="1"] {
@@ -311,33 +281,36 @@
   }
 
   .sd-study-focus-line {
-    width: clamp(2.3rem, 7vw, 5.5rem);
-    height: 1px;
-    background: color-mix(in srgb, var(--color-brand-light) 60%, transparent);
+    width: clamp(2rem, 6vw, 4.5rem);
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   }
 
   .sd-study-focus-label {
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 24%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 999px;
-    background: color-mix(in srgb, var(--color-brand-dark) 48%, transparent);
-    padding: 0.45rem 0.7rem;
-    color: var(--color-brand-light);
+    background: rgba(18, 17, 16, 0.92);
+    padding: 0.42rem 0.8rem;
+    color: #ffffff;
     font-family: var(--font-mono);
-    font-size: 0.48rem;
-    font-weight: 600;
-    line-height: 1;
+    font-size: 0.52rem;
+    font-weight: 700;
+    line-height: 1.1;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    backdrop-filter: blur(0.45rem);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    white-space: nowrap;
   }
 
   @media (max-width: 639px) {
     .sd-study-focus-label {
-      max-width: 8.5rem;
+      max-width: 9.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      font-size: 0.46rem;
+      padding: 0.35rem 0.6rem;
     }
   }
 </style>

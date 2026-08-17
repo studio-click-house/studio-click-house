@@ -205,7 +205,7 @@
       <div class="mt-7 flex flex-wrap items-center gap-5">
         <a
           href={resolve("/contact")}
-          class="group inline-flex items-center gap-3 rounded-[0.2rem] bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
+          class="group inline-flex items-center gap-3 rounded-[0.55rem] bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
           >Start a project
           <ArrowUpRight
             size={17}

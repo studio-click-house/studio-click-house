@@ -88,7 +88,7 @@
       <div class="sd-cta-reveal lg:col-span-7">
         <h2
           id="service-detail-cta-title"
-          class="max-w-[14ch] font-display text-[clamp(2.8rem,5vw,5.4rem)] leading-[0.9] tracking-[-0.045em]"
+          class="max-w-2xl font-display text-[clamp(2.4rem,3.8vw,3.8rem)] leading-[0.98] tracking-[-0.04em]"
         >
           {data.heading}
         </h2>

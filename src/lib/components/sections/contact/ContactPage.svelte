@@ -304,14 +304,14 @@
           >
             <a
               href="#project-brief"
-              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.5rem] bg-brand-dark px-6 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-dark px-6 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
             >
               Send a brief
               <ArrowDown size={15} />
             </a>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              class="group inline-flex min-h-12 items-center gap-2 rounded-[0.5rem] border border-brand-dark/22 px-4 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+              class="group inline-flex min-h-12 items-center gap-2 rounded-[0.55rem] border border-brand-dark/22 px-4 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
             >
               {siteConfig.contact.email}
               <ArrowUpRight
@@ -600,7 +600,7 @@
                   <button
                     type="button"
                     onclick={copyStudioEmail}
-                    class="inline-flex items-center gap-1.5 rounded-[0.4rem] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green"
+                    class="inline-flex items-center gap-1.5 rounded-[0.55rem] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green"
                     aria-live="polite"
                   >
                     {#if emailCopied}
@@ -915,7 +915,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: 0.55rem;
     background: var(--color-brand-green);
     padding-inline: 1.35rem;
     color: var(--color-brand-dark);

@@ -96,7 +96,7 @@
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-6 rounded-full bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
+            class="group inline-flex min-h-12 items-center gap-6 rounded-[0.55rem] bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
           >
             Start a project
             <ArrowUpRight
@@ -105,7 +105,7 @@
           </a>
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-full border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
           >
             Request a test edit
             <ArrowRight

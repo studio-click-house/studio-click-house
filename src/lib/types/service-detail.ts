@@ -64,10 +64,27 @@ export interface ServiceShowcaseData {
   gallery?: ServiceShowcaseGalleryItem[];
 }
 
+export interface ServiceGalleryItem {
+  id: string;
+  title: string;
+  category: string;
+  technique: string;
+  media: ServiceVisualMedia;
+}
+
+export interface ServiceGalleryData {
+  heading: string;
+  description?: string;
+  items: ServiceGalleryItem[];
+}
+
 export interface ServiceDetailCtaData {
   heading: string;
   description: string;
-  steps: { title: string; description: string }[];
+  steps: {
+    title: string;
+    description: string;
+  }[];
 }
 
 export interface ServicePageData {
@@ -80,6 +97,7 @@ export interface ServicePageData {
   intro: ServiceIntroData;
   beforeAfter: ServiceBeforeAfterData;
   showcase: ServiceShowcaseData;
+  gallery?: ServiceGalleryData;
   features: {
     heading: string;
     items: ServiceFeatureItem[];

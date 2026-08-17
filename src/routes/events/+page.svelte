@@ -144,11 +144,11 @@
                 type="email"
                 aria-label="Email address for event updates"
                 placeholder="Enter email"
-                class="h-auto min-w-0 flex-1 rounded-none border-brand-dark/20 bg-brand-light px-3 py-2 text-xs font-sans placeholder:text-brand-dark/35 focus-visible:border-brand-green focus-visible:ring-0"
+                class="h-auto min-w-0 flex-1 rounded-[0.55rem] border-brand-dark/20 bg-brand-light px-3 py-2 text-xs font-sans placeholder:text-brand-dark/35 focus-visible:border-brand-green focus-visible:ring-0"
               />
               <Button
                 type="button"
-                class="h-auto rounded-none bg-brand-dark px-4 py-2 font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
+                class="h-auto rounded-[0.55rem] bg-brand-dark px-4 py-2 font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
               >
                 Join
               </Button>

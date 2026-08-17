@@ -171,7 +171,7 @@
           <!-- Button -->
           <a
             href={plan.buttonHref}
-            class="w-full py-3.5 px-4 rounded-xl text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border border-brand-dark/10 bg-brand-dark/5 text-brand-dark group-hover:bg-brand-green group-hover:text-brand-light group-hover:border-brand-green"
+            class="w-full py-3.5 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border border-brand-dark/10 bg-brand-dark/5 text-brand-dark group-hover:bg-brand-green group-hover:text-brand-light group-hover:border-brand-green"
           >
             <span>{plan.buttonText}</span>
             <ArrowRight

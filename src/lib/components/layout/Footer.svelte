@@ -74,7 +74,7 @@
       <div class="pt-2">
         <a
           href={resolve("/contact")}
-          class="group inline-flex min-h-14 items-center gap-6 bg-brand-green px-8 text-sm font-semibold text-brand-dark transition-all duration-300 hover:bg-brand-light hover:text-brand-dark focus-visible:outline-brand-green"
+          class="group inline-flex min-h-14 items-center gap-6 rounded-[0.55rem] bg-brand-green px-8 text-sm font-semibold text-brand-dark transition-all duration-300 hover:bg-brand-light hover:text-brand-dark focus-visible:outline-brand-green"
         >
           Start a project
           <ArrowUpRight

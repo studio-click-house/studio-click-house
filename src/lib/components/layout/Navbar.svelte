@@ -510,14 +510,17 @@
   }
 
   .project-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
     min-height: 2.45rem;
-    min-width: 8.5rem;
-    gap: 0.8rem;
-    padding-inline: 0.85rem;
+    min-width: 9rem;
+    gap: 0.55rem;
+    padding-inline: 0.95rem;
     background: var(--color-brand-green);
     color: var(--color-brand-dark);
     border: 1px solid var(--color-brand-green);
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
@@ -541,7 +544,7 @@
     padding-inline: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
@@ -568,7 +571,7 @@
     padding-inline: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
@@ -600,7 +603,7 @@
     padding-inline: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 28%, transparent);
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 600;

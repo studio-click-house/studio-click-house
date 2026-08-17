@@ -107,7 +107,7 @@
               <button
                 type="button"
                 class={cn(
-                  "rounded-full border px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-wider transition-all duration-200 cursor-pointer",
+                  "rounded-[0.55rem] border px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-wider transition-all duration-200 cursor-pointer",
                   activeCatIndex === index
                     ? "border-brand-dark bg-brand-dark text-brand-light font-bold shadow-sm"
                     : "border-brand-dark/20 text-brand-dark/75 hover:border-brand-dark hover:text-brand-dark bg-transparent",
@@ -132,7 +132,7 @@
               <button
                 type="button"
                 class={cn(
-                  "flex min-h-16 items-center justify-between gap-4 rounded-xl border bg-transparent px-4 py-3 text-left transition-all duration-200 cursor-pointer",
+                  "flex min-h-16 items-center justify-between gap-4 rounded-[0.55rem] border bg-transparent px-4 py-3 text-left transition-all duration-200 cursor-pointer",
                   selectedServices[rate.slug]
                     ? "border-brand-green bg-brand-green/5 text-brand-dark shadow-sm"
                     : "border-brand-dark/15 hover:border-brand-dark/30 text-brand-dark/75",
@@ -229,7 +229,7 @@
                 <button
                   type="button"
                   class={cn(
-                    "py-2.5 rounded-lg font-mono text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer text-center",
+                    "py-2.5 rounded-[0.55rem] font-mono text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer text-center",
                     selectedComplexity === index
                       ? "bg-brand-dark text-brand-light font-bold"
                       : "border border-brand-dark/15 hover:bg-brand-dark/5 text-brand-dark/75",
@@ -257,7 +257,7 @@
               <button
                 type="button"
                 class={cn(
-                  "p-3.5 rounded-xl text-left border flex flex-col justify-between transition-all duration-200 cursor-pointer",
+                  "p-3.5 rounded-[0.55rem] text-left border flex flex-col justify-between transition-all duration-200 cursor-pointer",
                   selectedTurnaround === index
                     ? "border-brand-dark bg-brand-dark text-brand-light font-semibold shadow-sm"
                     : "border-brand-dark/15 text-brand-dark/75 hover:border-brand-dark/30 bg-transparent",
@@ -366,13 +366,13 @@
           <div class="pt-8 flex flex-col gap-3">
             <a
               href={`/contact?service=${encodeURIComponent(activeCategory.categoryName.toLowerCase().replace(" ", "-"))}&volume=${volume}&complexity=${selectedComplexity}&turnaround=${selectedTurnaround}`}
-              class="w-full py-4 px-6 bg-brand-green text-white text-center font-mono text-xs font-bold uppercase tracking-widest hover:bg-brand-dark transition-colors duration-300 flex items-center justify-center gap-2 rounded-xl shadow-sm"
+              class="w-full py-4 px-6 bg-brand-green text-white text-center font-mono text-xs font-bold uppercase tracking-widest hover:bg-brand-dark transition-colors duration-300 flex items-center justify-center gap-2 rounded-[0.55rem] shadow-sm"
             >
               Request Custom Proposal <ArrowRight size={16} />
             </a>
             <a
               href="/contact"
-              class="w-full py-3.5 px-6 border border-brand-dark/20 text-brand-dark text-center font-mono text-xs font-semibold uppercase tracking-widest hover:border-brand-dark hover:bg-brand-dark/5 transition-colors duration-300 rounded-xl"
+              class="w-full py-3.5 px-6 border border-brand-dark/20 text-brand-dark text-center font-mono text-xs font-semibold uppercase tracking-widest hover:border-brand-dark hover:bg-brand-dark/5 transition-colors duration-300 rounded-[0.55rem]"
             >
               Book a Consultation
             </a>

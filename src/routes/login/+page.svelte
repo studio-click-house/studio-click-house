@@ -89,7 +89,7 @@
             autocomplete="email"
             required
             placeholder="name@company.com"
-            class="h-auto w-full rounded-none border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus-visible:border-brand-green focus-visible:ring-0"
+            class="h-auto w-full rounded-[0.55rem] border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus-visible:border-brand-green focus-visible:ring-0"
           />
         </div>
 
@@ -115,13 +115,13 @@
             autocomplete="current-password"
             required
             placeholder="••••••••••••"
-            class="h-auto w-full rounded-none border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus-visible:border-brand-green focus-visible:ring-0"
+            class="h-auto w-full rounded-[0.55rem] border-brand-dark/15 bg-brand-paper px-4 py-3 text-xs font-sans placeholder:text-brand-dark/30 focus-visible:border-brand-green focus-visible:ring-0"
           />
         </div>
 
         <Button
           type="submit"
-          class="h-auto w-full rounded-none bg-brand-dark py-4 text-center font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
+          class="h-auto w-full rounded-[0.55rem] bg-brand-dark py-4 text-center font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
         >
           Sign In to Hub <ArrowUpRight size={14} />
         </Button>

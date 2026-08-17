@@ -603,7 +603,7 @@
         <div class="mt-6 flex items-center justify-center gap-4">
           <a
             href={resolve("/portfolio")}
-            class="group inline-flex min-h-[3rem] min-w-[10.5rem] items-center justify-between gap-4 border border-brand-dark rounded-[0.2rem] bg-brand-dark px-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.045em] text-brand-light transition-all duration-[280ms] ease-out hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] focus-visible:outline-3 focus-visible:outline-brand-green focus-visible:outline-offset-[3px]"
+            class="group inline-flex min-h-[3rem] min-w-[10.5rem] items-center justify-between gap-4 border border-brand-dark rounded-[0.55rem] bg-brand-dark px-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.045em] text-brand-light transition-all duration-[280ms] ease-out hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] focus-visible:outline-3 focus-visible:outline-brand-green focus-visible:outline-offset-[3px]"
           >
             <span>Explore Work</span>
             <ArrowUpRight
@@ -852,7 +852,7 @@
     justify-content: space-between;
     margin-top: 0.75rem;
     border: 1px solid var(--color-brand-dark);
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     padding-inline: 1rem;
     background: var(--color-brand-dark);
     color: var(--color-brand-light);
@@ -894,7 +894,7 @@
   }
 
   .workflow-link:focus-visible {
-    border-radius: 0.25rem;
+    border-radius: 0.55rem;
     outline: 3px solid var(--color-brand-green);
     outline-offset: 3px;
   }

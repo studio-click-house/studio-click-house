@@ -74,22 +74,13 @@
   bind:this={section}
   id="service-detail-audience"
   aria-labelledby="service-detail-audience-title"
-  class="relative isolate overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20 lg:py-24"
+  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
 >
-  <div
-    class="pointer-events-none absolute -right-52 top-[12%] size-[32rem] rounded-full bg-brand-green/10 blur-[120px]"
-    aria-hidden="true"
-  ></div>
   <div class="site-shell relative z-10">
     <div class="sd-audience-heading mb-9 lg:mb-11">
-      <p
-        class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-brand-green"
-      >
-        Built for real workflows
-      </p>
       <h2
         id="service-detail-audience-title"
-        class="mt-4 max-w-[16ch] font-display text-[clamp(2.7rem,4.6vw,4.8rem)] leading-[0.9] tracking-[-0.04em]"
+        class="max-w-2xl font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
       >
         {heading}
       </h2>

@@ -156,7 +156,7 @@
         <div class="mt-8 flex flex-wrap items-center gap-5">
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
+            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
           >
             Discuss a project
             <ArrowUpRight

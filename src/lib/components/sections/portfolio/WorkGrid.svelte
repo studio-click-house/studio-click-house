@@ -541,7 +541,7 @@
     padding: 0.75rem 1.6rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
-    border-radius: 999px;
+    border-radius: 0.55rem;
     background: transparent;
     color: color-mix(in srgb, var(--color-brand-dark) 75%, transparent);
     font-family: var(--font-mono);
@@ -580,7 +580,7 @@
   .load-more-btn {
     padding: 0.85rem 2.25rem;
     border: 1px solid var(--color-brand-dark);
-    border-radius: 999px;
+    border-radius: 0.55rem;
     background: transparent;
     color: var(--color-brand-dark);
     font-family: var(--font-mono);

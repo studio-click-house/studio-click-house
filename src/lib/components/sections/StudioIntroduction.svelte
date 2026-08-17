@@ -488,7 +488,7 @@
     gap: 1rem;
     padding-inline: 1rem;
     border: 1px solid var(--color-brand-dark);
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     font-family: var(--font-sans);
     font-size: 0.68rem;
     font-weight: 600;

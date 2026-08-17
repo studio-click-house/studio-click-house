@@ -216,7 +216,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border-radius: 0.2rem;
+    border-radius: 0.55rem;
     transition:
       background 280ms ease,
       color 280ms ease,

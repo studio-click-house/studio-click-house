@@ -88,7 +88,7 @@
         <button
           type="button"
           onclick={() => (activeFilter = category.id)}
-          class="rounded-full px-5 py-2.5 font-mono text-xs font-semibold tracking-wider transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-dark {activeFilter ===
+          class="rounded-[0.55rem] px-5 py-2.5 font-mono text-xs font-semibold tracking-wider transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-dark {activeFilter ===
           category.id
             ? 'bg-brand-dark text-brand-light shadow-md'
             : 'bg-brand-dark/5 text-brand-dark/70 hover:bg-brand-dark/10 hover:text-brand-dark'}"

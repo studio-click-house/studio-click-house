@@ -170,22 +170,12 @@
 </script>
 
 <section
-  id="faq-section"
   bind:this={section}
-  aria-labelledby="faq-section-title"
-  class="section-space relative overflow-hidden bg-brand-light text-brand-dark"
+  id="faq"
+  aria-labelledby="faq-title"
+  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
 >
-  <!-- Background design accents -->
-  <div
-    class="absolute inset-x-0 top-0 h-px bg-brand-dark/10"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="absolute inset-x-0 bottom-0 h-px bg-brand-dark/10"
-    aria-hidden="true"
-  ></div>
-
-  <div class="site-shell">
+  <div class="site-shell relative z-10">
     <div class="grid gap-14 lg:grid-cols-12 lg:gap-16 items-start">
       <!-- Left Column: Questions List (Columns 1-7) -->
       <div class="faq-reveal-left lg:col-span-7 space-y-10">
@@ -193,7 +183,7 @@
         <div class="border-b border-brand-dark/10 pb-8">
           <h2
             id="faq-section-title"
-            class="font-display text-[clamp(2.6rem,5vw,4.75rem)] leading-[0.9] tracking-[-0.045em] text-brand-dark"
+            class="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
           >
             Common Questions
           </h2>

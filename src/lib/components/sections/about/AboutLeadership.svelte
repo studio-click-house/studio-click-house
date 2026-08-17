@@ -145,10 +145,10 @@
 
           const portraits =
             gsap.utils.toArray<HTMLElement>(".leader-media img");
-          portraits.forEach((portrait, index) => {
+          portraits.forEach((portrait) => {
             gsap.fromTo(
               portrait,
-              { yPercent: index % 2 === 0 ? -5 : 5 },
+              { yPercent: -4 },
               {
                 scrollTrigger: {
                   trigger: portrait.closest(".leader-card"),
@@ -156,7 +156,7 @@
                   end: "bottom top",
                   scrub: 0.7,
                 },
-                yPercent: index % 2 === 0 ? 5 : -5,
+                yPercent: 4,
                 ease: "none",
               },
             );
@@ -177,26 +177,49 @@
   id="leadership-team"
   aria-label="Leadership Team"
   bind:this={sectionRef}
-  class="section-space relative bg-brand-light py-24 md:py-36"
+  class="section-space relative bg-brand-light py-20 md:py-32"
 >
   <div class="site-shell">
-    <div class="mb-16 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-24">
-      <h2
-        class="leadership-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-8"
-      >
-        {leadership.heading}
-      </h2>
-      <p
-        class="leadership-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
-      >
-        {leadership.subheading}
-      </p>
+    <div class="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
+      <div>
+        {#if leadership.eyebrow}
+          <span
+            class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-green"
+          >
+            {leadership.eyebrow}
+          </span>
+        {/if}
+        <h2
+          class="leadership-header-reveal font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.04] tracking-[-0.035em] text-brand-dark"
+        >
+          {leadership.heading}
+        </h2>
+      </div>
+
+      <div class="leadership-header-reveal flex items-center gap-2 self-end sm:self-auto">
+        <button
+          type="button"
+          onclick={slidePrev}
+          aria-label="Previous team member"
+          class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-dark/20 text-brand-dark transition-all duration-200 hover:border-brand-green hover:bg-brand-green hover:text-white active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
+        >
+          <ArrowLeft class="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onclick={slideNext}
+          aria-label="Next team member"
+          class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-dark/20 text-brand-dark transition-all duration-200 hover:border-brand-green hover:bg-brand-green hover:text-white active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
+        >
+          <ArrowRight class="h-4 w-4" />
+        </button>
+      </div>
     </div>
 
     <div
-      class="leadership-grid grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-12"
+      class="leadership-grid grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12"
     >
-      <!-- LEFT SIDE: Anchor MD Card -->
+      <!-- LEFT SIDE: Anchor MD Card (Fixed / Sticky to Left) -->
       {#if mdCard}
         <div class="flex flex-col lg:col-span-4">
           <article class="leader-card group relative flex flex-1 flex-col w-full max-w-[360px]">
@@ -216,10 +239,10 @@
               />
             </div>
 
-            <div class="mt-4 border-t border-brand-dark/25 pt-4">
+            <div class="mt-4 border-t border-brand-dark/20 pt-4">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <p class="mb-2 font-mono text-xs text-brand-green">01</p>
+                  <p class="mb-1.5 font-mono text-xs font-medium text-brand-green">01</p>
                   <h3
                     class="font-display text-2xl leading-none text-brand-dark transition-colors group-hover:text-brand-green"
                   >
@@ -232,17 +255,17 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`LinkedIn profile for ${mdCard.name}`}
-                    class="border-b border-brand-dark/30 pb-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/65 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+                    class="border-b border-brand-dark/25 pb-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/65 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
                     >LinkedIn ↗</a
                   >
                 {/if}
               </div>
               <p
-                class="mt-3 text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
+                class="mt-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
               >
                 {mdCard.role}
               </p>
-              <p class="mt-4 text-sm leading-relaxed text-brand-dark/70">
+              <p class="mt-3 text-sm leading-relaxed text-brand-dark/70">
                 {mdCard.bio}
               </p>
             </div>
@@ -251,26 +274,7 @@
       {/if}
 
       <!-- RIGHT SIDE: Interactive Slider for Department & Operational Leads -->
-      <div class="flex flex-col lg:col-span-8">
-        <div class="mb-6 flex items-center justify-end gap-2">
-          <button
-            type="button"
-            onclick={slidePrev}
-            aria-label="Previous team member"
-            class="flex h-9 w-9 items-center justify-center rounded-full border border-brand-dark/25 text-brand-dark transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
-          >
-            <ArrowLeft class="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onclick={slideNext}
-            aria-label="Next team member"
-            class="flex h-9 w-9 items-center justify-center rounded-full border border-brand-dark/25 text-brand-dark transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
-          >
-            <ArrowRight class="h-4 w-4" />
-          </button>
-        </div>
-
+      <div class="flex flex-col overflow-hidden lg:col-span-8">
         <div
           bind:this={carouselRef}
           role="region"
@@ -304,10 +308,10 @@
                 />
               </div>
 
-              <div class="mt-4 border-t border-brand-dark/25 pt-4">
+              <div class="mt-4 border-t border-brand-dark/20 pt-4">
                 <div class="flex items-start justify-between gap-4">
                   <div>
-                    <p class="mb-2 font-mono text-xs text-brand-green">
+                    <p class="mb-1.5 font-mono text-xs font-medium text-brand-green">
                       {(index + 2).toString().padStart(2, "0")}
                     </p>
                     <h3
@@ -322,17 +326,17 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`LinkedIn profile for ${member.name}`}
-                      class="border-b border-brand-dark/30 pb-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/65 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+                      class="border-b border-brand-dark/25 pb-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/65 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
                       >LinkedIn ↗</a
                     >
                   {/if}
                 </div>
                 <p
-                  class="mt-3 text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
+                  class="mt-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
                 >
                   {member.role}
                 </p>
-                <p class="mt-4 text-sm leading-relaxed text-brand-dark/70">
+                <p class="mt-3 text-sm leading-relaxed text-brand-dark/70">
                   {member.bio}
                 </p>
               </div>

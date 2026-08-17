@@ -30,7 +30,7 @@
       </div>
 
       <div
-        class="flex w-fit rounded-[0.3rem] border border-brand-dark/20 bg-brand-paper p-1 lg:col-span-4 lg:justify-self-end"
+        class="flex w-fit rounded-[0.55rem] border border-brand-dark/20 bg-brand-paper p-1 lg:col-span-4 lg:justify-self-end"
         role="tablist"
         aria-label="Pricing options"
       >
@@ -40,7 +40,7 @@
           role="tab"
           aria-selected={activeView === "packages"}
           aria-controls="pricing-packages-panel"
-          class="min-h-11 rounded-[0.2rem] px-5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition-colors sm:px-6 {activeView ===
+          class="min-h-11 rounded-[0.45rem] px-5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition-colors sm:px-6 {activeView ===
           'packages'
             ? 'bg-brand-dark text-brand-light'
             : 'text-brand-dark/65 hover:text-brand-dark'}"
@@ -54,7 +54,7 @@
           role="tab"
           aria-selected={activeView === "custom"}
           aria-controls="pricing-custom-panel"
-          class="min-h-11 rounded-[0.2rem] px-5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition-colors sm:px-6 {activeView ===
+          class="min-h-11 rounded-[0.45rem] px-5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition-colors sm:px-6 {activeView ===
           'custom'
             ? 'bg-brand-dark text-brand-light'
             : 'text-brand-dark/65 hover:text-brand-dark'}"

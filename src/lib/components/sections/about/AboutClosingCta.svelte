@@ -104,7 +104,7 @@
         >
           <a
             href={closingCta.primaryCtaHref}
-            class="inline-flex min-h-12 items-center justify-center gap-3 bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+            class="inline-flex min-h-12 items-center justify-center gap-3 rounded-[0.55rem] bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
           >
             <span>{closingCta.primaryCtaLabel}</span>
             <ArrowRight class="w-5 h-5" />

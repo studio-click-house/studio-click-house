@@ -75,7 +75,6 @@ export const colorCorrectionPage: ServicePageData = {
     heading: "What is color correction?",
     paragraphs: [
       "Color correction is all about transforming your footage into an eye-catching masterpiece. Adjusting each clip to get a consistent look entails fine-tuning white balance, fixing exposure, balancing whites and blacks, and increasing contrast and saturation. Even minor adjustments can make a tremendous difference to the overall quality of your images.",
-      "Advanced color-correction techniques can improve the hue quality of photographs. This includes fine-tuning illumination, tweaking gamma settings, controlling grayscale levels, and changing the overall colorimetric perspective. The end result is a refined and harmonious appearance that ensures every image meets the highest visual standards.",
     ],
     stages: [
       {
@@ -145,6 +144,85 @@ export const colorCorrectionPage: ServicePageData = {
       },
     ],
   },
+  gallery: {
+    heading: "Selected Work & Color Studies",
+    description:
+      "A curated lookbook of high-precision color correction, skin tone calibration, and series harmonization delivered for brands and studios.",
+    items: [
+      {
+        id: "gallery-fashion-editorial",
+        title: "Editorial Fashion & Tone Calibration",
+        category: "Fashion",
+        technique: "Selective Hue Matching",
+        media: {
+          src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          alt: "Editorial fashion portrait with color corrected studio lights",
+          width: 1200,
+          height: 1600,
+        },
+      },
+      {
+        id: "gallery-beauty-skincare",
+        title: "Beauty & Skin Tone Harmonization",
+        category: "Beauty",
+        technique: "Skin-Tone Balancing",
+        media: {
+          src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          alt: "Female model skincare facial color correction and tone grading",
+          width: 1200,
+          height: 1600,
+        },
+      },
+      {
+        id: "gallery-cosmetics-vibrancy",
+        title: "Cosmetics & Lip Shade True-Match",
+        category: "Cosmetics",
+        technique: "Batch Saturation Matching",
+        media: {
+          src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          alt: "Cosmetics product and beauty portrait with matched color vibrancy",
+          width: 1200,
+          height: 1600,
+        },
+      },
+      {
+        id: "gallery-luxury-jewelry",
+        title: "Fine Jewelry & Metal Lustre",
+        category: "Luxury",
+        technique: "White-Balance & Specular Control",
+        media: {
+          src: "https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          alt: "Luxury diamond ring and polished gemstone color enhancement",
+          width: 1200,
+          height: 800,
+        },
+      },
+      {
+        id: "gallery-garment-recolor",
+        title: "Apparel Colorways & Fabric Shifting",
+        category: "Apparel",
+        technique: "Fabric True-Match Recoloring",
+        media: {
+          src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1800",
+          alt: "Garment recolored with preserved fabric texture and shadow detail",
+          width: 1200,
+          height: 1600,
+        },
+      },
+      {
+        id: "gallery-fragrance-still-life",
+        title: "Fragrance Still Life & Atmosphere",
+        category: "Still Life",
+        technique: "Contrast & Ambient Grading",
+        media: {
+          src: "https://images.pexels.com/photos/18302102/pexels-photo-18302102.jpeg?auto=compress&cs=tinysrgb&w=1800",
+          alt: "Glass perfume still life with balanced ambient tones and reflection",
+          width: 1200,
+          height: 1600,
+        },
+      },
+    ],
+  },
   features: {
     heading: "Why choose our service?",
     items: [
@@ -177,6 +255,12 @@ export const colorCorrectionPage: ServicePageData = {
         title: "100% Money-Back Guarantee",
         description:
           "Customer satisfaction is our top priority. We are confident in our ability to exceed your expectations, offering a 100% money-back guarantee if you're not completely satisfied.",
+      },
+      {
+        icon: "Headphones",
+        title: "24/7 Dedicated Support",
+        description:
+          "Our production studio operates around the clock. Whether you have custom color instructions, urgent volume batches, or revisions, our team is always available to help.",
       },
     ],
   },
@@ -233,23 +317,6 @@ export const colorCorrectionPage: ServicePageData = {
         "Is there a satisfaction guarantee for the Color Correction service?",
       answer:
         "Yes, we offer a 100% money-back guarantee if you are not fully satisfied with our service. Ensuring your satisfaction is our utmost priority.",
-    },
-    {
-      question:
-        "How can I begin with a free trial or get a quote for the Color Correction service?",
-      answer:
-        "You can start by contacting us for a free trial or requesting a personalized quote. Our team is available 24/7 to assist you and ensure a smooth experience.",
-    },
-    {
-      question: "Who can benefit from the Color Correction service?",
-      answer:
-        "The service is ideal for e-commerce businesses, photographers, graphic designers, and anyone looking to enhance the color quality of their images for a more professional and appealing look.",
-    },
-    {
-      question:
-        "What sets Studio Click House's Color Correction service apart from others?",
-      answer:
-        "Our combination of expert color adjustment, affordability, rapid turnaround, and a commitment to customer satisfaction makes us a top choice for professional image editing.",
     },
   ],
   cta: {
