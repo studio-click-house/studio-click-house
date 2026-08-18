@@ -17,39 +17,39 @@
 
   const workFieldLandscapeMedia: Record<string, PreviewMedia> = {
     "product-finishing": {
-      src: "/images/work-fields/gallery/product-retouching.jpg",
-      alt: "Perfume bottle photographed with controlled liquid movement for product retouching",
-      width: 1600,
-      height: 900,
-      credit: "Temporary preview photo by Bolarinwa Olasunkanmi via Pexels",
+      src: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2000&q=85",
+      alt: "Luxury beauty cosmetic bottle photographed for high-end product retouching",
+      width: 2000,
+      height: 1333,
+      credit: "Photo via Unsplash",
     },
     "beauty-detail": {
-      src: "/images/work-fields/gallery/beauty-retouching.jpg",
-      alt: "Makeup artist refining a model's complexion in a controlled studio",
-      width: 1600,
-      height: 900,
-      credit: "Temporary preview photo by Angel Rondon via Pexels",
+      src: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=2000&q=85",
+      alt: "High-end beauty editorial skin texture and tone retouching",
+      width: 2000,
+      height: 1333,
+      credit: "Photo via Unsplash",
     },
     "fashion-color": {
-      src: "/images/work-fields/gallery/fashion-color.jpg",
-      alt: "Fashion model wearing saturated red and green styling during a studio shoot",
-      width: 1600,
-      height: 900,
-      credit: "Temporary preview photo by Gustavo Denuncio via Pexels",
+      src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2000&q=85",
+      alt: "High-fashion model in vibrant color grading and studio styling",
+      width: 2000,
+      height: 1333,
+      credit: "Photo via Unsplash",
     },
     "jewelry-detail": {
-      src: "/images/work-fields/gallery/jewelry-retouching.jpg",
-      alt: "Pearl and gold jewelry arranged with beauty products for detailed finishing",
-      width: 1600,
-      height: 900,
-      credit: "Temporary preview photo by Misolo Cosmetic via Pexels",
+      src: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=2000&q=85",
+      alt: "Fine luxury gold jewelry and pearls arranged for close-up retouching",
+      width: 2000,
+      height: 1333,
+      credit: "Photo via Unsplash",
     },
     "shadow-study": {
-      src: "/images/work-fields/gallery/product-composition.jpg",
-      alt: "Golden perfume bottle composed with directional natural shadows",
-      width: 1600,
-      height: 900,
-      credit: "Temporary preview photo by Khulood Abdulghani via Pexels",
+      src: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=2000&q=85",
+      alt: "Luxury perfume bottle composed with directional natural shadows",
+      width: 2000,
+      height: 1333,
+      credit: "Photo via Unsplash",
     },
   };
   const withImageKind = (item: WorkGalleryItem): WorkFieldSectionItem => ({
@@ -297,7 +297,7 @@
             const workFieldProgressInterval =
               (lastWorkFieldProgressTime - firstWorkFieldProgressTime) /
               Math.max(1, workFieldGalleryItems.length - 1);
-            const initialPanelPositions = [0.53, 0.84, 0.94];
+            const initialPanelPositions = [0.50, 0.83, 0.93];
             const initialBodyOffsets = [0.34, 0.52, 0.62];
 
             ScrollTrigger.getById("horizontal-projects-entry")?.kill(true);
@@ -716,6 +716,8 @@
           },
         );
       }, localSection);
+
+      ScrollTrigger.refresh();
     });
 
     return () => {
@@ -741,34 +743,33 @@
     class="project-stage relative h-[calc(100dvh_-_4.35rem)] overflow-hidden bg-brand-light"
   >
     <article
-      class="showcase-intro absolute inset-y-0 left-0 z-[1] flex w-[53%] flex-col justify-center border-r border-brand-dark/15 bg-brand-light px-[clamp(1.5rem,3vw,3.5rem)] py-[clamp(2rem,5vh,3.5rem)] text-brand-light overflow-hidden"
+      class="showcase-intro absolute inset-y-0 left-0 z-[1] flex w-[50%] flex-col items-center justify-center border-r border-brand-dark/15 bg-brand-light px-[clamp(1.5rem,3vw,3.5rem)] py-[clamp(2rem,5vh,3.5rem)] text-center text-brand-light overflow-hidden"
     >
-      <!-- Background Video playing editing workflow, full opacity for rich colors -->
-      <div class="absolute inset-0 z-0 opacity-100 pointer-events-none">
-        <video
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          class="h-full w-full object-cover"
-        >
-          <source src="/videos/editing-video-720p.webm" type="video/webm" />
-        </video>
+      <!-- Background Image with dark overlay for rich contrast -->
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2400&q=85"
+          alt="Luxury high-fashion editorial studio photoshoot"
+          width="2400"
+          height="1600"
+          loading="eager"
+          class="h-full w-full object-cover object-center"
+        />
         <!-- Dark gradient overlay to pop the white text -->
         <div
-          class="absolute inset-0 bg-brand-dark/45 z-10"
+          class="absolute inset-0 bg-brand-dark/50 z-10"
           aria-hidden="true"
         ></div>
       </div>
 
-      <div class="relative z-10">
+      <div class="relative z-10 flex flex-col items-center text-center">
         <h3
-          class="max-w-[8ch] font-display text-[clamp(3.6rem,6.8vw,7.75rem)] font-medium uppercase leading-[0.82] tracking-[-0.065em] text-brand-light"
+          class="font-display text-[clamp(3.6rem,6.8vw,7.75rem)] font-medium uppercase leading-[0.82] tracking-[-0.065em] text-brand-light"
         >
           Our<br />services
         </h3>
         <p
-          class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[38rem] text-[clamp(0.82rem,1vw,1rem)] leading-[1.4] text-brand-light/80"
+          class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[36rem] text-center text-[clamp(0.85rem,1.05vw,1.05rem)] leading-[1.4] text-brand-light/85"
         >
           One production partner for polished stills, considered motion, and
           believable 3D imagery—built around the needs of each project.

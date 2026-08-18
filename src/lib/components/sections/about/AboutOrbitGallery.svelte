@@ -1,19 +1,25 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { onMount } from "svelte";
-  import { ArrowUpRight, Compass, Wand2, ShieldCheck, Check } from "lucide-svelte";
+  import {
+    ArrowUpRight,
+    Compass,
+    Wand2,
+    ShieldCheck,
+    Check,
+  } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { aboutOrbitCards } from "$lib/content/about-orbit";
 
   const frameRotations = [-2, 1, -1.5, 3, -2, 1.5, -1, 2] as const;
   const stackLayout = [
-    { x: -20, y: -16, rotation: -4, scale: 0.90, zIndex: 44, z: 24 },
+    { x: -20, y: -16, rotation: -4, scale: 0.9, zIndex: 44, z: 24 },
     { x: 18, y: -15, rotation: 3.5, scale: 0.88, zIndex: 43, z: 20 },
     { x: -28, y: 10, rotation: -5.5, scale: 0.86, zIndex: 42, z: 16 },
     { x: 0, y: 0, rotation: 0, scale: 1, zIndex: 50, z: 80 },
     { x: 26, y: 12, rotation: 5, scale: 0.84, zIndex: 41, z: 12 },
     { x: -6, y: 5, rotation: -1.5, scale: 0.82, zIndex: 38, z: 8 },
-    { x: 5, y: 6, rotation: 1.5, scale: 0.80, zIndex: 37, z: 4 },
+    { x: 5, y: 6, rotation: 1.5, scale: 0.8, zIndex: 37, z: 4 },
     { x: 0, y: 10, rotation: 0.5, scale: 0.78, zIndex: 36, z: 0 },
   ] as const;
   const totalSpinAngle = Math.PI * 0.75;
@@ -21,7 +27,8 @@
   const assurances = [
     {
       title: "Direction",
-      description: "Every project starts with clear references, technical specifications and creative goals.",
+      description:
+        "Every project starts with clear references, technical specifications and creative goals.",
       icon: Compass,
     },
     {
@@ -90,8 +97,10 @@
         let cardQuickY: QuickToFn[] = [];
 
         const getStageSize = () => ({
-          width: orbitStageRef.clientWidth,
-          height: orbitStageRef.clientHeight,
+          width: orbitStageRef?.clientWidth || window.innerWidth,
+          height:
+            orbitStageRef?.clientHeight ||
+            Math.min(window.innerHeight * 0.75, 700),
         });
 
         const getFramePosition = (
@@ -196,8 +205,18 @@
               if (cardQuickX.length === 0) {
                 cards.forEach((card) => {
                   gsap.set(card, { transformPerspective: 1000 });
-                  cardQuickX.push(gsap.quickTo(card, "rotateX", { duration: 0.5, ease: "power2.out" }));
-                  cardQuickY.push(gsap.quickTo(card, "rotateY", { duration: 0.5, ease: "power2.out" }));
+                  cardQuickX.push(
+                    gsap.quickTo(card, "rotateX", {
+                      duration: 0.5,
+                      ease: "power2.out",
+                    }),
+                  );
+                  cardQuickY.push(
+                    gsap.quickTo(card, "rotateY", {
+                      duration: 0.5,
+                      ease: "power2.out",
+                    }),
+                  );
                 });
               }
             } else {
@@ -211,7 +230,7 @@
         media.add(
           "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
           () => {
-            cards.forEach(placeFrame);
+            placeWheel(0, 0, 0);
             gsap.set(centerTextRef, { autoAlpha: 1, scale: 1, y: 0 });
             gsap.set(stackGroupRef, { pointerEvents: "none" });
             gsap.set(cards, { pointerEvents: "none" });
@@ -285,18 +304,23 @@
 
             // Use orbitStageRef (no GSAP transforms) as stable coordinate space.
             const handlePointerMove = (event: PointerEvent) => {
-              if (!stackReady || !isHovering || event.pointerType !== "mouse") return;
+              if (!stackReady || !isHovering || event.pointerType !== "mouse")
+                return;
               if (cardQuickX.length === 0) return;
 
               const stageBounds = orbitStageRef.getBoundingClientRect();
               const halfWidth = stageBounds.width * 0.5;
               const normX = gsap.utils.clamp(
-                -0.5, 0.5,
-                (event.clientX - stageBounds.left - halfWidth * 0.5) / halfWidth,
+                -0.5,
+                0.5,
+                (event.clientX - stageBounds.left - halfWidth * 0.5) /
+                  halfWidth,
               );
               const normY = gsap.utils.clamp(
-                -0.5, 0.5,
-                (event.clientY - stageBounds.top - stageBounds.height * 0.5) / stageBounds.height,
+                -0.5,
+                0.5,
+                (event.clientY - stageBounds.top - stageBounds.height * 0.5) /
+                  stageBounds.height,
               );
 
               // Front card (index 3): full tilt
@@ -332,7 +356,7 @@
                 id: "about-orbit-gallery-pin",
                 trigger: sectionRef,
                 start: "top top+=70",
-                end: () => `+=${window.innerHeight * 1.9}`,
+                end: () => `+=${window.innerHeight * 1.5}`,
                 pin: true,
                 pinSpacing: true,
                 scrub: true,
@@ -502,6 +526,8 @@
 
         return () => media.revert();
       }, sectionRef);
+
+      ScrollTrigger.refresh();
     });
 
     return () => {
@@ -527,7 +553,9 @@
   >
     <!-- MOBILE HEADER (visible on mobile, hidden on desktop) -->
     <header class="w-full pb-6 mb-6 block md:hidden">
-      <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green">
+      <span
+        class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green"
+      >
         Our Production System
       </span>
       <h2
@@ -547,7 +575,9 @@
         class="workflow-header absolute top-0 pb-4 hidden md:block"
         style="right: clamp(0.5rem, 1.5vw, 1.75rem); width: min(44%, 39rem);"
       >
-        <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green">
+        <span
+          class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green"
+        >
           Our Production System
         </span>
         <h2
@@ -562,10 +592,10 @@
         {#each aboutOrbitCards as card, index (card.id)}
           <div
             data-shape={card.shape}
-            class="orbit-card-item absolute rounded-xl"
+            class="orbit-card-item absolute rounded-2xl overflow-hidden"
           >
             <figure
-              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl bg-brand-dark shadow-xl transition-shadow duration-300 hover:shadow-2xl border border-brand-dark/5"
+              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl shadow-xl transition-shadow duration-300 hover:shadow-2xl"
             >
               <img
                 src={card.media.src}
@@ -574,7 +604,7 @@
                 height={card.media.height}
                 loading="lazy"
                 decoding="async"
-                class="h-full w-full object-cover"
+                class="h-full w-full object-cover rounded-2xl"
               />
             </figure>
           </div>
@@ -622,7 +652,6 @@
         class="assurance-panel"
         aria-label="Our Process"
       >
-
         <div class="assurance-list" aria-label="Our production milestones">
           {#each assurances as assurance, index (assurance.title)}
             {@const Icon = assurance.icon}
@@ -632,7 +661,9 @@
               </span>
               <div class="assurance-content">
                 <div class="assurance-title-row">
-                  <span class="assurance-row-icon"><Icon size={15} strokeWidth={1.5} /></span>
+                  <span class="assurance-row-icon"
+                    ><Icon size={15} strokeWidth={1.5} /></span
+                  >
                   <h3>{assurance.title}</h3>
                 </div>
                 <p>{assurance.description}</p>
@@ -650,20 +681,44 @@
         <!-- Metrics Grid -->
         <div class="flex-1 grid grid-cols-4 gap-6 text-left">
           <div class="metric-item">
-            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">150+</span>
-            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">Creative Specialists</span>
+            <span
+              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              >150+</span
+            >
+            <span
+              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              >Creative Specialists</span
+            >
           </div>
           <div class="metric-item">
-            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">10+ Years</span>
-            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">Proven Experience</span>
+            <span
+              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              >10+ Years</span
+            >
+            <span
+              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              >Proven Experience</span
+            >
           </div>
           <div class="metric-item">
-            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">24/7</span>
-            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">Production Studio</span>
+            <span
+              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              >24/7</span
+            >
+            <span
+              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              >Production Studio</span
+            >
           </div>
           <div class="metric-item">
-            <span class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark">99%</span>
-            <span class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50">On-Time Delivery</span>
+            <span
+              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              >99%</span
+            >
+            <span
+              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              >On-Time Delivery</span
+            >
           </div>
         </div>
 
@@ -689,27 +744,48 @@
     >
       <div class="grid grid-cols-2 gap-6 text-left">
         <div class="metric-item">
-          <span class="block font-display text-2xl font-light leading-none text-brand-dark">150+</span>
-          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">Creative Specialists</span>
+          <span
+            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            >150+</span
+          >
+          <span
+            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            >Creative Specialists</span
+          >
         </div>
         <div class="metric-item">
-          <span class="block font-display text-2xl font-light leading-none text-brand-dark">10+ Years</span>
-          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">Proven Experience</span>
+          <span
+            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            >10+ Years</span
+          >
+          <span
+            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            >Proven Experience</span
+          >
         </div>
         <div class="metric-item">
-          <span class="block font-display text-2xl font-light leading-none text-brand-dark">24/7</span>
-          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">Production Studio</span>
+          <span
+            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            >24/7</span
+          >
+          <span
+            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            >Production Studio</span
+          >
         </div>
         <div class="metric-item">
-          <span class="block font-display text-2xl font-light leading-none text-brand-dark">99%</span>
-          <span class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50">On-Time Delivery</span>
+          <span
+            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            >99%</span
+          >
+          <span
+            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            >On-Time Delivery</span
+          >
         </div>
       </div>
       <div class="flex justify-start mt-2">
-        <a
-          href={resolve("/contact")}
-          class="workflow-link !mt-0"
-        >
+        <a href={resolve("/contact")} class="workflow-link !mt-0">
           <span>Start a project</span>
           <span class="workflow-link-icon">
             <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
@@ -727,7 +803,10 @@
 
   .orbit-story {
     padding-block: clamp(4rem, 7vw, 7rem);
-    background-image: radial-gradient(color-mix(in srgb, var(--color-brand-dark) 5%, transparent) 1px, transparent 1px);
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--color-brand-dark) 5%, transparent) 1px,
+      transparent 1px
+    );
     background-size: 28px 28px;
     position: relative;
   }
@@ -736,8 +815,17 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 10% 30%, rgba(201, 255, 90, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 90% 70%, rgba(126, 166, 65, 0.08) 0%, transparent 50%);
+    background:
+      radial-gradient(
+        circle at 10% 30%,
+        rgba(201, 255, 90, 0.12) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 90% 70%,
+        rgba(126, 166, 65, 0.08) 0%,
+        transparent 50%
+      );
     pointer-events: none;
     z-index: 1;
     mask-image: linear-gradient(to bottom, transparent 0%, black 120px);
@@ -759,14 +847,19 @@
   .orbit-card-item {
     width: clamp(8.5rem, 14vw, 15rem);
     aspect-ratio: 4 / 5;
-    border-radius: 0.6rem;
+    border-radius: 1rem;
     backface-visibility: hidden;
     transform-origin: center;
     transform-style: preserve-3d;
+    border: none;
+    outline: none;
   }
 
   .orbit-card-visual {
     transform-style: preserve-3d;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
   }
 
   .assurance-panel {
@@ -782,7 +875,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-top: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+    border-top: 1px solid
+      color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
   }
 
   .assurance-row {
@@ -792,13 +886,20 @@
     gap: 1rem;
     align-items: start;
     padding-block: 1.35rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
-    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), background-color 320ms ease;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+    transition:
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 320ms ease;
   }
 
   .assurance-row:hover {
     transform: translateX(0.5rem);
-    background-color: color-mix(in srgb, var(--color-brand-green) 4%, transparent);
+    background-color: color-mix(
+      in srgb,
+      var(--color-brand-green) 4%,
+      transparent
+    );
   }
 
   .assurance-index {
