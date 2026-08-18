@@ -399,16 +399,16 @@
     class="relative min-h-[28rem] overflow-hidden bg-brand-green text-brand-dark"
   >
     <ContactSignalField />
-    <div class="site-shell relative z-10 flex min-h-[28rem] items-center py-16">
-      <div class="contact-signal-copy max-w-4xl">
+    <div class="site-shell relative z-10 flex min-h-[28rem] items-center justify-end py-16">
+      <div class="contact-signal-copy ml-auto w-full max-w-xl lg:max-w-2xl pl-4 lg:pl-10">
         <h2
           id="contact-signal-title"
-          class="max-w-4xl font-display text-[clamp(2.8rem,5.4vw,5rem)] leading-[0.9] tracking-[-0.038em]"
+          class="font-display text-[clamp(2.4rem,4.5vw,4.25rem)] leading-[0.92] tracking-[-0.038em]"
         >
           A clear brief turns scattered inputs into one production signal.
         </h2>
         <p
-          class="mt-6 max-w-xl text-sm leading-6 text-brand-dark/72 sm:text-base"
+          class="mt-6 max-w-lg text-sm leading-6 text-brand-dark/72 sm:text-base"
         >
           You do not need to solve the workflow before writing. Bring the
           material and the intended finish; we can shape the route together.
@@ -563,7 +563,7 @@
                 width="1200"
                 height="900"
                 loading="lazy"
-                class="aspect-[4/3] w-full bg-brand-paper object-contain object-center"
+                class="aspect-[4/3] w-full object-cover object-center"
               />
               <figcaption class="bg-brand-dark p-5 text-brand-light">
                 <p class="font-display text-2xl tracking-[-0.02em]">

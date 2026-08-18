@@ -242,7 +242,7 @@ export const workGalleryItems: WorkGalleryItem[] = [
 export const testimonials: TestimonialItem[] = [
   {
     quote:
-      "Studio Click House has been a very good help to speed up the day to day process at our Studio. Very dedicated and always ready to take challenges.",
+      "Great design is not just about how something looks; it’s about how it makes people see, feel, and remember.",
     name: "Jilhaj Hossain Raju",
     role: "Managing Director",
     company: "Studio Click House Ltd.",

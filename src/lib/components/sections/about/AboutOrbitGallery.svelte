@@ -656,9 +656,6 @@
           {#each assurances as assurance, index (assurance.title)}
             {@const Icon = assurance.icon}
             <article bind:this={assuranceRows[index]} class="assurance-row">
-              <span class="assurance-index">
-                {String(index + 1).padStart(2, "0")}
-              </span>
               <div class="assurance-content">
                 <div class="assurance-title-row">
                   <span class="assurance-row-icon"
@@ -881,9 +878,8 @@
 
   .assurance-row {
     position: relative;
-    display: grid;
-    grid-template-columns: 2.2rem minmax(0, 1fr);
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
     align-items: start;
     padding-block: 1.35rem;
     border-bottom: 1px solid
@@ -900,15 +896,6 @@
       var(--color-brand-green) 4%,
       transparent
     );
-  }
-
-  .assurance-index {
-    align-self: start;
-    padding-top: 0.15rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--color-brand-green);
   }
 
   .assurance-content {

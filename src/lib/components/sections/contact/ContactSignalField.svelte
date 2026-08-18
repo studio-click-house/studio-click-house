@@ -39,10 +39,10 @@
           const positionIndex = index * 3;
           const progress = index / particleCount;
           const angle = progress * Math.PI * 8;
-          const radius = 1.25 + Math.sin(progress * Math.PI * 3) * 0.46;
+          const radius = 1.15 + Math.sin(progress * Math.PI * 3) * 0.42;
 
           positions[positionIndex] = Math.cos(angle) * radius;
-          positions[positionIndex + 1] = (progress - 0.5) * 5.8;
+          positions[positionIndex + 1] = (progress - 0.5) * 4.4;
           positions[positionIndex + 2] = Math.sin(angle) * radius * 0.7;
           phases[index] = progress * Math.PI * 2;
         }
@@ -54,24 +54,28 @@
         );
 
         const material = new THREE.PointsMaterial({
-          color: 0x20211f,
-          size: 0.045,
+          color: 0xffffff,
+          size: 0.052,
           transparent: true,
-          opacity: 0.52,
+          opacity: 0.85,
           sizeAttenuation: true,
         });
         const points = new THREE.Points(geometry, material);
         points.rotation.z = Math.PI / 2;
+        points.position.x = -3.4;
         scene.add(points);
 
-        // Draw a multi-harmonic oscilloscope signal bundle with 3 overlapping lines
+        // Draw a multi-harmonic oscilloscope signal bundle with bold white lines
         const signalGroup = new THREE.Group();
+        signalGroup.position.x = -3.4;
         scene.add(signalGroup);
 
         const harmonics = [
-          { freq: 4.0, ampY: 0.78, ampZ: 0.36, opacity: 0.58, color: 0x20211f, speed: 2.2 }, // Primary Dark
-          { freq: 5.5, ampY: 0.52, ampZ: 0.24, opacity: 0.32, color: 0x20211f, speed: -1.6 }, // Secondary Dark
-          { freq: 3.0, ampY: 0.95, ampZ: 0.48, opacity: 0.16, color: 0x20211f, speed: 1.1 }, // Sub-harmonic Dark
+          { freq: 4.0, ampY: 0.78, ampZ: 0.36, opacity: 0.95, color: 0xffffff, speed: 2.2, offset: 0 },
+          { freq: 4.0, ampY: 0.795, ampZ: 0.36, opacity: 0.85, color: 0xffffff, speed: 2.2, offset: 0.01 }, // Bold stroke duplicate
+          { freq: 4.0, ampY: 0.765, ampZ: 0.36, opacity: 0.85, color: 0xffffff, speed: 2.2, offset: -0.01 }, // Bold stroke duplicate
+          { freq: 5.5, ampY: 0.52, ampZ: 0.24, opacity: 0.75, color: 0xffffff, speed: -1.6, offset: 0 },
+          { freq: 3.0, ampY: 0.95, ampZ: 0.48, opacity: 0.45, color: 0xffffff, speed: 1.1, offset: 0 },
         ];
 
         const lineGeometries: InstanceType<typeof THREE.BufferGeometry>[] = [];
@@ -85,8 +89,8 @@
             const progress = index / 83;
             const positionIndex = index * 3;
             const angle = progress * Math.PI * h.freq;
-            positions[positionIndex] = (progress - 0.5) * 6.4;
-            positions[positionIndex + 1] = Math.sin(angle) * h.ampY;
+            positions[positionIndex] = (progress - 0.5) * 4.6;
+            positions[positionIndex + 1] = Math.sin(angle) * h.ampY + (h.offset || 0);
             positions[positionIndex + 2] = Math.cos(angle) * h.ampZ;
           }
           
@@ -142,7 +146,7 @@
                 const progress = index / 83;
                 const positionIndex = index * 3;
                 const angle = progress * Math.PI * h.freq + elapsed * h.speed;
-                arr[positionIndex + 1] = Math.sin(angle) * h.ampY;
+                arr[positionIndex + 1] = Math.sin(angle) * h.ampY + (h.offset || 0);
                 arr[positionIndex + 2] = Math.cos(angle) * h.ampZ;
               }
               posAttr.needsUpdate = true;
@@ -206,10 +210,24 @@
               },
             );
             gsap.fromTo(
-              signalGroup.position,
-              { x: -0.65 },
+              points.position,
+              { x: -3.7 },
               {
-                x: 0.65,
+                x: -3.1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: sectionElement,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              },
+            );
+            gsap.fromTo(
+              signalGroup.position,
+              { x: -3.7 },
+              {
+                x: -3.1,
                 ease: "none",
                 scrollTrigger: {
                   trigger: sectionElement,
@@ -268,11 +286,11 @@
 
 <div
   bind:this={sectionElement}
-  class="absolute inset-0 overflow-hidden"
+  class="absolute inset-0 overflow-hidden pointer-events-none"
   aria-hidden="true"
 >
   <canvas
     bind:this={canvasElement}
-    class="block h-full w-full bg-transparent opacity-70"
+    class="block h-full w-full bg-transparent opacity-95"
   ></canvas>
 </div>

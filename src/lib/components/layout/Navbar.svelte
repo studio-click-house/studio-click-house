@@ -113,41 +113,63 @@
               resumeNavigation = () => timeline.play();
             }
 
-            timeline
-              .from(
-                ".nav-reveal",
-                {
-                  y: 18,
-                  autoAlpha: 0,
-                  duration: revealDuration,
-                  stagger: waitsForPreloader ? 0.055 : 0.08,
-                  ease: "power3.out",
-                },
-                waitsForPreloader ? ">" : "-=0.45",
-              )
-              .from(
-                ".project-action",
-                {
-                  scale: 0.82,
-                  autoAlpha: 0,
-                  duration: waitsForPreloader ? 0.4 : 0.55,
-                  ease: "back.out(1.8)",
-                },
-                waitsForPreloader ? "-=0.28" : "-=0.35",
-              );
-
-            if (!waitsForPreloader) {
-              timeline.from(
-                ".brand-mark",
-                {
-                  scale: 0.86,
-                  rotation: -3,
-                  autoAlpha: 0,
-                  duration: 0.8,
-                  ease: "power3.out",
-                },
-                "-=0.6",
-              );
+            if (waitsForPreloader) {
+              timeline
+                .from(
+                  ".nav-reveal:not(.brand-block)",
+                  {
+                    y: 18,
+                    autoAlpha: 0,
+                    duration: revealDuration,
+                    stagger: 0.055,
+                    ease: "power3.out",
+                  },
+                  ">",
+                )
+                .from(
+                  ".project-action",
+                  {
+                    scale: 0.82,
+                    autoAlpha: 0,
+                    duration: 0.4,
+                    ease: "back.out(1.8)",
+                  },
+                  "-=0.28",
+                );
+            } else {
+              timeline
+                .from(
+                  ".nav-reveal",
+                  {
+                    y: 18,
+                    autoAlpha: 0,
+                    duration: revealDuration,
+                    stagger: 0.08,
+                    ease: "power3.out",
+                  },
+                  "-=0.45",
+                )
+                .from(
+                  ".brand-mark",
+                  {
+                    scale: 0.86,
+                    rotation: -3,
+                    autoAlpha: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                  },
+                  "-=0.6",
+                )
+                .from(
+                  ".project-action",
+                  {
+                    scale: 0.82,
+                    autoAlpha: 0,
+                    duration: 0.55,
+                    ease: "back.out(1.8)",
+                  },
+                  "-=0.35",
+                );
             }
 
             ScrollTrigger.create({
