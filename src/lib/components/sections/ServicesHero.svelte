@@ -81,7 +81,6 @@
 
           gsap.to(".services-hero-text-motion", {
             y: -72,
-            autoAlpha: 0.35,
             ease: "none",
             scrollTrigger: {
               trigger: heroSection,
@@ -145,33 +144,33 @@
         </h1>
       </div>
 
-      <div
-        class="services-hero-meta services-hero-text-motion lg:col-span-4 lg:self-end lg:pb-3"
-      >
-        <p
-          class="max-w-[34rem] text-base leading-[1.6] text-brand-light/68 lg:max-w-[30ch]"
-        >
-          {servicesHero.description}
-        </p>
-        <div class="mt-8 flex flex-wrap items-center gap-5">
-          <a
-            href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
+      <div class="services-hero-text-motion lg:col-span-4 lg:self-end lg:pb-3">
+        <div class="services-hero-meta">
+          <p
+            class="max-w-[34rem] text-base leading-[1.6] text-brand-light/68 lg:max-w-[30ch]"
           >
-            Discuss a project
-            <ArrowUpRight
-              class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </a>
-          <a
-            href="#services-details"
-            class="group inline-flex items-center gap-2 border-b border-brand-light/35 pb-1 text-sm font-medium text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
-          >
-            View capabilities
-            <ArrowDown
-              class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
-            />
-          </a>
+            {servicesHero.description}
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-5">
+            <a
+              href={resolve("/contact")}
+              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
+            >
+              Discuss a project
+              <ArrowUpRight
+                class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </a>
+            <a
+              href="#services-details"
+              class="group inline-flex items-center gap-2 border-b border-brand-light/35 pb-1 text-sm font-medium text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+            >
+              View capabilities
+              <ArrowDown
+                class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
