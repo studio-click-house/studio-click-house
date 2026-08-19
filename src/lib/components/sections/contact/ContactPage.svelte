@@ -51,26 +51,8 @@
     const form = event.currentTarget;
     if (!(form instanceof HTMLFormElement) || !form.reportValidity()) return;
 
-    const formData = new FormData(form);
-    const name = String(formData.get("name") ?? "New project").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const company = String(formData.get("company") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-    const subject = `Project brief from ${name}`;
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${phone || "Not provided"}`,
-      `Company or brand: ${company || "Not provided"}`,
-      `Service: ${selectedService}`,
-      "",
-      message,
-    ].join("\n");
-
     briefPrepared = true;
-    formStatus = "Your project email is ready to review before sending.";
-    window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    formStatus = "We received your project details, we will reply shortly.";
   }
 
   onMount(() => {
@@ -165,49 +147,6 @@
             },
           });
 
-          const contactChannels =
-            gsap.utils.toArray<HTMLElement>(".contact-channel");
-          const channelListeners = contactChannels.map((channel) => {
-            const icon = channel.querySelector("svg");
-            const handleEnter = () => {
-              gsap.to(channel, {
-                y: -5,
-                duration: 0.28,
-                ease: "power2.out",
-                overwrite: "auto",
-              });
-              gsap.to(icon, {
-                x: 2,
-                rotate: -7,
-                duration: 0.28,
-                ease: "power2.out",
-                overwrite: "auto",
-              });
-            };
-            const handleLeave = () => {
-              gsap.to(channel, {
-                y: 0,
-                duration: 0.38,
-                ease: "power3.out",
-                overwrite: "auto",
-              });
-              gsap.to(icon, {
-                x: 0,
-                rotate: 0,
-                duration: 0.38,
-                ease: "power3.out",
-                overwrite: "auto",
-              });
-            };
-
-            channel.addEventListener("pointerenter", handleEnter);
-            channel.addEventListener("pointerleave", handleLeave);
-            channel.addEventListener("focus", handleEnter);
-            channel.addEventListener("blur", handleLeave);
-
-            return { channel, icon, handleEnter, handleLeave };
-          });
-
           gsap.fromTo(
             ".contact-signal-copy",
             { yPercent: 18 },
@@ -238,28 +177,17 @@
 
           gsap.from(".contact-office-reveal", {
             autoAlpha: 0,
-            y: 28,
-            duration: 0.76,
-            stagger: 0.09,
-            ease: "power3.out",
+            y: 18,
+            duration: 0.45,
+            stagger: 0.04,
+            ease: "power2.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: officesSection,
-              start: "top 78%",
+              start: "top 85%",
               once: true,
             },
           });
-
-          return () => {
-            channelListeners.forEach(
-              ({ channel, icon, handleEnter, handleLeave }) => {
-                channel.removeEventListener("pointerenter", handleEnter);
-                channel.removeEventListener("pointerleave", handleLeave);
-                channel.removeEventListener("focus", handleEnter);
-                channel.removeEventListener("blur", handleLeave);
-                gsap.killTweensOf([channel, icon]);
-              },
-            );
-          };
         });
       }, pageRoot);
     });
@@ -275,16 +203,11 @@
   <section
     id="contact-hero"
     aria-labelledby="contact-page-title"
-    class="relative flex min-h-dvh flex-col overflow-hidden bg-brand-paper pt-24"
+    class="relative flex min-h-dvh flex-col bg-brand-paper pt-24 sm:pt-28"
   >
-    <div class="site-shell flex flex-1 items-center py-10 sm:py-12 lg:py-14">
+    <div class="site-shell flex flex-1 items-center py-8 sm:py-10 lg:py-12">
       <div class="grid w-full gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
         <div class="contact-hero-copy lg:col-span-7">
-          <p
-            class="contact-hero-reveal font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
-          >
-            Contact Studio Click House
-          </p>
           <h1
             id="contact-page-title"
             class="mt-5 max-w-none font-display text-[clamp(3.25rem,5.5vw,6.1rem)] leading-[0.9] tracking-[-0.05em] sm:whitespace-nowrap"
@@ -364,16 +287,26 @@
     <div
       id="contact-channels"
       aria-label="Direct contact options"
-      class="shrink-0 border-y border-brand-dark/12 bg-brand-light"
+      class="w-full shrink-0 border-t border-brand-dark/10 bg-brand-light/80 py-6 sm:py-7 lg:py-8 backdrop-blur-sm"
     >
-      <div class="site-shell grid gap-3 py-3 md:grid-cols-2 lg:grid-cols-4">
+      <div class="site-shell mx-auto grid content-center items-center gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         <a href={`mailto:${siteConfig.contact.email}`} class="contact-channel">
-          <Mail size={17} aria-hidden="true" />
-          <span><small>Email</small>{siteConfig.contact.email}</span>
+          <span class="contact-channel-icon shrink-0">
+            <Mail size={18} aria-hidden="true" />
+          </span>
+          <span class="contact-channel-text">
+            <small>Email</small>
+            <span>{siteConfig.contact.email}</span>
+          </span>
         </a>
         <a href={`tel:${siteConfig.contact.phoneHref}`} class="contact-channel">
-          <Phone size={17} aria-hidden="true" />
-          <span><small>Call us</small>{siteConfig.contact.phone}</span>
+          <span class="contact-channel-icon shrink-0">
+            <Phone size={18} aria-hidden="true" />
+          </span>
+          <span class="contact-channel-text">
+            <small>Call us</small>
+            <span>{siteConfig.contact.phone}</span>
+          </span>
         </a>
         <a
           href={siteConfig.contact.websiteHref}
@@ -381,12 +314,22 @@
           target="_blank"
           rel="noreferrer"
         >
-          <Globe2 size={17} aria-hidden="true" />
-          <span><small>Website</small>{siteConfig.contact.website}</span>
+          <span class="contact-channel-icon shrink-0">
+            <Globe2 size={18} aria-hidden="true" />
+          </span>
+          <span class="contact-channel-text">
+            <small>Website</small>
+            <span>{siteConfig.contact.website}</span>
+          </span>
         </a>
         <a href="#global-offices" class="contact-channel">
-          <MapPin size={17} aria-hidden="true" />
-          <span><small>Main studio</small>Dhaka, Bangladesh</span>
+          <span class="contact-channel-icon shrink-0">
+            <MapPin size={18} aria-hidden="true" />
+          </span>
+          <span class="contact-channel-text">
+            <small>Main studio</small>
+            <span>Dhaka, Bangladesh</span>
+          </span>
         </a>
       </div>
     </div>
@@ -396,24 +339,24 @@
     id="contact-signal"
     bind:this={signalSection}
     aria-labelledby="contact-signal-title"
-    class="relative min-h-[28rem] overflow-hidden bg-brand-green text-brand-dark"
+    class="relative overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
   >
+    <!-- 3D Wave Canvas inset behind the text -->
     <ContactSignalField />
-    <div class="site-shell relative z-10 flex min-h-[28rem] items-center justify-end py-16">
-      <div class="contact-signal-copy ml-auto w-full max-w-xl lg:max-w-2xl pl-4 lg:pl-10">
-        <h2
-          id="contact-signal-title"
-          class="font-display text-[clamp(2.4rem,4.5vw,4.25rem)] leading-[0.92] tracking-[-0.038em]"
-        >
-          A clear brief turns scattered inputs into one production signal.
-        </h2>
-        <p
-          class="mt-6 max-w-lg text-sm leading-6 text-brand-dark/72 sm:text-base"
-        >
-          You do not need to solve the workflow before writing. Bring the
-          material and the intended finish; we can shape the route together.
-        </p>
-      </div>
+
+    <div class="site-shell relative z-10 mx-auto max-w-4xl text-center">
+      <h2
+        id="contact-signal-title"
+        class="text-balance font-display text-[clamp(2.4rem,4.6vw,4.5rem)] leading-[0.95] tracking-[-0.04em] text-brand-dark"
+      >
+        A clear brief turns scattered inputs into one production signal.
+      </h2>
+      <p
+        class="mx-auto mt-6 max-w-xl text-base leading-7 text-brand-dark/72 sm:text-lg"
+      >
+        You do not need to solve the workflow before writing. Bring the
+        material and the intended finish; we can shape the route together.
+      </p>
     </div>
   </section>
 
@@ -429,14 +372,13 @@
           id="project-brief-title"
           class="text-balance font-display text-[clamp(2.6rem,4vw,4.6rem)] leading-[0.92] tracking-[-0.04em]"
         >
-          Send a project brief.
+          Share your project details.
         </h2>
         <p
           id="project-brief-description"
           class="mt-5 max-w-2xl text-base leading-7 text-brand-dark/68"
         >
-          Fill in what you know. We can discuss missing details after reviewing
-          the material.
+          Provide the details you have. We will follow up on anything incomplete after reviewing.
         </p>
       </header>
 
@@ -539,11 +481,11 @@
                   {formStatus}
                 </p>
               {:else}
-                <p>Your email app opens with the project details prepared.</p>
+                <p>We usually respond within 1–2 hours.</p>
               {/if}
             </div>
             <button type="submit" class="brief-submit group">
-              Prepare email
+              Submit details
               <ArrowUpRight
                 size={16}
                 class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -630,103 +572,95 @@
           id="global-offices-title"
           class="text-balance font-display text-[clamp(2.7rem,4.6vw,5.4rem)] leading-[0.9] tracking-[-0.045em]"
         >
-          Four offices. One production team.
+          Reach us here.
         </h2>
         <p class="mt-5 max-w-xl text-base leading-7 text-brand-dark/66">
-          Contact the office closest to your region, or write directly to the
-          Dhaka production studio.
+          Our production team works across borders to bring every project to life.
         </p>
       </header>
 
-      <div class="mt-10 grid gap-5 lg:grid-cols-12 lg:items-stretch">
+      <div class="mt-10 space-y-6">
+        <!-- Main Production Studio (Dhaka HQ) — Flagship Luxury Dark Card -->
         <article
-          class="contact-office-reveal rounded-[1rem] bg-brand-dark p-6 text-brand-light sm:p-8 lg:col-span-7 lg:p-10"
+          class="contact-office-reveal relative overflow-hidden rounded-[1.5rem] bg-brand-dark p-7 text-brand-light sm:p-9 lg:p-11 border border-white/10 shadow-2xl transition-all duration-300 hover:border-brand-green/45 hover:shadow-[0_24px_64px_-16px_rgba(126,166,65,0.18)]"
         >
-          <div class="flex items-start justify-between gap-6">
-            <div>
-              <p
-                class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-green"
-              >
-                Main production office
-              </p>
+          <!-- Ambient Green Luxury Glow -->
+          <div
+            class="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-brand-green/14 blur-3xl"
+            aria-hidden="true"
+          ></div>
+
+          <!-- 2-Column Content: Details + Glassmorphic Channels -->
+          <div class="relative z-10 grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-5">
               <h3
-                class="mt-4 font-display text-[clamp(2.7rem,5vw,5.5rem)] leading-none tracking-[-0.045em]"
+                class="font-display text-[clamp(2.8rem,5vw,4.8rem)] leading-[0.92] tracking-[-0.04em] text-brand-light"
               >
                 {primaryOffice.country}
               </h3>
-              <p class="mt-2 text-lg text-brand-light/56">
-                {primaryOffice.city}
+              <p class="mt-4 max-w-md text-sm leading-relaxed text-brand-light/75">
+                {primaryOffice.address}
               </p>
             </div>
-            <MapPin class="mt-1 size-6 text-brand-green" aria-hidden="true" />
-          </div>
 
-          <p class="mt-12 max-w-xl text-base leading-7 text-brand-light/72">
-            {primaryOffice.address}
-          </p>
-
-          <div
-            class="mt-8 grid gap-4 border-t border-brand-light/16 pt-6 sm:grid-cols-2"
-          >
-            <a
-              href={`tel:${primaryOffice.phoneHref}`}
-              class="office-link office-link-dark"
-            >
-              <Phone size={15} />
-              {primaryOffice.phone}
-            </a>
-            <a
-              href={`mailto:${primaryOffice.email}`}
-              class="office-link office-link-dark"
-            >
-              <Mail size={15} />
-              {primaryOffice.email}
-            </a>
-            {#if primaryOffice.website && primaryOffice.websiteHref}
-              <a
-                href={primaryOffice.websiteHref}
-                target="_blank"
-                rel="noreferrer"
-                class="office-link office-link-dark"
-              >
-                <Globe2 size={15} />
-                {primaryOffice.website}
+            <div class="grid gap-3.5 sm:grid-cols-2 lg:col-span-7">
+              <a href={`tel:${primaryOffice.phoneHref}`} class="office-channel-dark">
+                <Phone size={16} class="text-brand-green shrink-0" />
+                <div>
+                  <small>Phone line</small>
+                  <span>{primaryOffice.phone}</span>
+                </div>
               </a>
-            {/if}
-            {#if primaryOffice.skype}
-              <a
-                href={`skype:${primaryOffice.skype}?chat`}
-                class="office-link office-link-dark"
-              >
-                <ArrowUpRight size={15} /> Skype: {primaryOffice.skype}
+              <a href={`mailto:${primaryOffice.email}`} class="office-channel-dark">
+                <Mail size={16} class="text-brand-green shrink-0" />
+                <div>
+                  <small>Studio inbox</small>
+                  <span>{primaryOffice.email}</span>
+                </div>
               </a>
-            {/if}
+              {#if primaryOffice.website && primaryOffice.websiteHref}
+                <a href={primaryOffice.websiteHref} target="_blank" rel="noreferrer" class="office-channel-dark">
+                  <Globe2 size={16} class="text-brand-green shrink-0" />
+                  <div>
+                    <small>Official site</small>
+                    <span>{primaryOffice.website}</span>
+                  </div>
+                </a>
+              {/if}
+              {#if primaryOffice.skype}
+                <a href={`skype:${primaryOffice.skype}?chat`} class="office-channel-dark">
+                  <ArrowUpRight size={16} class="text-brand-green shrink-0" />
+                  <div>
+                    <small>Skype direct</small>
+                    <span>{primaryOffice.skype}</span>
+                  </div>
+                </a>
+              {/if}
+            </div>
           </div>
         </article>
 
-        <div
-          class="contact-office-reveal overflow-hidden rounded-[1rem] border border-brand-dark/14 bg-brand-paper lg:col-span-5"
-        >
+        <!-- 3 Regional Desks -->
+        <div class="regional-offices-grid">
           {#each regionalOffices as office (office.id)}
-            <article class="regional-office">
+            <article
+              class="contact-office-reveal flex h-full flex-col justify-between rounded-2xl border border-brand-dark/16 bg-brand-paper/95 p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-brand-green/50 hover:shadow-md"
+            >
               <div>
-                <h3 class="font-display text-3xl tracking-[-0.03em]">
+                <h3 class="font-display text-3xl font-light tracking-[-0.035em] text-brand-dark">
                   {office.country}
                 </h3>
-                <p class="mt-1 text-sm text-brand-dark/54">{office.city}</p>
+                <p class="mt-2 text-xs leading-relaxed text-brand-dark/75">{office.address}</p>
               </div>
-              <div class="mt-5 grid gap-2.5 text-sm">
-                <p class="flex items-start gap-2 text-brand-dark/66">
-                  <MapPin size={14} class="mt-0.5 shrink-0 text-brand-green" />
-                  {office.address}
-                </p>
-                <a href={`tel:${office.phoneHref}`} class="office-link">
-                  <Phone size={14} />
-                  {office.phone}
+
+              <div class="mt-6 flex flex-col gap-1.5 border-t border-brand-dark/10 pt-4">
+                <a href={`tel:${office.phoneHref}`} class="regional-contact-btn">
+                  <Phone size={13} class="text-brand-green shrink-0" />
+                  <span>{office.phone}</span>
                 </a>
-                <a href={`mailto:${office.email}`} class="office-link">
-                  <Mail size={14} />
-                  {office.email}
+                <a href={`mailto:${office.email}`} class="regional-contact-btn">
+                  <Mail size={13} class="text-brand-green shrink-0" />
+                  <span>{office.email}</span>
                 </a>
               </div>
             </article>
@@ -751,45 +685,73 @@
 
   .contact-channel {
     display: flex;
+    width: 100%;
     min-width: 0;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.95rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
-    border-radius: 0.65rem;
+    border-radius: 0.75rem;
     background: var(--color-brand-paper);
-    padding: 0.95rem 1rem;
+    padding: 1.05rem 1.25rem;
     color: var(--color-brand-dark);
     transition:
-      color 220ms ease,
-      background-color 220ms ease;
+      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 240ms ease,
+      background-color 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .contact-channel:hover {
-    border-color: color-mix(in srgb, var(--color-brand-green) 54%, transparent);
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-brand-green) 50%, transparent);
     background: color-mix(
       in srgb,
-      var(--color-brand-green) 7%,
+      var(--color-brand-green) 6%,
       var(--color-brand-paper)
     );
+    box-shadow: 0 8px 24px -6px rgba(126, 166, 65, 0.12);
+  }
+
+  .contact-channel-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: color-mix(in srgb, var(--color-brand-dark) 70%, transparent);
+    transition: color 240ms ease, transform 240ms ease;
+  }
+
+  .contact-channel:hover .contact-channel-icon {
     color: var(--color-brand-green);
+    transform: scale(1.08);
   }
 
-  .contact-channel small {
+  .contact-channel-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .contact-channel-text small {
     display: block;
-    margin-bottom: 0.2rem;
-    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
+    margin-bottom: 0.15rem;
+    color: color-mix(in srgb, var(--color-brand-dark) 48%, transparent);
     font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.12em;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
+    line-height: 1;
   }
 
-  .contact-channel span {
+  .contact-channel-text span {
     min-width: 0;
     overflow-wrap: anywhere;
-    font-size: 0.84rem;
+    font-size: 0.85rem;
     font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-brand-dark);
   }
 
   .brief-field-label {
@@ -935,14 +897,83 @@
     color: var(--color-brand-light);
   }
 
+  .office-channel-dark {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.95rem 1.15rem;
+    color: var(--color-brand-light);
+    backdrop-filter: blur(12px);
+    transition:
+      border-color 240ms ease,
+      background-color 240ms ease,
+      transform 240ms ease;
+  }
+
+  .office-channel-dark:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-brand-green) 60%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-brand-green) 12%,
+      rgba(255, 255, 255, 0.06)
+    );
+  }
+
+  .office-channel-dark small {
+    display: block;
+    margin-bottom: 0.15rem;
+    color: var(--color-brand-green);
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .office-channel-dark span {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-brand-light);
+    overflow-wrap: anywhere;
+  }
+
+  .regional-contact-btn {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.6rem;
+    color: color-mix(in srgb, var(--color-brand-dark) 80%, transparent);
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color 220ms ease;
+  }
+
+  .regional-contact-btn:hover {
+    color: var(--color-brand-green);
+  }
+
   .contact-detail-link,
   .office-link {
     display: inline-flex;
     width: fit-content;
-    align-items: flex-start;
-    gap: 0.55rem;
+    align-items: center;
+    gap: 0.6rem;
     color: color-mix(in srgb, var(--color-brand-dark) 76%, transparent);
+    line-height: 1.4;
     transition: color 220ms ease;
+  }
+
+  .contact-detail-link :global(svg),
+  .office-link :global(svg) {
+    flex-shrink: 0;
   }
 
   .contact-detail-link:hover,
@@ -950,17 +981,17 @@
     color: var(--color-brand-green);
   }
 
-  .office-link-dark {
-    color: color-mix(in srgb, var(--color-brand-light) 72%, transparent);
+  .regional-offices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    width: 100%;
   }
 
-  .regional-office {
-    padding: 1.4rem;
-  }
-
-  .regional-office + .regional-office {
-    border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
+  @media (max-width: 860px) {
+    .regional-offices-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (min-width: 768px) {

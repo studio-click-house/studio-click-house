@@ -54,28 +54,28 @@
         );
 
         const material = new THREE.PointsMaterial({
-          color: 0xffffff,
-          size: 0.052,
+          color: 0x7ea641,
+          size: 0.056,
           transparent: true,
           opacity: 0.85,
           sizeAttenuation: true,
         });
         const points = new THREE.Points(geometry, material);
         points.rotation.z = Math.PI / 2;
-        points.position.x = -3.4;
+        points.position.x = 0;
         scene.add(points);
 
-        // Draw a multi-harmonic oscilloscope signal bundle with bold white lines
+        // Draw a multi-harmonic oscilloscope signal bundle with vibrant brand-green lines
         const signalGroup = new THREE.Group();
-        signalGroup.position.x = -3.4;
+        signalGroup.position.x = 0;
         scene.add(signalGroup);
 
         const harmonics = [
-          { freq: 4.0, ampY: 0.78, ampZ: 0.36, opacity: 0.95, color: 0xffffff, speed: 2.2, offset: 0 },
-          { freq: 4.0, ampY: 0.795, ampZ: 0.36, opacity: 0.85, color: 0xffffff, speed: 2.2, offset: 0.01 }, // Bold stroke duplicate
-          { freq: 4.0, ampY: 0.765, ampZ: 0.36, opacity: 0.85, color: 0xffffff, speed: 2.2, offset: -0.01 }, // Bold stroke duplicate
-          { freq: 5.5, ampY: 0.52, ampZ: 0.24, opacity: 0.75, color: 0xffffff, speed: -1.6, offset: 0 },
-          { freq: 3.0, ampY: 0.95, ampZ: 0.48, opacity: 0.45, color: 0xffffff, speed: 1.1, offset: 0 },
+          { freq: 4.0, ampY: 0.78, ampZ: 0.36, opacity: 0.95, color: 0x7ea641, speed: 2.2, offset: 0 },
+          { freq: 4.0, ampY: 0.795, ampZ: 0.36, opacity: 0.85, color: 0x7ea641, speed: 2.2, offset: 0.01 }, // Bold stroke duplicate
+          { freq: 4.0, ampY: 0.765, ampZ: 0.36, opacity: 0.85, color: 0x7ea641, speed: 2.2, offset: -0.01 }, // Bold stroke duplicate
+          { freq: 5.5, ampY: 0.52, ampZ: 0.24, opacity: 0.75, color: 0x6a8f35, speed: -1.6, offset: 0 },
+          { freq: 3.0, ampY: 0.95, ampZ: 0.48, opacity: 0.5, color: 0x92c24c, speed: 1.1, offset: 0 },
         ];
 
         const lineGeometries: InstanceType<typeof THREE.BufferGeometry>[] = [];
@@ -211,9 +211,9 @@
             );
             gsap.fromTo(
               points.position,
-              { x: -3.7 },
+              { x: -0.3 },
               {
-                x: -3.1,
+                x: 0.3,
                 ease: "none",
                 scrollTrigger: {
                   trigger: sectionElement,
@@ -225,9 +225,9 @@
             );
             gsap.fromTo(
               signalGroup.position,
-              { x: -3.7 },
+              { x: -0.3 },
               {
-                x: -3.1,
+                x: 0.3,
                 ease: "none",
                 scrollTrigger: {
                   trigger: sectionElement,

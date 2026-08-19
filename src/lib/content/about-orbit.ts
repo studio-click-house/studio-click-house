@@ -90,7 +90,7 @@ export const aboutOrbitCards: AboutOrbitCard[] = [
     category: "Natural texture",
     shape: "portrait",
     media: {
-      src: "https://images.unsplash.com/photo-1567446537708-ac4aa75c9c28?auto=format&fit=crop&w=1122&q=85",
+      src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1122&q=85",
       alt: "High-end skincare beauty portrait with luminous complexion and natural skin texture",
       width: 1122,
       height: 1402,
