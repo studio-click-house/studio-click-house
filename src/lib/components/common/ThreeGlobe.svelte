@@ -199,6 +199,9 @@
     let initializationIdleId: number | undefined;
     let initializationTimeoutId: ReturnType<typeof setTimeout> | undefined;
     let initializationStarted = false;
+    let canInitialize =
+      !document.querySelector(".site-preloader") ||
+      document.documentElement.dataset.preloaderComplete === "true";
 
     async function initializeGlobe() {
       const [THREE, { default: ThreeGlobeConstructor }, { gsap }] =
@@ -584,7 +587,7 @@
     }
 
     const beginInitialization = () => {
-      if (initializationStarted || !active) return;
+      if (initializationStarted || !active || !canInitialize) return;
       initializationStarted = true;
       initializationObserver?.disconnect();
       initializationObserver = undefined;
@@ -599,36 +602,31 @@
       void initializeGlobe();
     };
 
-    const scheduleIdleInitialization = () => {
+    const scheduleIdleInitialization = (delay = 0) => {
       if (initializationStarted || !active) return;
 
-      if ("requestIdleCallback" in window) {
-        initializationIdleId = window.requestIdleCallback(
-          () => beginInitialization(),
-          { timeout: 1800 },
-        );
-      } else {
-        initializationTimeoutId = setTimeout(beginInitialization, 400);
-      }
+      initializationTimeoutId = setTimeout(() => {
+        initializationTimeoutId = undefined;
+        if ("requestIdleCallback" in window) {
+          initializationIdleId = window.requestIdleCallback(
+            () => beginInitialization(),
+            { timeout: 1800 },
+          );
+        } else {
+          beginInitialization();
+        }
+      }, delay);
     };
 
     const handlePreloaderComplete = () => {
-      scheduleIdleInitialization();
-    };
-
-    const handlePreloaderExit = () => {
-      beginInitialization();
+      canInitialize = true;
+      scheduleIdleInitialization(1400);
     };
 
     const preloaderElement = document.querySelector(".site-preloader");
     const isPreloaderComplete =
       document.documentElement.dataset.preloaderComplete === "true";
     if (preloaderElement && !isPreloaderComplete) {
-      window.addEventListener(
-        "site-preloader-header-reveal",
-        handlePreloaderExit,
-        { once: true },
-      );
       window.addEventListener(
         "site-preloader-complete",
         handlePreloaderComplete,
@@ -655,10 +653,6 @@
       window.removeEventListener(
         "site-preloader-complete",
         handlePreloaderComplete,
-      );
-      window.removeEventListener(
-        "site-preloader-header-reveal",
-        handlePreloaderExit,
       );
       initializationObserver?.disconnect();
       if (initializationIdleId !== undefined) {

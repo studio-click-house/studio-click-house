@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { resolve } from "$app/paths";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
 
@@ -110,7 +109,7 @@
 
         <div class="cta-detail-anim portfolio-cta-actions">
           <a
-            href={resolve(cta.primaryHref)}
+            href={cta.primaryHref}
             class="portfolio-cta-primary group"
           >
             <span>{cta.primaryLabel}</span>
@@ -121,7 +120,7 @@
             />
           </a>
           <a
-            href={resolve(cta.secondaryHref)}
+            href={cta.secondaryHref}
             class="portfolio-cta-secondary group"
           >
             <span>{cta.secondaryLabel}</span>

@@ -18,23 +18,25 @@
     let isHeroVisible = true;
     let isPreloaderComplete = !document.querySelector(".site-preloader");
     let startHeroMotion: (() => void) | undefined;
-    let videoStartTimer: ReturnType<typeof setTimeout> | undefined;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
 
     const startVideo = () => {
-      if (
-        !isPreloaderComplete ||
-        prefersReducedMotion.matches ||
-        !heroVideo
-      )
+      if (!isPreloaderComplete || prefersReducedMotion.matches || !heroVideo)
         return;
-      heroVideo.preload = "metadata";
-      heroVideo.load();
-      void heroVideo.play().catch(() => {
-        // The poster remains visible if browser autoplay policy blocks playback.
-      });
+      heroVideo.preload = "auto";
+      if (heroVideo.readyState === HTMLMediaElement.HAVE_NOTHING) {
+        heroVideo.load();
+      }
+      void heroVideo
+        .play()
+        .then(() => {
+          if (active) isVideoReady = true;
+        })
+        .catch(() => {
+          // The poster remains visible if browser autoplay policy blocks playback.
+        });
     };
 
     let videoObserver: IntersectionObserver | undefined;
@@ -48,10 +50,7 @@
 
           if (isHeroVisible) {
             if (!isPreloaderComplete) return;
-            if (heroVideo.preload === "none") startVideo();
-            else if (isVideoReady && !prefersReducedMotion.matches) {
-              void heroVideo.play().catch(() => {});
-            }
+            startVideo();
           } else {
             heroVideo.pause();
           }
@@ -80,9 +79,7 @@
     const handlePreloaderComplete = () => {
       isPreloaderComplete = true;
       startHeroMotion?.();
-      if (isHeroVisible) {
-        videoStartTimer = setTimeout(startVideo, 450);
-      }
+      if (isHeroVisible) startVideo();
     };
 
     if (!isPreloaderComplete) {
@@ -103,17 +100,13 @@
               paused: true,
               defaults: { ease: "power3.out" },
             })
-            .from(".hero-media", { scale: 1.08, duration: 1.6 })
+            .from(".hero-media", { scale: 1.08, duration: 1.2 })
             .from(
               ".hero-line",
-              { yPercent: 110, duration: 1.05, stagger: 0.11 },
-              0.18,
+              { yPercent: 110, duration: 0.78, stagger: 0.07 },
+              0.12,
             )
-            .from(
-              ".hero-detail",
-              { autoAlpha: 0, y: 20, duration: 0.7, stagger: 0.08 },
-              0.65,
-            );
+            .from(".hero-detail", { autoAlpha: 0, y: 20, duration: 0.5 }, 0.4);
 
           startHeroMotion = () => timeline.play();
           if (isPreloaderComplete) startHeroMotion();
@@ -133,7 +126,6 @@
         "site-preloader-complete",
         handlePreloaderComplete,
       );
-      if (videoStartTimer) clearTimeout(videoStartTimer);
       context?.revert();
     };
   });
@@ -160,7 +152,7 @@
       muted
       loop
       playsinline
-      preload="none"
+      preload="metadata"
       aria-hidden="true"
       tabindex="-1"
       oncanplay={handleVideoCanPlay}
@@ -218,7 +210,9 @@
           class="inline-flex items-center gap-2 text-sm font-semibold text-brand-light group"
         >
           <span class="border-b border-current pb-1">Explore services</span>
-          <span class="flex transition-transform duration-300 group-hover:translate-y-1">
+          <span
+            class="flex transition-transform duration-300 group-hover:translate-y-1"
+          >
             <ArrowDown size={15} strokeWidth={1.7} />
           </span>
         </a>

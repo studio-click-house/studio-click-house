@@ -12,7 +12,6 @@
   import ServiceDetailAudience from "$lib/components/sections/service-detail/ServiceDetailAudience.svelte";
   import ServiceDetailCta from "$lib/components/sections/service-detail/ServiceDetailCta.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
-  import AmbientScrollFlow from "$lib/components/animations/AmbientScrollFlow.svelte";
   import { siteConfig } from "$lib/config/site";
   import { backgroundRemovePage } from "$lib/content/background-remove";
   import { clippingPathPage } from "$lib/content/clipping-path";
@@ -96,7 +95,6 @@
   {/if}
 
   <main id="service-detail-page" class="relative min-h-screen bg-brand-light">
-    <AmbientScrollFlow />
     <ServiceDetailHero data={pageData.hero} />
     <ServiceDetailIntro data={pageData.intro} />
     <ServiceDetailBeforeAfter data={pageData.beforeAfter} />

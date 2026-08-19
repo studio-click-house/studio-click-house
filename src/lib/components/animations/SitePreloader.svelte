@@ -13,6 +13,10 @@
     targetY: number;
   };
 
+  type LandingParticle = LogoParticle & {
+    targetSize: number;
+  };
+
   let isVisible = $state(true);
   let isExiting = $state(false);
   let isFormationReady = $state(false);
@@ -24,11 +28,10 @@
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const minimumDisplayDuration = reduceMotion ? 180 : 1900;
+    const minimumDisplayDuration = reduceMotion ? 180 : 1500;
     let formationTimeline: { kill: () => void } | undefined;
     let landingTimeline: { kill: () => void } | undefined;
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
-    let headerReadyTimer: ReturnType<typeof setTimeout> | undefined;
     let formationFrame: number | undefined;
     let hasFinished = false;
     let isDisposed = false;
@@ -71,33 +74,71 @@
       finish();
     };
 
-    const handleHeaderReady = () => {
-      if (headerReadyTimer) clearTimeout(headerReadyTimer);
-      finish();
-    };
-
-    const playLogoFlight = async (
+    const playParticleLanding = async (
       sourceRect: DOMRect,
       targetRect: DOMRect,
     ) => {
+      const logoImage = criticalLogoImage;
+      const canvas = particleCanvasElement;
       const logo = logoElement;
       const backdrop = backdropElement;
       const completeLogo = logo?.querySelector<HTMLElement>(
         ".preloader-logo-complete",
       );
+      const context = canvas?.getContext("2d");
 
-      if (!logo || !backdrop || !completeLogo) {
+      if (!logoImage || !canvas || !backdrop || !completeLogo || !context) {
         completeLogoFlight();
         return;
       }
 
-      const sourceCenterX = sourceRect.left + sourceRect.width / 2;
-      const sourceCenterY = sourceRect.top + sourceRect.height / 2;
-      const targetCenterX = targetRect.left + targetRect.width / 2;
-      const targetCenterY = targetRect.top + targetRect.height / 2;
-      const deltaX = targetCenterX - sourceCenterX;
-      const deltaY = targetCenterY - sourceCenterY;
-      const scale = targetRect.width / sourceRect.width;
+      const pixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        window.innerWidth < 640 ? 1 : 1.25,
+      );
+      canvas.width = Math.round(window.innerWidth * pixelRatio);
+      canvas.height = Math.round(window.innerHeight * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const particles = createLandingParticles(
+        logoImage,
+        sourceRect,
+        targetRect,
+      );
+      const landing = { progress: 0 };
+
+      const renderLandingParticles = () => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        for (const particle of particles) {
+          const localProgress = Math.min(
+            1,
+            Math.max(
+              0,
+              (landing.progress - particle.delay) / (1 - particle.delay),
+            ),
+          );
+          const remaining = 1 - localProgress;
+          const easedProgress = 1 - remaining * remaining * remaining;
+          const scatter = Math.sin(easedProgress * Math.PI) * particle.drift;
+          const x =
+            particle.startX +
+            (particle.targetX - particle.startX) * easedProgress +
+            Math.cos(particle.phase) * scatter;
+          const y =
+            particle.startY +
+            (particle.targetY - particle.startY) * easedProgress +
+            Math.sin(particle.phase) * scatter;
+          const size =
+            particle.size +
+            (particle.targetSize - particle.size) * easedProgress;
+
+          context.fillStyle = particle.color;
+          context.fillRect(x, y, size, size);
+        }
+      };
+
+      renderLandingParticles();
 
       try {
         const { gsap } = await import("gsap");
@@ -105,15 +146,23 @@
 
         landingTimeline = gsap
           .timeline({ onComplete: completeLogoFlight })
+          .set(canvas, { autoAlpha: 1 })
           .to(
-            logo,
+            completeLogo,
             {
-              x: deltaX,
-              y: deltaY,
-              scale: scale,
-              transformOrigin: "center center",
-              duration: 0.85,
-              ease: "power3.inOut",
+              autoAlpha: 0,
+              duration: 0.1,
+              ease: "power1.out",
+            },
+            0,
+          )
+          .to(
+            landing,
+            {
+              progress: 1,
+              duration: 0.82,
+              ease: "none",
+              onUpdate: renderLandingParticles,
             },
             0,
           )
@@ -121,13 +170,14 @@
             backdrop,
             {
               autoAlpha: 0,
-              duration: 0.78,
+              duration: 0.76,
               ease: "power2.inOut",
             },
-            0.06,
+            0.04,
           );
       } catch {
         backdrop.style.setProperty("opacity", "0");
+        completeLogo.style.setProperty("opacity", "0");
         completeLogoFlight();
       }
     };
@@ -148,13 +198,10 @@
       targetHeader?.classList.add("preloader-measure-target");
       const targetRect = targetLogo.getBoundingClientRect();
       targetHeader?.classList.remove("preloader-measure-target");
-      void playLogoFlight(sourceRect, targetRect);
+      void playParticleLanding(sourceRect, targetRect);
     };
 
     prepareHeaderLogo();
-    window.addEventListener("site-header-ready", handleHeaderReady, {
-      once: true,
-    });
 
     const scheduleExit = () => {
       if (!isPageReady || !hasFormationCompleted || isExitScheduled) return;
@@ -198,11 +245,7 @@
         sampleCanvas.height,
       );
       const sampleStep =
-        window.innerWidth < 640 ? 16 : window.innerWidth < 1024 ? 13 : 11;
-      const baseSize = Math.max(
-        1.8,
-        (sampleStep / sampleCanvas.width) * logoRect.width * 0.98,
-      );
+        window.innerWidth < 640 ? 14 : window.innerWidth < 1024 ? 11 : 9;
       const particles: LogoParticle[] = [];
 
       for (
@@ -225,18 +268,85 @@
             logoRect.top + (sourceY / sampleCanvas.height) * logoRect.height;
           const horizontalProgress = sourceX / sampleCanvas.width;
           const travelDistance =
-            logoRect.left + 80 + Math.random() * window.innerWidth * 0.45;
+            logoRect.left + 90 + Math.random() * window.innerWidth * 0.58;
 
           particles.push({
             color: `rgba(${data[pixelIndex]}, ${data[pixelIndex + 1]}, ${data[pixelIndex + 2]}, ${alpha / 255})`,
-            delay: horizontalProgress * 0.2 + Math.random() * 0.05,
-            drift: 10 + Math.random() * 24,
+            delay: horizontalProgress * 0.22 + Math.random() * 0.06,
+            drift: 12 + Math.random() * 34,
             phase: Math.random() * Math.PI * 2,
-            size: baseSize,
+            size: 1.1 + Math.random() * 2.2,
             startX: targetX - travelDistance,
-            startY: targetY + (Math.random() - 0.5) * window.innerHeight * 0.55,
+            startY: targetY + (Math.random() - 0.5) * window.innerHeight * 0.78,
             targetX,
             targetY,
+          });
+        }
+      }
+
+      return particles;
+    };
+
+    const createLandingParticles = (
+      logoImage: HTMLImageElement,
+      sourceRect: DOMRect,
+      targetRect: DOMRect,
+    ) => {
+      const sampleCanvas = document.createElement("canvas");
+      const sampleContext = sampleCanvas.getContext("2d", {
+        willReadFrequently: true,
+      });
+      if (!sampleContext) return [];
+
+      sampleCanvas.width = logoImage.naturalWidth;
+      sampleCanvas.height = logoImage.naturalHeight;
+      sampleContext.drawImage(logoImage, 0, 0);
+
+      const { data } = sampleContext.getImageData(
+        0,
+        0,
+        sampleCanvas.width,
+        sampleCanvas.height,
+      );
+      const sampleStep = window.innerWidth < 640 ? 17 : 14;
+      const sourceSize = Math.max(
+        1,
+        (sampleStep / sampleCanvas.width) * sourceRect.width * 0.94,
+      );
+      const targetSize = Math.max(
+        0.8,
+        (sampleStep / sampleCanvas.width) * targetRect.width * 1.08,
+      );
+      const particles: LandingParticle[] = [];
+
+      for (
+        let sourceY = 0;
+        sourceY < sampleCanvas.height;
+        sourceY += sampleStep
+      ) {
+        for (
+          let sourceX = 0;
+          sourceX < sampleCanvas.width;
+          sourceX += sampleStep
+        ) {
+          const pixelIndex = (sourceY * sampleCanvas.width + sourceX) * 4;
+          const alpha = data[pixelIndex + 3];
+          if (alpha < 96) continue;
+
+          const horizontalProgress = sourceX / sampleCanvas.width;
+          const verticalProgress = sourceY / sampleCanvas.height;
+
+          particles.push({
+            color: `rgba(${data[pixelIndex]}, ${data[pixelIndex + 1]}, ${data[pixelIndex + 2]}, ${alpha / 255})`,
+            delay: horizontalProgress * 0.08 + Math.random() * 0.035,
+            drift: 10 + Math.random() * 22,
+            phase: Math.random() * Math.PI * 2,
+            size: sourceSize,
+            startX: sourceRect.left + horizontalProgress * sourceRect.width,
+            startY: sourceRect.top + verticalProgress * sourceRect.height,
+            targetSize,
+            targetX: targetRect.left + horizontalProgress * targetRect.width,
+            targetY: targetRect.top + verticalProgress * targetRect.height,
           });
         }
       }
@@ -287,14 +397,14 @@
         for (const particle of particles) {
           const localProgress = Math.min(
             1,
-            Math.max(0, (formation.progress - particle.delay) / 0.62),
+            Math.max(0, (formation.progress - particle.delay) / 0.58),
           );
           if (localProgress <= 0) continue;
 
           const easedProgress = 1 - Math.pow(1 - localProgress, 3);
           const remainingMotion = 1 - easedProgress;
           const wave =
-            Math.sin(particle.phase + localProgress * Math.PI * 3) *
+            Math.sin(particle.phase + localProgress * Math.PI * 4) *
             particle.drift *
             remainingMotion;
           const x =
@@ -304,11 +414,14 @@
             particle.startY +
             (particle.targetY - particle.startY) * easedProgress +
             wave;
-          const alpha = Math.min(1, localProgress / 0.14);
+          const alpha = Math.min(1, localProgress / 0.16);
+          const width =
+            particle.size * (1.8 - Math.min(0.8, localProgress * 0.8));
+          const height = particle.size * (0.52 + localProgress * 0.48);
 
           context.globalAlpha = alpha;
           context.fillStyle = particle.color;
-          context.fillRect(x, y, particle.size, particle.size);
+          context.fillRect(x, y, width, height);
         }
 
         context.globalAlpha = 1;
@@ -322,7 +435,7 @@
           .timeline({ onComplete: completeFormation })
           .to(formation, {
             progress: 1,
-            duration: 1.42,
+            duration: 1.46,
             ease: "none",
             onUpdate: renderParticles,
           })
@@ -333,13 +446,13 @@
               duration: 0.12,
               ease: "power2.out",
             },
-            "-=0.14",
+            "-=0.16",
           )
           .to(
             particleCanvasElement,
             {
               autoAlpha: 0,
-              duration: 0.12,
+              duration: 0.14,
               ease: "power2.out",
             },
             "<",
@@ -407,10 +520,8 @@
     return () => {
       isDisposed = true;
       document.removeEventListener("DOMContentLoaded", handleDocumentReady);
-      window.removeEventListener("site-header-ready", handleHeaderReady);
       if (formationFrame) cancelAnimationFrame(formationFrame);
       if (hideTimer) clearTimeout(hideTimer);
-      if (headerReadyTimer) clearTimeout(headerReadyTimer);
       formationTimeline?.kill();
       landingTimeline?.kill();
       restoreHeaderLogo();
