@@ -23,19 +23,19 @@ export const contactServiceDetails = [
   {
     name: contactServices[0],
     descriptor: "Retouching, isolation, color, and production-ready finishing.",
-    image: "/images/portfolio/photo-editing-showcase.png",
-    imageAlt: "Finished fashion portrait with controlled retouching and color",
+    image: "/images/work-fields/gallery/fashion-color.jpg",
+    imageAlt: "Fashion model during professional studio photoshoot and retouching session",
   },
   {
     name: contactServices[1],
     descriptor: "Commercial edits, social versions, and controlled grading.",
-    image: "/images/hero/hero-poster.jpg",
-    imageAlt: "Studio video post-production preview frame",
+    image: "/images/work-fields/studio-production-poster.jpg",
+    imageAlt: "Studio production set with camera operator, lighting, and product staging",
   },
   {
     name: contactServices[2],
     descriptor: "Product modeling, material development, and CGI rendering.",
-    image: "/images/portfolio/model-shadowed.png",
-    imageAlt: "Fashion product image with a finished dimensional shadow",
+    image: "/images/work-fields/gallery/product-retouching.jpg",
+    imageAlt: "Commercial fragrance product photography with high-speed water splash",
   },
 ] as const;

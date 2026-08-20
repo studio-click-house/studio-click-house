@@ -26,27 +26,46 @@
 
   const assurances = [
     {
+      step: "01",
       title: "Direction",
       description:
         "Every project starts with clear references, technical specifications and creative goals.",
       icon: Compass,
+      cardIndex: 3,
+      tag: "Direction & Framing",
     },
     {
+      step: "02",
       title: "Specialist craft",
-      description: "Dedicated editors matched to your project.",
+      description:
+        "Dedicated editors and 3D CGI artists matched to your project requirements.",
       icon: Wand2,
+      cardIndex: 1,
+      tag: "Specialist Craft",
     },
     {
+      step: "03",
       title: "Quality control",
-      description: "Every file reviewed before delivery.",
+      description:
+        "Every file reviewed for immaculate skin texture, edge accuracy, and lighting consistency.",
       icon: ShieldCheck,
+      cardIndex: 6,
+      tag: "Macro Quality Review",
     },
     {
+      step: "04",
       title: "Delivery",
-      description: "Production-ready assets delivered on time.",
+      description:
+        "Production-ready, multi-channel high-res assets delivered on time with strict SLA.",
       icon: Check,
+      cardIndex: 0,
+      tag: "Multi-Format Export",
     },
   ] as const;
+
+  let activeStep = $state(0);
+  let activeCardIndex = $state(3);
+  let isInteractive = $state(false);
 
   let sectionRef: HTMLElement;
   let orbitStageRef: HTMLElement;
@@ -57,6 +76,36 @@
   let workflowOutcomeRef: HTMLElement;
   let workflowLinkRef: HTMLAnchorElement;
   let assuranceRows: HTMLElement[] = [];
+  let triggerCardSelect: ((index: number) => void) | undefined;
+
+  const getStackSlot = (cardIndex: number, currentFrontIndex: number) => {
+    if (cardIndex === currentFrontIndex) {
+      return stackLayout[3];
+    }
+    const otherSlots = [0, 1, 2, 4, 5, 6, 7];
+    const offset = (cardIndex - currentFrontIndex + 8) % 8;
+    const slotIdx = otherSlots[(offset - 1 + 7) % 7];
+    return stackLayout[slotIdx];
+  };
+
+  function selectStep(stepIndex: number) {
+    if (!isInteractive) return;
+    activeStep = stepIndex;
+    const targetCard = assurances[stepIndex].cardIndex;
+    activeCardIndex = targetCard;
+    triggerCardSelect?.(targetCard);
+  }
+
+  function onCardClick(cardIndex: number) {
+    if (!isInteractive) return;
+    const stepIdx = assurances.findIndex((a) => a.cardIndex === cardIndex);
+    if (stepIdx !== -1) {
+      selectStep(stepIdx);
+    } else {
+      activeCardIndex = cardIndex;
+      triggerCardSelect?.(cardIndex);
+    }
+  }
 
   onMount(() => {
     let active = true;
@@ -88,7 +137,6 @@
           gsap.utils.toArray<HTMLElement>(".orbit-card-visual");
         const totalCards = cards.length;
         const media = gsap.matchMedia();
-        const frontCard = cards[3];
 
         let stackReady = false;
         let isHovering = false;
@@ -117,19 +165,6 @@
             x: Math.cos(angle) * radiusX,
             y: Math.sin(angle) * radiusY,
           };
-        };
-
-        const placeFrame = (card: HTMLElement, index: number) => {
-          const { width, height } = getStageSize();
-          const position = getFramePosition(index, totalCards, width, height);
-
-          gsap.set(card, {
-            x: position.x,
-            y: position.y,
-            rotation: frameRotations[index],
-            scale: 1,
-            zIndex: totalCards - index,
-          });
         };
 
         const placeWheel = (
@@ -164,7 +199,7 @@
             const baseAngle =
               (index / totalCards) * (2 * Math.PI) - Math.PI / 2;
             const currentAngle = baseAngle + spinAngle;
-            const layer = stackLayout[index];
+            const layer = getStackSlot(index, activeCardIndex);
             const wheelX = wheelCenterX + Math.cos(currentAngle) * radiusX;
             const wheelY = Math.sin(currentAngle) * radiusY;
             const wheelRotation = gsap.utils.interpolate(
@@ -197,10 +232,18 @@
           });
 
           // Reactively manage pointer-events and hover states based on stackProgress
-          const isStacked = stackProgress > 0.92;
+          const isStacked = stackProgress > 0.95;
           if (isStacked !== stackReady) {
             stackReady = isStacked;
-            gsap.set(frontCard, { pointerEvents: isStacked ? "auto" : "none" });
+            isInteractive = isStacked;
+            cards.forEach((card) => {
+              gsap.set(card, { pointerEvents: isStacked ? "auto" : "none" });
+            });
+            if (assurancePanelRef) {
+              gsap.set(assurancePanelRef, {
+                pointerEvents: isStacked ? "auto" : "none",
+              });
+            }
             if (isStacked) {
               if (cardQuickX.length === 0) {
                 cards.forEach((card) => {
@@ -227,23 +270,38 @@
           }
         };
 
+        triggerCardSelect = (targetCardIndex: number) => {
+          if (!stackReady) return;
+          const { width } = getStageSize();
+          const wheelCenterX = -Math.min(width * 0.27, 405);
+          const stackBaseScale = gsap.utils.clamp(1.5, 1.85, 2000 / width);
+
+          cards.forEach((card, index) => {
+            const layer = getStackSlot(index, targetCardIndex);
+            gsap.to(card, {
+              x: wheelCenterX + layer.x,
+              y: layer.y - 36,
+              z: layer.z,
+              rotation: layer.rotation,
+              scale: stackBaseScale * layer.scale,
+              zIndex: layer.zIndex,
+              duration: 0.42,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          });
+        };
+
         media.add(
           "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
           () => {
+            isInteractive = false;
             placeWheel(0, 0, 0);
             gsap.set(centerTextRef, { autoAlpha: 1, scale: 1, y: 0 });
             gsap.set(stackGroupRef, { pointerEvents: "none" });
             gsap.set(cards, { pointerEvents: "none" });
-            const entranceLayers = [...cardVisuals, centerTextRef];
-            const storyLayers = [
-              ...cards,
-              stackGroupRef,
-              assurancePanelRef,
-              workflowHeaderRef,
-              ...assuranceRows,
-              workflowOutcomeRef,
-              workflowLinkRef,
-            ];
+            gsap.set(assurancePanelRef, { pointerEvents: "none" });
+
             gsap
               .timeline({
                 scrollTrigger: {
@@ -302,7 +360,6 @@
               isHovering = true;
             };
 
-            // Use orbitStageRef (no GSAP transforms) as stable coordinate space.
             const handlePointerMove = (event: PointerEvent) => {
               if (!stackReady || !isHovering || event.pointerType !== "mouse")
                 return;
@@ -323,10 +380,8 @@
                   stageBounds.height,
               );
 
-              // Front card (index 3): full tilt
-              // Back cards: opposite tilt scaled down to create parallax depth
               cards.forEach((_card, index) => {
-                const isFront = index === 3;
+                const isFront = index === activeCardIndex;
                 const tiltScale = isFront ? 1 : -(0.3 + (index % 3) * 0.1);
                 cardQuickX[index]?.(-normY * 8 * tiltScale);
                 cardQuickY[index]?.(normX * 8 * tiltScale);
@@ -340,11 +395,9 @@
               cardQuickY.forEach((fn) => fn(0));
             };
 
-            // Listeners on window so they fire regardless of which child receives the pointer.
-            // frontCard receives pointerenter/leave naturally for the enter/exit gate.
-            frontCard.addEventListener("pointerenter", handlePointerEnter);
+            orbitStageRef.addEventListener("pointerenter", handlePointerEnter);
             window.addEventListener("pointermove", handlePointerMove);
-            frontCard.addEventListener("pointerleave", handlePointerLeave);
+            orbitStageRef.addEventListener("pointerleave", handlePointerLeave);
 
             const renderCards = () => {
               placeWheel(orbitProxy.motion, orbitProxy.spin, orbitProxy.stack);
@@ -482,12 +535,14 @@
 
             return () => {
               stackReady = false;
+              isInteractive = false;
               isHovering = false;
               cardQuickX = [];
               cardQuickY = [];
-              frontCard.removeEventListener("pointerenter", handlePointerEnter);
+              triggerCardSelect = undefined;
+              orbitStageRef?.removeEventListener("pointerenter", handlePointerEnter);
               window.removeEventListener("pointermove", handlePointerMove);
-              frontCard.removeEventListener("pointerleave", handlePointerLeave);
+              orbitStageRef?.removeEventListener("pointerleave", handlePointerLeave);
               gsap.killTweensOf(cards);
               gsap.killTweensOf(cardVisuals);
             };
@@ -498,6 +553,7 @@
           "(min-width: 768px) and (prefers-reduced-motion: reduce)",
           () => {
             placeWheel(1, 1, 1);
+            isInteractive = true;
             gsap.set(centerTextRef, { autoAlpha: 0 });
             gsap.set(assurancePanelRef, {
               autoAlpha: 1,
@@ -505,6 +561,7 @@
               xPercent: 0,
               y: 0,
               yPercent: -50,
+              pointerEvents: "auto",
             });
             gsap.set(
               [
@@ -519,8 +576,7 @@
                 y: 0,
               },
             );
-            gsap.set(cards, { pointerEvents: "none" });
-            gsap.set(cards[3], { pointerEvents: "auto" });
+            gsap.set(cards, { pointerEvents: "auto" });
           },
         );
 
@@ -592,10 +648,19 @@
         {#each aboutOrbitCards as card, index (card.id)}
           <div
             data-shape={card.shape}
-            class="orbit-card-item absolute rounded-2xl overflow-hidden"
+            class="orbit-card-item absolute rounded-2xl overflow-hidden cursor-pointer"
+            role="button"
+            tabindex="0"
+            onclick={() => onCardClick(index)}
+            onkeydown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onCardClick(index);
+              }
+            }}
           >
             <figure
-              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl shadow-xl transition-shadow duration-300 hover:shadow-2xl"
+              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl shadow-xl transition-all duration-300 group hover:shadow-2xl"
             >
               <img
                 src={card.media.src}
@@ -604,8 +669,22 @@
                 height={card.media.height}
                 loading="lazy"
                 decoding="async"
-                class="h-full w-full object-cover rounded-2xl"
+                class="h-full w-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105"
               />
+
+              <!-- Sleek glass sheen overlay -->
+              <div
+                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-white/10 opacity-70 transition-opacity duration-300 group-hover:opacity-90"
+              ></div>
+
+              <!-- Stage Badge on every Card -->
+              <div
+                class="card-stage-pill pointer-events-none absolute top-2.5 left-2.5 z-30 inline-flex items-center rounded-lg border border-white/20 bg-brand-dark/45 px-2.5 py-1 text-brand-light backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25)] max-w-[calc(100%-1.25rem)] transition-all duration-300"
+              >
+                <span class="font-sans text-[0.68rem] font-medium tracking-tight text-white truncate">
+                  {card.title}
+                </span>
+              </div>
             </figure>
           </div>
         {/each}
@@ -649,24 +728,71 @@
       <div
         id="why-trust-us"
         bind:this={assurancePanelRef}
-        class="assurance-panel"
+        class="assurance-panel {isInteractive ? 'is-interactive' : ''}"
         aria-label="Our Process"
       >
-        <div class="assurance-list" aria-label="Our production milestones">
-          {#each assurances as assurance, index (assurance.title)}
-            {@const Icon = assurance.icon}
-            <article bind:this={assuranceRows[index]} class="assurance-row">
-              <div class="assurance-content">
-                <div class="assurance-title-row">
-                  <span class="assurance-row-icon"
-                    ><Icon size={15} strokeWidth={1.5} /></span
-                  >
-                  <h3>{assurance.title}</h3>
+        <div class="assurance-track-wrapper relative flex gap-3 sm:gap-4 items-stretch">
+          <!-- Sliding glowing indicator rail on desktop -->
+          <div class="assurance-rail relative hidden w-[3px] rounded-full bg-brand-dark/10 sm:block overflow-hidden my-1">
+            <div
+              class="assurance-rail-active absolute left-0 w-full rounded-full bg-brand-green shadow-[0_0_12px_rgba(126,166,65,0.9)] transition-all duration-300 ease-out"
+              style="top: {activeStep * 25}%; height: 25%;"
+            ></div>
+          </div>
+
+          <!-- 4 interactive step cards -->
+          <div class="assurance-list flex-1 flex flex-col gap-1.5" role="tablist" aria-label="Our production milestones">
+            {#each assurances as assurance, index (assurance.title)}
+              {@const Icon = assurance.icon}
+              {@const isActive = activeStep === index}
+              <button
+                type="button"
+                bind:this={assuranceRows[index]}
+                class="assurance-row group cursor-pointer text-left w-full {isActive ? 'is-active' : ''}"
+                role="tab"
+                tabindex="0"
+                aria-selected={isActive}
+                onclick={() => selectStep(index)}
+                onmouseenter={() => selectStep(index)}
+                onkeydown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    selectStep(index);
+                  }
+                }}
+              >
+                <div class="assurance-content w-full">
+                  <div class="assurance-header-row flex items-center justify-between w-full">
+                    <div class="assurance-title-row flex items-center gap-3">
+                      <div
+                        class="assurance-row-icon flex h-8 w-8 items-center justify-center rounded-lg border transition-all duration-300 {isActive
+                          ? 'border-brand-green bg-brand-green text-brand-light shadow-sm'
+                          : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark group-hover:border-brand-green/40 group-hover:bg-brand-green/10 group-hover:text-brand-green'}"
+                      >
+                        <Icon size={15} strokeWidth={1.75} />
+                      </div>
+                      <h3 class="font-display font-medium text-[1.05rem] leading-tight text-brand-dark">
+                        {assurance.title}
+                      </h3>
+                    </div>
+
+                    <!-- Step number badge -->
+                    <span
+                      class="font-mono text-xs font-bold transition-all duration-300 px-2 py-0.5 rounded-full {isActive
+                        ? 'bg-brand-green/15 text-brand-green border border-brand-green/30'
+                        : 'text-brand-dark/30 group-hover:text-brand-dark/70'}"
+                    >
+                      {assurance.step}
+                    </span>
+                  </div>
+
+                  <p class="assurance-description mt-2 text-[0.78rem] leading-relaxed transition-colors duration-300 {isActive ? 'text-brand-dark/85 font-normal' : 'text-brand-dark/60'}">
+                    {assurance.description}
+                  </p>
                 </div>
-                <p>{assurance.description}</p>
-              </div>
-            </article>
-          {/each}
+              </button>
+            {/each}
+          </div>
         </div>
       </div>
 
@@ -677,43 +803,49 @@
       >
         <!-- Metrics Grid -->
         <div class="flex-1 grid grid-cols-4 gap-6 text-left">
-          <div class="metric-item">
+          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
               >150+</span
             >
             <span
-              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
               >Creative Specialists</span
             >
           </div>
-          <div class="metric-item">
+          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
               >10+ Years</span
             >
             <span
-              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
               >Proven Experience</span
             >
           </div>
-          <div class="metric-item">
+          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
+            <div class="flex items-center gap-1.5">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+              </span>
+              <span
+                class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+                >24/7</span
+              >
+            </div>
             <span
-              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >24/7</span
-            >
-            <span
-              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
               >Production Studio</span
             >
           </div>
-          <div class="metric-item">
+          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
               >99%</span
             >
             <span
-              class="block mt-1 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
               >On-Time Delivery</span
             >
           </div>
@@ -761,10 +893,16 @@
           >
         </div>
         <div class="metric-item">
-          <span
-            class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >24/7</span
-          >
+          <div class="flex items-center gap-1.5">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+            </span>
+            <span
+              class="block font-display text-2xl font-light leading-none text-brand-dark"
+              >24/7</span
+            >
+          </div>
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
             >Production Studio</span
@@ -866,14 +1004,22 @@
     width: min(44%, 39rem);
     padding-left: 0;
     transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .assurance-panel.is-interactive {
+    pointer-events: auto;
+  }
+
+  .assurance-panel:not(.is-interactive) .assurance-row {
+    pointer-events: none !important;
+    cursor: default !important;
   }
 
   .assurance-list {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border-top: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
   }
 
   .assurance-row {
@@ -881,38 +1027,43 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding-block: 1.35rem;
-    border-bottom: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+    padding: 0.95rem 1.15rem;
+    border-radius: 0.85rem;
+    border: 1px solid transparent;
     transition:
-      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 320ms ease;
+      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 280ms ease,
+      border-color 280ms ease,
+      box-shadow 280ms ease;
   }
 
-  .assurance-row:hover {
-    transform: translateX(0.5rem);
+  .assurance-panel.is-interactive .assurance-row:hover,
+  .assurance-panel.is-interactive .assurance-row.is-active {
+    transform: translateX(0.4rem);
     background-color: color-mix(
       in srgb,
-      var(--color-brand-green) 4%,
+      var(--color-brand-green) 5%,
       transparent
     );
+    border-color: color-mix(
+      in srgb,
+      var(--color-brand-green) 24%,
+      transparent
+    );
+  }
+
+  .assurance-panel.is-interactive .assurance-row.is-active {
+    box-shadow: 0 4px 20px -4px rgba(126, 166, 65, 0.12);
   }
 
   .assurance-content {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
   }
 
   .assurance-title-row {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-  }
-
-  .assurance-row-icon {
-    display: inline-flex;
-    color: var(--color-brand-green);
   }
 
   .assurance-row h3 {
@@ -1035,15 +1186,18 @@
       transform: none;
       opacity: 1 !important;
       visibility: visible !important;
+      pointer-events: auto !important;
     }
 
     .assurance-row {
       min-height: auto;
       gap: 0.85rem;
-      padding-block: 1.2rem;
+      padding: 0.85rem 1rem;
       transform: none !important;
       opacity: 1 !important;
       visibility: visible !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
     }
 
     .assurance-row p {
@@ -1062,3 +1216,4 @@
     }
   }
 </style>
+
