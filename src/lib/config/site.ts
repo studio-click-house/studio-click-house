@@ -6,9 +6,11 @@ export const siteConfig = {
     "Studio Click House provides image editing, retouching, and visual production for brands, studios, and production teams.",
   ogImage: "/images/brand/schl-logo.png",
   links: {
-    instagram: "",
-    linkedin: "",
-    facebook: "",
+    instagram: "https://instagram.com/studioclickhouse",
+    linkedin: "https://linkedin.com/company/studioclickhouse",
+    facebook: "https://facebook.com/studioclickhouse",
+    whatsapp: "https://wa.me/8809609777111",
+    youtube: "https://youtube.com/@studioclickhouse",
   },
   contact: {
     email: "info@studioclickhouse.com",

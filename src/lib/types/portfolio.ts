@@ -65,6 +65,45 @@ export interface PortfolioPageData {
   gallery: PortfolioGalleryItem[];
   comparison: PortfolioBeforeAfter;
   capabilities: string[];
+  magazineIntro?: {
+    eyebrow: string;
+    title: string;
+    watermarkText: string;
+    paragraphs: string[];
+    featuredImage: PreviewMedia;
+    secondaryImage: PreviewMedia;
+  };
+  staggeredStories?: Array<{
+    id: string;
+    category: string;
+    title: string;
+    description: string;
+    year: string;
+    media: PreviewMedia;
+    position: "left-tall" | "center-grid" | "right-offset" | "wide-bottom";
+  }>;
+  panorama?: {
+    watermark: string;
+    headline: string;
+    subheadline: string;
+    badge: string;
+    media: PreviewMedia;
+  };
+  manifesto?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
+  brandPartners?: Array<{
+    name: string;
+    category: string;
+  }>;
+  showreel?: {
+    title: string;
+    subtitle: string;
+    description: string;
+    media: PreviewMedia;
+  };
   stats: PortfolioStat[];
   cta: {
     heading: string;

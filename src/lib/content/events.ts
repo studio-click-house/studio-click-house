@@ -9,7 +9,8 @@ export const upcomingEvent: CompanyEvent = {
   location: "Studio grounds",
   status: "upcoming",
   format: "Team activity",
-  image: "/images/events/employee-football.png",
+  image:
+    "https://images.pexels.com/photos/5235776/pexels-photo-5235776.jpeg?auto=compress&dpr=1&w=1440",
   imageAlt: "Employees playing football together outdoors",
   focus: ["Team time", "Friendly match", "Fresh air"],
 };
@@ -24,7 +25,8 @@ export const pastEvents: CompanyEvent[] = [
     location: "London · Online",
     status: "past",
     format: "Team tour",
-    image: "/images/events/nepal-team-tour.png",
+    image:
+      "https://images.pexels.com/photos/7263397/pexels-photo-7263397.jpeg?auto=compress&dpr=1&w=1440",
     imageAlt: "A team enjoying a mountain tour together",
     focus: ["Quality systems", "Production workflow", "Image consistency"],
   },
@@ -37,7 +39,8 @@ export const pastEvents: CompanyEvent[] = [
     location: "Dhaka studio",
     status: "past",
     format: "Team trip",
-    image: "/images/events/coxs-bazar-team-trip.png",
+    image:
+      "https://images.pexels.com/photos/7148443/pexels-photo-7148443.jpeg?auto=compress&dpr=1&w=1440",
     imageAlt: "A team walking together along the beach",
     focus: ["Complex edges", "Alpha control", "Production detail"],
   },
@@ -50,7 +53,8 @@ export const pastEvents: CompanyEvent[] = [
     location: "Studio Click House",
     status: "past",
     format: "Sports activity",
-    image: "/images/events/employee-football.png",
+    image:
+      "https://images.pexels.com/photos/12169308/pexels-photo-12169308.jpeg?auto=compress&dpr=1&w=1440",
     imageAlt: "Employees playing a friendly football match",
     focus: ["Brushed metal", "Reflection control", "Micro detail"],
   },
@@ -63,7 +67,8 @@ export const pastEvents: CompanyEvent[] = [
     location: "Studio Click House · Online",
     status: "past",
     format: "Company outing",
-    image: "/images/events/nepal-team-tour.png",
+    image:
+      "https://images.pexels.com/photos/7348656/pexels-photo-7348656.jpeg?auto=compress&dpr=1&w=1440",
     imageAlt: "A team exploring a mountain landscape together",
     focus: ["Capture planning", "Lighting", "Post-production"],
   },

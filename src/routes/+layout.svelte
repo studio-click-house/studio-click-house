@@ -4,6 +4,7 @@
   import CursorOrb from "$lib/components/animations/CursorOrb.svelte";
   import Footer from "$lib/components/layout/Footer.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";
+  import FloatingSocialBar from "$lib/components/layout/FloatingSocialBar.svelte";
   import SitePreloader from "$lib/components/animations/SitePreloader.svelte";
   import { createLenis } from "$lib/animations/lenis";
   import { refreshScrollTriggersAfterFonts } from "$lib/animations/gsap";
@@ -58,6 +59,7 @@
 >
 <SitePreloader />
 <Navbar />
+<FloatingSocialBar />
 <CursorOrb />
 {@render children()}
 <Footer />

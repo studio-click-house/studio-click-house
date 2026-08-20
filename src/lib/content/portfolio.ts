@@ -1,4 +1,3 @@
-import { previewMedia } from "$lib/content/media";
 import type { PortfolioPageData } from "$lib/types/portfolio";
 
 export const portfolioPageData: PortfolioPageData = {
@@ -77,7 +76,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Fashion model studio beauty portrait skin retouching",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -90,7 +89,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Macro diamond ring polishing and sparkle enhancement",
         width: 1200,
         height: 800,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "wide",
     },
@@ -103,7 +102,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Glass perfume bottle isolated with natural drop shadow",
         width: 1200,
         height: 800,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "wide",
     },
@@ -116,7 +115,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Fashion model posing under color corrected studio lights",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -129,7 +128,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Mechanical chronograph watch dial separated into vector paths",
         width: 1200,
         height: 1200,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "square",
     },
@@ -142,7 +141,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Hollow suit jacket with 3D neck joint creation",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -155,7 +154,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Female model skincare high-end facial skin retouching",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -168,7 +167,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "High heels luxury shoes isolated with vector clipping path",
         width: 1200,
         height: 1200,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "square",
     },
@@ -181,7 +180,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Luxury gold necklace macro shine & surface retouching",
         width: 1200,
         height: 800,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "wide",
     },
@@ -194,7 +193,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Model wearing color corrected silk evening dress",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -207,7 +206,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Sneaker product isolated with clean clipping path",
         width: 1200,
         height: 1200,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "square",
     },
@@ -220,7 +219,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Model wearing custom pattern swatch replaced dress",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -233,7 +232,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Skincare product bottle transparent background removal",
         width: 1200,
         height: 800,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "wide",
     },
@@ -246,7 +245,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Apparel shirt ghost mannequin joint insert",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -259,7 +258,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Product advertising campaign banner graphic design",
         width: 1200,
         height: 800,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "wide",
     },
@@ -272,7 +271,7 @@ export const portfolioPageData: PortfolioPageData = {
         alt: "Black and white fashion model portrait retouch",
         width: 1200,
         height: 1600,
-        credit: "Pexels"
+        credit: "Pexels",
       },
       aspectRatio: "tall",
     },
@@ -314,10 +313,163 @@ export const portfolioPageData: PortfolioPageData = {
     "Editorial Finishing",
   ],
 
+  magazineIntro: {
+    eyebrow: "The Creative Standard · Est. 2015",
+    title: "Where Pixel Precision Meets High-End Visual Art",
+    watermarkText: "STUDIO",
+    paragraphs: [
+      "Studio Click House operates at the intersection of commercial scale and bespoke editorial craftsmanship. From high-fashion lookbooks to global e-commerce catalogs, our dedicated teams preserve tactile grain, subtle fold dynamics, and skin micro-textures.",
+      "Every frame undergoes stringent quality checks: pen-tool vector clipping paths, lossless frequency separation, CMYK/sRGB color matching, and bespoke lighting adjustments engineered to elevate conversion and brand perception.",
+    ],
+    featuredImage: {
+      src: "https://images.pexels.com/photos/2681751/pexels-photo-2681751.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Editorial fashion portrait demonstrating high-end skin and textile retouching",
+      width: 1000,
+      height: 1400,
+      credit: "Studio Click House",
+    },
+    secondaryImage: {
+      src: "https://images.pexels.com/photos/2773977/pexels-photo-2773977.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Creative jewelry and accessory retouching detail",
+      width: 800,
+      height: 1000,
+      credit: "Studio Click House",
+    },
+  },
+
+  staggeredStories: [
+    {
+      id: "story-fashion-ceremony",
+      category: "Editorial Retouching",
+      title: "Haute Couture & Runway Lighting",
+      description:
+        "Lossless skin cleanup, fabric fold sculpting, and ambient lighting refinement for Paris Fashion Week editorial campaigns.",
+      year: "2025",
+      media: {
+        src: "https://images.pexels.com/photos/20194705/pexels-photo-20194705.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Runway fashion editorial model retouching",
+        width: 1200,
+        height: 1600,
+        credit: "Studio Click House",
+      },
+      position: "left-tall",
+    },
+    {
+      id: "story-jewelry-sparkle",
+      category: "Macro Jewelry",
+      title: "Fine Gold & Gemstone Radiance",
+      description:
+        "Extreme close-up reflection balancing, metal polishing, and multi-focus compositing for luxury jewelers.",
+      year: "2025",
+      media: {
+        src: "https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg?auto=compress&cs=tinysrgb&w=1000",
+        alt: "Diamond ring fine jewelry macro post-production",
+        width: 1000,
+        height: 750,
+        credit: "Studio Click House",
+      },
+      position: "center-grid",
+    },
+    {
+      id: "story-cosmetics-glass",
+      category: "Glass & Reflections",
+      title: "Perfume Isolation & Realistic Refraction",
+      description:
+        "Sub-pixel pen path clipping with preserved transparent glass refractions and hand-drawn natural drop shadows.",
+      year: "2026",
+      media: {
+        src: "https://images.pexels.com/photos/3989394/pexels-photo-3989394.jpeg?auto=compress&cs=tinysrgb&w=1000",
+        alt: "Glass perfume bottle background isolation with reflections",
+        width: 1000,
+        height: 1000,
+        credit: "Studio Click House",
+      },
+      position: "center-grid",
+    },
+    {
+      id: "story-ghost-mannequin",
+      category: "Apparel Volume",
+      title: "3D Hollow Neck Tailoring",
+      description:
+        "Seamless front-and-back composite construction creating natural depth, collar alignment, and symmetrical drape.",
+      year: "2025",
+      media: {
+        src: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1000",
+        alt: "Men's tailored suit ghost mannequin hollow neck composite",
+        width: 1000,
+        height: 1350,
+        credit: "Studio Click House",
+      },
+      position: "right-offset",
+    },
+    {
+      id: "story-color-mastery",
+      category: "Color Correction",
+      title: "Harmonized Garment Swatch Matching",
+      description:
+        "Precision pantone-matched recoloring across 40+ SKU variations without losing natural sheen or stitch fidelity.",
+      year: "2026",
+      media: {
+        src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Fashion model colored fabric studio grading",
+        width: 1200,
+        height: 1600,
+        credit: "Studio Click House",
+      },
+      position: "right-offset",
+    },
+  ],
+
+  panorama: {
+    watermark: "CRAFT",
+    headline: "Precision Down to the Micron",
+    subheadline:
+      "Every fiber, edge transition, and reflection sculpted with dedicated digital artistry.",
+    badge: "Mastery in Detail",
+    media: {
+      src: "https://images.pexels.com/photos/3785927/pexels-photo-3785927.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      alt: "Ultra-wide studio detail showcase of fabric texture and model styling",
+      width: 1920,
+      height: 900,
+      credit: "Studio Click House",
+    },
+  },
+
+  manifesto: {
+    quote:
+      "The true standard of post-production is invisible perfection: every pixel refined so the art, garment, and human expression feel completely effortless.",
+    author: "Studio Click House",
+    role: "Global Creative Post-Production & Color Studio",
+  },
+
+  brandPartners: [
+    { name: "Vogue Creative", category: "Editorial" },
+    { name: "Nordic Apparel", category: "E-Commerce" },
+    { name: "Aurum Fine Jewelry", category: "Luxury Retail" },
+    { name: "Lumière Cosmetics", category: "Beauty" },
+    { name: "Atelier Studio Paris", category: "Commercial" },
+    { name: "Monolith Footwear", category: "Apparel" },
+  ],
+
+  showreel: {
+    title: "2026 Craft & Process Showreel",
+    subtitle: "Behind The Scenes · Layer by Layer",
+    description:
+      "Experience how our artists take raw commercial camera files and transform them into catalog-ready masterpieces.",
+    media: {
+      src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      alt: "Studio Click House post-production process showreel preview",
+      width: 1600,
+      height: 900,
+      credit: "Studio Click House",
+    },
+  },
+
   stats: [
     { value: 5, suffix: "M+", label: "Assets delivered" },
     { value: 150, suffix: "+", label: "Digital artists" },
     { value: 10, suffix: "+", label: "Years of production" },
+    { value: 99, suffix: ".8%", label: "On-time SLA rating" },
   ],
 
   cta: {
