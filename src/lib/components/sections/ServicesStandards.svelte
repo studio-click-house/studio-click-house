@@ -94,7 +94,7 @@
       >
         {#each productionGallery as image, index (image.src)}
           <figure
-            class="standards-gallery-frame relative overflow-hidden rounded-[1rem] {index ===
+            class="standards-gallery-frame relative overflow-hidden rounded-sm {index ===
             0
               ? 'col-span-2 aspect-[4/3] lg:col-span-4 lg:row-span-2 lg:aspect-auto'
               : 'aspect-[4/3] lg:col-span-3 lg:aspect-auto'}"
@@ -134,7 +134,7 @@
           {#each serviceStandards as standard, index (standard.title)}
             <article
               id={`service-standard-${index + 1}`}
-              class="standards-reveal group"
+              class="standards-reveal group pl-3 border-l-2 border-transparent transition-all duration-300 hover:border-brand-green/50 hover:translate-x-[3px]"
             >
               <h3
                 class="text-[1rem] font-semibold tracking-[-0.02em] transition-colors duration-300 group-hover:text-brand-green sm:text-[1.05rem]"

@@ -402,7 +402,8 @@
                 aria-current={page.url.pathname === item.href
                   ? "page"
                   : undefined}
-                class="group/link flex h-full items-center justify-between px-6 py-5 transition-colors hover:bg-brand-light/8"
+          class="group/link flex h-full items-center justify-between px-6 py-5 transition-colors hover:bg-brand-light/8"
+                style="transition-delay: {index * 35}ms"
               >
                 <span class="flex items-baseline gap-3">
                   <span class="font-mono text-[0.55rem] text-brand-light/35">
@@ -542,7 +543,7 @@
     background: var(--color-brand-green);
     color: var(--color-brand-dark);
     border: 1px solid var(--color-brand-green);
-    border-radius: 0.55rem;
+    border-radius: 4px;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
@@ -566,7 +567,7 @@
     padding-inline: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
-    border-radius: 0.55rem;
+    border-radius: 4px;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
@@ -593,7 +594,7 @@
     padding-inline: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
-    border-radius: 0.55rem;
+    border-radius: 4px;
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
@@ -625,7 +626,7 @@
     padding-inline: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 28%, transparent);
-    border-radius: 0.55rem;
+    border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 600;

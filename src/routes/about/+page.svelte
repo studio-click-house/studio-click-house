@@ -6,6 +6,7 @@
   import AboutTimeline from "$lib/components/sections/about/AboutTimeline.svelte";
   import AboutCareersBanner from "$lib/components/sections/about/AboutCareersBanner.svelte";
   import AboutLeadership from "$lib/components/sections/about/AboutLeadership.svelte";
+  import DirectorsMessage from "$lib/components/sections/DirectorsMessage.svelte";
   import AboutClosingCta from "$lib/components/sections/about/AboutClosingCta.svelte";
   import { aboutPageData } from "$lib/content/about";
   import { siteConfig } from "$lib/config/site";
@@ -65,5 +66,6 @@
   <AboutTimeline journey={aboutPageData.journey} />
   <AboutCareersBanner careers={aboutPageData.careers} />
   <AboutLeadership leadership={aboutPageData.leadership} />
+  <DirectorsMessage />
   <AboutClosingCta closingCta={aboutPageData.closingCta} />
 </main>

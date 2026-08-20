@@ -52,7 +52,7 @@
                       width={client.width}
                       height={client.height}
                       loading="lazy"
-                      class={`object-contain opacity-55 grayscale ${
+                      class={`object-contain opacity-55 grayscale transition-all duration-300 ${
                         [
                           "julie-benedetto-photography",
                           "maddy-pollard",
@@ -126,6 +126,12 @@
   .logo-slot:hover .placeholder-mark {
     color: var(--color-brand-green);
     transform: translateY(-2px);
+  }
+
+  .logo-slot:hover img {
+    filter: grayscale(0);
+    opacity: 0.82;
+    transform: scale(1.04);
   }
 
   @keyframes logo-drift {

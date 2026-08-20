@@ -93,7 +93,7 @@
 <section
   id="portfolio-mosaic-gallery"
   aria-label="Mosaic Craft Gallery"
-  class="relative w-full bg-brand-light py-16 lg:py-24 border-b border-brand-dark/10"
+  class="relative w-full bg-brand-light py-16 lg:py-24"
 >
   <div class="site-shell relative z-10">
     <!-- Top Row of Mosaic (4 photos side-by-side matching image) -->

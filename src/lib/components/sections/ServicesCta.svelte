@@ -96,7 +96,7 @@
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-6 rounded-[0.55rem] bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
+            class="group inline-flex min-h-12 items-center gap-6 rounded-sm bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
           >
             Start a project
             <ArrowUpRight
@@ -105,7 +105,7 @@
           </a>
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+            class="group inline-flex min-h-12 items-center gap-3 rounded-sm border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
           >
             Request a test edit
             <ArrowRight
@@ -125,7 +125,7 @@
     </div>
 
     <div
-      class="services-cta-reveal mt-14 grid gap-8 rounded-[1.25rem] bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
+      class="services-cta-reveal mt-14 grid gap-8 rounded-sm bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
     >
       <div>
         <h3 class="text-base font-semibold">Send the brief</h3>

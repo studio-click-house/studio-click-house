@@ -449,15 +449,21 @@
     height: 2.7rem;
     place-items: center;
     border: 1px solid
-      color-mix(in srgb, var(--color-brand-green) 18%, transparent);
-    border-radius: 0.55rem;
-    background: color-mix(in srgb, var(--color-brand-green) 6%, transparent);
+      color-mix(in srgb, var(--color-brand-mist) 30%, transparent);
+    border-radius: 4px;
+    background: transparent;
     color: color-mix(
       in srgb,
-      var(--color-brand-green) 72%,
-      var(--color-brand-dark)
+      var(--color-brand-dark) 50%,
+      transparent
     );
+    transition: color 260ms ease, border-color 260ms ease;
     will-change: transform, opacity;
+  }
+
+  .assurance-row:hover .assurance-icon {
+    color: var(--color-brand-green);
+    border-color: color-mix(in srgb, var(--color-brand-green) 35%, transparent);
   }
 
   .assurance-index {

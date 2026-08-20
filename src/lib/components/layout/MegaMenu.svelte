@@ -227,15 +227,15 @@
             <div class="flex items-center gap-3">
               <!-- Icon Container -->
               <div
-                class="size-9 flex items-center justify-center rounded-lg bg-brand-light/5 text-brand-light/60 transition-colors group-hover:bg-brand-green/10 group-hover:text-brand-green group-data-[active=true]:bg-brand-green group-data-[active=true]:text-brand-dark"
+                class="size-8 flex items-center justify-center rounded-sm border border-brand-light/8 text-brand-light/50 transition-all duration-300 group-hover:border-brand-green/30 group-hover:text-brand-green group-data-[active=true]:border-brand-green/50 group-data-[active=true]:bg-brand-green/10 group-data-[active=true]:text-brand-green"
               >
-                <category.icon size={16} strokeWidth={2} />
+                <category.icon size={15} strokeWidth={1.8} />
               </div>
               <div class="flex flex-col">
                 <span
-                  class="font-sans text-xs font-bold uppercase tracking-wider transition-colors {activeCategory ===
+                  class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 {activeCategory ===
                   category.id
-                    ? 'text-brand-green'
+                    ? 'text-brand-green translate-x-0.5'
                     : 'text-brand-light/80 group-hover:text-brand-light'}"
                 >
                   {category.label}
@@ -298,7 +298,7 @@
                 <span
                   class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out {service.slug ===
                   activeServiceSlug
-                    ? 'text-brand-green translate-x-1'
+                    ? 'text-brand-green translate-x-1.5'
                     : 'text-brand-light/80'}"
                 >
                   {service.title}

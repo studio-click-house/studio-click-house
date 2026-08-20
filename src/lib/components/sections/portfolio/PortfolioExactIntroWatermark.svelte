@@ -47,33 +47,15 @@
   id="portfolio-intro-watermark"
   bind:this={section}
   aria-label="Studio Introduction and Creative Standard"
-  class="relative w-full bg-brand-light pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden border-b border-brand-dark/10"
+  class="relative w-full bg-brand-light pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden"
 >
   <div class="site-shell relative z-10">
     <!-- Top Row: Decorative Motif + 3-Column Text Grid (Exact layout from image) -->
     <div
       class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start mb-16 lg:mb-24"
     >
-      <!-- Left Column: Decorative Flourish + Bold Title -->
+      <!-- Left Column: Bold Title -->
       <div class="md:col-span-4 flex flex-col items-start">
-        <!-- SVG Flourish Motif in Brand Green -->
-        <div class="flex items-center gap-1.5 text-brand-green mb-4">
-          <svg
-            class="size-6 text-brand-green"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path
-              d="M12 2L14.5 8.5L21 9.5L16 14.5L17.5 21L12 17.5L6.5 21L8 14.5L3 9.5L9.5 8.5L12 2Z"
-            />
-          </svg>
-          <span
-            class="font-mono text-xs uppercase tracking-widest font-semibold text-brand-green"
-          >
-            Editorial Standard
-          </span>
-        </div>
-
         <h2
           class="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-brand-dark leading-[1.1] tracking-tight"
         >
@@ -105,33 +87,30 @@
       </div>
     </div>
 
-    <!-- Bottom Showcase: Giant Watermark Word with Centered Overlapping Cutout Photo (Exact match from image) -->
-    <div class="relative flex items-center justify-center my-6 md:my-10">
-      <!-- Massive Bold Watermark Text in Brand Green Tint -->
-      <div
-        class="font-display text-[22vw] sm:text-[20vw] lg:text-[18vw] font-black uppercase tracking-tighter text-brand-green/25 leading-none select-none text-center pointer-events-none w-full"
-        aria-hidden="true"
-      >
-        STUDIO
-      </div>
-
-      <!-- Centered Layered Photo breaking right through the center of the letters (Exact match) -->
+    <!-- Bottom Showcase: Giant Word Masked with Photo (Image 2 Match) -->
+    <div class="relative flex items-center justify-center my-6 md:my-10 overflow-hidden select-none">
       <div
         bind:this={cutoutImage}
-        class="absolute z-20 w-44 overflow-hidden border border-brand-dark/10 bg-brand-light shadow-xl sm:w-60 md:w-80 lg:w-96"
+        class="studio-image-mask font-display text-[22vw] sm:text-[20vw] lg:text-[18vw] font-black uppercase tracking-tighter leading-none text-center w-full"
+        aria-label="Studio Click House"
       >
-        <div class="aspect-[4/3] w-full overflow-hidden bg-brand-dark/5">
-          <img
-            src="/images/work-fields/gallery/fashion-color.jpg"
-            alt="Studio Click House fashion post-production craftsmanship"
-            width="1600"
-            height="900"
-            loading="lazy"
-            decoding="async"
-            class="h-full w-full object-cover object-center scale-105 transition-transform duration-700 hover:scale-110"
-          />
-        </div>
+        STUDIO
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .studio-image-mask {
+    background-image: url("/images/work-fields/gallery/fashion-color.jpg");
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 10px 25px rgba(51, 46, 45, 0.08));
+    will-change: transform;
+  }
+</style>

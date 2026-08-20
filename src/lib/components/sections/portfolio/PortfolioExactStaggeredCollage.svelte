@@ -49,7 +49,7 @@
   id="portfolio-staggered-collage"
   bind:this={collageSection}
   aria-label="Editorial Showcase Collage"
-  class="relative w-full bg-brand-light py-16 lg:py-24 overflow-hidden border-b border-brand-dark/10"
+  class="relative w-full bg-brand-light py-16 lg:py-24 overflow-hidden"
 >
   <div class="site-shell relative z-10">
     <!-- Asymmetric Collage Container -->
@@ -201,9 +201,9 @@
       </div>
     </div>
 
-    <!-- Section 4 (Embedded Divider): Left label + Giant Right Watermark Word (Exact match to "Performing Arts" & "Arts") -->
+    <!-- Section 4 (Embedded Divider): Left label + Giant Right Watermark Word (Photo Masked Match) -->
     <div
-      class="mt-20 pt-8 border-t border-brand-dark/15 flex items-baseline justify-between overflow-hidden relative"
+      class="mt-20 pt-8 flex items-baseline justify-between overflow-hidden relative select-none"
     >
       <div
         class="font-display text-xl sm:text-2xl lg:text-3xl font-semibold text-brand-dark tracking-tight"
@@ -211,7 +211,7 @@
         Performing Craft
       </div>
       <div
-        class="font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase text-brand-green/20 leading-none select-none tracking-tighter -mr-4 pointer-events-none"
+        class="craft-image-mask font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase leading-none select-none tracking-tighter -mr-4 pointer-events-none"
         aria-hidden="true"
       >
         Craft
@@ -219,3 +219,17 @@
     </div>
   </div>
 </section>
+
+<style>
+  .craft-image-mask {
+    background-image: url("/images/work-fields/gallery/product-retouching.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 8px 20px rgba(51, 46, 45, 0.08));
+  }
+</style>

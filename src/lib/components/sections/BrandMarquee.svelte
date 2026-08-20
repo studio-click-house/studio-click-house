@@ -47,7 +47,7 @@
         class="flex min-w-max items-center"
         aria-hidden={index >= serviceNames.length}
       >
-        <span class="mx-5 size-1 bg-brand-green sm:mx-8" aria-hidden="true"
+        <span class="mx-5 size-[3px] rounded-full bg-brand-light/30 sm:mx-8" aria-hidden="true"
         ></span>
         <span
           class="marquee-service-name font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
@@ -70,7 +70,7 @@
   }
 
   .marquee-track {
-    animation: marquee 34s linear infinite;
+    animation: marquee 44s linear infinite;
   }
 
   .marquee-service-name {

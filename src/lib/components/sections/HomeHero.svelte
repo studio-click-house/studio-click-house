@@ -95,18 +95,33 @@
       context = gsap.context(() => {
         const media = gsap.matchMedia();
         media.add("(prefers-reduced-motion: no-preference)", () => {
+          const heroLines = gsap.utils.toArray<HTMLElement>(".hero-line");
           const timeline = gsap
             .timeline({
               paused: true,
-              defaults: { ease: "power3.out" },
             })
-            .from(".hero-media", { scale: 1.08, duration: 1.2 })
-            .from(
-              ".hero-line",
-              { yPercent: 110, duration: 0.78, stagger: 0.07 },
-              0.12,
-            )
-            .from(".hero-detail", { autoAlpha: 0, y: 20, duration: 0.5 }, 0.4);
+            .from(".hero-media", { scale: 1.05, duration: 1.4, ease: "power2.out" });
+
+          heroLines.forEach((line, i) => {
+            const durations = [0.72, 0.95, 0.78];
+            const eases = ["power3.out", "power4.out", "power3.out"];
+            const offsets = [0.1, 0.18, 0.28];
+            timeline.from(
+              line,
+              {
+                yPercent: 110,
+                duration: durations[i] ?? 0.78,
+                ease: eases[i] ?? "power3.out",
+              },
+              offsets[i] ?? 0.1,
+            );
+          });
+
+          timeline.from(
+            ".hero-detail",
+            { autoAlpha: 0, y: 24, duration: 0.7, ease: "power2.out" },
+            0.55,
+          );
 
           startHeroMotion = () => timeline.play();
           if (isPreloaderComplete) startHeroMotion();
@@ -163,10 +178,10 @@
     </video>
   </div>
   <div
-    class="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,33,31,0.5)_0%,rgba(32,33,31,0.2)_50%,rgba(32,33,31,0)_100%)]"
+    class="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,33,31,0.58)_0%,rgba(32,33,31,0.25)_50%,rgba(32,33,31,0)_100%)]"
   ></div>
   <div
-    class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-light/35 to-transparent"
+    class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-brand-dark/55 to-transparent"
   ></div>
 
   <div
@@ -189,31 +204,31 @@
       </h1>
     </div>
 
-    <div class="hero-detail mt-10 pt-6 lg:mt-0">
-      <p class="text-sm leading-relaxed text-brand-light/75 sm:text-base">
+    <div class="hero-detail mt-10 pt-6 lg:mt-0 lg:border-l lg:border-brand-light/15 lg:pl-8">
+      <p class="text-sm leading-relaxed text-brand-light/70 sm:text-base">
         Studio Click House shapes still and moving images for brands, studios,
         and production teams that care about the final frame.
       </p>
       <div class="mt-7 flex flex-wrap items-center gap-5">
         <a
           href={resolve("/contact")}
-          class="group inline-flex items-center gap-3 rounded-[0.55rem] bg-brand-green px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
+          class="group inline-flex items-center gap-3 rounded-sm bg-brand-green px-5 py-3.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
           >Start a project
           <ArrowUpRight
-            size={17}
-            strokeWidth={1.7}
-            class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+            size={15}
+            strokeWidth={1.8}
+            class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           /></a
         >
         <a
           href={resolve("/#horizontal-projects-showcase")}
-          class="inline-flex items-center gap-2 text-sm font-semibold text-brand-light group"
+          class="hero-explore-link inline-flex items-center gap-2 text-sm font-semibold text-brand-light group"
         >
-          <span class="border-b border-current pb-1">Explore services</span>
+          <span class="hero-explore-label">Explore services</span>
           <span
-            class="flex transition-transform duration-300 group-hover:translate-y-1"
+            class="flex transition-transform duration-300 group-hover:translate-y-0.5"
           >
-            <ArrowDown size={15} strokeWidth={1.7} />
+            <ArrowDown size={14} strokeWidth={1.8} />
           </span>
         </a>
       </div>
@@ -232,7 +247,7 @@
       class="scroll-mouse flex justify-center items-start w-[20px] h-[34px] border border-brand-light/35 rounded-full"
     >
       <div
-        class="scroll-wheel w-[3px] h-[8px] mt-1.5 bg-brand-green rounded-full"
+        class="scroll-wheel w-[3px] h-[8px] mt-1.5 bg-brand-light/55 rounded-full"
       ></div>
     </div>
   </div>
@@ -254,12 +269,34 @@
     opacity: 1;
   }
 
+  .hero-explore-label {
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .hero-explore-label::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-explore-link:hover .hero-explore-label::after {
+    transform: scaleX(1);
+  }
+
   .scroll-indicator {
-    animation: scroll-fade-in 1s ease 1s both;
+    animation: scroll-fade-in 1s ease 1.2s both;
   }
 
   .scroll-wheel {
-    animation: scroll-wheel-dot 2.2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    animation: scroll-wheel-dot 2.6s cubic-bezier(0.76, 0, 0.24, 1) infinite;
   }
 
   @keyframes scroll-wheel-dot {

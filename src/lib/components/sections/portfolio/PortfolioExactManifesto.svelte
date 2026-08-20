@@ -2,7 +2,7 @@
 <section
   id="portfolio-manifesto-quote"
   aria-label="Studio Creative Manifesto"
-  class="relative w-full bg-brand-light py-20 lg:py-28 border-b border-brand-dark/10 text-center"
+  class="relative w-full bg-brand-light py-20 lg:py-28 text-center"
 >
   <div class="site-shell max-w-3xl mx-auto flex flex-col items-center">
     <!-- Centered Editorial Quote matching image quote -->

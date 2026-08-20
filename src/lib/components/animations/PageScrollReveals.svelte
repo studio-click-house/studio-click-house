@@ -29,6 +29,7 @@
             "studio-team",
             "production-process",
             "why-trust-us",
+            "faq",
             "faq-section",
             "client-locations",
             "pricing-configurator",
@@ -40,7 +41,10 @@
             root.querySelectorAll<HTMLElement>(":scope > section"),
           ).filter((section) => !excludedSections.has(section.id));
 
-          for (const section of sections) {
+          const pageHeight = document.documentElement.scrollHeight;
+
+          for (let sIdx = 0; sIdx < sections.length; sIdx++) {
+            const section = sections[sIdx];
             const sectionTop = section.getBoundingClientRect().top;
             if (sectionTop <= window.innerHeight * 0.82) continue;
 
@@ -53,8 +57,16 @@
 
             if (!copy.length && !visual.length) continue;
 
+            const sectionOffsetY = section.offsetTop;
+            const isLaterHalf = sectionOffsetY > pageHeight * 0.45;
+
+            const copyY = isLaterHalf ? 42 : 26;
+            const copyDuration = isLaterHalf ? 1.1 : 0.75;
+            const copyStagger = isLaterHalf ? 0.1 : 0.06;
+            const visualDuration = isLaterHalf ? 1.2 : 0.9;
+
             const timeline = gsap.timeline({
-              defaults: { ease: "power3.out" },
+              defaults: { ease: isLaterHalf ? "power2.out" : "power3.out" },
               scrollTrigger: {
                 trigger: section,
                 start: "top 82%",
@@ -65,9 +77,9 @@
             if (copy.length) {
               timeline.from(copy, {
                 autoAlpha: 0,
-                y: 34,
-                duration: 0.9,
-                stagger: 0.08,
+                y: copyY,
+                duration: copyDuration,
+                stagger: copyStagger,
               });
             }
 
@@ -76,12 +88,13 @@
                 visual,
                 {
                   autoAlpha: 0,
-                  y: 26,
+                  y: isLaterHalf ? 30 : 20,
                   scale: 1.02,
-                  duration: 1.05,
+                  clipPath: "inset(6% 0% 0% 0%)",
+                  duration: visualDuration,
                   stagger: 0.1,
                 },
-                copy.length ? "-=0.62" : 0,
+                copy.length ? "-=0.55" : 0,
               );
             }
           }

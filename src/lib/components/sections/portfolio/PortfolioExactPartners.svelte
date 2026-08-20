@@ -18,13 +18,13 @@
 <section
   id="portfolio-partner-logos"
   aria-label="Brand Partners and Sponsors"
-  class="relative w-full bg-brand-light py-16 lg:py-24 border-b border-brand-dark/10"
+  class="relative w-full bg-brand-light pt-16 pb-12 sm:pt-20 sm:pb-16 text-center"
 >
-  <div class="site-shell text-center">
+  <div class="site-shell">
     <h2
-      class="font-display text-xl sm:text-2xl font-semibold text-brand-dark mb-10 tracking-tight"
+      class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-dark mb-12 inline-block border-b-2 border-brand-dark/25 pb-1"
     >
-      Sponsor & Brand Partners
+      Sponsor
     </h2>
 
     <!-- 2-Row Clean Monochrome Partner Matrix matching image -->

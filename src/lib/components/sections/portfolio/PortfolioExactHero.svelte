@@ -2,6 +2,15 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
 
   let heroSection = $state<HTMLElement | null>(null);
+  let heroVideo = $state<HTMLVideoElement | null>(null);
+
+  $effect(() => {
+    if (heroVideo) {
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      void heroVideo.play().catch(() => {});
+    }
+  });
 
   $effect(() => {
     if (!heroSection) return;
@@ -40,14 +49,26 @@
   aria-label="Portfolio Hero"
   class="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-brand-dark pt-24 md:pt-28"
 >
-  <img
-    src="/images/portfolio/portfolio-fashion-studio-hero.jpg"
-    alt="Fashion photographer directing a model during a studio portfolio shoot"
-    width="2400"
-    height="1600"
-    fetchpriority="high"
-    class="absolute inset-0 h-full w-full object-cover object-center"
-  />
+  <video
+    bind:this={heroVideo}
+    poster="/images/portfolio/portfolio-fashion-studio-hero.jpg"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="auto"
+    class="absolute inset-0 h-full w-full object-cover object-center scale-105"
+    aria-label="Fashion photographer taking photos of a model during a creative studio shoot"
+  >
+    <source
+      src="/videos/work-fields-studio-production.mp4"
+      type="video/mp4"
+    />
+    <source
+      src="https://assets.mixkit.co/videos/preview/mixkit-photographer-taking-photos-of-a-model-in-a-studio-41484-large.mp4"
+      type="video/mp4"
+    />
+  </video>
 
   <div class="absolute inset-0 bg-brand-dark/38"></div>
   <div class="absolute inset-0 bg-brand-green/25 mix-blend-color"></div>
@@ -56,17 +77,13 @@
   ></div>
 
   <div class="site-shell relative z-10 flex flex-col items-center text-center text-brand-light">
-    <p
-      class="hero-anim-item mb-4 text-[10px] font-semibold uppercase tracking-[0.38em] md:text-xs"
-    >
-      Selected work · 2015—2026
-    </p>
+
 
     <h1
       class="hero-anim-item select-none text-[clamp(6.5rem,21vw,18rem)] leading-[0.72] tracking-[-0.085em] text-brand-light drop-shadow-[0_8px_30px_rgba(0,0,0,0.32)]"
       style="font-family: 'Playfair Display', Georgia, serif; font-style: italic;"
     >
-      Studio
+      Archive
     </h1>
 
     <p

@@ -49,7 +49,7 @@
   id="portfolio-craft-panorama"
   bind:this={panoramaSection}
   aria-label="Full-Width Craftsmanship Texture Panorama"
-  class="relative w-full bg-brand-light pb-16 lg:pb-24 border-b border-brand-dark/10 overflow-hidden"
+  class="relative w-full bg-brand-light pb-16 lg:pb-24 overflow-hidden"
 >
   <div class="w-full max-w-[100vw] overflow-hidden">
     <div

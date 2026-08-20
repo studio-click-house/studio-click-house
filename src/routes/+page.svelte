@@ -8,7 +8,7 @@
   import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
   import ProductionProcess from "$lib/components/sections/ProductionProcess.svelte";
   import StudioIntroduction from "$lib/components/sections/StudioIntroduction.svelte";
-  import DirectorsMessage from "$lib/components/sections/DirectorsMessage.svelte";
+  import ScrollImageStory from "$lib/components/sections/ScrollImageStory.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -51,8 +51,8 @@
   <AboutOrbitGallery />
   <HorizontalProjectsShowcase />
   <CreativeMarquee items={data.clientLogoItems} />
+  <ScrollImageStory />
   <ProductionProcess />        
-  <DirectorsMessage />
   <FaqSection />
   <ClientLocations closingCta={aboutPageData.closingCta} />
 </main>

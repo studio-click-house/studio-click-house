@@ -46,7 +46,11 @@
   function startPlayback() {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-    window.speechSynthesis.cancel();
+    try {
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.resume();
+    } catch {}
+
     speechUtterance = new SpeechSynthesisUtterance(STUDIO_BRIEF_SCRIPT);
     speechUtterance.rate = 0.95;
     speechUtterance.pitch = 1.0;
@@ -75,6 +79,9 @@
 
     try {
       window.speechSynthesis.speak(speechUtterance);
+      // In some browsers, isPlaying isn't set until onstart fires. Set optimistic state:
+      isPlaying = true;
+      isPaused = false;
     } catch {
       // Browser autoplay policy might hold until gesture
     }
@@ -84,15 +91,13 @@
     if (typeof window === "undefined" || !window.speechSynthesis) return;
 
     if (isPlaying) {
-      window.speechSynthesis.pause();
+      window.speechSynthesis.cancel();
       isPlaying = false;
       isPaused = true;
       hasUserStopped = true;
     } else if (isPaused) {
-      window.speechSynthesis.resume();
-      isPlaying = true;
-      isPaused = false;
       hasUserStopped = false;
+      startPlayback();
     } else {
       hasUserStopped = false;
       startPlayback();
@@ -102,52 +107,55 @@
   onMount(() => {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        getBestVoice();
-      };
-    }
-
-    // Auto-run on arrival
-    const triggerAutoRun = () => {
+    const tryStart = () => {
       if (!hasUserStopped && !isPlaying) {
         startPlayback();
       }
     };
 
-    // Attempt immediately on mount
-    triggerAutoRun();
-
-    // Also trigger when preloader is done
-    const preloader = document.querySelector(".site-preloader");
-    if (preloader) {
-      window.addEventListener("site-preloader-complete", triggerAutoRun, { once: true });
+    // Load voices and try start immediately
+    if (window.speechSynthesis.getVoices().length > 0) {
+      tryStart();
+    } else {
+      window.speechSynthesis.onvoiceschanged = () => {
+        tryStart();
+      };
     }
 
-    // Modern browsers require 1 interaction for audio: listen on first gesture
-    const handleFirstGesture = () => {
-      if (!hasUserStopped && !isPlaying && !isPaused) {
-        startPlayback();
+    // Try again on preloader completion events
+    window.addEventListener("site-preloader-complete", tryStart, { once: true });
+    window.addEventListener("site-preloader-logo-landed", tryStart, { once: true });
+
+    // Ensure audio starts on first user action (movement, scroll, click, key)
+    const handleGesture = () => {
+      if (!hasUserStopped && !isPlaying) {
+        tryStart();
       }
-      cleanupGestureListeners();
+      cleanupListeners();
     };
 
-    const cleanupGestureListeners = () => {
-      window.removeEventListener("pointerdown", handleFirstGesture);
-      window.removeEventListener("click", handleFirstGesture);
-      window.removeEventListener("keydown", handleFirstGesture);
-      window.removeEventListener("touchstart", handleFirstGesture);
-      window.removeEventListener("scroll", handleFirstGesture);
+    const cleanupListeners = () => {
+      window.removeEventListener("pointermove", handleGesture);
+      window.removeEventListener("pointerdown", handleGesture);
+      window.removeEventListener("click", handleGesture);
+      window.removeEventListener("keydown", handleGesture);
+      window.removeEventListener("touchstart", handleGesture);
+      window.removeEventListener("scroll", handleGesture);
+      window.removeEventListener("wheel", handleGesture);
     };
 
-    window.addEventListener("pointerdown", handleFirstGesture, { once: true });
-    window.addEventListener("click", handleFirstGesture, { once: true });
-    window.addEventListener("keydown", handleFirstGesture, { once: true });
-    window.addEventListener("touchstart", handleFirstGesture, { once: true });
-    window.addEventListener("scroll", handleFirstGesture, { once: true });
+    window.addEventListener("pointermove", handleGesture, { once: true, passive: true });
+    window.addEventListener("pointerdown", handleGesture, { once: true, passive: true });
+    window.addEventListener("click", handleGesture, { once: true, passive: true });
+    window.addEventListener("keydown", handleGesture, { once: true, passive: true });
+    window.addEventListener("touchstart", handleGesture, { once: true, passive: true });
+    window.addEventListener("scroll", handleGesture, { once: true, passive: true });
+    window.addEventListener("wheel", handleGesture, { once: true, passive: true });
 
     return () => {
-      cleanupGestureListeners();
+      cleanupListeners();
+      window.removeEventListener("site-preloader-complete", tryStart);
+      window.removeEventListener("site-preloader-logo-landed", tryStart);
       if (typeof window !== "undefined" && window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }

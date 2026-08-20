@@ -29,7 +29,7 @@
             >
               {#if testimonial.avatar}
                 <div
-                  class="size-16 md:size-20 shrink-0 rounded-full overflow-hidden border border-brand-green/40 bg-brand-light/5"
+                  class="size-16 md:size-20 shrink-0 rounded-full overflow-hidden border border-brand-light/15 bg-brand-light/5 transition-all duration-300 hover:border-brand-green/60 hover:scale-[1.04]"
                 >
                   <img
                     src={testimonial.avatar}
@@ -39,11 +39,12 @@
                 </div>
               {/if}
               <div class="flex-1 space-y-4">
-                <p class="font-display text-2xl md:text-3xl leading-snug">
-                  “{testimonial.quote}”
+                <p class="director-quote relative font-display text-2xl md:text-3xl leading-snug">
+                  <span class="director-quote-mark" aria-hidden="true">“</span>
+                  {testimonial.quote}
                 </p>
                 <footer class="text-sm flex items-center gap-3">
-                  <div class="h-px w-6 bg-brand-green/60"></div>
+                  <div class="h-px w-8 bg-brand-green/50"></div>
                   <div>
                     <cite
                       class="not-italic font-bold text-brand-light block sm:inline"
@@ -87,3 +88,18 @@
     </div>
   </div>
 </section>
+
+<style>
+  .director-quote-mark {
+    position: absolute;
+    top: -0.35em;
+    left: -0.08em;
+    font-family: var(--font-display);
+    font-size: 3.5em;
+    line-height: 1;
+    color: var(--color-brand-green);
+    opacity: 0.12;
+    pointer-events: none;
+    user-select: none;
+  }
+</style>

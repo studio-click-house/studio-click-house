@@ -960,8 +960,7 @@
     color: var(--color-brand-green);
   }
 
-  .contact-detail-link,
-  .office-link {
+  .contact-detail-link {
     display: inline-flex;
     width: fit-content;
     align-items: center;
@@ -971,13 +970,11 @@
     transition: color 220ms ease;
   }
 
-  .contact-detail-link :global(svg),
-  .office-link :global(svg) {
+  .contact-detail-link :global(svg) {
     flex-shrink: 0;
   }
 
-  .contact-detail-link:hover,
-  .office-link:hover {
+  .contact-detail-link:hover {
     color: var(--color-brand-green);
   }
 

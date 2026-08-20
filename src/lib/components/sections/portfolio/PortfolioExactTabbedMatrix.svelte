@@ -134,7 +134,7 @@
 <section
   id="portfolio-tabbed-matrix"
   aria-label="Disciplines Schedule and Delivery Matrix"
-  class="relative w-full bg-brand-light py-16 lg:py-24 border-b border-brand-dark/10"
+  class="relative w-full bg-brand-light py-16 lg:py-24"
 >
   <div class="site-shell relative z-10">
     <!-- Top 4-Tab Bar (Exact layout with clean borders & active indicator) -->
@@ -168,12 +168,6 @@
             {/if}
           </button>
         {/each}
-      </div>
-
-      <div class="hidden md:flex items-center text-brand-green pr-2">
-        <span class="text-xs font-mono font-semibold uppercase tracking-widest"
-          >+ Live SLA</span
-        >
       </div>
     </div>
 

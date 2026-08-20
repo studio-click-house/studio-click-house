@@ -419,7 +419,7 @@
   id="production-process"
   bind:this={section}
   aria-labelledby="production-process-title"
-  class="process-section overflow-hidden bg-brand-light text-brand-dark section-space pt-0"
+  class="process-section overflow-hidden bg-brand-light text-brand-dark section-space pt-6 sm:pt-10"
 >
   <div class="process-orb process-orb-left" aria-hidden="true"></div>
   <div class="process-orb process-orb-right" aria-hidden="true"></div>

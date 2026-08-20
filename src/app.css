@@ -89,9 +89,21 @@
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
+    transition: color 220ms ease;
+  }
+
+  .section-space-lg {
+    padding-block: clamp(7rem, 11vw, 12rem);
+  }
+
+  .editorial-divider {
+    width: 40%;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.12;
   }
 
   .display-title {
