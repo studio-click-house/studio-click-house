@@ -125,7 +125,7 @@
     </div>
 
     <div
-      class="services-cta-reveal mt-14 grid gap-8 rounded-sm bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
+      class="services-cta-reveal mt-14 grid gap-8 rounded-[1.5rem] bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
     >
       <div>
         <h3 class="text-base font-semibold">Send the brief</h3>

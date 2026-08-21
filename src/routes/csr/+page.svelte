@@ -23,8 +23,8 @@
 </script>
 
 <PageMeta
-  title="Corporate Social Responsibility | Studio Click House (SCHL)"
-  description="Discover Studio Click House's (SCHL) commitment to sustainable green web-hosting footprints, ethical labor standards, and community support in creative ecosystems."
+  title="Corporate Social Responsibility | Studio Click House"
+  description="Discover Studio Click House's commitment to sustainable green web-hosting footprints, ethical labor standards, and community support in creative ecosystems."
   canonicalPath="/csr"
 />
 

@@ -51,9 +51,9 @@
   aria-label="Full-Width Craftsmanship Texture Panorama"
   class="relative w-full bg-brand-light pb-16 lg:pb-24 overflow-hidden"
 >
-  <div class="w-full max-w-[100vw] overflow-hidden">
+  <div class="site-shell relative z-10">
     <div
-      class="relative w-full aspect-[21/9] sm:aspect-[24/9] max-h-[580px] overflow-hidden bg-brand-dark/10"
+      class="relative w-full aspect-[21/9] sm:aspect-[24/9] max-h-[580px] rounded-2xl md:rounded-3xl border border-brand-dark/10 shadow-2xl overflow-hidden bg-white"
     >
       <img
         src="/images/work-fields/gallery/jewelry-retouching.jpg"

@@ -34,7 +34,7 @@
 </script>
 
 <PageMeta
-  title="Company Events & Activities | Studio Click House (SCHL)"
+  title="Company Events & Activities | Studio Click House"
   description="Explore upcoming and past Studio Click House company events, creative sessions, workshops, and the activities that bring our studio together."
   canonicalPath="/events"
 />

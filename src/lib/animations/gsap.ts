@@ -40,3 +40,11 @@ export function refreshScrollTriggersAfterFonts() {
 
   return initialRefreshPromise;
 }
+
+export async function refreshScrollTriggers() {
+  if (!browser) return;
+  const runtime = await registerScrollTrigger();
+  if (!runtime) return;
+  runtime.ScrollTrigger.refresh();
+}
+

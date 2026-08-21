@@ -144,19 +144,23 @@
           </a>
         </div>
 
-        <!-- Regional Phone Lines Table -->
-        <div class="max-w-md">
-          <div class="space-y-1 font-mono text-[0.78rem]">
-            {#each directLines as line (line.code)}
-              <a
-                href={line.href}
-                class="group flex items-center justify-between border-b border-brand-dark/8 py-1 transition-colors hover:text-brand-green"
-              >
-                <span class="font-bold text-brand-dark/60 group-hover:text-brand-green">{line.code}</span>
-                <span class="text-brand-dark font-medium tabular-nums group-hover:text-brand-green">{line.number}</span>
-              </a>
-            {/each}
-          </div>
+        <!-- Newsletter Subscription -->
+        <div class="max-w-md pt-2">
+          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-2">Join our newsletter</span>
+          <form class="flex w-full items-center">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              required
+              class="w-full rounded-l-md border border-r-0 border-brand-dark/15 bg-white px-3 py-2 text-[0.8rem] text-brand-dark placeholder:text-brand-dark/40 focus:border-brand-green focus:outline-none focus:ring-1 focus:ring-brand-green"
+            />
+            <button
+              type="submit"
+              class="rounded-r-md bg-brand-dark px-4 py-2 text-[0.8rem] font-semibold text-white transition-colors hover:bg-brand-green whitespace-nowrap border border-brand-dark hover:border-brand-green"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
 
         <!-- Original Studio Social Media Tiles -->
@@ -179,23 +183,23 @@
 
         <!-- Payment Badges moved right after Social Media -->
         <div class="pt-2">
-          <div class="flex flex-wrap items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2.5">
             <!-- Visa -->
             <div
-              class="h-6 w-10 rounded-[3px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
+              class="h-7 w-12 rounded-[4px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
               title="Visa"
             >
-              <svg viewBox="0 0 48 32" class="h-3 w-auto" role="img" aria-label="Visa">
+              <svg viewBox="0 0 48 32" class="h-3.5 w-auto" role="img" aria-label="Visa">
                 <path fill="#1A1F71" d="M19.5 9.8l-3.2 12.4h-3l3.2-12.4h3zm15.4 8l1.6-4.3.9 4.3h-2.5zm3.3 4.4h2.8l-2.5-12.4h-2.6c-.6 0-1.1.3-1.3.9l-4.5 11.5h3.1l.6-1.7h3.9l.4 1.7zm-7.9-4.1c0-3.3-4.6-3.5-4.6-5 0-.5.5-1 1.4-1 .9 0 1.5.2 2.1.5l.4-1.7c-.6-.2-1.4-.4-2.4-.4-2.5 0-4.3 1.3-4.3 3.2 0 1.4 1.3 2.1 2.2 2.7 1 .5 1.3.9 1.3 1.3 0 .8-.8 1.1-1.5 1.1-.9 0-1.8-.2-2.6-.7l-.4 1.8c.8.3 1.7.5 2.8.5 2.7 0 4.5-1.3 4.5-3.6zM16.8 9.8l-4.8 12.4h-2.9l-2.4-9.9c-.1-.5-.3-.8-.8-1-1.1-.6-2.3-1-3.4-1.3l.1-.3h5c.7 0 1.2.4 1.4 1.2l1.3 6.5 3.1-7.7h3.2z" />
               </svg>
             </div>
 
             <!-- Mastercard -->
             <div
-              class="h-6 w-10 rounded-[3px] bg-[#222324] px-1 flex items-center justify-center shadow-xs border border-white/10 transition-transform duration-200 hover:scale-105"
+              class="h-7 w-12 rounded-[4px] bg-[#222324] px-1 flex items-center justify-center shadow-xs border border-white/10 transition-transform duration-200 hover:scale-105"
               title="Mastercard"
             >
-              <svg viewBox="0 0 38 24" class="h-3 w-auto" role="img" aria-label="Mastercard">
+              <svg viewBox="0 0 38 24" class="h-3.5 w-auto" role="img" aria-label="Mastercard">
                 <circle cx="13" cy="12" r="9" fill="#EB001B" />
                 <circle cx="25" cy="12" r="9" fill="#F79E1B" />
                 <path d="M19 5.3a8.9 8.9 0 0 1 3.4 6.7 8.9 8.9 0 0 1-3.4 6.7 8.9 8.9 0 0 1-3.4-6.7c0-2.6 1.3-5 3.4-6.7z" fill="#FF5F00" />
@@ -204,10 +208,10 @@
 
             <!-- PayPal -->
             <div
-              class="h-6 w-10 rounded-[3px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
+              class="h-7 w-12 rounded-[4px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
               title="PayPal"
             >
-              <svg viewBox="0 0 34 24" class="h-3 w-auto" role="img" aria-label="PayPal">
+              <svg viewBox="0 0 34 24" class="h-3.5 w-auto" role="img" aria-label="PayPal">
                 <path fill="#003087" d="M11.5 19.5h-4a.6.6 0 0 1-.6-.7l3.8-15.6c.1-.4.5-.7.9-.7h6.2c2.2 0 3.8.5 4.7 1.5.9 1 1.1 2.1.8 3.7-.6 3.1-2.6 4.9-5.8 4.9h-3.4c-.4 0-.7.3-.8.7l-1.6 6.2z"/>
                 <path fill="#0079C1" d="M14.8 13.7c.4-.1.8-.1 1.2-.1 3.2 0 5.2-1.8 5.8-4.9.3-1.6.1-2.7-.8-3.7-.4-.4-.9-.8-1.5-1-.2 1.4-.7 2.6-1.5 3.5-1.1 1.2-2.7 1.8-4.6 1.8h-2.4c-.4 0-.7.3-.8.7l-1.7 6.7h3.1l1.1-4.4c.1-.4.5-.6.9-.6h1.2z"/>
                 <path fill="#00457C" d="M14.5 9.4c0-.1.1-.3.1-.4.2-.8.8-1.5 1.5-2 .7-.6 1.6-.9 2.7-.9h-6.2c-.4 0-.8.3-.9.7l-3.8 15.6a.6.6 0 0 0 .6.7h4l1.6-6.2c.1-.4.4-.7.8-.7h1.4c3.2 0 5.2-1.8 5.8-4.9.1-.5.1-.9.1-1.3-1.8.1-3.6.5-5 1.4-.9.6-1.5 1.3-1.9 2.6z"/>
@@ -216,28 +220,28 @@
 
             <!-- American Express -->
             <div
-              class="h-6 w-10 rounded-[3px] bg-[#006FCF] px-1 flex items-center justify-center shadow-xs border border-[#006FCF]/40 transition-transform duration-200 hover:scale-105"
+              class="h-7 w-12 rounded-[4px] bg-[#006FCF] px-1 flex items-center justify-center shadow-xs border border-[#006FCF]/40 transition-transform duration-200 hover:scale-105"
               title="American Express"
             >
-              <span class="font-mono text-[0.45rem] font-black tracking-tighter text-white uppercase">AMEX</span>
+              <span class="font-mono text-[0.55rem] font-black tracking-tighter text-white uppercase">AMEX</span>
             </div>
 
             <!-- Apple Pay -->
             <div
-              class="h-6 w-10 rounded-[3px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
+              class="h-7 w-12 rounded-[4px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
               title="Apple Pay"
             >
-              <svg viewBox="0 0 38 24" class="h-3 w-auto fill-black" role="img" aria-label="Apple Pay">
+              <svg viewBox="0 0 38 24" class="h-3.5 w-auto fill-black" role="img" aria-label="Apple Pay">
                 <path d="M7.7 7.7c-.5.6-1.3 1-2.1.9-.1-.8.2-1.7.7-2.2.5-.6 1.3-.9 2-.9.1.8-.2 1.6-.6 2.2zm.6 1.1c-1.2-.1-2.1.7-2.7.7-.6 0-1.4-.6-2.3-.6-1.2 0-2.3.7-2.9 1.8-1.3 2.2-.3 5.4.9 7.2.6.9 1.3 1.8 2.3 1.8s1.3-.6 2.5-.6c1.1 0 1.4.6 2.4.6 1 0 1.7-.9 2.3-1.8.7-1 1-2 1-2-.1 0-2-.8-2-3 0-1.9 1.5-2.8 1.6-2.9-1-.1-1.9-1.2-3.1-1.2zM15 5.5v12.2h1.6V12h2.9c2.3 0 3.8-1.5 3.8-3.3 0-1.8-1.5-3.2-3.8-3.2H15zm1.6 1.5h2.8c1.5 0 2.3.8 2.3 1.8s-.8 1.8-2.3 1.8h-2.8V7zm9.6 10.8c.8 0 1.6-.4 1.9-1.1v1h1.5V11.2h-1.5v1c-.4-.7-1.1-1.1-1.9-1.1-1.6 0-2.7 1.4-2.7 3.3 0 2 1.1 3.4 2.7 3.4zm.5-1.4c-.9 0-1.6-.7-1.6-2s.7-2 1.6-2 1.6.7 1.6 2-.7 2-1.6 2zm6.7 3.7l1.7-4.6-2.3-6.2h1.7l1.4 4.3 1.4-4.3h1.7l-3.9 9.6c-.4 1-.9 1.2-1.7 1.2h-1v-.9z"/>
               </svg>
             </div>
 
             <!-- Google Pay -->
             <div
-              class="h-6 w-10 rounded-[3px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
+              class="h-7 w-12 rounded-[4px] bg-white px-1 flex items-center justify-center shadow-xs border border-brand-dark/10 transition-transform duration-200 hover:scale-105"
               title="Google Pay"
             >
-              <svg viewBox="0 0 38 24" class="h-3 w-auto" role="img" aria-label="Google Pay">
+              <svg viewBox="0 0 38 24" class="h-3.5 w-auto" role="img" aria-label="Google Pay">
                 <path fill="#4285F4" d="M12.8 11.2h-5v2.3h2.9c-.2 1.2-1.3 2-2.9 2-1.7 0-3.1-1.4-3.1-3.1s1.4-3.1 3.1-3.1c.8 0 1.5.3 2.1.8l1.7-1.7C10.7 7.5 9.3 7 7.8 7 4.9 7 2.6 9.3 2.6 12.2s2.3 5.2 5.2 5.2c3 0 5-2.1 5-5.1 0-.4 0-.8-.1-1.1h.1z"/>
                 <path fill="#5F6368" d="M16.5 5.5v12.2h1.6V12h2.9c2.3 0 3.8-1.5 3.8-3.3 0-1.8-1.5-3.2-3.8-3.2h-4.5zm1.6 1.5h2.8c1.5 0 2.3.8 2.3 1.8s-.8 1.8-2.3 1.8h-2.8V7zm9.6 10.8c.8 0 1.6-.4 1.9-1.1v1h1.5V11.2h-1.5v1c-.4-.7-1.1-1.1-1.9-1.1-1.6 0-2.7 1.4-2.7 3.3 0 2 1.1 3.4 2.7 3.4zm.5-1.4c-.9 0-1.6-.7-1.6-2s.7-2 1.6-2 1.6.7 1.6 2-.7 2-1.6 2zm6.7 3.7l1.7-4.6-2.3-6.2h1.7l1.4 4.3 1.4-4.3h1.7l-3.9 9.6c-.4 1-.9 1.2-1.7 1.2h-1v-.9z"/>
               </svg>
@@ -419,7 +423,7 @@
       class="footer-reveal flex flex-col gap-3 pt-3 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/50 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>
-        &copy; {new Date().getFullYear()} Studio Click House Limited (SCHL). All rights reserved.
+        &copy; {new Date().getFullYear()} Studio Click House Limited. All rights reserved.
       </p>
       <div class="flex items-center gap-6">
         <a

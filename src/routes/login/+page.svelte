@@ -28,8 +28,8 @@
 </script>
 
 <PageMeta
-  title="Client Portal Sign In | Studio Click House (SCHL)"
-  description="Sign in to the Studio Click House (SCHL) client workspace portal to access your active visual projects, feedback boards, and finalized assets."
+  title="Client Portal Sign In | Studio Click House"
+  description="Sign in to the Studio Click House client workspace portal to access your active visual projects, feedback boards, and finalized assets."
   canonicalPath="/login"
 />
 

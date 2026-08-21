@@ -94,7 +94,7 @@
       >
         {#each productionGallery as image, index (image.src)}
           <figure
-            class="standards-gallery-frame relative overflow-hidden rounded-sm {index ===
+            class="standards-gallery-frame relative overflow-hidden rounded-[1.5rem] {index ===
             0
               ? 'col-span-2 aspect-[4/3] lg:col-span-4 lg:row-span-2 lg:aspect-auto'
               : 'aspect-[4/3] lg:col-span-3 lg:aspect-auto'}"

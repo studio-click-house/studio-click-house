@@ -102,7 +102,7 @@
         <button
           type="button"
           onclick={() => openImage(item)}
-          class="group relative aspect-square cursor-pointer overflow-hidden border border-brand-dark/10 bg-brand-light text-left"
+          class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left"
           aria-label="View {item.title}"
         >
           <img
@@ -134,7 +134,7 @@
       <button
         type="button"
         onclick={() => openImage(galleryItems[4])}
-        class="group relative aspect-[4/3] cursor-pointer overflow-hidden border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
+        class="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
         aria-label="View {galleryItems[4].title}"
       >
         <img
@@ -162,7 +162,7 @@
       <button
         type="button"
         onclick={() => openImage(galleryItems[5])}
-        class="group relative aspect-[16/9] cursor-pointer overflow-hidden border border-brand-dark/10 bg-brand-light text-left md:col-span-6"
+        class="group relative aspect-[16/9] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-6"
         aria-label="View {galleryItems[5].title}"
       >
         <img
@@ -190,7 +190,7 @@
       <button
         type="button"
         onclick={() => openImage(galleryItems[6])}
-        class="group relative aspect-[4/3] cursor-pointer overflow-hidden border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
+        class="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
         aria-label="View {galleryItems[6].title}"
       >
         <img
@@ -227,7 +227,7 @@
       }}
     >
       <div
-        class="relative flex max-h-[90dvh] w-full max-w-4xl flex-col items-center overflow-hidden border border-brand-dark/10 bg-brand-light p-4 shadow-2xl sm:p-6"
+        class="relative flex max-h-[90dvh] w-full max-w-4xl flex-col items-center overflow-hidden rounded-2xl border border-brand-dark/10 bg-brand-light p-4 shadow-2xl sm:p-6"
       >
         <button
           bind:this={closeButton}

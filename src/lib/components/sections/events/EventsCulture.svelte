@@ -50,7 +50,7 @@
             class="absolute inset-0 bg-gradient-to-t from-brand-dark/94 via-brand-dark/20 to-transparent"
           ></div>
           <div
-            class="relative flex min-h-[22rem] flex-col justify-end p-6 sm:p-8"
+            class="relative flex h-full flex-col justify-end p-6 sm:p-8"
           >
             <h3
               class="font-display text-[clamp(2rem,3vw,3.4rem)] leading-[0.96] tracking-[-0.03em] text-brand-light"

@@ -6,10 +6,17 @@
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import FloatingSocialBar from "$lib/components/layout/FloatingSocialBar.svelte";
   import SitePreloader from "$lib/components/animations/SitePreloader.svelte";
+  import { afterNavigate } from "$app/navigation";
   import { createLenis } from "$lib/animations/lenis";
-  import { refreshScrollTriggersAfterFonts } from "$lib/animations/gsap";
+  import { refreshScrollTriggersAfterFonts, refreshScrollTriggers } from "$lib/animations/gsap";
 
   let { children } = $props();
+
+  afterNavigate(() => {
+    setTimeout(() => {
+      void refreshScrollTriggers();
+    }, 150);
+  });
 
   onMount(() => {
     let active = true;

@@ -115,13 +115,28 @@
       context = gsap.context(() => {
         const media = gsap.matchMedia();
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.from(".hero-anim-item", {
-            y: 16,
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroSection,
+              start: "top 90%",
+              toggleActions: "play none none none"
+            }
+          });
+
+          tl.from(".hero-anim-item", {
+            y: 20,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.8,
             stagger: 0.08,
             ease: "power3.out",
-          });
+          })
+          .from(".hero-img-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out"
+          }, "-=0.5");
         });
         return () => media.revert();
       }, heroSection);
@@ -241,9 +256,10 @@
           class="grid w-full grid-cols-3 gap-3.5 sm:gap-4.5 items-center max-w-[620px]"
         >
           {#each imageShowcases as item, cardIdx (item.title)}
-            <div
-              class="group relative flex min-h-[340px] sm:min-h-[410px] lg:min-h-[440px] xl:min-h-[480px] w-full flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_28px_60px_-15px_rgba(0,0,0,0.2)] hover:-translate-y-2 {item.offsetClass}"
-            >
+            <div class="hero-img-anim w-full">
+              <div
+                class="group relative flex min-h-[340px] sm:min-h-[410px] lg:min-h-[440px] xl:min-h-[480px] w-full flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_28px_60px_-15px_rgba(0,0,0,0.2)] hover:-translate-y-2 {item.offsetClass}"
+              >
               <!-- Cross-fading Images List -->
               {#each item.images as img, imgIdx}
                 <img
@@ -270,13 +286,9 @@
                 >
                   {item.title}
                 </div>
-                <div
-                  class="mt-0.5 font-mono text-[0.45rem] sm:text-[0.5rem] uppercase tracking-wider text-brand-dark/50"
-                >
-                  Per {item.unit}
-                </div>
               </div>
             </div>
+          </div>
           {/each}
         </div>
       </div>

@@ -118,6 +118,8 @@
     },
   ];
 
+  let activePlanId = $state("enhancement");
+
   onMount(() => {
     let active = true;
     registerScrollTrigger().then((runtime) => {
@@ -149,8 +151,14 @@
       class="pricing-container-reveal relative w-full bg-white border border-brand-dark/10 rounded-[2rem] grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-brand-dark/10 shadow-sm z-10"
     >
       {#each plans as plan (plan.id)}
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div
-          class="group relative flex flex-col justify-between p-8 md:p-10 transition-all duration-300 ease-out bg-transparent border-2 border-transparent hover:scale-y-[1.03] hover:scale-x-[1.01] hover:z-30 hover:bg-white hover:border-brand-green hover:rounded-[1.75rem] hover:shadow-2xl"
+          onmouseenter={() => (activePlanId = plan.id)}
+          class="relative flex flex-col justify-between p-8 md:p-10 transition-all duration-300 ease-out border-2 {
+            activePlanId === plan.id
+              ? 'scale-y-[1.03] scale-x-[1.01] z-30 bg-white border-brand-green rounded-[1.75rem] shadow-2xl'
+              : 'bg-transparent border-transparent z-10'
+          }"
         >
           <div>
             <!-- Header Solid Black Badge Block -->
@@ -195,12 +203,16 @@
           <!-- Button -->
           <a
             href={resolve(plan.buttonHref as "/contact")}
-            class="w-full py-3.5 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border border-brand-dark/10 bg-brand-dark/5 text-brand-dark group-hover:bg-brand-green group-hover:text-brand-light group-hover:border-brand-green"
+            class="w-full py-3.5 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border {
+              activePlanId === plan.id
+                ? 'bg-brand-green text-brand-light border-brand-green'
+                : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark'
+            }"
           >
             <span>{plan.buttonText}</span>
             <ArrowRight
               size={14}
-              class="transition-transform duration-300 group-hover:translate-x-1"
+              class="transition-transform duration-300 {activePlanId === plan.id ? 'translate-x-1' : ''}"
             />
           </a>
         </div>

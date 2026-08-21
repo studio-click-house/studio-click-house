@@ -58,7 +58,7 @@
       <div class="md:col-span-6 flex flex-col gap-8">
         <!-- Top Left Large Image (Matches top-left image in reference) -->
         <div
-          class="collage-item group overflow-hidden border border-brand-dark/10 bg-brand-light"
+          class="collage-item group overflow-hidden rounded-xl md:rounded-2xl border border-brand-dark/10 bg-brand-light"
         >
           <div class="aspect-[4/3] w-full overflow-hidden bg-brand-dark/5">
             <img
@@ -93,7 +93,7 @@
           </div>
 
           <div
-            class="collage-item group aspect-square overflow-hidden border border-brand-dark/10 bg-brand-light"
+            class="collage-item group aspect-square overflow-hidden rounded-xl md:rounded-2xl border border-brand-dark/10 bg-brand-light"
           >
             <img
               src="/images/about/colorways/dress-color-emerald.webp"
@@ -134,7 +134,7 @@
         <!-- Middle-Right: 2-column micro row (Portrait Image on left + Description text on right) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
           <div
-            class="collage-item group aspect-[3/4] overflow-hidden border border-brand-dark/10 bg-brand-light"
+            class="collage-item group aspect-[3/4] overflow-hidden rounded-xl md:rounded-2xl border border-brand-dark/10 bg-brand-light"
           >
             <img
               src="/images/work-fields/gallery/beauty-retouching.jpg"
@@ -167,7 +167,7 @@
 
         <!-- Bottom Right Feature Card (Matches bottom right photo and card in reference) -->
         <div
-          class="collage-item group overflow-hidden border border-brand-dark/10 bg-brand-light"
+          class="collage-item group overflow-hidden rounded-xl md:rounded-2xl border border-brand-dark/10 bg-brand-light"
         >
           <div class="aspect-[16/9] w-full overflow-hidden bg-brand-dark/5">
             <img

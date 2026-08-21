@@ -37,8 +37,8 @@
 </script>
 
 <PageMeta
-  title="Portfolio | Selected Post-Production Work — Studio Click House (SCHL)"
-  description="Explore the Studio Click House (SCHL) portfolio showcasing selected work in luxury fashion retouching, pen path clipping, background isolation, and 3D CGI renders."
+  title="Portfolio | Selected Post-Production Work — Studio Click House"
+  description="Explore the Studio Click House portfolio showcasing selected work in luxury fashion retouching, pen path clipping, background isolation, and 3D CGI renders."
   canonicalPath="/portfolio"
 />
 

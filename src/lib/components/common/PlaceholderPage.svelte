@@ -12,7 +12,7 @@
 </script>
 
 <PageMeta
-  title={`${title} | Studio Click House (SCHL)`}
+  title={`${title} | Studio Click House`}
   {description}
   {canonicalPath}
 />

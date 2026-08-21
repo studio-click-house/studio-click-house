@@ -37,8 +37,8 @@
 </script>
 
 <PageMeta
-  title="Studio Click House (SCHL) | Image Editing, Retouching & Visual Production"
-  description="Studio Click House (SCHL) is an editorial creative studio providing high-end photo retouching, image editing, video grading, and custom 3D CGI product renders for global brands and agencies."
+  title="Studio Click House | Image Editing, Retouching & Visual Production"
+  description="Studio Click House is an editorial creative studio providing high-end photo retouching, image editing, video grading, and custom 3D CGI product renders for global brands and agencies."
   canonicalPath="/"
 />
 <JsonLd data={organizationData} />
