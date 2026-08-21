@@ -122,24 +122,29 @@
 
   onMount(() => {
     let active = true;
+    let context: { revert: () => void } | undefined;
+
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime) return;
       const { gsap } = runtime;
 
-      gsap.from(".pricing-container-reveal", {
-        opacity: 0,
-        y: 40,
-        duration: 0.85,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#pricing-cards-section",
-          start: "top 80%",
-        },
+      context = gsap.context(() => {
+        gsap.from(".pricing-container-reveal", {
+          opacity: 0,
+          y: 40,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#pricing-cards-section",
+            start: "top 80%",
+          },
+        });
       });
     });
 
     return () => {
       active = false;
+      context?.revert();
     };
   });
 </script>
