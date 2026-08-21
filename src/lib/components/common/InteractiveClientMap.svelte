@@ -96,7 +96,7 @@
       <div class="z-20 flex flex-col lg:col-span-4 lg:py-6">
         <h2
           id="global-production-heading"
-          class="network-copy-step max-w-[12ch] font-display text-[clamp(2.35rem,3.35vw,3.75rem)] font-light leading-[0.95] tracking-[-0.035em]"
+          class="network-copy-step max-w-xl font-display text-[clamp(3rem,5.5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em]"
         >
           {closingCta.heading}
         </h2>

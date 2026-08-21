@@ -10,7 +10,7 @@ export interface PricingServiceRate {
 }
 
 export interface PricingCategory {
-  categoryName: "Image Editing" | "Video Editing" | "3D Modeling";
+  categoryName: "Image Editing" | "Video Editing" | "3D Modeling" | "AI Services";
   description: string;
   rates: PricingServiceRate[];
 }
@@ -127,6 +127,60 @@ export const pricingCategories: PricingCategory[] = [
         unit: "render",
         description: "Photorealistic camera composition, studio lighting, and staging.",
         features: ["Studio lighting setup", "Bespoke background staging", "Multiple camera angles", "Post-render retouching included"]
+      }
+    ]
+  },
+  {
+    categoryName: "AI Services",
+    description: "Generative AI background synthesis, relighting, upscaling, and model generation.",
+    rates: [
+      {
+        name: "AI Background Synthesis",
+        slug: "ai-background-synthesis",
+        basePrice: 0.80,
+        unit: "image",
+        description: "AI-driven background replacement and scene composition.",
+        features: ["High-fidelity blending", "Bespoke style matching", "Upscaled output"]
+      },
+      {
+        name: "AI Product Relighting",
+        slug: "ai-product-relighting",
+        basePrice: 1.20,
+        unit: "image",
+        description: "Studio-quality product light adjustments and shadowing.",
+        features: ["Directional lighting matching", "Natural drop shadowing", "Reflections correction"]
+      },
+      {
+        name: "AI Model Generation",
+        slug: "ai-model-generation",
+        basePrice: 2.00,
+        unit: "image",
+        description: "AI fashion model generation and pose transformations.",
+        features: ["Realistic skin textures", "Diverse model poses", "Garment drape matching"]
+      },
+      {
+        name: "AI Face Swap & Match",
+        slug: "ai-face-swap",
+        basePrice: 1.50,
+        unit: "image",
+        description: "Seamless matching of headshots and facial profiles.",
+        features: ["Natural lighting match", "Consistent angle blending", "Facial hair/makeup matching"]
+      },
+      {
+        name: "AI Resolution Upscale",
+        slug: "ai-upscale",
+        basePrice: 0.30,
+        unit: "image",
+        description: "AI resolution enhancement and texture synthesis.",
+        features: ["Up to 8k upscaling", "Sharp details retention", "Noise cleanup"]
+      },
+      {
+        name: "AI Pattern Synthesis",
+        slug: "ai-pattern-synthesis",
+        basePrice: 1.00,
+        unit: "image",
+        description: "Tileable textures and custom fabric generation.",
+        features: ["Seamless tiling", "Material colorways", "Texture details"]
       }
     ]
   }

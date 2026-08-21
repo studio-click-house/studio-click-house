@@ -382,7 +382,7 @@ export const aboutPageData: AboutPageData = {
     ],
   },
   closingCta: {
-    heading: "Need a post-production partner who can stay close to the work?",
+    heading: "Need a partner close to the work?",
     description:
       "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
     primaryCtaLabel: "Start a Project",

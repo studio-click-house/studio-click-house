@@ -42,7 +42,7 @@
 
     // Volume Discount factor
     let discount = 1.0;
-    if (activeCategory.categoryName === "Image Editing") {
+    if (activeCategory.categoryName === "Image Editing" || activeCategory.categoryName === "AI Services") {
       if (volume > 200) discount = 0.7;
       else if (volume > 50) discount = 0.8;
       else if (volume > 10) discount = 0.9;
@@ -195,7 +195,7 @@
               id="volume-slider"
               type="range"
               min="1"
-              max={activeCategory.categoryName === "Image Editing"
+              max={activeCategory.categoryName === "Image Editing" || activeCategory.categoryName === "AI Services"
                 ? "300"
                 : activeCategory.categoryName === "Video Editing"
                   ? "40"
@@ -208,7 +208,7 @@
             >
               <span>Min: 1</span>
               <span
-                >Max: {activeCategory.categoryName === "Image Editing"
+                >Max: {activeCategory.categoryName === "Image Editing" || activeCategory.categoryName === "AI Services"
                   ? "300"
                   : activeCategory.categoryName === "Video Editing"
                     ? "40"

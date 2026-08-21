@@ -4,91 +4,117 @@
   import { Check, ArrowRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
 
-  interface PlanFeature {
-    text: string;
-    included: boolean;
+  interface ServiceItem {
+    name: string;
+    price: string;
   }
 
   interface PricingPlan {
     id: string;
     name: string;
-    price: string;
-    period: string;
     description: string;
-    badge: string;
-    features: PlanFeature[];
+    services: ServiceItem[];
+    features: string[];
     buttonText: string;
     buttonHref: string;
   }
 
   const plans: PricingPlan[] = [
     {
-      id: "basic",
-      name: "Basic Plan",
-      price: "$0.23",
-      period: "/Per Image",
-      badge: "Basic Plan",
-      description: "Fast, Easy, and within anyone's reach.",
-      features: [
-        { text: "Delivery within 48 hours", included: true },
-        { text: "1-500 Images / Order", included: true },
-        { text: "Multiple Quality Check", included: true },
-        { text: "Easy Upload & Download", included: true },
-        { text: "24/7 Customer Support", included: true },
+      id: "cut-outs-service",
+      name: "Cut-Outs Service",
+      description: "Pixel-perfect hand-drawn vector paths and soft edge masking.",
+      services: [
+        { name: "Clipping Path", price: "€0.50" },
+        { name: "Image Masking", price: "€1.50" },
+        { name: "Object Remove", price: "€0.80" },
+        { name: "Shadow Making", price: "€2.00" },
+        { name: "360 Image", price: "€1.00" },
+        { name: "E-commerce Image", price: "€1.00" },
+        { name: "Neck Join/Ghost Mannequin", price: "€2.00" },
       ],
-      buttonText: "Choose plan",
-      buttonHref: "/contact?plan=basic",
+      features: [
+        "Free Trial",
+        "Secure FTP",
+        "3 Steps Quality Control",
+        "24×7 Support",
+        "Low Cost",
+        "Bulk Offer"
+      ],
+      buttonText: "Order Now",
+      buttonHref: "/contact?plan=cut-outs",
     },
     {
-      id: "standard",
-      name: "Standard",
-      price: "$0.29",
-      period: "/Per Image",
-      badge: "Standard",
-      description: "Upgrade to the deal that can seal more sales",
-      features: [
-        { text: "Delivery Within 24 Hours", included: true },
-        { text: "1-500 Images / Order", included: true },
-        { text: "Multiple Quality Check", included: true },
-        { text: "Easy Upload & Download", included: true },
-        { text: "24/7 Customer Support", included: true },
+      id: "enhancement",
+      name: "Enhancement",
+      description: "Creative retouching, color correction, and restoration.",
+      services: [
+        { name: "Image Retouch", price: "€1.00" },
+        { name: "Creative Retouch", price: "€2.50" },
+        { name: "High-end Retouch", price: "€3.00" },
+        { name: "Image Manipulation", price: "€5.00" },
+        { name: "Color Correction", price: "€1.50" },
+        { name: "Color Change", price: "€1.00" },
+        { name: "Pattern Change", price: "€5.00" },
+        { name: "Real Estate Photo", price: "€4.00" },
+        { name: "Old Photo Restoration", price: "€10.00" },
       ],
-      buttonText: "Choose plan",
-      buttonHref: "/contact?plan=standard",
+      features: [
+        "Free Trial",
+        "Secure FTP",
+        "3 Steps Quality Control",
+        "24×7 Support",
+        "Low Cost",
+        "Bulk Offer"
+      ],
+      buttonText: "Order Now",
+      buttonHref: "/contact?plan=enhancement",
     },
     {
-      id: "premium",
-      name: "Premium",
-      price: "$0.41",
-      period: "/Per Image",
-      badge: "Premium",
-      description: "Features that streamline your work process.",
-      features: [
-        { text: "Delivery Within 12 Hours", included: true },
-        { text: "1-500 Images / Order", included: true },
-        { text: "Multiple Quality Check", included: true },
-        { text: "Easy Upload & Download", included: true },
-        { text: "24/7 Customer Support", included: true },
+      id: "vector-illustration",
+      name: "Vector Illustration & Conversion",
+      description: "Raster-to-vector tracing, plans, logo designs, and custom artwork.",
+      services: [
+        { name: "Raster to Vector", price: "€5.00" },
+        { name: "Plan Drawing", price: "€20.00" },
+        { name: "Logo Design", price: "€5.00" },
+        { name: "Drawing of product", price: "€5.00" },
+        { name: "Advertising Design", price: "€10.00" },
+        { name: "Illustration", price: "€20.00" },
       ],
-      buttonText: "Choose plan",
-      buttonHref: "/contact?plan=premium",
+      features: [
+        "Free Trial",
+        "Secure FTP",
+        "3 Steps Quality Control",
+        "24×7 Support",
+        "Low Cost",
+        "Bulk Offer"
+      ],
+      buttonText: "Order Now",
+      buttonHref: "/contact?plan=illustration",
     },
     {
-      id: "enterprise",
-      name: "Enterprise",
-      price: "Contact Us",
-      period: "",
-      badge: "Enterprise",
-      description: "Advanced facilities to expand your business.",
-      features: [
-        { text: "As your requirements", included: true },
-        { text: "Any Quantity", included: true },
-        { text: "Multiple Quality Check", included: true },
-        { text: "Easy Upload & Download", included: true },
-        { text: "24/7 Customer Support", included: true },
+      id: "ai-services",
+      name: "AI Services",
+      description: "Generative AI background synthesis, relighting, and model generation.",
+      services: [
+        { name: "AI Background Synthesis", price: "€0.80" },
+        { name: "AI Product Relighting", price: "€1.20" },
+        { name: "AI Model Generation", price: "€2.00" },
+        { name: "AI Face Swap & Match", price: "€1.50" },
+        { name: "AI Resolution Upscale", price: "€0.30" },
+        { name: "AI Pattern Synthesis", price: "€1.00" },
       ],
-      buttonText: "Contact Us",
-      buttonHref: "/contact?plan=enterprise",
+      features: [
+        "Free Trial",
+        "Secure FTP",
+        "3 Steps Quality Control",
+        "24×7 Support",
+        "Low Cost",
+        "Bulk Offer"
+      ],
+      buttonText: "Order Now",
+      buttonHref: "/contact?plan=ai-services",
     },
   ];
 
@@ -118,51 +144,49 @@
 
 <div id="pricing-cards-section" class="relative bg-brand-light text-brand-dark">
   <div class="site-shell">
-    <!-- Unified Widescreen Container Grid (Matches first wireframe image with no gaps between cards) -->
+    <!-- Unified 4-Column Grid Structure -->
     <div
       class="pricing-container-reveal relative w-full bg-white border border-brand-dark/10 rounded-[2rem] grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-brand-dark/10 shadow-sm z-10"
     >
       {#each plans as plan (plan.id)}
         <div
-          class="group relative flex flex-col justify-between p-8 md:p-10 transition-all duration-300 ease-out bg-transparent border-2 border-transparent hover:scale-y-[1.05] hover:scale-x-[1.02] hover:z-30 hover:bg-white hover:border-brand-green hover:rounded-[1.75rem] hover:shadow-2xl"
+          class="group relative flex flex-col justify-between p-8 md:p-10 transition-all duration-300 ease-out bg-transparent border-2 border-transparent hover:scale-y-[1.03] hover:scale-x-[1.01] hover:z-30 hover:bg-white hover:border-brand-green hover:rounded-[1.75rem] hover:shadow-2xl"
         >
           <div>
-            <!-- Price & Period -->
-            <div class="flex items-baseline gap-1 mb-2">
-              <span
-                class="font-display text-4xl lg:text-5xl tracking-tight text-brand-dark transition-colors duration-300 group-hover:text-brand-green"
-              >
-                {plan.price}
-              </span>
-              {#if plan.period}
-                <span class="text-sm text-brand-dark/50 font-medium">
-                  {plan.period}
-                </span>
-              {/if}
-            </div>
-
-            <!-- Badge (Pill) -->
+            <!-- Header Solid Black Badge Block -->
             <div
-              class="inline-block text-[0.65rem] font-bold tracking-wider uppercase bg-brand-dark/5 text-brand-dark/60 px-3 py-1 rounded-full mb-6 transition-colors duration-300 group-hover:bg-brand-green/10 group-hover:text-brand-green"
+              class="w-full bg-brand-dark text-brand-light text-center py-4 px-6 rounded-xl font-mono text-[0.7rem] font-bold uppercase tracking-wider mb-8 flex items-center justify-center min-h-[70px] shadow-xs"
             >
-              {plan.badge}
+              {plan.name}
             </div>
 
             <!-- Description -->
-            <p class="text-sm text-brand-dark/70 leading-relaxed mb-6">
+            <p class="text-xs text-brand-dark/55 leading-relaxed mb-6 font-sans">
               {plan.description}
             </p>
 
-            <!-- Features Checklist -->
-            <ul class="space-y-3.5 mb-8 border-t border-brand-dark/10 pt-6">
+            <!-- Services & Prices Dashed List -->
+            <div class="mb-8">
+              <ul class="space-y-0.5">
+                {#each plan.services as svc}
+                  <li class="flex items-center justify-between py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
+                    <span class="font-medium text-left pr-2">{svc.name}</span>
+                    <span class="font-mono font-bold text-brand-green shrink-0">{svc.price}</span>
+                  </li>
+                {/each}
+              </ul>
+            </div>
+
+            <!-- Guarantees Checklist -->
+            <ul class="space-y-3 mb-8">
               {#each plan.features as feature}
-                <li class="flex items-start gap-2.5 text-xs text-brand-dark/80">
+                <li class="flex items-start gap-2.5 text-xs text-brand-dark/75 font-mono">
                   <div
-                    class="w-4 h-4 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-0.5 transition-colors duration-300 group-hover:bg-brand-green group-hover:text-brand-light"
+                    class="w-4 h-4 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-0.5"
                   >
                     <Check size={10} strokeWidth={3} />
                   </div>
-                  <span>{feature.text}</span>
+                  <span>{feature}</span>
                 </li>
               {/each}
             </ul>
@@ -170,7 +194,7 @@
 
           <!-- Button -->
           <a
-            href={plan.buttonHref}
+            href={resolve(plan.buttonHref as "/contact")}
             class="w-full py-3.5 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border border-brand-dark/10 bg-brand-dark/5 text-brand-dark group-hover:bg-brand-green group-hover:text-brand-light group-hover:border-brand-green"
           >
             <span>{plan.buttonText}</span>
