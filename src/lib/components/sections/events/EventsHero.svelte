@@ -17,11 +17,6 @@
     class="site-shell relative grid min-h-[calc(100dvh-5rem)] content-center gap-8 pb-10 pt-6 md:grid-cols-12 md:items-center md:gap-6 lg:pb-14"
   >
     <div class="relative z-10 md:col-span-5" data-events-hero-copy>
-      <p
-        class="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
-      >
-        Company events
-      </p>
       <h1
         class="mt-5 max-w-[9ch] font-display text-[clamp(3.5rem,6.2vw,6.6rem)] leading-[0.88] tracking-[-0.045em]"
       >

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import {
+    Play,
     Instagram,
     Linkedin,
     Facebook,
@@ -11,153 +12,86 @@
   } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
 
-  const STUDIO_BRIEF_SCRIPT =
-    "Welcome to Studio Click House. We are a global creative post-production studio delivering high-end commercial retouching, e-commerce image workflows, CGI, and cinematic video editing. We partner with leading brands, agencies, and photographers worldwide with guaranteed 15-minute response times and precision turnarounds. Explore our portfolio or start your free trial today.";
+  const AUDIO_SRC = "/audio/Audio-Presentation.mp3";
 
   let isPlaying = $state(false);
-  let isPaused = $state(false);
-  let hasUserStopped = $state(false);
-  let speechUtterance: SpeechSynthesisUtterance | null = null;
+  let hasUserInteracted = $state(false);
+  let audioElement: HTMLAudioElement | null = null;
 
-  function getBestVoice(): SpeechSynthesisVoice | null {
-    if (typeof window === "undefined" || !window.speechSynthesis) return null;
-    const voices = window.speechSynthesis.getVoices();
-    if (!voices || voices.length === 0) return null;
-
-    const preferred = [
-      "Google US English",
-      "Google UK English Female",
-      "Samantha",
-      "Daniel",
-      "Karen",
-      "Microsoft Jenny",
-      "Microsoft Ryan",
-    ];
-
-    for (const name of preferred) {
-      const match = voices.find((v) => v.name.includes(name));
-      if (match) return match;
+  function toggleAudio(e?: MouseEvent) {
+    if (e) {
+      e.stopPropagation();
     }
+    if (!audioElement) return;
 
-    const en = voices.find((v) => v.lang.startsWith("en"));
-    return en || voices[0] || null;
-  }
-
-  function startPlayback() {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
-
-    try {
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.resume();
-    } catch {}
-
-    speechUtterance = new SpeechSynthesisUtterance(STUDIO_BRIEF_SCRIPT);
-    speechUtterance.rate = 0.95;
-    speechUtterance.pitch = 1.0;
-
-    const voice = getBestVoice();
-    if (voice) {
-      speechUtterance.voice = voice;
-    }
-
-    speechUtterance.onstart = () => {
-      isPlaying = true;
-      isPaused = false;
-    };
-
-    speechUtterance.onend = () => {
-      isPlaying = false;
-      isPaused = false;
-    };
-
-    speechUtterance.onerror = (e) => {
-      if (e.error !== "canceled" && e.error !== "interrupted") {
-        isPlaying = false;
-        isPaused = false;
-      }
-    };
-
-    try {
-      window.speechSynthesis.speak(speechUtterance);
-      // In some browsers, isPlaying isn't set until onstart fires. Set optimistic state:
-      isPlaying = true;
-      isPaused = false;
-    } catch {
-      // Browser autoplay policy might hold until gesture
-    }
-  }
-
-  function toggleAudio() {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    hasUserInteracted = true;
 
     if (isPlaying) {
-      window.speechSynthesis.cancel();
-      isPlaying = false;
-      isPaused = true;
-      hasUserStopped = true;
-    } else if (isPaused) {
-      hasUserStopped = false;
-      startPlayback();
+      audioElement.pause();
     } else {
-      hasUserStopped = false;
-      startPlayback();
+      audioElement.play().catch(() => {
+        // Autoplay policy fallback
+      });
     }
   }
 
   onMount(() => {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    audioElement = new Audio(AUDIO_SRC);
+    audioElement.preload = "auto";
 
-    const tryStart = () => {
-      if (!hasUserStopped && !isPlaying) {
-        startPlayback();
+    audioElement.onplay = () => {
+      isPlaying = true;
+    };
+
+    audioElement.onpause = () => {
+      isPlaying = false;
+    };
+
+    audioElement.onended = () => {
+      isPlaying = false;
+      if (audioElement) {
+        audioElement.currentTime = 0;
       }
     };
 
-    // Load voices and try start immediately
-    if (window.speechSynthesis.getVoices().length > 0) {
-      tryStart();
-    } else {
-      window.speechSynthesis.onvoiceschanged = () => {
-        tryStart();
-      };
-    }
-
-    // Try again on preloader completion events
-    window.addEventListener("site-preloader-complete", tryStart, { once: true });
-    window.addEventListener("site-preloader-logo-landed", tryStart, { once: true });
-
-    // Ensure audio starts on first user action (movement, scroll, click, key)
-    const handleGesture = () => {
-      if (!hasUserStopped && !isPlaying) {
-        tryStart();
+    const tryAutoplay = () => {
+      if (!hasUserInteracted && audioElement && audioElement.paused) {
+        audioElement.play().catch(() => {
+          // Browser requires user interaction before autoplay
+        });
       }
+    };
+
+    window.addEventListener("site-preloader-complete", tryAutoplay, { once: true });
+    window.addEventListener("site-preloader-logo-landed", tryAutoplay, { once: true });
+
+    const handleFirstGesture = () => {
+      tryAutoplay();
       cleanupListeners();
     };
 
     const cleanupListeners = () => {
-      window.removeEventListener("pointermove", handleGesture);
-      window.removeEventListener("pointerdown", handleGesture);
-      window.removeEventListener("click", handleGesture);
-      window.removeEventListener("keydown", handleGesture);
-      window.removeEventListener("touchstart", handleGesture);
-      window.removeEventListener("scroll", handleGesture);
-      window.removeEventListener("wheel", handleGesture);
+      window.removeEventListener("pointerdown", handleFirstGesture);
+      window.removeEventListener("click", handleFirstGesture);
+      window.removeEventListener("keydown", handleFirstGesture);
+      window.removeEventListener("touchstart", handleFirstGesture);
+      window.removeEventListener("scroll", handleFirstGesture);
     };
 
-    window.addEventListener("pointermove", handleGesture, { once: true, passive: true });
-    window.addEventListener("pointerdown", handleGesture, { once: true, passive: true });
-    window.addEventListener("click", handleGesture, { once: true, passive: true });
-    window.addEventListener("keydown", handleGesture, { once: true, passive: true });
-    window.addEventListener("touchstart", handleGesture, { once: true, passive: true });
-    window.addEventListener("scroll", handleGesture, { once: true, passive: true });
-    window.addEventListener("wheel", handleGesture, { once: true, passive: true });
+    window.addEventListener("pointerdown", handleFirstGesture, { once: true, passive: true });
+    window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
+    window.addEventListener("keydown", handleFirstGesture, { once: true, passive: true });
+    window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
+    window.addEventListener("scroll", handleFirstGesture, { once: true, passive: true });
 
     return () => {
       cleanupListeners();
-      window.removeEventListener("site-preloader-complete", tryStart);
-      window.removeEventListener("site-preloader-logo-landed", tryStart);
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
+      window.removeEventListener("site-preloader-complete", tryAutoplay);
+      window.removeEventListener("site-preloader-logo-landed", tryAutoplay);
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = "";
+        audioElement = null;
       }
     };
   });
@@ -258,7 +192,7 @@
         aria-label={isPlaying ? "Pause Studio Audio Brief" : "Play Studio Audio Brief"}
         class="flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95 {isPlaying
           ? 'bg-brand-green text-brand-dark shadow-[0_0_12px_rgba(126,166,65,0.6)]'
-          : 'bg-white text-black shadow-[0_0_8px_rgba(255,255,255,0.35)] hover:bg-brand-green hover:text-brand-dark'}"
+          : 'bg-white/[0.06] text-white/80 hover:bg-brand-green hover:text-brand-dark hover:shadow-[0_0_12px_rgba(126,166,65,0.4)]'}"
       >
         {#if isPlaying}
           <!-- 3 animated equalizer running lines -->
@@ -268,11 +202,8 @@
             <span class="w-[2px] h-full bg-current rounded-full animate-bar-3"></span>
           </div>
         {:else}
-          <!-- 2 black pause vertical bar lines inside full white circle -->
-          <div class="flex items-center justify-center gap-[3px] h-3" aria-hidden="true">
-            <span class="w-[2.5px] h-3 bg-black rounded-full"></span>
-            <span class="w-[2.5px] h-3 bg-black rounded-full"></span>
-          </div>
+          <!-- Triangle play button -->
+          <Play size={13} class="fill-current translate-x-[1px]" aria-hidden="true" />
         {/if}
       </button>
 

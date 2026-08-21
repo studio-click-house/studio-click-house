@@ -1,98 +1,46 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { Play } from "lucide-svelte";
 
-  const STUDIO_BRIEF_SCRIPT =
-    "Welcome to Studio Click House. We are a global creative post-production studio delivering high-end commercial retouching, e-commerce image workflows, CGI, and cinematic video editing. We partner with leading brands, agencies, and photographers worldwide with guaranteed 15-minute response times and precision turnarounds. Explore our portfolio or start your free trial today.";
+  const AUDIO_SRC = "/audio/Audio-Presentation.mp3";
 
   let isPlaying = $state(false);
-  let isPaused = $state(false);
-  let speechUtterance: SpeechSynthesisUtterance | null = null;
-
-  function getBestVoice(): SpeechSynthesisVoice | null {
-    if (typeof window === "undefined" || !window.speechSynthesis) return null;
-    const voices = window.speechSynthesis.getVoices();
-    if (!voices || voices.length === 0) return null;
-
-    const preferred = [
-      "Google US English",
-      "Google UK English Female",
-      "Samantha",
-      "Daniel",
-      "Karen",
-      "Microsoft Jenny",
-      "Microsoft Ryan",
-    ];
-
-    for (const name of preferred) {
-      const match = voices.find((v) => v.name.includes(name));
-      if (match) return match;
-    }
-
-    const en = voices.find((v) => v.lang.startsWith("en"));
-    return en || voices[0] || null;
-  }
-
-  function startPlayback() {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
-
-    window.speechSynthesis.cancel();
-    speechUtterance = new SpeechSynthesisUtterance(STUDIO_BRIEF_SCRIPT);
-    speechUtterance.rate = 0.95;
-    speechUtterance.pitch = 1.0;
-
-    const voice = getBestVoice();
-    if (voice) {
-      speechUtterance.voice = voice;
-    }
-
-    speechUtterance.onstart = () => {
-      isPlaying = true;
-      isPaused = false;
-    };
-
-    speechUtterance.onend = () => {
-      isPlaying = false;
-      isPaused = false;
-    };
-
-    speechUtterance.onerror = (e) => {
-      if (e.error !== "canceled" && e.error !== "interrupted") {
-        isPlaying = false;
-        isPaused = false;
-      }
-    };
-
-    window.speechSynthesis.speak(speechUtterance);
-  }
+  let audioElement: HTMLAudioElement | null = null;
 
   function toggleAudio() {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    if (!audioElement) return;
 
     if (isPlaying) {
-      window.speechSynthesis.pause();
-      isPlaying = false;
-      isPaused = true;
-    } else if (isPaused) {
-      window.speechSynthesis.resume();
-      isPlaying = true;
-      isPaused = false;
+      audioElement.pause();
     } else {
-      startPlayback();
+      audioElement.play().catch(() => {});
     }
   }
 
   onMount(() => {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    audioElement = new Audio(AUDIO_SRC);
+    audioElement.preload = "auto";
 
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        getBestVoice();
-      };
-    }
+    audioElement.onplay = () => {
+      isPlaying = true;
+    };
+
+    audioElement.onpause = () => {
+      isPlaying = false;
+    };
+
+    audioElement.onended = () => {
+      isPlaying = false;
+      if (audioElement) {
+        audioElement.currentTime = 0;
+      }
+    };
 
     return () => {
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        window.speechSynthesis.cancel();
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = "";
+        audioElement = null;
       }
     };
   });
@@ -111,12 +59,10 @@
       <button
         type="button"
         onclick={toggleAudio}
-        aria-label={isPlaying ? "Pause Studio Voice Brief" : isPaused ? "Resume Studio Voice Brief" : "Play Studio Voice Brief"}
+        aria-label={isPlaying ? "Pause Studio Voice Brief" : "Play Studio Voice Brief"}
         class="flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95 {isPlaying
           ? 'bg-brand-green text-brand-dark shadow-[0_0_12px_rgba(126,166,65,0.6)]'
-          : isPaused
-            ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 hover:bg-brand-green hover:text-brand-dark hover:border-transparent'
-            : 'bg-white/[0.06] text-white/80 hover:bg-brand-green hover:text-brand-dark hover:shadow-[0_0_12px_rgba(126,166,65,0.4)]'}"
+          : 'bg-white/[0.06] text-white/80 hover:bg-brand-green hover:text-brand-dark hover:shadow-[0_0_12px_rgba(126,166,65,0.4)]'}"
       >
         {#if isPlaying}
           <!-- 3 animated equalizer running lines -->
@@ -125,18 +71,9 @@
             <span class="w-[2px] h-full bg-current rounded-full animate-bar-2"></span>
             <span class="w-[2px] h-full bg-current rounded-full animate-bar-3"></span>
           </div>
-        {:else if isPaused}
-          <!-- 2 pause vertical bar lines -->
-          <div class="flex items-center justify-center gap-[3px] h-3" aria-hidden="true">
-            <span class="w-[2.5px] h-3 bg-current rounded-full"></span>
-            <span class="w-[2.5px] h-3 bg-current rounded-full"></span>
-          </div>
         {:else}
-          <!-- Idle state with 2 subtle bars -->
-          <div class="flex items-center justify-center gap-[3px] h-3" aria-hidden="true">
-            <span class="w-[2.5px] h-2.5 bg-current rounded-full opacity-70"></span>
-            <span class="w-[2.5px] h-3.5 bg-current rounded-full"></span>
-          </div>
+          <!-- Triangle play button -->
+          <Play size={13} class="fill-current translate-x-[1px]" aria-hidden="true" />
         {/if}
       </button>
 
@@ -145,7 +82,7 @@
         role="tooltip"
         class="pointer-events-none absolute right-full mr-2.5 whitespace-nowrap rounded-md border border-white/15 bg-[#181615] px-2.5 py-1 font-mono text-[0.65rem] text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:opacity-100 group-hover:-translate-x-0.5"
       >
-        {isPlaying ? "Pause Audio Brief" : isPaused ? "Resume Audio Brief" : "Play Audio Brief"}
+        {isPlaying ? "Pause Audio Brief" : "Play Audio Brief"}
       </span>
     </div>
   </div>
