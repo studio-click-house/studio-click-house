@@ -50,6 +50,41 @@
     { code: "AU", label: "Sydney Hub", number: "+61 4 8396 3759", href: "tel:+61483963759" },
   ] as const;
 
+  const affiliations = [
+    {
+      name: "BACCO",
+      caption: "Call Centre & Outsourcing",
+      fullName: "Bangladesh Association of Call Centre & Outsourcing",
+      src: "/images/affiliations/bacco.png",
+      width: 842,
+      height: 296,
+    },
+    {
+      name: "BASIS",
+      caption: "Software & Information Services",
+      fullName: "Bangladesh Association of Software & Information Services",
+      src: "/images/affiliations/basis.svg",
+      width: 299,
+      height: 105,
+    },
+    {
+      name: "DCCI",
+      caption: "Dhaka Chamber of Commerce",
+      fullName: "Dhaka Chamber of Commerce & Industry",
+      src: "/images/affiliations/dcci.png",
+      width: 1459,
+      height: 348,
+    },
+    {
+      name: "ISO",
+      caption: "ISO Certified",
+      fullName: "International Organization for Standardization",
+      src: "/images/affiliations/iso-wordmark.svg",
+      width: 172,
+      height: 59,
+    },
+  ] as const;
+
   const socials = [
     { label: "Instagram", href: siteConfig.links.instagram || "https://instagram.com/studioclickhouse", icon: Instagram },
     { label: "LinkedIn", href: siteConfig.links.linkedin || "https://linkedin.com/company/studioclickhouse", icon: Linkedin },
@@ -246,6 +281,17 @@
                 <path fill="#5F6368" d="M16.5 5.5v12.2h1.6V12h2.9c2.3 0 3.8-1.5 3.8-3.3 0-1.8-1.5-3.2-3.8-3.2h-4.5zm1.6 1.5h2.8c1.5 0 2.3.8 2.3 1.8s-.8 1.8-2.3 1.8h-2.8V7zm9.6 10.8c.8 0 1.6-.4 1.9-1.1v1h1.5V11.2h-1.5v1c-.4-.7-1.1-1.1-1.9-1.1-1.6 0-2.7 1.4-2.7 3.3 0 2 1.1 3.4 2.7 3.4zm.5-1.4c-.9 0-1.6-.7-1.6-2s.7-2 1.6-2 1.6.7 1.6 2-.7 2-1.6 2zm6.7 3.7l1.7-4.6-2.3-6.2h1.7l1.4 4.3 1.4-4.3h1.7l-3.9 9.6c-.4 1-.9 1.2-1.7 1.2h-1v-.9z"/>
               </svg>
             </div>
+
+            <!-- SSLCommerz -->
+            <div
+              class="h-7 w-12 rounded-[4px] bg-[#003E78] px-1 flex items-center justify-center shadow-xs border border-[#003E78]/40 transition-transform duration-200 hover:scale-105"
+              title="SSLCommerz"
+            >
+              <span class="flex flex-col items-center leading-none">
+                <span class="font-mono text-[0.55rem] font-black tracking-tight text-white">SSL</span>
+                <span class="font-mono text-[0.4rem] font-bold tracking-[0.06em] text-white/85">COMMERZ</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -418,9 +464,43 @@
 
 
 
+    <!-- Accreditation & Membership Card -->
+    <div id="footer-affiliations" class="footer-reveal">
+      <div class="overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white shadow-xs">
+        <div class="flex items-center justify-between px-5 pt-4 pb-1">
+          <p class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45">
+            Accredited &amp; Member Of
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4">
+          {#each affiliations as item, i (item.name)}
+            <div
+              class="group flex flex-col items-center justify-center gap-2.5 border-brand-dark/8 px-4 py-5 transition-colors duration-300 hover:bg-brand-dark/[0.02] {i % 2 === 0
+                ? 'border-r'
+                : ''} {i < 2 ? 'border-b sm:border-b-0' : ''} {i < 3 ? 'sm:border-r' : ''}"
+            >
+              <img
+                src={item.src}
+                alt={item.fullName}
+                width={item.width}
+                height={item.height}
+                loading="lazy"
+                decoding="async"
+                title={item.fullName}
+                class="h-7 w-auto object-contain transition-all duration-300 [filter:grayscale(100%)_brightness(0)_opacity(60%)] group-hover:opacity-100 group-hover:[filter:grayscale(0%)_brightness(1)_opacity(100%)] md:h-8"
+              />
+              <span class="text-center font-mono text-[0.48rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/45">
+                {item.caption}
+              </span>
+            </div>
+          {/each}
+        </div>
+      </div>
+    </div>
+
     <!-- Bottom Legal Bar -->
     <div
-      class="footer-reveal flex flex-col gap-3 pt-3 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/50 sm:flex-row sm:items-center sm:justify-between"
+      class="footer-reveal flex flex-col gap-3 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/50 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>
         &copy; {new Date().getFullYear()} Studio Click House Limited. All rights reserved.

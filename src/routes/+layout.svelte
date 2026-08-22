@@ -11,8 +11,18 @@
   import { refreshScrollTriggersAfterFonts, refreshScrollTriggers } from "$lib/animations/gsap";
 
   let { children } = $props();
+  let lenisRuntime: Awaited<ReturnType<typeof createLenis>> = null;
 
-  afterNavigate(() => {
+  afterNavigate((navigation) => {
+    // Force scroll to top on page change, unless navigating to a hash link
+    if (!navigation.to?.url.hash) {
+      if (lenisRuntime?.lenis) {
+        lenisRuntime.lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+
     setTimeout(() => {
       void refreshScrollTriggers();
     }, 150);
@@ -20,17 +30,16 @@
 
   onMount(() => {
     let active = true;
-    let runtime: Awaited<ReturnType<typeof createLenis>> = null;
 
     const startLenis = () => {
-      if (!active || runtime) return;
+      if (!active || lenisRuntime) return;
 
       createLenis().then((createdRuntime) => {
         if (!active) {
           createdRuntime?.destroy();
           return;
         }
-        runtime = createdRuntime;
+        lenisRuntime = createdRuntime;
         void refreshScrollTriggersAfterFonts();
       });
     };
@@ -47,7 +56,7 @@
     return () => {
       active = false;
       window.removeEventListener("site-preloader-complete", startLenis);
-      runtime?.destroy();
+      lenisRuntime?.destroy();
     };
   });
 </script>

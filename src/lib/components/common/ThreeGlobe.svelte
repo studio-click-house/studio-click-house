@@ -49,12 +49,16 @@
     visible: boolean;
   }
 
-  const INITIAL_ROTATION_X = 0.12;
-  const INITIAL_ROTATION_Y = -1.92;
-  const ROUTE_COLORS = ["#7ea641", "#9aca54", "#63adb0", "#06b6d4"];
-  const GLOBE_COLOR = "#062056";
+  // Home view: pinned on Europe; the globe eases back here after user interaction
+  const HOME_LAT = 52;
+  const HOME_LNG = 14;
+  const INITIAL_ROTATION_X = HOME_LAT * (Math.PI / 180) * 0.7;
+  const INITIAL_ROTATION_Y = (HOME_LNG - 90) * (Math.PI / 180);
+  const RETURN_DELAY = 2600;
+  const ROUTE_COLORS = ["#7ea641", "#9aca54", "#c9e39b", "#5f8f36"];
+  const GLOBE_COLOR = "#332E2D";
   const ATMOSPHERE_COLOR = "#7ea641";
-  const POLYGON_COLOR = "rgba(255,255,255,0.7)";
+  const POLYGON_COLOR = "rgba(248,248,246,0.62)";
   const ARC_TIME = 1350;
   const ARC_LENGTH = 0.46;
   const MAX_RINGS = 1.35;
@@ -76,6 +80,33 @@
   let pointerPreviousX = 0;
   let pointerPreviousY = 0;
   let requestRender: (() => void) | undefined;
+  let returnTimeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  function cancelReturnToHome() {
+    if (returnTimeoutId !== undefined) {
+      clearTimeout(returnTimeoutId);
+      returnTimeoutId = undefined;
+    }
+  }
+
+  function returnToHome() {
+    velocityX = 0;
+    velocityY = 0;
+    // Ease back along the shortest rotational path to the Europe view
+    const homeY =
+      INITIAL_ROTATION_Y +
+      Math.round((targetRotationY - INITIAL_ROTATION_Y) / (Math.PI * 2)) *
+        Math.PI *
+        2;
+    targetRotationY = homeY;
+    targetRotationX = INITIAL_ROTATION_X;
+    requestRender?.();
+  }
+
+  function scheduleReturnToHome() {
+    cancelReturnToHome();
+    returnTimeoutId = setTimeout(returnToHome, RETURN_DELAY);
+  }
 
   function createArcData() {
     if (locations.length < 2) return [];
@@ -158,6 +189,7 @@
 
   function handlePointerDown(event: PointerEvent) {
     isDragging = true;
+    cancelReturnToHome();
     pointerPreviousX = event.clientX;
     pointerPreviousY = event.clientY;
     velocityX = 0;
@@ -183,6 +215,7 @@
 
   function handlePointerUp(event: PointerEvent) {
     isDragging = false;
+    scheduleReturnToHome();
 
     if (
       event.currentTarget instanceof HTMLElement &&
@@ -216,7 +249,7 @@
         "(prefers-reduced-motion: reduce)",
       ).matches;
       const scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0x000000, 400, 2000);
+      scene.fog = new THREE.Fog(0x332e2d, 400, 2000);
       const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
       const renderer = new THREE.WebGLRenderer({
         canvas: canvasElement,
@@ -288,15 +321,15 @@
         .ringPropagationSpeed(prefersReducedMotion ? 0 : RING_PROPAGATION_SPEED)
         .ringRepeatPeriod(ARC_TIME * ARC_LENGTH);
 
-      scene.add(new THREE.AmbientLight(0x38bdf8, 0.6));
-      const leftLight = new THREE.DirectionalLight(0xffffff, 0.7);
+      scene.add(new THREE.AmbientLight(0xf8f8f6, 0.55));
+      const leftLight = new THREE.DirectionalLight(0xfff8ec, 0.75);
       leftLight.position.set(-400, 100, 400);
       scene.add(leftLight);
-      const topLight = new THREE.DirectionalLight(0xffffff, 0.7);
+      const topLight = new THREE.DirectionalLight(0xf8f8f6, 0.65);
       topLight.position.set(-200, 500, 200);
       scene.add(topLight);
-      const pointLight = new THREE.PointLight(0xffffff, 0.8);
-      pointLight.position.set(-200, 500, 200);
+      const pointLight = new THREE.PointLight(0x9aca54, 0.5);
+      pointLight.position.set(300, 200, 400);
       scene.add(pointLight);
 
       // Hover event handlers removed to display labels permanently instead.
@@ -368,7 +401,7 @@
                   listedNames.includes(name) ||
                   listedNames.includes(admin)
                 ) {
-                  return "#8ccb2e"; // Calibrated Brand Green
+                  return "#9aca54"; // Brand green highlight
                 }
               }
               return POLYGON_COLOR;
@@ -650,6 +683,7 @@
 
     return () => {
       active = false;
+      cancelReturnToHome();
       window.removeEventListener(
         "site-preloader-complete",
         handlePreloaderComplete,

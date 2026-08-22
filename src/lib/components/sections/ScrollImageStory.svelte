@@ -3,7 +3,6 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { previewMedia } from "$lib/content/media";
 
   let section: HTMLElement;
   let storyVideo: HTMLVideoElement;
@@ -127,6 +126,7 @@
               { x: 9, y: 7, scale: 1.02, rotation: 1, duration: 5.2 },
               { x: -7, y: -9, scale: 0.98, rotation: -1.2, duration: 6.8 },
               { x: 8, y: 6, scale: 1.02, rotation: 1.1, duration: 5.6 },
+              { x: -9, y: 8, scale: 1.01, rotation: -0.9, duration: 6.1 },
             ];
 
             gsap.utils
@@ -201,7 +201,7 @@
   <figure
     class="ai-visual relative h-[26rem] overflow-hidden sm:h-[34rem] lg:h-[42rem]"
   >
-    <figcaption class="sr-only">AI image editing in motion.</figcaption>
+    <figcaption class="sr-only">AI video post-production in motion.</figcaption>
     <div class="ai-video-reveal absolute inset-0 overflow-hidden">
       <video
         bind:this={storyVideo}
@@ -230,14 +230,14 @@
           <span class="ai-visual-title-line"><span>Professional</span></span>
           <span class="ai-visual-title-line"
             ><span class="italic text-brand-green"
-              >video post-production.</span
+              >AI video post-production.</span
             ></span
           >
         </p>
         <p
           class="ai-visual-copy-step mt-6 max-w-lg text-sm leading-relaxed text-brand-light/80 sm:text-base font-sans"
         >
-          Accelerate your motion pipeline. From high-end color grading and commercial cutdowns to advanced visual enhancement, we deliver broadcast-ready video tailored for global campaigns.
+          Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.
         </p>
       </div>
     </div>
@@ -258,7 +258,7 @@
           id="scroll-image-story-title"
           class="ai-panel-copy-heading font-display text-xl font-normal leading-[1.3] tracking-[-0.02em] text-brand-dark sm:text-2xl"
         >
-          Professional video post-production accelerates the workflow — streamlining complex cutdowns, color balance, visual cleanup, and high-volume delivery with artisan oversight.
+          AI video post-production accelerates the workflow — streamlining generative shot creation, complex cutdowns, color balance, and visual cleanup with artisan oversight at every frame.
         </h2>
       </div>
 
@@ -266,23 +266,21 @@
         <p
           class="mt-4 max-w-2xl text-sm leading-relaxed text-brand-dark/78 sm:text-base"
         >
-          Every sequence is reviewed frame-by-frame by experienced colorists and senior editors to ensure pristine fidelity, temporal consistency, and cinematic storytelling.
+          Generated or captured, every sequence is finished by senior colorists and editors. We blend Kling, Google Flow, Runway, and Luma-generated footage with expert grading and frame-by-frame review for pristine fidelity, temporal consistency, and cinematic storytelling.
         </p>
 
-        <!-- Video Production Capabilities Badges -->
-        <div class="mt-6 flex flex-wrap items-center gap-2.5">
-          <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-brand-dark/10 shadow-2xs text-xs font-medium text-brand-dark/80">
-            <span class="size-1.5 rounded-full bg-brand-green"></span> 4K / 8K Cinema Master
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-brand-dark/10 shadow-2xs text-xs font-medium text-brand-dark/80">
-            <span class="size-1.5 rounded-full bg-brand-green"></span> ACES Color Pipeline
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-brand-dark/10 shadow-2xs text-xs font-medium text-brand-dark/80">
-            <span class="size-1.5 rounded-full bg-brand-green"></span> AI Motion Upscaling
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-brand-dark/10 shadow-2xs text-xs font-medium text-brand-dark/80">
-            <span class="size-1.5 rounded-full bg-brand-green"></span> 24h Express Turnaround
-          </span>
+        <!-- AI Video Capability Spec Strip -->
+        <div
+          class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/55"
+          aria-label="AI video post-production capabilities"
+        >
+          <span>Text-to-Video Generation</span>
+          <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
+          <span>AI Motion Upscaling 4K–8K</span>
+          <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
+          <span>ACES Color Pipeline</span>
+          <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
+          <span>24h Express Turnaround</span>
         </div>
 
         <a
@@ -295,94 +293,87 @@
       </div>
     </div>
     <div class="ai-tool-stage site-shell" aria-hidden="true">
-      <!-- 1. DaVinci Resolve Studio -->
-      <div class="ai-logo-orbit ai-logo-resolve">
-        <div class="ai-logo-bubble" title="DaVinci Resolve Studio · Color Grading">
-          <svg viewBox="0 0 24 24" class="size-6 text-brand-dark fill-current" focusable="false">
-            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 17.93V13h6.93A8 8 0 0 1 13 19.93zm-2 0A8 8 0 0 1 4.07 13H11zm-6.93-9A8 8 0 0 1 11 4.07V11zm9-6.93A8 8 0 0 1 19.93 11H13z" />
+      <!-- 1. Runway -->
+      <div class="ai-logo-orbit ai-logo-runway">
+        <div class="ai-logo-bubble">
+          <svg viewBox="0 0 24 24" class="size-6 fill-current" focusable="false">
+            <path d="M5.5 3h4.9l4.1 7.1L18.6 3H22l-6.3 10.2V21h-3.6v-7.8L5.5 3zm1 18 5.4-7.3 2.5 2.6L10.6 21H6.5z" />
           </svg>
         </div>
-        <div class="ai-logo-preview ai-logo-preview-below">
-          <img
-            src={previewMedia.videoColorGrading.src}
-            alt="DaVinci Resolve Color Grade"
-            width={previewMedia.videoColorGrading.width}
-            height={previewMedia.videoColorGrading.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        <span class="ai-logo-name">Runway Gen-4</span>
       </div>
 
-      <!-- 2. Adobe Premiere Pro & After Effects -->
-      <div class="ai-logo-orbit ai-logo-adobe">
-        <div class="ai-logo-bubble" title="Adobe Premiere & After Effects">
-          <svg viewBox="0 0 24 24" class="size-6 fill-red-600" focusable="false">
-            <path d="m13.966 22.624-1.69-4.281H8.122l3.892-9.144 5.662 13.425ZM8.884 1.376H0v21.248Zm15.116 0h-8.884L24 22.624Z" />
+      <!-- 2. Kling AI -->
+      <div class="ai-logo-orbit ai-logo-kling">
+        <div class="ai-logo-bubble">
+          <svg viewBox="0 0 24 24" class="size-6 fill-current" focusable="false">
+            <path d="M6 3h3.5v7.4L15.6 3h4.2l-6.9 8.1L20.4 21h-4.3l-5-6.6-1.6 1.8V21H6V3z" />
           </svg>
         </div>
-        <div class="ai-logo-preview ai-logo-preview-below">
-          <img
-            src={previewMedia.editingWorkspace.src}
-            alt="Adobe Premiere Timeline"
-            width={previewMedia.editingWorkspace.width}
-            height={previewMedia.editingWorkspace.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        <span class="ai-logo-name">Kling AI</span>
       </div>
 
-      <!-- 3. Google Veo -->
-      <div class="ai-logo-orbit ai-logo-veo">
-        <div class="ai-logo-bubble" title="Google Veo · Generative Video">
+      <!-- 3. Google Flow -->
+      <div class="ai-logo-orbit ai-logo-flow">
+        <div class="ai-logo-bubble">
           <svg viewBox="0 0 24 24" class="size-6" focusable="false">
-            <path class="google-blue" d="M21.6 12.227c0-.709-.064-1.391-.182-2.045H12v3.868h5.382a4.6 4.6 0 0 1-1.995 3.018v2.509h3.232c1.891-1.741 2.981-4.305 2.981-7.35Z" />
-            <path class="google-green" d="M12 22c2.7 0 4.964-.895 6.619-2.423l-3.232-2.509c-.895.6-2.041.955-3.387.955-2.605 0-4.809-1.759-5.596-4.123H3.064v2.591A9.997 9.997 0 0 0 12 22Z" />
-            <path class="google-yellow" d="M6.404 13.9A6.018 6.018 0 0 1 6.09 12c0-.659.114-1.3.314-1.9V7.509h-3.34A10.002 10.002 0 0 0 2 12c0 1.614.386 3.141 1.064 4.491L6.404 13.9Z" />
-            <path class="google-red" d="M12 5.977c1.468 0 2.786.505 3.827 1.496l2.864-2.864C16.959 2.995 14.695 2 12 2a9.997 9.997 0 0 0-8.936 5.509l3.34 2.591C7.191 7.736 9.395 5.977 12 5.977Z" />
-          </svg>
-        </div>
-        <div class="ai-logo-preview ai-logo-preview-above">
-          <img
-            src={previewMedia.redStudioPortrait.src}
-            alt="AI Color & Motion"
-            width={previewMedia.redStudioPortrait.width}
-            height={previewMedia.redStudioPortrait.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
-
-      <!-- 4. OpenAI Sora -->
-      <div class="ai-logo-orbit ai-logo-openai">
-        <div class="ai-logo-bubble" title="OpenAI Sora · Neural Motion">
-          <svg viewBox="0 0 24 24" class="size-6 fill-current text-brand-dark" focusable="false">
+            <defs>
+              <linearGradient id="flow-spark-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4285f4" />
+                <stop offset="100%" stop-color="#34a853" />
+              </linearGradient>
+            </defs>
             <path
-              d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.911 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.182a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.096 5.98 5.98 0 0 0 .511 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073Zm-9.022 12.608a4.476 4.476 0 0 1-2.877-1.041l.142-.08 4.778-2.759a.795.795 0 0 0 .393-.681V11.13l2.02 1.169a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494Zm-9.661-4.125a4.471 4.471 0 0 1-.534-3.014l.142.085 4.783 2.758a.771.771 0 0 0 .78 0l5.843-3.368v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.499 4.499 0 0 1-6.141-1.646ZM2.341 7.896a4.485 4.485 0 0 1 2.365-1.973V11.6a.766.766 0 0 0 .388.677l5.814 3.354-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872Zm16.596 3.855-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.104v-5.677a.79.79 0 0 0-.407-.667Zm2.011-3.023-.142-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.499 4.499 0 0 1 6.68 4.66ZM8.307 12.863l-2.02-1.164a.08.08 0 0 1-.038-.057V6.074a4.499 4.499 0 0 1 7.375-3.454l-.142.081-4.778 2.758a.795.795 0 0 0-.393.681Zm1.097-2.365 2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5Z"
+              fill="url(#flow-spark-gradient)"
+              d="M12 1.8l2.1 6.4a2.04 2.04 0 0 0 1.45 1.38l6.65 1.83-6.65 1.83a2.04 2.04 0 0 0-1.45 1.38L12 22.2l-2.1-7.58a2.04 2.04 0 0 0-1.45-1.38L3.8 11.41l6.65-1.83A2.04 2.04 0 0 0 11.9 8.2L12 1.8z"
             />
           </svg>
         </div>
-        <div class="ai-logo-preview ai-logo-preview-above">
-          <img
-            src={previewMedia.perfumeStillLife.src}
-            alt="AI Cinema Render"
-            width={previewMedia.perfumeStillLife.width}
-            height={previewMedia.perfumeStillLife.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        <span class="ai-logo-name">Google Flow</span>
       </div>
 
-      <!-- 5. Topaz Video AI / Neural Clean -->
-      <div class="ai-logo-orbit ai-logo-topaz">
-        <div class="ai-logo-bubble" title="Topaz Video AI · Upscaling & Denoise">
-          <svg viewBox="0 0 24 24" class="size-6 text-brand-green fill-none stroke-current stroke-2" focusable="false">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+      <!-- 4. Luma Dream Machine -->
+      <div class="ai-logo-orbit ai-logo-luma">
+        <div class="ai-logo-bubble">
+          <svg viewBox="0 0 24 24" class="size-6" focusable="false">
+            <defs>
+              <linearGradient id="luma-crescent-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ff5ca8" />
+                <stop offset="55%" stop-color="#ff8a5c" />
+                <stop offset="100%" stop-color="#ffd166" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#luma-crescent-gradient)"
+              d="M16.4 2.6a10 10 0 1 0 5 12.2A8 8 0 0 1 16.4 2.6z"
+            />
           </svg>
         </div>
+        <span class="ai-logo-name ai-logo-name-above">Luma Dream Machine</span>
+      </div>
+
+      <!-- 5. Pika -->
+      <div class="ai-logo-orbit ai-logo-pika">
+        <div class="ai-logo-bubble">
+          <svg viewBox="0 0 24 24" class="size-6 fill-current" focusable="false">
+            <path d="M6 3h7.6a5 5 0 0 1 0 10H9.6v8H6V3zm3.6 3.2v3.6h4a1.8 1.8 0 0 0 0-3.6h-4z" />
+          </svg>
+        </div>
+        <span class="ai-logo-name ai-logo-name-above">Pika</span>
+      </div>
+
+      <!-- 6. Hailuo AI · MiniMax -->
+      <div class="ai-logo-orbit ai-logo-hailuo">
+        <div class="ai-logo-bubble">
+          <svg viewBox="0 0 24 24" class="size-6 fill-none stroke-current stroke-[2.2]" focusable="false">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12.5 8.5A4.5 4.5 0 0 0 8 13a6.8 6.8 0 0 0 6.8 6.8A9.2 9.2 0 0 0 9.6 4.9 11.5 11.5 0 0 1 21.3 12"
+            />
+          </svg>
+        </div>
+        <span class="ai-logo-name ai-logo-name-above">Hailuo AI</span>
       </div>
     </div>
   </div>
@@ -488,15 +479,9 @@
   }
 
   .ai-tool-stage {
-    --logo-openai: #101010;
-    --logo-gemini-blue: #4e82ee;
-    --logo-gemini-violet: #886cdb;
-    --logo-gemini-pink: #d965b8;
+    --logo-runway: #101010;
+    --logo-hailuo: #5b8cff;
     --logo-google-blue: #4285f4;
-    --logo-google-green: #34a853;
-    --logo-google-yellow: #fbbc05;
-    --logo-google-red: #ea4335;
-    --logo-adobe: #ff0000;
     --logo-claude: #d97757;
     position: absolute;
     inset: 0;
@@ -511,45 +496,41 @@
     pointer-events: auto;
   }
 
-  .ai-logo-preview {
+  .ai-logo-name {
     position: absolute;
-    z-index: 1;
-    left: 0;
-    width: clamp(9rem, 13vw, 13rem);
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
+    top: calc(100% + 0.55rem);
+    left: 50%;
+    padding: 0.32rem 0.62rem;
     border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 76%, transparent);
-    border-radius: 0.5rem;
-    background: var(--color-brand-light);
-    box-shadow: 0 1.25rem 3rem
-      color-mix(in srgb, var(--color-brand-dark) 16%, transparent);
+      color-mix(in srgb, var(--color-brand-light) 18%, transparent);
+    border-radius: 0.45rem;
+    background: color-mix(in srgb, var(--color-brand-dark) 92%, transparent);
+    box-shadow: 0 0.6rem 1.6rem
+      color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
+    color: var(--color-brand-light);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
     opacity: 0;
-    transform: translateY(0.75rem) scale(0.94);
-    transform-origin: center;
+    transform: translate(-50%, 0.45rem);
     transition:
-      opacity 220ms ease,
-      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 200ms ease,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
   }
 
-  .ai-logo-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .ai-logo-name-above {
+    top: auto;
+    bottom: calc(100% + 0.55rem);
+    transform: translate(-50%, -0.45rem);
   }
 
-  .ai-logo-preview-below {
-    top: calc(100% + 0.9rem);
-  }
-
-  .ai-logo-preview-above {
-    bottom: calc(100% + 0.9rem);
-    transform: translateY(-0.75rem) scale(0.94);
-  }
-
-  .ai-logo-orbit:hover .ai-logo-preview {
+  .ai-logo-orbit:hover .ai-logo-name {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate(-50%, 0);
   }
 
   .ai-logo-bubble {
@@ -575,50 +556,39 @@
     fill: currentColor;
   }
 
-  .ai-logo-resolve {
+  .ai-logo-runway {
     top: 13%;
     left: 8%;
-    color: var(--color-brand-green);
+    color: var(--logo-runway);
   }
 
-  .ai-logo-adobe {
+  .ai-logo-kling {
     top: 6%;
     right: 20%;
-    color: #e63946;
+    color: var(--color-brand-dark);
   }
 
-  .ai-logo-veo {
-    bottom: 9%;
-    left: 17%;
+  .ai-logo-flow {
+    top: 40%;
+    right: 4%;
     color: var(--logo-google-blue);
   }
 
-  .ai-logo-openai {
+  .ai-logo-luma {
     right: 8%;
     bottom: 18%;
-    color: var(--logo-openai);
   }
 
-  .ai-logo-topaz {
+  .ai-logo-pika {
+    bottom: 9%;
+    left: 16%;
+    color: var(--logo-runway);
+  }
+
+  .ai-logo-hailuo {
     bottom: clamp(4.5rem, 5.5vw, 6.5rem);
     left: 52%;
-    color: var(--color-brand-green);
-  }
-
-  .google-blue {
-    fill: var(--logo-google-blue);
-  }
-
-  .google-green {
-    fill: var(--logo-google-green);
-  }
-
-  .google-yellow {
-    fill: var(--logo-google-yellow);
-  }
-
-  .google-red {
-    fill: var(--logo-google-red);
+    color: var(--logo-hailuo);
   }
 
   .ai-panel-curve {
@@ -699,31 +669,32 @@
       height: 1.55rem;
     }
 
-    .ai-logo-preview {
+    .ai-logo-name {
       display: none;
     }
 
-    .ai-logo-resolve {
+    .ai-logo-runway {
       top: auto;
       bottom: 1.5rem;
       left: 1rem;
     }
 
-    .ai-logo-topaz {
+    .ai-logo-hailuo {
       top: auto;
       right: auto;
       bottom: 5rem;
       left: 45%;
     }
 
-    .ai-logo-veo {
+    .ai-logo-pika {
       right: 1rem;
       bottom: 1.5rem;
       left: auto;
     }
 
-    .ai-logo-adobe,
-    .ai-logo-openai {
+    .ai-logo-kling,
+    .ai-logo-flow,
+    .ai-logo-luma {
       display: none;
     }
 

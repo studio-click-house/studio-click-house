@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Play } from "lucide-svelte";
+  import { Pause, Play } from "lucide-svelte";
 
   const AUDIO_SRC = "/audio/Audio-Presentation.mp3";
 
@@ -65,12 +65,7 @@
           : 'bg-white/[0.06] text-white/80 hover:bg-brand-green hover:text-brand-dark hover:shadow-[0_0_12px_rgba(126,166,65,0.4)]'}"
       >
         {#if isPlaying}
-          <!-- 3 animated equalizer running lines -->
-          <div class="flex items-center justify-center gap-[2.5px] h-3.5" aria-hidden="true">
-            <span class="w-[2px] h-full bg-current rounded-full animate-bar-1"></span>
-            <span class="w-[2px] h-full bg-current rounded-full animate-bar-2"></span>
-            <span class="w-[2px] h-full bg-current rounded-full animate-bar-3"></span>
-          </div>
+          <Pause size={13} class="fill-current" aria-hidden="true" />
         {:else}
           <!-- Triangle play button -->
           <Play size={13} class="fill-current translate-x-[1px]" aria-hidden="true" />
@@ -88,44 +83,3 @@
   </div>
 </aside>
 
-<style>
-  @keyframes barBounce1 {
-    0%,
-    100% {
-      height: 30%;
-    }
-    50% {
-      height: 100%;
-    }
-  }
-
-  @keyframes barBounce2 {
-    0%,
-    100% {
-      height: 90%;
-    }
-    50% {
-      height: 25%;
-    }
-  }
-
-  @keyframes barBounce3 {
-    0%,
-    100% {
-      height: 45%;
-    }
-    50% {
-      height: 95%;
-    }
-  }
-
-  .animate-bar-1 {
-    animation: barBounce1 600ms ease-in-out infinite;
-  }
-  .animate-bar-2 {
-    animation: barBounce2 520ms ease-in-out infinite 80ms;
-  }
-  .animate-bar-3 {
-    animation: barBounce3 680ms ease-in-out infinite 160ms;
-  }
-</style>

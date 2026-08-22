@@ -87,7 +87,7 @@
   aria-labelledby="global-production-heading"
   bind:this={sectionRoot}
   data-cursor-trail="off"
-  class="network-section relative min-h-[100dvh] overflow-hidden bg-black px-4 text-brand-light lg:py-0"
+  class="network-section relative min-h-[100dvh] overflow-hidden bg-brand-dark px-4 text-brand-light lg:py-0"
 >
   <div class="site-shell relative z-10 mx-auto max-w-7xl lg:min-h-[100dvh]">
     <div
@@ -145,8 +145,8 @@
       ),
       radial-gradient(
         circle at 76% 42%,
-        rgb(6 32 86 / 0.3) 0,
-        rgb(6 32 86 / 0.12) 34%,
+        rgb(51 46 45 / 0.42) 0,
+        rgb(51 46 45 / 0.18) 34%,
         transparent 68%
       );
     pointer-events: none;

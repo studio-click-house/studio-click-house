@@ -10,7 +10,7 @@
 <section
   id="client-locations"
   aria-label="Client locations map"
-  class="overflow-hidden bg-black text-brand-light"
+  class="overflow-hidden bg-brand-dark text-brand-light"
 >
   <InteractiveClientMap {closingCta} />
 </section>
