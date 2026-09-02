@@ -4,6 +4,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { workGalleryItems } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
 
   const selectedProjects = workGalleryItems.slice(0, 3);
 
@@ -207,7 +208,7 @@
               class="project-word font-display italic"
               aria-hidden="true"
             >
-              {project.category}
+              {$_(`home.workGalleryItems.${project.id}.category`) || project.category}
             </p>
 
             <figure bind:this={projectPlates[index]} class="project-plate">
@@ -221,7 +222,7 @@
                 class="project-image"
               />
               <figcaption class="project-caption">
-                <span class="caption-category">{project.category}</span>
+                <span class="caption-category">{$_(`home.workGalleryItems.${project.id}.category`) || project.category}</span>
                 <span class="caption-index"
                   >Study / {String(index + 1).padStart(2, "0")}</span
                 >
@@ -232,12 +233,12 @@
               <p
                 class="font-mono text-[0.56rem] uppercase tracking-[0.17em] text-brand-green font-semibold"
               >
-                Proof {String(index + 1).padStart(2, "0")} / {project.category}
+                Proof {String(index + 1).padStart(2, "0")} / {$_(`home.workGalleryItems.${project.id}.category`) || project.category}
               </p>
               <h3
                 class="mt-5 font-display text-[clamp(2.8rem,4.5vw,5.4rem)] leading-[0.88] tracking-[-0.042em]"
               >
-                {#each project.title.split(" ") as word, wordIndex (`${project.id}-${wordIndex}`)}
+                {#each ($_(`home.workGalleryItems.${project.id}.title`) || project.title).split(" ") as word, wordIndex (`${project.id}-${wordIndex}`)}
                   <span class="project-title-word-mask"
                     ><span class="project-title-word">{word}</span></span
                   >
@@ -246,7 +247,7 @@
               <p
                 class="mt-6 max-w-md text-sm leading-relaxed text-brand-dark/75 sm:text-base"
               >
-                {project.description}
+                {$_(`home.workGalleryItems.${project.id}.description`) || project.description}
               </p>
               <div class="mt-7 flex flex-wrap gap-x-5 gap-y-2">
                 {#each project.tags as tag (tag)}

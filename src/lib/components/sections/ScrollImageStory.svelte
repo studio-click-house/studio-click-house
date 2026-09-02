@@ -3,6 +3,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   let section: HTMLElement;
   let storyVideo: HTMLVideoElement;
@@ -227,17 +228,17 @@
         <p
           class="font-display text-5xl leading-[0.9] tracking-[-0.04em] text-brand-light sm:text-6xl lg:text-7xl"
         >
-          <span class="ai-visual-title-line"><span>Professional</span></span>
+          <span class="ai-visual-title-line"><span>{$_('home.scrollImage.title1')}</span></span>
           <span class="ai-visual-title-line"
             ><span class="italic text-brand-green"
-              >AI video post-production.</span
+              >{$_('home.scrollImage.title2')}</span
             ></span
           >
         </p>
         <p
           class="ai-visual-copy-step mt-6 max-w-lg text-sm leading-relaxed text-brand-light/80 sm:text-base font-sans"
         >
-          Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.
+          {$_('home.scrollImage.copy1')}
         </p>
       </div>
     </div>
@@ -258,7 +259,7 @@
           id="scroll-image-story-title"
           class="ai-panel-copy-heading font-display text-xl font-normal leading-[1.3] tracking-[-0.02em] text-brand-dark sm:text-2xl"
         >
-          AI video post-production accelerates the workflow — streamlining generative shot creation, complex cutdowns, color balance, and visual cleanup with artisan oversight at every frame.
+          {$_('home.scrollImage.copy2')}
         </h2>
       </div>
 
@@ -266,7 +267,7 @@
         <p
           class="mt-4 max-w-2xl text-sm leading-relaxed text-brand-dark/78 sm:text-base"
         >
-          Generated or captured, every sequence is finished by senior colorists and editors. We blend Kling, Google Flow, Runway, and Luma-generated footage with expert grading and frame-by-frame review for pristine fidelity, temporal consistency, and cinematic storytelling.
+          {$_('home.scrollImage.copy3')}
         </p>
 
         <!-- AI Video Capability Spec Strip -->
@@ -274,20 +275,20 @@
           class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/55"
           aria-label="AI video post-production capabilities"
         >
-          <span>Text-to-Video Generation</span>
+          <span>{$_('home.scrollImage.capabilities.0') || 'Text-to-Video Generation'}</span>
           <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
-          <span>AI Motion Upscaling 4K–8K</span>
+          <span>{$_('home.scrollImage.capabilities.1') || 'AI Motion Upscaling 4K–8K'}</span>
           <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
-          <span>ACES Color Pipeline</span>
+          <span>{$_('home.scrollImage.capabilities.2') || 'ACES Color Pipeline'}</span>
           <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
-          <span>24h Express Turnaround</span>
+          <span>{$_('home.scrollImage.capabilities.3') || '24h Express Turnaround'}</span>
         </div>
 
         <a
           href={resolve("/services/video-editing")}
           class="mt-8 inline-flex items-center gap-3 border-b border-brand-green/50 pb-2 font-display text-sm font-normal tracking-[0.02em] text-brand-green transition-colors hover:border-brand-dark/40 hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
-          Explore video editing & post-production
+          {$_('home.scrollImage.explore')}
           <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
         </a>
       </div>

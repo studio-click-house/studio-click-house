@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { workGalleryItems } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
 
   let section: HTMLElement;
   let viewport: HTMLElement;
@@ -166,12 +167,12 @@
               <h3
                 class="mt-5 max-w-sm font-display text-3xl leading-[0.95] tracking-[-0.025em] sm:text-4xl text-brand-light"
               >
-                {item.title}
+                {$_(`home.workGalleryItems.${item.id}.title`) || item.title}
               </h3>
               <p
                 class="mt-4 max-w-sm text-sm leading-relaxed text-brand-light/80"
               >
-                {item.description}
+                {$_(`home.workGalleryItems.${item.id}.description`) || item.description}
               </p>
               <ul class="mt-5 flex flex-wrap gap-2" aria-label="Work tags">
                 {#each item.tags as tag (tag)}

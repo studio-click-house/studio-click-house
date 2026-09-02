@@ -5,6 +5,7 @@
   import { clientLocations } from "$lib/content/home";
   import type { AboutPageData } from "$lib/types/about";
   import ThreeGlobe from "./ThreeGlobe.svelte";
+  import { _ } from "svelte-i18n";
 
   let { closingCta } = $props<{
     closingCta: AboutPageData["closingCta"];
@@ -98,20 +99,20 @@
           id="global-production-heading"
           class="network-copy-step max-w-xl font-display text-[clamp(3rem,5.5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em]"
         >
-          {closingCta.heading}
+          {$_('home.closingCta.heading') || closingCta.heading}
         </h2>
 
         <p
           class="network-copy-step mt-4 max-w-md text-sm leading-6 text-brand-light/62"
         >
-          {closingCta.description}
+          {$_('home.closingCta.description') || closingCta.description}
         </p>
 
         <a
           href={closingCta.primaryCtaHref}
           class="network-copy-step mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-[0.55rem] bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
-          <span>{closingCta.primaryCtaLabel}</span>
+          <span>{$_('home.closingCta.primaryCtaLabel') || closingCta.primaryCtaLabel}</span>
           <ArrowRight class="h-5 w-5" />
         </a>
       </div>

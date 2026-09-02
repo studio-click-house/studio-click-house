@@ -12,7 +12,9 @@
   } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { navigationItems } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
   import MegaMenu from "./MegaMenu.svelte";
+  import LanguageSwitcher from "./LanguageSwitcher.svelte";
 
   let isScrolled = $state(false);
   let isMegaMenuOpen = $state(false);
@@ -282,7 +284,7 @@
               class="nav-link inline-flex items-center gap-1.5 py-2 outline-none"
             >
               <span class="nav-label">
-                {#each item.label.split("") as letter, letterIndex (letterIndex)}
+                {#each ($_('nav.' + item.label.toLowerCase()) || item.label).split("") as letter, letterIndex (letterIndex)}
                   <span
                     class="nav-letter"
                     data-letter={letter}
@@ -309,7 +311,7 @@
             class="nav-link inline-flex items-center py-2"
           >
             <span class="nav-label">
-              {#each item.label.split("") as letter, letterIndex (letterIndex)}
+              {#each ($_('nav.' + item.label.toLowerCase()) || item.label).split("") as letter, letterIndex (letterIndex)}
                 <span
                   class="nav-letter"
                   data-letter={letter}
@@ -329,7 +331,7 @@
           onmouseenter={closeNavigationMenus}
           class="project-action inline-flex items-center justify-between"
         >
-          <span>Free trial</span>
+          <span>{$_('nav.free_trial') || 'Free trial'}</span>
           <ArrowUpRight
             size={14}
             strokeWidth={1.7}
@@ -343,17 +345,12 @@
           class="login-action hidden xl:inline-flex items-center gap-1.5"
         >
           <LogIn size={14} strokeWidth={1.7} />
-          <span>Login</span>
+          <span>{$_('nav.login') || 'Login'}</span>
         </a>
 
-        <button
-          type="button"
-          class="language-action hidden xl:inline-flex items-center gap-1.5"
-          aria-label="Current language: English"
-        >
-          <Globe size={14} strokeWidth={1.7} />
-          <span>EN</span>
-        </button>
+        <div class="hidden xl:flex ml-2">
+          <LanguageSwitcher />
+        </div>
       </div>
 
       <button
@@ -412,7 +409,7 @@
                   <span
                     class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green"
                   >
-                    {item.label}
+                    {$_('nav.' + item.label.toLowerCase()) || item.label}
                   </span>
                 </span>
                 <ArrowUpRight
@@ -433,14 +430,11 @@
             onclick={() => (isMenuOpen = false)}
             class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
           >
-            Login <ArrowUpRight size={14} strokeWidth={1.7} />
+            {$_('nav.login') || 'Login'} <ArrowUpRight size={14} strokeWidth={1.7} />
           </a>
-          <button
-            type="button"
-            class="flex items-center gap-2 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
-          >
-            <Globe size={13} /> EN
-          </button>
+          <div class="flex items-center justify-center px-4 py-2">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     {/if}
@@ -462,7 +456,10 @@
   }
 
   .nav-surface {
-    grid-template-columns: minmax(8rem, 1fr) auto minmax(15rem, 1fr);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     min-height: 4.35rem;
     padding-inline: 0.65rem;
     color: var(--color-brand-light);
@@ -587,33 +584,6 @@
     background: var(--color-brand-green);
   }
 
-  .language-action {
-    min-height: 2.45rem;
-    margin-left: 0.6rem;
-    gap: 0.55rem;
-    padding-inline: 0.85rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 26%, transparent);
-    border-radius: 4px;
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.018em;
-    text-transform: uppercase;
-    color: var(--color-brand-light);
-    background: transparent;
-    transition:
-      color 220ms ease,
-      border-color 220ms ease,
-      background 220ms ease;
-  }
-
-  .language-action:hover {
-    color: var(--color-brand-dark);
-    border-color: var(--color-brand-green);
-    background: var(--color-brand-green);
-  }
-
   .project-action:active,
   .menu-action:active {
     transform: scale(0.98);
@@ -677,7 +647,7 @@
 
   @media (max-width: 79.999rem) {
     .nav-surface {
-      grid-template-columns: minmax(8rem, 1fr) auto;
+      gap: 0.5rem;
     }
   }
 

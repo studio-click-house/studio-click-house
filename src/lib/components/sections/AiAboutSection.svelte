@@ -226,16 +226,11 @@
 </svelte:head>
 
 <section
-  id="studio-introduction"
+  id="ai-about-section"
   bind:this={section}
-  aria-labelledby="studio-introduction-title"
-  class="about-section relative overflow-hidden bg-brand-light section-space text-brand-dark"
+  aria-labelledby="ai-about-section-title"
+  class="about-section relative overflow-hidden bg-brand-light pt-4 pb-16 sm:pt-6 sm:pb-20 lg:pt-6 lg:pb-24 text-brand-dark"
 >
-  <div
-    class="absolute inset-x-0 top-0 h-px bg-brand-dark/10"
-    aria-hidden="true"
-  ></div>
-
   <div class="site-shell relative z-10">
     <div class="about-layout">
       <figure class="about-comparison">
@@ -296,32 +291,32 @@
         </div>
 
         <h2
-          id="studio-introduction-title"
+          id="ai-about-section-title"
           class="font-display text-[clamp(2.65rem,4.8vw,5.4rem)] leading-[0.88] tracking-[-0.045em]"
         >
           <span class="about-title-line">
-            <span>{$_('home.intro.title1')}</span>
+            <span>{$_('home.aiAbout.title1')}</span>
           </span>
           <span class="about-title-line">
-            <span><em class="text-brand-green">{$_('home.intro.title2')}</em></span>
+            <span><em class="text-brand-green">{$_('home.aiAbout.title2')}</em></span>
           </span>
         </h2>
 
         <p
           class="about-copy-step mt-8 max-w-md text-sm leading-relaxed text-brand-dark/70 sm:text-base"
         >
-          {$_('home.intro.subtitle')}
+          {$_('home.aiAbout.subtitle')}
         </p>
 
         <p
           class="about-copy-step mt-5 max-w-md border-l border-brand-green/45 pl-5 text-sm italic leading-relaxed text-brand-dark/60 sm:text-base"
         >
-          {$_('home.intro.copy')}
+          {$_('home.aiAbout.copy')}
         </p>
 
         <div class="about-copy-step about-actions">
-          <a href={resolve("/about")} class="about-action about-action-primary">
-            <span>{$_('home.intro.aboutStudio')}</span>
+          <a href={resolve("/services")} class="about-action about-action-primary">
+            <span>{$_('home.aiAbout.explore')}</span>
             <ArrowUpRight size={15} strokeWidth={1.7} />
           </a>
 
@@ -329,7 +324,7 @@
             href={resolve("/contact")}
             class="about-action about-action-secondary"
           >
-            <span>{$_('home.intro.freeTrial')}</span>
+            <span>{$_('home.aiAbout.freeTrial')}</span>
             <ArrowUpRight size={15} strokeWidth={1.7} />
           </a>
         </div>
@@ -339,8 +334,6 @@
 </section>
 
 <style>
-
-
   .about-layout {
     display: grid;
     align-items: center;

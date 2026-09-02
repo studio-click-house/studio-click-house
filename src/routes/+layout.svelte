@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import "../app.css";
+  import "$lib/i18n";
   import CursorOrb from "$lib/components/animations/CursorOrb.svelte";
   import Footer from "$lib/components/layout/Footer.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";

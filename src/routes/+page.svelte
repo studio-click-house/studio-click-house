@@ -7,7 +7,8 @@
   import HomeHero from "$lib/components/sections/HomeHero.svelte";
   import HorizontalProjectsShowcase from "$lib/components/sections/HorizontalProjectsShowcase.svelte";
   import ProductionProcess from "$lib/components/sections/ProductionProcess.svelte";
-  import StudioIntroduction from "$lib/components/sections/StudioIntroduction.svelte";
+  import AboutDescription from "$lib/components/sections/AboutDescription.svelte";
+  import AiAboutSection from "$lib/components/sections/AiAboutSection.svelte";
   import ScrollImageStory from "$lib/components/sections/ScrollImageStory.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
@@ -47,7 +48,8 @@
 <main id="main-content">
   <PageScrollReveals />
   <HomeHero />
-  <StudioIntroduction />
+  <AboutDescription />
+  <AiAboutSection />
   <AboutOrbitGallery />
   <HorizontalProjectsShowcase />
   <CreativeMarquee items={data.clientLogoItems} />

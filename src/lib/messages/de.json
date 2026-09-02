@@ -1,0 +1,315 @@
+{
+  "nav": {
+    "login": "Anmelden",
+    "free_trial": "Kostenlos testen",
+    "about": "Über uns",
+    "services": "Leistungen",
+    "pricing": "Preise",
+    "portfolio": "Portfolio",
+    "section": "Sektion",
+    "events": "Veranstaltungen",
+    "csr": "CSR",
+    "careers": "Karriere",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "services": {
+      "background-remove": {
+        "title": "Hintergrund entfernen",
+        "description": "Saubere Freistellung des Motivs und Entfernung des Hintergrunds.",
+        "category": "Bildbearbeitung"
+      },
+      "clipping-path": {
+        "title": "Freisteller",
+        "description": "Präzise Motivisolation für eine saubere, flexible Bildproduktion.",
+        "category": "Bildbearbeitung"
+      },
+      "ghost-mannequin": {
+        "title": "Hollow Man",
+        "description": "Kleidungsrekonstruktion, die Form und Passform visuell klar hält.",
+        "category": "Bildbearbeitung"
+      },
+      "editorial-retouching": {
+        "title": "Editorial-Retusche",
+        "description": "Hochwertiges, detailliertes Finish, geleitet von Material, Licht und Markenkontext.",
+        "category": "Bildbearbeitung"
+      },
+      "ecommerce-retouching": {
+        "title": "E-Commerce-Retusche",
+        "description": "Polierte Bildverbesserung, zugeschnitten auf Onlineshop-Angebote mit hohem Volumen.",
+        "category": "Bildbearbeitung"
+      },
+      "jewelry-retouching": {
+        "title": "Schmuck-Retusche",
+        "description": "Detailgenaue Bereinigung, die Reflexionen, Textur und Form schützt.",
+        "category": "Bildbearbeitung"
+      },
+      "color-correction": {
+        "title": "Farbkorrektur",
+        "description": "Kontrollierte Farbanpassung über einzelne Frames und komplette Chargen hinweg.",
+        "category": "Bildbearbeitung"
+      },
+      "ai-retouch": {
+        "title": "KI-Retusche",
+        "description": "KI-gestützte Bearbeitung der nächsten Generation für schnelle, hochwertige Massenverarbeitung.",
+        "category": "Bildbearbeitung"
+      },
+      "commercial-editing": {
+        "title": "Werbeschnitt",
+        "description": "Polierte Postproduktion für Marken-Reels, Werbespots und Produktkampagnen.",
+        "category": "Videobearbeitung"
+      },
+      "color-grading": {
+        "title": "Color Grading",
+        "description": "Kalibrierter Farbabgleich und ästhetische Tonung für zusammenhängende Videoserien.",
+        "category": "Videobearbeitung"
+      },
+      "social-cutdowns": {
+        "title": "Social Cutdowns",
+        "description": "Knackige, schnell umgesetzte Videorevisionen, zugeschnitten auf soziale Plattformen.",
+        "category": "Videobearbeitung"
+      },
+      "3d-product-modeling": {
+        "title": "3D-Produktmodellierung",
+        "description": "Präzise, leichte 3D-Modelle, die direkt nach Referenzdesigns erstellt werden.",
+        "category": "3D-Modellierung"
+      },
+      "texturing-shading": {
+        "title": "Texturierung & Shading",
+        "description": "Benutzerdefinierte PBR-Materialkarten, die Metall, Glas und Stoffe authentisch darstellen.",
+        "category": "3D-Modellierung"
+      },
+      "cgi-rendering": {
+        "title": "CGI-Rendering",
+        "description": "Fotorealistische 3D-Produktrenderings mit individueller Studio-Inszenierung.",
+        "category": "3D-Modellierung"
+      }
+    },
+    "serviceShowcases": {
+      "item_0": {
+        "displayTitle": "Bildbearbeitung",
+        "description": "Freistellung, Retusche, Farb- und Detailarbeit für einzelne Frames oder komplette Produktionschargen.",
+        "category": "Bildbearbeitung",
+        "beforeLabel": "Vorher",
+        "afterLabel": "Nachher"
+      },
+      "item_1": {
+        "displayTitle": "Videobearbeitung",
+        "description": "Werbeschnitte, Social Cutdowns und kontrolliertes Grading, abgestimmt auf jedes Format und jeden Kontext.",
+        "category": "Videobearbeitung",
+        "beforeLabel": "",
+        "afterLabel": ""
+      },
+      "item_2": {
+        "displayTitle": "3D & CGI",
+        "description": "Produktmodellierung, Materialentwicklung und CGI-Rendering für glaubwürdige kommerzielle Bildwelten.",
+        "category": "3D-Modellierung",
+        "beforeLabel": "Modell",
+        "afterLabel": "Render"
+      }
+    },
+    "workGalleryItems": {
+      "product-finishing": {
+        "title": "Form, Licht und ein sauberes finales Bild.",
+        "description": "Ein durchdachtes Produktbild behält sein Material und seine Beleuchtung glaubwürdig bei, während visuelle Ablenkungen entfernt werden.",
+        "category": "Produkt-Finish"
+      },
+      "beauty-detail": {
+        "title": "Die Textur bleibt erhalten. Ablenkung fällt weg.",
+        "description": "Gezieltes Finish balanciert Hautdetails, Farbton und den beabsichtigten Charakter des Porträts aus.",
+        "category": "Beauty-Details"
+      },
+      "fashion-color": {
+        "title": "Farbentscheidungen, die zur Gesamtgeschichte gehören.",
+        "description": "Eine kontrollierte Farbbehandlung hilft, das Motiv abzuheben, während die Kampagne optisch verbunden bleibt.",
+        "category": "Fashion-Farben"
+      },
+      "jewelry-detail": {
+        "title": "Kleine Oberflächen, genau betrachtet.",
+        "description": "Reflexion, Kantendefinition und Materialdetails werden gehandhabt, ohne das Objekt abzuflachen.",
+        "category": "Schmuck-Details"
+      },
+      "shadow-study": {
+        "title": "Ein geerdetes Bild braucht dennoch Raum zum Atmen.",
+        "description": "Gerichtete Schatten und negativer Raum verleihen einem Produkt Gewicht, ohne die Komposition schwer wirken zu lassen.",
+        "category": "Schattenstudie"
+      }
+    },
+    "testimonials": {
+      "item_0": {
+        "quote": "Großartiges Design dreht sich nicht nur darum, wie etwas aussieht; es geht darum, wie es Menschen sehen, fühlen und erinnern lässt.",
+        "role": "Geschäftsführer"
+      }
+    },
+    "faqs": {
+      "item_0": {
+        "question": "Mit welchen Dateiformaten können Sie arbeiten?",
+        "answer": "Die Dateianforderungen hängen von der Arbeit ab. Teilen Sie uns Ihre verfügbaren Quelldateien und beabsichtigten Ausgaben mit, damit das Studio den richtigen Produktionsweg bestätigen kann, bevor die Arbeit beginnt."
+      },
+      "item_1": {
+        "question": "Wie wird die Bearbeitungszeit geplant?",
+        "answer": "Die Planung richtet sich nach Anzahl der Bilder, Komplexität, Quellqualität, Feedback-Phasen und endgültigen Lieferanforderungen. Ein Zeitplan wird für jedes Projekt bestätigt, anstatt im Voraus angenommen zu werden."
+      },
+      "item_2": {
+        "question": "Wie funktionieren Revisionen?",
+        "answer": "Revisionsbedarf wird während der Projektplanung vereinbart. Klare visuelle Referenzen und gebündeltes Feedback helfen dem Studio, Entscheidungen über die gesamte Bildserie hinweg konsistent zu halten."
+      },
+      "item_3": {
+        "question": "Wie sollen Dateien übertragen werden?",
+        "answer": "Die Übertragungsmethode wird mit dem Projekt bestätigt. Produktionsdateien sollten über einen vereinbarten sicheren Arbeitsbereich geteilt werden und nicht über öffentliche Links, die vertrauliches Material enthalten."
+      },
+      "item_4": {
+        "question": "Können Sie eine große Charge visuell konsistent halten?",
+        "answer": "Ja. Referenzbilder, gemeinsame Bearbeitungsregeln und Überprüfungspunkte können festgelegt werden, bevor eine größere Charge in die Produktion geht."
+      },
+      "item_5": {
+        "question": "Kann sich das Studio in einen bestehenden kreativen Workflow einfügen?",
+        "answer": "Das Studio kann nach Ihren Benennungs-, Überprüfungs- und Lieferkonventionen arbeiten, wenn diese Anforderungen während der Projektplanung mitgeteilt werden."
+      }
+    },
+    "showcaseProjects": {
+      "photo-editing": {
+        "title": "Fotobearbeitung",
+        "description": "Retusche, Farbkorrektur, Freistellung und sauberes Finish für polierte Kampagnen- und E-Commerce-Bilder.",
+        "category": "Bild-Postproduktion"
+      },
+      "video-editing": {
+        "title": "Videobearbeitung",
+        "description": "Werbeschnitte, Social Cutdowns, Retusche und kontrolliertes Color Grading, abgestimmt auf jedes Format.",
+        "category": "Video-Postproduktion"
+      },
+      "3d-cgi": {
+        "title": "3D & CGI",
+        "description": "Produktmodellierung, Materialentwicklung, Beleuchtung und fotorealistisches CGI-Rendering für Werbebilder.",
+        "category": "Digitale Produktion"
+      }
+    },
+    "hero": {
+      "title1": "Every image,",
+      "title2": "finished",
+      "title3": "with intent.",
+      "subtitle": "Studio Click House shapes still and moving images for brands, studios, and production teams that care about the final frame.",
+      "cta": "Start a project",
+      "explore": "Explore services",
+      "scroll": "Scroll"
+    },
+    "intro": {
+      "title1": "Image editing,",
+      "title2": "built for scale.",
+      "subtitle": "Studio Click House is a Bangladesh-based image post-production studio serving photographers, creative agencies, online shops, and retailers worldwide. Since 2022, we have delivered image editing and retouching for consistent, production-ready visual content.",
+      "copy": "Our team of 150+ designers brings 4–16 years of individual experience and works 24/7 to support demanding image volumes and deadlines.",
+      "aboutStudio": "About the studio",
+      "freeTrial": "Free trial"
+    },
+    "aboutDescription": {
+      "eyebrow": "01 / STUDIO-ÜBERSICHT",
+      "tagline": "Menschliche Handwerkskunst und technische Disziplin für erstklassige visuelle Medien.",
+      "title1": "Präzises Finishing.",
+      "title2": "Skalierbar für kreative Ansprüche.",
+      "paragraph1": "Studio Click House ist ein internationales Postproduktionsstudio für weltweit führende Fotografen, Modemarken, E-Commerce-Händler und Kreativagenturen.",
+      "paragraph2": "Wir sind spezialisiert auf redaktionelle Bildretusche, Farbkorrektur für Videos und fotorealistisches 3D-CGI-Rendering. Mit sorgfältiger Handwerkskunst und einer 24/7-Produktionspipeline stellen wir sicher, dass jedes Bild höchsten Standards entspricht.",
+      "quote": "Jeder Pixel, Schatten und Farbverlauf wird so gestaltet, dass er die einzigartige visuelle Identität Ihrer Marke widerspiegelt.",
+      "stats": [
+        { "value": "150+", "label": "Spezialisten", "sub": "Eigene Retuscheure & 3D-Künstler" },
+        { "value": "24/7", "label": "Globale Produktion", "sub": "Schnelle Bearbeitung über Nacht" },
+        { "value": "99,8%", "label": "QC-Genauigkeit", "sub": "Dreistufige Qualitätskontrolle" },
+        { "value": "20+", "label": "Länder weltweit", "sub": "Vertraut von internationalen Marken" }
+      ],
+      "aboutStudio": "Über das Studio",
+      "freeTrial": "Kostenlose Testversion"
+    },
+    "aiAbout": {
+      "eyebrow": "02 / KI & PRÄZISIONS-GRADING",
+      "title1": "Intelligente Farbvarianten,",
+      "title2": "makelloses Finishing.",
+      "subtitle": "Erleben Sie unseren präzisen Farbkorrektur- und KI-gestützten Finishing-Workflow. Interaktive Farbvarianten bewahren Gewebestruktur, Lichtdiffusion und feine Details.",
+      "copy": "Wechseln Sie zwischen den Farbvarianten, um die Qualität der Texturen und Farbtreue zu überprüfen.",
+      "explore": "Services entdecken",
+      "freeTrial": "Test anfordern"
+    },
+    "faq": {
+      "title": "Common Questions"
+    },
+    "scrollImage": {
+      "title1": "Professional",
+      "title2": "AI video post-production.",
+      "copy1": "Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.",
+      "copy2": "AI video post-production accelerates the workflow — streamlining generative shot creation, complex cutdowns, color balance, and visual cleanup with artisan oversight at every frame.",
+      "copy3": "Generated or captured, every sequence is finished by senior colorists and editors. We blend Kling, Google Flow, Runway, and Luma-generated footage with expert grading and frame-by-frame review for pristine fidelity, temporal consistency, and cinematic storytelling.",
+      "capabilities": [
+        "Text-to-Video Generation",
+        "AI Motion Upscaling 4K–8K",
+        "ACES Color Pipeline",
+        "24h Express Turnaround"
+      ],
+      "explore": "Explore video editing & post-production"
+    },
+    "processSteps": [
+      {
+        "title": "Brief and file intake",
+        "navTitle": "Brief intake",
+        "timing": "Project start",
+        "description": "We review your source files, references, volume, output formats, and delivery priorities before production begins."
+      },
+      {
+        "title": "Reference alignment",
+        "navTitle": "Reference",
+        "timing": "Before production",
+        "description": "A sample image defines the approved finish, so color, texture, crop, and detail treatment are clear from the start."
+      },
+      {
+        "title": "Team assignment",
+        "navTitle": "Team assignment",
+        "timing": "Production setup",
+        "description": "The project manager routes each batch to specialists whose experience matches the service and visual standard required."
+      },
+      {
+        "title": "Specialist editing",
+        "navTitle": "Editing",
+        "timing": "Active production",
+        "description": "Editors work from the approved reference while preserving consistent naming, dimensions, color, and finishing across the batch."
+      },
+      {
+        "title": "Quality review",
+        "navTitle": "Quality review",
+        "timing": "Before delivery",
+        "description": "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio."
+      }
+    ],
+    "closingCta": {
+      "heading": "Need a partner close to the work?",
+      "description": "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
+      "primaryCtaLabel": "Start a Project",
+      "secondaryCtaLabel": "Explore Our Portfolio"
+    },
+    "aboutOrbit": {
+      "eyebrow": "Our Production System",
+      "heading": "Quality isn't the last step. It's every step.",
+      "postProduction": "post-production",
+      "description": "From AI-assisted image production and precision retouching to complex 3D CGI rendering, our Dhaka studio combines intelligent workflows with human craft to create polished campaign assets.",
+      "explore": "Explore Work",
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Creative Specialists"
+        },
+        {
+          "value": "10+ Years",
+          "label": "Proven Experience"
+        },
+        {
+          "value": "24/7",
+          "label": "Production Studio"
+        },
+        {
+          "value": "99%",
+          "label": "On-Time Delivery"
+        }
+      ],
+      "startProject": "Start a project"
+    },
+    "creativeMarquee": {
+      "title": "Our Clients"
+    }
+  }
+}

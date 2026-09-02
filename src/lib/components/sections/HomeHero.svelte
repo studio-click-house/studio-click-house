@@ -3,6 +3,7 @@
   import { resolve } from "$app/paths";
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
   import BrandMarquee from "$lib/components/sections/BrandMarquee.svelte";
+  import { _ } from "svelte-i18n";
 
   let section: HTMLElement;
   let heroVideo: HTMLVideoElement;
@@ -192,28 +193,27 @@
         class="max-w-[12ch] font-display text-[clamp(2.75rem,6.8vw,6.25rem)] leading-[0.86] tracking-[-0.045em]"
       >
         <span class="block overflow-hidden pb-4 -mb-4"
-          ><span class="hero-line block">Every image,</span></span
+          ><span class="hero-line block">{$_('home.hero.title1')}</span></span
         >
         <span class="block overflow-hidden pb-4 -mb-4"
-          ><span class="hero-line block italic text-brand-green">finished</span
+          ><span class="hero-line block italic text-brand-green">{$_('home.hero.title2')}</span
           ></span
         >
         <span class="block overflow-hidden pb-4 -mb-4"
-          ><span class="hero-line block">with intent.</span></span
+          ><span class="hero-line block">{$_('home.hero.title3')}</span></span
         >
       </h1>
     </div>
 
     <div class="hero-detail mt-10 pt-6 lg:mt-0 lg:border-l lg:border-brand-light/15 lg:pl-8">
       <p class="text-sm leading-relaxed text-brand-light/70 sm:text-base">
-        Studio Click House shapes still and moving images for brands, studios,
-        and production teams that care about the final frame.
+        {$_('home.hero.subtitle')}
       </p>
       <div class="mt-7 flex flex-wrap items-center gap-5">
         <a
           href={resolve("/contact")}
           class="group inline-flex items-center gap-3 rounded-sm bg-brand-green px-5 py-3.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
-          >Start a project
+          >{$_('home.hero.cta')}
           <ArrowUpRight
             size={15}
             strokeWidth={1.8}
@@ -224,7 +224,7 @@
           href={resolve("/#horizontal-projects-showcase")}
           class="hero-explore-link inline-flex items-center gap-2 text-sm font-semibold text-brand-light group"
         >
-          <span class="hero-explore-label">Explore services</span>
+          <span class="hero-explore-label">{$_('home.hero.explore')}</span>
           <span
             class="flex transition-transform duration-300 group-hover:translate-y-0.5"
           >
@@ -241,7 +241,7 @@
     <span
       class="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-brand-light/45"
     >
-      Scroll
+      {$_('home.hero.scroll')}
     </span>
     <div
       class="scroll-mouse flex justify-center items-start w-[20px] h-[34px] border border-brand-light/35 rounded-full"

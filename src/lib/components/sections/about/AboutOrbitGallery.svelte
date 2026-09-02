@@ -10,6 +10,7 @@
   } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { aboutOrbitCards } from "$lib/content/about-orbit";
+  import { _ } from "svelte-i18n";
 
   const frameRotations = [-2, 1, -1.5, 3, -2, 1.5, -1, 2] as const;
   const stackLayout = [
@@ -612,12 +613,12 @@
       <span
         class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green"
       >
-        Our Production System
+        {$_('home.aboutOrbit.eyebrow')}
       </span>
       <h2
         class="font-display text-2xl font-light leading-tight tracking-[-0.03em] text-brand-dark mt-2"
       >
-        Quality isn't the last step. It's every step.
+        {$_('home.aboutOrbit.heading')}
       </h2>
     </header>
 
@@ -634,12 +635,12 @@
         <span
           class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green"
         >
-          Our Production System
+          {$_('home.aboutOrbit.eyebrow')}
         </span>
         <h2
           class="font-display text-[clamp(1.8rem,3vw,2.8rem)] font-light leading-[1.05] tracking-[-0.045em] text-brand-dark mt-2"
         >
-          Quality isn't the last step. It's every step.
+          {$_('home.aboutOrbit.heading')}
         </h2>
       </header>
 
@@ -698,23 +699,21 @@
         <h2
           class="font-display text-2xl font-light leading-tight tracking-[-0.035em] text-brand-dark sm:text-4xl md:text-5xl lg:text-6xl"
         >
-          AI <span class="italic text-brand-green">post-production</span>
+          AI <span class="italic text-brand-green">{$_('home.aboutOrbit.postProduction')}</span>
         </h2>
 
         <p
           class="mt-4 text-xs leading-relaxed text-brand-dark/75 sm:text-sm md:text-base"
         >
-          From AI-assisted image production and precision retouching to complex
-          3D CGI rendering, our Dhaka studio combines intelligent workflows with
-          human craft to create polished campaign assets.
+          {$_('home.aboutOrbit.description')}
         </p>
 
-        <div class="mt-6 flex items-center justify-center gap-4">
+        <div class="mt-8">
           <a
             href={resolve("/portfolio")}
-            class="group inline-flex min-h-[3rem] min-w-[10.5rem] items-center justify-between gap-4 border border-brand-dark rounded-[0.55rem] bg-brand-dark px-4 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.045em] text-brand-light transition-all duration-[280ms] ease-out hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] focus-visible:outline-3 focus-visible:outline-brand-green focus-visible:outline-offset-[3px]"
+            class="group inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-transparent px-5 py-2.5 font-sans text-xs font-semibold text-brand-dark transition-all duration-300 hover:border-brand-dark/30 hover:bg-brand-dark/5"
           >
-            <span>Explore Work</span>
+            <span>{$_('home.aboutOrbit.explore')}</span>
             <ArrowUpRight
               size={15}
               strokeWidth={1.7}
@@ -806,47 +805,47 @@
           <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >150+</span
+              >{$_('home.aboutOrbit.stats.0.value') || '150+'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >Creative Specialists</span
+              >{$_('home.aboutOrbit.stats.0.label') || 'Creative Specialists'}</span
             >
           </div>
-          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
+          <div class="orbit-stat-fade-up">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >10+ Years</span
+              >{$_('home.aboutOrbit.stats.1.value') || '10+ Years'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >Proven Experience</span
+              >{$_('home.aboutOrbit.stats.1.label') || 'Proven Experience'}</span
             >
           </div>
-          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
-            <div class="flex items-center gap-1.5">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
-              </span>
+          <div class="orbit-stat-fade-up">
+            <div class="flex items-center justify-between">
               <span
                 class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-                >24/7</span
+                >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
               >
+              <div
+                class="size-2 animate-pulse rounded-full bg-brand-green/80"
+                aria-hidden="true"
+              ></div>
             </div>
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >Production Studio</span
+              >{$_('home.aboutOrbit.stats.2.label') || 'Production Studio'}</span
             >
           </div>
-          <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
+          <div class="orbit-stat-fade-up">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >99%</span
+              >{$_('home.aboutOrbit.stats.3.value') || '99%'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >On-Time Delivery</span
+              >{$_('home.aboutOrbit.stats.3.label') || 'On-Time Delivery'}</span
             >
           </div>
         </div>
@@ -872,50 +871,50 @@
       class="w-full border-t border-brand-dark/10 pt-8 mt-8 flex flex-col gap-6 block md:hidden"
     >
       <div class="grid grid-cols-2 gap-6 text-left">
-        <div class="metric-item">
+        <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >150+</span
+            >{$_('home.aboutOrbit.stats.0.value') || '150+'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >Creative Specialists</span
+            >{$_('home.aboutOrbit.stats.0.label') || 'Creative Specialists'}</span
           >
         </div>
-        <div class="metric-item">
+        <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >10+ Years</span
+            >{$_('home.aboutOrbit.stats.1.value') || '10+ Years'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >Proven Experience</span
+            >{$_('home.aboutOrbit.stats.1.label') || 'Proven Experience'}</span
           >
         </div>
-        <div class="metric-item">
-          <div class="flex items-center gap-1.5">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
-            </span>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-3">
             <span
               class="block font-display text-2xl font-light leading-none text-brand-dark"
-              >24/7</span
+              >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
             >
+            <div
+              class="size-1.5 animate-pulse rounded-full bg-brand-green"
+              aria-hidden="true"
+            ></div>
           </div>
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >Production Studio</span
+            >{$_('home.aboutOrbit.stats.2.label') || 'Production Studio'}</span
           >
         </div>
-        <div class="metric-item">
+        <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >99%</span
+            >{$_('home.aboutOrbit.stats.3.value') || '99%'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >On-Time Delivery</span
+            >{$_('home.aboutOrbit.stats.3.label') || 'On-Time Delivery'}</span
           >
         </div>
       </div>

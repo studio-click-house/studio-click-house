@@ -2,6 +2,7 @@
   import { onMount, tick } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { previewMedia } from "$lib/content/media";
+  import { _ } from "svelte-i18n";
 
   const originalDress = {
     src: "/images/about/colorways/dress-color-original.jpg",
@@ -454,12 +455,12 @@
       </div>
 
       <div bind:this={content} class="process-intro">
-        <p>{processSteps[activeIndex].timing}</p>
+        <p>{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</p>
         <h2 id="production-process-title">
-          {processSteps[activeIndex].title}
+          {$_(`home.processSteps.${activeIndex}.title`) || processSteps[activeIndex].title}
         </h2>
         <div class="process-rule" aria-hidden="true"></div>
-        <p>{processSteps[activeIndex].description}</p>
+        <p>{$_(`home.processSteps.${activeIndex}.description`) || processSteps[activeIndex].description}</p>
       </div>
 
       <figure class="process-image process-image-right" aria-hidden="true">
@@ -503,7 +504,7 @@
             onfocus={() => showStep(index)}
             onkeydown={(event) => handleTabKeydown(event, index)}
           >
-            <span>{step.navTitle}</span>
+            <span>{$_(`home.processSteps.${index}.navTitle`) || step.navTitle}</span>
             <i aria-hidden="true"></i>
           </button>
         {/each}

@@ -5,6 +5,7 @@
   import { faqs } from "$lib/content/home";
   import { previewMedia } from "$lib/content/media";
   import type { FaqItem, PreviewMedia } from "$lib/types/content";
+  import { _ } from "svelte-i18n";
 
   const defaultFaqImages = [
     previewMedia.jewelryMacro, // Q1: Formats
@@ -189,7 +190,7 @@
             id="faq-section-title"
             class="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
           >
-            Common Questions
+            {$_('home.faq.title')}
           </h2>
         </div>
 
@@ -215,7 +216,7 @@
                   class="font-sans font-semibold text-[1.02rem] sm:text-[1.12rem] leading-snug text-brand-dark transition-colors duration-200 group-hover:text-brand-green"
                   class:text-brand-green={activeIndex === index}
                 >
-                  {item.question}
+                  {$_(`home.faqs.${index}.question`) || item.question}
                 </h3>
 
                 <!-- Circular Plus icon pill matching screenshot -->
@@ -240,7 +241,7 @@
               >
                 <div class="px-5 pb-5 pt-1 sm:px-6 sm:pb-6 border-t border-brand-dark/6 mt-0.5 pt-3.5">
                   <p class="max-w-2xl text-sm leading-relaxed text-brand-dark/70 sm:text-[0.95rem]">
-                    {item.answer}
+                    {$_(`home.faqs.${index}.answer`) || item.answer}
                   </p>
                 </div>
               </div>

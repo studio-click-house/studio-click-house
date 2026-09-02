@@ -10,6 +10,7 @@
     ArrowUpRight,
   } from "lucide-svelte";
   import { services } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
 
   let { isOpen = false, onClose } = $props<{
     isOpen: boolean;
@@ -207,7 +208,7 @@
       <p
         class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green font-semibold"
       >
-        Our Divisions
+        {$_('nav.divisions') || 'Our Divisions'}
       </p>
       <div class="flex flex-col gap-3">
         {#each categories as category}
@@ -238,12 +239,12 @@
                     ? 'text-brand-green translate-x-0.5'
                     : 'text-brand-light/80 group-hover:text-brand-light'}"
                 >
-                  {category.label}
+                  {$_(`nav.megaCategories.${category.id}.label`) || category.label}
                 </span>
                 <span
                   class="font-sans text-[0.62rem] text-brand-light/45 mt-0.5 transition-colors group-hover:text-brand-light/60 group-data-[active=true]:text-brand-light/70"
                 >
-                  {category.description}
+                  {$_(`nav.megaCategories.${category.id}.description`) || category.description}
                 </span>
               </div>
             </div>
@@ -262,7 +263,7 @@
       <p
         class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green mb-5 font-semibold"
       >
-        Services
+        {$_('nav.services') || 'Services'}
       </p>
       <ul class="flex flex-col gap-2.5">
         {#each activeCategoryServices as service, sIndex}
@@ -301,7 +302,7 @@
                     ? 'text-brand-green translate-x-1.5'
                     : 'text-brand-light/80'}"
                 >
-                  {service.title}
+                  {$_(`home.services.${service.slug}.title`) || service.title}
                 </span>
               </div>
               <ArrowUpRight

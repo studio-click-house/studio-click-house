@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import type { ClientLogoItem } from "$lib/types/content";
 
   let { items = [] }: { items: ClientLogoItem[] } = $props();
@@ -22,7 +23,7 @@
         id="creative-marquee-title"
         class="font-display text-[clamp(2.6rem,5vw,4.75rem)] leading-[0.9] tracking-[-0.045em]"
       >
-        Our Clients
+        {$_('home.creativeMarquee.title')}
       </h2>
     </div>
   </div>

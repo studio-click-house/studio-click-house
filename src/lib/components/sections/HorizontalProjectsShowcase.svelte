@@ -4,6 +4,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { showcaseProjects, workGalleryItems } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
   import type {
     PreviewMedia,
     ShowcaseProjectMedia,
@@ -838,14 +839,14 @@
               <p
                 class="detail-reveal font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
               >
-                <span class="detail-reveal-inner block">{project.category}</span
+                <span class="detail-reveal-inner block">{$_(`home.showcaseProjects.${project.id}.category`) || project.category}</span
                 >
               </p>
               <p
                 class="detail-reveal max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
               >
                 <span class="detail-reveal-inner block"
-                  >{project.description}</span
+                  >{$_(`home.showcaseProjects.${project.id}.description`) || project.description}</span
                 >
               </p>
             </div>
@@ -863,7 +864,7 @@
                   class="detail-reveal pb-[0.16em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.95] tracking-[-0.06em]"
                 >
                   <span class="detail-reveal-inner block align-middle">
-                    {project.title}
+                    {$_(`home.showcaseProjects.${project.id}.title`) || project.title}
                     <span
                       class="project-link inline-flex align-middle ml-[0.15em]"
                     >
@@ -931,12 +932,12 @@
                         <p
                           class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
                         >
-                          {finalShowcaseProject.category}
+                          {$_(`home.showcaseProjects.${finalShowcaseProject.id}.category`) || finalShowcaseProject.category}
                         </p>
                         <p
                           class="max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
                         >
-                          {finalShowcaseProject.description}
+                          {$_(`home.showcaseProjects.${finalShowcaseProject.id}.description`) || finalShowcaseProject.description}
                         </p>
                       </div>
 
@@ -946,7 +947,7 @@
                         <h3
                           class="pb-[0.16em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.95] tracking-[-0.06em]"
                         >
-                          {finalShowcaseProject.title}
+                          {$_(`home.showcaseProjects.${finalShowcaseProject.id}.title`) || finalShowcaseProject.title}
                           <span
                             class="inline-flex align-middle ml-[0.15em] text-brand-dark"
                           >
@@ -996,7 +997,7 @@
                         <p
                           class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.14em]"
                         >
-                          {item.category}
+                          {$_(`home.workGalleryItems.${item.id}.category`) || item.category}
                         </p>
                         <span
                           class="rounded-full border border-brand-light/80 px-3 py-1 font-mono text-[0.54rem] font-bold"
@@ -1009,7 +1010,7 @@
                       <h3
                         class="work-field-hover-detail absolute bottom-[clamp(1rem,2vw,1.5rem)] left-[clamp(1rem,2vw,1.5rem)] max-w-[70%] font-display text-[clamp(1.3rem,1.8vw,2rem)] leading-[0.95] tracking-[-0.035em]"
                       >
-                        {item.title}
+                        {$_(`home.workGalleryItems.${item.id}.title`) || item.title}
                       </h3>
                       <a
                         href={resolve("/services")}
@@ -1150,12 +1151,12 @@
                 <h3
                   class="max-w-sm font-display text-2xl leading-[1.0] tracking-[-0.025em] text-brand-light sm:text-3xl"
                 >
-                  {item.title}
+                  {$_(`home.workGalleryItems.${item.id}.title`) || item.title}
                 </h3>
                 <p
                   class="mt-4 max-w-sm text-sm leading-relaxed text-brand-light/80"
                 >
-                  {item.description}
+                  {$_(`home.workGalleryItems.${item.id}.description`) || item.description}
                 </p>
               </div>
             </div>

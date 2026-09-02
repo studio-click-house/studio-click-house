@@ -5,6 +5,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
   import { services, serviceShowcases } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
 
   let activeShowcaseIndex = $state(0);
   let activeServiceIndex = $state(0);
@@ -148,7 +149,7 @@
   <div class="service-shell site-shell">
     <header class="service-header">
       <h2 id="studio-services-title" class="service-title font-display">
-        Our services
+        {$_('nav.services') || 'Our services'}
       </h2>
     </header>
 
@@ -174,7 +175,7 @@
           onmouseenter={() => activateShowcase(index)}
           onfocus={() => activateShowcase(index)}
         >
-          {showcase.displayTitle}
+          {$_(`home.serviceShowcases.item_${index}.displayTitle`) || showcase.displayTitle}
         </button>
       {/each}
     </div>
@@ -204,7 +205,7 @@
                   <span class="service-number">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span class="service-name">{service.title}</span>
+                  <span class="service-name">{$_(`home.services.${service.slug}.title`) || service.title}</span>
                 </span>
                 <ArrowUpRight size={16} strokeWidth={1.45} aria-hidden="true" />
               </span>

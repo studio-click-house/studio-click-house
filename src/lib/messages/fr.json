@@ -1,0 +1,315 @@
+{
+  "nav": {
+    "login": "Connexion",
+    "free_trial": "Essai gratuit",
+    "about": "À propos",
+    "services": "Services",
+    "pricing": "Tarifs",
+    "portfolio": "Portfolio",
+    "section": "Section",
+    "events": "Événements",
+    "csr": "RSE",
+    "careers": "Carrières",
+    "contact": "Contact"
+  },
+  "home": {
+    "services": {
+      "background-remove": {
+        "title": "Détourage",
+        "description": "Isolation nette du sujet et extraction de l'arrière-plan.",
+        "category": "Retouche d'image"
+      },
+      "clipping-path": {
+        "title": "Tracé de détourage",
+        "description": "Isolation précise du sujet pour une production d'images propre et flexible.",
+        "category": "Retouche d'image"
+      },
+      "ghost-mannequin": {
+        "title": "Mannequin fantôme",
+        "description": "Reconstruction du vêtement conservant sa forme et son ajustement visuel.",
+        "category": "Retouche d'image"
+      },
+      "editorial-retouching": {
+        "title": "Retouche éditoriale",
+        "description": "Finition haut de gamme détaillée guidée par la matière, la lumière et le contexte de la marque.",
+        "category": "Retouche d'image"
+      },
+      "ecommerce-retouching": {
+        "title": "Retouche e-commerce",
+        "description": "Amélioration d'image soignée adaptée aux catalogues de boutiques en ligne.",
+        "category": "Retouche d'image"
+      },
+      "jewelry-retouching": {
+        "title": "Retouche de bijoux",
+        "description": "Nettoyage minutieux qui protège les reflets, la texture et la forme.",
+        "category": "Retouche d'image"
+      },
+      "color-correction": {
+        "title": "Correction colorimétrique",
+        "description": "Alignement contrôlé des couleurs sur des images individuelles ou des lots complets.",
+        "category": "Retouche d'image"
+      },
+      "ai-retouch": {
+        "title": "Retouche IA",
+        "description": "Édition assistée par IA de nouvelle génération pour un traitement en masse rapide et de haute qualité.",
+        "category": "Retouche d'image"
+      },
+      "commercial-editing": {
+        "title": "Montage publicitaire",
+        "description": "Post-production soignée pour les vidéos de marque, spots publicitaires et campagnes de produits.",
+        "category": "Montage vidéo"
+      },
+      "color-grading": {
+        "title": "Étalonnage des couleurs",
+        "description": "Équilibre colorimétrique calibré et tonification esthétique pour des ensembles vidéo cohérents.",
+        "category": "Montage vidéo"
+      },
+      "social-cutdowns": {
+        "title": "Déclinaisons réseaux sociaux",
+        "description": "Révisions vidéo percutantes et rapides adaptées aux plateformes sociales.",
+        "category": "Montage vidéo"
+      },
+      "3d-product-modeling": {
+        "title": "Modélisation de produits 3D",
+        "description": "Modèles 3D précis et légers construits directement à partir de designs de référence.",
+        "category": "Modélisation 3D"
+      },
+      "texturing-shading": {
+        "title": "Texturisation et shading",
+        "description": "Cartes de matériaux PBR personnalisées représentant fidèlement le métal, le verre et les tissus.",
+        "category": "Modélisation 3D"
+      },
+      "cgi-rendering": {
+        "title": "Rendu CGI",
+        "description": "Rendus de produits 3D photoréalistes avec mise en scène de studio personnalisée.",
+        "category": "Modélisation 3D"
+      }
+    },
+    "serviceShowcases": {
+      "item_0": {
+        "displayTitle": "Retouche d'image",
+        "description": "Isolation, retouche, couleur et travail de détail pour des images individuelles ou des lots complets.",
+        "category": "Retouche d'image",
+        "beforeLabel": "Avant",
+        "afterLabel": "Après"
+      },
+      "item_1": {
+        "displayTitle": "Montage vidéo",
+        "description": "Montages commerciaux, déclinaisons pour réseaux sociaux et étalonnage contrôlé pour chaque format.",
+        "category": "Montage vidéo",
+        "beforeLabel": "",
+        "afterLabel": ""
+      },
+      "item_2": {
+        "displayTitle": "3D & CGI",
+        "description": "Modélisation de produits, développement de matériaux et rendu CGI pour des images commerciales crédibles.",
+        "category": "Modélisation 3D",
+        "beforeLabel": "Modèle",
+        "afterLabel": "Rendu"
+      }
+    },
+    "workGalleryItems": {
+      "product-finishing": {
+        "title": "Forme, lumière et rendu final propre.",
+        "description": "Une image de produit bien pensée conserve son matériau et son éclairage crédibles tout en supprimant les distractions visuelles.",
+        "category": "Finition de produit"
+      },
+      "beauty-detail": {
+        "title": "La texture reste présente. La distraction disparaît.",
+        "description": "Une finition ciblée équilibre les détails de la peau, le teint et le caractère voulu du portrait.",
+        "category": "Détails de beauté"
+      },
+      "fashion-color": {
+        "title": "Des choix de couleurs qui font partie de l'histoire.",
+        "description": "Un traitement des couleurs contrôlé aide à séparer le sujet tout en gardant une campagne visuellement cohérente.",
+        "category": "Couleurs mode"
+      },
+      "jewelry-detail": {
+        "title": "Petites surfaces, considérées de près.",
+        "description": "La réflexion, la définition des bords et les détails des matériaux sont gérés sans aplatir l'objet.",
+        "category": "Détails de bijoux"
+      },
+      "shadow-study": {
+        "title": "Une image ancrée a encore besoin de respirer.",
+        "description": "Les ombres directionnelles et l'espace négatif donnent du poids à un produit sans alourdir la composition.",
+        "category": "Étude des ombres"
+      }
+    },
+    "testimonials": {
+      "item_0": {
+        "quote": "Un bon design ne se résume pas à son apparence ; il s'agit de la façon dont il permet aux gens de voir, ressentir et se souvenir.",
+        "role": "Directeur Général"
+      }
+    },
+    "faqs": {
+      "item_0": {
+        "question": "Avec quels formats de fichiers pouvez-vous travailler ?",
+        "answer": "Les exigences de fichiers dépendent du travail. Partagez vos fichiers sources disponibles et les sorties prévues afin que le studio puisse confirmer le bon cheminement de production avant de commencer."
+      },
+      "item_1": {
+        "question": "Comment le délai d'exécution est-il planifié ?",
+        "answer": "Le temps est calculé en fonction du nombre d'images, de la complexité, de la qualité source, des étapes de retour et des besoins de livraison finale. Un calendrier est confirmé pour chaque projet plutôt que présumé à l'avance."
+      },
+      "item_2": {
+        "question": "Comment fonctionnent les révisions ?",
+        "answer": "Les besoins de révision sont convenus lors du cadrage. Des références visuelles claires et des retours consolidés aident le studio à maintenir la cohérence des décisions sur l'ensemble du lot d'images."
+      },
+      "item_3": {
+        "question": "Comment les fichiers doivent-ils être transférés ?",
+        "answer": "La méthode de transfert est confirmée avec le projet. Les fichiers de production doivent être partagés via un espace de travail sécurisé convenu plutôt que par des liens publics contenant du matériel sensible."
+      },
+      "item_4": {
+        "question": "Pouvez-vous maintenir une cohérence visuelle sur un gros lot ?",
+        "answer": "Oui. Des images de référence, des règles de finition partagées et des points de contrôle peuvent être établis avant qu'un gros lot ne passe en production."
+      },
+      "item_5": {
+        "question": "Le studio peut-il s'intégrer à un workflow créatif existant ?",
+        "answer": "Le studio peut travailler à partir de vos conventions de nommage, de révision et de livraison lorsque ces exigences sont partagées lors du cadrage."
+      }
+    },
+    "showcaseProjects": {
+      "photo-editing": {
+        "title": "Retouche photo",
+        "description": "Retouche, correction colorimétrique, détourage et finition propre pour des images de campagne et e-commerce soignées.",
+        "category": "Post-production d'image"
+      },
+      "video-editing": {
+        "title": "Montage vidéo",
+        "description": "Montages commerciaux, déclinaisons sociales, retouche et étalonnage des couleurs contrôlé, adaptés à chaque format de visionnage.",
+        "category": "Post-production vidéo"
+      },
+      "3d-cgi": {
+        "title": "3D & CGI",
+        "description": "Modélisation de produits, développement de matériaux, éclairage et rendu CGI photoréaliste pour l'imagerie commerciale.",
+        "category": "Production numérique"
+      }
+    },
+    "hero": {
+      "title1": "Every image,",
+      "title2": "finished",
+      "title3": "with intent.",
+      "subtitle": "Studio Click House shapes still and moving images for brands, studios, and production teams that care about the final frame.",
+      "cta": "Start a project",
+      "explore": "Explore services",
+      "scroll": "Scroll"
+    },
+    "intro": {
+      "title1": "Image editing,",
+      "title2": "built for scale.",
+      "subtitle": "Studio Click House is a Bangladesh-based image post-production studio serving photographers, creative agencies, online shops, and retailers worldwide. Since 2022, we have delivered image editing and retouching for consistent, production-ready visual content.",
+      "copy": "Our team of 150+ designers brings 4–16 years of individual experience and works 24/7 to support demanding image volumes and deadlines.",
+      "aboutStudio": "About the studio",
+      "freeTrial": "Free trial"
+    },
+    "aboutDescription": {
+      "eyebrow": "01 / PRÉSENTATION DU STUDIO",
+      "tagline": "L'artisanat humain et l'exigence technique au service d'images d'exception.",
+      "title1": "Finition de précision.",
+      "title2": "Conçue pour l'échelle créative.",
+      "paragraph1": "Studio Click House est un studio international de post-production visuelle au service des photographes, des marques de mode, du e-commerce et des agences de création.",
+      "paragraph2": "Nous sommes spécialisés dans la retouche d'images éditoriales, l'étalonnage vidéo et le rendu 3D CGI photoréaliste. Grâce à un pipeline de production 24/7, nous garantissons une qualité irréprochable.",
+      "quote": "Chaque pixel, ombre et nuance de couleur est façonné pour refléter la signature visuelle de votre marque.",
+      "stats": [
+        { "value": "150+", "label": "Spécialistes", "sub": "Retoucheurs et artistes 3D en interne" },
+        { "value": "24/7", "label": "Production Globale", "sub": "Livraison rapide dans le monde entier" },
+        { "value": "99.8%", "label": "Précision QC", "sub": "Contrôle qualité en 3 étapes" },
+        { "value": "20+", "label": "Pays Desservis", "sub": "Approuvé par des marques mondiales" }
+      ],
+      "aboutStudio": "À propos du studio",
+      "freeTrial": "Essai gratuit"
+    },
+    "aiAbout": {
+      "eyebrow": "02 / IA & ÉTALONNAGE DE PRÉCISION",
+      "title1": "Nuances intelligentes,",
+      "title2": "finition impeccable.",
+      "subtitle": "Découvrez notre flux de travail d'étalonnage des couleurs et de finition assistée par IA. L'ajustement interactif préserve la texture et la fidélité des couleurs sur toute votre gamme.",
+      "copy": "Basculez entre les variantes de couleurs ci-dessous pour vérifier la qualité des détails et la fidélité colorimétrique.",
+      "explore": "Découvrir les services",
+      "freeTrial": "Demander un essai"
+    },
+    "faq": {
+      "title": "Common Questions"
+    },
+    "scrollImage": {
+      "title1": "Professional",
+      "title2": "AI video post-production.",
+      "copy1": "Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.",
+      "copy2": "AI video post-production accelerates the workflow — streamlining generative shot creation, complex cutdowns, color balance, and visual cleanup with artisan oversight at every frame.",
+      "copy3": "Generated or captured, every sequence is finished by senior colorists and editors. We blend Kling, Google Flow, Runway, and Luma-generated footage with expert grading and frame-by-frame review for pristine fidelity, temporal consistency, and cinematic storytelling.",
+      "capabilities": [
+        "Text-to-Video Generation",
+        "AI Motion Upscaling 4K–8K",
+        "ACES Color Pipeline",
+        "24h Express Turnaround"
+      ],
+      "explore": "Explore video editing & post-production"
+    },
+    "processSteps": [
+      {
+        "title": "Brief and file intake",
+        "navTitle": "Brief intake",
+        "timing": "Project start",
+        "description": "We review your source files, references, volume, output formats, and delivery priorities before production begins."
+      },
+      {
+        "title": "Reference alignment",
+        "navTitle": "Reference",
+        "timing": "Before production",
+        "description": "A sample image defines the approved finish, so color, texture, crop, and detail treatment are clear from the start."
+      },
+      {
+        "title": "Team assignment",
+        "navTitle": "Team assignment",
+        "timing": "Production setup",
+        "description": "The project manager routes each batch to specialists whose experience matches the service and visual standard required."
+      },
+      {
+        "title": "Specialist editing",
+        "navTitle": "Editing",
+        "timing": "Active production",
+        "description": "Editors work from the approved reference while preserving consistent naming, dimensions, color, and finishing across the batch."
+      },
+      {
+        "title": "Quality review",
+        "navTitle": "Quality review",
+        "timing": "Before delivery",
+        "description": "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio."
+      }
+    ],
+    "closingCta": {
+      "heading": "Need a partner close to the work?",
+      "description": "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
+      "primaryCtaLabel": "Start a Project",
+      "secondaryCtaLabel": "Explore Our Portfolio"
+    },
+    "aboutOrbit": {
+      "eyebrow": "Our Production System",
+      "heading": "Quality isn't the last step. It's every step.",
+      "postProduction": "post-production",
+      "description": "From AI-assisted image production and precision retouching to complex 3D CGI rendering, our Dhaka studio combines intelligent workflows with human craft to create polished campaign assets.",
+      "explore": "Explore Work",
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Creative Specialists"
+        },
+        {
+          "value": "10+ Years",
+          "label": "Proven Experience"
+        },
+        {
+          "value": "24/7",
+          "label": "Production Studio"
+        },
+        {
+          "value": "99%",
+          "label": "On-Time Delivery"
+        }
+      ],
+      "startProject": "Start a project"
+    },
+    "creativeMarquee": {
+      "title": "Our Clients"
+    }
+  }
+}
