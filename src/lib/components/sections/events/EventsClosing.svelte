@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
+  import { _ } from "svelte-i18n";
 </script>
 
 <section
@@ -18,7 +19,7 @@
         <h2
           class="max-w-[13ch] font-display text-[clamp(2.5rem,4.5vw,4.8rem)] leading-[0.94] tracking-[-0.04em]"
         >
-          Meet the people. See the work.
+          {$_('events.closing.heading') || 'Meet the people. See the work.'}
         </h2>
       </div>
       
@@ -27,13 +28,13 @@
           href={resolve("/about")}
           class="inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-5 font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-brand-dark transition-colors duration-300 hover:bg-white"
         >
-          About the studio <ArrowUpRight size={15} />
+          {$_('events.closing.aboutStudio') || 'About the studio'} <ArrowUpRight size={15} />
         </a>
         <a
           href={resolve("/portfolio")}
           class="inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-white/20 bg-white/5 px-5 font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-brand-light backdrop-blur-sm transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
         >
-          View portfolio <ArrowUpRight size={15} />
+          {$_('events.closing.viewPortfolio') || 'View portfolio'} <ArrowUpRight size={15} />
         </a>
       </div>
     </div>

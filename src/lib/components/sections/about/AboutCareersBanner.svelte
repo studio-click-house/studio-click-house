@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
+  import { _ } from "svelte-i18n";
 
   let { careers } = $props<{ careers: AboutPageData["careers"] }>();
   let sectionRef: HTMLElement;
@@ -104,7 +105,7 @@
       <p
         class="absolute bottom-5 right-5 border-t border-white/35 pt-2 text-[0.68rem] uppercase tracking-[0.16em] text-white/75"
       >
-        Inside the studio
+        {$_('about.careers.tag') || 'Inside the studio'}
       </p>
     </div>
 
@@ -113,13 +114,13 @@
         <h2
           class="max-w-[10ch] font-display text-[clamp(3.25rem,5.5vw,6.5rem)] leading-[0.84] tracking-[-0.05em] text-white"
         >
-          {careers.heading}
+          {$_('about.careers.heading') || careers.heading}
         </h2>
 
         <p
           class="mt-7 max-w-xl text-base leading-relaxed text-white/70 md:text-lg"
         >
-          {careers.description}
+          {$_('about.careers.description') || careers.description}
         </p>
 
         <dl
@@ -128,19 +129,19 @@
           <div>
             <dt class="font-display text-2xl text-white sm:text-3xl">150+</dt>
             <dd class="mt-1 text-[0.62rem] uppercase tracking-[0.13em]">
-              Artists
+              {$_('about.careers.stats.0.label') || 'Artists'}
             </dd>
           </div>
           <div class="border-x border-white/20 px-4 sm:px-6">
             <dt class="font-display text-2xl text-white sm:text-3xl">24/7</dt>
             <dd class="mt-1 text-[0.62rem] uppercase tracking-[0.13em]">
-              Operations
+              {$_('about.careers.stats.1.label') || 'Operations'}
             </dd>
           </div>
           <div class="pl-4 sm:pl-6">
             <dt class="font-display text-2xl text-white sm:text-3xl">Dhaka</dt>
             <dd class="mt-1 text-[0.62rem] uppercase tracking-[0.13em]">
-              Studio HQ
+              {$_('about.careers.stats.2.label') || 'Studio HQ'}
             </dd>
           </div>
         </dl>
@@ -149,7 +150,7 @@
           href={careers.ctaHref}
           class="mt-10 inline-flex min-h-12 items-center gap-5 border-b border-brand-green pb-1 text-sm font-semibold text-brand-light transition-colors duration-300 hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
-          <span>{careers.ctaLabel}</span>
+          <span>{$_('about.careers.ctaLabel') || careers.ctaLabel}</span>
           <span aria-hidden="true">↗</span>
         </a>
       </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   let sectionElement = $state<HTMLElement | null>(null);
 
@@ -111,17 +112,17 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16 lg:mb-24 pb-8 border-b border-brand-dark/10">
       <div class="lg:col-span-12">
         <span class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-brand-green mb-3 block">
-          PROCESS SPECIFICATIONS
+          {$_('portfolio.matrix.eyebrow') || 'PROCESS SPECIFICATIONS'}
         </span>
         <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1.05] tracking-tight">
-          How we enforce <span class="italic font-light text-brand-green">precision</span> at scale.
+          {$_('portfolio.matrix.headingPart1') || 'How we enforce'} <span class="italic font-light text-brand-green">{$_('portfolio.matrix.headingPart2') || 'precision'}</span> {$_('portfolio.matrix.headingPart3') || 'at scale.'}
         </h2>
       </div>
     </div>
 
     <!-- Spacious Editorial Service Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
-      {#each services as item (item.index)}
+      {#each services as item, index (item.index)}
         <div class="service-card flex flex-col group">
           <!-- Image Showcase Container -->
           <div class="relative overflow-hidden aspect-[3/2] rounded-xl md:rounded-2xl border border-brand-dark/10 bg-brand-dark/5">
@@ -136,20 +137,20 @@
           <!-- Service Label Header -->
           <div class="flex items-baseline gap-2 mt-6 mb-3 border-b border-brand-dark/10 pb-2">
             <span class="font-mono text-xs text-brand-green font-bold">{item.index} //</span>
-            <h3 class="font-display text-2xl font-normal text-brand-dark">{item.label}</h3>
+            <h3 class="font-display text-2xl font-normal text-brand-dark">{$_(`portfolio.matrix.services.${index}.label`) || item.label}</h3>
           </div>
 
           <!-- Description -->
           <p class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal mb-6 min-h-[3.5rem]">
-            {item.desc}
+            {$_(`portfolio.matrix.services.${index}.desc`) || item.desc}
           </p>
 
           <!-- Core Deliverables Bullet List -->
           <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 pt-4 border-t border-brand-dark/5">
-            {#each item.deliverables as del}
+            {#each item.deliverables as del, dIndex}
               <li class="flex items-start gap-2">
                 <span class="text-brand-green font-mono text-[10px] mt-1">↳</span>
-                <span class="text-xs sm:text-sm text-brand-dark/85 font-medium leading-tight">{del}</span>
+                <span class="text-xs sm:text-sm text-brand-dark/85 font-medium leading-tight">{$_(`portfolio.matrix.services.${index}.deliverables.${dIndex}`) || del}</span>
               </li>
             {/each}
           </ul>
@@ -163,7 +164,7 @@
         href="#portfolio-mosaic-gallery"
         class="font-mono text-xs font-bold text-brand-dark hover:text-brand-green transition-colors uppercase tracking-widest inline-flex items-center gap-2 border border-brand-dark/15 py-3 px-6 hover:border-brand-green/45 select-none"
       >
-        <span>Enter Mosaic Gallery</span>
+        <span>{$_('portfolio.matrix.enterMosaic') || 'Enter Mosaic Gallery'}</span>
         <span class="text-brand-green">↗</span>
       </a>
     </div>

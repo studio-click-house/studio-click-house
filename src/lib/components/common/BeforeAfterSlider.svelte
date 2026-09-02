@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
+  import { _ } from "svelte-i18n";
 
   interface Props {
     beforeSrc: string;
@@ -270,8 +271,8 @@
       />
     </figure>
 
-    <span class="{mediaLabelClass} left-[0.8rem]">{beforeLabel}</span>
-    <span class="{mediaLabelClass} right-[0.8rem]">{afterLabel}</span>
+    <span class="{mediaLabelClass} left-[0.8rem]">{beforeLabel ? (beforeLabel === "Before" ? ($_('slider.before') || beforeLabel) : beforeLabel) : ($_('slider.before') || 'Before')}</span>
+    <span class="{mediaLabelClass} right-[0.8rem]">{afterLabel ? (afterLabel === "After" ? ($_('slider.after') || afterLabel) : afterLabel) : ($_('slider.after') || 'After')}</span>
 
     <span
       class="comparison-divider pointer-events-none absolute inset-y-0 z-[4] w-px bg-brand-light/80 [will-change:left]"

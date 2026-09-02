@@ -767,13 +767,12 @@
         <h3
           class="font-display text-[clamp(3.6rem,6.8vw,7.75rem)] font-medium uppercase leading-[0.82] tracking-[-0.065em] text-brand-light"
         >
-          Our<br />services
+          {$_('home.showcaseIntro.title1') || 'Our'}<br />{$_('home.showcaseIntro.title2') || 'services'}
         </h3>
         <p
           class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[36rem] text-center text-[clamp(0.85rem,1.05vw,1.05rem)] leading-[1.4] text-brand-light/85"
         >
-          One production partner for polished stills, considered motion, and
-          believable 3D imagery—built around the needs of each project.
+          {$_('home.showcaseIntro.description') || 'One production partner for polished stills, considered motion, and believable 3D imagery—built around the needs of each project.'}
         </p>
       </div>
     </article>

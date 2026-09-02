@@ -6,6 +6,7 @@
   import { previewMedia } from "$lib/content/media";
   import { services } from "$lib/content/home";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
+  import { _ } from "svelte-i18n";
 
   type DivisionMedia =
     | {
@@ -177,9 +178,9 @@
   class="bg-brand-light text-brand-dark"
 >
   <div class="site-shell">
-    <h2 id="services-details-title" class="sr-only">Production services</h2>
+    <h2 id="services-details-title" class="sr-only">{$_('services.showcase.heading') || 'Production services'}</h2>
 
-    {#each divisions as division (division.id)}
+    {#each divisions as division, divIdx (division.id)}
       <article
         id={division.id}
         class="service-chapter grid gap-y-10 py-16 sm:py-18 lg:grid-cols-12 lg:items-center lg:gap-x-12 lg:py-16"
@@ -190,18 +191,18 @@
             <h3
               class="max-w-[12ch] font-display text-[clamp(2.5rem,3.8vw,4.35rem)] leading-[0.9] tracking-[-0.04em]"
             >
-              {division.title}
+              {$_(`services.showcase.divisions.${divIdx}.title`) || division.title}
             </h3>
             <p
               class="mt-5 max-w-[38rem] text-[0.95rem] leading-[1.65] text-brand-dark/65 lg:max-w-[38ch]"
             >
-              {division.description}
+              {$_(`services.showcase.divisions.${divIdx}.description`) || division.description}
             </p>
             <a
               href={resolve("/contact")}
               class="mt-6 inline-flex items-center gap-2 rounded-[0.55rem] border border-brand-dark/25 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-light"
             >
-              Plan this workflow
+              {$_('services.showcase.planWorkflow') || 'Plan this workflow'}
               <ArrowUpRight class="h-3.5 w-3.5" />
             </a>
           </header>

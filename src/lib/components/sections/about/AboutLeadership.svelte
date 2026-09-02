@@ -3,6 +3,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
   import { ArrowLeft, ArrowRight } from "lucide-svelte";
+  import { _ } from "svelte-i18n";
 
   let { leadership } = $props<{ leadership: AboutPageData["leadership"] }>();
 
@@ -98,9 +99,8 @@
 
   onMount(() => {
     if (carouselRef) {
-      carouselRef.scrollLeft = 0;
+      startAutoplay();
     }
-    startAutoplay();
 
     let active = true;
     let context: { revert: () => void } | undefined;
@@ -186,13 +186,13 @@
           <span
             class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-green"
           >
-            {leadership.eyebrow}
+            {$_('about.leadership.eyebrow') || leadership.eyebrow}
           </span>
         {/if}
         <h2
           class="leadership-header-reveal font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.04] tracking-[-0.035em] text-brand-dark"
         >
-          {leadership.heading}
+          {$_('about.leadership.heading') || leadership.heading}
         </h2>
       </div>
 
@@ -263,10 +263,10 @@
               <p
                 class="mt-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
               >
-                {mdCard.role}
+                {$_('about.leadership.members.0.role') || mdCard.role}
               </p>
               <p class="mt-3 text-sm leading-relaxed text-brand-dark/70">
-                {mdCard.bio}
+                {$_('about.leadership.members.0.bio') || mdCard.bio}
               </p>
             </div>
           </article>
@@ -334,10 +334,10 @@
                 <p
                   class="mt-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
                 >
-                  {member.role}
+                  {$_(`about.leadership.members.${index + 1}.role`) || member.role}
                 </p>
                 <p class="mt-3 text-sm leading-relaxed text-brand-dark/70">
-                  {member.bio}
+                  {$_(`about.leadership.members.${index + 1}.bio`) || member.bio}
                 </p>
               </div>
             </article>
@@ -347,5 +347,3 @@
     </div>
   </div>
 </section>
-
-

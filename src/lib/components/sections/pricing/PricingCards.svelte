@@ -3,6 +3,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { Check, ArrowRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
+  import { _ } from "svelte-i18n";
 
   interface ServiceItem {
     name: string;
@@ -155,7 +156,7 @@
     <div
       class="pricing-container-reveal relative w-full bg-white border border-brand-dark/10 rounded-[2rem] grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-brand-dark/10 shadow-sm z-10"
     >
-      {#each plans as plan (plan.id)}
+      {#each plans as plan, planIdx (plan.id)}
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div
           onmouseenter={() => (activePlanId = plan.id)}
@@ -170,20 +171,20 @@
             <div
               class="w-full bg-brand-dark text-brand-light text-center py-4 px-6 rounded-xl font-mono text-[0.7rem] font-bold uppercase tracking-wider mb-8 flex items-center justify-center min-h-[70px] shadow-xs"
             >
-              {plan.name}
+              {$_(`pricing.packages.plans.${planIdx}.name`) || plan.name}
             </div>
 
             <!-- Description -->
             <p class="text-xs text-brand-dark/55 leading-relaxed mb-6 font-sans">
-              {plan.description}
+              {$_(`pricing.packages.plans.${planIdx}.description`) || plan.description}
             </p>
 
             <!-- Services & Prices Dashed List -->
             <div class="mb-8">
               <ul class="space-y-0.5">
-                {#each plan.services as svc}
+                {#each plan.services as svc, svcIdx}
                   <li class="flex items-center justify-between py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
-                    <span class="font-medium text-left pr-2">{svc.name}</span>
+                    <span class="font-medium text-left pr-2">{$_(`pricing.packages.plans.${planIdx}.services.${svcIdx}.name`) || svc.name}</span>
                     <span class="font-mono font-bold text-brand-green shrink-0">{svc.price}</span>
                   </li>
                 {/each}
@@ -192,14 +193,14 @@
 
             <!-- Guarantees Checklist -->
             <ul class="space-y-3 mb-8">
-              {#each plan.features as feature}
+              {#each plan.features as feature, featureIdx}
                 <li class="flex items-start gap-2.5 text-xs text-brand-dark/75 font-mono">
                   <div
                     class="w-4 h-4 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-0.5"
                   >
                     <Check size={10} strokeWidth={3} />
                   </div>
-                  <span>{feature}</span>
+                  <span>{$_(`pricing.packages.features.${featureIdx}`) || feature}</span>
                 </li>
               {/each}
             </ul>
@@ -214,7 +215,7 @@
                 : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark'
             }"
           >
-            <span>{plan.buttonText}</span>
+            <span>{$_('pricing.packages.orderNow') || plan.buttonText}</span>
             <ArrowRight
               size={14}
               class="transition-transform duration-300 {activePlanId === plan.id ? 'translate-x-1' : ''}"

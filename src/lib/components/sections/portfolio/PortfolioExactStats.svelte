@@ -1,3 +1,7 @@
+<script lang="ts">
+  import { _ } from "svelte-i18n";
+</script>
+
 <!-- Section 11: Numbers Row with Colons + Bottom Botanical Flourish (Exact Match to 9 : 60 : 250 : 50) -->
 <section
   id="portfolio-glance-stats"
@@ -9,7 +13,7 @@
     <span
       class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-green mb-8 block"
     >
-      Studio at a Glance
+      {$_('portfolio.stats.eyebrow') || 'Studio at a Glance'}
     </span>
 
     <!-- 4 Numbers with Colons (Exact format from reference image) -->
@@ -26,7 +30,7 @@
         <span
           class="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-brand-dark/60 mt-2"
         >
-          Craft
+          {$_('portfolio.stats.craft') || 'Craft'}
         </span>
       </div>
 
@@ -45,7 +49,7 @@
         <span
           class="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-brand-dark/60 mt-2"
         >
-          Color
+          {$_('portfolio.stats.color') || 'Color'}
         </span>
       </div>
 
@@ -64,7 +68,7 @@
         <span
           class="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-brand-dark/60 mt-2"
         >
-          Detail
+          {$_('portfolio.stats.detail') || 'Detail'}
         </span>
       </div>
 
@@ -83,7 +87,7 @@
         <span
           class="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-brand-dark/60 mt-2"
         >
-          Finish
+          {$_('portfolio.stats.finish') || 'Finish'}
         </span>
       </div>
     </div>
@@ -100,13 +104,22 @@
         aria-hidden="true"
       >
         <path
-          d="M96 76V18M96 52C78 48 65 37 59 22C77 23 90 33 96 52ZM96 42C111 38 123 29 129 16C113 16 102 26 96 42Z"
+          d="M96 68C96 46 96 28 96 8"
+          stroke-dasharray="2 2"
+          opacity="0.6"
         />
-        <path
-          d="M72 66C57 62 45 54 38 42C54 41 66 49 72 66ZM120 66C136 62 147 53 153 40C137 41 126 49 120 66Z"
-        />
-        <circle cx="96" cy="12" r="4" fill="currentColor" stroke="none" />
+        <path d="M96 52C82 46 70 38 62 25C76 25 88 32 96 52Z" />
+        <path d="M96 42C110 36 122 28 130 15C116 15 104 22 96 42Z" />
+        <path d="M96 60C86 56 78 50 72 42C82 42 90 47 96 60Z" />
+        <path d="M96 56C106 52 114 46 120 38C110 38 102 43 96 56Z" />
+        <circle cx="96" cy="8" r="3" fill="currentColor" />
+        <path d="M50 74C80 74 112 74 142 74" opacity="0.3" />
       </svg>
+      <span
+        class="font-mono text-[11px] uppercase tracking-[0.25em] text-brand-green font-semibold mt-2"
+      >
+        Studio Click House
+      </span>
     </div>
   </div>
 </section>

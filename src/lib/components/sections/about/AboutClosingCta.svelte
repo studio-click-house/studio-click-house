@@ -3,6 +3,7 @@
   import { ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
+  import { _ } from "svelte-i18n";
 
   let { closingCta } = $props<{ closingCta: AboutPageData["closingCta"] }>();
 
@@ -88,7 +89,7 @@
         <h2
           class="max-w-5xl font-display text-[clamp(3rem,6vw,7rem)] leading-[0.87] tracking-[-0.05em] text-brand-dark"
         >
-          {closingCta.heading}
+          {$_('about.closingCta.heading') || closingCta.heading}
         </h2>
       </div>
 
@@ -96,7 +97,7 @@
         <p
           class="max-w-xl text-base leading-relaxed text-brand-dark/70 md:text-lg"
         >
-          {closingCta.description}
+          {$_('about.closingCta.description') || closingCta.description}
         </p>
 
         <div
@@ -106,7 +107,7 @@
             href={closingCta.primaryCtaHref}
             class="inline-flex min-h-12 items-center justify-center gap-3 rounded-[0.55rem] bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
           >
-            <span>{closingCta.primaryCtaLabel}</span>
+            <span>{$_('about.closingCta.primaryCtaLabel') || closingCta.primaryCtaLabel}</span>
             <ArrowRight class="w-5 h-5" />
           </a>
 
@@ -114,7 +115,7 @@
             href={closingCta.secondaryCtaHref}
             class="border-b border-brand-dark/35 pb-1 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
           >
-            <span>{closingCta.secondaryCtaLabel}</span>
+            <span>{$_('about.closingCta.secondaryCtaLabel') || closingCta.secondaryCtaLabel}</span>
           </a>
         </div>
       </div>

@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
+  import { _ } from "svelte-i18n";
 
   let { journey } = $props<{ journey: AboutPageData["journey"] }>();
 
@@ -103,12 +104,12 @@
       <h2
         class="journey-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-8"
       >
-        {journey.heading}
+        {$_('about.journey.heading') || journey.heading}
       </h2>
       <p
         class="journey-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
       >
-        {journey.subheading}
+        {$_('about.journey.subheading') || journey.subheading}
       </p>
     </div>
 
@@ -147,23 +148,23 @@
               <div
                 class="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-green"
               >
-                {milestone.year} · {milestone.subtitle}
+                {milestone.year} · {$_(`about.journey.milestones.${index}.subtitle`) || milestone.subtitle}
               </div>
               <h3
                 class="mb-3 font-display text-2xl font-normal text-brand-dark md:text-4xl"
               >
-                {milestone.title}
+                {$_(`about.journey.milestones.${index}.title`) || milestone.title}
               </h3>
               <p
                 class="text-sm md:text-base text-brand-dark/80 leading-relaxed mb-4"
               >
-                {milestone.description}
+                {$_(`about.journey.milestones.${index}.description`) || milestone.description}
               </p>
               {#if milestone.statsHighlight}
                 <div
                   class="inline-flex items-center gap-2 border-t border-brand-dark/25 pt-2 text-xs font-mono font-medium text-brand-dark/75"
                 >
-                  {milestone.statsHighlight}
+                  {$_(`about.journey.milestones.${index}.statsHighlight`) || milestone.statsHighlight}
                 </div>
               {/if}
             </div>

@@ -141,32 +141,32 @@
         "role": "Geschäftsführer"
       }
     },
-    "faqs": {
-      "item_0": {
+    "faqs": [
+      {
         "question": "Mit welchen Dateiformaten können Sie arbeiten?",
         "answer": "Die Dateianforderungen hängen von der Arbeit ab. Teilen Sie uns Ihre verfügbaren Quelldateien und beabsichtigten Ausgaben mit, damit das Studio den richtigen Produktionsweg bestätigen kann, bevor die Arbeit beginnt."
       },
-      "item_1": {
+      {
         "question": "Wie wird die Bearbeitungszeit geplant?",
         "answer": "Die Planung richtet sich nach Anzahl der Bilder, Komplexität, Quellqualität, Feedback-Phasen und endgültigen Lieferanforderungen. Ein Zeitplan wird für jedes Projekt bestätigt, anstatt im Voraus angenommen zu werden."
       },
-      "item_2": {
+      {
         "question": "Wie funktionieren Revisionen?",
         "answer": "Revisionsbedarf wird während der Projektplanung vereinbart. Klare visuelle Referenzen und gebündeltes Feedback helfen dem Studio, Entscheidungen über die gesamte Bildserie hinweg konsistent zu halten."
       },
-      "item_3": {
+      {
         "question": "Wie sollen Dateien übertragen werden?",
         "answer": "Die Übertragungsmethode wird mit dem Projekt bestätigt. Produktionsdateien sollten über einen vereinbarten sicheren Arbeitsbereich geteilt werden und nicht über öffentliche Links, die vertrauliches Material enthalten."
       },
-      "item_4": {
+      {
         "question": "Können Sie eine große Charge visuell konsistent halten?",
         "answer": "Ja. Referenzbilder, gemeinsame Bearbeitungsregeln und Überprüfungspunkte können festgelegt werden, bevor eine größere Charge in die Produktion geht."
       },
-      "item_5": {
+      {
         "question": "Kann sich das Studio in einen bestehenden kreativen Workflow einfügen?",
         "answer": "Das Studio kann nach Ihren Benennungs-, Überprüfungs- und Lieferkonventionen arbeiten, wenn diese Anforderungen während der Projektplanung mitgeteilt werden."
       }
-    },
+    ],
     "showcaseProjects": {
       "photo-editing": {
         "title": "Fotobearbeitung",
@@ -185,36 +185,37 @@
       }
     },
     "hero": {
-      "title1": "Every image,",
-      "title2": "finished",
-      "title3": "with intent.",
-      "subtitle": "Studio Click House shapes still and moving images for brands, studios, and production teams that care about the final frame.",
-      "cta": "Start a project",
-      "explore": "Explore services",
-      "scroll": "Scroll"
+      "title1": "Jedes Bild,",
+      "title2": "vollendet",
+      "title3": "mit Hingabe.",
+      "subtitle": "Studio Click House gestaltet Stand- und Bewegtbilder für Marken, Studios und Produktionsteams, die Wert auf das perfekte Endresultat legen.",
+      "cta": "Projekt starten",
+      "explore": "Leistungen entdecken",
+      "scroll": "Scrollen"
     },
     "intro": {
-      "title1": "Image editing,",
-      "title2": "built for scale.",
-      "subtitle": "Studio Click House is a Bangladesh-based image post-production studio serving photographers, creative agencies, online shops, and retailers worldwide. Since 2022, we have delivered image editing and retouching for consistent, production-ready visual content.",
-      "copy": "Our team of 150+ designers brings 4–16 years of individual experience and works 24/7 to support demanding image volumes and deadlines.",
-      "aboutStudio": "About the studio",
-      "freeTrial": "Free trial"
+      "title1": "Bildbearbeitung,",
+      "title2": "gebaut für Skalierung.",
+      "subtitle": "Studio Click House ist ein internationales Bild-Postproduktionsstudio für Fotografen, Kreativagenturen, Online-Shops und Händler weltweit. Seit 2022 liefern wir konsistente, produktionsfertige Bildretuschen.",
+      "copy": "Unser Team von über 150 Spezialisten verfügt über 4–16 Jahre individuelle Erfahrung und arbeitet rund um die Uhr, um anspruchsvolle Volumina und Deadlines einzuhalten.",
+      "aboutStudio": "Über das Studio",
+      "freeTrial": "Kostenlose Testversion"
     },
     "aboutDescription": {
       "eyebrow": "01 / STUDIO-ÜBERSICHT",
       "tagline": "Menschliche Handwerkskunst und technische Disziplin für erstklassige visuelle Medien.",
-      "title1": "Präzises Finishing.",
-      "title2": "Skalierbar für kreative Ansprüche.",
+      "title1": "Über uns",
+      "title2": "Studio Click House.",
       "paragraph1": "Studio Click House ist ein internationales Postproduktionsstudio für weltweit führende Fotografen, Modemarken, E-Commerce-Händler und Kreativagenturen.",
       "paragraph2": "Wir sind spezialisiert auf redaktionelle Bildretusche, Farbkorrektur für Videos und fotorealistisches 3D-CGI-Rendering. Mit sorgfältiger Handwerkskunst und einer 24/7-Produktionspipeline stellen wir sicher, dass jedes Bild höchsten Standards entspricht.",
       "quote": "Jeder Pixel, Schatten und Farbverlauf wird so gestaltet, dass er die einzigartige visuelle Identität Ihrer Marke widerspiegelt.",
       "stats": [
-        { "value": "150+", "label": "Spezialisten", "sub": "Eigene Retuscheure & 3D-Künstler" },
-        { "value": "24/7", "label": "Globale Produktion", "sub": "Schnelle Bearbeitung über Nacht" },
-        { "value": "99,8%", "label": "QC-Genauigkeit", "sub": "Dreistufige Qualitätskontrolle" },
-        { "value": "20+", "label": "Länder weltweit", "sub": "Vertraut von internationalen Marken" }
+        { "value": "150+", "label": "Senior-Spezialisten", "sub": "Inhouse-Retuscheure & 3D-Künstler" },
+        { "value": "24/7", "label": "Globale Produktion", "sub": "Kontinuierliche weltweite 24h-Lieferung" },
+        { "value": "99,8%", "label": "QC-Genauigkeit", "sub": "Dreistufiges Präzisions-Prüfsystem" },
+        { "value": "20+", "label": "Länder weltweit", "sub": "Vertraut von internationalen Modemarken" }
       ],
+      "atelierTags": ["ATELIER 01", "24/7 BETRIEB", "3-STUFEN QC", "WELTWEIT"],
       "aboutStudio": "Über das Studio",
       "freeTrial": "Kostenlose Testversion"
     },
@@ -228,88 +229,813 @@
       "freeTrial": "Test anfordern"
     },
     "faq": {
-      "title": "Common Questions"
+      "title": "Häufig gestellte Fragen"
     },
     "scrollImage": {
-      "title1": "Professional",
-      "title2": "AI video post-production.",
-      "copy1": "Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.",
-      "copy2": "AI video post-production accelerates the workflow — streamlining generative shot creation, complex cutdowns, color balance, and visual cleanup with artisan oversight at every frame.",
-      "copy3": "Generated or captured, every sequence is finished by senior colorists and editors. We blend Kling, Google Flow, Runway, and Luma-generated footage with expert grading and frame-by-frame review for pristine fidelity, temporal consistency, and cinematic storytelling.",
+      "title1": "Professionelle",
+      "title2": "KI-Videopostproduktion.",
+      "copy1": "Beschleunigen Sie Ihre Motion-Pipeline mit generativer KI. Von modelbasierten Aufnahmen mit Kling, Flow und Veo bis hin zu 4K–8K KI-Motion-Upscaling und cineastischem Finishing liefern wir sendefähige Videos für globale Kampagnen.",
+      "copy2": "KI-Videopostproduktion optimiert den Workflow — vereinfacht generative Aufnahmen, komplexe Zuschnitte, Farbbalance und visuelle Bereinigung mit meisterhafter Kontrolle bei jedem Frame.",
+      "copy3": "Generiert oder gefilmt, jede Sequenz wird von Senior-Colorists und Editoren finalisiert. Wir kombinieren Kling, Google Flow, Runway und Luma mit meisterhaftem Grading und Frame-für-Frame-Prüfung für höchste visuelle Konsistenz.",
       "capabilities": [
-        "Text-to-Video Generation",
-        "AI Motion Upscaling 4K–8K",
-        "ACES Color Pipeline",
-        "24h Express Turnaround"
+        "Text-zu-Video-Generierung",
+        "KI Motion Upscaling 4K–8K",
+        "ACES Farb-Pipeline",
+        "24h Express-Lieferung"
       ],
-      "explore": "Explore video editing & post-production"
+      "explore": "Video-Editing & Postproduktion entdecken"
     },
     "processSteps": [
       {
-        "title": "Brief and file intake",
-        "navTitle": "Brief intake",
-        "timing": "Project start",
-        "description": "We review your source files, references, volume, output formats, and delivery priorities before production begins."
+        "title": "Briefing und Dateiübernahme",
+        "navTitle": "Briefing",
+        "timing": "Projektstart",
+        "description": "Wir analysieren Ihre Quelldateien, Referenzen, Mengen, Ausgabeformate und Lieferprioritäten vor Produktionsbeginn."
       },
       {
-        "title": "Reference alignment",
-        "navTitle": "Reference",
-        "timing": "Before production",
-        "description": "A sample image defines the approved finish, so color, texture, crop, and detail treatment are clear from the start."
+        "title": "Referenzabgleich",
+        "navTitle": "Referenz",
+        "timing": "Vor Produktion",
+        "description": "Ein Musterbild definiert das finale Finishing, sodass Farbe, Textur, Beschnitt und Detailbehandlung von Anfang an feststehen."
       },
       {
-        "title": "Team assignment",
-        "navTitle": "Team assignment",
-        "timing": "Production setup",
-        "description": "The project manager routes each batch to specialists whose experience matches the service and visual standard required."
+        "title": "Team-Zuweisung",
+        "navTitle": "Team",
+        "timing": "Produktions-Setup",
+        "description": "Der Projektleiter teilt jeden Auftrag Spezialisten zu, deren Erfahrung exakt zum gewünschten visuellen Standard passt."
       },
       {
-        "title": "Specialist editing",
-        "navTitle": "Editing",
-        "timing": "Active production",
-        "description": "Editors work from the approved reference while preserving consistent naming, dimensions, color, and finishing across the batch."
+        "title": "Spezialisierte Bearbeitung",
+        "navTitle": "Bearbeitung",
+        "timing": "Laufende Produktion",
+        "description": "Unsere Bildbearbeiter arbeiten nach der genehmigten Referenz unter Wahrung einheitlicher Benennungen, Maße und Farben."
       },
       {
-        "title": "Quality review",
-        "navTitle": "Quality review",
-        "timing": "Before delivery",
-        "description": "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio."
+        "title": "Qualitätskontrolle",
+        "navTitle": "Qualitätsprüfung",
+        "timing": "Vor Auslieferung",
+        "description": "Eine separate Prüfung kontrolliert Details, Konsistenz, technische Vorgaben und die vereinbarte Referenz vor dem Versand."
       }
     ],
     "closingCta": {
-      "heading": "Need a partner close to the work?",
-      "description": "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
-      "primaryCtaLabel": "Start a Project",
-      "secondaryCtaLabel": "Explore Our Portfolio"
+      "heading": "Suchen Sie einen engagierten Produktionspartner?",
+      "description": "Senden Sie uns ein Testbild oder einen Videoclip. Erleben Sie unsere 24-Stunden-Lieferung, Pixelpräzision und persönliche Betreuung direkt.",
+      "primaryCtaLabel": "Projekt starten",
+      "secondaryCtaLabel": "Portfolio entdecken"
+    },
+    "aiWorkflow": {
+      "title1": "KI E-Commerce",
+      "title2": "Workflow.",
+      "stage1": {
+        "title": "Rohe Flachaufnahme",
+        "description": "Standardmäßiges flach fotografiertes Kleidungsstück auf transparentem Studio-Freisteller."
+      },
+      "stage2": {
+        "title": "3D Ghost Mannequin",
+        "description": "Symmetrische Hohlpuppen-Komposition auf reinem E-Commerce Studio-Grau."
+      },
+      "stage3": {
+        "title": "KI Model-Synthese",
+        "description": "Virtuelle Modelsynthese mit authentischem Stofffall, natürlicher Haltung und Studio-Lichtkante."
+      },
+      "stage4": {
+        "title": "Kobaltblau Farbvariante",
+        "description": "Präzise chromatisierte Umfärbung unter Erhalt aller natürlichen Stofffalten und Glanzpunkte."
+      },
+      "explore": "KI-Services & vollständige Pipeline entdecken"
+    },
+    "showcaseIntro": {
+      "title1": "Unsere",
+      "title2": "Leistungen",
+      "description": "Ein zentraler Produktionspartner für makellose Standbilder, anspruchsvolle Bewegtbilder und glaubwürdige 3D-Visualisierungen."
     },
     "aboutOrbit": {
-      "eyebrow": "Our Production System",
-      "heading": "Quality isn't the last step. It's every step.",
-      "postProduction": "post-production",
-      "description": "From AI-assisted image production and precision retouching to complex 3D CGI rendering, our Dhaka studio combines intelligent workflows with human craft to create polished campaign assets.",
-      "explore": "Explore Work",
+      "eyebrow": "Unser Produktionssystem",
+      "heading": "Qualität ist nicht der letzte Schritt. Es ist jeder Schritt.",
+      "postProduction": "Postproduktion",
+      "description": "Von KI-gestützter Bildproduktion und feinstem Retusche-Handwerk bis hin zu komplexem 3D-CGI-Rendering verbindet unser Studio intelligente Workflows mit menschlicher Kunstfertigkeit.",
+      "explore": "Arbeiten ansehen",
+      "steps": [
+        {
+          "title": "Kreative Ausrichtung",
+          "description": "Jedes Projekt beginnt mit klaren Referenzen, technischen Spezifikationen und kreativen Zielen."
+        },
+        {
+          "title": "Spezialisierte Handwerkskunst",
+          "description": "Engagierte Bildretuscheure und 3D-CGI-Künstler, passgenau auf Ihre Projektanforderungen abgestimmt."
+        },
+        {
+          "title": "Qualitätskontrolle",
+          "description": "Jede Datei wird auf makellose Hautstruktur, Kantenschärfe und Lichtkonsistenz geprüft."
+        },
+        {
+          "title": "Auslieferung",
+          "description": "Produktionsfertige, hochauflösende Multi-Channel-Assets, pünktlich geliefert mit striktem SLA."
+        }
+      ],
       "stats": [
         {
           "value": "150+",
-          "label": "Creative Specialists"
+          "label": "Kreativ-Spezialisten"
         },
         {
-          "value": "10+ Years",
-          "label": "Proven Experience"
+          "value": "10+ Jahre",
+          "label": "Erprobte Erfahrung"
         },
         {
           "value": "24/7",
-          "label": "Production Studio"
+          "label": "Produktionsstudio"
         },
         {
           "value": "99%",
-          "label": "On-Time Delivery"
+          "label": "Pünktliche Lieferung"
         }
       ],
-      "startProject": "Start a project"
+      "startProject": "Projekt starten"
     },
     "creativeMarquee": {
-      "title": "Our Clients"
+      "title": "Unsere Kunden"
     }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Über Studio Click House",
+      "headingLine1": "Wir sind",
+      "headingLine2": "Studio Click House",
+      "positioning": "Ein spezialisiertes Postproduktionsstudio für High-End-Bildretusche, Video-Color-Grading und 3D-CGI-Bearbeitung für globale Modemarken, kommerziellen E-Commerce und Kreativagenturen.",
+      "stats": [
+        {
+          "label": "Digitale Künstler",
+          "sublabel": "Retuscheure, Colorists & 3D-Künstler"
+        },
+        {
+          "label": "Jahre Exzellenz",
+          "sublabel": "Aufbau globaler Postproduktions-Pipelines"
+        },
+        {
+          "label": "Gelieferte Medien",
+          "sublabel": "Ohne Kompromisse bei der SLA-Präzision"
+        }
+      ]
+    },
+    "people": {
+      "eyebrow": "Unser Team",
+      "heading": "Das Team hinter jedem Frame",
+      "subheading": "Wir sind ein Kollektiv aus detailverliebten Retuscheuren, Colorists, 3D-Generalisten und Workflow-Architekten, die nahtlos von unserem Hauptstudio in Dhaka aus arbeiten.",
+      "collectiveTitle": "Studio Click House Kollektiv",
+      "location1": "Hauptsitz Dhaka",
+      "location2": "Produktionsflächen / Studios",
+      "moments": [
+        {
+          "title": "Präzises Color Grading",
+          "category": "Video-Suite"
+        },
+        {
+          "title": "Qualitätskontrolle & Proofing",
+          "category": "Retusche-Desk"
+        },
+        {
+          "title": "3D & CGI Rendering",
+          "category": "3D-Abteilung"
+        },
+        {
+          "title": "Workshops & Wissenstransfer",
+          "category": "Studiokultur"
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Unsere Reise",
+      "heading": "Unsere bisherige Geschichte",
+      "subheading": "Von einer 4-köpfigen Bildbearbeitungszelle in Dhaka zu einem 150+ Spezialisten zählenden Postproduktionsstudio für internationale Modehäuser.",
+      "milestones": [
+        {
+          "subtitle": "Dhaka, Bangladesch",
+          "title": "Die Gründung des Studios",
+          "description": "Studio Click House begann in einem kleinen Arbeitsraum mit vier passionierten Bildretuscheuren für anspruchsvolle Modekataloge.",
+          "statsHighlight": "4 Retuscheure · 10 Kunden"
+        },
+        {
+          "subtitle": "Volumen-Skalierung",
+          "title": "Kommerzielle E-Commerce-Expansion",
+          "description": "Erweiterung unserer Produktionsfläche für nächtliche Großserienretuschen für europäische und nordamerikanische Modehändler.",
+          "statsHighlight": "35 Künstler · 100k+ Bilder/Jahr"
+        },
+        {
+          "subtitle": "Multi-Media-Produktion",
+          "title": "Abteilung für Videoschnitt & Motion",
+          "description": "Eröffnung unserer Videopostproduktions-Suite mit Broadcast-Color-Grading, Videoretusche und kommerziellem Schnitt.",
+          "statsHighlight": "Video-Suite · 10-Bit Color-Workstations"
+        },
+        {
+          "subtitle": "Produkt-Visualisierung",
+          "title": "3D & CGI Rendering Suite",
+          "description": "Einführung von 3D-Produktmodellierung und CGI-Szenenkomposition für Schmuck-, Kosmetik- und Modemarken.",
+          "statsHighlight": "3D-Abt. · Maya & Blender Pipeline"
+        },
+        {
+          "subtitle": "Globale Infrastruktur",
+          "title": "Globaler Delivery Hub & Enterprise-Infrastruktur",
+          "description": "Aufbau internationaler Liefer-Pipelines, Cloud-Speicher und durchgehender 24/7-Zwei-Schichten-Betrieb.",
+          "statsHighlight": "150+ Künstler · 24/7-Produktions-Pipeline"
+        }
+      ]
+    },
+    "careers": {
+      "eyebrow": "Werde Teil unseres Teams",
+      "heading": "Dein nächstes Kapitel beginnt hier",
+      "description": "Wir sind stets auf der Suche nach passionierten Retuscheuren, Video-Editoren, 3D-Künstlern und Projektleitern, die unsere Hingabe zu visueller Perfektion teilen.",
+      "tag": "Einblick ins Studio",
+      "ctaLabel": "Offene Stellen ansehen",
+      "stats": [
+        { "label": "Künstler" },
+        { "label": "Betrieb" },
+        { "label": "Studio-HQ" }
+      ]
+    },
+    "leadership": {
+      "eyebrow": "Führungsteam",
+      "heading": "Die Köpfe hinter SCHL",
+      "subheading": "Unsere Führungsebene vereint tiefes technisches Postproduktions-Know-how mit internationaler Agenturerfahrung.",
+      "members": [
+        {
+          "role": "Geschäftsführer (MD)",
+          "bio": "Leitet strategisches Wachstum, internationale Partnerschaften und Enterprise-Postproduktionsabläufe für Studio Click House."
+        },
+        {
+          "role": "Leitung Postproduktion & Betrieb",
+          "bio": "Koordiniert die tägliche 24/7-Produktionsplanung, SLA-Einhaltung und Qualitätssicherung für unser über 150-köpfiges Künstlerteam."
+        },
+        {
+          "role": "Lead Colorist & Video Director",
+          "bio": "Master-Colorist spezialisiert auf DaVinci Resolve-Workflows, Broadcast-Werbung und HDR-Modefilme."
+        },
+        {
+          "role": "Leitung 3D & CGI-Pipelines",
+          "bio": "Beaufsichtigt 3D-Produktvisualisierung, Lichtarchitektur und fotorealistisches CGI-Compositing für globale E-Commerce-Kunden."
+        },
+        {
+          "role": "Senior Retusche-Supervisor",
+          "bio": "Leitet High-End-Werbebildretusche, Farbharmonisierung und Luxusmode-Beauty-Workflows."
+        },
+        {
+          "role": "Lead VFX & Compositing Supervisor",
+          "bio": "Verantwortlich für Rotoskopie, Cleanplates, Chroma-Keying und Multi-Pass-CGI-Integration für Werbe- und Filmproduktionen."
+        },
+        {
+          "role": "Leitung Qualitätssicherung & SLA",
+          "bio": "Steuert die mehrstufige technische Prüfung und pixelgenaue Qualitätskontrolle aller 24/7-Kundenprojekte."
+        },
+        {
+          "role": "Senior Motion Designer & Editor",
+          "bio": "Führt kommerziellen Videoschnitt, Marken-Motion-Graphics und dynamische Kampagnenformate für weltweite Werbeagenturen."
+        }
+      ]
+    },
+    "directorsMessage": {
+      "eyebrow": "Vom Creative Director",
+      "title": "Angetrieben von Hingabe und bereit für jede Herausforderung.",
+      "testimonials": [
+        {
+          "quote": "Großartiges Design dreht sich nicht nur darum, wie etwas aussieht – sondern wie Menschen es sehen, fühlen und in Erinnerung behalten.",
+          "role": "Geschäftsführer"
+        }
+      ],
+      "emptyTitle": "Hier entstehen Kundenberichte.",
+      "emptyDescription": "Verifizierte Testimonials, Namen und Unternehmensangaben werden erst nach Freigabe veröffentlicht. Der Bereich ist bereit für Ihre Inhalte."
+    },
+    "closingCta": {
+      "heading": "Suchen Sie einen Partner für anspruchsvolle Postproduktion?",
+      "description": "Senden Sie uns ein Testbild oder einen Videoclip. Erleben Sie unsere 24h-Lieferung, Pixel-Präzision und engagiertes Projektmanagement aus erster Hand.",
+      "primaryCtaLabel": "Projekt starten",
+      "secondaryCtaLabel": "Portfolio entdecken"
+    }
+  },
+  "footer": {
+    "tagline": "Jeder Pixel mit Absicht vollendet",
+    "description": "Studio Click House ist ein umfassendes kreatives Postproduktionsstudio, das globale E-Commerce-Marken, Einzelhändler, Agenturen und Fotostudios dabei unterstützt, erstklassigen visuellen Content in großem Maßstab zu produzieren.",
+    "emailUs": "Schreiben Sie uns",
+    "newsletterTitle": "Newsletter abonnieren",
+    "newsletterPlaceholder": "E-Mail-Adresse eingeben",
+    "newsletterButton": "Abonnieren",
+    "locationsTitle": "Unsere Standorte",
+    "productionTag": "24/7 Globale Produktion",
+    "headquarters": "Hauptsitz",
+    "europeHub": "Europa Hub",
+    "nordicHub": "Nordischer Hub",
+    "americasApac": "Amerika & APAC",
+    "company": "Unternehmen",
+    "services": "Leistungen",
+    "policy": "Richtlinien",
+    "freeTrial": "Kostenlose Testphase",
+    "accreditations": "Akkreditiert & Mitglied von",
+    "allRightsReserved": "Studio Click House Limited. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "backToTop": "Nach oben",
+    "companyLinks": [
+      "Über uns",
+      "Karriere",
+      "Preise",
+      "Portfolio",
+      "Events & CSR",
+      "Kontakt"
+    ],
+    "serviceLinks": [
+      "Bildretusche",
+      "Freistellen & Maskieren",
+      "Farbkorrektur",
+      "Videoschnitt",
+      "3D & CGI Modellierung"
+    ],
+    "policyLinks": [
+      "CSR & Engagement",
+      "Datensicherheit & NDA",
+      "Datenschutzrichtlinie",
+      "Nutzungsbedingungen",
+      "Rückerstattungsrichtlinie"
+    ]
+  },
+  "pricing": {
+    "hero": {
+      "eyebrow": "Transparente Studiotarife",
+      "heading1": "Maßgeschneiderte Produktions-",
+      "heading2": "Kalkulationen.",
+      "description": "Klare Tarife, garantierte SLAs und skalierbare monatliche Retuschekapazitäten für internationale Marken und Kreativstudios.",
+      "viewPackages": "Pakete ansehen",
+      "buildCustom": "Individuelles Angebot erstellen",
+      "stats": [
+        { "label": "Lieferzeit-SLA" },
+        { "label": "Volumen-Staffelung" },
+        { "label": "QC-Bestehensrate" }
+      ],
+      "showcases": [
+        { "title": "Editorielle Retusche" },
+        { "title": "3D Produkt-CGI" },
+        { "title": "Farbkorrektur & Finishing" }
+      ]
+    },
+    "options": {
+      "heading": "Unsere Preise",
+      "description": "Wählen Sie ein fertiges Produktionspaket oder erstellen Sie ein individuelles Angebot passend zu Ihrem Volumen, der Komplexität und der Lieferzeit.",
+      "packagesTab": "Pakete",
+      "customTab": "Individueller Preis"
+    },
+    "packages": {
+      "orderNow": "Jetzt bestellen",
+      "features": [
+        "Kostenlose Testphase",
+        "Sicherer FTP-Transfer",
+        "3-Stufen-Qualitätskontrolle",
+        "24/7 Support",
+        "Günstige Konditionen",
+        "Mengenrabatte"
+      ],
+      "plans": [
+        {
+          "name": "Freistell-Service",
+          "description": "Pixelgenaue handgezeichnete Vektorpfade und weiche Kantenmaskierung.",
+          "services": [
+            { "name": "Beschneidungspfad" },
+            { "name": "Bildmaskierung" },
+            { "name": "Objektentfernung" },
+            { "name": "Schattenkreation" },
+            { "name": "360°-Produktbild" },
+            { "name": "E-Commerce-Bild" },
+            { "name": "Hohle Puppe / Ghost Mannequin" }
+          ]
+        },
+        {
+          "name": "Bildveredelung",
+          "description": "Kreative Retusche, Farbkorrektur und Bildrestauration.",
+          "services": [
+            { "name": "Bildretusche" },
+            { "name": "Kreativretusche" },
+            { "name": "High-End-Retusche" },
+            { "name": "Bildmanipulation" },
+            { "name": "Farbkorrektur" },
+            { "name": "Farbwechsel" },
+            { "name": "Musterwechsel" },
+            { "name": "Immobilienfoto-Retusche" },
+            { "name": "Alte Fotos restaurieren" }
+          ]
+        },
+        {
+          "name": "Vektorillustration & Konvertierung",
+          "description": "Raster-zu-Vektor-Vektorisierung, Grundrisse, Logodesign und Grafiken.",
+          "services": [
+            { "name": "Raster zu Vektor" },
+            { "name": "Planzeichnung" },
+            { "name": "Logodesign" },
+            { "name": "Produktzeichnung" },
+            { "name": "Werbedesign" },
+            { "name": "Illustration" }
+          ]
+        },
+        {
+          "name": "KI-Dienstleistungen",
+          "description": "Generative KI-Hintergrundsynthese, Relighting und Modellerstellung.",
+          "services": [
+            { "name": "KI-Hintergrundsynthese" },
+            { "name": "KI-Produktbeleuchtung" },
+            { "name": "KI-Modellgenerierung" },
+            { "name": "KI-Gesichtstausch & Anpassung" },
+            { "name": "KI-Auflösungshochskalierung" },
+            { "name": "KI-Mustersynthese" }
+          ]
+        }
+      ]
+    },
+    "assurances": {
+      "heading1": "In jedem Paket",
+      "heading2": "enthalten.",
+      "description": "Das Paket bestimmt Tempo und Skalierung. Unser hoher Qualitätsanspruch bleibt stets unverändert.",
+      "items": [
+        {
+          "title": "Mehrfache Qualitätsprüfungen",
+          "description": "Jede Lieferung durchläuft unseren standardisierten mehrstufigen Prüfprozess."
+        },
+        {
+          "title": "Einfacher Datentransfer",
+          "description": "Quelldateien sicher hochladen und strukturierte, produktionsfertige Exporte erhalten."
+        },
+        {
+          "title": "24/7 Produktions-Support",
+          "description": "Zuverlässige Umsetzung auch bei anspruchsvollen Studio- und Kampagnenzeitplänen."
+        },
+        {
+          "title": "Flexible Lieferzeiten",
+          "description": "Wählen Sie die Lieferpriorität passend zu Ihrem Volumen und Ihrer Deadline."
+        }
+      ]
+    },
+    "calculator": {
+      "pipelineCategory": "Pipeline-Kategorie",
+      "categories": [
+        "Bildbearbeitung",
+        "Videoschnitt",
+        "3D & CGI",
+        "KI-Dienste"
+      ],
+      "services": "Leistungen",
+      "estimatedVolume": "Geschätztes Volumen",
+      "productionComplexity": "Produktionskomplexität",
+      "complexity": [
+        {
+          "label": "Standard",
+          "description": "Freisteller, einfache Schatten, leichte Hautretusche und Basisschnitte."
+        },
+        {
+          "label": "Mittel",
+          "description": "Mehrebenen-Compositing, strukturierte Stoffe, feine Maskierung und Farbabgleich."
+        },
+        {
+          "label": "Erweitert",
+          "description": "Vollständige High-End-Beauty-Retusche, 3D-Texturierung und anspruchsvolles Rotoskopieren."
+        }
+      ],
+      "deliveryPriority": "Lieferpriorität",
+      "turnaround": [
+        { "label": "Standard (24h)" },
+        { "label": "Express (12h)" },
+        { "label": "Dringend (6h)" }
+      ],
+      "realTimeCalculation": "Echtzeit-Kalkulation",
+      "investmentSummary": "Investitionsübersicht",
+      "estimatedTotalNote": "Geschätzter Gesamtbetrag basierend auf ausgewähltem Volumen, Komplexität und Priorität.",
+      "requestCustomProposal": "Individuelles Angebot anfordern",
+      "bookConsultation": "Beratungsgespräch buchen",
+      "guaranteePill": "Inklusive persönlichem Projektmanager & SLA-Garantie."
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Projekt starten.",
+      "description": "Bildretusche, Video-Postproduktion und CGI mit Rund-um-die-Uhr-Support für internationale Kreativteams.",
+      "sendBrief": "Briefing senden"
+    },
+    "channels": {
+      "email": "E-Mail",
+      "callUs": "Anrufen",
+      "website": "Webseite",
+      "mainStudio": "Hauptstudio"
+    },
+    "signal": {
+      "title": "Ein klares Briefing verwandelt verstreute Ideen in ein präzises Produktionssignal.",
+      "description": "Sie müssen vorab nicht alle Details lösen. Bringen Sie Ihr Ausgangsmaterial und das gewünschte Ziel mit – den besten Weg definieren wir gemeinsam."
+    },
+    "form": {
+      "title": "Projektdetails mitteilen.",
+      "subtitle": "Geben Sie die verfügbaren Informationen ein. Offene Punkte klären wir im Anschluss direkt mit Ihnen.",
+      "name": "Name *",
+      "email": "E-Mail *",
+      "phone": "Telefon",
+      "company": "Unternehmen oder Marke",
+      "service": "Leistung",
+      "message": "Ihre Nachricht *",
+      "placeholder": "Ausgangsmaterial, gewünschtes Ergebnis, Volumen, Zeitrahmen und besondere Richtlinien.",
+      "submit": "Angaben absenden",
+      "responseTime": "Wir antworten in der Regel innerhalb von 1–2 Stunden.",
+      "haveQuestions": "Haben Sie Fragen?",
+      "haveQuestionsNote": "Rufen Sie uns an oder schreiben Sie unserem Dhaka-Studio vor dem Absenden."
+    },
+    "offices": {
+      "title": "Hier erreichen Sie uns.",
+      "description": "Unser Produktionsteam arbeitet grenzübergreifend, um jedes Projekt erfolgreich umzusetzen."
+    }
+  },
+  "services": {
+    "hero": {
+      "heading1": "Präzises",
+      "heading2": "Finishing.",
+      "heading3": "Gebaut für Skalierung.",
+      "description": "Wir liefern pixelgenaue Bildretusche, kommerziellen Videoschnitt und fotorealistisches 3D-CGI-Rendering. Entwickelt für große Katalogvolumen, kreative Markenkampagnen und internationale Studiostandards.",
+      "discussProject": "Projekt besprechen",
+      "viewCapabilities": "Leistungen ansehen",
+      "disciplines": [
+        "Bildbearbeitung",
+        "Videoschnitt",
+        "3D & CGI"
+      ]
+    },
+    "showcase": {
+      "heading": "Produktionsleistungen",
+      "planWorkflow": "Diesen Workflow planen",
+      "divisions": [
+        {
+          "title": "Jeder Pixel, vollendet.",
+          "description": "Bildveredelung in großem Maßstab mit der nötigen Sorgfalt für Fashion-, Schmuck-, Produkt- und Kampagnenprojekte."
+        },
+        {
+          "title": "Bewegtbild mit klarer Handschrift.",
+          "description": "Werbeschnitte, Markenfirmen und plattformoptimierte Formate, geformt durch perfektes Timing, Sound und kalibrierte Farben."
+        },
+        {
+          "title": "Erschaffen, bevor es existiert.",
+          "description": "Präzise 3D-Modelle, realistische Texturen und fotorealistische Produktszenen für Produktlaunches, Kataloge und Kampagnen."
+        }
+      ]
+    },
+    "standards": {
+      "heading": "Qualität ist ein System, keine Endkontrolle.",
+      "description": "Jedes Asset durchläuft eine kalibrierte Produktion, sichere Datenübertragung und Senior-Review, bevor es das Studio verlässt.",
+      "items": [
+        {
+          "title": "EIZO-Farbkalibriert",
+          "description": "Konsistente Farbprofile auf allen Displays nach internationalen Druck- und Bildschirmstandards."
+        },
+        {
+          "title": "Sichere Infrastruktur",
+          "description": "Verschlüsselte Serverspeicherung und NDA-Konformität zum Schutz aller Kundendaten und geistigen Eigentums."
+        },
+        {
+          "title": "Hohe Produktionskapazität",
+          "description": "Über 150+ ausgebildete Digitalkünstler im Schichtbetrieb zur reibungslosen Bewältigung enger Kampagnenfristen."
+        },
+        {
+          "title": "Zweistufige QC-Prüfung",
+          "description": "Jede Datei durchläuft eine Artist-Prüfung und eine abschließende Inspektion durch die Senior-Leitung vor dem Export."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Bringen Sie das nächste Bild in Bewegung.",
+      "description": "Teilen Sie Ihr Briefing, Beispieldateien und den Zeitrahmen. Unser Team plant den passenden Ablauf und erstellt ein klares Angebot.",
+      "startProject": "Projekt starten",
+      "requestTest": "Testbearbeitung anfordern",
+      "viewRateGuide": "Preisübersicht ansehen",
+      "steps": [
+        {
+          "title": "Briefing senden",
+          "description": "Referenzen, Beispieldateien, Volumen und Zeitplan mitteilen."
+        },
+        {
+          "title": "Test prüfen",
+          "description": "Das Finish freigeben und den Produktionsumfang bestätigen."
+        },
+        {
+          "title": "In Produktion gehen",
+          "description": "Die Assets durchlaufen die Produktion und zweistufige Qualitätskontrolle."
+        }
+      ]
+    }
+  },
+  "careers": {
+    "eyebrow": "Karriere",
+    "title": "Gestalten Sie erstklassige Werke mit uns.",
+    "description": "Zukünftige Karrieremöglichkeiten bei Studio Click House werden hier veröffentlicht.",
+    "contactNote": "Für Studioanfragen wenden Sie sich bitte direkt an unser Team.",
+    "contactLink": "Studio kontaktieren"
+  },
+  "csr": {
+    "eyebrow": "Verantwortungsvolles Handeln",
+    "title": "Digitale CSR",
+    "description": "Wir sind überzeugt, dass Postproduktion den Menschen hinter den Bildschirmen und der Umwelt, die unsere digitalen Pipelines antreibt, Respekt schuldet.",
+    "pillars": [
+      {
+        "title": "Ethische Produktionsstandards",
+        "desc": "Unser Studioteam arbeitet in gesunden, ausgewogenen Arbeitsumgebungen mit fairer Stundenvergütung – im klaren Gegensatz zu ausbeuterischem Stücklohn-Outsourcing."
+      },
+      {
+        "title": "Nachhaltige Verarbeitung & Infrastruktur",
+        "desc": "Wir bevorzugen Serverumgebungen mit erneuerbarer Energie. Unsere Server und Cloudflare-Speicher nutzen energieeffiziente Knotenpunkte, um den Rechenaufwand zu minimieren."
+      },
+      {
+        "title": "Unterstützung lokaler Kreativökosysteme",
+        "desc": "Wir widmen jährlich 3 % unserer Studioarbeitszeit gemeinnützigen Medienprojekten, unabhängigen Kulturarchiven und aufstrebenden Künstlern durch kostenlose Finishing-Unterstützung."
+      }
+    ],
+    "sidebar": {
+      "partnerTitle": "Gemeinsam Wirkung erzielen",
+      "partnerDesc": "Sind Sie eine gemeinnützige Organisation, ein Kulturarchiv oder ein Kunstkollektiv mit Bedarf an spezialisierter Postproduktion, Farbkorrektur oder Archivierungsdiensten?",
+      "pitchProject": "Projekt vorstellen",
+      "commitTitle": "Unser Versprechen",
+      "commitDesc": "Mit Studio Click House unterstützen Sie eine digitale Lieferkette, die Arbeitnehmerrechte schützt und klimabewusste Cloud-Infrastrukturen nutzt."
+    }
+  },
+  "privacy": {
+    "eyebrow": "Rechtliches",
+    "title": "Datenschutzrichtlinie",
+    "description": "Die vollständige Datenschutzerklärung wird hier vor Beginn der regulären Produktionsannahme und Datenverarbeitung bereitgestellt."
+  },
+  "terms": {
+    "eyebrow": "Rechtliches",
+    "title": "Nutzungsbedingungen",
+    "description": "Die allgemeinen Geschäftsbedingungen werden hier vor Annahme von Produktionsaufträgen und Projekten veröffentlicht."
+  },
+  "placeholder": {
+    "backHome": "Zur Startseite",
+    "discussProject": "Projekt besprechen"
+  },
+  "events": {
+    "hero": {
+      "title": "Studio in Bewegung.",
+      "description": "Workshops, Teammomente und Erlebnisse, die unser Handwerk und unsere Gemeinschaft stärken."
+    },
+    "upcoming": {
+      "format": "Format",
+      "place": "Ort"
+    },
+    "archive": {
+      "eyebrow": "Veranstaltungsarchiv",
+      "heading": "Momente, die unser Studio geprägt haben."
+    },
+    "culture": {
+      "heading": "Die Arbeit wächst, wenn das Team wächst.",
+      "description": "Unsere Aktivitäten schaffen Raum für gemeinsamen Austausch, praxisorientiertes Lernen und echte Verbindungen."
+    },
+    "closing": {
+      "heading": "Lernen Sie uns kennen. Sehen Sie die Arbeit.",
+      "aboutStudio": "Über das Studio",
+      "viewPortfolio": "Portfolio ansehen"
+    }
+  },
+  "portfolio": {
+    "hero": {
+      "title": "Archiv",
+      "subtitle": "High-End-Postproduktion und kreatives Finishing"
+    },
+    "intro": {
+      "heading": "Der High-End-Postproduktionsstandard 2026",
+      "p1": "Studio Click House steht für über ein Jahrzehnt meisterhafter Handwerkskunst in den Bereichen High-Fashion-Retusche, hochpräzise Freistellpfade, unsichtbare Ghost-Mannequin-Montagen und farbechte Color-Gradings für internationale Premium-Marken.",
+      "p2": "Jedes Bild, das unser Studio durchläuft, wird von erfahrenen Digitalkünstlern mit verlustfreier Frequenztrennung, Subpixel-Vektorgenauigkeit und strikter Einhaltung von Druck- und Bildschirmstandards veredelt."
+    },
+    "collage": {
+      "colorMastery": "Farbperfektion",
+      "pantonePrecision": "Pantone-Präzision",
+      "pantoneDesc": "Makellose Textil-Umfrärbungen und harmonische Hautton-Abstimmungen, kalibriert für anspruchsvolle Lookbooks und Printkampagnen.",
+      "selectedCampaign": "Ausgewählte Kampagne",
+      "hauteCouture": "Haute-Couture-Retusche",
+      "hauteCoutureDesc": "Editorial-Finishing auf höchstem Niveau – bewahrt die authentische Haptik von Seide, Samt und feinem Schmuck bei perfekter Lichtführung.",
+      "macroDetail": "Makro-Detail",
+      "microContouring": "Mikro-Konturierung",
+      "microContouringDesc": "Nicht-destruktive Frequenztrennung zum Erhalt der natürlichen Porenstruktur und lebendigen Hautausstrahlung.",
+      "apparelVolume": "Textil-Volumen",
+      "hollowJoint": "3D-Hohlkragen-Montage",
+      "archiveBadge": "2026 Archiv",
+      "performingCraft": "Gelebtes Handwerk"
+    },
+    "matrix": {
+      "eyebrow": "PROZESS-SPEZIFIKATIONEN",
+      "headingPart1": "Wie wir",
+      "headingPart2": "Präzision",
+      "headingPart3": "in Serie umsetzen.",
+      "enterMosaic": "Zur Mosaik-Galerie",
+      "services": [
+        {
+          "label": "Editorial-Retusche",
+          "desc": "High-Fashion-Retusche, Beauty-Cleaning und Schnittkorrekturen für globale Lookbooks und Markenkampagnen.",
+          "deliverables": [
+            "Kampagnen & High-End Fashion",
+            "Katalog- & E-Commerce-Bereinigung",
+            "Anatomie- & Textil-Formgebung",
+            "High-End Beauty & Porträts"
+          ]
+        },
+        {
+          "label": "Vektor-Freistellung",
+          "desc": "Präzise handgezeichnete Pfade und Mehrebenen-Masken für saubere Freistellungen und Umfärbungen.",
+          "deliverables": [
+            "Einzelpfad-Vektorschnitt",
+            "Mehrebenen-Maskierung",
+            "Hintergrundentfernung & PNGs",
+            "Kontaktschatten & Reflexionen"
+          ]
+        },
+        {
+          "label": "Farbe & Farbmuster",
+          "desc": "Exakte Kalibrierung und Anpassung von Produktfarben für konsistente Farbtreue über alle SKUs hinweg.",
+          "deliverables": [
+            "Farbmuster- & Target-Abgleich",
+            "SKU-übergreifende Farbkonsistenz",
+            "Produkt-Umfärbung",
+            "Glanz- & Metallveredelung"
+          ]
+        },
+        {
+          "label": "Spezialanfertigungen",
+          "desc": "Maßgeschneiderte Postproduktion inklusive unsichtbarer Puppenmontage, Kragenkonstruktion und 3D-CGI.",
+          "deliverables": [
+            "Ghost Mannequin / Unsichtbare Puppe",
+            "Kragen- & Halsausschnitt-Montage",
+            "Musterabgleich & Nahtkorrekturen",
+            "Makro-Schmuck- & Uhrenpolitur"
+          ]
+        }
+      ]
+    },
+    "mosaic": {
+      "closeModal": "Vorschau schließen",
+      "items": [
+        { "title": "Model Beauty-Profil", "category": "Haut-Retusche" },
+        { "title": "Schmuck-Styling-Detail", "category": "Feiner Schmuck" },
+        { "title": "Accessoire-Grading", "category": "Farbkorrektur" },
+        { "title": "Glaswaren-Freistellung", "category": "Freistellpfad" },
+        { "title": "Beauty-Produktion", "category": "Editorial-Retusche" },
+        { "title": "Fashion-Farbwelt", "category": "Couture-Kampagne" },
+        { "title": "CGI-Produkt-Finishing", "category": "3D & CGI" }
+      ]
+    },
+    "manifesto": {
+      "quote": "„Die Rolle einer kreativen Führungspersönlichkeit besteht nicht darin, alle Ideen zu haben, sondern eine Kultur zu schaffen, in der jeder Ideen entwickeln kann und sich wertgeschätzt fühlt.“"
+    },
+    "partners": {
+      "title": "Partner & Kunden"
+    },
+    "stats": {
+      "eyebrow": "Studio im Überblick",
+      "craft": "Handwerk",
+      "color": "Farbe",
+      "detail": "Detail",
+      "finish": "Finish"
+    }
+  },
+  "serviceDetail": {
+    "kicker": "Bild-Postproduktionsservice",
+    "placeOrder": "Auftrag erteilen",
+    "getPriceIdea": "Preisübersicht erhalten",
+    "exploreFullPortfolio": "Vollständiges Portfolio ansehen",
+    "compareAria": "Vorher-Nachher-Ergebnisse vergleichen"
+  },
+  "login": {
+    "badge": "Sicherer Zugang",
+    "title": "Studio-Arbeitsbereich",
+    "subtitle": "Zugangsdaten eingeben, um Projekte einzusehen",
+    "emailLabel": "E-Mail-Adresse",
+    "passwordLabel": "Passwort",
+    "forgot": "Vergessen?",
+    "signInButton": "Im Hub anmelden",
+    "backHome": "Zur Startseite",
+    "errorFill": "Bitte füllen Sie alle Felder aus.",
+    "success": "Erfolgreich angemeldet. Weiterleitung zum Arbeitsbereich..."
+  },
+  "blog": {
+    "title": "Studio-Journal",
+    "eyebrow": "Journal",
+    "description": "Beiträge über Bildbearbeitung, Produktionsansätze und Studiopraxis werden hier veröffentlicht, sobald redaktionelle Inhalte vorliegen."
+  },
+  "slider": {
+    "before": "Vorher",
+    "after": "Nachher",
+    "ariaLabel": "Vorher-Nachher-Bilder vergleichen"
+  },
+  "social": {
+    "playBrief": "Präsentation abspielen",
+    "pauseBrief": "Präsentation anhalten"
+  },
+  "error": {
+    "statusBadge": "Fehler",
+    "title404": "Seite nicht gefunden",
+    "desc404": "Die gesuchte Seite oder Datei wurde verschoben, umbenannt oder existiert nicht.",
+    "title500": "Unerwarteter Fehler",
+    "desc500": "Beim Laden dieser Seite ist ein unerwartetes Problem aufgetreten. Bitte versuchen Sie es später erneut.",
+    "backHome": "Zurück zum Studio",
+    "exploreServices": "Leistungen entdecken"
+  },
+  "languages": {
+    "en": "Englisch",
+    "fr": "Französisch",
+    "es": "Spanisch",
+    "de": "Deutsch"
   }
 }

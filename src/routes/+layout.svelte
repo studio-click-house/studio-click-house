@@ -10,9 +10,16 @@
   import { afterNavigate } from "$app/navigation";
   import { createLenis } from "$lib/animations/lenis";
   import { refreshScrollTriggersAfterFonts, refreshScrollTriggers } from "$lib/animations/gsap";
+  import { locale } from "svelte-i18n";
 
   let { children } = $props();
   let lenisRuntime: Awaited<ReturnType<typeof createLenis>> = null;
+
+  $effect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = $locale || "en";
+    }
+  });
 
   afterNavigate((navigation) => {
     // Force scroll to top on page change, unless navigating to a hash link

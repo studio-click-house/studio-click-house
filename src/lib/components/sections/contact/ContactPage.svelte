@@ -15,6 +15,7 @@
   import { siteConfig } from "$lib/config/site";
   import ContactHeroCard from "./ContactHeroCard.svelte";
   import ContactSignalField from "./ContactSignalField.svelte";
+  import { _ } from "svelte-i18n";
 
   let pageRoot: HTMLElement;
   let signalSection: HTMLElement;
@@ -213,14 +214,13 @@
             class="mt-5 max-w-none font-display text-[clamp(3.25rem,5.5vw,6.1rem)] leading-[0.9] tracking-[-0.05em] sm:whitespace-nowrap"
           >
             <span class="contact-title-mask">
-              <span class="contact-title-line">Start a project.</span>
+              <span class="contact-title-line">{$_('contact.hero.title') || 'Start a project.'}</span>
             </span>
           </h1>
           <p
             class="contact-hero-reveal mt-7 max-w-xl text-base leading-7 text-brand-dark/70 sm:text-lg"
           >
-            Image editing, video post-production, and CGI with 24/7 support for
-            international creative teams.
+            {$_('contact.hero.description') || 'Image editing, video post-production, and CGI with 24/7 support for international creative teams.'}
           </p>
           <div
             class="contact-hero-reveal mt-8 flex flex-wrap items-center gap-5"
@@ -229,7 +229,7 @@
               href="#project-brief"
               class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-dark px-6 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
             >
-              Send a brief
+              {$_('contact.hero.sendBrief') || 'Send a brief'}
               <ArrowDown size={15} />
             </a>
             <a
@@ -295,7 +295,7 @@
             <Mail size={18} aria-hidden="true" />
           </span>
           <span class="contact-channel-text">
-            <small>Email</small>
+            <small>{$_('contact.channels.email') || 'Email'}</small>
             <span>{siteConfig.contact.email}</span>
           </span>
         </a>
@@ -304,7 +304,7 @@
             <Phone size={18} aria-hidden="true" />
           </span>
           <span class="contact-channel-text">
-            <small>Call us</small>
+            <small>{$_('contact.channels.callUs') || 'Call us'}</small>
             <span>{siteConfig.contact.phone}</span>
           </span>
         </a>
@@ -318,7 +318,7 @@
             <Globe2 size={18} aria-hidden="true" />
           </span>
           <span class="contact-channel-text">
-            <small>Website</small>
+            <small>{$_('contact.channels.website') || 'Website'}</small>
             <span>{siteConfig.contact.website}</span>
           </span>
         </a>
@@ -327,7 +327,7 @@
             <MapPin size={18} aria-hidden="true" />
           </span>
           <span class="contact-channel-text">
-            <small>Main studio</small>
+            <small>{$_('contact.channels.mainStudio') || 'Main studio'}</small>
             <span>Dhaka, Bangladesh</span>
           </span>
         </a>
@@ -349,13 +349,12 @@
         id="contact-signal-title"
         class="text-balance font-display text-[clamp(2.4rem,4.6vw,4.5rem)] leading-[0.95] tracking-[-0.04em] text-brand-dark"
       >
-        A clear brief turns scattered inputs into one production signal.
+        {$_('contact.signal.title') || 'A clear brief turns scattered inputs into one production signal.'}
       </h2>
       <p
         class="mx-auto mt-6 max-w-xl text-base leading-7 text-brand-dark/72 sm:text-lg"
       >
-        You do not need to solve the workflow before writing. Bring the
-        material and the intended finish; we can shape the route together.
+        {$_('contact.signal.description') || 'You do not need to solve the workflow before writing. Bring the material and the intended finish; we can shape the route together.'}
       </p>
     </div>
   </section>
@@ -372,13 +371,13 @@
           id="project-brief-title"
           class="text-balance font-display text-[clamp(2.6rem,4vw,4.6rem)] leading-[0.92] tracking-[-0.04em]"
         >
-          Share your project details.
+          {$_('contact.form.title') || 'Share your project details.'}
         </h2>
         <p
           id="project-brief-description"
           class="mt-5 max-w-2xl text-base leading-7 text-brand-dark/68"
         >
-          Provide the details you have. We will follow up on anything incomplete after reviewing.
+          {$_('contact.form.subtitle') || 'Provide the details you have. We will follow up on anything incomplete after reviewing.'}
         </p>
       </header>
 
@@ -393,7 +392,7 @@
         >
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="brief-field">
-              <span class="brief-field-label">Name *</span>
+              <span class="brief-field-label">{$_('contact.form.name') || 'Name *'}</span>
               <input
                 id="contact-name"
                 name="name"
@@ -404,7 +403,7 @@
               />
             </label>
             <label class="brief-field">
-              <span class="brief-field-label">Email *</span>
+              <span class="brief-field-label">{$_('contact.form.email') || 'Email *'}</span>
               <input
                 id="contact-email"
                 name="email"
@@ -415,7 +414,7 @@
               />
             </label>
             <label class="brief-field">
-              <span class="brief-field-label">Phone</span>
+              <span class="brief-field-label">{$_('contact.form.phone') || 'Phone'}</span>
               <input
                 id="contact-phone"
                 name="phone"
@@ -425,7 +424,7 @@
               />
             </label>
             <label class="brief-field">
-              <span class="brief-field-label">Company or brand</span>
+              <span class="brief-field-label">{$_('contact.form.company') || 'Company or brand'}</span>
               <input
                 id="contact-company"
                 name="company"
@@ -437,7 +436,7 @@
           </div>
 
           <fieldset class="mt-6">
-            <legend class="brief-field-label">Service</legend>
+            <legend class="brief-field-label">{$_('contact.form.service') || 'Service'}</legend>
             <div class="mt-3 grid gap-2 sm:grid-cols-3">
               {#each contactServiceDetails as service (service.name)}
                 <button
@@ -457,14 +456,14 @@
           </fieldset>
 
           <label class="brief-note mt-5">
-            <span class="brief-field-label">Your message *</span>
+            <span class="brief-field-label">{$_('contact.form.message') || 'Your message *'}</span>
             <textarea
               id="contact-message"
               name="message"
               required
               rows="5"
               class="brief-note-input"
-              placeholder="Source material, intended result, volume, timing, and anything that must stay consistent."
+              placeholder={$_('contact.form.placeholder') || 'Source material, intended result, volume, timing, and anything that must stay consistent.'}
             ></textarea>
           </label>
 
@@ -481,11 +480,11 @@
                   {formStatus}
                 </p>
               {:else}
-                <p>We usually respond within 1–2 hours.</p>
+                <p>{$_('contact.form.responseTime') || 'We usually respond within 1–2 hours.'}</p>
               {/if}
             </div>
             <button type="submit" class="brief-submit group">
-              Submit details
+              {$_('contact.form.submit') || 'Submit details'}
               <ArrowUpRight
                 size={16}
                 class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -518,10 +517,10 @@
             </figure>
             <div class="p-5">
               <h3 class="font-display text-2xl tracking-[-0.02em]">
-                Have questions?
+                {$_('contact.form.haveQuestions') || 'Have questions?'}
               </h3>
               <p class="mt-2 text-sm leading-6 text-brand-dark/62">
-                Call or email the Dhaka studio before sending a brief.
+                {$_('contact.form.haveQuestionsNote') || 'Call or email the Dhaka studio before sending a brief.'}
               </p>
               <div class="mt-5 grid gap-3 text-sm">
                 <a
@@ -572,10 +571,10 @@
           id="global-offices-title"
           class="text-balance font-display text-[clamp(2.7rem,4.6vw,5.4rem)] leading-[0.9] tracking-[-0.045em]"
         >
-          Reach us here.
+          {$_('contact.offices.title') || 'Reach us here.'}
         </h2>
         <p class="mt-5 max-w-xl text-base leading-7 text-brand-dark/66">
-          Our production team works across borders to bring every project to life.
+          {$_('contact.offices.description') || 'Our production team works across borders to bring every project to life.'}
         </p>
       </header>
 

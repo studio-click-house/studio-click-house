@@ -3,207 +3,149 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { studioDressColorways } from "$lib/content/media";
   import { _ } from "svelte-i18n";
 
   let section: HTMLElement;
-  let comparisonFrame: HTMLElement;
-  let aboutCopy: HTMLElement;
-  let colorwaysReady = $state(false);
-  let selectedColorwayId =
-    $state<(typeof studioDressColorways)[number]["id"]>("emerald");
-
-  function selectColorway(
-    colorwayId: (typeof studioDressColorways)[number]["id"],
-  ) {
-    if (!colorwaysReady || colorwayId === selectedColorwayId) return;
-
-    selectedColorwayId = colorwayId;
-  }
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
-    const colorwayPreloads = studioDressColorways.map((colorway) => {
-      const preload = new Image();
-      preload.decoding = "async";
-      preload.src = colorway.src;
-      return preload;
-    });
-
-    void Promise.allSettled(
-      colorwayPreloads.map((preload) => preload.decode()),
-    ).then(() => {
-      if (active) colorwaysReady = true;
-    });
 
     registerScrollTrigger().then((runtime) => {
-      if (!active || !runtime || !section || !comparisonFrame || !aboutCopy)
-        return;
-
+      if (!active || !runtime || !section) return;
       const { gsap } = runtime;
 
       context = gsap.context(() => {
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          const revealTimeline = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-              trigger: section,
-              start: "top 92%",
-              end: "top 26%",
-              scrub: 0.8,
-            },
-          });
+          const cards = gsap.utils.toArray<HTMLElement>(".stage-column");
+          const dividers = gsap.utils.toArray<HTMLElement>(".stage-divider");
 
-          revealTimeline.fromTo(
-            comparisonFrame,
-            {
-              autoAlpha: 0.45,
-              y: 54,
-              scale: 0.92,
-              clipPath: "inset(9% 7% 9% 7% round 2rem)",
-            },
+          // 1. Header reveal: independent once:true trigger so it never gets stuck hidden on scroll
+          gsap.fromTo(
+            ".ai-head-reveal",
+            { autoAlpha: 0, y: 25 },
             {
               autoAlpha: 1,
               y: 0,
-              scale: 1,
-              clipPath: "inset(0% 0% 0% 0% round 1.5rem)",
-              duration: 0.7,
-            },
-            0,
+              duration: 0.6,
+              ease: "power3.out",
+              scrollTrigger: { trigger: section, start: "top 92%", once: true },
+            }
           );
 
-          gsap
-            .timeline({
-              scrollTrigger: {
-                trigger: section,
-                start: "top 82%",
-                end: "center 50%",
-                scrub: 1.18,
-              },
-            })
-            .from(
-              aboutCopy,
+          // 2. Scrubbed cards timeline: completes exactly as the section reaches the middle of the viewport
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: "top 88%",
+              end: "center 48%",
+              scrub: 0.6,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // Step 1 (Raw Flat Input) appears and settles
+          if (cards[0]) {
+            tl.fromTo(
+              cards[0],
+              { autoAlpha: 0, scale: 0.94, y: 20 },
               {
-                autoAlpha: 0.2,
-                x: 82,
-                duration: 0.5,
+                autoAlpha: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.45,
                 ease: "power2.out",
-              },
-              0,
-            )
-            .from(
-              ".about-title-line > span",
-              {
-                yPercent: 112,
-                rotate: 2,
-                transformOrigin: "left bottom",
-                duration: 0.58,
-                stagger: 0.1,
-                ease: "power3.out",
-              },
-              0.08,
-            )
-            .from(
-              ".about-copy-step",
-              {
-                autoAlpha: 0,
-                x: 42,
-                y: 24,
-                duration: 0.46,
-                stagger: 0.12,
-                ease: "power2.out",
-              },
-              0.52,
+              }
             );
+          }
 
-          gsap.fromTo(
-            ".comparison-media",
-            { yPercent: -6, scale: 1.08 },
-            {
-              yPercent: 6,
-              scale: 1.015,
-              ease: "none",
-              scrollTrigger: {
-                trigger: comparisonFrame,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.65,
+          // Step 2 (3D Ghost Mannequin) unfolds to the right
+          if (dividers[0]) {
+            tl.fromTo(
+              dividers[0].querySelector(".stage-divider-line"),
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.25, ease: "power2.inOut" },
+              "-=0.1"
+            );
+          }
+          if (cards[1]) {
+            tl.fromTo(
+              cards[1],
+              { autoAlpha: 0, x: -60, scale: 0.94 },
+              {
+                autoAlpha: 1,
+                x: 0,
+                scale: 1,
+                duration: 0.45,
+                ease: "power2.out",
               },
-            },
-          );
+              "-=0.12"
+            );
+          }
 
-          gsap.fromTo(
-            ".grading-orbit",
-            { x: 34, y: -30 },
-            {
-              x: -20,
-              y: 48,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 88%",
-                end: "bottom 16%",
-                scrub: 0.55,
+          // Step 3 (AI On-Model Synthesis) unfolds to the right
+          if (dividers[1]) {
+            tl.fromTo(
+              dividers[1].querySelector(".stage-divider-line"),
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.25, ease: "power2.inOut" },
+              "-=0.1"
+            );
+          }
+          if (cards[2]) {
+            tl.fromTo(
+              cards[2],
+              { autoAlpha: 0, x: -60, scale: 0.94 },
+              {
+                autoAlpha: 1,
+                x: 0,
+                scale: 1,
+                duration: 0.45,
+                ease: "power2.out",
               },
+              "-=0.12"
+            );
+          }
+
+          // Step 4 (Cobalt Colorway) unfolds to the right
+          if (dividers[2]) {
+            tl.fromTo(
+              dividers[2].querySelector(".stage-divider-line"),
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.25, ease: "power2.inOut" },
+              "-=0.1"
+            );
+          }
+          if (cards[3]) {
+            tl.fromTo(
+              cards[3],
+              { autoAlpha: 0, x: -60, scale: 0.94 },
+              {
+                autoAlpha: 1,
+                x: 0,
+                scale: 1,
+                duration: 0.45,
+                ease: "power2.out",
+              },
+              "-=0.12"
+            );
+          }
+
+          // Explore Link reveal
+          tl.fromTo(
+            ".ai-explore-link",
+            { autoAlpha: 0, y: 15 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.3,
+              ease: "power2.out",
             },
+            "-=0.15"
           );
         });
-
-        media.add(
-          "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-          () => {
-            gsap.to(".grading-orb-shadow", {
-              x: 22,
-              y: 18,
-              scale: 1.025,
-              rotation: 4,
-              duration: 4.8,
-              ease: "sine.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-
-            gsap.to(".grading-orb-midtone", {
-              x: -20,
-              y: -22,
-              scale: 0.97,
-              rotation: -3,
-              duration: 3.1,
-              ease: "power1.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-
-            gsap.to(".grading-orb-highlight", {
-              x: 14,
-              y: 24,
-              scale: 1.06,
-              rotation: 6,
-              duration: 1.9,
-              ease: "sine.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-          },
-        );
-
-        media.add(
-          "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
-          () => {
-            gsap.to(".grading-orb-highlight", {
-              x: -10,
-              y: 14,
-              scale: 1.04,
-              duration: 2.3,
-              ease: "sine.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-          },
-        );
 
         return () => media.revert();
       }, section);
@@ -212,435 +154,396 @@
     return () => {
       active = false;
       context?.revert();
-      colorwayPreloads.forEach((preload) => {
-        preload.src = "";
-      });
     };
   });
 </script>
 
-<svelte:head>
-  {#each studioDressColorways as colorway}
-    <link rel="preload" as="image" href={colorway.src} />
-  {/each}
-</svelte:head>
-
 <section
   id="ai-about-section"
   bind:this={section}
-  aria-labelledby="ai-about-section-title"
-  class="about-section relative overflow-hidden bg-brand-light pt-4 pb-16 sm:pt-6 sm:pb-20 lg:pt-6 lg:pb-24 text-brand-dark"
+  aria-labelledby="ai-about-title"
+  class="relative overflow-hidden bg-brand-light text-brand-dark pt-10 sm:pt-14 lg:pt-18 pb-16 sm:pb-22 lg:pb-28"
 >
   <div class="site-shell relative z-10">
-    <div class="about-layout">
-      <figure class="about-comparison">
-        <div
-          bind:this={comparisonFrame}
-          class="comparison-frame"
-          role="group"
-          aria-label="Interactive outfit color-correction preview"
-        >
-          <div class="comparison-media">
-            {#each studioDressColorways as colorway}
+
+    <!-- ═══ Section Header (Centered) ═══ -->
+    <div class="mb-10 sm:mb-14 text-center">
+      <h2
+        id="ai-about-title"
+        class="ai-head-reveal font-display text-[clamp(2.4rem,4.2vw,4.5rem)] leading-[0.92] tracking-[-0.038em]"
+      >
+        {$_('home.aiWorkflow.title1') || 'AI E-Commerce'} <em class="font-display italic font-normal text-brand-green">{$_('home.aiWorkflow.title2') || 'Workflow.'}</em>
+      </h2>
+    </div>
+
+    <!-- ═══ 4-Stage Breakdown Grid ═══ -->
+    <div class="ai-stages-container">
+      <div class="ai-stages-grid">
+
+        <!-- ── STAGE 01: Raw Flat Input ── -->
+        <div class="stage-column">
+          <div class="stage-card">
+            <div class="stage-frame">
               <img
-                src={colorway.src}
-                alt={colorway.id === selectedColorwayId ? colorway.alt : ""}
-                width={colorway.width}
-                height={colorway.height}
-                loading="eager"
-                decoding="async"
-                aria-hidden={colorway.id !== selectedColorwayId}
-                class:colorway-image-active={colorway.id === selectedColorwayId}
-                class="colorway-image"
+                src="/images/about/ghost-mannequin-input.jpg"
+                alt="Raw garment flat capture input"
+                class="stage-img"
+                width="560"
+                height="747"
+                loading="lazy"
               />
-            {/each}
+            </div>
+          </div>
+          
+          <div class="stage-content">
+            <div class="stage-heading">
+              <span class="stage-index">01</span>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage1.title') || 'Raw Flat Input'}</h3>
+            </div>
+            <p class="stage-description">
+              {$_('home.aiWorkflow.stage1.description') || 'Standard flat garment photo on transparent studio cutout.'}
+            </p>
           </div>
         </div>
 
-        <div
-          class="colorway-controls"
-          role="group"
-          aria-label="Choose an outfit color correction"
-        >
-          {#each studioDressColorways as colorway}
-            <button
-              type="button"
-              class:colorway-control-active={colorway.id === selectedColorwayId}
-              class="colorway-control"
-              aria-label={`Show ${colorway.label} color correction`}
-              aria-pressed={colorway.id === selectedColorwayId}
-              disabled={!colorwaysReady}
-              onclick={() => selectColorway(colorway.id)}
-              onmouseenter={() => selectColorway(colorway.id)}
-            >
-              <span
-                class="colorway-swatch"
-                data-colorway={colorway.id}
-                aria-hidden="true"
-              ></span>
-            </button>
-          {/each}
-        </div>
-      </figure>
-
-      <div bind:this={aboutCopy} class="about-copy">
-        <div class="grading-orbit" aria-hidden="true">
-          <span class="grading-orb grading-orb-shadow"></span>
-          <span class="grading-orb grading-orb-midtone"></span>
-          <span class="grading-orb grading-orb-highlight"></span>
+        <!-- ── Connector 1 -> 2 ── -->
+        <div class="stage-divider" aria-hidden="true">
+          <div class="stage-divider-line"></div>
+          <div class="stage-divider-arrow">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <path d="M0 6h15M12 1l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
 
-        <h2
-          id="ai-about-section-title"
-          class="font-display text-[clamp(2.65rem,4.8vw,5.4rem)] leading-[0.88] tracking-[-0.045em]"
-        >
-          <span class="about-title-line">
-            <span>{$_('home.aiAbout.title1')}</span>
-          </span>
-          <span class="about-title-line">
-            <span><em class="text-brand-green">{$_('home.aiAbout.title2')}</em></span>
-          </span>
-        </h2>
+        <!-- ── STAGE 02: 3D Ghost Mannequin (Hero Focused Card) ── -->
+        <div class="stage-column stage-column-hero">
+          <div class="stage-card stage-card-hero">
+            <div class="stage-frame">
+              <img
+                src="/images/about/ghost-mannequin-emerald.jpg"
+                alt="Symmetrical 3D ghost mannequin e-commerce capture"
+                class="stage-img"
+                width="560"
+                height="747"
+                loading="lazy"
+              />
+            </div>
+          </div>
 
-        <p
-          class="about-copy-step mt-8 max-w-md text-sm leading-relaxed text-brand-dark/70 sm:text-base"
-        >
-          {$_('home.aiAbout.subtitle')}
-        </p>
-
-        <p
-          class="about-copy-step mt-5 max-w-md border-l border-brand-green/45 pl-5 text-sm italic leading-relaxed text-brand-dark/60 sm:text-base"
-        >
-          {$_('home.aiAbout.copy')}
-        </p>
-
-        <div class="about-copy-step about-actions">
-          <a href={resolve("/services")} class="about-action about-action-primary">
-            <span>{$_('home.aiAbout.explore')}</span>
-            <ArrowUpRight size={15} strokeWidth={1.7} />
-          </a>
-
-          <a
-            href={resolve("/contact")}
-            class="about-action about-action-secondary"
-          >
-            <span>{$_('home.aiAbout.freeTrial')}</span>
-            <ArrowUpRight size={15} strokeWidth={1.7} />
-          </a>
+          <div class="stage-content">
+            <div class="stage-heading">
+              <span class="stage-index text-brand-green">02</span>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage2.title') || '3D Ghost Mannequin'}</h3>
+            </div>
+            <p class="stage-description">
+              {$_('home.aiWorkflow.stage2.description') || 'Clean symmetrical hollow mannequin composite on e-commerce studio grey.'}
+            </p>
+          </div>
         </div>
+
+        <!-- ── Connector 2 -> 3 ── -->
+        <div class="stage-divider" aria-hidden="true">
+          <div class="stage-divider-line"></div>
+          <div class="stage-divider-arrow">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <path d="M0 6h15M12 1l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ── STAGE 03: AI On-Model Synthesis ── -->
+        <div class="stage-column">
+          <div class="stage-card">
+            <div class="stage-frame">
+              <img
+                src="/images/about/ai-model-emerald.jpg"
+                alt="AI-dressed model wearing emerald garment"
+                class="stage-img"
+                width="560"
+                height="747"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="stage-content">
+            <div class="stage-heading">
+              <span class="stage-index">03</span>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage3.title') || 'AI On-Model Synthesis'}</h3>
+            </div>
+            <p class="stage-description">
+              {$_('home.aiWorkflow.stage3.description') || 'Virtual model synthesis matching true fabric drape, posture & studio rim light.'}
+            </p>
+          </div>
+        </div>
+
+        <!-- ── Connector 3 -> 4 ── -->
+        <div class="stage-divider" aria-hidden="true">
+          <div class="stage-divider-line"></div>
+          <div class="stage-divider-arrow">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <path d="M0 6h15M12 1l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ── STAGE 04: Cobalt Colorway ── -->
+        <div class="stage-column">
+          <div class="stage-card">
+            <div class="stage-frame">
+              <img
+                src="/images/about/ai-model-cobalt.jpg"
+                alt="Cobalt blue colorway variant"
+                class="stage-img"
+                width="560"
+                height="747"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="stage-content">
+            <div class="stage-heading">
+              <span class="stage-index">04</span>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage4.title') || 'Cobalt Colorway'}</h3>
+            </div>
+            <p class="stage-description">
+              {$_('home.aiWorkflow.stage4.description') || 'Instant chromatic recolor preserving natural fabric folds and highlights.'}
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
+
+    <!-- ═══ Clean Explore Link (Centered) ═══ -->
+    <div class="mt-10 sm:mt-12 flex justify-center">
+      <a href={resolve("/services/ai-retouch")} class="ai-explore-link group">
+        <span class="font-sans text-xs sm:text-[0.84rem] font-semibold text-brand-dark group-hover:text-brand-green transition-colors duration-200">
+          {$_('home.aiWorkflow.explore') || 'Explore AI Services & Full Pipeline'}
+        </span>
+        <span class="grid h-6 w-6 place-items-center rounded-full border border-brand-dark/15 bg-white text-brand-dark transition-all duration-200 group-hover:border-brand-green group-hover:bg-brand-green group-hover:text-brand-dark">
+          <ArrowUpRight size={13} strokeWidth={1.8} class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
+      </a>
+    </div>
+
   </div>
 </section>
 
 <style>
-  .about-layout {
-    display: grid;
-    align-items: center;
-    gap: 4.5rem;
+  /* ═══ Stages Layout ═══ */
+  .ai-stages-container {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-block: 0.5rem;
   }
 
-  .about-comparison {
-    position: relative;
-    width: min(calc(100% - 4rem), 44rem);
-    margin: 0 auto;
+  .ai-stages-container::-webkit-scrollbar {
+    display: none;
   }
 
-  .comparison-frame {
-    position: relative;
-    aspect-ratio: 4 / 5;
+  .ai-stages-grid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+    min-width: 1080px;
+  }
+
+  /* ═══ Stage Column ═══ */
+  .stage-column {
+    flex: 1;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    will-change: transform, opacity;
+  }
+
+  .stage-column-hero {
+    max-width: 265px;
+  }
+
+  /* ── Stage Card & Frame ── */
+  .stage-card {
+    width: 100%;
+    border-radius: 0.95rem;
     overflow: hidden;
-    border-radius: 1.5rem;
-    background: var(--color-brand-dark);
-    box-shadow: 0 2rem 5rem
-      color-mix(in srgb, var(--color-brand-dark) 16%, transparent);
-    touch-action: pan-y;
-    will-change: clip-path, transform;
+    border: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+    background: var(--color-brand-paper);
+    box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.04);
+    transition:
+      transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 500ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .comparison-media {
-    position: absolute;
-    inset: -2.5% 0;
+  .stage-card:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--color-brand-dark) 25%, transparent);
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.08);
+  }
+
+  .stage-card-hero {
+    border: 1.5px solid var(--color-brand-green);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-brand-green) 25%, transparent),
+      0 6px 20px -4px rgba(126, 166, 65, 0.12);
+  }
+
+  .stage-card-hero:hover {
+    border-color: var(--color-brand-green);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-brand-green) 45%, transparent),
+      0 16px 36px -8px rgba(126, 166, 65, 0.18);
+  }
+
+  .stage-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 3.9;
     overflow: hidden;
-    will-change: transform;
   }
 
-  .colorway-image {
-    position: absolute;
-    inset: 0;
+  .stage-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 24%;
-    opacity: 0;
-    user-select: none;
-    pointer-events: none;
+    object-position: center 15%;
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .colorway-image-active {
-    z-index: 1;
-    opacity: 1;
+  .stage-card:hover .stage-img {
+    transform: scale(1.035);
   }
 
-  .colorway-controls {
-    --colorway-emerald: oklch(38% 0.1 165deg);
-    --colorway-cobalt: oklch(42% 0.18 265deg);
-    --colorway-plum: oklch(34% 0.11 330deg);
-    position: absolute;
-    z-index: 7;
-    top: 50%;
-    right: -4rem;
+  /* ── Stage Content & Typography ── */
+  .stage-content {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    transform: translateY(-50%);
+    gap: 0.3rem;
+    padding-inline: 0.2rem;
   }
 
-  .colorway-control {
-    display: grid;
-    width: 2.75rem;
-    height: 2.75rem;
-    place-items: center;
-    padding: 0;
-    border: 0;
-    border-radius: 9999px;
-    background: transparent;
-    box-shadow: none;
-    cursor: pointer;
-  }
-
-  .colorway-control:focus-visible {
-    outline: 2px solid var(--color-brand-green);
-    outline-offset: 1px;
-  }
-
-  .colorway-control-active {
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .colorway-swatch {
-    width: 1.2rem;
-    height: 1.2rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 42%, transparent);
-    border-radius: 9999px;
-  }
-
-  .colorway-control-active .colorway-swatch {
-    box-shadow:
-      0 0 0 2px var(--color-brand-light),
-      0 0 0 4px var(--color-brand-green);
-  }
-
-  .colorway-swatch[data-colorway="emerald"] {
-    background: var(--colorway-emerald);
-  }
-
-  .colorway-swatch[data-colorway="cobalt"] {
-    background: var(--colorway-cobalt);
-  }
-
-  .colorway-swatch[data-colorway="plum"] {
-    background: var(--colorway-plum);
-  }
-
-  .about-title-line {
-    display: block;
-    overflow: hidden;
-    padding: 0 0.1em 0.24em;
-    margin: 0 -0.1em -0.24em;
-  }
-
-  .about-title-line > span {
-    display: block;
-    will-change: transform;
-  }
-
-  .about-copy {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .about-actions {
+  .stage-heading {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
+    align-items: baseline;
+    gap: 0.4rem;
   }
 
-  .about-action {
-    display: inline-flex;
-    min-height: 3rem;
-    min-width: 10.5rem;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-inline: 1rem;
-    border: 1px solid var(--color-brand-dark);
-    border-radius: 0.55rem;
+  .stage-index {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-brand-green);
+  }
+
+  .stage-title {
     font-family: var(--font-sans);
-    font-size: 0.68rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    letter-spacing: 0.045em;
-    text-transform: uppercase;
-    transition:
-      color 280ms ease,
-      background 280ms ease,
-      border-color 280ms ease,
-      transform 280ms ease;
-  }
-
-  .about-action :global(svg) {
-    transition: transform 280ms ease;
-  }
-
-  .about-action:hover :global(svg) {
-    transform: translate(0.15rem, -0.15rem);
-  }
-
-  .about-action:active {
-    transform: scale(0.98);
-  }
-
-  .about-action:focus-visible {
-    outline: 3px solid var(--color-brand-green);
-    outline-offset: 3px;
-  }
-
-  .about-action-primary {
-    background: var(--color-brand-dark);
-    color: var(--color-brand-light);
-  }
-
-  .about-action-primary:hover {
-    border-color: var(--color-brand-green);
-    background: var(--color-brand-green);
     color: var(--color-brand-dark);
+    letter-spacing: -0.015em;
   }
 
-  .about-action-secondary {
-    background: color-mix(in srgb, var(--color-brand-paper) 72%, transparent);
-    color: var(--color-brand-dark);
+  .stage-description {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
   }
 
-  .about-action-secondary:hover {
-    border-color: var(--color-brand-green);
-    background: var(--color-brand-green);
+  /* ═══ Connectors ═══ */
+  .stage-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-inline: 0.65rem;
+    flex-shrink: 0;
+    align-self: center;
+    margin-bottom: 4.2rem;
   }
 
-  .about-copy > :not(.grading-orbit) {
-    position: relative;
-    z-index: 1;
+  .stage-divider-line {
+    width: 32px;
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-brand-dark) 18%, transparent) 0,
+      color-mix(in srgb, var(--color-brand-dark) 18%, transparent) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+    transform-origin: left;
   }
 
-  .grading-orbit {
-    position: absolute;
-    z-index: 0;
-    inset: -6rem -5rem -5rem -4rem;
-    overflow: visible;
-    pointer-events: none;
-    will-change: transform;
+  .stage-divider-arrow {
+    display: flex;
+    flex-shrink: 0;
+    color: var(--color-brand-green);
   }
 
-  .grading-orb {
-    position: absolute;
-    display: block;
-    border-radius: 9999px;
-    will-change: transform;
+  /* ═══ Explore Link ═══ */
+  .ai-explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
   }
 
-  .grading-orb-shadow {
-    top: 2%;
-    right: -5%;
-    width: 15rem;
-    height: 15rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
-    background: color-mix(in srgb, var(--color-brand-dark) 8%, transparent);
-  }
-
-  .grading-orb-midtone {
-    top: 42%;
-    left: 2%;
-    width: 10rem;
-    height: 10rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-green) 20%, transparent);
-    background: color-mix(in srgb, var(--color-brand-green) 9%, transparent);
-  }
-
-  .grading-orb-highlight {
-    top: 74%;
-    right: 8%;
-    width: 6rem;
-    height: 6rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-green) 32%, transparent);
-    background: color-mix(in srgb, var(--color-brand-green) 16%, transparent);
-  }
-
-  @media (min-width: 1024px) {
-    .about-layout {
-      grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.92fr);
-      gap: clamp(4rem, 7vw, 8rem);
+  /* ═══ Responsive ═══ */
+  @media (max-width: 991px) {
+    .ai-stages-grid {
+      min-width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
 
-    .about-comparison {
-      width: min(100%, calc(76svh * 4 / 5));
-      margin: 0;
+    .stage-column,
+    .stage-column-hero {
+      width: 100%;
+      max-width: 360px;
     }
 
-    .comparison-frame {
-      max-height: 76svh;
-    }
-
-    .about-copy {
-      max-width: 36rem;
-      will-change: transform;
+    .stage-divider {
+      transform: rotate(90deg);
+      margin-bottom: 0;
+      padding-inline: 0;
+      margin-block: 0.5rem;
     }
   }
 
-  @media (max-width: 640px) {
-    .about-layout {
-      gap: 3.75rem;
+  @media (min-width: 992px) and (max-width: 1279px) {
+    .stage-column {
+      max-width: 215px;
     }
 
-    .colorway-control {
-      width: 2.75rem;
-      height: 2.75rem;
+    .stage-column-hero {
+      max-width: 230px;
     }
 
-    .grading-orbit {
-      inset: -2rem -1rem auto auto;
-      width: 7rem;
-      height: 7rem;
+    .stage-divider {
+      padding-inline: 0.35rem;
     }
 
-    .grading-orb-shadow,
-    .grading-orb-midtone {
-      display: none;
-    }
-
-    .grading-orb-highlight {
-      top: 0;
-      right: 0;
-      width: 4.5rem;
-      height: 4.5rem;
-      opacity: 0.7;
+    .stage-divider-line {
+      width: 22px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .comparison-media,
-    .grading-orbit,
-    .grading-orb,
-    .about-title-line > span {
+    .stage-column,
+    .stage-divider-line,
+    .ai-head-reveal,
+    .ai-explore-link {
       will-change: auto;
-    }
-
-    .colorway-image {
-      will-change: auto;
+      transform: none !important;
     }
   }
 </style>

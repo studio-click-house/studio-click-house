@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { CompanyEvent } from "$lib/types/events";
+  import { _ } from "svelte-i18n";
 
   interface Props {
     upcoming: CompanyEvent;
@@ -20,12 +21,12 @@
       <h1
         class="mt-5 max-w-[9ch] font-display text-[clamp(3.5rem,6.2vw,6.6rem)] leading-[0.88] tracking-[-0.045em]"
       >
-        Studio in motion.
+        {$_('events.hero.title') || 'Studio in motion.'}
       </h1>
       <p
         class="mt-6 max-w-sm text-base leading-relaxed text-brand-light/68 sm:text-lg"
       >
-        Sessions and shared moments that move our craft and company forward.
+        {$_('events.hero.description') || 'Sessions and shared moments that move our craft and company forward.'}
       </p>
     </div>
 

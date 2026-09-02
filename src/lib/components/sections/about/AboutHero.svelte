@@ -4,6 +4,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { loadYouTubeApi, type YouTubePlayer } from "$lib/utils/youtube";
   import type { AboutPageData, AboutStat } from "$lib/types/about";
+  import { _ } from "svelte-i18n";
 
   let { hero } = $props<{ hero: AboutPageData["hero"] }>();
 
@@ -232,12 +233,12 @@
             <span
               class="hero-line-inner block text-[0.42em] font-normal italic leading-none text-brand-dark/48"
             >
-              {hero.headingLine1}
+              {$_('about.hero.headingLine1') || hero.headingLine1}
             </span>
           </span>
           <span class="block overflow-hidden">
             <span class="hero-line-inner block max-w-[9ch] text-brand-dark"
-              >{hero.headingLine2}</span
+              >{$_('about.hero.headingLine2') || hero.headingLine2}</span
             >
           </span>
         </h1>
@@ -245,7 +246,7 @@
         <p
           class="hero-description-reveal ml-auto max-w-3xl text-lg leading-relaxed text-brand-dark/75 md:text-2xl"
         >
-          {hero.positioning}
+          {$_('about.hero.positioning') || hero.positioning}
         </p>
       </div>
     </div>
@@ -267,12 +268,12 @@
             >
           </div>
           <div class="text-sm font-semibold text-brand-dark/90">
-            {stat.label}
+            {$_(`about.hero.stats.${i}.label`) || stat.label}
           </div>
           <div
             class="mt-1 max-w-[15rem] text-xs leading-relaxed text-brand-dark/58"
           >
-            {stat.sublabel}
+            {$_(`about.hero.stats.${i}.sublabel`) || stat.sublabel}
           </div>
         </div>
       {/each}

@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
+  import { _ } from "svelte-i18n";
 
   let { people } = $props<{ people: AboutPageData["people"] }>();
   let sectionRef: HTMLElement;
@@ -71,12 +72,12 @@
       <h2
         class="people-header-reveal max-w-[11ch] font-display text-[clamp(3rem,5vw,6rem)] leading-[0.86] tracking-[-0.045em] text-brand-dark lg:col-span-8"
       >
-        {people.heading}
+        {$_('about.people.heading') || people.heading}
       </h2>
       <p
         class="people-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
       >
-        {people.subheading}
+        {$_('about.people.subheading') || people.subheading}
       </p>
     </div>
 
@@ -107,14 +108,14 @@
           <p
             class="absolute bottom-4 left-4 max-w-[18rem] font-display text-2xl leading-none text-white md:text-3xl"
           >
-            Studio Click House collective
+            {$_('about.people.collectiveTitle') || 'Studio Click House collective'}
           </p>
         </div>
         <figcaption
           class="mt-3 flex items-center justify-between border-t border-brand-dark/25 pt-2 text-[0.64rem] uppercase tracking-[0.14em] text-brand-dark/55"
         >
-          <span>Dhaka headquarters</span>
-          <span>Production floor / suites</span>
+          <span>{$_('about.people.location1') || 'Dhaka headquarters'}</span>
+          <span>{$_('about.people.location2') || 'Production floor / suites'}</span>
         </figcaption>
       </figure>
 
@@ -148,12 +149,12 @@
               <p
                 class="text-[0.58rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
               >
-                {moment.category}
+                {$_(`about.people.moments.${index}.category`) || moment.category}
               </p>
               <h3
                 class="mt-1 text-sm font-semibold leading-tight text-brand-dark md:text-base"
               >
-                {moment.title}
+                {$_(`about.people.moments.${index}.title`) || moment.title}
               </h3>
             </figcaption>
           </figure>

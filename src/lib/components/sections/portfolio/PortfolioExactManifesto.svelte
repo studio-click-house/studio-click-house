@@ -1,3 +1,7 @@
+<script lang="ts">
+  import { _ } from "svelte-i18n";
+</script>
+
 <!-- Section 8: Centered Manifesto Quote + Artistic Brand Botanical Leaf Emblem (Exact Match) -->
 <section
   id="portfolio-manifesto-quote"
@@ -9,9 +13,7 @@
     <blockquote
       class="font-display text-2xl sm:text-3xl lg:text-4xl font-normal leading-[1.3] text-brand-dark tracking-tight mb-8"
     >
-      “The role of a creative leader is not to have all the ideas; it’s to
-      create a culture where everyone can have ideas and feel that they’re
-      valued.”
+      {$_('portfolio.manifesto.quote') || '“The role of a creative leader is not to have all the ideas; it’s to create a culture where everyone can have ideas and feel that they’re valued.”'}
     </blockquote>
 
     <!-- Centered Decorative Artistic Leaf Emblem matching reference image -->

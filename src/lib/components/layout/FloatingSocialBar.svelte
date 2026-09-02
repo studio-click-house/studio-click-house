@@ -11,6 +11,7 @@
     Phone,
   } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
+  import { _ } from "svelte-i18n";
 
   const AUDIO_SRC = "/audio/Audio-Presentation.mp3";
 
@@ -212,7 +213,7 @@
         role="tooltip"
         class="pointer-events-none absolute right-full mr-2.5 whitespace-nowrap rounded-md border border-white/15 bg-[#181615] px-2.5 py-1 font-mono text-[0.65rem] text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:opacity-100 group-hover:-translate-x-0.5"
       >
-        {isPlaying ? "Pause Brief" : "Play Brief"}
+        {isPlaying ? ($_('social.pauseBrief') || 'Pause Brief') : ($_('social.playBrief') || 'Play Brief')}
       </span>
     </div>
   </div>

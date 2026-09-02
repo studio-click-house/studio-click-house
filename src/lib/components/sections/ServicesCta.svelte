@@ -3,6 +3,7 @@
   import { ArrowRight, ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   let section = $state<HTMLElement>();
 
@@ -81,7 +82,7 @@
           id="services-cta-title"
           class="max-w-[13ch] font-display text-[clamp(3.3rem,5.8vw,6.5rem)] leading-[0.86] tracking-[-0.045em]"
         >
-          Put the next image in motion.
+          {$_('services.cta.heading') || 'Put the next image in motion.'}
         </h2>
       </div>
 
@@ -89,8 +90,7 @@
         <p
           class="max-w-[34ch] text-sm leading-[1.65] text-brand-dark/72 sm:text-base"
         >
-          Share the brief, sample files, and delivery window. Our production
-          desk will map the right workflow and return a clear scope.
+          {$_('services.cta.description') || 'Share the brief, sample files, and delivery window. Our production desk will map the right workflow and return a clear scope.'}
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -98,7 +98,7 @@
             href={resolve("/contact")}
             class="group inline-flex min-h-12 items-center gap-6 rounded-sm bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
           >
-            Start a project
+            {$_('services.cta.startProject') || 'Start a project'}
             <ArrowUpRight
               class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
@@ -107,7 +107,7 @@
             href={resolve("/contact")}
             class="group inline-flex min-h-12 items-center gap-3 rounded-sm border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
           >
-            Request a test edit
+            {$_('services.cta.requestTest') || 'Request a test edit'}
             <ArrowRight
               class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             />
@@ -118,7 +118,7 @@
           href={resolve("/pricing")}
           class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-dark/65 transition-colors duration-300 hover:text-brand-green"
         >
-          View rate guide
+          {$_('services.cta.viewRateGuide') || 'View rate guide'}
           <ArrowRight class="h-4 w-4" />
         </a>
       </div>
@@ -128,21 +128,21 @@
       class="services-cta-reveal mt-14 grid gap-8 rounded-[1.5rem] bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
     >
       <div>
-        <h3 class="text-base font-semibold">Send the brief</h3>
+        <h3 class="text-base font-semibold">{$_('services.cta.steps.0.title') || 'Send the brief'}</h3>
         <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
-          Share references, sample files, volume, and timing.
+          {$_('services.cta.steps.0.description') || 'Share references, sample files, volume, and timing.'}
         </p>
       </div>
       <div>
-        <h3 class="text-base font-semibold">Review a test</h3>
+        <h3 class="text-base font-semibold">{$_('services.cta.steps.1.title') || 'Review a test'}</h3>
         <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
-          Approve the finish and confirm the production scope.
+          {$_('services.cta.steps.1.description') || 'Approve the finish and confirm the production scope.'}
         </p>
       </div>
       <div>
-        <h3 class="text-base font-semibold">Move to production</h3>
+        <h3 class="text-base font-semibold">{$_('services.cta.steps.2.title') || 'Move to production'}</h3>
         <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
-          Assets move through production and two-tier quality control.
+          {$_('services.cta.steps.2.description') || 'Assets move through production and two-tier quality control.'}
         </p>
       </div>
     </div>

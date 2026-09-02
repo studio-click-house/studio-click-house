@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { EventActivity } from "$lib/types/events";
+  import { _ } from "svelte-i18n";
 
   interface Props {
     activities: EventActivity[];
@@ -17,13 +18,12 @@
       <h2
         class="max-w-[15ch] font-display text-[clamp(2.7rem,4.6vw,5rem)] leading-[0.94] tracking-[-0.04em]"
       >
-        The work grows when the team does.
+        {$_('events.culture.heading') || 'The work grows when the team does.'}
       </h2>
       <p
         class="mt-5 max-w-xl text-base leading-relaxed text-brand-dark/64 sm:text-lg"
       >
-        Our company activities make room for shared thinking, practical
-        learning, and the human connections behind consistent creative work.
+        {$_('events.culture.description') || 'Our company activities make room for shared thinking, practical learning, and the human connections behind consistent creative work.'}
       </p>
     </div>
 

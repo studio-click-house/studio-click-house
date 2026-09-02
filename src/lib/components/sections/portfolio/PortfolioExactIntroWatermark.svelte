@@ -1,5 +1,6 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   let section = $state<HTMLElement | null>(null);
   let cutoutImage = $state<HTMLElement | null>(null);
@@ -59,7 +60,7 @@
         <h2
           class="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-brand-dark leading-[1.1] tracking-tight"
         >
-          The High-End Post-Production Standard 2026
+          {$_('portfolio.intro.heading') || 'The High-End Post-Production Standard 2026'}
         </h2>
       </div>
 
@@ -68,10 +69,7 @@
         class="md:col-span-4 text-sm sm:text-base text-brand-dark/80 font-normal leading-relaxed"
       >
         <p>
-          Studio Click House represents over a decade of dedicated craftsmanship
-          in luxury fashion retouching, intricate clipping paths, invisible
-          ghost mannequin reconstruction, and high-fidelity color grading for
-          world-renowned brands.
+          {$_('portfolio.intro.p1') || 'Studio Click House represents over a decade of dedicated craftsmanship in luxury fashion retouching, intricate clipping paths, invisible ghost mannequin reconstruction, and high-fidelity color grading for world-renowned brands.'}
         </p>
       </div>
 
@@ -80,9 +78,7 @@
         class="md:col-span-4 text-sm sm:text-base text-brand-dark/80 font-normal leading-relaxed"
       >
         <p>
-          Every image that passes through our workstations is handled by master
-          digital artists adhering to lossless frequency separation, sub-pixel
-          pen vector precision, and strict print-ready color standards.
+          {$_('portfolio.intro.p2') || 'Every image that passes through our workstations is handled by master digital artists adhering to lossless frequency separation, sub-pixel pen vector precision, and strict print-ready color standards.'}
         </p>
       </div>
     </div>

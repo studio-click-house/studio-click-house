@@ -2,6 +2,7 @@
   import { Check, Sparkles, ArrowRight, ShieldCheck } from "lucide-svelte";
   import { pricingCategories, pricingPageData } from "$lib/content/pricing";
   import { cn } from "$lib/utils";
+  import { _ } from "svelte-i18n";
 
   // Calculator State
   let activeCatIndex = $state(0);
@@ -100,7 +101,7 @@
           <h3
             class="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-dark/55"
           >
-            Pipeline Category
+            {$_('pricing.calculator.pipelineCategory') || 'Pipeline Category'}
           </h3>
           <div class="flex flex-wrap gap-3">
             {#each pricingCategories as category, index}
@@ -114,7 +115,7 @@
                 )}
                 onclick={() => (activeCatIndex = index)}
               >
-                {category.categoryName}
+                {$_(`pricing.calculator.categories.${index}`) || category.categoryName}
               </button>
             {/each}
           </div>
@@ -125,7 +126,7 @@
           <h3
             class="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-dark/55"
           >
-            Services
+            {$_('pricing.calculator.services') || 'Services'}
           </h3>
           <div class="grid gap-2 sm:grid-cols-2">
             {#each activeCategory.rates as rate}
@@ -182,7 +183,7 @@
           >
             <div class="flex justify-between items-center mb-4">
               <h3 class="text-sm font-semibold text-brand-dark">
-                Estimated Volume
+                {$_('pricing.calculator.estimatedVolume') || 'Estimated Volume'}
               </h3>
               <span
                 class="font-mono text-xs font-bold bg-brand-green/15 text-brand-green px-2.5 py-1 rounded-md"
@@ -222,7 +223,7 @@
             class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5"
           >
             <h3 class="mb-4 text-sm font-semibold text-brand-dark">
-              Production Complexity
+              {$_('pricing.calculator.productionComplexity') || 'Production Complexity'}
             </h3>
             <div class="grid grid-cols-3 gap-2">
               {#each pricingPageData.calculator.complexityOptions as option, index}
@@ -236,13 +237,12 @@
                   )}
                   onclick={() => (selectedComplexity = index)}
                 >
-                  {option.label}
+                  {$_(`pricing.calculator.complexity.${index}.label`) || option.label}
                 </button>
               {/each}
             </div>
             <p class="text-xs text-brand-dark/65 mt-3 leading-relaxed">
-              {pricingPageData.calculator.complexityOptions[selectedComplexity]
-                .description}
+              {$_(`pricing.calculator.complexity.${selectedComplexity}.description`) || pricingPageData.calculator.complexityOptions[selectedComplexity].description}
             </p>
           </div>
         </div>
@@ -250,7 +250,7 @@
         <!-- Priority / Turnaround -->
         <div class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5">
           <h3 class="mb-4 text-sm font-semibold text-brand-dark">
-            Delivery Priority
+            {$_('pricing.calculator.deliveryPriority') || 'Delivery Priority'}
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {#each pricingPageData.calculator.turnaroundOptions as option, index}
@@ -264,7 +264,7 @@
                 )}
                 onclick={() => (selectedTurnaround = index)}
               >
-                <span class="text-sm font-medium">{option.label}</span>
+                <span class="text-sm font-medium">{$_(`pricing.calculator.turnaround.${index}.label`) || option.label}</span>
                 <span
                   class={cn(
                     "text-xs font-mono mt-1",
@@ -295,12 +295,12 @@
               <p
                 class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-green"
               >
-                Real-Time Calculation
+                {$_('pricing.calculator.realTimeCalculation') || 'Real-Time Calculation'}
               </p>
               <h3
                 class="mt-1 font-display text-2xl font-normal text-brand-dark"
               >
-                Investment Summary
+                {$_('pricing.calculator.investmentSummary') || 'Investment Summary'}
               </h3>
             </div>
             <div
@@ -325,8 +325,7 @@
               </span>
             </div>
             <p class="mt-2 text-xs text-brand-dark/65 leading-relaxed">
-              Estimated total based on selected volume, complexity, and
-              priority.
+              {$_('pricing.calculator.estimatedTotalNote') || 'Estimated total based on selected volume, complexity, and priority.'}
             </p>
           </div>
 
@@ -368,13 +367,13 @@
               href={`/contact?service=${encodeURIComponent(activeCategory.categoryName.toLowerCase().replace(" ", "-"))}&volume=${volume}&complexity=${selectedComplexity}&turnaround=${selectedTurnaround}`}
               class="w-full py-4 px-6 bg-brand-green text-white text-center font-mono text-xs font-bold uppercase tracking-widest hover:bg-brand-dark transition-colors duration-300 flex items-center justify-center gap-2 rounded-[0.55rem] shadow-sm"
             >
-              Request Custom Proposal <ArrowRight size={16} />
+              {$_('pricing.calculator.requestCustomProposal') || 'Request Custom Proposal'} <ArrowRight size={16} />
             </a>
             <a
               href="/contact"
               class="w-full py-3.5 px-6 border border-brand-dark/20 text-brand-dark text-center font-mono text-xs font-semibold uppercase tracking-widest hover:border-brand-dark hover:bg-brand-dark/5 transition-colors duration-300 rounded-[0.55rem]"
             >
-              Book a Consultation
+              {$_('pricing.calculator.bookConsultation') || 'Book a Consultation'}
             </a>
           </div>
 
@@ -383,7 +382,7 @@
             class="mt-6 flex items-center justify-center gap-2 text-xs text-brand-dark/65"
           >
             <ShieldCheck size={14} class="text-brand-green" />
-            <span>Dedicated project manager & SLA guarantee included.</span>
+            <span>{$_('pricing.calculator.guaranteePill') || 'Dedicated project manager & SLA guarantee included.'}</span>
           </div>
         </div>
       </div>

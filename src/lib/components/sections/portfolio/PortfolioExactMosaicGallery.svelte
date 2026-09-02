@@ -1,6 +1,7 @@
 <script lang="ts">
   import { X } from "lucide-svelte";
   import { tick } from "svelte";
+  import { _ } from "svelte-i18n";
 
   interface GalleryItem {
     src: string;
@@ -57,14 +58,17 @@
   ];
 
   let selectedImage = $state<GalleryItem | null>(null);
+  let selectedIndex = $state<number | null>(null);
   let closeButton = $state<HTMLButtonElement | null>(null);
 
-  function openImage(item: GalleryItem) {
+  function openImage(item: GalleryItem, index: number) {
     selectedImage = item;
+    selectedIndex = index;
   }
 
   function closeImage() {
     selectedImage = null;
+    selectedIndex = null;
   }
 
   $effect(() => {
@@ -98,12 +102,12 @@
   <div class="site-shell relative z-10">
     <!-- Top Row of Mosaic (4 photos side-by-side matching image) -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
-      {#each galleryItems.slice(0, 4) as item (item.src)}
+      {#each galleryItems.slice(0, 4) as item, index (item.src)}
         <button
           type="button"
-          onclick={() => openImage(item)}
+          onclick={() => openImage(item, index)}
           class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left"
-          aria-label="View {item.title}"
+          aria-label="View {$_(`portfolio.mosaic.items.${index}.title`) || item.title}"
         >
           <img
             src={item.src}
@@ -118,10 +122,10 @@
             <span
               class="font-mono text-[9px] uppercase tracking-wider text-brand-green font-semibold"
             >
-              {item.category}
+              {$_(`portfolio.mosaic.items.${index}.category`) || item.category}
             </span>
             <span class="font-display text-xs sm:text-sm font-normal">
-              {item.title}
+              {$_(`portfolio.mosaic.items.${index}.title`) || item.title}
             </span>
           </div>
         </button>
@@ -133,9 +137,9 @@
       <!-- Item 1: Narrow Portrait (3 cols) -->
       <button
         type="button"
-        onclick={() => openImage(galleryItems[4])}
+        onclick={() => openImage(galleryItems[4], 4)}
         class="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
-        aria-label="View {galleryItems[4].title}"
+        aria-label="View {$_('portfolio.mosaic.items.4.title') || galleryItems[4].title}"
       >
         <img
           src={galleryItems[4].src}
@@ -150,10 +154,10 @@
           <span
             class="font-mono text-[9px] uppercase tracking-wider text-brand-green font-semibold"
           >
-            {galleryItems[4].category}
+            {$_('portfolio.mosaic.items.4.category') || galleryItems[4].category}
           </span>
           <span class="font-display text-xs sm:text-sm font-normal">
-            {galleryItems[4].title}
+            {$_('portfolio.mosaic.items.4.title') || galleryItems[4].title}
           </span>
         </div>
       </button>
@@ -161,9 +165,9 @@
       <!-- Item 2: Wide Landscape (6 cols) -->
       <button
         type="button"
-        onclick={() => openImage(galleryItems[5])}
+        onclick={() => openImage(galleryItems[5], 5)}
         class="group relative aspect-[16/9] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-6"
-        aria-label="View {galleryItems[5].title}"
+        aria-label="View {$_('portfolio.mosaic.items.5.title') || galleryItems[5].title}"
       >
         <img
           src={galleryItems[5].src}
@@ -178,10 +182,10 @@
           <span
             class="font-mono text-[10px] uppercase tracking-wider text-brand-green font-semibold"
           >
-            {galleryItems[5].category}
+            {$_('portfolio.mosaic.items.5.category') || galleryItems[5].category}
           </span>
           <span class="font-display text-base sm:text-lg font-normal">
-            {galleryItems[5].title}
+            {$_('portfolio.mosaic.items.5.title') || galleryItems[5].title}
           </span>
         </div>
       </button>
@@ -189,9 +193,9 @@
       <!-- Item 3: Square/Standard (3 cols) -->
       <button
         type="button"
-        onclick={() => openImage(galleryItems[6])}
+        onclick={() => openImage(galleryItems[6], 6)}
         class="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
-        aria-label="View {galleryItems[6].title}"
+        aria-label="View {$_('portfolio.mosaic.items.6.title') || galleryItems[6].title}"
       >
         <img
           src={galleryItems[6].src}
@@ -206,67 +210,69 @@
           <span
             class="font-mono text-[9px] uppercase tracking-wider text-brand-green font-semibold"
           >
-            {galleryItems[6].category}
+            {$_('portfolio.mosaic.items.6.category') || galleryItems[6].category}
           </span>
           <span class="font-display text-xs sm:text-sm font-normal">
-            {galleryItems[6].title}
+            {$_('portfolio.mosaic.items.6.title') || galleryItems[6].title}
           </span>
         </div>
       </button>
     </div>
   </div>
+</section>
 
-  <!-- Lightbox Modal -->
-  {#if selectedImage}
-    <dialog
-      open
-      class="fixed inset-0 z-50 m-0 flex h-full max-h-none w-full max-w-none items-center justify-center border-0 bg-brand-dark/90 p-4 backdrop-blur-md"
-      aria-label={selectedImage.title}
-      onclick={(event) => {
-        if (event.target === event.currentTarget) closeImage();
-      }}
+<!-- Image Lightbox Modal -->
+{#if selectedImage && selectedIndex !== null}
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label="{$_(`portfolio.mosaic.items.${selectedIndex}.title`) || selectedImage.title} preview"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark/90 p-4 sm:p-6 backdrop-blur-md"
+    tabindex="-1"
+  >
+    <button
+      type="button"
+      class="fixed inset-0 h-full w-full cursor-default bg-transparent"
+      onclick={closeImage}
+      aria-label="{$_('portfolio.mosaic.closeModal') || 'Close preview'}"
+      tabindex="-1"
+    ></button>
+
+    <div
+      class="relative z-10 flex max-h-[90vh] max-w-4xl flex-col items-center overflow-hidden rounded-2xl bg-brand-dark border border-brand-light/10 shadow-2xl"
     >
-      <div
-        class="relative flex max-h-[90dvh] w-full max-w-4xl flex-col items-center overflow-hidden rounded-2xl border border-brand-dark/10 bg-brand-light p-4 shadow-2xl sm:p-6"
+      <button
+        bind:this={closeButton}
+        type="button"
+        onclick={closeImage}
+        class="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-brand-dark/80 text-brand-light hover:bg-brand-green hover:text-brand-dark transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-green"
+        aria-label="{$_('portfolio.mosaic.closeModal') || 'Close preview'}"
       >
-        <button
-          bind:this={closeButton}
-          type="button"
-          onclick={closeImage}
-          class="absolute top-4 right-4 z-10 rounded-full bg-brand-dark/10 p-2 text-brand-dark hover:bg-brand-dark/20 transition-colors cursor-pointer"
-          aria-label="Close lightbox"
-        >
-          <X class="size-5" />
-        </button>
+        <X class="h-5 w-5" />
+      </button>
 
-        <div
-          class="flex max-h-[70dvh] w-full items-center justify-center overflow-hidden bg-brand-dark/5"
-        >
-          <img
-            src={selectedImage.src}
-            alt={selectedImage.alt}
-            class="max-h-[70dvh] w-auto object-contain"
-          />
-        </div>
+      <div class="max-h-[75vh] w-full overflow-hidden bg-brand-dark/50">
+        <img
+          src={selectedImage.src}
+          alt={selectedImage.alt}
+          class="h-full w-full object-contain max-h-[75vh]"
+        />
+      </div>
 
-        <div
-          class="w-full mt-4 flex items-center justify-between pt-3 border-t border-brand-dark/10"
-        >
-          <div>
-            <span
-              class="font-mono text-[10px] uppercase tracking-widest text-brand-green font-semibold"
-            >
-              {selectedImage.category}
-            </span>
-            <h4 class="font-display text-xl font-normal text-brand-dark">
-              {selectedImage.title}
-            </h4>
-          </div>
-          <span class="font-mono text-xs text-brand-dark/50"
-            >Studio Click House Archive</span
+      <div
+        class="flex w-full items-center justify-between border-t border-brand-light/10 bg-brand-dark px-6 py-4 text-brand-light"
+      >
+        <div>
+          <span
+            class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold"
           >
+            {$_(`portfolio.mosaic.items.${selectedIndex}.category`) || selectedImage.category}
+          </span>
+          <h3 class="font-display text-lg font-normal text-brand-light">
+            {$_(`portfolio.mosaic.items.${selectedIndex}.title`) || selectedImage.title}
+          </h3>
         </div>
       </div>
-    </dialog>
-  {/if}
-</section>
+    </div>
+  </div>
+{/if}

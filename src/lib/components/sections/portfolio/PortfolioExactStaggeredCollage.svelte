@@ -1,5 +1,6 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   let collageSection = $state<HTMLElement | null>(null);
 
@@ -79,16 +80,15 @@
             <span
               class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold mb-1"
             >
-              Color Mastery
+              {$_('portfolio.collage.colorMastery') || 'Color Mastery'}
             </span>
             <h3 class="font-display text-xl font-normal text-brand-dark mb-2">
-              Pantone Precision
+              {$_('portfolio.collage.pantonePrecision') || 'Pantone Precision'}
             </h3>
             <p
               class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal"
             >
-              Flawless garment recoloring and skin tone harmony calibrated for
-              high-end print lookbooks.
+              {$_('portfolio.collage.pantoneDesc') || 'Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks.'}
             </p>
           </div>
 
@@ -115,19 +115,17 @@
           <span
             class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold block mb-2"
           >
-            Selected Campaign
+            {$_('portfolio.collage.selectedCampaign') || 'Selected Campaign'}
           </span>
           <h2
             class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-brand-dark leading-tight tracking-tight mb-3"
           >
-            Haute Couture Retouch
+            {$_('portfolio.collage.hauteCouture') || 'Haute Couture Retouch'}
           </h2>
           <p
             class="text-sm sm:text-base text-brand-dark/80 font-normal leading-relaxed max-w-lg"
           >
-            High-fashion editorial finishing engineered to maintain the
-            authentic tactile texture of silk, velvet, and fine jewelry while
-            perfecting lighting contour lines.
+            {$_('portfolio.collage.hauteCoutureDesc') || 'High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines.'}
           </p>
         </div>
 
@@ -151,16 +149,15 @@
             <span
               class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold mb-1"
             >
-              Macro Detail
+              {$_('portfolio.collage.macroDetail') || 'Macro Detail'}
             </span>
             <h3 class="font-display text-xl font-normal text-brand-dark mb-2">
-              Micro Contouring
+              {$_('portfolio.collage.microContouring') || 'Micro Contouring'}
             </h3>
             <p
               class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal"
             >
-              Non-destructive frequency separation preserving pore fidelity and
-              natural skin luminescence.
+              {$_('portfolio.collage.microContouringDesc') || 'Non-destructive frequency separation preserving pore fidelity and natural skin luminescence.'}
             </p>
           </div>
         </div>
@@ -187,14 +184,14 @@
               <span
                 class="font-mono text-[10px] uppercase tracking-wider text-brand-green font-semibold"
               >
-                Apparel Volume
+                {$_('portfolio.collage.apparelVolume') || 'Apparel Volume'}
               </span>
               <h4 class="font-display text-base font-normal text-brand-dark">
-                3D Hollow Joint Tailoring
+                {$_('portfolio.collage.hollowJoint') || '3D Hollow Joint Tailoring'}
               </h4>
             </div>
             <span class="font-mono text-xs text-brand-dark/50"
-              >2026 Archive</span
+              >{$_('portfolio.collage.archiveBadge') || '2026 Archive'}</span
             >
           </div>
         </div>
@@ -208,7 +205,7 @@
       <div
         class="font-display text-xl sm:text-2xl lg:text-3xl font-semibold text-brand-dark tracking-tight"
       >
-        Performing Craft
+        {$_('portfolio.collage.performingCraft') || 'Performing Craft'}
       </div>
       <div
         class="craft-image-mask font-display text-6xl sm:text-8xl lg:text-9xl font-black uppercase leading-none select-none tracking-tighter -mr-4 pointer-events-none"

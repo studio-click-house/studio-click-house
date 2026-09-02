@@ -11,6 +11,7 @@
   import { resolve } from "$app/paths";
   import { siteConfig } from "$lib/config/site";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   const services = [
     { label: "Photo Retouching", href: "/services" },
@@ -160,17 +161,19 @@
             />
           </div>
           <p class="font-mono text-[0.65rem] font-bold tracking-[0.22em] text-brand-dark uppercase">
-            Every Pixel Finished With Intent
+            {$_('footer.tagline') || 'Every Pixel Finished With Intent'}
           </p>
         </div>
 
         <p class="text-[0.86rem] leading-relaxed text-brand-dark/70 max-w-md font-sans">
-          Studio Click House is a full-scale Creative Post-Production Studio helping global E-commerce brands, Retailers, Agencies, and Photo studios produce clean, consistent, high-impact content at scale.
+          {$_('footer.description') || 'Studio Click House is a full-scale Creative Post-Production Studio helping global E-commerce brands, Retailers, Agencies, and Photo studios produce clean, consistent, high-impact content at scale.'}
         </p>
 
         <!-- Direct Email -->
         <div>
-          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-1">Email Us</span>
+          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-1">
+            {$_('footer.emailUs') || 'Email Us'}
+          </span>
           <a
             href={`mailto:${siteConfig.contact.email}`}
             class="font-sans text-xl font-bold tracking-tight text-brand-dark border-b-2 border-brand-dark pb-0.5 hover:text-brand-green hover:border-brand-green transition-colors"
@@ -181,11 +184,13 @@
 
         <!-- Newsletter Subscription -->
         <div class="max-w-md pt-2">
-          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-2">Join our newsletter</span>
+          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-2">
+            {$_('footer.newsletterTitle') || 'Join our newsletter'}
+          </span>
           <form class="flex w-full items-center">
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={$_('footer.newsletterPlaceholder') || 'Enter your email'}
               required
               class="w-full rounded-l-md border border-r-0 border-brand-dark/15 bg-white px-3 py-2 text-[0.8rem] text-brand-dark placeholder:text-brand-dark/40 focus:border-brand-green focus:outline-none focus:ring-1 focus:ring-brand-green"
             />
@@ -193,7 +198,7 @@
               type="submit"
               class="rounded-r-md bg-brand-dark px-4 py-2 text-[0.8rem] font-semibold text-white transition-colors hover:bg-brand-green whitespace-nowrap border border-brand-dark hover:border-brand-green"
             >
-              Subscribe
+              {$_('footer.newsletterButton') || 'Subscribe'}
             </button>
           </form>
         </div>
@@ -300,9 +305,9 @@
       <div class="lg:col-span-7 space-y-4">
         <div class="flex items-center justify-between pb-1">
           <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45">
-            Our Locations
+            {$_('footer.locationsTitle') || 'Our Locations'}
           </p>
-          <span class="font-mono text-[0.65rem] text-brand-dark/50 font-semibold">24/7 Global Production</span>
+          <span class="font-mono text-[0.65rem] text-brand-dark/50 font-semibold">{$_('footer.productionTag') || '24/7 Global Production'}</span>
         </div>
 
         <!-- Headquarters Card (Bangladesh / Dhaka) -->
@@ -310,7 +315,7 @@
           <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <span class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-1">
-                Headquarters
+                {$_('footer.headquarters') || 'Headquarters'}
               </span>
               <h3 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-dark flex items-baseline gap-2.5">
                 DHAKA <span class="font-sans text-xs font-medium text-brand-dark/50">Bangladesh</span>
@@ -342,7 +347,7 @@
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
               <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45 block mb-0.5">
-                Europe Hub
+                {$_('footer.europeHub') || 'Europe Hub'}
               </span>
               <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
                 LONDON <span class="font-sans text-[0.68rem] font-normal text-brand-dark/50">UK</span>
@@ -360,7 +365,7 @@
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
               <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45 block mb-0.5">
-                Nordic Hub
+                {$_('footer.nordicHub') || 'Nordic Hub'}
               </span>
               <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
                 SWEDEN <span class="font-sans text-[0.68rem] font-normal text-brand-dark/50">Stockholm</span>
@@ -378,7 +383,7 @@
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
               <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45 block mb-0.5">
-                Americas & APAC
+                {$_('footer.americasApac') || 'Americas & APAC'}
               </span>
               <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
                 AUSTRALIA <span class="font-sans text-[0.68rem] font-normal text-brand-dark/50">Sydney</span>
@@ -397,15 +402,17 @@
         <div class="grid grid-cols-3 gap-5 pt-4">
           <!-- Company -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">Company</p>
+            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
+              {$_('footer.company') || 'Company'}
+            </p>
             <ul class="space-y-1.5 text-[0.82rem]">
-              {#each companyLinks as link (link.href)}
+              {#each companyLinks as link, idx (link.href)}
                 <li>
                   <a
                     href={resolve(link.href)}
                     class="text-brand-dark/75 hover:text-brand-green transition-colors inline-flex items-center gap-1.5"
                   >
-                    <span>{link.label}</span>
+                    <span>{$_(`footer.companyLinks.${idx}`) || link.label}</span>
                     {#if link.badge}
                       <span class="rounded bg-brand-acid px-1 py-0.2 font-mono text-[0.5rem] font-bold uppercase text-brand-dark">
                         {link.badge}
@@ -419,7 +426,7 @@
                   href={resolve("/contact")}
                   class="font-bold text-brand-green hover:underline decoration-brand-green underline-offset-4"
                 >
-                  Free Trial
+                  {$_('footer.freeTrial') || 'Free Trial'}
                 </a>
               </li>
             </ul>
@@ -427,15 +434,17 @@
 
           <!-- Services -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">Services</p>
+            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
+              {$_('footer.services') || 'Services'}
+            </p>
             <ul class="space-y-1.5 text-[0.82rem]">
-              {#each services as link (link.href)}
+              {#each services as link, idx (link.href)}
                 <li>
                   <a
                     href={resolve(link.href)}
                     class="text-brand-dark/75 hover:text-brand-green transition-colors"
                   >
-                    {link.label}
+                    {$_(`footer.serviceLinks.${idx}`) || link.label}
                   </a>
                 </li>
               {/each}
@@ -444,15 +453,17 @@
 
           <!-- Policy -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">Policy</p>
+            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
+              {$_('footer.policy') || 'Policy'}
+            </p>
             <ul class="space-y-1.5 text-[0.82rem]">
-              {#each policyLinks as link (link.label)}
+              {#each policyLinks as link, idx (link.label)}
                 <li>
                   <a
                     href={resolve(link.href)}
                     class="text-brand-dark/70 hover:text-brand-green transition-colors"
                   >
-                    {link.label}
+                    {$_(`footer.policyLinks.${idx}`) || link.label}
                   </a>
                 </li>
               {/each}
@@ -469,7 +480,7 @@
       <div class="overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white shadow-xs">
         <div class="flex items-center justify-between px-5 pt-4 pb-1">
           <p class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45">
-            Accredited &amp; Member Of
+            {$_('footer.accreditations') || 'Accredited & Member Of'}
           </p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-4">
@@ -503,23 +514,23 @@
       class="footer-reveal flex flex-col gap-3 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/50 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>
-        &copy; {new Date().getFullYear()} Studio Click House Limited. All rights reserved.
+        &copy; {new Date().getFullYear()} {$_('footer.allRightsReserved') || 'Studio Click House Limited. All rights reserved.'}
       </p>
       <div class="flex items-center gap-6">
         <a
           href={resolve("/privacy")}
-          class="hover:text-brand-dark transition-colors">Privacy</a
+          class="hover:text-brand-dark transition-colors">{$_('footer.privacy') || 'Privacy'}</a
         >
         <a
           href={resolve("/terms")}
-          class="hover:text-brand-dark transition-colors">Terms</a
+          class="hover:text-brand-dark transition-colors">{$_('footer.terms') || 'Terms'}</a
         >
         <a
           href="#top"
           onclick={scrollToTop}
           class="group flex items-center gap-1.5 text-brand-dark hover:text-brand-green transition-colors font-bold"
         >
-          <span>Back to top</span>
+          <span>{$_('footer.backToTop') || 'Back to top'}</span>
           <ArrowUp
             size={13}
             class="transition-transform duration-300 group-hover:-translate-y-1"

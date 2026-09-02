@@ -90,7 +90,7 @@
   id="about-description"
   bind:this={section}
   aria-labelledby="about-description-title"
-  class="relative overflow-hidden bg-brand-light py-20 sm:py-24 lg:py-28 text-brand-dark"
+  class="relative overflow-hidden bg-brand-light pt-20 sm:pt-24 lg:pt-28 pb-10 sm:pb-12 lg:pb-14 text-brand-dark"
 >
   <div class="site-shell relative z-10">
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
@@ -104,11 +104,11 @@
           class="font-display text-[clamp(2.5rem,4.4vw,4.8rem)] leading-[0.92] tracking-[-0.04em]"
         >
           <span class="desc-title-line block overflow-hidden pb-1">
-            <span class="block will-change-transform">Precision finishing.</span>
+            <span class="block will-change-transform">About Us</span>
           </span>
           <span class="desc-title-line block overflow-hidden pb-1">
             <span class="block will-change-transform">
-              <em class="font-display italic font-normal text-brand-green">Built for creative scale.</em>
+              <em class="font-display italic font-normal text-brand-green">Studio Click House.</em>
             </span>
           </span>
         </h2>
@@ -116,12 +116,11 @@
         <!-- Story Copy -->
         <div class="mt-6 space-y-4 max-w-xl">
           <p class="desc-story-item font-sans text-base leading-[1.55] font-normal text-brand-dark/90 sm:text-[1.15rem] sm:leading-[1.5]">
-            <strong class="font-semibold text-brand-dark">Studio Click House</strong> is an international visual post-production house serving 
-            <em class="font-display italic font-normal text-brand-dark text-[1.1em]">world-class photographers</em>, global fashion brands, and creative agencies.
+            {$_('home.aboutDescription.paragraph1') || 'Studio Click House is an international visual post-production house serving world-class photographers, global fashion brands, e-commerce retailers, and creative agencies.'}
           </p>
           
           <p class="desc-story-item text-xs leading-relaxed text-brand-dark/65 sm:text-sm font-sans">
-            We specialize in editorial image retouching, video color grading, and photorealistic 3D CGI rendering. Combining meticulous artisan craft with an overnight 24/7 delivery pipeline, our studio ensures every frame meets uncompromising standards.
+            {$_('home.aboutDescription.paragraph2') || 'We specialize in editorial image retouching, video color grading, and photorealistic 3D CGI rendering. Combining meticulous human artistry with an overnight 24/7 production pipeline, our studio ensures every frame meets uncompromising creative and commercial standards.'}
           </p>
         </div>
 
@@ -131,7 +130,7 @@
             href={resolve("/about")}
             class="about-action about-action-primary"
           >
-            <span>{$_('home.aboutDescription.aboutStudio')}</span>
+            <span>{$_('home.aboutDescription.aboutStudio') || 'About the studio'}</span>
             <ArrowUpRight size={15} strokeWidth={1.7} />
           </a>
 
@@ -139,7 +138,7 @@
             href={resolve("/contact")}
             class="about-action about-action-secondary"
           >
-            <span>{$_('home.aboutDescription.freeTrial')}</span>
+            <span>{$_('home.aboutDescription.freeTrial') || 'Start Free Trial'}</span>
             <ArrowUpRight size={15} strokeWidth={1.7} />
           </a>
         </div>
@@ -159,20 +158,20 @@
                 <Users size={15} strokeWidth={1.75} />
               </div>
               <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                ATELIER 01
+                {$_('home.aboutDescription.atelierTags.0') || 'ATELIER 01'}
               </span>
             </div>
 
             <!-- Content -->
             <div class="relative z-10 mt-4">
               <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                150+
+                {$_('home.aboutDescription.stats.0.value') || '150+'}
               </span>
               <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                Senior Specialists
+                {$_('home.aboutDescription.stats.0.label') || 'Senior Specialists'}
               </h3>
               <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                Dedicated in-house retouchers & 3D artists
+                {$_('home.aboutDescription.stats.0.sub') || 'Dedicated in-house retouchers & 3D artists'}
               </p>
             </div>
 
@@ -194,20 +193,20 @@
                 <Clock size={15} strokeWidth={1.75} />
               </div>
               <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                CONTINUOUS
+                {$_('home.aboutDescription.atelierTags.1') || 'CONTINUOUS'}
               </span>
             </div>
 
             <!-- Content -->
             <div class="relative z-10 mt-4">
               <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                24/7
+                {$_('home.aboutDescription.stats.1.value') || '24/7'}
               </span>
               <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                Global Production
+                {$_('home.aboutDescription.stats.1.label') || 'Global Production'}
               </h3>
               <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                Continuous worldwide overnight turnaround
+                {$_('home.aboutDescription.stats.1.sub') || 'Continuous worldwide overnight turnaround'}
               </p>
             </div>
 
@@ -229,20 +228,20 @@
                 <ShieldCheck size={15} strokeWidth={1.75} />
               </div>
               <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                3-TIER QC
+                {$_('home.aboutDescription.atelierTags.2') || '3-TIER QC'}
               </span>
             </div>
 
             <!-- Content -->
             <div class="relative z-10 mt-4">
               <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                99.8%
+                {$_('home.aboutDescription.stats.2.value') || '99.8%'}
               </span>
               <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                QC Accuracy
+                {$_('home.aboutDescription.stats.2.label') || 'QC Accuracy'}
               </h3>
               <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                Three-tier precision inspection system
+                {$_('home.aboutDescription.stats.2.sub') || 'Three-tier precision inspection system'}
               </p>
             </div>
 
@@ -264,20 +263,20 @@
                 <Globe size={15} strokeWidth={1.75} />
               </div>
               <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                WORLDWIDE
+                {$_('home.aboutDescription.atelierTags.3') || 'WORLDWIDE'}
               </span>
             </div>
 
             <!-- Content -->
             <div class="relative z-10 mt-4">
               <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                20+
+                {$_('home.aboutDescription.stats.3.value') || '20+'}
               </span>
               <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                Countries Served
+                {$_('home.aboutDescription.stats.3.label') || 'Countries Served'}
               </h3>
               <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                Trusted by international luxury brands
+                {$_('home.aboutDescription.stats.3.sub') || 'Trusted by international luxury brands'}
               </p>
             </div>
 

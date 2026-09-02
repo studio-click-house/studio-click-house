@@ -2,6 +2,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import { _ } from "svelte-i18n";
 </script>
 
 <PageMeta
@@ -15,22 +16,22 @@
     <section
       class="border-x border-brand-dark/10 px-5 pb-16 pt-12 sm:px-10 lg:px-16"
     >
-      <p class="eyebrow text-brand-green">Careers</p>
+      <p class="eyebrow text-brand-green">{$_('careers.eyebrow') || 'Careers'}</p>
       <div class="mt-8 max-w-3xl border-b border-brand-dark/15 pb-12">
-        <h1 class="display-title">Build beautiful work with us.</h1>
+        <h1 class="display-title">{$_('careers.title') || 'Build beautiful work with us.'}</h1>
         <p
           class="mt-8 max-w-xl text-base leading-relaxed text-brand-dark/65 sm:text-lg"
         >
-          Future Studio Click House career opportunities will be shared here.
+          {$_('careers.description') || 'Future Studio Click House career opportunities will be shared here.'}
         </p>
       </div>
 
       <div class="mt-12 max-w-xl">
         <p class="text-sm leading-relaxed text-brand-dark/65">
-          For studio enquiries, please contact the team directly.
+          {$_('careers.contactNote') || 'For studio enquiries, please contact the team directly.'}
         </p>
         <a href={resolve("/contact")} class="text-link mt-6 text-brand-dark">
-          Contact the studio <ArrowUpRight size={14} />
+          {$_('careers.contactLink') || 'Contact the studio'} <ArrowUpRight size={14} />
         </a>
       </div>
     </section>

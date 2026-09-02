@@ -2,6 +2,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import { _ } from "svelte-i18n";
 
   const pillars = [
     {
@@ -33,22 +34,21 @@
     <div
       class="border-x border-brand-dark/10 px-5 pb-10 pt-12 sm:px-10 lg:px-16"
     >
-      <p class="eyebrow text-brand-green">Operating with Intent</p>
+      <p class="eyebrow text-brand-green">{$_('csr.eyebrow') || 'Operating with Intent'}</p>
 
       <div class="mt-8 max-w-4xl border-b border-brand-dark/15 pb-12">
-        <h1 class="display-title">Digital CSR</h1>
+        <h1 class="display-title">{$_('csr.title') || 'Digital CSR'}</h1>
         <p
           class="mt-8 max-w-xl text-base leading-relaxed text-brand-dark/65 sm:text-lg"
         >
-          We believe post-production should respect the human hands behind the
-          screens and the environments powering our digital pipelines.
+          {$_('csr.description') || 'We believe post-production should respect the human hands behind the screens and the environments powering our digital pipelines.'}
         </p>
       </div>
 
       <div class="mt-16 grid gap-12 lg:grid-cols-[1fr_0.4fr]">
         <!-- Pillars List -->
         <div class="space-y-12">
-          {#each pillars as pillar (pillar.id)}
+          {#each pillars as pillar, index (pillar.id)}
             <article
               class="border-b border-brand-dark/10 pb-10 last:border-0 last:pb-0"
             >
@@ -60,12 +60,12 @@
               <h2
                 class="mt-3 font-display text-2xl tracking-[-0.02em] text-brand-dark sm:text-3xl"
               >
-                {pillar.title}
+                {$_(`csr.pillars.${index}.title`) || pillar.title}
               </h2>
               <p
                 class="mt-4 max-w-2xl text-sm leading-relaxed text-brand-dark/65"
               >
-                {pillar.desc}
+                {$_(`csr.pillars.${index}.desc`) || pillar.desc}
               </p>
             </article>
           {/each}
@@ -79,18 +79,16 @@
             <h3
               class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand-dark"
             >
-              Partnering on Impact
+              {$_('csr.sidebar.partnerTitle') || 'Partnering on Impact'}
             </h3>
             <p class="mt-4 text-xs leading-relaxed text-brand-dark/65">
-              Are you a registered non-profit, cultural archive, or public arts
-              group in need of specialized post-production, color, or archiving
-              services?
+              {$_('csr.sidebar.partnerDesc') || 'Are you a registered non-profit, cultural archive, or public arts group in need of specialized post-production, color, or archiving services?'}
             </p>
             <a
               href={resolve("/contact")}
               class="text-link mt-6 text-brand-dark"
             >
-              Pitch your project <ArrowUpRight size={14} />
+              {$_('csr.sidebar.pitchProject') || 'Pitch your project'} <ArrowUpRight size={14} />
             </a>
           </div>
 
@@ -98,12 +96,10 @@
             <h3
               class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand-dark"
             >
-              Our Commitment
+              {$_('csr.sidebar.commitTitle') || 'Our Commitment'}
             </h3>
             <p class="mt-4 text-xs leading-relaxed text-brand-dark/65">
-              By choosing Studio Click House, you support a digital supply chain
-              that prioritizes workers and utilizes energy-conscious cloud
-              delivery nodes.
+              {$_('csr.sidebar.commitDesc') || 'By choosing Studio Click House, you support a digital supply chain that prioritizes workers and utilizes energy-conscious cloud delivery nodes.'}
             </p>
           </div>
         </div>

@@ -771,7 +771,7 @@
                         <Icon size={15} strokeWidth={1.75} />
                       </div>
                       <h3 class="font-display font-medium text-[1.05rem] leading-tight text-brand-dark">
-                        {assurance.title}
+                        {$_(`home.aboutOrbit.steps.${index}.title`) || assurance.title}
                       </h3>
                     </div>
 
@@ -786,7 +786,7 @@
                   </div>
 
                   <p class="assurance-description mt-2 text-[0.78rem] leading-relaxed transition-colors duration-300 {isActive ? 'text-brand-dark/85 font-normal' : 'text-brand-dark/60'}">
-                    {assurance.description}
+                    {$_(`home.aboutOrbit.steps.${index}.description`) || assurance.description}
                   </p>
                 </div>
               </button>

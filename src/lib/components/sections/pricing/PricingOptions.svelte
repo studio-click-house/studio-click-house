@@ -1,6 +1,7 @@
 <script lang="ts">
   import PricingCalculator from "./PricingCalculator.svelte";
   import PricingCards from "./PricingCards.svelte";
+  import { _ } from "svelte-i18n";
 
   type PricingView = "packages" | "custom";
 
@@ -19,13 +20,12 @@
           id="pricing-options-title"
           class="font-display text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[0.92] tracking-[-0.04em] text-brand-dark"
         >
-          Our Pricing
+          {$_('pricing.options.heading') || 'Our Pricing'}
         </h2>
         <p
           class="mt-5 max-w-xl text-sm leading-relaxed text-brand-dark/70 sm:text-base"
         >
-          Choose a ready-made production package or build a custom estimate
-          around your exact volume, complexity, and turnaround.
+          {$_('pricing.options.description') || 'Choose a ready-made production package or build a custom estimate around your exact volume, complexity, and turnaround.'}
         </p>
       </div>
 
@@ -46,7 +46,7 @@
             : 'text-brand-dark/65 hover:text-brand-dark'}"
           onclick={() => (activeView = "packages")}
         >
-          Packages
+          {$_('pricing.options.packagesTab') || 'Packages'}
         </button>
         <button
           id="pricing-custom-tab"
@@ -60,7 +60,7 @@
             : 'text-brand-dark/65 hover:text-brand-dark'}"
           onclick={() => (activeView = "custom")}
         >
-          Custom Price
+          {$_('pricing.options.customTab') || 'Custom Price'}
         </button>
       </div>
     </header>

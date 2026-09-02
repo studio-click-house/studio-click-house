@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import * as THREE from "three";
+  import type * as THREE from "three";
   import { registerScrollTrigger } from "$lib/animations/gsap";
 
   interface Props {
@@ -63,7 +63,7 @@
   // Spatial offsets calculated based on visibleCount inside onMount to prevent Svelte reactivity warning
   let spatialPositions: Array<{ x: number; y: number }> = [];
 
-  const createClothMaterial = () => {
+  const createClothMaterial = (THREE: typeof import("three")) => {
     return new THREE.ShaderMaterial({
       transparent: true,
       uniforms: {
@@ -153,6 +153,7 @@
 
   onMount(async () => {
     if (!canvasRef || !viewportRef || images.length === 0) return;
+    const THREE = await import("three");
 
     // 0. Compute spatial positions to prevent reactivity warning
     spatialPositions = Array.from({ length: visibleCount }, (_, i) => {
@@ -201,7 +202,7 @@
     // 3. Create Shared Geometry and materials pool
     geometry = new THREE.PlaneGeometry(1, 1, 32, 32);
     materials = Array.from({ length: visibleCount }, () =>
-      createClothMaterial(),
+      createClothMaterial(THREE),
     );
 
     // 4. Create and position meshes

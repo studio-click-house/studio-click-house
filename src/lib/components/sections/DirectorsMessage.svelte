@@ -1,6 +1,7 @@
 <script lang="ts">
   import { MessageSquareQuote } from "lucide-svelte";
   import { testimonials } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
 </script>
 
 <section
@@ -10,12 +11,14 @@
 >
   <div class="site-shell grid gap-14 lg:grid-cols-12">
     <div class="lg:col-span-4">
-      <p class="eyebrow text-brand-green font-semibold">From the Creative Director</p>
+      <p class="eyebrow text-brand-green font-semibold">
+        {$_('about.directorsMessage.eyebrow') || 'From the Creative Director'}
+      </p>
       <h2
         id="director-message-title"
         class="mt-7 font-display text-5xl leading-[0.95] tracking-[-0.035em] sm:text-6xl"
       >
-        Driven by dedication and ready for every challenge.
+        {$_('about.directorsMessage.title') || 'Driven by dedication and ready for every challenge.'}
       </h2>
     </div>
     <div data-scroll-visual class="lg:col-span-8 lg:pt-14">
@@ -23,7 +26,7 @@
         <div
           class="divide-y divide-brand-light/15 border-y border-brand-light/15"
         >
-          {#each testimonials as testimonial (`${testimonial.name}-${testimonial.company}`)}
+          {#each testimonials as testimonial, index (`${testimonial.name}-${testimonial.company}`)}
             <blockquote
               class="py-8 flex flex-col gap-6 md:flex-row md:items-start md:gap-8"
             >
@@ -41,7 +44,7 @@
               <div class="flex-1 space-y-4">
                 <p class="director-quote relative font-display text-2xl md:text-3xl leading-snug">
                   <span class="director-quote-mark" aria-hidden="true">“</span>
-                  {testimonial.quote}
+                  {$_(`about.directorsMessage.testimonials.${index}.quote`) || testimonial.quote}
                 </p>
                 <footer class="text-sm flex items-center gap-3">
                   <div class="h-px w-8 bg-brand-green/50"></div>
@@ -54,7 +57,8 @@
                     <span
                       class="text-brand-light/65 text-xs block sm:inline sm:before:content-['//'] sm:before:mx-1 font-mono"
                     >
-                      {#if testimonial.role}{testimonial.role},{" "}
+                      {#if testimonial.role}
+                        {$_(`about.directorsMessage.testimonials.${index}.role`) || testimonial.role},{" "}
                       {/if}{testimonial.company}
                     </span>
                   </div>
@@ -75,12 +79,10 @@
           />
           <div>
             <p class="font-display text-4xl sm:text-5xl">
-              Client stories will live here.
+              {$_('about.directorsMessage.emptyTitle') || 'Client stories will live here.'}
             </p>
             <p class="mt-4 max-w-xl text-sm leading-relaxed text-brand-light/65">
-              Verified testimonials, names, and companies will be added only
-              after they are supplied and approved. The section is ready for
-              that content now.
+              {$_('about.directorsMessage.emptyDescription') || 'Verified testimonials, names, and companies will be added only after they are supplied and approved. The section is ready for that content now.'}
             </p>
           </div>
         </div>
@@ -98,7 +100,7 @@
     font-size: 3.5em;
     line-height: 1;
     color: var(--color-brand-green);
-    opacity: 0.12;
+    opacity: 0.35;
     pointer-events: none;
     user-select: none;
   }

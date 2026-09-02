@@ -5,6 +5,7 @@
   import { Button } from "$lib/components/ui/button";
   import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
+  import { _ } from "svelte-i18n";
 
   let email = $state("");
   let password = $state("");
@@ -14,13 +15,13 @@
   function handleSubmit(event: SubmitEvent) {
     event.preventDefault();
     if (!email || !password) {
-      errorMsg = "Please fill in all fields.";
+      errorMsg = $_("login.errorFill") || "Please fill in all fields.";
       successMsg = "";
       return;
     }
     // Mock login logic
     errorMsg = "";
-    successMsg = "Successfully authenticated. Redirecting to workspace...";
+    successMsg = $_("login.success") || "Successfully authenticated. Redirecting to workspace...";
     setTimeout(() => {
       window.location.href = resolve("/");
     }, 1500);
@@ -44,17 +45,17 @@
       <div
         class="absolute -top-3 left-6 bg-brand-green px-2.5 py-1 font-mono text-[0.52rem] uppercase tracking-[0.14em] text-brand-dark font-bold"
       >
-        Secure Access
+        {$_('login.badge') || 'Secure Access'}
       </div>
 
       <div class="text-center md:text-left">
         <h1 class="font-display text-3xl tracking-[-0.02em] text-brand-dark">
-          Studio Workspace
+          {$_('login.title') || 'Studio Workspace'}
         </h1>
         <p
           class="mt-2 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/40"
         >
-          Enter credentials to view assets
+          {$_('login.subtitle') || 'Enter credentials to view assets'}
         </p>
       </div>
 
@@ -80,7 +81,7 @@
             for="email"
             class="!block font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/60"
           >
-            Email address
+            {$_('login.emailLabel') || 'Email address'}
           </Label>
           <Input
             id="email"
@@ -99,13 +100,13 @@
               for="password"
               class="!block font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/60"
             >
-              Password
+              {$_('login.passwordLabel') || 'Password'}
             </Label>
             <a
               href="#reset"
               class="font-mono text-[0.52rem] uppercase tracking-[0.12em] text-brand-dark/45 hover:text-brand-green"
             >
-              Forgot?
+              {$_('login.forgot') || 'Forgot?'}
             </a>
           </div>
           <Input
@@ -123,7 +124,7 @@
           type="submit"
           class="h-auto w-full rounded-[0.55rem] bg-brand-dark py-4 text-center font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
         >
-          Sign In to Hub <ArrowUpRight size={14} />
+          {$_('login.signInButton') || 'Sign In to Hub'} <ArrowUpRight size={14} />
         </Button>
       </form>
 
@@ -134,7 +135,7 @@
           href={resolve("/")}
           class="flex items-center gap-1 hover:text-brand-green"
         >
-          <ArrowLeft size={10} /> Back home
+          <ArrowLeft size={10} /> {$_('login.backHome') || 'Back home'}
         </a>
         <span>SCHL · Workspace v0.1</span>
       </div>

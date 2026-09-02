@@ -5,6 +5,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { servicesHero } from "$lib/content/services";
   import { previewMedia } from "$lib/content/media";
+  import { _ } from "svelte-i18n";
 
   let heroSection = $state<HTMLElement>();
 
@@ -135,11 +136,11 @@
         >
           <span class="block overflow-hidden pb-[0.08em]">
             <span class="services-hero-title-line block"
-              >Precision <em class="text-brand-green">finish.</em></span
+              >{$_('services.hero.heading1') || 'Precision'} <em class="text-brand-green">{$_('services.hero.heading2') || 'finish.'}</em></span
             >
           </span>
           <span class="block overflow-hidden pb-[0.08em]">
-            <span class="services-hero-title-line block">Built to scale.</span>
+            <span class="services-hero-title-line block">{$_('services.hero.heading3') || 'Built to scale.'}</span>
           </span>
         </h1>
       </div>
@@ -149,14 +150,14 @@
           <p
             class="max-w-[34rem] text-base leading-[1.6] text-brand-light/68 lg:max-w-[30ch]"
           >
-            {servicesHero.description}
+            {$_('services.hero.description') || servicesHero.description}
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-5">
             <a
               href={resolve("/contact")}
               class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
             >
-              Discuss a project
+              {$_('services.hero.discussProject') || 'Discuss a project'}
               <ArrowUpRight
                 class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
@@ -165,7 +166,7 @@
               href="#services-details"
               class="group inline-flex items-center gap-2 border-b border-brand-light/35 pb-1 text-sm font-medium text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
             >
-              View capabilities
+              {$_('services.hero.viewCapabilities') || 'View capabilities'}
               <ArrowDown
                 class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
               />
@@ -189,7 +190,7 @@
       </figure>
 
       <div class="grid gap-2 sm:grid-cols-3 lg:col-span-6">
-        {#each disciplines as discipline (discipline.index)}
+        {#each disciplines as discipline, discIdx (discipline.index)}
           <a
             href={`#service-showcase-${discipline.index === "01" ? "photo" : discipline.index === "02" ? "video" : "3d"}`}
             class="services-hero-meta group relative flex min-h-36 items-end overflow-hidden rounded-[1rem] bg-brand-light/[0.045] p-4 transition-colors duration-300 sm:min-h-52 lg:min-h-full lg:p-5"
@@ -208,7 +209,7 @@
             <span
               class="relative z-[1] flex items-end justify-between gap-3 text-sm font-medium text-brand-light"
             >
-              {discipline.label}
+              {$_(`services.hero.disciplines.${discIdx}`) || discipline.label}
               <ArrowUpRight
                 class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />

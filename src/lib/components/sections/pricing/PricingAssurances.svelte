@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
+
   const assurances = [
     {
       number: "01",
@@ -39,21 +41,20 @@
           id="pricing-assurances-title"
           class="max-w-[10ch] font-display text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[0.92] tracking-[-0.04em]"
         >
-          Included with <em class="font-normal text-brand-green">every plan.</em
+          {$_('pricing.assurances.heading1') || 'Included with'} <em class="font-normal text-brand-green">{$_('pricing.assurances.heading2') || 'every plan.'}</em
           >
         </h2>
         <p
           class="mt-5 max-w-md text-sm leading-relaxed text-brand-light/62 sm:text-base"
         >
-          The package changes the pace and scale. The production care remains
-          consistent.
+          {$_('pricing.assurances.description') || 'The package changes the pace and scale. The production care remains consistent.'}
         </p>
       </div>
 
       <div
         class="grid border-t border-brand-light/15 sm:grid-cols-2 lg:col-span-7"
       >
-        {#each assurances as assurance}
+        {#each assurances as assurance, index}
           <article
             class="grid min-h-44 grid-cols-[2.25rem_1fr] gap-4 border-b border-brand-light/15 py-7 sm:px-6 sm:odd:border-r"
           >
@@ -64,12 +65,12 @@
             </span>
             <div>
               <h3 class="font-display text-xl tracking-[-0.02em] sm:text-2xl">
-                {assurance.title}
+                {$_(`pricing.assurances.items.${index}.title`) || assurance.title}
               </h3>
               <p
                 class="mt-3 max-w-xs text-sm leading-relaxed text-brand-light/55"
               >
-                {assurance.description}
+                {$_(`pricing.assurances.items.${index}.description`) || assurance.description}
               </p>
             </div>
           </article>

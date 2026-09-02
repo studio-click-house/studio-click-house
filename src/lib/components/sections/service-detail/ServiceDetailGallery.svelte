@@ -4,6 +4,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceGalleryData } from "$lib/types/service-detail";
+  import { _ } from "svelte-i18n";
 
   let { data } = $props<{ data: ServiceGalleryData }>();
   let section = $state<HTMLElement>();
@@ -88,7 +89,7 @@
         href={resolve("/portfolio")}
         class="group inline-flex shrink-0 items-center justify-between gap-2.5 rounded-[0.55rem] border border-brand-dark/18 bg-brand-paper px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-dark transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
       >
-        <span>Explore Full Portfolio</span>
+        <span>{$_('serviceDetail.exploreFullPortfolio') || 'Explore Full Portfolio'}</span>
         <ArrowUpRight
           size={15}
           class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

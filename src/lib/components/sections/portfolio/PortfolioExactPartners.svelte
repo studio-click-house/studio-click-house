@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
+
   const partners = [
     { name: "Zara", src: "/images/clients/zara_logo.png" },
     { name: "Damas", src: "/images/clients/damas_logo.png" },
@@ -24,7 +26,7 @@
     <h2
       class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-dark mb-12 inline-block border-b-2 border-brand-dark/25 pb-1"
     >
-      Sponsor
+      {$_('portfolio.partners.title') || 'Sponsors & Clients'}
     </h2>
 
     <!-- 2-Row Clean Monochrome Partner Matrix matching image -->

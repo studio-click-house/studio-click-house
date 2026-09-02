@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { serviceStandards } from "$lib/content/services";
+  import { _ } from "svelte-i18n";
 
   const productionGallery = [
     {
@@ -118,15 +119,14 @@
               id="services-standards-title"
               class="max-w-[12ch] font-display text-[clamp(2.6rem,3.6vw,4rem)] leading-[0.92] tracking-[-0.04em]"
             >
-              Quality is a system, not a final check.
+              {$_('services.standards.heading') || 'Quality is a system, not a final check.'}
             </h2>
           </div>
 
           <p
             class="standards-reveal mt-6 max-w-[38ch] text-sm leading-[1.7] text-brand-dark/65 lg:text-base"
           >
-            Every asset moves through calibrated production, secure transfer,
-            and senior review before it leaves the studio.
+            {$_('services.standards.description') || 'Every asset moves through calibrated production, secure transfer, and senior review before it leaves the studio.'}
           </p>
         </header>
 
@@ -139,12 +139,12 @@
               <h3
                 class="text-[1rem] font-semibold tracking-[-0.02em] transition-colors duration-300 group-hover:text-brand-green sm:text-[1.05rem]"
               >
-                {standard.title}
+                {$_(`services.standards.items.${index}.title`) || standard.title}
               </h3>
               <p
                 class="mt-2 max-w-[46ch] text-sm leading-[1.6] text-brand-dark/58"
               >
-                {standard.description}
+                {$_(`services.standards.items.${index}.description`) || standard.description}
               </p>
             </article>
           {/each}

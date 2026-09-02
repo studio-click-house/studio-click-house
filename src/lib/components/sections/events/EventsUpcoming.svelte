@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { CompanyEvent } from "$lib/types/events";
+  import { _ } from "svelte-i18n";
 
   interface Props {
     event: CompanyEvent;
@@ -49,7 +50,7 @@
               <dt
                 class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/44"
               >
-                Format
+                {$_('events.upcoming.format') || 'Format'}
               </dt>
               <dd class="text-sm text-brand-dark/78">{event.format}</dd>
             </div>
@@ -57,7 +58,7 @@
               <dt
                 class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/44"
               >
-                Place
+                {$_('events.upcoming.place') || 'Place'}
               </dt>
               <dd class="text-sm text-brand-dark/78">{event.location}</dd>
             </div>

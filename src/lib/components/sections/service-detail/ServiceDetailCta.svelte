@@ -4,6 +4,7 @@
   import { ArrowUpRight, ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceDetailCtaData } from "$lib/types/service-detail";
+  import { _ } from "svelte-i18n";
 
   let { data } = $props<{ data: ServiceDetailCtaData }>();
 
@@ -107,7 +108,7 @@
             href={resolve("/contact")}
             class="group inline-flex min-h-12 items-center gap-5 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
           >
-            Place an order
+            {$_('serviceDetail.placeOrder') || 'Place an order'}
             <ArrowUpRight
               class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
@@ -116,7 +117,7 @@
             href={resolve("/pricing")}
             class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-brand-light/20 px-5 text-sm font-semibold text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
           >
-            Get price idea
+            {$_('serviceDetail.getPriceIdea') || 'Get price idea'}
             <ArrowRight
               class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             />

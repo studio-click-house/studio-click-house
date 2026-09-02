@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { services } from "$lib/content/home";
+  import { _ } from "svelte-i18n";
 
-  const serviceNames = services.map((service) => service.title);
-  const loopItems = [...serviceNames, ...serviceNames];
+  const loopServices = [...services, ...services];
   let marquee: HTMLElement;
 
   onMount(() => {
@@ -42,17 +42,17 @@
   <div
     class="marquee-track flex w-max items-center py-4 will-change-transform sm:py-[1.1rem]"
   >
-    {#each loopItems as item, index (`${item}-${index}`)}
+    {#each loopServices as service, index (`${service.slug}-${index}`)}
       <span
         class="flex min-w-max items-center"
-        aria-hidden={index >= serviceNames.length}
+        aria-hidden={index >= services.length}
       >
         <span class="mx-5 size-[3px] rounded-full bg-brand-light/30 sm:mx-8" aria-hidden="true"
         ></span>
         <span
           class="marquee-service-name font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
         >
-          {item}
+          {$_(`home.services.${service.slug}.title`) || service.title}
           <span class="marquee-center-probe" aria-hidden="true"></span>
         </span>
       </span>
@@ -62,40 +62,46 @@
 
 <style>
   .hero-service-marquee {
-    background: color-mix(in srgb, var(--color-brand-dark) 58%, transparent);
-    box-shadow:
-      inset 0 1px color-mix(in srgb, var(--color-brand-light) 8%, transparent),
-      0 -1.5rem 4rem
-        color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
+    background: rgba(12, 11, 10, 0.45);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
   }
 
   .marquee-track {
-    animation: marquee 44s linear infinite;
+    animation: marquee-slide 42s linear infinite;
+  }
+
+  .hero-service-marquee:hover .marquee-track {
+    animation-play-state: paused;
   }
 
   .marquee-service-name {
     position: relative;
-    transition: color 220ms ease;
+    display: inline-flex;
+    align-items: center;
+    transition:
+      color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+      text-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .marquee-center-probe {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 1px;
+    inset: 0;
     pointer-events: none;
   }
 
-  :global(.marquee-service-name.is-centered) {
+  :global(.marquee-service-name.is-centered),
+  .hero-service-marquee:hover .marquee-service-name:hover {
     color: var(--color-brand-green);
+    transform: scale(1.05);
+    text-shadow: 0 0 16px rgba(126, 166, 65, 0.45);
   }
 
-  #hero-services-marquee:hover .marquee-track {
-    animation-play-state: paused;
-  }
-
-  @keyframes marquee {
+  @keyframes marquee-slide {
+    from {
+      transform: translateX(0);
+    }
     to {
       transform: translateX(-50%);
     }
@@ -104,10 +110,6 @@
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none;
-    }
-
-    .marquee-service-name {
-      transition: none;
     }
   }
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { _ } from "svelte-i18n";
 
   let heroSection = $state<HTMLElement | null>(null);
   let heroVideo = $state<HTMLVideoElement | null>(null);
@@ -77,19 +78,17 @@
   ></div>
 
   <div class="site-shell relative z-10 flex flex-col items-center text-center text-brand-light">
-
-
     <h1
       class="hero-anim-item select-none text-[clamp(6.5rem,21vw,18rem)] leading-[0.72] tracking-[-0.085em] text-brand-light drop-shadow-[0_8px_30px_rgba(0,0,0,0.32)]"
       style="font-family: 'Playfair Display', Georgia, serif; font-style: italic;"
     >
-      Archive
+      {$_('portfolio.hero.title') || 'Archive'}
     </h1>
 
     <p
       class="hero-anim-item mt-8 max-w-xl text-sm font-semibold uppercase leading-relaxed tracking-[0.14em] text-brand-light md:text-lg"
     >
-      High-end post-production<br />and creative finishing
+      {$_('portfolio.hero.subtitle') || 'High-end post-production and creative finishing'}
     </p>
   </div>
 </section>

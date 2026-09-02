@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { CompanyEvent } from "$lib/types/events";
+  import { _ } from "svelte-i18n";
 
   interface Props {
     events: CompanyEvent[];
@@ -17,12 +18,12 @@
       <p
         class="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
       >
-        Event archive
+        {$_('events.archive.eyebrow') || 'Event archive'}
       </p>
       <h2
         class="mt-5 max-w-[14ch] font-display text-[clamp(2.6rem,4.4vw,4.8rem)] leading-[0.94] tracking-[-0.04em]"
       >
-        Moments that shaped the studio.
+        {$_('events.archive.heading') || 'Moments that shaped the studio.'}
       </h2>
     </div>
 
