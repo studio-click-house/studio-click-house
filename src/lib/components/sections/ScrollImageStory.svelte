@@ -7,13 +7,16 @@
 
   let section: HTMLElement;
   let storyVideo: HTMLVideoElement;
+  let stage3Video: HTMLVideoElement | undefined = $state();
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
     let videoVisible = false;
     let videoPrepared = false;
+    let stage3Visible = false;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
     const syncVideoPlayback = () => {
       if (videoVisible && !reducedMotion.matches) {
         if (!videoPrepared) {
@@ -25,6 +28,16 @@
         storyVideo.pause();
       }
     };
+
+    const syncStage3Playback = () => {
+      if (!stage3Video) return;
+      if (stage3Visible && !reducedMotion.matches) {
+        void stage3Video.play().catch(() => undefined);
+      } else {
+        stage3Video.pause();
+      }
+    };
+
     const videoObserver = new IntersectionObserver(
       ([entry]) => {
         videoVisible = entry?.isIntersecting ?? false;
@@ -33,8 +46,21 @@
       { rootMargin: "240px 0px", threshold: 0.08 },
     );
 
+    let stage3Observer: IntersectionObserver | undefined;
+    if (stage3Video) {
+      stage3Observer = new IntersectionObserver(
+        ([entry]) => {
+          stage3Visible = entry?.isIntersecting ?? false;
+          syncStage3Playback();
+        },
+        { rootMargin: "200px 0px", threshold: 0.1 },
+      );
+      stage3Observer.observe(stage3Video);
+    }
+
     videoObserver.observe(storyVideo);
     reducedMotion.addEventListener("change", syncVideoPlayback);
+    reducedMotion.addEventListener("change", syncStage3Playback);
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !section) return;
@@ -116,65 +142,71 @@
               },
               0.26,
             );
+
+          const stageCols = gsap.utils.toArray<HTMLElement>(".video-stage-col");
+          const stageConduits = gsap.utils.toArray<HTMLElement>(".video-stage-conduit");
+
+          if (stageCols.length > 0) {
+            gsap.from(stageCols, {
+              autoAlpha: 0,
+              y: 28,
+              duration: 0.6,
+              stagger: 0.14,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ".video-pipeline-grid",
+                start: "top 85%",
+                once: true,
+              },
+            });
+          }
+
+          if (stageConduits.length > 0) {
+            gsap.from(stageConduits, {
+              autoAlpha: 0,
+              scale: 0.9,
+              duration: 0.55,
+              stagger: 0.14,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ".video-pipeline-grid",
+                start: "top 85%",
+                once: true,
+              },
+            });
+          }
+
+          const branchSvgs = gsap.utils.toArray<HTMLElement>(".stage-branch-svg");
+          if (branchSvgs.length > 0) {
+            gsap.from(branchSvgs, {
+              autoAlpha: 0,
+              scaleY: 0,
+              transformOrigin: "top center",
+              duration: 0.4,
+              stagger: 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ".video-pipeline-grid",
+                start: "top 82%",
+                once: true,
+              },
+            });
+          }
+
+          gsap.from(".ai-bubble-item", {
+            autoAlpha: 0,
+            y: 12,
+            scale: 0.88,
+            duration: 0.45,
+            stagger: 0.04,
+            ease: "back.out(1.5)",
+            scrollTrigger: {
+              trigger: ".video-pipeline-grid",
+              start: "top 80%",
+              once: true,
+            },
+          });
         });
-
-        media.add(
-          "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-          () => {
-            const logoDrift = [
-              { x: 10, y: -8, scale: 1.02, rotation: 1.2, duration: 5.8 },
-              { x: -8, y: 10, scale: 0.98, rotation: -1.1, duration: 6.4 },
-              { x: 9, y: 7, scale: 1.02, rotation: 1, duration: 5.2 },
-              { x: -7, y: -9, scale: 0.98, rotation: -1.2, duration: 6.8 },
-              { x: 8, y: 6, scale: 1.02, rotation: 1.1, duration: 5.6 },
-              { x: -9, y: 8, scale: 1.01, rotation: -0.9, duration: 6.1 },
-            ];
-
-            gsap.utils
-              .toArray<HTMLElement>(".ai-logo-bubble")
-              .forEach((bubble, index) => {
-                const drift = logoDrift[index] ?? logoDrift[0];
-
-                gsap.to(bubble, {
-                  ...drift,
-                  ease: "sine.inOut",
-                  repeat: -1,
-                  yoyo: true,
-                });
-              });
-
-            gsap.to(".ai-panel-orb-shadow", {
-              x: 22,
-              y: 18,
-              scale: 1.025,
-              rotation: 4,
-              duration: 4.8,
-              ease: "sine.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-            gsap.to(".ai-panel-orb-midtone", {
-              x: -20,
-              y: -22,
-              scale: 0.97,
-              rotation: -3,
-              duration: 3.1,
-              ease: "power1.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-            gsap.to(".ai-panel-orb-highlight", {
-              x: 14,
-              y: 10,
-              scale: 1.06,
-              rotation: 6,
-              duration: 1.9,
-              ease: "sine.inOut",
-              repeat: -1,
-              yoyo: true,
-            });
-          },
-        );
 
         ScrollTrigger.refresh();
         return () => media.revert();
@@ -186,8 +218,11 @@
     return () => {
       active = false;
       videoObserver.disconnect();
+      stage3Observer?.disconnect();
       reducedMotion.removeEventListener("change", syncVideoPlayback);
+      reducedMotion.removeEventListener("change", syncStage3Playback);
       storyVideo.pause();
+      stage3Video?.pause();
       context?.revert();
     };
   });
@@ -246,135 +281,288 @@
 
   <div class="ai-panel relative z-10 bg-brand-light">
     <div class="ai-panel-curve" aria-hidden="true"></div>
-    <div class="ai-panel-orbits" aria-hidden="true">
-      <span class="ai-panel-orb ai-panel-orb-shadow"></span>
-      <span class="ai-panel-orb ai-panel-orb-midtone"></span>
-      <span class="ai-panel-orb ai-panel-orb-highlight"></span>
-    </div>
-    <div
-      class="ai-panel-content site-shell flex flex-col items-center gap-6 pt-14 pb-4 text-center sm:gap-8 sm:pt-16 sm:pb-6 lg:pt-20 lg:pb-8"
-    >
-      <div class="ai-panel-copy mx-auto w-full max-w-2xl text-left">
-        <h2
-          id="scroll-image-story-title"
-          class="ai-panel-copy-heading font-display text-xl font-normal leading-[1.3] tracking-[-0.02em] text-brand-dark sm:text-2xl"
-        >
-          {$_('home.scrollImage.copy2')}
-        </h2>
-      </div>
-
-      <div class="ai-panel-support w-full max-w-2xl text-left">
-        <p
-          class="mt-4 max-w-2xl text-sm leading-relaxed text-brand-dark/78 sm:text-base"
-        >
-          {$_('home.scrollImage.copy3')}
-        </p>
-
-        <!-- AI Video Capability Spec Strip -->
-        <div
-          class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/55"
-          aria-label="AI video post-production capabilities"
-        >
-          <span>{$_('home.scrollImage.capabilities.0') || 'Text-to-Video Generation'}</span>
-          <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
-          <span>{$_('home.scrollImage.capabilities.1') || 'AI Motion Upscaling 4K–8K'}</span>
-          <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
-          <span>{$_('home.scrollImage.capabilities.2') || 'ACES Color Pipeline'}</span>
-          <span class="h-3 w-px bg-brand-green/70" aria-hidden="true"></span>
-          <span>{$_('home.scrollImage.capabilities.3') || '24h Express Turnaround'}</span>
+    <div class="site-shell relative z-10 pt-14 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 flex flex-col items-center text-center">
+      <!-- Section Editorial Intro (Short, Punchy, Focused) -->
+      <div class="max-w-2xl mx-auto flex flex-col items-center text-center">
+        <div class="ai-panel-copy">
+          <h2
+            id="scroll-image-story-title"
+            class="ai-panel-copy-heading font-display text-2xl sm:text-3xl lg:text-[2.2rem] font-normal leading-[1.22] tracking-[-0.02em] text-brand-dark text-center"
+          >
+            {$_('home.scrollImage.copy2')}
+          </h2>
         </div>
 
-        <a
-          href={resolve("/services/video-editing")}
-          class="mt-8 inline-flex items-center gap-3 border-b border-brand-green/50 pb-2 font-display text-sm font-normal tracking-[0.02em] text-brand-green transition-colors hover:border-brand-dark/40 hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
-        >
-          {$_('home.scrollImage.explore')}
-          <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
+        <div class="ai-panel-support mt-3.5 flex flex-col items-center text-center">
+          <p class="max-w-lg text-sm sm:text-base leading-relaxed text-brand-dark/70 text-center">
+            {$_('home.scrollImage.copy3')}
+          </p>
+        </div>
+      </div>
+
+      <!-- ═══ 3-Stage Visual Video Pipeline (Preview Frames + Floating Tool Bubbles) ═══ -->
+      <div class="video-pipeline-container mt-11 sm:mt-16 w-full max-w-6xl mx-auto px-2 sm:px-4">
+        <div class="video-pipeline-grid">
+
+          <!-- ── STAGE 01: Raw Generative Synthesis ── -->
+          <div class="video-stage-col">
+            <div class="video-stage-card group">
+              <div class="video-stage-frame">
+                <img
+                  src={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.jpg`}
+                  alt="Raw AI text-to-video generative synthesis draft"
+                  class="video-stage-img"
+                  width="640"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div class="video-stage-content">
+              <div class="video-stage-header">
+                <span class="video-stage-idx">01</span>
+                <h3 class="video-stage-title">{$_('home.scrollImage.stages.stage1.title') || 'Generative Synthesis'}</h3>
+              </div>
+              <p class="video-stage-desc">
+                {$_('home.scrollImage.stages.stage1.description') || 'Prompt-to-shot synthesis with generative model velocity.'}
+              </p>
+
+              <!-- Natural Pipeline Node Connector & Bubbles for Stage 01 -->
+              <div class="stage-pipeline-connector">
+                <svg class="stage-branch-svg branch-2-node" viewBox="0 0 140 24" fill="none" aria-hidden="true">
+                  <!-- Live streaming stem coming down from stage -->
+                  <line x1="70" y1="0" x2="70" y2="6" stroke="var(--color-brand-green)" stroke-width="1.6" class="stage-branch-flow" />
+                  <circle cx="70" cy="6" r="2.5" fill="var(--color-brand-green)" />
+                  <!-- Smooth live flowing bezier branches into each tool -->
+                  <path d="M 70 6 C 70 16, 35 12, 35 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                  <path d="M 70 6 C 70 16, 105 12, 105 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                </svg>
+
+                <div class="stage-tool-bubbles bubbles-2-row relative">
+                  <!-- Runway Gen-4 -->
+                  <div class="ai-bubble-item tool-runway">
+                    <div class="ai-bubble-orb">
+                      <svg viewBox="0 0 24 24" class="size-4.5 sm:size-5 shrink-0" focusable="false">
+                        <path fill="#f8fafc" d="M7 6h5c2.2 0 3.8 1.4 3.8 3.5 0 1.6-.9 2.8-2.3 3.3l3 6.2h-2.5l-2.7-5.7H9.2v5.7H7V6zm2.2 5.5h2.8c1.3 0 2-.6 2-1.8s-.7-1.7-2-1.7H9.2v3.5z" />
+                      </svg>
+                    </div>
+                    <span class="ai-bubble-label">Runway</span>
+                  </div>
+
+                  <!-- Kling AI -->
+                  <div class="ai-bubble-item tool-kling">
+                    <div class="ai-bubble-orb">
+                      <svg viewBox="0 0 24 24" class="size-4.5 sm:size-5 shrink-0" focusable="false">
+                        <path fill="#60a5fa" d="M7 6h2.5v5.2L14.2 6H17.5l-5.4 6 5.8 7H14.5l-4.3-5.3-1.1 1.2V19H7V6z"/>
+                      </svg>
+                    </div>
+                    <span class="ai-bubble-label">Kling AI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Connector 1 -> 2 (Stage Direction Arrow matching AiAboutSection) ── -->
+          <div class="stage-divider" aria-hidden="true">
+            <div class="stage-divider-line"></div>
+            <div class="stage-divider-arrow">
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                <path d="M0 6h15M12 1l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ── STAGE 02: Temporal Upscaling ── -->
+          <div class="video-stage-col">
+            <div class="video-stage-card group">
+              <div class="video-stage-frame">
+                <img
+                  src={`${base}/images/about/video-pipeline/stage-2-motion-upscale.jpg`}
+                  alt="AI optical flow motion upscaling preview"
+                  class="video-stage-img"
+                  width="640"
+                  height="360"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div class="video-stage-content">
+              <div class="video-stage-header">
+                <span class="video-stage-idx">02</span>
+                <h3 class="video-stage-title">{$_('home.scrollImage.stages.stage2.title') || 'Temporal Upscaling'}</h3>
+              </div>
+              <p class="video-stage-desc">
+                {$_('home.scrollImage.stages.stage2.description') || 'Optical flow motion vectors for pristine 4K consistency.'}
+              </p>
+
+              <!-- Natural Pipeline Node Connector & Bubbles for Stage 02 -->
+              <div class="stage-pipeline-connector">
+                <svg class="stage-branch-svg branch-2-node" viewBox="0 0 140 24" fill="none" aria-hidden="true">
+                  <!-- Live streaming stem coming down from stage -->
+                  <line x1="70" y1="0" x2="70" y2="6" stroke="var(--color-brand-green)" stroke-width="1.6" class="stage-branch-flow" />
+                  <circle cx="70" cy="6" r="2.5" fill="var(--color-brand-green)" />
+                  <!-- Smooth live flowing bezier branches into each tool -->
+                  <path d="M 70 6 C 70 16, 35 12, 35 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                  <path d="M 70 6 C 70 16, 105 12, 105 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                </svg>
+
+                <div class="stage-tool-bubbles bubbles-2-row relative">
+                  <!-- Google Flow -->
+                  <div class="ai-bubble-item tool-flow">
+                    <div class="ai-bubble-orb">
+                      <svg viewBox="0 0 24 24" class="size-4.5 sm:size-5 shrink-0" focusable="false">
+                        <defs>
+                          <linearGradient id="flow-spark-clean" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#4285f4" />
+                            <stop offset="35%" stop-color="#34a853" />
+                            <stop offset="70%" stop-color="#fbbc05" />
+                            <stop offset="100%" stop-color="#ea4335" />
+                          </linearGradient>
+                        </defs>
+                        <path fill="url(#flow-spark-clean)" d="M12 3.5l1.9 5.6a1.5 1.5 0 0 0 1 1l5.6 1.9-5.6 1.9a1.5 1.5 0 0 0-1 1L12 20.5l-1.9-5.6a1.5 1.5 0 0 0-1-1L3.5 12l5.6-1.9a1.5 1.5 0 0 0 1-1L12 3.5z"/>
+                      </svg>
+                    </div>
+                    <span class="ai-bubble-label">Flow</span>
+                  </div>
+
+                  <!-- Luma Dream -->
+                  <div class="ai-bubble-item tool-luma">
+                    <div class="ai-bubble-orb">
+                      <svg viewBox="0 0 24 24" class="size-4.5 sm:size-5 shrink-0" focusable="false">
+                        <defs>
+                          <linearGradient id="luma-crescent-clean" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ff5ca8" />
+                            <stop offset="100%" stop-color="#ffd166" />
+                          </linearGradient>
+                        </defs>
+                        <path fill="url(#luma-crescent-clean)" d="M15.5 4.5a8 8 0 1 0 4 9.8A6.4 6.4 0 0 1 15.5 4.5z"/>
+                      </svg>
+                    </div>
+                    <span class="ai-bubble-label">Luma</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Connector 2 -> 3 (Stage Direction Arrow matching AiAboutSection) ── -->
+          <div class="stage-divider" aria-hidden="true">
+            <div class="stage-divider-line"></div>
+            <div class="stage-divider-arrow">
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                <path d="M0 6h15M12 1l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ── STAGE 03: Master Editorial & Color Finishing ── -->
+          <div class="video-stage-col">
+            <div class="video-stage-card group">
+              <div class="video-stage-frame">
+                <video
+                  bind:this={stage3Video}
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  poster={`${base}/images/about/video-pipeline/stage-3-master-grade.jpg`}
+                  class="video-stage-img"
+                  aria-label="Finished commercial color grading master clip"
+                >
+                  <source src={`${base}/videos/stage-3-master-grade.mp4`} type="video/mp4" />
+                  <source src={`${base}/videos/editing-video-720p.webm`} type="video/webm" />
+                  <img
+                    src={`${base}/images/about/video-pipeline/stage-3-master-grade.jpg`}
+                    alt="Finished ACES calibrated color grading master frame"
+                    class="video-stage-img"
+                    width="640"
+                    height="360"
+                    loading="lazy"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <div class="video-stage-content">
+              <div class="video-stage-header">
+                <span class="video-stage-idx text-brand-green">03</span>
+                <h3 class="video-stage-title">{$_('home.scrollImage.stages.stage3.title') || 'Artisan Finishing'}</h3>
+              </div>
+              <p class="video-stage-desc">
+                {$_('home.scrollImage.stages.stage3.description') || 'Frame-by-frame color balance, timeline cutdowns, and QC.'}
+              </p>
+
+              <!-- Natural Pipeline Node Connector & Bubbles for Stage 03 -->
+              <div class="stage-pipeline-connector">
+                <svg class="stage-branch-svg branch-4-node" viewBox="0 0 280 24" fill="none" aria-hidden="true">
+                  <!-- Live streaming stem coming down from stage -->
+                  <line x1="140" y1="0" x2="140" y2="6" stroke="var(--color-brand-green)" stroke-width="1.6" class="stage-branch-flow" />
+                  <circle cx="140" cy="6" r="2.5" fill="var(--color-brand-green)" />
+                  <!-- Smooth live flowing bezier branches into each tool -->
+                  <path d="M 140 6 C 140 16, 35 12, 35 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                  <path d="M 140 6 C 140 16, 105 12, 105 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                  <path d="M 140 6 C 140 16, 175 12, 175 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                  <path d="M 140 6 C 140 16, 245 12, 245 24" stroke="var(--color-brand-green)" stroke-width="1.6" stroke-linecap="round" class="stage-branch-flow" />
+                </svg>
+
+                <div class="stage-tool-bubbles bubbles-4-row">
+                  <!-- Premiere Pro -->
+                  <div class="ai-bubble-item tool-premiere">
+                    <div class="ai-bubble-orb">
+                      <span class="adobe-bubble-text text-[#9999ff]">Pr</span>
+                    </div>
+                    <span class="ai-bubble-label">Premiere</span>
+                  </div>
+
+                  <!-- After Effects -->
+                  <div class="ai-bubble-item tool-aftereffects">
+                    <div class="ai-bubble-orb">
+                      <span class="adobe-bubble-text text-[#cf96fd]">Ae</span>
+                    </div>
+                    <span class="ai-bubble-label">After Effects</span>
+                  </div>
+
+                  <!-- Illustrator -->
+                  <div class="ai-bubble-item tool-illustrator">
+                    <div class="ai-bubble-orb">
+                      <span class="adobe-bubble-text text-[#ff9a00]">Ai</span>
+                    </div>
+                    <span class="ai-bubble-label">Illustrator</span>
+                  </div>
+
+                  <!-- DaVinci Resolve -->
+                  <div class="ai-bubble-item tool-davinci">
+                    <div class="ai-bubble-orb">
+                      <svg viewBox="0 0 24 24" class="size-4.5 sm:size-5 shrink-0" focusable="false">
+                        <circle cx="12" cy="7.8" r="2.6" fill="#ef4444"/>
+                        <circle cx="8" cy="14.8" r="2.6" fill="#3b82f6"/>
+                        <circle cx="16" cy="14.8" r="2.6" fill="#22c55e"/>
+                        <circle cx="12" cy="12" r="1.5" fill="#ffffff"/>
+                      </svg>
+                    </div>
+                    <span class="ai-bubble-label">DaVinci</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Explore Link (Centered) -->
+      <div class="mt-10 sm:mt-12 flex justify-center">
+        <a href={resolve("/services/video-editing")} class="ai-explore-link group">
+          <span class="font-sans text-xs sm:text-[0.84rem] font-semibold text-brand-dark group-hover:text-brand-green transition-colors duration-200">
+            {$_('home.scrollImage.explore') || 'Explore video editing & post-production'}
+          </span>
+          <span class="grid h-6 w-6 place-items-center rounded-full border border-brand-dark/15 bg-white text-brand-dark transition-all duration-200 group-hover:border-brand-green group-hover:bg-brand-green group-hover:text-brand-dark">
+            <ArrowUpRight size={13} strokeWidth={1.8} class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
         </a>
-      </div>
-    </div>
-    <div class="ai-tool-stage site-shell" aria-hidden="true">
-      <!-- 1. Runway -->
-      <div class="ai-logo-orbit ai-logo-runway">
-        <div class="ai-logo-bubble">
-          <svg viewBox="0 0 24 24" class="size-6 fill-current" focusable="false">
-            <path d="M5.5 3h4.9l4.1 7.1L18.6 3H22l-6.3 10.2V21h-3.6v-7.8L5.5 3zm1 18 5.4-7.3 2.5 2.6L10.6 21H6.5z" />
-          </svg>
-        </div>
-        <span class="ai-logo-name">Runway Gen-4</span>
-      </div>
-
-      <!-- 2. Kling AI -->
-      <div class="ai-logo-orbit ai-logo-kling">
-        <div class="ai-logo-bubble">
-          <svg viewBox="0 0 24 24" class="size-6 fill-current" focusable="false">
-            <path d="M6 3h3.5v7.4L15.6 3h4.2l-6.9 8.1L20.4 21h-4.3l-5-6.6-1.6 1.8V21H6V3z" />
-          </svg>
-        </div>
-        <span class="ai-logo-name">Kling AI</span>
-      </div>
-
-      <!-- 3. Google Flow -->
-      <div class="ai-logo-orbit ai-logo-flow">
-        <div class="ai-logo-bubble">
-          <svg viewBox="0 0 24 24" class="size-6" focusable="false">
-            <defs>
-              <linearGradient id="flow-spark-gradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#4285f4" />
-                <stop offset="100%" stop-color="#34a853" />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#flow-spark-gradient)"
-              d="M12 1.8l2.1 6.4a2.04 2.04 0 0 0 1.45 1.38l6.65 1.83-6.65 1.83a2.04 2.04 0 0 0-1.45 1.38L12 22.2l-2.1-7.58a2.04 2.04 0 0 0-1.45-1.38L3.8 11.41l6.65-1.83A2.04 2.04 0 0 0 11.9 8.2L12 1.8z"
-            />
-          </svg>
-        </div>
-        <span class="ai-logo-name">Google Flow</span>
-      </div>
-
-      <!-- 4. Luma Dream Machine -->
-      <div class="ai-logo-orbit ai-logo-luma">
-        <div class="ai-logo-bubble">
-          <svg viewBox="0 0 24 24" class="size-6" focusable="false">
-            <defs>
-              <linearGradient id="luma-crescent-gradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#ff5ca8" />
-                <stop offset="55%" stop-color="#ff8a5c" />
-                <stop offset="100%" stop-color="#ffd166" />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#luma-crescent-gradient)"
-              d="M16.4 2.6a10 10 0 1 0 5 12.2A8 8 0 0 1 16.4 2.6z"
-            />
-          </svg>
-        </div>
-        <span class="ai-logo-name ai-logo-name-above">Luma Dream Machine</span>
-      </div>
-
-      <!-- 5. Pika -->
-      <div class="ai-logo-orbit ai-logo-pika">
-        <div class="ai-logo-bubble">
-          <svg viewBox="0 0 24 24" class="size-6 fill-current" focusable="false">
-            <path d="M6 3h7.6a5 5 0 0 1 0 10H9.6v8H6V3zm3.6 3.2v3.6h4a1.8 1.8 0 0 0 0-3.6h-4z" />
-          </svg>
-        </div>
-        <span class="ai-logo-name ai-logo-name-above">Pika</span>
-      </div>
-
-      <!-- 6. Hailuo AI · MiniMax -->
-      <div class="ai-logo-orbit ai-logo-hailuo">
-        <div class="ai-logo-bubble">
-          <svg viewBox="0 0 24 24" class="size-6 fill-none stroke-current stroke-[2.2]" focusable="false">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12.5 8.5A4.5 4.5 0 0 0 8 13a6.8 6.8 0 0 0 6.8 6.8A9.2 9.2 0 0 0 9.6 4.9 11.5 11.5 0 0 1 21.3 12"
-            />
-          </svg>
-        </div>
-        <span class="ai-logo-name ai-logo-name-above">Hailuo AI</span>
       </div>
     </div>
   </div>
@@ -417,7 +605,6 @@
 
   .ai-panel {
     isolation: isolate;
-    padding-bottom: 4rem;
   }
 
   .ai-panel::after {
@@ -425,171 +612,384 @@
     inset: 0;
     z-index: 0;
     background: radial-gradient(
-      ellipse 65% 50% at 50% 48%,
-      color-mix(in srgb, var(--color-brand-green) 18%, transparent) 0%,
-      color-mix(in srgb, var(--color-brand-green) 6%, transparent) 40%,
-      transparent 68%
+      ellipse 70% 45% at 50% 55%,
+      color-mix(in srgb, var(--color-brand-green) 12%, transparent) 0%,
+      color-mix(in srgb, var(--color-brand-green) 4%, transparent) 45%,
+      transparent 70%
     );
     content: "";
     pointer-events: none;
   }
 
-  .ai-panel-orbits {
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .ai-panel-orb {
-    position: absolute;
-    display: block;
-    border-radius: 999px;
-    will-change: transform;
-  }
-
-  .ai-panel-orb-shadow {
-    top: 10%;
-    right: -2rem;
-    width: 11rem;
-    height: 11rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
-    background: color-mix(in srgb, var(--color-brand-dark) 8%, transparent);
-  }
-
-  .ai-panel-orb-midtone {
-    bottom: 16%;
-    left: 3%;
-    width: 7.5rem;
-    height: 7.5rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-green) 20%, transparent);
-    background: color-mix(in srgb, var(--color-brand-green) 9%, transparent);
-  }
-
-  .ai-panel-orb-highlight {
-    right: 34%;
-    bottom: clamp(5rem, 6vw, 7rem);
-    width: 4rem;
-    height: 4rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-green) 32%, transparent);
-    background: color-mix(in srgb, var(--color-brand-green) 16%, transparent);
-  }
-
-  .ai-tool-stage {
-    --logo-runway: #101010;
-    --logo-hailuo: #5b8cff;
-    --logo-google-blue: #4285f4;
-    --logo-claude: #d97757;
-    position: absolute;
-    inset: 0;
+  /* ═══ 3-Stage Visual Video Pipeline ═══ */
+  .video-pipeline-container {
+    position: relative;
     z-index: 2;
+  }
+
+  .video-pipeline-grid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.75rem;
     width: 100%;
-    max-width: none;
+  }
+
+  /* ═══ Inter-Stage Direction Connectors (Matching AiAboutSection) ═══ */
+  .stage-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-inline: 0.35rem;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 5.75rem;
+    user-select: none;
     pointer-events: none;
   }
 
-  .ai-logo-orbit {
-    position: absolute;
-    pointer-events: auto;
+  .stage-divider-line {
+    width: 28px;
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-brand-dark) 22%, transparent) 0,
+      color-mix(in srgb, var(--color-brand-dark) 22%, transparent) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+    transform-origin: left;
   }
 
-  .ai-logo-name {
-    position: absolute;
-    top: calc(100% + 0.55rem);
-    left: 50%;
-    padding: 0.32rem 0.62rem;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 18%, transparent);
-    border-radius: 0.45rem;
-    background: color-mix(in srgb, var(--color-brand-dark) 92%, transparent);
-    box-shadow: 0 0.6rem 1.6rem
-      color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
-    color: var(--color-brand-light);
-    font-family: var(--font-mono, ui-monospace, monospace);
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translate(-50%, 0.45rem);
+  .stage-divider-arrow {
+    display: flex;
+    flex-shrink: 0;
+    color: var(--color-brand-green);
+  }
+
+  .video-stage-col {
+    position: relative;
+    flex: 1;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.95rem;
+    will-change: transform, opacity;
+    z-index: 1;
+  }
+
+  .video-stage-col:hover {
+    z-index: 40;
+  }
+
+  /* ── Stage Card & Cinematic Frame (Auto Expand on Hover) ── */
+  .video-stage-card {
+    position: relative;
+    width: 100%;
+    border-radius: 1.05rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
+    background: var(--color-brand-paper);
+    box-shadow: 0 6px 22px -4px rgba(0, 0, 0, 0.07);
+    transform-origin: center center;
     transition:
-      opacity 200ms ease,
-      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
+      transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 360ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 360ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, box-shadow;
+    cursor: default;
+    z-index: 1;
   }
 
-  .ai-logo-name-above {
-    top: auto;
-    bottom: calc(100% + 0.55rem);
-    transform: translate(-50%, -0.45rem);
-  }
-
-  .ai-logo-orbit:hover .ai-logo-name {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-
-  .ai-logo-bubble {
-    display: grid;
-    width: 4.5rem;
-    height: 4.5rem;
-    place-items: center;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-light) 88%, transparent);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--color-brand-light) 66%, transparent);
+  /* When hovered: pops up automatically, increases size big, lifts up and shows clearly! */
+  .video-stage-card:hover {
+    z-index: 50;
+    transform: translateY(-28px) scale(1.24);
+    border-color: color-mix(in srgb, var(--color-brand-green) 70%, transparent);
     box-shadow:
-      inset 0 1px 0 color-mix(in srgb, white 82%, transparent),
-      0 1.25rem 3rem
-        color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
-    backdrop-filter: blur(1rem) saturate(125%);
-    will-change: transform;
+      0 34px 75px -14px rgba(0, 0, 0, 0.36),
+      0 0 0 1px color-mix(in srgb, var(--color-brand-green) 40%, transparent),
+      0 0 28px -4px color-mix(in srgb, var(--color-brand-green) 28%, transparent);
   }
 
-  .ai-logo-bubble svg {
-    width: 1.65rem;
-    height: 1.65rem;
-    fill: currentColor;
+  .video-stage-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.2;
+    overflow: hidden;
+    background: #000000;
   }
 
-  .ai-logo-runway {
-    top: 13%;
-    left: 8%;
-    color: var(--logo-runway);
+  .video-stage-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .ai-logo-kling {
-    top: 6%;
-    right: 20%;
+  .video-stage-card:hover .video-stage-img {
+    transform: scale(1.03);
+  }
+
+  /* ── Stage Content & Typography ── */
+  .video-stage-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+    padding-inline: 0.35rem;
+    width: 100%;
+  }
+
+  .video-stage-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .video-stage-idx {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-brand-green);
+  }
+
+  .video-stage-title {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--color-brand-dark);
+    letter-spacing: -0.015em;
   }
 
-  .ai-logo-flow {
-    top: 40%;
-    right: 4%;
-    color: var(--logo-google-blue);
+  .video-stage-desc {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.8rem;
+    line-height: 1.48;
+    color: color-mix(in srgb, var(--color-brand-dark) 68%, transparent);
+    max-width: 320px;
   }
 
-  .ai-logo-luma {
-    right: 8%;
-    bottom: 18%;
+  /* ── Natural Pipeline Node Connector ── */
+  .stage-pipeline-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.75rem;
   }
 
-  .ai-logo-pika {
-    bottom: 9%;
-    left: 16%;
-    color: var(--logo-runway);
+  .stage-branch-svg {
+    display: block;
+    overflow: visible;
   }
 
-  .ai-logo-hailuo {
-    bottom: clamp(4.5rem, 5.5vw, 6.5rem);
-    left: 52%;
-    color: var(--logo-hailuo);
+  .branch-2-node {
+    width: 140px;
+    height: 24px;
+  }
+
+  .branch-4-node {
+    width: 280px;
+    height: 24px;
+  }
+
+  /* Live running flowing curved conduit line matching the pipeline aesthetic */
+  .stage-branch-flow {
+    stroke-dasharray: 5 4;
+    animation: liveConduitStream 1.6s linear infinite;
+    stroke: var(--color-brand-green);
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-brand-green) 55%, transparent));
+  }
+
+  /* ── Connected Tool Bubbles Row ── */
+  .stage-tool-bubbles {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.15rem;
+  }
+
+  .bubbles-2-row {
+    grid-template-columns: repeat(2, 70px);
+    width: 140px;
+  }
+
+  .bubbles-4-row {
+    grid-template-columns: repeat(4, 70px);
+    width: 280px;
+  }
+
+  .ai-bubble-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 70px;
+    gap: 0.35rem;
+    cursor: default;
+    user-select: none;
+    will-change: transform;
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ai-bubble-orb {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: #0f172a;
+    border: 1.5px solid color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
+    box-shadow:
+      0 4px 12px -2px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    transition:
+      transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .adobe-bubble-text {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .ai-bubble-label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
+    line-height: 1.15;
+    text-align: center;
+    max-width: 68px;
+    white-space: nowrap;
+    transition: color 200ms ease;
+  }
+
+  @keyframes liveConduitStream {
+    0% {
+      stroke-dashoffset: 36;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* ═══ Hover State on Bubbles ═══ */
+  .ai-bubble-item:hover {
+    animation-play-state: paused;
+    transform: translateY(-4px);
+  }
+
+  .ai-bubble-item:hover .ai-bubble-orb {
+    transform: scale(1.12);
+  }
+
+  .ai-bubble-item:hover .ai-bubble-label {
+    color: var(--color-brand-dark);
+    font-weight: 600;
+  }
+
+  /* ═══ Signature Glowing Brand Borders for Each Bubble ═══ */
+  /* 1. Runway */
+  .tool-runway .ai-bubble-orb {
+    background: #111317;
+    border-color: rgba(203, 213, 225, 0.7);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+  .tool-runway:hover .ai-bubble-orb {
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 14px rgba(203, 213, 225, 0.6);
+  }
+
+  /* 2. Kling AI */
+  .tool-kling .ai-bubble-orb {
+    background: #091226;
+    border-color: rgba(59, 130, 246, 0.75);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(59, 130, 246, 0.35);
+  }
+  .tool-kling:hover .ai-bubble-orb {
+    border-color: #3b82f6;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(59, 130, 246, 0.65);
+  }
+
+  /* 3. Google Flow */
+  .tool-flow .ai-bubble-orb {
+    background: #091326;
+    border-color: rgba(66, 133, 244, 0.75);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(66, 133, 244, 0.35);
+  }
+  .tool-flow:hover .ai-bubble-orb {
+    border-color: #4285f4;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(66, 133, 244, 0.65);
+  }
+
+  /* 4. Luma Dream */
+  .tool-luma .ai-bubble-orb {
+    background: #1a0b20;
+    border-color: rgba(255, 92, 168, 0.75);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(255, 92, 168, 0.35);
+  }
+  .tool-luma:hover .ai-bubble-orb {
+    border-color: #ff5ca8;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(255, 92, 168, 0.65);
+  }
+
+  /* 5. Adobe Premiere Pro */
+  .tool-premiere .ai-bubble-orb {
+    background: #080824;
+    border-color: rgba(153, 153, 255, 0.8);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(153, 153, 255, 0.35);
+  }
+  .tool-premiere:hover .ai-bubble-orb {
+    border-color: #9999ff;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(153, 153, 255, 0.65);
+  }
+
+  /* 6. Adobe After Effects */
+  .tool-aftereffects .ai-bubble-orb {
+    background: #110722;
+    border-color: rgba(207, 150, 253, 0.8);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(207, 150, 253, 0.35);
+  }
+  .tool-aftereffects:hover .ai-bubble-orb {
+    border-color: #cf96fd;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(207, 150, 253, 0.65);
+  }
+
+  /* 7. Adobe Illustrator */
+  .tool-illustrator .ai-bubble-orb {
+    background: #1e0c00;
+    border-color: rgba(255, 154, 0, 0.8);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(255, 154, 0, 0.35);
+  }
+  .tool-illustrator:hover .ai-bubble-orb {
+    border-color: #ff9a00;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(255, 154, 0, 0.65);
+  }
+
+  /* 8. DaVinci Resolve */
+  .tool-davinci .ai-bubble-orb {
+    background: #0e1219;
+    border-color: rgba(244, 63, 94, 0.8);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.15), 0 0 8px rgba(244, 63, 94, 0.35);
+  }
+  .tool-davinci:hover .ai-bubble-orb {
+    border-color: #f43f5e;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.25), 0 0 16px rgba(244, 63, 94, 0.65);
   }
 
   .ai-panel-curve {
@@ -629,74 +1029,39 @@
     mask-size: 100% 100%;
   }
 
-  .ai-panel-content {
-    position: relative;
-    z-index: 3;
+  /* ═══ Explore Link ═══ */
+  .ai-explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  @media (max-width: 991px) {
+    .video-pipeline-grid {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .video-stage-col {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .stage-divider {
+      transform: rotate(90deg);
+      align-self: center;
+      margin-top: 0;
+      padding-inline: 0;
+      margin-block: 0.5rem;
+    }
   }
 
   @media (max-width: 47.999rem) {
     .ai-visual-copy-inner {
       padding-top: 2rem;
       padding-bottom: 2rem;
-    }
-
-    .ai-panel {
-      padding-bottom: 2rem;
-    }
-
-    .ai-panel-orb-shadow,
-    .ai-panel-orb-midtone {
-      display: none;
-    }
-
-    .ai-panel-orb-highlight {
-      right: 8%;
-      bottom: 8%;
-      width: 4rem;
-      height: 4rem;
-    }
-
-    .ai-tool-stage {
-      inset: 0;
-    }
-
-    .ai-logo-bubble {
-      width: 4rem;
-      height: 4rem;
-    }
-
-    .ai-logo-bubble svg {
-      width: 1.55rem;
-      height: 1.55rem;
-    }
-
-    .ai-logo-name {
-      display: none;
-    }
-
-    .ai-logo-runway {
-      top: auto;
-      bottom: 1.5rem;
-      left: 1rem;
-    }
-
-    .ai-logo-hailuo {
-      top: auto;
-      right: auto;
-      bottom: 5rem;
-      left: 45%;
-    }
-
-    .ai-logo-pika {
-      right: 1rem;
-      bottom: 1.5rem;
-      left: auto;
-    }
-
-    .ai-logo-kling,
-    .ai-logo-flow,
-    .ai-logo-luma {
-      display: none;
     }
 
     .ai-visual-curve {
@@ -713,12 +1078,12 @@
     .ai-visual-title-line > span,
     .ai-visual-copy-step,
     .ai-panel-support,
-    .ai-logo-orbit,
-    .ai-logo-bubble,
-    .ai-panel-orb,
-    .ai-panel-orbits,
-    .ai-tool-stage {
+    .ai-bubble-item,
+    .ai-bubble-orb,
+    .stage-branch-flow {
       will-change: auto;
+      animation: none !important;
+      transition: none !important;
     }
   }
 </style>

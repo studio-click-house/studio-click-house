@@ -235,14 +235,31 @@
       "title1": "Post-production vidéo",
       "title2": "IA professionnelle.",
       "copy1": "Accélérez votre production vidéo grâce à l'IA générative. De la génération de plans sur modèle avec Kling, Flow et Veo à l'upscaling vidéo 4K–8K et aux finitions cinématographiques, nous livrons des vidéos prêtes pour la diffusion mondiale.",
-      "copy2": "La post-production vidéo par IA optimise le flux de travail — rationalisant la création de plans, les déclinaisons de formats, l'équilibre colorimétrique et le nettoyage avec l'œil vigilant d'experts sur chaque image.",
-      "copy3": "Générée ou capturée, chaque séquence est finalisée par des étalonneurs et monteurs seniors. Nous combinons Kling, Google Flow, Runway et Luma avec un étalonnage professionnel et une vérification image par image pour une cohérence parfaite.",
+      "copy2": "Post-production vidéo par IA avec supervision artisanale à chaque image.",
+      "copy3": "Chaque séquence est finalisée par des monteurs et étalonneurs experts pour une fidélité cinématographique optimale.",
       "capabilities": [
         "Génération texte-vidéo",
         "Upscaling IA 4K–8K",
         "Pipeline couleur ACES",
         "Délai express 24h"
       ],
+      "stages": {
+        "stage1": {
+          "tag": "RAW 1080p · BROUILLON",
+          "title": "Synthèse Générative",
+          "description": "Création de plans à partir de texte avec la vélocité de l'IA."
+        },
+        "stage2": {
+          "tag": "4K UHD · 60 FPS",
+          "title": "Upscaling Temporel",
+          "description": "Vecteurs de flux optique pour une cohérence 4K irréprochable."
+        },
+        "stage3": {
+          "tag": "ACEScg · MASTER QC",
+          "title": "Finitions Artisanales",
+          "description": "Étalonnage précis image par image, montage et contrôle qualité."
+        }
+      },
       "explore": "Découvrir le montage & la post-production vidéo"
     },
     "processSteps": [

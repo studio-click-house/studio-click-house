@@ -235,14 +235,31 @@
       "title1": "Professionelle",
       "title2": "KI-Videopostproduktion.",
       "copy1": "Beschleunigen Sie Ihre Motion-Pipeline mit generativer KI. Von modelbasierten Aufnahmen mit Kling, Flow und Veo bis hin zu 4K–8K KI-Motion-Upscaling und cineastischem Finishing liefern wir sendefähige Videos für globale Kampagnen.",
-      "copy2": "KI-Videopostproduktion optimiert den Workflow — vereinfacht generative Aufnahmen, komplexe Zuschnitte, Farbbalance und visuelle Bereinigung mit meisterhafter Kontrolle bei jedem Frame.",
-      "copy3": "Generiert oder gefilmt, jede Sequenz wird von Senior-Colorists und Editoren finalisiert. Wir kombinieren Kling, Google Flow, Runway und Luma mit meisterhaftem Grading und Frame-für-Frame-Prüfung für höchste visuelle Konsistenz.",
+      "copy2": "KI-Videopostproduktion mit handwerklicher Präzision in jedem Frame.",
+      "copy3": "Jede Sequenz wird von erfahrenen Cuttern und Coloristen für filmische Perfektion und zeitliche Konsistenz veredelt.",
       "capabilities": [
         "Text-zu-Video-Generierung",
         "KI Motion Upscaling 4K–8K",
         "ACES Farb-Pipeline",
         "24h Express-Lieferung"
       ],
+      "stages": {
+        "stage1": {
+          "tag": "RAW 1080p · ENTWURF",
+          "title": "Generative Synthese",
+          "description": "Text-zu-Sequenz-Synthese mit generativer Modellgeschwindigkeit."
+        },
+        "stage2": {
+          "tag": "4K UHD · 60 FPS",
+          "title": "Temporales Upscaling",
+          "description": "Optical-Flow-Bewegungsvektoren für makellose 4K-Konsistenz."
+        },
+        "stage3": {
+          "tag": "ACEScg · MASTER QC",
+          "title": "Meisterhaftes Finishing",
+          "description": "Frame-genaue Farbbalance, Timeline-Schnitt und Endkontrolle."
+        }
+      },
       "explore": "Video-Editing & Postproduktion entdecken"
     },
     "processSteps": [

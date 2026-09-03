@@ -235,14 +235,31 @@
       "title1": "Posproducción de video",
       "title2": "con IA profesional.",
       "copy1": "Acelere su flujo de producción de movimiento con IA generativa. Desde tomas creadas sobre modelos con Kling, Flow y Veo hasta escalado con IA 4K–8K y acabados cinematográficos, entregamos video de máxima calidad para campañas globales.",
-      "copy2": "La posproducción de video con IA agiliza todo el flujo de trabajo — facilitando la creación de tomas generativas, adaptaciones de formato, equilibrio de color y limpieza visual con supervisión experta fotograma a fotograma.",
-      "copy3": "Ya sea generado o filmado en rodaje, cada secuencia es finalizada por coloristas y editores sénior. Combinamos Kling, Google Flow, Runway y Luma con etalonaje experto y revisión minuciosa para una fidelidad impecable.",
+      "copy2": "Posproducción de video con IA y supervisión artesanal en cada fotograma.",
+      "copy3": "Cada secuencia es finalizada por editores y coloristas expertos para una fidelidad cinematográfica impecable.",
       "capabilities": [
         "Generación de texto a video",
         "Escalado con IA 4K–8K",
         "Pipeline de color ACES",
         "Entrega exprés en 24h"
       ],
+      "stages": {
+        "stage1": {
+          "tag": "RAW 1080p · BORRADOR",
+          "title": "Síntesis Generativa",
+          "description": "Creación de tomas a partir de texto con velocidad de modelo generativo."
+        },
+        "stage2": {
+          "tag": "4K UHD · 60 FPS",
+          "title": "Escalado Temporal",
+          "description": "Vectores de flujo óptico para una consistencia 4K impecable."
+        },
+        "stage3": {
+          "tag": "ACEScg · MASTER QC",
+          "title": "Acabado Artesanal",
+          "description": "Etalonaje preciso cuadro a cuadro, montaje y control de calidad."
+        }
+      },
       "explore": "Explorar edición de video y posproducción"
     },
     "processSteps": [

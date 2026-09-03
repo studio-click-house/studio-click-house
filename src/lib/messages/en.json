@@ -235,14 +235,31 @@
       "title1": "Professional",
       "title2": "AI video post-production.",
       "copy1": "Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.",
-      "copy2": "AI video post-production accelerates the workflow — streamlining generative shot creation, complex cutdowns, color balance, and visual cleanup with artisan oversight at every frame.",
-      "copy3": "Generated or captured, every sequence is finished by senior colorists and editors. We blend Kling, Google Flow, Runway, and Luma-generated footage with expert grading and frame-by-frame review for pristine fidelity, temporal consistency, and cinematic storytelling.",
+      "copy2": "AI video post-production with artisan oversight at every frame.",
+      "copy3": "Every sequence is finished by senior editors and colorists for cinematic fidelity and temporal consistency.",
       "capabilities": [
         "Text-to-Video Generation",
         "AI Motion Upscaling 4K–8K",
         "ACES Color Pipeline",
         "24h Express Turnaround"
       ],
+      "stages": {
+        "stage1": {
+          "tag": "RAW 1080p · DRAFT",
+          "title": "Generative Synthesis",
+          "description": "Prompt-to-shot synthesis with generative model velocity."
+        },
+        "stage2": {
+          "tag": "4K UHD · 60 FPS",
+          "title": "Temporal Upscaling",
+          "description": "Optical flow motion vectors for pristine 4K consistency."
+        },
+        "stage3": {
+          "tag": "ACEScg · MASTER QC",
+          "title": "Artisan Finishing",
+          "description": "Frame-by-frame color balance, timeline cutdowns, and QC."
+        }
+      },
       "explore": "Explore video editing & post-production"
     },
     "processSteps": [

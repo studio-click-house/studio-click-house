@@ -31,7 +31,13 @@
               y: 0,
               duration: 0.6,
               ease: "power3.out",
-              scrollTrigger: { trigger: section, start: "top 92%", once: true },
+              scrollTrigger: {
+                trigger: section,
+                start: "top 92%",
+                toggleActions: "play none none none",
+                once: true,
+                invalidateOnRefresh: true,
+              },
             }
           );
 
@@ -543,6 +549,8 @@
     .ai-head-reveal,
     .ai-explore-link {
       will-change: auto;
+      opacity: 1 !important;
+      visibility: visible !important;
       transform: none !important;
     }
   }
