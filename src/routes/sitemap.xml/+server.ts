@@ -1,27 +1,23 @@
 import type { RequestHandler } from "./$types";
 import { siteConfig } from "$lib/config/site";
-import { services } from "$lib/content/home";
+import { implementedServiceSlugs } from "$lib/content/service-pages";
 
 const staticPaths = [
   "/",
   "/about",
   "/services",
   "/portfolio",
-  "/section",
   "/pricing",
   "/events",
   "/csr",
   "/careers",
-  "/login",
   "/contact",
-  "/privacy",
-  "/terms",
 ];
 
 export const GET: RequestHandler = () => {
   const paths = [
     ...staticPaths,
-    ...services.map((service) => `/services/${service.slug}`),
+    ...implementedServiceSlugs.map((slug) => `/services/${slug}`),
   ];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

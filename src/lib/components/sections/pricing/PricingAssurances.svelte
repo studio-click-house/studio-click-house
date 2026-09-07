@@ -54,7 +54,7 @@
       <div
         class="grid border-t border-brand-light/15 sm:grid-cols-2 lg:col-span-7"
       >
-        {#each assurances as assurance, index}
+      {#each assurances as assurance, index (`${index}-${assurance.title}`)}
           <article
             class="grid min-h-44 grid-cols-[2.25rem_1fr] gap-4 border-b border-brand-light/15 py-7 sm:px-6 sm:odd:border-r"
           >

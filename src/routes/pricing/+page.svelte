@@ -33,7 +33,7 @@
 
 <JsonLd data={pricingSchema} />
 
-<main id="pricing-page" class="relative bg-brand-light text-brand-dark">
+<main id="main-content" class="relative bg-brand-light text-brand-dark">
   <PageScrollReveals />
 
   <!-- Cinematic Three.js WebGL Interactive Wave / Image Hero -->

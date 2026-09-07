@@ -10,13 +10,13 @@
 </script>
 
 <PageMeta
-  title={`${status} — Page Not Found | Studio Click House`}
-  description="The requested page could not be found. Return to Studio Click House to explore our image post-production services and portfolio."
-  canonicalPath="/404"
+  title={is404 ? "404 — Page Not Found | Studio Click House" : `${status} — Something Went Wrong | Studio Click House`}
+  description={is404 ? "The requested page could not be found. Return to Studio Click House to explore our image post-production services and portfolio." : "The requested page could not be displayed. Return to Studio Click House and try again."}
+  noindex
 />
 
 <main
-  id="error-page"
+  id="main-content"
   class="relative isolate min-h-[100dvh] overflow-hidden bg-brand-dark px-4 pt-32 pb-24 text-brand-light flex items-center justify-center"
 >
   <!-- Ambient background glow -->

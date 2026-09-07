@@ -304,20 +304,20 @@
       "title1": "IA E-Commerce",
       "title2": "Workflow.",
       "stage1": {
-        "title": "Captura en plano sin retoque",
-        "description": "Fotografía plana estándar de la prenda sobre recorte de estudio transparente."
+        "title": "Imagen original",
+        "description": "Fotografía estándar del producto en plano antes del procesamiento."
       },
       "stage2": {
-        "title": "Maniquí invisible 3D",
-        "description": "Composición simétrica de maniquí hueco sobre fondo gris de estudio de comercio electrónico."
+        "title": "Maniquí invisible",
+        "description": "Composición limpia de maniquí hueco con volumen 3D natural."
       },
       "stage3": {
-        "title": "Síntesis de modelo con IA",
-        "description": "Síntesis en modelo virtual respetando la caída real del tejido, la postura y la iluminación de estudio."
+        "title": "Generación de modelo con IA",
+        "description": "Colocación natural de su prenda en un modelo fotográfico realista con IA."
       },
       "stage4": {
-        "title": "Variante de color azul cobalto",
-        "description": "Recoloración cromática instantánea que preserva los pliegues naturales de la tela y los reflejos."
+        "title": "Cambio de color y variantes",
+        "description": "Recoloración instantánea a cualquier tono conservando las texturas reales de la tela."
       },
       "explore": "Explorar servicios de IA y pipeline completo"
     },

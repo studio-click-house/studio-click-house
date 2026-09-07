@@ -182,7 +182,7 @@
             <!-- Services & Prices Dashed List -->
             <div class="mb-8">
               <ul class="space-y-0.5">
-                {#each plan.services as svc, svcIdx}
+              {#each plan.services as svc, svcIdx (`${svcIdx}-${svc.name}`)}
                   <li class="flex items-center justify-between py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
                     <span class="font-medium text-left pr-2">{$_(`pricing.packages.plans.${planIdx}.services.${svcIdx}.name`) || svc.name}</span>
                     <span class="font-mono font-bold text-brand-green shrink-0">{svc.price}</span>
@@ -193,7 +193,7 @@
 
             <!-- Guarantees Checklist -->
             <ul class="space-y-3 mb-8">
-              {#each plan.features as feature, featureIdx}
+            {#each plan.features as feature, featureIdx (`${featureIdx}-${feature}`)}
                 <li class="flex items-start gap-2.5 text-xs text-brand-dark/75 font-mono">
                   <div
                     class="w-4 h-4 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-0.5"

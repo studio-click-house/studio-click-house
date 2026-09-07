@@ -109,8 +109,8 @@ export interface PortfolioPageData {
     heading: string;
     description: string;
     primaryLabel: string;
-    primaryHref: string;
+    primaryHref: "/contact";
     secondaryLabel: string;
-    secondaryHref: string;
+    secondaryHref: "/services";
   };
 }

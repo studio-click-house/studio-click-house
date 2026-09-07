@@ -32,10 +32,11 @@
   title="Client Portal Sign In | Studio Click House"
   description="Sign in to the Studio Click House client workspace portal to access your active visual projects, feedback boards, and finalized assets."
   canonicalPath="/login"
+  noindex
 />
 
 <main
-  id="login-page"
+  id="main-content"
   class="min-h-[100dvh] bg-brand-paper pt-32 pb-24 flex items-center"
 >
   <div class="site-shell w-full max-w-md">

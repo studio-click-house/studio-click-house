@@ -5,7 +5,6 @@
   import {
     ArrowUpRight,
     ChevronDown,
-    Globe,
     LogIn,
     Menu,
     X,
@@ -229,7 +228,6 @@
 <header
   id="site-header"
   bind:this={headerElement}
-  role="none"
   class:is-scrolled={isScrolled}
   class="site-header fixed inset-x-0 top-0 z-50 w-full select-none"
 >

@@ -25,7 +25,7 @@
 
     <!-- Client / Partner Logo Minimal Grid (Matching reference image sponsor layout) -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y sm:divide-y-0 divide-x-0 sm:divide-x divide-brand-dark/10 border-y border-brand-dark/10">
-      {#each brands as brand}
+    {#each brands as brand (brand)}
         <div class="flex flex-col items-center justify-center p-6 text-center group transition-colors hover:bg-white/60">
           <span class="font-display text-lg sm:text-xl font-normal text-brand-dark/70 tracking-tight group-hover:text-brand-dark transition-colors">
             {brand.name}

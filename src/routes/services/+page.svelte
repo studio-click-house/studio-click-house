@@ -47,7 +47,7 @@
 <JsonLd data={faqSchemaData} />
 
 <main
-  id="services-page"
+  id="main-content"
   class="relative bg-brand-light text-brand-dark min-h-screen"
 >
   <!-- 1. Hero Section -->

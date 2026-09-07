@@ -120,7 +120,7 @@
     >
       <span class="inline-block overflow-hidden pb-1">
         <span class="hero-word inline-block">{hero.headingLine1}</span>
-      </span>{" "}
+      </span>
       <span class="inline-block overflow-hidden pb-1">
         <span class="hero-word inline-block italic font-light text-brand-green">{hero.headingLine2}</span>
       </span>

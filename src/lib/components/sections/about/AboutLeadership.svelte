@@ -76,7 +76,9 @@
     scrollLeft = carouselRef.scrollLeft;
     try {
       carouselRef.setPointerCapture(event.pointerId);
-    } catch {}
+    } catch {
+      // Pointer capture is optional when the pointer is already released.
+    }
     stopAutoplay();
   }
 
@@ -93,7 +95,9 @@
     isDragging = false;
     try {
       carouselRef.releasePointerCapture(event.pointerId);
-    } catch {}
+    } catch {
+      // Pointer capture is optional when the pointer is already released.
+    }
     startAutoplay();
   }
 
@@ -252,8 +256,8 @@
                 {#if mdCard.linkedinUrl}
                   <a
                     href={mdCard.linkedinUrl}
+                    rel="external noopener noreferrer"
                     target="_blank"
-                    rel="noopener noreferrer"
                     aria-label={`LinkedIn profile for ${mdCard.name}`}
                     class="border-b border-brand-dark/25 pb-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/65 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
                     >LinkedIn ↗</a
@@ -323,8 +327,8 @@
                   {#if member.linkedinUrl}
                     <a
                       href={member.linkedinUrl}
+                      rel="external noopener noreferrer"
                       target="_blank"
-                      rel="noopener noreferrer"
                       aria-label={`LinkedIn profile for ${member.name}`}
                       class="border-b border-brand-dark/25 pb-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/65 transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
                       >LinkedIn ↗</a

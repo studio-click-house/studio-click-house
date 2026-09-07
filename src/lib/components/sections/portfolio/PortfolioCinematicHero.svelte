@@ -11,6 +11,7 @@
 
   let section: HTMLElement;
   let canvasContainer: HTMLElement;
+  let canvasElement: HTMLCanvasElement;
   let headingLines: HTMLElement[] = [];
   let detailElements: HTMLElement[] = [];
 
@@ -26,7 +27,7 @@
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !section) return;
-      const { gsap, ScrollTrigger } = runtime;
+      const { gsap } = runtime;
 
       gsapContext = gsap.context(() => {
         const media = gsap.matchMedia();
@@ -76,6 +77,7 @@
         camera.position.z = 1;
 
         renderer = new THREE.WebGLRenderer({
+          canvas: canvasElement,
           alpha: true,
           antialias: false,
           powerPreference: "low-power",
@@ -83,7 +85,6 @@
         if (!renderer) return;
         renderer.setSize(rect.width, rect.height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        canvasContainer.appendChild(renderer.domElement);
         renderer.domElement.style.cssText =
           "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;";
 
@@ -230,6 +231,7 @@
       decoding="async"
       class="hero-fallback-image"
     />
+    <canvas bind:this={canvasElement} aria-hidden="true"></canvas>
   </div>
 
   <div class="hero-gradient" aria-hidden="true"></div>

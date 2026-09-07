@@ -41,7 +41,7 @@
 
 <JsonLd data={schemaData} />
 
-<main id="events-page" bind:this={pageRoot} class="relative overflow-clip">
+<main id="main-content" bind:this={pageRoot} class="relative overflow-clip">
   <EventsHero upcoming={upcomingEvent} archive={pastEvents} />
   <EventsUpcoming event={upcomingEvent} />
   <EventsArchive events={pastEvents} />

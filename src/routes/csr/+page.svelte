@@ -29,7 +29,7 @@
   canonicalPath="/csr"
 />
 
-<main id="csr-page" class="min-h-[100dvh] bg-brand-paper pt-32 pb-24">
+<main id="main-content" class="min-h-[100dvh] bg-brand-paper pt-32 pb-24">
   <div class="site-shell">
     <div
       class="border-x border-brand-dark/10 px-5 pb-10 pt-12 sm:px-10 lg:px-16"

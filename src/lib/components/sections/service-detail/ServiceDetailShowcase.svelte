@@ -197,7 +197,7 @@
           {/if}
 
           <div class="grid content-center gap-3 py-[7%] sm:gap-4">
-            {#each [1, 2] as index}
+            {#each [1, 2] as index (index)}
               {#if data.gallery?.[index] && data.stats?.[index]}
                 <figure
                   class="sd-proof-card sd-proof-card-side group relative aspect-[5/4] overflow-hidden rounded-[0.85rem] bg-brand-dark cursor-pointer"

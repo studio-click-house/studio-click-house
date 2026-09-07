@@ -58,7 +58,7 @@
                       class="text-brand-light/65 text-xs block sm:inline sm:before:content-['//'] sm:before:mx-1 font-mono"
                     >
                       {#if testimonial.role}
-                        {$_(`about.directorsMessage.testimonials.${index}.role`) || testimonial.role},{" "}
+                        {$_(`about.directorsMessage.testimonials.${index}.role`) || testimonial.role},
                       {/if}{testimonial.company}
                     </span>
                   </div>

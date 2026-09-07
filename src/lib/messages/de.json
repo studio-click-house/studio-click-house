@@ -304,20 +304,20 @@
       "title1": "KI E-Commerce",
       "title2": "Workflow.",
       "stage1": {
-        "title": "Rohe Flachaufnahme",
-        "description": "Standardmäßiges flach fotografiertes Kleidungsstück auf transparentem Studio-Freisteller."
+        "title": "Rohbild-Eingabe",
+        "description": "Standard-Produktfoto oder Flachaufnahme vor der Bearbeitung."
       },
       "stage2": {
-        "title": "3D Ghost Mannequin",
-        "description": "Symmetrische Hohlpuppen-Komposition auf reinem E-Commerce Studio-Grau."
+        "title": "Ghost Mannequin",
+        "description": "Saubere Hohlpuppen-Komposition mit natürlichem 3D-Volumen."
       },
       "stage3": {
-        "title": "KI Model-Synthese",
-        "description": "Virtuelle Modelsynthese mit authentischem Stofffall, natürlicher Haltung und Studio-Lichtkante."
+        "title": "KI-Model-Generierung",
+        "description": "Natürliche Platzierung Ihres Kleidungsstücks auf einem fotorealistischen KI-Modell."
       },
       "stage4": {
-        "title": "Kobaltblau Farbvariante",
-        "description": "Präzise chromatisierte Umfärbung unter Erhalt aller natürlichen Stofffalten und Glanzpunkte."
+        "title": "Farbwechsel & Varianten",
+        "description": "Sofortige Umfärbung in jeden Farbton unter Erhalt aller echten Stofftexturen."
       },
       "explore": "KI-Services & vollständige Pipeline entdecken"
     },

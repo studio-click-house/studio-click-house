@@ -7,7 +7,7 @@
     Sparkles,
     ArrowRight,
   } from "lucide-svelte";
-  import { cn } from "$lib/utils";
+  import { resolve } from "$app/paths";
 
   const standards = [
     {
@@ -104,7 +104,7 @@
     <div
       class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch"
     >
-      {#each standards as item}
+      {#each standards as item (item.title)}
         <article
           class="flex flex-col justify-between rounded-2xl border border-brand-dark/15 bg-brand-paper p-8 lg:p-10 transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm"
         >
@@ -162,7 +162,7 @@
               Technical Specifications Included:
             </h4>
             <ul class="space-y-3 mb-8">
-              {#each item.specs as spec}
+              {#each item.specs as spec (spec)}
                 <li class="flex items-start gap-3 text-sm text-brand-dark/75">
                   <span
                     class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-green/15 text-brand-green"
@@ -200,7 +200,7 @@
         </p>
       </div>
       <a
-        href="/contact?subject=trial-batch"
+        href={resolve("/contact?subject=trial-batch")}
         class="shrink-0 py-4 px-8 bg-brand-green text-white font-mono text-xs font-bold uppercase tracking-widest rounded-[0.55rem] hover:bg-white hover:text-brand-dark transition-colors duration-300 flex items-center gap-2 shadow-sm"
       >
         Request Free Trial Batch <ArrowRight size={16} />

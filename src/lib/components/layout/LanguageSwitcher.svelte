@@ -82,7 +82,7 @@
       aria-orientation="vertical"
     >
       <div class="overflow-hidden rounded-lg border border-brand-light/10 bg-[rgb(12,11,10)]/95 shadow-2xl shadow-black/70 p-2 backdrop-blur-2xl ring-1 ring-black/40">
-        {#each availableLanguages as lang}
+        {#each availableLanguages as lang (lang.code)}
           {@const isActive = currentLocale === lang.code}
           <button
             type="button"

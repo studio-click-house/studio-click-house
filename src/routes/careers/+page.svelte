@@ -11,7 +11,7 @@
   canonicalPath="/careers"
 />
 
-<main id="careers-page" class="min-h-[100dvh] bg-brand-paper pb-24 pt-32">
+<main id="main-content" class="min-h-[100dvh] bg-brand-paper pb-24 pt-32">
   <div class="site-shell">
     <section
       class="border-x border-brand-dark/10 px-5 pb-16 pt-12 sm:px-10 lg:px-16"

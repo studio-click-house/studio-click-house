@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { base } from "$app/paths";
+  import { resolve } from "$app/paths";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { workGalleryItems } from "$lib/content/home";
@@ -188,7 +188,7 @@
         >
       </h2>
 
-      <a href="{base}/portfolio" class="portfolio-link group">
+      <a href={resolve("/portfolio")} class="portfolio-link group">
         <span>Explore portfolio</span>
         <ArrowUpRight
           size={17}
@@ -266,7 +266,7 @@
       Preview media · final client-approved case studies will replace these
       studies
     </p>
-    <a href="{base}/portfolio" class="text-brand-green font-semibold"
+    <a href={resolve("/portfolio")} class="text-brand-green font-semibold"
       >View all work ↗</a
     >
   </footer>

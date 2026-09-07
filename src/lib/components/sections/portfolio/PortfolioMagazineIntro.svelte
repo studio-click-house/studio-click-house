@@ -102,7 +102,7 @@
 
         <!-- Multi-paragraph narrative with rich typography -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm sm:text-base text-brand-dark/80 leading-relaxed font-normal">
-          {#each data.paragraphs as paragraph}
+          {#each data.paragraphs as paragraph (paragraph)}
             <p>{paragraph}</p>
           {/each}
         </div>

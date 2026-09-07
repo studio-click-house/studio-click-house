@@ -31,7 +31,7 @@
 
 <JsonLd data={schemaData} />
 
-<main class="relative bg-brand-light text-brand-dark">
+<main id="main-content" class="relative bg-brand-light text-brand-dark">
   <ScrollChoreography />
   <ScrollImageStory />
   <ServicesSection />

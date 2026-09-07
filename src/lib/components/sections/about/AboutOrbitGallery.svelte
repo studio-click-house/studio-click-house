@@ -152,22 +152,6 @@
             Math.min(window.innerHeight * 0.75, 700),
         });
 
-        const getFramePosition = (
-          index: number,
-          total: number,
-          width: number,
-          height: number,
-        ) => {
-          const radiusX = width * 0.39;
-          const radiusY = height * 0.56;
-          const angle = (index / total) * (Math.PI * 2) - Math.PI / 2;
-
-          return {
-            x: Math.cos(angle) * radiusX,
-            y: Math.sin(angle) * radiusY,
-          };
-        };
-
         const placeWheel = (
           motionProgress: number,
           spinProgress: number,
@@ -823,16 +807,10 @@
             >
           </div>
           <div class="orbit-stat-fade-up">
-            <div class="flex items-center justify-between">
-              <span
-                class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-                >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
-              >
-              <div
-                class="size-2 animate-pulse rounded-full bg-brand-green/80"
-                aria-hidden="true"
-              ></div>
-            </div>
+            <span
+              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
+            >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
               >{$_('home.aboutOrbit.stats.2.label') || 'Production Studio'}</span
@@ -892,16 +870,10 @@
           >
         </div>
         <div class="flex flex-col">
-          <div class="flex items-center gap-3">
-            <span
-              class="block font-display text-2xl font-light leading-none text-brand-dark"
-              >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
-            >
-            <div
-              class="size-1.5 animate-pulse rounded-full bg-brand-green"
-              aria-hidden="true"
-            ></div>
-          </div>
+          <span
+            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
+          >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
             >{$_('home.aboutOrbit.stats.2.label') || 'Production Studio'}</span

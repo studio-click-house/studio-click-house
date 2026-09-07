@@ -319,6 +319,17 @@
         }
       };
 
+      const handleWindowBlur = () => {
+        document.documentElement.classList.remove("custom-cursor-active");
+        handlePointerLeave();
+      };
+
+      const handleWindowFocus = () => {
+        if (canUseCursorOrb.matches) {
+          document.documentElement.classList.add("custom-cursor-active");
+        }
+      };
+
       window.addEventListener("pointermove", handlePointerMove, {
         passive: true,
       });
@@ -336,11 +347,15 @@
         passive: true,
       });
       window.addEventListener("pointerup", handlePointerUp, { passive: true });
+      window.addEventListener("blur", handleWindowBlur);
+      window.addEventListener("focus", handleWindowFocus);
       canUseCursorOrb.addEventListener("change", handleMediaChange);
       removeMediaListener = () => {
         document.documentElement.classList.remove("custom-cursor-active");
         if (settleTimeout) clearTimeout(settleTimeout);
         window.removeEventListener("pointermove", handlePointerMove);
+        window.removeEventListener("blur", handleWindowBlur);
+        window.removeEventListener("focus", handleWindowFocus);
         removeLenisScrollListener();
         gsap.ticker.remove(drawTrail);
         window.removeEventListener("resize", resizeTrail);

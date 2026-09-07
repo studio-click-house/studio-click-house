@@ -349,17 +349,19 @@
             .hexPolygonsData(worldMap.features)
             .hexPolygonResolution(3)
             .hexPolygonMargin(0.7)
-            .hexPolygonColor((feature: any) => {
-              const props = feature?.properties;
+            .hexPolygonColor((feature: object) => {
+              const props = "properties" in feature && typeof feature.properties === "object"
+                ? feature.properties
+                : null;
               if (props) {
                 const isoA2 = String(
-                  props.ISO_A2 || props.iso_a2 || "",
+                  Reflect.get(props, "ISO_A2") || Reflect.get(props, "iso_a2") || "",
                 ).toUpperCase();
                 const name = String(
-                  props.NAME || props.name || "",
+                  Reflect.get(props, "NAME") || Reflect.get(props, "name") || "",
                 ).toUpperCase();
                 const admin = String(
-                  props.ADMIN || props.admin || "",
+                  Reflect.get(props, "ADMIN") || Reflect.get(props, "admin") || "",
                 ).toUpperCase();
 
                 const listedIsoCodes = [

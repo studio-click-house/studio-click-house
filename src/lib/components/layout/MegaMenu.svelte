@@ -1,7 +1,7 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-navigation-without-resolve -- resolveServiceHref returns a resolved pathname. */
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
-  import { resolve } from "$app/paths";
   import {
     Camera,
     Video,
@@ -10,6 +10,7 @@
     ArrowUpRight,
   } from "lucide-svelte";
   import { services } from "$lib/content/home";
+  import { resolveServiceHref } from "$lib/content/service-pages";
   import { _ } from "svelte-i18n";
 
   let { isOpen = false, onClose } = $props<{
@@ -22,7 +23,7 @@
   >("Image Editing");
   let activeServiceSlug = $state<string>("background-remove");
   let menuContainer = $state<HTMLDivElement>();
-  let gsapModule = $state<any>(null);
+  let gsapModule = $state<typeof import("gsap").gsap | null>(null);
 
   // Group services by category
   const activeCategoryServices = $derived(
@@ -78,6 +79,7 @@
   $effect(() => {
     if (!browser || !gsapModule || !menuContainer) return;
     const gsap = gsapModule;
+    const container = menuContainer;
 
     if (isOpen) {
       gsap.set(menuContainer, { display: "block" });
@@ -113,7 +115,7 @@
         ease: "power3.inOut",
         overwrite: "auto",
         onComplete: () => {
-          gsap.set(menuContainer, { display: "none" });
+          gsap.set(container, { display: "none" });
           activeCategory = "Image Editing";
           activeServiceSlug = "background-remove";
         },
@@ -126,8 +128,7 @@
     if (!browser || !gsapModule || !menuContainer || !isOpen) return;
     const gsap = gsapModule;
 
-    // Establish dependency tracking
-    const _cat = activeCategory;
+    if (!categories.some((category) => category.id === activeCategory)) return;
 
     gsap.fromTo(
       ".middle-service-item",
@@ -211,7 +212,7 @@
         {$_('nav.divisions') || 'Our Divisions'}
       </p>
       <div class="flex flex-col gap-3">
-        {#each categories as category}
+        {#each categories as category (category.id)}
           <div
             role="button"
             tabindex="0"
@@ -266,7 +267,7 @@
         {$_('nav.services') || 'Services'}
       </p>
       <ul class="flex flex-col gap-2.5">
-        {#each activeCategoryServices as service, sIndex}
+        {#each activeCategoryServices as service, sIndex (service.slug)}
           <li
             class="middle-service-item border-b border-brand-light/5 pb-2.5 last:border-0 relative pl-3.5 animate-duration-200"
             onmouseenter={() => (activeServiceSlug = service.slug)}
@@ -283,7 +284,7 @@
             ></span>
 
             <a
-              href={resolve("/services/[slug]", { slug: service.slug })}
+              href={resolveServiceHref(service.slug)}
               onclick={onClose}
               class="group flex items-center justify-between text-left py-0.5 outline-none w-full"
             >
@@ -322,7 +323,7 @@
     <div
       class="relative h-full min-h-[22rem] w-full overflow-hidden rounded-lg border border-brand-light/10 bg-brand-dark/30"
     >
-      {#each services as service}
+      {#each services as service (service.slug)}
         <div
           class="mega-thumb-{service.slug} absolute inset-0 size-full transition-opacity duration-300"
           style="opacity: {service.slug === activeServiceSlug

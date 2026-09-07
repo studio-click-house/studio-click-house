@@ -147,7 +147,7 @@
 
           <!-- Core Deliverables Bullet List -->
           <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 pt-4 border-t border-brand-dark/5">
-            {#each item.deliverables as del, dIndex}
+            {#each item.deliverables as del, dIndex (`${dIndex}-${del}`)}
               <li class="flex items-start gap-2">
                 <span class="text-brand-green font-mono text-[10px] mt-1">↳</span>
                 <span class="text-xs sm:text-sm text-brand-dark/85 font-medium leading-tight">{$_(`portfolio.matrix.services.${index}.deliverables.${dIndex}`) || del}</span>

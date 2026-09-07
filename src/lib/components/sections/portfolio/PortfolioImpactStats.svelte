@@ -22,7 +22,7 @@
 
     <!-- Numbers Counter Grid with subtle colons (Matching bottom numbers in reference image) -->
     <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 lg:gap-16">
-      {#each stats as stat, index}
+    {#each stats as stat, index (`${index}-${stat.label}`)}
         <div class="flex items-center gap-6 sm:gap-12 lg:gap-16">
           <div class="flex flex-col items-center text-center">
             <div class="font-display text-5xl sm:text-7xl lg:text-8xl font-normal text-brand-dark leading-none">

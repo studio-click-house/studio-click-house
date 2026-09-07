@@ -3,6 +3,7 @@
   import { pricingCategories, pricingPageData } from "$lib/content/pricing";
   import { cn } from "$lib/utils";
   import { _ } from "svelte-i18n";
+  import { resolve } from "$app/paths";
 
   // Calculator State
   let activeCatIndex = $state(0);
@@ -104,7 +105,7 @@
             {$_('pricing.calculator.pipelineCategory') || 'Pipeline Category'}
           </h3>
           <div class="flex flex-wrap gap-3">
-            {#each pricingCategories as category, index}
+          {#each pricingCategories as category, index (category.categoryName)}
               <button
                 type="button"
                 class={cn(
@@ -129,7 +130,7 @@
             {$_('pricing.calculator.services') || 'Services'}
           </h3>
           <div class="grid gap-2 sm:grid-cols-2">
-            {#each activeCategory.rates as rate}
+            {#each activeCategory.rates as rate (rate.slug)}
               <button
                 type="button"
                 class={cn(
@@ -226,7 +227,7 @@
               {$_('pricing.calculator.productionComplexity') || 'Production Complexity'}
             </h3>
             <div class="grid grid-cols-3 gap-2">
-              {#each pricingPageData.calculator.complexityOptions as option, index}
+              {#each pricingPageData.calculator.complexityOptions as option, index (option.label)}
                 <button
                   type="button"
                   class={cn(
@@ -253,7 +254,7 @@
             {$_('pricing.calculator.deliveryPriority') || 'Delivery Priority'}
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {#each pricingPageData.calculator.turnaroundOptions as option, index}
+            {#each pricingPageData.calculator.turnaroundOptions as option, index (option.label)}
               <button
                 type="button"
                 class={cn(
@@ -364,13 +365,13 @@
           <!-- CTAs -->
           <div class="pt-8 flex flex-col gap-3">
             <a
-              href={`/contact?service=${encodeURIComponent(activeCategory.categoryName.toLowerCase().replace(" ", "-"))}&volume=${volume}&complexity=${selectedComplexity}&turnaround=${selectedTurnaround}`}
+              href={resolve(`/contact?service=${encodeURIComponent(activeCategory.categoryName.toLowerCase().replace(" ", "-"))}&volume=${volume}&complexity=${selectedComplexity}&turnaround=${selectedTurnaround}`)}
               class="w-full py-4 px-6 bg-brand-green text-white text-center font-mono text-xs font-bold uppercase tracking-widest hover:bg-brand-dark transition-colors duration-300 flex items-center justify-center gap-2 rounded-[0.55rem] shadow-sm"
             >
               {$_('pricing.calculator.requestCustomProposal') || 'Request Custom Proposal'} <ArrowRight size={16} />
             </a>
             <a
-              href="/contact"
+              href={resolve("/contact")}
               class="w-full py-3.5 px-6 border border-brand-dark/20 text-brand-dark text-center font-mono text-xs font-semibold uppercase tracking-widest hover:border-brand-dark hover:bg-brand-dark/5 transition-colors duration-300 rounded-[0.55rem]"
             >
               {$_('pricing.calculator.bookConsultation') || 'Book a Consultation'}

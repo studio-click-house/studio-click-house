@@ -39,7 +39,7 @@
     items: ServiceFeatureItem[];
   }>();
 
-  const iconMap: Record<string, any> = {
+  const iconMap: Record<string, typeof BadgeDollarSign> = {
     BadgeDollarSign,
     BadgePercent,
     CheckCircle,

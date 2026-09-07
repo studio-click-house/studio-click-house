@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { SvelteSet } from "svelte/reactivity";
   import { portfolioPageData } from "$lib/content/portfolio";
 
   const trailImages = portfolioPageData.gallery
@@ -22,7 +23,7 @@
     let mousePosition = { x: 0, y: 0 };
     let cachedMousePosition = { x: 0, y: 0 };
     let lastMousePosition = { x: 0, y: 0 };
-    const activeTimelines = new Set<{ kill: () => void }>();
+    const activeTimelines = new SvelteSet<{ kill: () => void }>();
 
     const calculateParentSize = () => {
       const rect = sectionElement.getBoundingClientRect();

@@ -17,8 +17,8 @@
     { label: "Photo Retouching", href: "/services" },
     { label: "Background Removal", href: "/services/background-remove" },
     { label: "Color Correction", href: "/services/color-correction" },
-    { label: "Video Editing", href: "/services/video-editing" },
-    { label: "3D & CGI Modeling", href: "/services/3d-modeling" },
+    { label: "Video Editing", href: "/services#video-editing" },
+    { label: "3D & CGI Modeling", href: "/services#3d-modeling" },
   ] as const;
 
   interface CompanyLink {
@@ -42,13 +42,6 @@
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
     { label: "Refund Policy", href: "/terms" },
-  ] as const;
-
-  const directLines = [
-    { code: "BD", label: "Bangladesh HQ", number: "+880 9609-777111", href: "tel:+8809609777111" },
-    { code: "UK", label: "London Office", number: "+44 333 004 7739", href: "tel:+443330047739" },
-    { code: "SE", label: "Stockholm Hub", number: "+46 8 559 24212", href: "tel:+46855924212" },
-    { code: "AU", label: "Sydney Hub", number: "+61 4 8396 3759", href: "tel:+61483963759" },
   ] as const;
 
   const affiliations = [
@@ -210,7 +203,7 @@
               <a
                 href={item.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="external noreferrer"
                 class="group flex size-9 items-center justify-center rounded-[8px] border border-brand-dark/12 bg-white text-brand-dark/70 shadow-xs transition-all duration-250 hover:-translate-y-0.5 hover:border-brand-dark hover:bg-brand-dark hover:text-white"
                 title={item.label}
                 aria-label={item.label}
@@ -421,14 +414,6 @@
                   </a>
                 </li>
               {/each}
-              <li>
-                <a
-                  href={resolve("/contact")}
-                  class="font-bold text-brand-green hover:underline decoration-brand-green underline-offset-4"
-                >
-                  {$_('footer.freeTrial') || 'Free Trial'}
-                </a>
-              </li>
             </ul>
           </div>
 

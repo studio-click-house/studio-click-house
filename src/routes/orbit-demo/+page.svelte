@@ -1,6 +1,7 @@
 <script lang="ts">
   import AboutOrbitGallery from "$lib/components/sections/about/AboutOrbitGallery.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import { resolve } from "$app/paths";
 </script>
 
 <PageMeta
@@ -9,7 +10,7 @@
   canonicalPath="/orbit-demo"
 />
 
-<main class="min-h-screen bg-brand-dark text-brand-light">
+<main id="main-content" class="min-h-screen bg-brand-dark text-brand-light">
   <div
     class="site-shell flex flex-col items-center justify-center py-20 text-center"
   >
@@ -38,7 +39,7 @@
       End of Demo
     </p>
     <a
-      href="/about"
+      href={resolve("/about")}
       class="mt-4 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-brand-green hover:underline"
     >
       ← Return to About Page

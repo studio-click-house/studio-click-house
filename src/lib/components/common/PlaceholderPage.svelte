@@ -21,7 +21,7 @@
 />
 
 <main
-  id={`${canonicalPath.replaceAll("/", "-").replace(/^-|-$/g, "") || "home"}-page`}
+  id="main-content"
   class="min-h-[100dvh] bg-brand-paper pt-32"
 >
   <header

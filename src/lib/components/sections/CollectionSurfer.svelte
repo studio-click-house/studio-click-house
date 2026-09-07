@@ -84,7 +84,7 @@
   };
 
   onMount(() => {
-    let context: any;
+    let context: { revert: () => void } | undefined;
     let active = true;
 
     const updateTimeline = () => {
@@ -147,8 +147,8 @@
       });
     };
 
-    let gsap: any;
-    let ScrollTrigger: any;
+    let gsap: NonNullable<Awaited<ReturnType<typeof registerScrollTrigger>>>["gsap"];
+    let ScrollTrigger: NonNullable<Awaited<ReturnType<typeof registerScrollTrigger>>>["ScrollTrigger"];
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !containerRef || !viewportRef) return;
@@ -165,7 +165,7 @@
           pin: viewportRef,
           scrub: true,
           invalidateOnRefresh: true,
-          onUpdate: (self: any) => {
+          onUpdate: (self) => {
             targetScrollY = self.scroll() - self.start;
           },
         });
@@ -233,7 +233,7 @@
         class="relative w-0 h-0 pointer-events-auto"
         style="transform-style: preserve-3d;"
       >
-        {#each duplicatedItems as item, i}
+        {#each duplicatedItems as item, i (i)}
           <div
             bind:this={cardElements[i]}
             class="absolute w-[240px] h-[320px] md:w-[300px] md:h-[400px] -ml-[120px] -mt-[160px] md:-ml-[150px] md:-mt-[200px] bg-neutral-900 overflow-hidden shadow-2xl transition-colors duration-500 ease-out group"

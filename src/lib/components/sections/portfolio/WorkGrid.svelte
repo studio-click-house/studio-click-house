@@ -132,14 +132,14 @@
 
   // 2. Animation for grid cards (re-evaluates on filter/item changes without touching header)
   $effect(() => {
-    const _len = visibleItems.length;
-    const _filter = activeFilter;
+    const itemCount = visibleItems.length;
+    const filter = activeFilter;
     
     let active = true;
     let context: { revert: () => void } | undefined;
 
     registerScrollTrigger().then((runtime) => {
-      if (!active || !runtime || !section) return;
+      if (!active || !runtime || !section || itemCount === 0 || filter !== activeFilter) return;
       const { gsap, ScrollTrigger } = runtime;
 
       context = gsap.context(() => {
@@ -236,7 +236,7 @@
 
   <div class="work-grid-stage site-shell">
     <div class="work-grid">
-      {#each columnItems as col, colIndex}
+      {#each columnItems as col (col[0]?.id ?? "empty")}
         <div class="work-grid-col">
           {#each col as item (item.id)}
             <article class="work-grid-card work-grid-card--{item.aspectRatio}">

@@ -53,7 +53,9 @@
   let currentScrollZ = 0;
   let scrollVelocity = 0;
   let animationFrameId: number;
-  let pinTrigger: any;
+  let pinTrigger: ReturnType<
+    NonNullable<Awaited<ReturnType<typeof registerScrollTrigger>>>["ScrollTrigger"]["create"]
+  >;
 
   // Event handlers for cleanup
   let pointerMoveHandler: ((e: PointerEvent) => void) | null = null;
@@ -270,7 +272,7 @@
         pin: viewportRef,
         scrub: true,
         invalidateOnRefresh: true,
-        onUpdate: (self: any) => {
+        onUpdate: (self) => {
           const scrollOffset = self.scroll() - self.start;
           targetScrollZ = scrollOffset * speed;
         },
@@ -444,7 +446,7 @@
 
 <div
   bind:this={containerRef}
-  class="relative w-full overflow-hidden bg-brand-light"
+  class={`relative w-full overflow-hidden bg-brand-light ${className}`}
   style="height: calc(100vh + 2600px);"
 >
   <!-- Pinned Viewport Container styled as full-screen height (same as hero section) to prevent overlapping -->

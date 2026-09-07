@@ -60,7 +60,7 @@
 
 <JsonLd data={schemaData} />
 
-<main class="relative bg-brand-light text-brand-dark">
+<main id="main-content" class="relative bg-brand-light text-brand-dark">
   <AboutHero hero={aboutPageData.hero} />
   <AboutPeople people={aboutPageData.people} />
   <AboutTimeline journey={aboutPageData.journey} />

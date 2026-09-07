@@ -304,20 +304,20 @@
       "title1": "AI E-Commerce",
       "title2": "Workflow.",
       "stage1": {
-        "title": "Raw Flat Input",
-        "description": "Standard flat garment photo on transparent studio cutout."
+        "title": "Raw Image Input",
+        "description": "Standard product photo or flat-lay capture before processing."
       },
       "stage2": {
-        "title": "3D Ghost Mannequin",
-        "description": "Clean symmetrical hollow mannequin composite on e-commerce studio grey."
+        "title": "Ghost Mannequin",
+        "description": "Clean hollow mannequin composite with natural 3D volume."
       },
       "stage3": {
-        "title": "AI On-Model Synthesis",
-        "description": "Virtual model synthesis matching true fabric drape, posture & studio rim light."
+        "title": "AI Model Generation",
+        "description": "Placing your garment naturally onto a realistic AI fashion model."
       },
       "stage4": {
-        "title": "Cobalt Colorway",
-        "description": "Instant chromatic recolor preserving natural fabric folds and highlights."
+        "title": "Color Change & Variants",
+        "description": "Instant recoloring to any SKU shade while preserving real fabric textures."
       },
       "explore": "Explore AI Services & Full Pipeline"
     },

@@ -1,6 +1,8 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-navigation-without-resolve -- resolveServiceHref returns a resolved pathname. */
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
+  import { resolveServiceHref } from "$lib/content/service-pages";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { showcaseProjects, workGalleryItems } from "$lib/content/home";
@@ -777,7 +779,7 @@
       </div>
     </article>
 
-    {#each showcaseProjects as project, index (project.id)}
+    {#each showcaseProjects as project (project.id)}
       <article
         class="project-panel absolute inset-y-0 left-0 w-[66.6vw] overflow-hidden border-l border-brand-dark/15"
         style:background-color={project.bgColor}
@@ -1077,9 +1079,7 @@
                       class="work-field-progress-item border-t border-brand-dark/15 last:border-b"
                     >
                       <a
-                        href={resolve("/services/[slug]", {
-                          slug: serviceSlug,
-                        })}
+                        href={resolveServiceHref(serviceSlug)}
                         class="group grid grid-cols-[2.25rem_1fr_auto] items-center gap-3 py-[clamp(0.5rem,0.9vh,0.7rem)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-dark"
                         aria-label="Explore the {workFieldServiceLabels[
                           item.id

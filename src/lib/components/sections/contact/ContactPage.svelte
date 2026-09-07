@@ -312,7 +312,7 @@
           href={siteConfig.contact.websiteHref}
           class="contact-channel"
           target="_blank"
-          rel="noreferrer"
+          rel="external noreferrer"
         >
           <span class="contact-channel-icon shrink-0">
             <Globe2 size={18} aria-hidden="true" />
@@ -618,7 +618,7 @@
                 </div>
               </a>
               {#if primaryOffice.website && primaryOffice.websiteHref}
-                <a href={primaryOffice.websiteHref} target="_blank" rel="noreferrer" class="office-channel-dark">
+                <a href={primaryOffice.websiteHref} target="_blank" rel="external noreferrer" class="office-channel-dark">
                   <Globe2 size={16} class="text-brand-green shrink-0" />
                   <div>
                     <small>Official site</small>

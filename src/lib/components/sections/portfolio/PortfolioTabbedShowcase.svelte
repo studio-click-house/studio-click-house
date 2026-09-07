@@ -60,7 +60,7 @@
 
       <!-- Category Filter Tabs (Styled like clean segmented pill tabs) -->
       <nav class="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3" aria-label="Portfolio category filter">
-        {#each categories as cat}
+      {#each categories as cat (cat.id)}
           <button
             type="button"
             onclick={() => (activeCategory = cat.id)}

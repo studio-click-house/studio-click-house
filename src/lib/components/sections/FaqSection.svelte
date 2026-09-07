@@ -24,15 +24,6 @@
     images?: PreviewMedia[]; 
   }>();
 
-  const telemetryData = [
-    { code: "FMT.RAW // PSB // TIFF" },
-    { code: "SCHED.CONFIRMED" },
-    { code: "VER.03 // ACTIVE" },
-    { code: "SSH.ENCRYPTED" },
-    { code: "ISO.CALIBRATED" },
-    { code: "CONV.INTEGRATED" },
-  ];
-
   let activeIndex = $state(0);
   let activeImageIndex = $state(0);
   let section: HTMLElement;

@@ -3,6 +3,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
   import { _ } from "svelte-i18n";
+  import { resolve } from "$app/paths";
 
   let { careers } = $props<{ careers: AboutPageData["careers"] }>();
   let sectionRef: HTMLElement;
@@ -147,7 +148,7 @@
         </dl>
 
         <a
-          href={careers.ctaHref}
+          href={resolve(careers.ctaHref)}
           class="mt-10 inline-flex min-h-12 items-center gap-5 border-b border-brand-green pb-1 text-sm font-semibold text-brand-light transition-colors duration-300 hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
           <span>{$_('about.careers.ctaLabel') || careers.ctaLabel}</span>

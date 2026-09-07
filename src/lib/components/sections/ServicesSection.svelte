@@ -1,7 +1,8 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-navigation-without-resolve -- resolveServiceHref returns a resolved pathname. */
   import { onMount, tick } from "svelte";
   import { ArrowUpRight } from "lucide-svelte";
-  import { resolve } from "$app/paths";
+  import { resolveServiceHref } from "$lib/content/service-pages";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
   import { services, serviceShowcases } from "$lib/content/home";
@@ -194,7 +195,7 @@
           {#each activeServices as service, index (service.slug)}
             <a
               id={`capability-${service.slug}`}
-              href={resolve("/services/[slug]", { slug: service.slug })}
+              href={resolveServiceHref(service.slug)}
               class="service-row"
               class:active-service={activeServiceIndex === index}
               onmouseenter={() => activateService(index)}

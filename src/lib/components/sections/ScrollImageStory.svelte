@@ -245,6 +245,7 @@
         loop
         playsinline
         preload="metadata"
+        poster={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.jpg`}
         class="story-image ai-visual-image absolute inset-x-0 top-[-12.5%] h-[125%] w-full object-cover"
         aria-hidden="true"
       >
@@ -464,7 +465,6 @@
               <div class="video-stage-frame">
                 <video
                   bind:this={stage3Video}
-                  autoplay
                   muted
                   loop
                   playsinline
@@ -555,7 +555,7 @@
 
       <!-- Explore Link (Centered) -->
       <div class="mt-10 sm:mt-12 flex justify-center">
-        <a href={resolve("/services/video-editing")} class="ai-explore-link group">
+        <a href={resolve("/services#video-editing")} class="ai-explore-link group">
           <span class="font-sans text-xs sm:text-[0.84rem] font-semibold text-brand-dark group-hover:text-brand-green transition-colors duration-200">
             {$_('home.scrollImage.explore') || 'Explore video editing & post-production'}
           </span>
@@ -677,41 +677,28 @@
     text-align: center;
     gap: 0.95rem;
     will-change: transform, opacity;
-    z-index: 1;
   }
 
-  .video-stage-col:hover {
-    z-index: 40;
-  }
-
-  /* ── Stage Card & Cinematic Frame (Auto Expand on Hover) ── */
+  /* ── Stage Card & Cinematic Frame (Matching AiAboutSection) ── */
   .video-stage-card {
     position: relative;
     width: 100%;
-    border-radius: 1.05rem;
+    border-radius: 0.95rem;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
     background: var(--color-brand-paper);
-    box-shadow: 0 6px 22px -4px rgba(0, 0, 0, 0.07);
-    transform-origin: center center;
+    box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.04);
     transition:
-      transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 360ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 360ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, box-shadow;
+      transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 500ms cubic-bezier(0.16, 1, 0.3, 1);
     cursor: default;
-    z-index: 1;
   }
 
-  /* When hovered: pops up automatically, increases size big, lifts up and shows clearly! */
   .video-stage-card:hover {
-    z-index: 50;
-    transform: translateY(-28px) scale(1.24);
-    border-color: color-mix(in srgb, var(--color-brand-green) 70%, transparent);
-    box-shadow:
-      0 34px 75px -14px rgba(0, 0, 0, 0.36),
-      0 0 0 1px color-mix(in srgb, var(--color-brand-green) 40%, transparent),
-      0 0 28px -4px color-mix(in srgb, var(--color-brand-green) 28%, transparent);
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--color-brand-dark) 25%, transparent);
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.08);
   }
 
   .video-stage-frame {
@@ -726,11 +713,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .video-stage-card:hover .video-stage-img {
-    transform: scale(1.03);
+    transform: scale(1.035);
   }
 
   /* ── Stage Content & Typography ── */

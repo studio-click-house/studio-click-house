@@ -6,13 +6,15 @@
     title,
     description,
     canonicalPath,
+    noindex = false,
     image = siteConfig.ogImage,
     titleKey,
     descriptionKey,
   } = $props<{
     title: string;
     description: string;
-    canonicalPath: string;
+    canonicalPath?: string;
+    noindex?: boolean;
     image?: string;
     titleKey?: string;
     descriptionKey?: string;
@@ -26,7 +28,7 @@
     descriptionKey ? ($_?.(descriptionKey) || description) : description,
   );
 
-  const canonical = $derived(`${siteConfig.url}${canonicalPath}`);
+  const canonical = $derived(canonicalPath ? `${siteConfig.url}${canonicalPath}` : undefined);
   const ogImage = $derived(
     image.startsWith("http") ? image : `${siteConfig.url}${image}`,
   );
@@ -49,21 +51,21 @@
 <svelte:head>
   <title>{computedTitle}</title>
   <meta name="description" content={computedDescription} />
-  <link rel="canonical" href={canonical} />
-
-  <!-- Multi-language Hreflang Tags -->
-  <link rel="alternate" hreflang="x-default" href={canonical} />
-  <link rel="alternate" hreflang="en" href={canonical} />
-  <link rel="alternate" hreflang="de" href={canonical} />
-  <link rel="alternate" hreflang="fr" href={canonical} />
-  <link rel="alternate" hreflang="es" href={canonical} />
+  {#if canonical}
+    <link rel="canonical" href={canonical} />
+  {/if}
+  {#if noindex}
+    <meta name="robots" content="noindex, nofollow" />
+  {/if}
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content={siteConfig.name} />
   <meta property="og:title" content={computedTitle} />
   <meta property="og:description" content={computedDescription} />
-  <meta property="og:url" content={canonical} />
+  {#if canonical}
+    <meta property="og:url" content={canonical} />
+  {/if}
   <meta property="og:image" content={ogImage} />
   <meta property="og:locale" content={ogLocale} />
   {#each alternateLocales as altLocale (altLocale)}

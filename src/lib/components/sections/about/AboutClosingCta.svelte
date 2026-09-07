@@ -4,6 +4,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
   import { _ } from "svelte-i18n";
+  import { resolve } from "$app/paths";
 
   let { closingCta } = $props<{ closingCta: AboutPageData["closingCta"] }>();
 
@@ -104,7 +105,7 @@
           class="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
         >
           <a
-            href={closingCta.primaryCtaHref}
+            href={resolve(closingCta.primaryCtaHref)}
             class="inline-flex min-h-12 items-center justify-center gap-3 rounded-[0.55rem] bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
           >
             <span>{$_('about.closingCta.primaryCtaLabel') || closingCta.primaryCtaLabel}</span>
@@ -112,7 +113,7 @@
           </a>
 
           <a
-            href={closingCta.secondaryCtaHref}
+            href={resolve(closingCta.secondaryCtaHref)}
             class="border-b border-brand-dark/35 pb-1 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
           >
             <span>{$_('about.closingCta.secondaryCtaLabel') || closingCta.secondaryCtaLabel}</span>

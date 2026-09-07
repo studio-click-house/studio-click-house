@@ -304,20 +304,20 @@
       "title1": "IA E-Commerce",
       "title2": "Workflow.",
       "stage1": {
-        "title": "Prise de vue à plat brute",
-        "description": "Photo à plat standard du vêtement sur détourage studio transparent."
+        "title": "Image brute d'origine",
+        "description": "Photo produit ou prise de vue à plat standard avant traitement."
       },
       "stage2": {
-        "title": "Mannequin fantôme 3D",
-        "description": "Composite symétrique de mannequin invisible sur fond gris studio e-commerce épuré."
+        "title": "Mannequin invisible",
+        "description": "Composite de mannequin fantôme soigné avec un volume 3D naturel."
       },
       "stage3": {
-        "title": "Synthèse mannequin IA",
-        "description": "Synthèse sur modèle virtuel respectant le drapé réel du tissu, la posture et la lumière studio."
+        "title": "Génération de modèle IA",
+        "description": "Habillage naturel de votre vêtement sur un mannequin photo IA réaliste."
       },
       "stage4": {
-        "title": "Déclinaison bleu cobalt",
-        "description": "Recoloration chromatique instantanée préservant les plis naturels du tissu et les reflets."
+        "title": "Changement de couleur & variantes",
+        "description": "Recoloration instantanée selon vos déclinaisons en préservant les textures réelles du tissu."
       },
       "explore": "Découvrir les services IA & le pipeline complet"
     },

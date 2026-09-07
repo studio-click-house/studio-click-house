@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { ArrowRight, SlidersHorizontal } from "lucide-svelte";
-  import { pricingPageData, pricingCategories } from "$lib/content/pricing";
+  import { pricingPageData } from "$lib/content/pricing";
   import { _ } from "svelte-i18n";
 
   let heroSection: HTMLElement;
@@ -231,7 +231,7 @@
           <div
             class="hero-anim-item mt-12 grid max-w-sm grid-cols-3 gap-6 border-t border-brand-dark/12 pt-6"
           >
-            {#each stats as stat, i}
+          {#each stats as stat, i (stat.label)}
               <div>
                 <div
                   class="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl"
@@ -262,7 +262,7 @@
                 class="group relative flex min-h-[340px] sm:min-h-[410px] lg:min-h-[440px] xl:min-h-[480px] w-full flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_28px_60px_-15px_rgba(0,0,0,0.2)] hover:-translate-y-2 {item.offsetClass}"
               >
               <!-- Cross-fading Images List -->
-              {#each item.images as img, imgIdx}
+              {#each item.images as img, imgIdx (img.src)}
                 <img
                   src={img.src}
                   alt={img.alt}

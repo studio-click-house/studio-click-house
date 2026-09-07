@@ -30,7 +30,7 @@
   let brImg = $state<HTMLDivElement | null>(null);
 
   onMount(() => {
-    let context: any;
+    let context: { revert: () => void } | undefined;
     let active = true;
 
     registerScrollTrigger().then((runtime) => {

@@ -1,6 +1,8 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-navigation-without-resolve -- resolveServiceHref returns a resolved pathname. */
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
+  import { resolveServiceHref } from "$lib/content/service-pages";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { previewMedia } from "$lib/content/media";
@@ -211,7 +213,7 @@
             <div class="grid gap-x-8 sm:grid-cols-2">
               {#each division.services as service (service.slug)}
                 <a
-                  href={resolve("/services/[slug]", { slug: service.slug })}
+                  href={resolveServiceHref(service.slug)}
                   class="group grid grid-cols-[1fr_auto] items-center gap-3 py-3 transition-colors duration-300 hover:text-brand-green"
                 >
                   <span

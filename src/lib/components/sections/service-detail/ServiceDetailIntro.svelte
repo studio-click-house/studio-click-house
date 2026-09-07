@@ -161,7 +161,7 @@
           </h2>
 
           <div class="mt-7 max-w-[34rem]">
-            {#each data.paragraphs as paragraph}
+          {#each data.paragraphs as paragraph (paragraph)}
               <p
                 class="sd-intro-copy text-base leading-[1.7] text-brand-dark/64 sm:text-[1.03rem] [&+&]:mt-4"
               >

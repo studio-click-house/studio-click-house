@@ -24,13 +24,21 @@
     scroll-behavior: smooth;
     background: var(--color-brand-light);
     font-family: var(--font-sans);
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    scrollbar-color: color-mix(in srgb, var(--color-brand-dark) 35%, transparent) transparent;
+    scrollbar-width: thin;
   }
 
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    display: none;
+  html::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-brand-dark) 35%, transparent);
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
   }
 
   body {

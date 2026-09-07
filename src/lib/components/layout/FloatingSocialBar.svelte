@@ -164,7 +164,7 @@
         <a
           href={item.href}
           target={item.href.startsWith("http") ? "_blank" : undefined}
-          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+          rel="external noopener noreferrer"
           aria-label={item.label}
           class="flex h-8 w-8 items-center justify-center rounded-full bg-white/[0.06] text-white/80 transition-all duration-200 hover:scale-110 active:scale-95 {item.hoverClass}"
         >

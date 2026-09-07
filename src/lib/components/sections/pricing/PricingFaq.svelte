@@ -4,7 +4,6 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { Plus, Minus } from "lucide-svelte";
   import { slide } from "svelte/transition";
-  import { cn } from "$lib/utils";
 
   let sectionEl: HTMLElement;
   let openIndex = $state<number | null>(null);
@@ -14,7 +13,7 @@
   };
 
   onMount(() => {
-    let ctx: any;
+    let ctx: { revert: () => void } | undefined;
     registerScrollTrigger().then((gsapRuntime) => {
       if (!gsapRuntime || !sectionEl) return;
       const { gsap } = gsapRuntime;
@@ -62,11 +61,11 @@
 
     <!-- FAQ Accordion -->
     <div class="faq-grid flex flex-col border-t border-brand-dark/15">
-      {#each pricingPageData.faqs as faq, index}
+      {#each pricingPageData.faqs as faq, index (faq.question)}
         <div class="faq-item border-b border-brand-dark/15 py-6 transition-all">
           <button
             type="button"
-            class="w-full flex justify-between items-center text-left py-2 font-display text-xl sm:text-2xl font-normal tracking-tight text-brand-dark hover:text-brand-green transition-colors focus:outline-none cursor-pointer"
+            class="w-full flex justify-between items-center text-left py-2 font-display text-xl sm:text-2xl font-normal tracking-tight text-brand-dark hover:text-brand-green transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green cursor-pointer"
             onclick={() => toggle(index)}
           >
             <span>{faq.question}</span>

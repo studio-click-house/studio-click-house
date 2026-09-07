@@ -3,9 +3,19 @@
 
   $effect(() => {
     if (showreelVideo) {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       showreelVideo.muted = true;
       showreelVideo.defaultMuted = true;
-      void showreelVideo.play().catch(() => {});
+      const syncPlayback = () => {
+        if (reducedMotion.matches) {
+          showreelVideo?.pause();
+        } else {
+          void showreelVideo?.play().catch(() => {});
+        }
+      };
+      syncPlayback();
+      reducedMotion.addEventListener("change", syncPlayback);
+      return () => reducedMotion.removeEventListener("change", syncPlayback);
     }
   });
 </script>
@@ -19,7 +29,6 @@
   <div class="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[24/10] max-h-[85vh] overflow-hidden">
     <video
       bind:this={showreelVideo}
-      autoplay
       loop
       muted
       playsinline

@@ -204,10 +204,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index">01</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage1.title') || 'Raw Flat Input'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage1.title') || 'Raw Image Input'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage1.description') || 'Standard flat garment photo on transparent studio cutout.'}
+              {$_('home.aiWorkflow.stage1.description') || 'Standard product photo or flat-lay capture before processing.'}
             </p>
           </div>
         </div>
@@ -240,10 +240,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index text-brand-green">02</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage2.title') || '3D Ghost Mannequin'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage2.title') || 'Ghost Mannequin'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage2.description') || 'Clean symmetrical hollow mannequin composite on e-commerce studio grey.'}
+              {$_('home.aiWorkflow.stage2.description') || 'Clean hollow mannequin composite with natural 3D volume.'}
             </p>
           </div>
         </div>
@@ -276,10 +276,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index">03</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage3.title') || 'AI On-Model Synthesis'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage3.title') || 'AI Model Generation'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage3.description') || 'Virtual model synthesis matching true fabric drape, posture & studio rim light.'}
+              {$_('home.aiWorkflow.stage3.description') || 'Placing your garment naturally onto a realistic AI fashion model.'}
             </p>
           </div>
         </div>
@@ -312,10 +312,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index">04</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage4.title') || 'Cobalt Colorway'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage4.title') || 'Color Change & Variants'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage4.description') || 'Instant chromatic recolor preserving natural fabric folds and highlights.'}
+              {$_('home.aiWorkflow.stage4.description') || 'Instant recoloring to any SKU shade while preserving real fabric textures.'}
             </p>
           </div>
         </div>

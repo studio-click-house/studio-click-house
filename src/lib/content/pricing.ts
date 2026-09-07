@@ -1,5 +1,3 @@
-import type { PreviewMedia } from "$lib/types/content";
-
 export interface PricingServiceRate {
   name: string;
   slug: string;

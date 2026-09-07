@@ -10,7 +10,7 @@
     description: string;
     features: string[];
     actionLabel: string;
-    actionHref: `/services/${string}`;
+    actionHref: `/services/${string}` | `/services#${string}`;
     image: string;
     imageAlt: string;
   }
@@ -27,7 +27,7 @@
         "Untouched edge and skin detail",
       ],
       actionLabel: "View retouching",
-      actionHref: "/services/image-editing",
+      actionHref: "/services#photo-editing",
       image: "/images/portfolio/model-raw.png",
       imageAlt:
         "Raw fashion studio capture before background removal and retouching",
@@ -59,7 +59,7 @@
         "Clean white e-commerce option",
       ],
       actionLabel: "See background removal",
-      actionHref: "/services/background-removal",
+      actionHref: "/services/background-remove",
       image: "/images/portfolio/model-isolated.png",
       imageAlt: "Fashion model cleanly isolated on a white background",
     },
@@ -74,7 +74,7 @@
         "Full-length edge review",
       ],
       actionLabel: "Explore shadow creation",
-      actionHref: "/services/shadow-creation",
+      actionHref: "/services#photo-editing",
       image: "/images/portfolio/model-shadowed.png",
       imageAlt: "Finished retouched model with a soft natural contact shadow",
     },
@@ -303,7 +303,7 @@
 </script>
 
 <svelte:head>
-  {#each stages as stage}
+  {#each stages as stage (stage.id)}
     <link rel="preload" as="image" href={stage.image} />
   {/each}
 </svelte:head>
@@ -358,7 +358,7 @@
                 <p class="breakdown-description">{stage.description}</p>
 
                 <ul class="breakdown-features">
-                  {#each stage.features as feature}
+                  {#each stage.features as feature (feature)}
                     <li>
                       <span aria-hidden="true"></span>
                       {feature}
@@ -415,7 +415,7 @@
             </h3>
             <p class="breakdown-description">{stage.description}</p>
             <ul class="breakdown-features">
-              {#each stage.features as feature}
+              {#each stage.features as feature (feature)}
                 <li>
                   <span aria-hidden="true"></span>
                   {feature}

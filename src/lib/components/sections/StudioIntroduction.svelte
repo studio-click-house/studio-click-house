@@ -220,7 +220,7 @@
 </script>
 
 <svelte:head>
-  {#each studioDressColorways as colorway}
+  {#each studioDressColorways as colorway (colorway.id)}
     <link rel="preload" as="image" href={colorway.src} />
   {/each}
 </svelte:head>
@@ -246,7 +246,7 @@
           aria-label="Interactive outfit color-correction preview"
         >
           <div class="comparison-media">
-            {#each studioDressColorways as colorway}
+            {#each studioDressColorways as colorway (colorway.id)}
               <img
                 src={colorway.src}
                 alt={colorway.id === selectedColorwayId ? colorway.alt : ""}
@@ -267,7 +267,7 @@
           role="group"
           aria-label="Choose an outfit color correction"
         >
-          {#each studioDressColorways as colorway}
+          {#each studioDressColorways as colorway (colorway.id)}
             <button
               type="button"
               class:colorway-control-active={colorway.id === selectedColorwayId}

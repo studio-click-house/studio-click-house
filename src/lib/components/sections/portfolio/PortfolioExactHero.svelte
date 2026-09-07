@@ -7,9 +7,19 @@
 
   $effect(() => {
     if (heroVideo) {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       heroVideo.muted = true;
       heroVideo.defaultMuted = true;
-      void heroVideo.play().catch(() => {});
+      const syncPlayback = () => {
+        if (reducedMotion.matches) {
+          heroVideo?.pause();
+        } else {
+          void heroVideo?.play().catch(() => {});
+        }
+      };
+      syncPlayback();
+      reducedMotion.addEventListener("change", syncPlayback);
+      return () => reducedMotion.removeEventListener("change", syncPlayback);
     }
   });
 
@@ -53,7 +63,6 @@
   <video
     bind:this={heroVideo}
     poster="/images/portfolio/portfolio-fashion-studio-hero.jpg"
-    autoplay
     loop
     muted
     playsinline
