@@ -368,7 +368,33 @@
           "label": "On-Time Delivery"
         }
       ],
-      "startProject": "Start a project"
+      "startProject": "Start a project",
+      "cards": {
+        "orbit-1": {
+          "title": "AI Fashion Retouching"
+        },
+        "orbit-2": {
+          "title": "AI Product Compositing"
+        },
+        "orbit-3": {
+          "title": "Generative 3D CGI"
+        },
+        "orbit-4": {
+          "title": "Intelligent Color Grading"
+        },
+        "orbit-5": {
+          "title": "AI e-Commerce Masking"
+        },
+        "orbit-6": {
+          "title": "AI Jewelry Retouching"
+        },
+        "orbit-7": {
+          "title": "AI Beauty Retouching"
+        },
+        "orbit-8": {
+          "title": "AI Video Editing"
+        }
+      }
     },
     "creativeMarquee": {
       "title": "Our Clients"

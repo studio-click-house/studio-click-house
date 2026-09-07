@@ -368,7 +368,33 @@
           "label": "Livraison à temps"
         }
       ],
-      "startProject": "Démarrer un projet"
+      "startProject": "Démarrer un projet",
+      "cards": {
+        "orbit-1": {
+          "title": "Retouche mode IA"
+        },
+        "orbit-2": {
+          "title": "Compositing produit IA"
+        },
+        "orbit-3": {
+          "title": "CGI 3D génératif"
+        },
+        "orbit-4": {
+          "title": "Étalonnage intelligent"
+        },
+        "orbit-5": {
+          "title": "Détourage e-commerce IA"
+        },
+        "orbit-6": {
+          "title": "Retouche joaillerie IA"
+        },
+        "orbit-7": {
+          "title": "Retouche beauté IA"
+        },
+        "orbit-8": {
+          "title": "Montage vidéo IA"
+        }
+      }
     },
     "creativeMarquee": {
       "title": "Nos clients"

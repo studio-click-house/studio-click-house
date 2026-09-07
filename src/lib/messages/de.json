@@ -368,7 +368,33 @@
           "label": "Pünktliche Lieferung"
         }
       ],
-      "startProject": "Projekt starten"
+      "startProject": "Projekt starten",
+      "cards": {
+        "orbit-1": {
+          "title": "KI-Moderetusche"
+        },
+        "orbit-2": {
+          "title": "KI-Produkt-Compositing"
+        },
+        "orbit-3": {
+          "title": "Generatives 3D-CGI"
+        },
+        "orbit-4": {
+          "title": "Intelligentes Color-Grading"
+        },
+        "orbit-5": {
+          "title": "KI-e-Commerce-Maskierung"
+        },
+        "orbit-6": {
+          "title": "KI-Schmuckretusche"
+        },
+        "orbit-7": {
+          "title": "KI-Beauty-Retusche"
+        },
+        "orbit-8": {
+          "title": "KI-Videobearbeitung"
+        }
+      }
     },
     "creativeMarquee": {
       "title": "Unsere Kunden"

@@ -368,7 +368,33 @@
           "label": "Entregas a tiempo"
         }
       ],
-      "startProject": "Iniciar un proyecto"
+      "startProject": "Iniciar un proyecto",
+      "cards": {
+        "orbit-1": {
+          "title": "Retoque de moda con IA"
+        },
+        "orbit-2": {
+          "title": "Composición de producto con IA"
+        },
+        "orbit-3": {
+          "title": "CGI 3D generativo"
+        },
+        "orbit-4": {
+          "title": "Etalonaje inteligente"
+        },
+        "orbit-5": {
+          "title": "Máscara para e-commerce con IA"
+        },
+        "orbit-6": {
+          "title": "Retoque de joyería con IA"
+        },
+        "orbit-7": {
+          "title": "Retoque de belleza con IA"
+        },
+        "orbit-8": {
+          "title": "Edición de video con IA"
+        }
+      }
     },
     "creativeMarquee": {
       "title": "Nuestros clientes"

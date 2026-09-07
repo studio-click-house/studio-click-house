@@ -667,7 +667,7 @@
                 class="card-stage-pill pointer-events-none absolute top-2.5 left-2.5 z-30 inline-flex items-center rounded-lg border border-white/20 bg-brand-dark/45 px-2.5 py-1 text-brand-light backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25)] max-w-[calc(100%-1.25rem)] transition-all duration-300"
               >
                 <span class="font-sans text-[0.68rem] font-medium tracking-tight text-white truncate">
-                  {card.title}
+                  {$_(`home.aboutOrbit.cards.${card.id}.title`) || card.title}
                 </span>
               </div>
             </figure>
@@ -835,7 +835,7 @@
             href={resolve("/contact")}
             class="workflow-link !mt-0"
           >
-            <span>Start a project</span>
+            <span>{$_('home.aboutOrbit.startProject') || 'Start a project'}</span>
             <span class="workflow-link-icon">
               <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
             </span>
@@ -892,7 +892,7 @@
       </div>
       <div class="flex justify-start mt-2">
         <a href={resolve("/contact")} class="workflow-link !mt-0">
-          <span>Start a project</span>
+          <span>{$_('home.aboutOrbit.startProject') || 'Start a project'}</span>
           <span class="workflow-link-icon">
             <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
           </span>
