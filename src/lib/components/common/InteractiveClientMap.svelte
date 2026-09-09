@@ -4,6 +4,7 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { clientLocations } from "$lib/content/home";
   import type { AboutPageData } from "$lib/types/about";
+  // import CobeGlobe from "./CobeGlobe.svelte";
   import ThreeGlobe from "./ThreeGlobe.svelte";
   import { _ } from "svelte-i18n";
   import { resolve } from "$app/paths";
@@ -89,7 +90,7 @@
   aria-labelledby="global-production-heading"
   bind:this={sectionRoot}
   data-cursor-trail="off"
-  class="network-section relative min-h-[100dvh] overflow-hidden bg-brand-dark px-4 text-brand-light lg:py-0"
+  class="network-section relative min-h-[100dvh] overflow-hidden bg-brand-light px-4 text-brand-dark lg:py-0"
 >
   <div class="site-shell relative z-10 mx-auto max-w-7xl lg:min-h-[100dvh]">
     <div
@@ -98,20 +99,20 @@
       <div class="z-20 flex flex-col lg:col-span-4 lg:py-6">
         <h2
           id="global-production-heading"
-          class="network-copy-step max-w-xl font-display text-[clamp(3rem,5.5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em]"
+          class="network-copy-step max-w-xl font-display text-[clamp(3rem,5.5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em] text-brand-dark"
         >
           {$_('home.closingCta.heading') || closingCta.heading}
         </h2>
 
         <p
-          class="network-copy-step mt-4 max-w-md text-sm leading-6 text-brand-light/62"
+          class="network-copy-step mt-4 max-w-md text-sm leading-6 text-brand-dark/75"
         >
           {$_('home.closingCta.description') || closingCta.description}
         </p>
 
         <a
           href={resolve(closingCta.primaryCtaHref)}
-          class="network-copy-step mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-[0.55rem] bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+          class="network-copy-step mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-[0.55rem] bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-dark hover:text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
         >
           <span>{$_('home.closingCta.primaryCtaLabel') || closingCta.primaryCtaLabel}</span>
           <ArrowRight class="h-5 w-5" />
@@ -131,28 +132,7 @@
 
 <style>
   .network-section::before {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(
-        circle at 76% 42%,
-        color-mix(in srgb, var(--color-brand-green) 24%, transparent) 0,
-        color-mix(in srgb, var(--color-brand-green) 9%, transparent) 34%,
-        transparent 62%
-      ),
-      radial-gradient(
-        ellipse at 18% 54%,
-        color-mix(in srgb, var(--color-brand-green) 6%, transparent) 0,
-        transparent 48%
-      ),
-      radial-gradient(
-        circle at 76% 42%,
-        rgb(51 46 45 / 0.42) 0,
-        rgb(51 46 45 / 0.18) 34%,
-        transparent 68%
-      );
-    pointer-events: none;
-    content: "";
+    content: none;
   }
 
   .network-section::after {
@@ -166,19 +146,20 @@
 
   .globe-ambient {
     position: absolute;
-    z-index: -1;
-    width: min(98%, 50rem);
+    z-index: 0;
+    width: min(98%, 46rem);
     aspect-ratio: 1;
     border-radius: 9999px;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--color-brand-green) 38%, transparent) 0,
-      color-mix(in srgb, var(--color-brand-green) 16%, transparent) 38%,
-      transparent 70%
+      rgba(126, 166, 65, 0.22) 0%,
+      rgba(126, 166, 65, 0.14) 32%,
+      rgba(126, 166, 65, 0.06) 52%,
+      rgba(126, 166, 65, 0.015) 68%,
+      rgba(126, 166, 65, 0) 82%
     );
-    filter: blur(1.1rem);
-    opacity: 0.9;
     pointer-events: none;
+    filter: blur(42px);
     will-change: transform, opacity;
   }
 
