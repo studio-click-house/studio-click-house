@@ -329,6 +329,12 @@
     }
   }
 
+  @media (max-width: 39.999rem) {
+    .scroll-indicator {
+      display: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-video {
       display: none;

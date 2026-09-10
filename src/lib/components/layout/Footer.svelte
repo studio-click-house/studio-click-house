@@ -169,7 +169,7 @@
           </span>
           <a
             href={`mailto:${siteConfig.contact.email}`}
-            class="font-sans text-xl font-bold tracking-tight text-brand-dark border-b-2 border-brand-dark pb-0.5 hover:text-brand-green hover:border-brand-green transition-colors"
+            class="font-sans text-xl font-bold tracking-tight text-brand-dark border-b-2 border-brand-dark pb-0.5 hover:text-brand-green hover:border-brand-green transition-colors [overflow-wrap:anywhere]"
           >
             {siteConfig.contact.email}
           </a>
@@ -296,7 +296,7 @@
 
       <!-- Right Column: OUR LOCATIONS (4 Country Cards + Navigation) -->
       <div class="lg:col-span-7 space-y-4">
-        <div class="flex items-center justify-between pb-1">
+        <div class="flex flex-col items-start gap-2 pb-1 sm:flex-row sm:items-center sm:justify-between">
           <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45">
             {$_('footer.locationsTitle') || 'Our Locations'}
           </p>
@@ -310,7 +310,7 @@
               <span class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-1">
                 {$_('footer.headquarters') || 'Headquarters'}
               </span>
-              <h3 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-dark flex items-baseline gap-2.5">
+              <h3 class="flex flex-wrap items-baseline gap-2.5 font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
                 DHAKA <span class="font-sans text-xs font-medium text-brand-dark/50">Bangladesh</span>
               </h3>
               <p class="mt-1 text-[0.76rem] text-brand-dark/60 font-sans max-w-sm">
@@ -392,7 +392,7 @@
         </div>
 
         <!-- Navigation Columns below Locations -->
-        <div class="grid grid-cols-3 gap-5 pt-4">
+        <div class="grid grid-cols-1 gap-8 pt-4 sm:grid-cols-3 sm:gap-5">
           <!-- Company -->
           <div class="space-y-2.5">
             <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
@@ -501,7 +501,7 @@
       <p>
         &copy; {new Date().getFullYear()} {$_('footer.allRightsReserved') || 'Studio Click House Limited. All rights reserved.'}
       </p>
-      <div class="flex items-center gap-6">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
         <a
           href={resolve("/privacy")}
           class="hover:text-brand-dark transition-colors">{$_('footer.privacy') || 'Privacy'}</a

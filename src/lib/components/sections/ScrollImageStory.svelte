@@ -1053,11 +1053,13 @@
 
     .ai-visual-curve {
       height: 4rem;
+      transform: translateY(-1px);
     }
 
     .ai-panel-curve {
       top: -4rem;
       height: 4rem;
+      transform: translateY(1px);
     }
   }
 

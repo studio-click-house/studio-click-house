@@ -1212,7 +1212,7 @@
 
 <div
   bind:this={containerElement}
-  class="globe-container relative flex h-[36rem] w-full select-none items-center justify-center overflow-visible sm:h-[clamp(36rem,78dvh,46rem)]"
+  class="globe-container relative flex aspect-square h-auto w-full select-none items-center justify-center overflow-hidden sm:aspect-auto sm:h-[clamp(36rem,78dvh,46rem)] sm:overflow-visible"
   onpointerdown={handlePointerDown}
   onpointermove={handlePointerMove}
   onpointerup={handlePointerUp}

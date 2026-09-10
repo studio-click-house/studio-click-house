@@ -577,7 +577,7 @@
   ></div>
 
   <div
-    class="orbit-story-shell relative z-10 flex min-h-[calc(100dvh-4.35rem)] w-full items-center justify-center px-4"
+    class="orbit-story-shell relative z-10 flex min-h-[calc(100dvh-4.35rem)] w-full flex-col items-center justify-center px-4"
   >
     <!-- MOBILE HEADER (visible on mobile, hidden on desktop) -->
     <header class="w-full pb-6 mb-6 block md:hidden">
@@ -1152,4 +1152,3 @@
     }
   }
 </style>
-

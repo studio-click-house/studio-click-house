@@ -121,7 +121,7 @@
 
       <div
         bind:this={globeStage}
-        class="globe-stage relative flex min-h-[36rem] items-center justify-center lg:col-span-8 lg:min-h-0 lg:translate-x-12 xl:translate-x-20"
+        class="globe-stage relative flex min-h-0 items-center justify-center py-6 sm:min-h-[36rem] sm:py-0 lg:col-span-8 lg:min-h-0 lg:translate-x-12 xl:translate-x-20"
       >
         <div class="globe-ambient" aria-hidden="true"></div>
         <ThreeGlobe locations={clientLocations} />

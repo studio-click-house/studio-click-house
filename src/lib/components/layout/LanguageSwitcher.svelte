@@ -76,7 +76,7 @@
   <!-- Dropdown Menu (Exact same top-full mt-7 gap & invisible hover bridge as MegaMenu) -->
   {#if isOpen}
     <div
-      class="absolute right-0 top-full mt-7 w-44 origin-top-right z-50 animate-in fade-in-0 zoom-in-95 duration-150
+      class="language-dropdown absolute right-0 top-full mt-7 w-44 origin-top-right z-50 animate-in fade-in-0 zoom-in-95 duration-150
       before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-['']"
       role="menu"
       aria-orientation="vertical"
@@ -102,3 +102,15 @@
     </div>
   {/if}
 </div>
+
+<style>
+  @media (max-width: 79.999rem) {
+    .language-dropdown {
+      top: auto;
+      bottom: 100%;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      transform-origin: bottom right;
+    }
+  }
+</style>

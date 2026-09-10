@@ -153,7 +153,7 @@
 <aside
   id="floating-social-sidebar"
   aria-label="Social links and Studio Audio Brief"
-  class="fixed right-0 top-1/2 -translate-y-1/2 z-40 select-none flex flex-col items-end gap-2.5"
+  class="fixed right-0 top-1/2 z-40 hidden -translate-y-1/2 select-none flex-col items-end gap-2.5 sm:flex"
 >
   <!-- Main Social Links Island -->
   <div

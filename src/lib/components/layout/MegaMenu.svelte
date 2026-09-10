@@ -391,5 +391,37 @@
 <style>
   .mega-menu-panel {
     background: var(--navbar-surface, var(--color-brand-dark));
+    width: min(72rem, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 5rem);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .mega-menu-panel::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 79.999rem) {
+    .mega-menu-panel > div {
+      grid-template-columns: minmax(11rem, 0.8fr) minmax(0, 1fr) minmax(14rem, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (max-width: 47.999rem) {
+    .mega-menu-panel > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .mega-menu-panel > div > div:nth-child(2) {
+      border-inline: 0;
+      padding-inline: 0;
+    }
+
+    .mega-menu-panel > div > div:last-child {
+      min-height: 12rem;
+    }
   }
 </style>

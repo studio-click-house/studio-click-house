@@ -256,7 +256,7 @@
     </a>
 
     <div
-      class="nav-reveal nav-links hidden xl:flex items-center justify-center"
+      class="nav-reveal nav-links hidden lg:flex items-center justify-center"
     >
       {#each navigationItems as item (item.href)}
         {#if item.label === "Services"}
@@ -353,11 +353,14 @@
 
       <button
         type="button"
-        class="menu-action nav-reveal flex xl:hidden items-center justify-between"
+        class="menu-action flex lg:hidden items-center justify-between"
         aria-expanded={isMenuOpen}
         aria-controls="mobile-navigation-panel"
         aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
-        onclick={() => (isMenuOpen = !isMenuOpen)}
+        onclick={() => {
+          isMenuOpen = !isMenuOpen;
+          isMegaMenuOpen = false;
+        }}
       >
         <span class="hidden sm:inline">{isMenuOpen ? "Close" : "Menu"}</span>
         {#if isMenuOpen}
@@ -371,7 +374,7 @@
     {#if isMenuOpen}
       <div
         id="mobile-navigation-panel"
-        class="navigation-panel absolute inset-x-0 overflow-hidden border border-brand-light/15 bg-brand-dark/92 text-brand-light shadow-2xl shadow-brand-dark/35 backdrop-blur-2xl xl:hidden"
+        class="navigation-panel absolute inset-x-0 border border-brand-light/15 bg-brand-dark/92 text-brand-light shadow-2xl shadow-brand-dark/35 backdrop-blur-2xl lg:hidden"
       >
         <div
           class="flex items-center justify-between border-b border-brand-light/10 bg-brand-light/5 px-5 py-4 sm:px-7"
@@ -391,34 +394,59 @@
         <ol aria-label="Mobile routes" class="mobile-route-grid">
           {#each navigationItems as item, index (item.href)}
             <li>
-              <a
-                href={resolve(item.href)}
-                onclick={() => (isMenuOpen = false)}
-                aria-current={page.url.pathname === item.href
-                  ? "page"
-                  : undefined}
-          class="group/link flex h-full items-center justify-between px-6 py-5 transition-colors hover:bg-brand-light/8"
-                style="transition-delay: {index * 35}ms"
-              >
-                <span class="flex items-baseline gap-3">
-                  <span class="font-mono text-[0.55rem] text-brand-light/35">
-                    {String(index + 1).padStart(2, "0")}
+              {#if item.label === "Services"}
+                <button
+                  type="button"
+                  onclick={() => (isMegaMenuOpen = !isMegaMenuOpen)}
+                  aria-expanded={isMegaMenuOpen}
+                  class="group/link flex h-full w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-brand-light/8"
+                >
+                  <span class="flex items-baseline gap-3">
+                    <span class="font-mono text-[0.55rem] text-brand-light/35">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
+                      {$_('nav.' + item.label.toLowerCase()) || item.label}
+                    </span>
                   </span>
-                  <span
-                    class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green"
-                  >
-                    {$_('nav.' + item.label.toLowerCase()) || item.label}
+                  <ChevronDown
+                    size={16}
+                    strokeWidth={1.6}
+                    class="text-brand-light/35 transition-transform duration-200 {isMegaMenuOpen ? 'rotate-180' : ''}"
+                  />
+                </button>
+              {:else}
+                <a
+                  href={resolve(item.href)}
+                  onclick={() => (isMenuOpen = false)}
+                  aria-current={page.url.pathname === item.href ? "page" : undefined}
+                  class="group/link flex h-full items-center justify-between px-6 py-5 transition-colors hover:bg-brand-light/8"
+                  style="transition-delay: {index * 35}ms"
+                >
+                  <span class="flex items-baseline gap-3">
+                    <span class="font-mono text-[0.55rem] text-brand-light/35">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
+                      {$_('nav.' + item.label.toLowerCase()) || item.label}
+                    </span>
                   </span>
-                </span>
-                <ArrowUpRight
-                  size={14}
-                  strokeWidth={1.6}
-                  class="text-brand-light/35 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-brand-green"
-                />
-              </a>
+                  <ArrowUpRight
+                    size={14}
+                    strokeWidth={1.6}
+                    class="text-brand-light/35 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-brand-green"
+                  />
+                </a>
+              {/if}
             </li>
           {/each}
         </ol>
+
+        {#if isMegaMenuOpen}
+          <div class="mobile-mega-menu-host">
+            <MegaMenu isOpen={isMegaMenuOpen} onClose={closeNavigationMenus} />
+          </div>
+        {/if}
 
         <div
           class="mobile-utilities flex items-stretch border-t border-brand-light/10"
@@ -527,6 +555,10 @@
     gap: 0.5rem;
   }
 
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
   .project-action {
     display: inline-flex;
     align-items: center;
@@ -588,6 +620,7 @@
   }
 
   .menu-action {
+    flex: none;
     min-height: 2.85rem;
     min-width: 2.85rem;
     gap: 0.75rem;
@@ -613,8 +646,51 @@
 
   .navigation-panel {
     top: calc(100% + 0.6rem);
+    max-height: calc(100dvh - 4.5rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
     animation: reveal-navigation 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
     transform-origin: top center;
+  }
+
+  .navigation-panel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-mega-menu-host {
+    position: relative;
+    z-index: 60;
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  :global(.mobile-mega-menu-host .mega-menu-panel) {
+    position: relative;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: none;
+    margin: 0;
+    padding: 1rem;
+    transform: none !important;
+    box-sizing: border-box;
+  }
+
+  :global(.mobile-mega-menu-host .mega-menu-panel > div) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  :global(.mobile-mega-menu-host .mega-menu-panel > div > div:nth-child(2)) {
+    border-inline: 0;
+    padding-inline: 0;
+  }
+
+  :global(.mobile-mega-menu-host .mega-menu-panel > div > div:last-child) {
+    min-height: 14rem;
   }
 
   .mobile-route-grid {
@@ -647,13 +723,19 @@
     .nav-surface {
       gap: 0.5rem;
     }
+
+    .project-action,
+    .menu-action {
+      min-height: 2.85rem;
+      height: 2.85rem;
+    }
   }
 
   @media (max-width: 39.999rem) {
     .nav-surface {
       width: 100%;
       min-height: 3.5rem;
-      padding-inline: 0.75rem;
+      padding-inline: 1rem;
     }
 
     .brand-block {
@@ -671,10 +753,10 @@
     }
 
     .menu-action {
-      width: 2.5rem;
-      min-width: 2.5rem;
-      height: 2.5rem;
-      min-height: 2.5rem;
+      width: 2.75rem;
+      min-width: 2.75rem;
+      height: 2.75rem;
+      min-height: 2.75rem;
       padding-inline: 0;
       justify-content: center;
     }

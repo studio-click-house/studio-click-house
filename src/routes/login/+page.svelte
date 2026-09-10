@@ -130,7 +130,7 @@
       </form>
 
       <div
-        class="mt-8 border-t border-brand-dark/10 pt-6 flex justify-between items-center text-[0.58rem] font-mono uppercase tracking-[0.12em] text-brand-dark/45"
+        class="mt-8 flex flex-col gap-3 border-t border-brand-dark/10 pt-6 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-brand-dark/45 sm:flex-row sm:items-center sm:justify-between"
       >
         <a
           href={resolve("/")}

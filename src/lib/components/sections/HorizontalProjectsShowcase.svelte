@@ -1116,7 +1116,7 @@
       <div class="work-fields-mobile h-full gap-3">
         {#each workFieldGalleryItems as item (item.id)}
           <article
-            class="work-card relative h-full w-[88vw] shrink-0 snap-center overflow-hidden border border-brand-light/10 bg-brand-light/5"
+            class="work-card relative h-full w-[calc(100vw-2rem)] shrink-0 snap-start overflow-hidden border border-brand-light/10 bg-brand-light/5"
           >
             {#if item.media.kind === "video"}
               <video
@@ -1333,12 +1333,12 @@
 
     .project-stage {
       display: flex;
+      flex-direction: column;
       height: auto;
       width: 100%;
       gap: 0.75rem;
-      overflow-x: auto;
+      overflow: hidden;
       padding-inline: 1rem;
-      scroll-snap-type: x mandatory;
       scrollbar-width: none;
     }
 
@@ -1350,20 +1350,18 @@
     .project-panel {
       position: relative;
       inset: auto;
-      width: 88vw;
-      min-width: 88vw;
+      width: 100%;
+      min-width: 0;
       height: 82dvh;
       transform: none !important;
-      scroll-snap-align: center;
     }
 
     .work-fields-track {
       position: relative;
       inset: auto;
       z-index: auto;
-      height: 82dvh;
-      width: max-content;
-      flex: 0 0 auto;
+      height: auto;
+      width: 100%;
       transform: none !important;
       will-change: auto;
     }
@@ -1373,12 +1371,12 @@
     }
 
     .work-fields-mobile {
-      display: flex;
+      display: grid;
     }
 
     .work-card {
-      width: 88vw;
-      scroll-snap-align: center;
+      width: 100%;
+      min-height: 82dvh;
     }
 
     .showcase-intro {
@@ -1418,6 +1416,16 @@
 
     .project-details > :first-child p:last-child {
       display: none;
+    }
+
+    .work-card-detail {
+      transform: none;
+      visibility: visible;
+    }
+
+    .work-card-detail > * {
+      opacity: 1;
+      transform: none;
     }
   }
 
