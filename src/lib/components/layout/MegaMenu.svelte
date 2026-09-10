@@ -21,9 +21,15 @@
   let activeCategory = $state<
     "Image Editing" | "Video Editing" | "3D Modeling"
   >("Image Editing");
-  let activeServiceSlug = $state<string>("background-remove");
+  let activeServiceSlug = $state<string>("ai-retouch");
   let menuContainer = $state<HTMLDivElement>();
   let gsapModule = $state<typeof import("gsap").gsap | null>(null);
+
+  function translate(key: string, fallback: string): string {
+    const res = $_(key, { default: fallback });
+    if (!res || res === key) return fallback;
+    return res;
+  }
 
   // Group services by category
   const activeCategoryServices = $derived(
@@ -33,18 +39,21 @@
   const categories = [
     {
       id: "Image Editing" as const,
+      key: "imageEditing",
       label: "Photo Editing",
       description: "Precision Photoshop & retouching at scale",
       icon: Camera,
     },
     {
       id: "Video Editing" as const,
+      key: "videoEditing",
       label: "Video Editing",
       description: "Cinematic cuts, grading & social reels",
       icon: Video,
     },
     {
       id: "3D Modeling" as const,
+      key: "modeling3d",
       label: "3D Product Modeling",
       description: "CGI rendering, shading & design",
       icon: Layers,
@@ -117,7 +126,7 @@
         onComplete: () => {
           gsap.set(container, { display: "none" });
           activeCategory = "Image Editing";
-          activeServiceSlug = "background-remove";
+          activeServiceSlug = "ai-retouch";
         },
       });
     }
@@ -209,7 +218,7 @@
       <p
         class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green font-semibold"
       >
-        {$_('nav.divisions') || 'Our Divisions'}
+        {translate("nav.divisions", "Our Divisions")}
       </p>
       <div class="flex flex-col gap-3">
         {#each categories as category (category.id)}
@@ -224,7 +233,7 @@
                 handleCategoryHover(category.id);
               }
             }}
-            class="group border border-brand-light/5 rounded-xl p-3.5 flex items-center justify-between transition-all duration-300 ease-out cursor-pointer outline-none hover:bg-brand-light/5 hover:border-brand-green/20 data-[active=true]:bg-brand-light/5 data-[active=true]:border-brand-green/40 focus-visible:ring-1 focus-visible:ring-brand-green"
+            class="group border border-brand-light/5 rounded-xl p-3.5 flex items-center justify-between transition-all duration-300 ease-out cursor-pointer outline-none hover:bg-brand-light/5 hover:border-brand-green/20 data-[active=true]:bg-brand-light/5 data-[active=true]:border-brand-green/60 data-[active=true]:shadow-[0_0_15px_rgba(126,166,65,0.15)] focus-visible:ring-1 focus-visible:ring-brand-green"
           >
             <div class="flex items-center gap-3">
               <!-- Icon Container -->
@@ -240,12 +249,12 @@
                     ? 'text-brand-green translate-x-0.5'
                     : 'text-brand-light/80 group-hover:text-brand-light'}"
                 >
-                  {$_(`nav.megaCategories.${category.id}.label`) || category.label}
+                  {translate(`nav.megaCategories.${category.key}.label`, category.label)}
                 </span>
                 <span
                   class="font-sans text-[0.62rem] text-brand-light/45 mt-0.5 transition-colors group-hover:text-brand-light/60 group-data-[active=true]:text-brand-light/70"
                 >
-                  {$_(`nav.megaCategories.${category.id}.description`) || category.description}
+                  {translate(`nav.megaCategories.${category.key}.description`, category.description)}
                 </span>
               </div>
             </div>
@@ -264,57 +273,93 @@
       <p
         class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green mb-5 font-semibold"
       >
-        {$_('nav.services') || 'Services'}
+        {translate("nav.services", "Services")}
       </p>
       <ul class="flex flex-col gap-2.5">
         {#each activeCategoryServices as service, sIndex (service.slug)}
-          <li
-            class="middle-service-item border-b border-brand-light/5 pb-2.5 last:border-0 relative pl-3.5 animate-duration-200"
-            onmouseenter={() => (activeServiceSlug = service.slug)}
-          >
-            <!-- Vertical Active Line Indicator -->
-            <span
-              class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3.5 bg-brand-green transition-all duration-300 origin-center"
-              style="opacity: {service.slug === activeServiceSlug
-                ? 1
-                : 0}; transform: translateY(-50%) scaleY({service.slug ===
+          {#if service.slug === "ai-retouch"}
+            <li
+              class="middle-service-item relative rounded-lg border border-brand-green/50 bg-brand-green/[0.08] p-2.5 my-1 transition-all duration-300 ease-out hover:border-brand-green hover:bg-brand-green/[0.14] hover:shadow-[0_0_18px_rgba(126,166,65,0.25)] {service.slug ===
               activeServiceSlug
-                ? 1
-                : 0})"
-            ></span>
-
-            <a
-              href={resolveServiceHref(service.slug)}
-              onclick={onClose}
-              class="group flex items-center justify-between text-left py-0.5 outline-none w-full"
+                ? 'border-brand-green shadow-[0_0_18px_rgba(126,166,65,0.25)] ring-1 ring-brand-green/40'
+                : ''}"
+              onmouseenter={() => (activeServiceSlug = service.slug)}
             >
-              <div class="flex items-center gap-2.5">
-                <span
-                  class="font-display text-[0.7rem] font-bold tracking-wide transition-colors duration-200 {service.slug ===
-                  activeServiceSlug
-                    ? 'text-brand-green'
-                    : 'text-brand-light/30'}"
-                >
-                  {String(sIndex + 1).padStart(2, "0")}
-                </span>
-                <span
-                  class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out {service.slug ===
-                  activeServiceSlug
-                    ? 'text-brand-green translate-x-1.5'
-                    : 'text-brand-light/80'}"
-                >
-                  {$_(`home.services.${service.slug}.title`) || service.title}
-                </span>
-              </div>
-              <ArrowUpRight
-                size={13}
-                class="text-brand-light/20 transition-all duration-300 group-hover:text-brand-green group-hover:translate-x-0.5 group-hover:-translate-y-0.5 {service.slug ===
+              <a
+                href={resolveServiceHref(service.slug)}
+                onclick={onClose}
+                class="group flex items-center justify-between text-left outline-none w-full"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span
+                    class="font-display text-[0.7rem] font-bold tracking-wide text-brand-green"
+                  >
+                    {String(sIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    class="font-sans text-xs font-bold uppercase tracking-wider text-brand-green transition-all duration-300 ease-out {service.slug ===
+                    activeServiceSlug
+                      ? 'translate-x-1'
+                      : 'group-hover:translate-x-1'}"
+                  >
+                    {translate(`home.services.${service.slug}.title`, service.title)}
+                  </span>
+                </div>
+                <ArrowUpRight
+                  size={14}
+                  class="text-brand-green transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+            </li>
+          {:else}
+            <li
+              class="middle-service-item border-b border-brand-light/5 pb-2.5 last:border-0 relative pl-3.5 animate-duration-200"
+              onmouseenter={() => (activeServiceSlug = service.slug)}
+            >
+              <!-- Vertical Active Line Indicator -->
+              <span
+                class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3.5 bg-brand-green transition-all duration-300 origin-center"
+                style="opacity: {service.slug === activeServiceSlug
+                  ? 1
+                  : 0}; transform: translateY(-50%) scaleY({service.slug ===
                 activeServiceSlug
-                  ? 'opacity-100'
-                  : 'opacity-40'}"
-              />
-            </a>
-          </li>
+                  ? 1
+                  : 0})"
+              ></span>
+
+              <a
+                href={resolveServiceHref(service.slug)}
+                onclick={onClose}
+                class="group flex items-center justify-between text-left py-0.5 outline-none w-full"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span
+                    class="font-display text-[0.7rem] font-bold tracking-wide transition-colors duration-200 {service.slug ===
+                    activeServiceSlug
+                      ? 'text-brand-green'
+                      : 'text-brand-light/30'}"
+                  >
+                    {String(sIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out {service.slug ===
+                    activeServiceSlug
+                      ? 'text-brand-green translate-x-1.5'
+                      : 'text-brand-light/80'}"
+                  >
+                    {translate(`home.services.${service.slug}.title`, service.title)}
+                  </span>
+                </div>
+                <ArrowUpRight
+                  size={13}
+                  class="text-brand-light/20 transition-all duration-300 group-hover:text-brand-green group-hover:translate-x-0.5 group-hover:-translate-y-0.5 {service.slug ===
+                  activeServiceSlug
+                    ? 'opacity-100'
+                    : 'opacity-40'}"
+                />
+              </a>
+            </li>
+          {/if}
         {/each}
       </ul>
     </div>

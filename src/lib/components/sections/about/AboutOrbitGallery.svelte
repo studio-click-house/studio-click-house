@@ -1,13 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { onMount } from "svelte";
-  import {
-    ArrowUpRight,
-    Compass,
-    Wand2,
-    ShieldCheck,
-    Check,
-  } from "lucide-svelte";
+  import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { aboutOrbitCards } from "$lib/content/about-orbit";
   import { _ } from "svelte-i18n";
@@ -31,7 +25,6 @@
       title: "Direction",
       description:
         "Every project starts with clear references, technical specifications and creative goals.",
-      icon: Compass,
       cardIndex: 3,
       tag: "Direction & Framing",
     },
@@ -40,7 +33,6 @@
       title: "Specialist craft",
       description:
         "Dedicated editors and 3D CGI artists matched to your project requirements.",
-      icon: Wand2,
       cardIndex: 1,
       tag: "Specialist Craft",
     },
@@ -49,7 +41,6 @@
       title: "Quality control",
       description:
         "Every file reviewed for immaculate skin texture, edge accuracy, and lighting consistency.",
-      icon: ShieldCheck,
       cardIndex: 6,
       tag: "Macro Quality Review",
     },
@@ -58,7 +49,6 @@
       title: "Delivery",
       description:
         "Production-ready, multi-channel high-res assets delivered on time with strict SLA.",
-      icon: Check,
       cardIndex: 0,
       tag: "Multi-Format Export",
     },
@@ -448,13 +438,11 @@
                   autoAlpha: 0,
                   xPercent: 115,
                   y: 0,
-                  yPercent: -50,
                 },
                 {
                   autoAlpha: 1,
                   xPercent: 0,
                   y: 0,
-                  yPercent: -50,
                   duration: 0.18,
                   ease: "none",
                 },
@@ -464,7 +452,7 @@
                 workflowHeaderRef,
                 {
                   autoAlpha: 0,
-                  x: 52,
+                  x: 32,
                 },
                 {
                   autoAlpha: 1,
@@ -545,7 +533,6 @@
               x: 0,
               xPercent: 0,
               y: 0,
-              yPercent: -50,
               pointerEvents: "auto",
             });
             gsap.set(
@@ -594,15 +581,11 @@
   >
     <!-- MOBILE HEADER (visible on mobile, hidden on desktop) -->
     <header class="w-full pb-6 mb-6 block md:hidden">
-      <span
-        class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green"
-      >
-        {$_('home.aboutOrbit.eyebrow')}
-      </span>
       <h2
         class="font-display text-2xl font-light leading-tight tracking-[-0.03em] text-brand-dark mt-2"
       >
-        {$_('home.aboutOrbit.heading')}
+        {$_('home.aboutOrbit.headingPart1') || "Quality isn't the last step."}
+        <em class="font-display italic font-normal text-brand-green">{$_('home.aboutOrbit.headingPart2') || "It's every step."}</em>
       </h2>
     </header>
 
@@ -610,23 +593,6 @@
       bind:this={orbitStageRef}
       class="orbit-stage relative flex h-[34rem] w-full max-w-[92rem] items-center justify-center sm:h-[40rem] lg:h-[44rem]"
     >
-      <!-- DESKTOP HEADER (Absolute positioned on the right top, hidden on mobile) -->
-      <header
-        bind:this={workflowHeaderRef}
-        class="workflow-header absolute top-0 pb-4 hidden md:block"
-        style="right: clamp(0.5rem, 1.5vw, 1.75rem); width: min(44%, 39rem);"
-      >
-        <span
-          class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.2em] text-brand-green"
-        >
-          {$_('home.aboutOrbit.eyebrow')}
-        </span>
-        <h2
-          class="font-display text-[clamp(1.8rem,3vw,2.8rem)] font-light leading-[1.05] tracking-[-0.045em] text-brand-dark mt-2"
-        >
-          {$_('home.aboutOrbit.heading')}
-        </h2>
-      </header>
 
       <!-- Left: Stacked cards -->
       <div bind:this={stackGroupRef} class="orbit-stack-group">
@@ -714,6 +680,19 @@
         class="assurance-panel {isInteractive ? 'is-interactive' : ''}"
         aria-label="Our Process"
       >
+        <!-- DESKTOP HEADER (Directly above steps, eliminating awkward vertical gap) -->
+        <header
+          bind:this={workflowHeaderRef}
+          class="workflow-header mb-6 hidden md:block"
+        >
+          <h2
+            class="font-display text-[clamp(1.35rem,1.9vw,2.05rem)] font-light leading-[1.15] tracking-[-0.03em] text-brand-dark"
+          >
+            {$_('home.aboutOrbit.headingPart1') || "Quality isn't the last step."}
+            <em class="font-display italic font-normal text-brand-green">{$_('home.aboutOrbit.headingPart2') || "It's every step."}</em>
+          </h2>
+        </header>
+
         <div class="assurance-track-wrapper relative flex gap-3 sm:gap-4 items-stretch">
           <!-- Sliding glowing indicator rail on desktop -->
           <div class="assurance-rail relative hidden w-[3px] rounded-full bg-brand-dark/10 sm:block overflow-hidden my-1">
@@ -724,9 +703,8 @@
           </div>
 
           <!-- 4 interactive step cards -->
-          <div class="assurance-list flex-1 flex flex-col gap-1.5" role="tablist" aria-label="Our production milestones">
+          <div class="assurance-list flex-1 flex flex-col gap-2" role="tablist" aria-label="Our production milestones">
             {#each assurances as assurance, index (assurance.title)}
-              {@const Icon = assurance.icon}
               {@const isActive = activeStep === index}
               <button
                 type="button"
@@ -744,34 +722,26 @@
                   }
                 }}
               >
-                <div class="assurance-content w-full">
-                  <div class="assurance-header-row flex items-center justify-between w-full">
-                    <div class="assurance-title-row flex items-center gap-3">
-                      <div
-                        class="assurance-row-icon flex h-8 w-8 items-center justify-center rounded-lg border transition-all duration-300 {isActive
-                          ? 'border-brand-green bg-brand-green text-brand-light shadow-sm'
-                          : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark group-hover:border-brand-green/40 group-hover:bg-brand-green/10 group-hover:text-brand-green'}"
-                      >
-                        <Icon size={15} strokeWidth={1.75} />
-                      </div>
-                      <h3 class="font-display font-medium text-[1.05rem] leading-tight text-brand-dark">
-                        {$_(`home.aboutOrbit.steps.${index}.title`) || assurance.title}
-                      </h3>
-                    </div>
+                <div class="assurance-content flex items-start gap-3.5 sm:gap-4 w-full">
+                  <!-- Large editorial numeral -->
+                  <span
+                    class="font-display text-2xl sm:text-[1.85rem] font-light leading-none select-none transition-colors duration-300 w-7 sm:w-8 shrink-0 pt-0.5 {isActive
+                      ? 'text-brand-green'
+                      : 'text-brand-dark/25 group-hover:text-brand-dark/60'}"
+                  >
+                    {assurance.step}
+                  </span>
 
-                    <!-- Step number badge -->
-                    <span
-                      class="font-mono text-xs font-bold transition-all duration-300 px-2 py-0.5 rounded-full {isActive
-                        ? 'bg-brand-green/15 text-brand-green border border-brand-green/30'
-                        : 'text-brand-dark/30 group-hover:text-brand-dark/70'}"
-                    >
-                      {assurance.step}
-                    </span>
+                  <!-- Title + Description -->
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-sans font-semibold text-[0.92rem] sm:text-[0.98rem] leading-tight text-brand-dark tracking-[-0.01em]">
+                      {$_(`home.aboutOrbit.steps.${index}.title`) || assurance.title}
+                    </h3>
+
+                    <p class="assurance-description mt-1 text-[0.76rem] sm:text-[0.8rem] leading-relaxed transition-colors duration-300 {isActive ? 'text-brand-dark/85 font-normal' : 'text-brand-dark/60'}">
+                      {$_(`home.aboutOrbit.steps.${index}.description`) || assurance.description}
+                    </p>
                   </div>
-
-                  <p class="assurance-description mt-2 text-[0.78rem] leading-relaxed transition-colors duration-300 {isActive ? 'text-brand-dark/85 font-normal' : 'text-brand-dark/60'}">
-                    {$_(`home.aboutOrbit.steps.${index}.description`) || assurance.description}
-                  </p>
                 </div>
               </button>
             {/each}
@@ -908,7 +878,7 @@
   }
 
   .orbit-story {
-    padding-block: clamp(4rem, 7vw, 7rem);
+    padding-block: clamp(2rem, 3.5vw, 3.5rem);
     background-image: radial-gradient(
       color-mix(in srgb, var(--color-brand-dark) 5%, transparent) 1px,
       transparent 1px
@@ -970,11 +940,10 @@
 
   .assurance-panel {
     position: absolute;
-    top: 50%;
+    top: clamp(2.25rem, 5vw, 4rem);
     right: clamp(0.5rem, 1.5vw, 1.75rem);
     width: min(44%, 39rem);
     padding-left: 0;
-    transform: translateY(-50%);
     pointer-events: none;
   }
 
@@ -998,7 +967,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 0.95rem 1.15rem;
+    padding: 0.85rem 1.15rem;
     border-radius: 0.85rem;
     border: 1px solid transparent;
     transition:
@@ -1008,33 +977,30 @@
       box-shadow 280ms ease;
   }
 
-  .assurance-panel.is-interactive .assurance-row:hover,
-  .assurance-panel.is-interactive .assurance-row.is-active {
-    transform: translateX(0.4rem);
+  .assurance-panel.is-interactive .assurance-row:hover {
+    transform: translateX(0.35rem);
     background-color: color-mix(
       in srgb,
-      var(--color-brand-green) 5%,
-      transparent
-    );
-    border-color: color-mix(
-      in srgb,
-      var(--color-brand-green) 24%,
+      var(--color-brand-dark) 3.5%,
       transparent
     );
   }
 
   .assurance-panel.is-interactive .assurance-row.is-active {
-    box-shadow: 0 4px 20px -4px rgba(126, 166, 65, 0.12);
+    transform: translateX(0.4rem);
+    background-color: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(10px);
+    border-color: color-mix(
+      in srgb,
+      var(--color-brand-dark) 9%,
+      transparent
+    );
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.06);
   }
 
   .assurance-content {
     display: flex;
-    flex-direction: column;
-  }
-
-  .assurance-title-row {
-    display: flex;
-    align-items: center;
+    width: 100%;
   }
 
   .assurance-row h3 {
@@ -1042,12 +1008,11 @@
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: -0.015em;
-    text-transform: capitalize;
     color: var(--color-brand-dark);
   }
 
   .assurance-row p {
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     line-height: 1.5;
     color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
     max-width: 32rem;

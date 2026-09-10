@@ -214,15 +214,24 @@
               {#each division.services as service (service.slug)}
                 <a
                   href={resolveServiceHref(service.slug)}
-                  class="group grid grid-cols-[1fr_auto] items-center gap-3 py-3 transition-colors duration-300 hover:text-brand-green"
+                  class="group grid grid-cols-[1fr_auto] items-center gap-3 py-3 transition-colors duration-300 hover:text-brand-green {service.slug ===
+                  'ai-retouch'
+                    ? 'rounded-lg border border-brand-green/40 bg-brand-green/[0.04] px-3 my-0.5 shadow-[0_0_12px_rgba(126,166,65,0.08)]'
+                    : ''}"
                 >
                   <span
-                    class="text-sm font-medium tracking-[-0.01em] sm:text-base"
+                    class="text-sm font-medium tracking-[-0.01em] sm:text-base {service.slug ===
+                    'ai-retouch'
+                      ? 'text-brand-green font-semibold'
+                      : ''}"
                   >
                     {service.title}
                   </span>
                   <ArrowUpRight
-                    class="h-4 w-4 text-brand-dark/45 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-green"
+                    class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-green {service.slug ===
+                    'ai-retouch'
+                      ? 'text-brand-green'
+                      : 'text-brand-dark/45'}"
                   />
                 </a>
               {/each}

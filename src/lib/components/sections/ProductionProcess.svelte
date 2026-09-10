@@ -40,7 +40,7 @@
       description:
         "We review your source files, references, volume, output formats, and delivery priorities before production begins.",
       images: [
-        previewMedia.editingWorkspace,
+        previewMedia.jewelryDetail,
         originalDress,
         previewMedia.studioPortrait,
       ],
@@ -65,7 +65,7 @@
         "The project manager routes each batch to specialists whose experience matches the service and visual standard required.",
       images: [
         previewMedia.monochromePortrait,
-        previewMedia.editingWorkspace,
+        previewMedia.perfumeStillLife,
         previewMedia.redStudioPortrait,
       ],
     },
@@ -455,12 +455,14 @@
       </div>
 
       <div bind:this={content} class="process-intro">
-        <p>{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</p>
+        <span class="process-watermark-num" aria-hidden="true">
+          {String(activeIndex + 1).padStart(2, "0")}
+        </span>
+        <p class="process-timing">{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</p>
         <h2 id="production-process-title">
           {$_(`home.processSteps.${activeIndex}.title`) || processSteps[activeIndex].title}
         </h2>
-        <div class="process-rule" aria-hidden="true"></div>
-        <p>{$_(`home.processSteps.${activeIndex}.description`) || processSteps[activeIndex].description}</p>
+        <p class="process-desc">{$_(`home.processSteps.${activeIndex}.description`) || processSteps[activeIndex].description}</p>
       </div>
 
       <figure class="process-image process-image-right" aria-hidden="true">
@@ -580,13 +582,15 @@
   }
 
   .process-image {
+    position: relative;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: 1.15rem;
+    border: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
     background: var(--color-brand-mist);
-    box-shadow: 0 1.25rem 3.5rem
-      color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
+    box-shadow: 0 1.25rem 3rem -0.75rem color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
     will-change: transform, opacity;
   }
+
 
   .process-image img {
     width: 100%;
@@ -616,41 +620,57 @@
   }
 
   .process-intro {
+    position: relative;
     grid-area: copy;
     max-width: 38rem;
     margin-inline: auto;
     text-align: center;
   }
 
-  .process-intro > p:first-child {
+  .process-watermark-num {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: clamp(8rem, 16vw, 15rem);
+    font-weight: 400;
+    line-height: 1;
+    color: color-mix(in srgb, var(--color-brand-dark) 4%, transparent);
+    user-select: none;
+    pointer-events: none;
+    z-index: -1;
+    letter-spacing: -0.05em;
+  }
+
+  .process-timing {
+    position: relative;
     font-size: 0.82rem;
     color: color-mix(in srgb, var(--color-brand-dark) 58%, transparent);
+    letter-spacing: 0.02em;
   }
 
   .process-intro h2 {
-    max-width: 16ch;
-    margin: 1.2rem auto 0;
+    position: relative;
+    max-width: 17ch;
+    margin: 1rem auto 0;
     font-family: var(--font-display);
-    font-size: clamp(2.15rem, 4vw, 4.25rem);
+    font-size: clamp(2.2rem, 3.8vw, 3.8rem);
     font-weight: 400;
-    line-height: 1.02;
+    line-height: 1.05;
     letter-spacing: -0.035em;
+    color: var(--color-brand-dark);
   }
 
-  .process-rule {
-    width: 2.5rem;
-    height: 1px;
-    margin: 1.5rem auto;
-    background: var(--color-brand-green);
-  }
-
-  .process-intro > p:last-child {
-    max-width: 36rem;
-    margin-inline: auto;
+  .process-desc {
+    position: relative;
+    max-width: 35rem;
+    margin: 1.25rem auto 0;
     font-size: 0.88rem;
-    line-height: 1.7;
-    color: color-mix(in srgb, var(--color-brand-dark) 58%, transparent);
+    line-height: 1.68;
+    color: color-mix(in srgb, var(--color-brand-dark) 60%, transparent);
   }
+
 
   .process-image-right {
     grid-area: right;
@@ -691,6 +711,7 @@
     color: color-mix(in srgb, var(--color-brand-dark) 52%, transparent);
     text-align: center;
     transition: color 240ms ease;
+    cursor: pointer;
   }
 
   .process-tabs button:hover,
@@ -704,7 +725,13 @@
     right: 0.35rem;
     left: 0.35rem;
     font-size: 0.78rem;
+    font-weight: 500;
     letter-spacing: 0.01em;
+    line-height: 1.25;
+  }
+
+  .process-tabs button.active > span {
+    font-weight: 600;
   }
 
   .process-timeline-line {
@@ -782,15 +809,15 @@
     width: 2rem;
     height: 2rem;
     place-items: center;
-    border: 1px solid transparent;
+    border: 1px solid var(--color-brand-dark);
     border-radius: 50%;
     background: var(--color-brand-light);
     font-family: var(--font-mono);
-    font-size: 0.55rem;
+    font-size: 0.58rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     transform: translateX(-50%) translateY(0.15rem);
-    border-color: var(--color-brand-dark);
+    color: var(--color-brand-dark);
   }
 
   .process-tabs button:focus-visible {

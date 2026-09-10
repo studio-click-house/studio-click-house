@@ -10,7 +10,34 @@
     "events": "Events",
     "csr": "CSR",
     "careers": "Careers",
-    "contact": "Contact"
+    "contact": "Contact",
+    "divisions": "Our Divisions",
+    "megaCategories": {
+      "imageEditing": {
+        "label": "Photo Editing",
+        "description": "Precision Photoshop & retouching at scale"
+      },
+      "videoEditing": {
+        "label": "Video Editing",
+        "description": "Cinematic cuts, grading & social reels"
+      },
+      "modeling3d": {
+        "label": "3D Product Modeling",
+        "description": "CGI rendering, shading & design"
+      },
+      "Image Editing": {
+        "label": "Photo Editing",
+        "description": "Precision Photoshop & retouching at scale"
+      },
+      "Video Editing": {
+        "label": "Video Editing",
+        "description": "Cinematic cuts, grading & social reels"
+      },
+      "3D Modeling": {
+        "label": "3D Product Modeling",
+        "description": "CGI rendering, shading & design"
+      }
+    }
   },
   "home": {
     "services": {
@@ -50,7 +77,7 @@
         "category": "Image Editing"
       },
       "ai-retouch": {
-        "title": "AI retouch",
+        "title": "AI photo retouch",
         "description": "Next-gen AI-assisted editing for rapid, high-quality bulk processing.",
         "category": "Image Editing"
       },
@@ -292,6 +319,12 @@
         "navTitle": "Quality review",
         "timing": "Before delivery",
         "description": "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio."
+      },
+      {
+        "title": "Delivery and feedback",
+        "navTitle": "Delivery",
+        "timing": "Final handoff",
+        "description": "Final files arrive organised and ready to use, with one clear feedback path for any consolidated finishing notes."
       }
     ],
     "closingCta": {
@@ -301,7 +334,7 @@
       "secondaryCtaLabel": "Explore Our Portfolio"
     },
     "aiWorkflow": {
-      "title1": "AI E-Commerce",
+      "title1": "E-Commerce AI",
       "title2": "Workflow.",
       "stage1": {
         "title": "Raw Image Input",
@@ -329,6 +362,8 @@
     "aboutOrbit": {
       "eyebrow": "Our Production System",
       "heading": "Quality isn't the last step. It's every step.",
+      "headingPart1": "Quality isn't the last step.",
+      "headingPart2": "It's every step.",
       "postProduction": "post-production",
       "description": "From AI-assisted image production and precision retouching to complex 3D CGI rendering, our Dhaka studio combines intelligent workflows with human craft to create polished campaign assets.",
       "explore": "Explore Work",

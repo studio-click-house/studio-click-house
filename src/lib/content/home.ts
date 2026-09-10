@@ -24,6 +24,14 @@ export const navigationItems = [
 export const services: ServiceItem[] = [
   // Image Editing
   {
+    title: "AI photo retouch",
+    slug: "ai-retouch",
+    description:
+      "Next-gen AI-assisted editing for rapid, high-quality bulk processing.",
+    media: previewMedia.editingWorkspace,
+    category: "Image Editing",
+  },
+  {
     title: "Background remove",
     slug: "background-remove",
     description: "Clean subject isolation and backdrop extraction.",
@@ -76,14 +84,6 @@ export const services: ServiceItem[] = [
     description:
       "Controlled color alignment across individual frames and full batches.",
     media: previewMedia.redStudioPortrait,
-    category: "Image Editing",
-  },
-  {
-    title: "AI retouch",
-    slug: "ai-retouch",
-    description:
-      "Next-gen AI-assisted editing for rapid, high-quality bulk processing.",
-    media: previewMedia.editingWorkspace,
     category: "Image Editing",
   },
 

@@ -10,7 +10,34 @@
     "events": "Eventos",
     "csr": "RSC",
     "careers": "Carreras",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "divisions": "Nuestras Divisiones",
+    "megaCategories": {
+      "imageEditing": {
+        "label": "Edición de Fotos",
+        "description": "Photoshop de precisión y retoque a escala"
+      },
+      "videoEditing": {
+        "label": "Edición de Video",
+        "description": "Cortes cinematográficos, gradación y reels"
+      },
+      "modeling3d": {
+        "label": "Modelado 3D",
+        "description": "Renderizado CGI, sombreado y diseño"
+      },
+      "Image Editing": {
+        "label": "Edición de Fotos",
+        "description": "Photoshop de precisión y retoque a escala"
+      },
+      "Video Editing": {
+        "label": "Edición de Video",
+        "description": "Cortes cinematográficos, gradación y reels"
+      },
+      "3D Modeling": {
+        "label": "Modelado 3D",
+        "description": "Renderizado CGI, sombreado y diseño"
+      }
+    }
   },
   "home": {
     "services": {
@@ -50,7 +77,7 @@
         "category": "Edición de imagen"
       },
       "ai-retouch": {
-        "title": "Retoque con IA",
+        "title": "Retoque fotográfico IA",
         "description": "Edición asistida por IA de próxima generación para procesamiento masivo rápido y de alta calidad.",
         "category": "Edición de imagen"
       },
@@ -292,6 +319,12 @@
         "navTitle": "Control de calidad",
         "timing": "Antes de la entrega",
         "description": "Un control independiente revisa cada detalle, especificaciones técnicas y la referencia acordada antes del envío final."
+      },
+      {
+        "title": "Entrega y feedback",
+        "navTitle": "Entrega",
+        "timing": "Entrega final",
+        "description": "Los archivos finales se entregan organizados y listos para producción, con un canal claro para cualquier revisión final."
       }
     ],
     "closingCta": {
@@ -301,7 +334,7 @@
       "secondaryCtaLabel": "Explorar portfolio"
     },
     "aiWorkflow": {
-      "title1": "IA E-Commerce",
+      "title1": "E-Commerce IA",
       "title2": "Workflow.",
       "stage1": {
         "title": "Imagen original",
@@ -329,6 +362,8 @@
     "aboutOrbit": {
       "eyebrow": "Nuestro sistema de producción",
       "heading": "La calidad no es el último paso. Es cada paso.",
+      "headingPart1": "La calidad no es el último paso.",
+      "headingPart2": "Es cada paso.",
       "postProduction": "posproducción",
       "description": "Desde la producción de imágenes asistida por IA y el retoque de alta gama hasta el renderizado 3D CGI complejo, nuestro estudio combina flujos inteligentes con arte humano.",
       "explore": "Explorar trabajos",
