@@ -4,10 +4,10 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { clientLocations } from "$lib/content/home";
   import type { AboutPageData } from "$lib/types/about";
-  // import CobeGlobe from "./CobeGlobe.svelte";
-  import ThreeGlobe from "./ThreeGlobe.svelte";
   import { _ } from "svelte-i18n";
   import { resolve } from "$app/paths";
+
+  type ThreeGlobeComponent = typeof import("./ThreeGlobe.svelte").default;
 
   let { closingCta } = $props<{
     closingCta: AboutPageData["closingCta"];
@@ -15,10 +15,36 @@
 
   let sectionRoot: HTMLElement;
   let globeStage: HTMLDivElement;
+  let ThreeGlobe = $state<ThreeGlobeComponent | null>(null);
 
   onMount(() => {
     let active = true;
     let context: { revert: () => void } | undefined;
+    let globeObserver: IntersectionObserver | undefined;
+    let globeFallbackTimer: number | undefined;
+
+    const loadGlobe = () => {
+      void import("./ThreeGlobe.svelte").then(({ default: component }) => {
+        if (active) ThreeGlobe = component;
+      });
+    };
+
+    if ("IntersectionObserver" in window) {
+      globeObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) return;
+          loadGlobe();
+          globeObserver?.disconnect();
+        },
+        { rootMargin: "480px 0px" },
+      );
+      globeObserver.observe(sectionRoot);
+      globeFallbackTimer = window.setTimeout(() => {
+        if (!ThreeGlobe) loadGlobe();
+      }, 3000);
+    } else {
+      loadGlobe();
+    }
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !sectionRoot || !globeStage) return;
@@ -80,6 +106,8 @@
 
     return () => {
       active = false;
+      globeObserver?.disconnect();
+      if (globeFallbackTimer) window.clearTimeout(globeFallbackTimer);
       context?.revert();
     };
   });
@@ -124,7 +152,9 @@
         class="globe-stage relative flex min-h-0 items-center justify-center py-6 sm:min-h-[36rem] sm:py-0 lg:col-span-8 lg:min-h-0 lg:translate-x-12 xl:translate-x-20"
       >
         <div class="globe-ambient" aria-hidden="true"></div>
-        <ThreeGlobe locations={clientLocations} />
+        {#if ThreeGlobe}
+          <ThreeGlobe locations={clientLocations} />
+        {/if}
       </div>
     </div>
   </div>

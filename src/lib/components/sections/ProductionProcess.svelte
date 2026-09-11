@@ -646,7 +646,7 @@
   .process-timing {
     position: relative;
     font-size: 0.82rem;
-    color: color-mix(in srgb, var(--color-brand-dark) 58%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 82%, transparent);
     letter-spacing: 0.02em;
   }
 
@@ -668,7 +668,7 @@
     margin: 1.25rem auto 0;
     font-size: 0.88rem;
     line-height: 1.68;
-    color: color-mix(in srgb, var(--color-brand-dark) 60%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 82%, transparent);
   }
 
 
@@ -708,7 +708,7 @@
     z-index: 1;
     min-height: 7.8rem;
     padding-inline: 0.5rem;
-    color: color-mix(in srgb, var(--color-brand-dark) 52%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 82%, transparent);
     text-align: center;
     transition: color 240ms ease;
     cursor: pointer;

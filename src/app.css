@@ -95,6 +95,12 @@
 }
 
 @layer components {
+  #site-footer [class*="text-brand-dark/45"],
+  #site-footer [class*="text-brand-dark/50"],
+  #site-footer [class*="text-brand-dark/60"] {
+    color: color-mix(in srgb, var(--color-brand-dark) 78%, transparent);
+  }
+
   .site-shell {
     width: min(100% - 2rem, 90rem);
     min-width: 0;
