@@ -31,12 +31,13 @@
               duration: 0.6,
               stagger: 0.08,
               ease: "power3.out",
+              clearProps: "all",
               scrollTrigger: {
                 trigger: section,
                 start: "top 88%",
                 once: true,
               },
-            }
+            },
           );
 
           gsap.fromTo(
@@ -48,12 +49,13 @@
               duration: 0.55,
               stagger: 0.1,
               ease: "power2.out",
+              clearProps: "all",
               scrollTrigger: {
                 trigger: section,
-                start: "top 85%",
+                start: "top 88%",
                 once: true,
               },
-            }
+            },
           );
 
           gsap.fromTo(
@@ -66,12 +68,13 @@
               duration: 0.55,
               stagger: 0.08,
               ease: "power2.out",
+              clearProps: "all",
               scrollTrigger: {
                 trigger: section,
-                start: "top 85%",
+                start: "top 88%",
                 once: true,
               },
-            }
+            },
           );
         });
 

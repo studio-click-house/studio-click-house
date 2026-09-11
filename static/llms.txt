@@ -1,9 +1,50 @@
 # Studio Click House (SCHL)
 
-Canonical site: https://studioclickhouse.com/
-Services: https://studioclickhouse.com/services
-Portfolio: https://studioclickhouse.com/portfolio
-About: https://studioclickhouse.com/about
-Contact: https://studioclickhouse.com/contact
+> Studio Click House Limited (SCHL) is a full-service creative post-production studio based in Dhaka, Bangladesh, with offices in Stockholm, Sydney, and London. The studio provides high-end image editing, photo retouching, video color grading, and photorealistic 3D CGI product rendering for global e-commerce brands, retailers, agencies, and photo studios.
 
-Studio Click House (SCHL) provides high-end image editing, photo retouching, video color grading, and custom 3D CGI product renders. Public service details and project examples should be read from the canonical pages above.
+## Canonical Pages
+
+- Homepage: https://studioclickhouse.com/
+- About: https://studioclickhouse.com/about
+- Services: https://studioclickhouse.com/services
+- Portfolio: https://studioclickhouse.com/portfolio
+- Pricing: https://studioclickhouse.com/pricing
+- Contact: https://studioclickhouse.com/contact
+- Events: https://studioclickhouse.com/events
+- CSR: https://studioclickhouse.com/csr
+- Careers: https://studioclickhouse.com/careers
+
+## Service Categories
+
+### Image Editing
+- Background Removal: https://studioclickhouse.com/services/background-remove
+- Clipping Path: https://studioclickhouse.com/services/clipping-path
+- Ghost Mannequin: https://studioclickhouse.com/services/ghost-mannequin
+- Editorial Retouching: https://studioclickhouse.com/services/editorial-retouching
+- E-commerce Retouching: https://studioclickhouse.com/services/ecommerce-retouching
+- Jewelry Retouching: https://studioclickhouse.com/services/jewelry-retouching
+- Color Correction: https://studioclickhouse.com/services/color-correction
+- AI Photo Retouch: https://studioclickhouse.com/services/ai-retouch
+
+### Video Post-Production
+- Commercial Editing
+- Color Grading
+- Social Media Cutdowns
+
+### 3D & CGI
+- 3D Product Modeling
+- Texturing & Shading
+- CGI Rendering
+
+## Contact
+
+- Email: info@studioclickhouse.com
+- Phone (BD): +8809609-777111
+- Phone (SE): +46855924212
+- Phone (AU): +61483963759
+- Phone (UK): +443330047739
+- WhatsApp: https://wa.me/8809609777111
+
+## Detailed Documentation
+
+For comprehensive service descriptions, file specifications, and workflow details, see: https://studioclickhouse.com/llms-full.txt

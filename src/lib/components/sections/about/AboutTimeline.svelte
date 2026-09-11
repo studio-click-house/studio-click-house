@@ -29,13 +29,15 @@
             {
               scrollTrigger: {
                 trigger: sectionRef,
-                start: "top 80%",
+                start: "top 88%",
+                once: true,
               },
               autoAlpha: 1,
               y: 0,
               duration: 0.8,
               stagger: 0.1,
               ease: "power2.out",
+              clearProps: "all",
             },
           );
 
@@ -47,7 +49,7 @@
               {
                 scrollTrigger: {
                   trigger: timelineTrackRef,
-                  start: "top 75%",
+                  start: "top 80%",
                   end: "bottom 35%",
                   scrub: 0.5,
                 },
@@ -65,19 +67,19 @@
           milestoneCards.forEach((card) => {
             gsap.fromTo(
               card,
-              { autoAlpha: 0, y: 40, scale: 0.96 },
+              { autoAlpha: 0, y: 30, scale: 0.98 },
               {
                 scrollTrigger: {
                   trigger: card,
-                  start: "top 85%",
-                  end: "top 45%",
-                  toggleActions: "play none none reverse",
+                  start: "top 88%",
+                  once: true,
                 },
                 autoAlpha: 1,
                 y: 0,
                 scale: 1,
                 duration: 0.7,
                 ease: "power2.out",
+                clearProps: "all",
               },
             );
           });
@@ -102,7 +104,7 @@
     <!-- Header -->
     <div class="mb-16 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-24">
       <h2
-        class="journey-header-reveal font-display text-[clamp(3.25rem,6vw,7rem)] leading-[0.86] tracking-[-0.05em] text-brand-dark lg:col-span-8"
+        class="journey-header-reveal font-display text-[clamp(2.5rem,5.5vw,7rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark lg:col-span-8"
       >
         {$_('about.journey.heading') || journey.heading}
       </h2>

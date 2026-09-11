@@ -115,50 +115,103 @@
         media.add("(prefers-reduced-motion: no-preference)", () => {
           const chapters = gsap.utils.toArray<HTMLElement>(".service-chapter");
 
-          chapters.forEach((chapter) => {
-            const chapterContent =
-              chapter.querySelector<HTMLElement>(".chapter-content");
-            const isReverse = chapter.dataset.reverse === "true";
+          // Desktop (min-width: 1024px): horizontal slide & subtle media scrub
+          media.add("(min-width: 1024px)", () => {
+            chapters.forEach((chapter) => {
+              const chapterContent =
+                chapter.querySelector<HTMLElement>(".chapter-content");
+              const isReverse = chapter.dataset.reverse === "true";
 
-            if (chapterContent) {
-              gsap.fromTo(
-                chapterContent,
-                { x: isReverse ? 52 : -52, autoAlpha: 0.35 },
-                {
-                  x: 0,
-                  autoAlpha: 1,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: chapter,
-                    start: "top 92%",
-                    end: "top 48%",
-                    scrub: true,
+              if (chapterContent) {
+                gsap.fromTo(
+                  chapterContent,
+                  { x: isReverse ? 40 : -40, autoAlpha: 0.35 },
+                  {
+                    x: 0,
+                    autoAlpha: 1,
+                    ease: "power2.out",
+                    clearProps: "all",
+                    scrollTrigger: {
+                      trigger: chapter,
+                      start: "top 88%",
+                      end: "top 52%",
+                      scrub: 1,
+                    },
                   },
-                },
+                );
+              }
+
+              const chapterMedia = chapter.querySelector<HTMLElement>(
+                ".chapter-scroll-media",
               );
-            }
 
-            const chapterMedia = chapter.querySelector<HTMLElement>(
-              ".chapter-scroll-media",
-            );
-
-            if (chapterMedia) {
-              gsap.fromTo(
-                chapterMedia,
-                { y: 76, scale: 0.91 },
-                {
-                  y: -28,
-                  scale: 1,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: chapter,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true,
+              if (chapterMedia) {
+                gsap.fromTo(
+                  chapterMedia,
+                  { y: 50, scale: 0.94 },
+                  {
+                    y: -20,
+                    scale: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                      trigger: chapter,
+                      start: "top bottom",
+                      end: "bottom top",
+                      scrub: 1,
+                    },
                   },
-                },
+                );
+              }
+            });
+          });
+
+          // Mobile & Tablet (max-width: 1023px): vertical reveal without horizontal jitter
+          media.add("(max-width: 1023px)", () => {
+            chapters.forEach((chapter) => {
+              const chapterContent =
+                chapter.querySelector<HTMLElement>(".chapter-content");
+              const chapterMedia = chapter.querySelector<HTMLElement>(
+                ".chapter-scroll-media",
               );
-            }
+
+              if (chapterContent) {
+                gsap.fromTo(
+                  chapterContent,
+                  { y: 28, autoAlpha: 0 },
+                  {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 0.75,
+                    ease: "power2.out",
+                    clearProps: "all",
+                    scrollTrigger: {
+                      trigger: chapter,
+                      start: "top 88%",
+                      once: true,
+                    },
+                  },
+                );
+              }
+
+              if (chapterMedia) {
+                gsap.fromTo(
+                  chapterMedia,
+                  { y: 30, autoAlpha: 0 },
+                  {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    clearProps: "all",
+                    scrollTrigger: {
+                      trigger: chapter,
+                      start: "top 85%",
+                      once: true,
+                    },
+                  },
+                );
+              }
+            });
           });
         });
 
@@ -240,7 +293,7 @@
         </div>
 
         <div
-          class="chapter-media chapter-scroll-media relative w-full max-w-[28rem] justify-self-center"
+          class="chapter-media chapter-scroll-media relative w-full max-w-[28rem] sm:max-w-[32rem] lg:max-w-[28rem] justify-self-center"
         >
           {#if division.media.kind === "comparison"}
             <BeforeAfterSlider

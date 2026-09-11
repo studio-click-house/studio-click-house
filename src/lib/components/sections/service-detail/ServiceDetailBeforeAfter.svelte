@@ -24,23 +24,25 @@
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
-                start: "top 78%",
+                start: "top 88%",
                 once: true,
               },
               defaults: { ease: "power3.out" },
             })
             .from(".sd-ba-copy", {
               autoAlpha: 0,
-              x: -26,
+              y: 22,
               duration: 0.78,
+              clearProps: "all",
             })
             .from(
               ".sd-ba-slider",
               {
                 autoAlpha: 0,
-                y: 72,
-                scale: 0.975,
-                duration: 0.95,
+                y: 48,
+                scale: 0.98,
+                duration: 0.85,
+                clearProps: "all",
               },
               "-=0.48",
             );

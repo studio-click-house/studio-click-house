@@ -25,28 +25,32 @@
             duration: 0.85,
             stagger: 0.09,
             ease: "power3.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 78%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           });
 
-          gsap.fromTo(
-            ".services-cta-orbit",
-            { xPercent: 18, rotation: -18 },
-            {
-              xPercent: -4,
-              rotation: 24,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
+          // Orbit rotation scrub
+          media.add("(min-width: 1024px)", () => {
+            gsap.fromTo(
+              ".services-cta-orbit",
+              { xPercent: 18, rotation: -18 },
+              {
+                xPercent: -4,
+                rotation: 24,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
               },
-            },
-          );
+            );
+          });
         });
 
         return () => media.revert();
@@ -80,7 +84,7 @@
       <div class="services-cta-reveal lg:col-span-8">
         <h2
           id="services-cta-title"
-          class="max-w-[13ch] font-display text-[clamp(3.3rem,5.8vw,6.5rem)] leading-[0.86] tracking-[-0.045em]"
+          class="max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"
         >
           {$_('services.cta.heading') || 'Put the next image in motion.'}
         </h2>

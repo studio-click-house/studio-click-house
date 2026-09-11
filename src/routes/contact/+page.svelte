@@ -3,6 +3,12 @@
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { siteConfig } from "$lib/config/site";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ]);
 
   const contactSchema = {
     "@context": "https://schema.org",
@@ -43,6 +49,7 @@
 />
 
 <JsonLd data={contactSchema} />
+<JsonLd data={breadcrumbData} />
 
 <main id="main-content">
   <ContactPage />

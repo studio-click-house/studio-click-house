@@ -8,6 +8,12 @@
   import ServicesCta from "$lib/components/sections/ServicesCta.svelte";
   import { servicesFaqs } from "$lib/content/services";
   import { siteConfig } from "$lib/config/site";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+  ]);
 
   const schemaData = {
     "@context": "https://schema.org",
@@ -45,6 +51,7 @@
 
 <JsonLd data={schemaData} />
 <JsonLd data={faqSchemaData} />
+<JsonLd data={breadcrumbData} />
 
 <main
   id="main-content"

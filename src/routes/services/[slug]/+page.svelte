@@ -14,6 +14,7 @@
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import { siteConfig } from "$lib/config/site";
   import { servicePages } from "$lib/content/service-pages";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
 
   const serviceSlug = $derived(page.params.slug ?? "service");
 
@@ -31,6 +32,13 @@
           name: pageData.hero.title + " " + pageData.hero.titleAccent,
           url: `${siteConfig.url}/services/${pageData.slug}`,
           description: pageData.seo.description,
+          serviceType: pageData.hero.title + " " + pageData.hero.titleAccent,
+          areaServed: "Worldwide",
+          availableChannel: {
+            "@type": "ServiceChannel",
+            serviceUrl: `${siteConfig.url}/contact`,
+            serviceSmsNumber: siteConfig.contact.phone,
+          },
           provider: {
             "@type": "Organization",
             name: siteConfig.name,
@@ -56,6 +64,16 @@
         }
       : null,
   );
+
+  const breadcrumbData = $derived(
+    pageData
+      ? buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: pageData.hero.title + " " + pageData.hero.titleAccent, path: `/services/${pageData.slug}` },
+        ])
+      : null,
+  );
 </script>
 
 <PageMeta
@@ -69,6 +87,9 @@
 {/if}
 {#if faqSchemaData}
     <JsonLd data={faqSchemaData} />
+{/if}
+{#if breadcrumbData}
+    <JsonLd data={breadcrumbData} />
 {/if}
 
 <main id="main-content" class="relative min-h-screen bg-brand-light">

@@ -24,36 +24,40 @@
         media.add("(prefers-reduced-motion: no-preference)", () => {
           gsap.fromTo(
             ".closing-cta-reveal",
-            { autoAlpha: 0, y: 36 },
+            { autoAlpha: 0, y: 24 },
             {
               scrollTrigger: {
                 trigger: sectionRef,
-                start: "top 80%",
+                start: "top 88%",
+                once: true,
               },
               autoAlpha: 1,
               y: 0,
-              duration: 0.8,
-              stagger: 0.12,
-              ease: "power3.out",
+              duration: 0.65,
+              stagger: 0.1,
+              ease: "power2.out",
+              clearProps: "all",
             },
           );
 
-          gsap.fromTo(
-            ".closing-focus-ring",
-            { xPercent: 22, rotation: -24, scale: 0.72 },
-            {
-              scrollTrigger: {
-                trigger: sectionRef,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.8,
+          media.add("(min-width: 1024px)", () => {
+            gsap.fromTo(
+              ".closing-focus-ring",
+              { xPercent: 22, rotation: -24, scale: 0.72 },
+              {
+                scrollTrigger: {
+                  trigger: sectionRef,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.8,
+                },
+                xPercent: -8,
+                rotation: 34,
+                scale: 1.08,
+                ease: "none",
               },
-              xPercent: -8,
-              rotation: 34,
-              scale: 1.08,
-              ease: "none",
-            },
-          );
+            );
+          });
         });
       }, sectionRef);
     });
@@ -69,7 +73,7 @@
   id="closing-cta"
   aria-label="Closing Call to Action"
   bind:this={sectionRef}
-  class="section-space relative overflow-hidden border-t border-brand-dark/20 bg-brand-paper py-24 md:py-36"
+  class="section-space relative overflow-hidden border-t border-brand-dark/20 bg-brand-paper py-16 sm:py-24 md:py-32"
 >
   <div
     class="closing-focus-ring pointer-events-none absolute -right-[18rem] -top-[18rem] aspect-square w-[46rem] rounded-full border border-brand-dark/12"
@@ -84,11 +88,11 @@
 
   <div class="site-shell relative z-10">
     <div
-      class="grid gap-10 border-b border-brand-dark/25 pb-12 lg:grid-cols-12 lg:items-end lg:gap-12 md:pb-16"
+      class="grid gap-8 sm:gap-10 border-b border-brand-dark/25 pb-10 sm:pb-12 lg:grid-cols-12 lg:items-end lg:gap-12 md:pb-16"
     >
       <div class="closing-cta-reveal lg:col-span-8">
         <h2
-          class="max-w-5xl font-display text-[clamp(3rem,6vw,7rem)] leading-[0.87] tracking-[-0.05em] text-brand-dark"
+          class="max-w-5xl font-display text-[clamp(2.5rem,5.5vw,6.5rem)] leading-[0.9] tracking-[-0.04em] text-brand-dark"
         >
           {$_('about.closingCta.heading') || closingCta.heading}
         </h2>

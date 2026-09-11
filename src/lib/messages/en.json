@@ -990,6 +990,7 @@
       "microContouringDesc": "Non-destructive frequency separation preserving pore fidelity and natural skin luminescence.",
       "apparelVolume": "Apparel Volume",
       "hollowJoint": "3D Hollow Joint Tailoring",
+      "footwearIsolation": "Footwear Vector Isolation",
       "archiveBadge": "2026 Archive",
       "performingCraft": "Performing Craft"
     },
@@ -1109,6 +1110,114 @@
     "desc500": "An unexpected issue occurred while loading this page. Please try again later.",
     "backHome": "Return to Studio",
     "exploreServices": "Explore Services"
+  },
+  "portfolio": {
+    "hero": {
+      "title": "Visual Craft",
+      "subtitle": "High-end post-production, editorial finishing & CGI archive",
+      "badge": "Portfolio · 2015–2026"
+    },
+    "intro": {
+      "heading": "The High-End Post-Production Standard",
+      "p1": "Studio Click House represents over a decade of dedicated craftsmanship in luxury fashion retouching, intricate clipping paths, invisible ghost mannequin reconstruction, and high-fidelity color grading for world-renowned brands.",
+      "p2": "Every image that passes through our workstations is handled by master digital artists adhering to lossless frequency separation, sub-pixel pen vector precision, and strict print-ready color standards.",
+      "detailLabel": "Sub-pixel Pen Vector Standard"
+    },
+    "beforeAfter": {
+      "eyebrow": "Inspection Tool",
+      "title": "Camera Raw to Campaign Master",
+      "description": "Drag the split line to compare the unprocessed studio camera capture against our finalized frequency-separated, color-graded delivery.",
+      "rawLabel": "Raw Studio Capture",
+      "retouchedLabel": "Final Campaign Delivery",
+      "dragHint": "Drag slider to inspect pixel transition"
+    },
+    "collage": {
+      "selectedCampaign": "Editorial Showcase",
+      "hauteCouture": "Haute Couture Retouch",
+      "hauteCoutureDesc": "High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines.",
+      "colorMastery": "Color Calibration",
+      "pantonePrecision": "Pantone Precision",
+      "pantoneDesc": "Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks.",
+      "macroDetail": "Pore Architecture",
+      "microContouring": "Micro Contouring",
+      "microContouringDesc": "Non-destructive frequency separation preserving pore fidelity and natural skin luminescence.",
+      "apparelVolume": "Apparel Volume",
+      "hollowJoint": "3D Hollow Joint Tailoring",
+      "footwearIsolation": "Footwear Vector Isolation",
+      "archiveBadge": "2026 Archive",
+      "performingCraft": "Precision Craftsmanship"
+    },
+    "matrix": {
+      "eyebrow": "Disciplines & Scopes",
+      "headingPart1": "How we enforce",
+      "headingPart2": "precision",
+      "headingPart3": "at scale.",
+      "description": "Explore our primary disciplines spanning campaign fashion, e-commerce catalog production, and 3D CGI.",
+      "services": [
+        {
+          "label": "Editorial Retouch",
+          "desc": "High-end fashion retouching, beauty cleaning, and fabric sculpting for global lookbooks and editorial campaigns.",
+          "deliverables": [
+            "Campaign & High-End Fashion",
+            "Commercial & Catalog Cleaning",
+            "Anatomical & Fabric Sculpting",
+            "High-End Beauty & Portraiture"
+          ]
+        },
+        {
+          "label": "Vector Clipping",
+          "desc": "Precision hand-drawn clipping paths and multipath masks for flawless background isolation and recoloring.",
+          "deliverables": [
+            "Single Path Vector Clipping",
+            "Multi-Path Layering & Masking",
+            "Background Erasure & PNGs",
+            "Contact Shadows & Reflections"
+          ]
+        },
+        {
+          "label": "Color & Swatches",
+          "desc": "Calibrating and shifting product colors for absolute brand accuracy and seamless SKU consistency.",
+          "deliverables": [
+            "Swatch & Color Target Matching",
+            "Cross-SKU Color Consistency",
+            "Product Color Changing",
+            "Metallic & Sheen Enhancement"
+          ]
+        },
+        {
+          "label": "Special Scopes",
+          "desc": "Bespoke post-production including invisible ghost mannequin, collar construction, and custom 3D CGI.",
+          "deliverables": [
+            "Ghost Mannequin / Invisible",
+            "Collar & Neck Joint Insertion",
+            "Pattern Alignment & Stitching",
+            "Macro Jewelry & Watch Polish"
+          ]
+        }
+      ]
+    },
+    "mosaic": {
+      "filterAll": "All Work",
+      "closeModal": "Close preview"
+    },
+    "manifesto": {
+      "quote": "“The true standard of post-production is invisible perfection: every pixel refined so the art, garment, and human expression feel completely effortless.”",
+      "author": "Studio Click House",
+      "role": "Global Creative Post-Production & Color Studio"
+    },
+    "partners": {
+      "title": "Selected Brand Partners"
+    },
+    "showreel": {
+      "title": "Process & Craft Showreel",
+      "subtitle": "Behind the layers · From raw capture to finished campaign"
+    },
+    "stats": {
+      "eyebrow": "Verified Studio Metrics",
+      "ctaHeading": "Ready to see what we can do for your brand?",
+      "ctaDesc": "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
+      "ctaButton": "Request Free Test Retouch"
+    }
   },
   "languages": {
     "en": "English",

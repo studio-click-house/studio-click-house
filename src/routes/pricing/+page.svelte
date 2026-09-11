@@ -9,6 +9,12 @@
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import { siteConfig } from "$lib/config/site";
   import { aboutPageData } from "$lib/content/about";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Pricing", path: "/pricing" },
+  ]);
 
   const pricingSchema = {
     "@context": "https://schema.org",
@@ -32,6 +38,7 @@
 />
 
 <JsonLd data={pricingSchema} />
+<JsonLd data={breadcrumbData} />
 
 <main id="main-content" class="relative bg-brand-light text-brand-dark">
   <PageScrollReveals />

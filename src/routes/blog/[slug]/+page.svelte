@@ -15,4 +15,5 @@
   eyebrow="Journal article"
   description="This article route is structurally ready. Original article content and accurate publishing metadata are still required."
   canonicalPath={`/blog/${articleSlug}`}
+  noindex={true}
 />

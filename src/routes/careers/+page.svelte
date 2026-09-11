@@ -2,7 +2,30 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import JsonLd from "$lib/components/seo/JsonLd.svelte";
+  import { siteConfig } from "$lib/config/site";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
   import { _ } from "svelte-i18n";
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Careers", path: "/careers" },
+  ]);
+
+  const careersSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteConfig.url}/careers#webpage`,
+    url: `${siteConfig.url}/careers`,
+    name: `Careers & Opportunities | ${siteConfig.name}`,
+    description:
+      "Explore career opportunities and join the production team at Studio Click House. Learn about openings for image retouchers, CGI artists, and editors.",
+    provider: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
 </script>
 
 <PageMeta
@@ -10,6 +33,9 @@
   description="Explore career opportunities and join the production team at Studio Click House. Learn about openings for image retouchers, CGI artists, and editors."
   canonicalPath="/careers"
 />
+
+<JsonLd data={careersSchema} />
+<JsonLd data={breadcrumbData} />
 
 <main id="main-content" class="min-h-[100dvh] bg-brand-paper pb-24 pt-32">
   <div class="site-shell">

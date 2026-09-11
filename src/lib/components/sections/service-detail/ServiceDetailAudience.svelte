@@ -27,9 +27,10 @@
             y: 22,
             duration: 0.72,
             ease: "power3.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 80%",
+              start: "top 88%",
               once: true,
             },
           });
@@ -40,22 +41,25 @@
             duration: 0.74,
             stagger: 0.09,
             ease: "power3.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: ".sd-audience-grid",
-              start: "top 82%",
+              start: "top 88%",
               once: true,
             },
           });
 
-          gsap.to(".sd-audience-parallax-img", {
-            yPercent: 6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.8,
-            },
+          media.add("(min-width: 1024px)", () => {
+            gsap.to(".sd-audience-parallax-img", {
+              yPercent: 6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.8,
+              },
+            });
           });
         });
 

@@ -23,12 +23,13 @@
             ".people-header-reveal",
             { autoAlpha: 0, y: 30 },
             {
-              scrollTrigger: { trigger: sectionRef, start: "top 80%" },
+              scrollTrigger: { trigger: sectionRef, start: "top 88%", once: true },
               autoAlpha: 1,
               y: 0,
               duration: 0.8,
               stagger: 0.1,
               ease: "power2.out",
+              clearProps: "all",
             },
           );
 
@@ -38,7 +39,8 @@
             {
               scrollTrigger: {
                 trigger: ".people-contact-sheet",
-                start: "top 82%",
+                start: "top 88%",
+                once: true,
               },
               autoAlpha: 1,
               y: 0,
@@ -46,6 +48,7 @@
               duration: 0.85,
               stagger: 0.1,
               ease: "power3.out",
+              clearProps: "all",
             },
           );
         });
@@ -70,7 +73,7 @@
       class="mb-12 grid gap-7 pt-5 lg:grid-cols-12 lg:items-end md:mb-16"
     >
       <h2
-        class="people-header-reveal max-w-[11ch] font-display text-[clamp(3rem,5vw,6rem)] leading-[0.86] tracking-[-0.045em] text-brand-dark lg:col-span-8"
+        class="people-header-reveal max-w-[11ch] font-display text-[clamp(2.5rem,5vw,6rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark lg:col-span-8"
       >
         {$_('about.people.heading') || people.heading}
       </h2>

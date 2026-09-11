@@ -84,51 +84,66 @@
     };
   });
 
+  let isRendered = $state(false);
+
   // Open/Close Dropdown Panel Animation
   $effect(() => {
-    if (!browser || !gsapModule || !menuContainer) return;
+    if (!browser || !menuContainer) return;
     const gsap = gsapModule;
     const container = menuContainer;
 
     if (isOpen) {
-      gsap.set(menuContainer, { display: "block" });
+      isRendered = true;
+      if (gsap) {
+        gsap.set(container, { display: "block" });
 
-      gsap.fromTo(
-        menuContainer,
-        { clipPath: "inset(0% 0% 100% 0%)" },
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 0.5,
-          ease: "power3.out",
-          overwrite: "auto",
-        },
-      );
+        gsap.fromTo(
+          container,
+          { clipPath: "inset(0% 0% 100% 0%)" },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 0.45,
+            ease: "power3.out",
+            overwrite: "auto",
+          },
+        );
 
-      gsap.fromTo(
-        ".middle-service-item",
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          stagger: 0.02,
-          ease: "power2.out",
-          delay: 0.05,
-          overwrite: "auto",
-        },
-      );
+        gsap.fromTo(
+          ".middle-service-item",
+          { opacity: 0, y: 10 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.02,
+            ease: "power2.out",
+            delay: 0.05,
+            overwrite: "auto",
+          },
+        );
+      } else {
+        container.style.display = "block";
+      }
     } else {
-      gsap.to(menuContainer, {
-        clipPath: "inset(0% 0% 100% 0%)",
-        duration: 0.35,
-        ease: "power3.inOut",
-        overwrite: "auto",
-        onComplete: () => {
-          gsap.set(container, { display: "none" });
-          activeCategory = "Image Editing";
-          activeServiceSlug = "ai-retouch";
-        },
-      });
+      if (gsap && isRendered) {
+        gsap.to(container, {
+          clipPath: "inset(0% 0% 100% 0%)",
+          duration: 0.3,
+          ease: "power3.inOut",
+          overwrite: "auto",
+          onComplete: () => {
+            if (container) container.style.display = "none";
+            isRendered = false;
+            activeCategory = "Image Editing";
+            activeServiceSlug = "ai-retouch";
+          },
+        });
+      } else {
+        if (container) container.style.display = "none";
+        isRendered = false;
+        activeCategory = "Image Editing";
+        activeServiceSlug = "ai-retouch";
+      }
     }
   });
 
@@ -209,7 +224,8 @@
 
 <div
   bind:this={menuContainer}
-  class="mega-menu-panel absolute top-full left-1/2 -translate-x-1/2 mt-7 w-[72rem] rounded-lg border border-brand-light/10 shadow-2xl p-8 hidden z-50 overflow-hidden
+  style:display={isRendered ? "block" : "none"}
+  class="mega-menu-panel absolute top-full left-1/2 -translate-x-1/2 mt-7 w-[72rem] rounded-lg border border-brand-light/10 shadow-2xl p-8 z-50 overflow-hidden
   before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-['']"
 >
   <div class="grid grid-cols-[20rem_1fr_22rem] gap-8 items-stretch">

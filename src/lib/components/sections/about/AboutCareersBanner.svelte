@@ -23,45 +23,48 @@
             ".careers-banner-content",
             { autoAlpha: 0, y: 36 },
             {
-              scrollTrigger: { trigger: sectionRef, start: "top 80%" },
+              scrollTrigger: { trigger: sectionRef, start: "top 88%", once: true },
               autoAlpha: 1,
               y: 0,
               duration: 0.9,
               ease: "power3.out",
+              clearProps: "all",
             },
           );
 
-          gsap.fromTo(
-            ".careers-media",
-            { yPercent: -8, scale: 1.14 },
-            {
-              scrollTrigger: {
-                trigger: sectionRef,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.8,
+          media.add("(min-width: 1024px)", () => {
+            gsap.fromTo(
+              ".careers-media",
+              { yPercent: -8, scale: 1.14 },
+              {
+                scrollTrigger: {
+                  trigger: sectionRef,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.8,
+                },
+                yPercent: 8,
+                scale: 1.14,
+                ease: "none",
               },
-              yPercent: 8,
-              scale: 1.14,
-              ease: "none",
-            },
-          );
+            );
 
-          gsap.fromTo(
-            ".careers-lens-ring",
-            { rotation: -30, scale: 0.78 },
-            {
-              scrollTrigger: {
-                trigger: sectionRef,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.7,
+            gsap.fromTo(
+              ".careers-lens-ring",
+              { rotation: -30, scale: 0.78 },
+              {
+                scrollTrigger: {
+                  trigger: sectionRef,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.7,
+                },
+                rotation: 75,
+                scale: 1.12,
+                ease: "none",
               },
-              rotation: 75,
-              scale: 1.12,
-              ease: "none",
-            },
-          );
+            );
+          });
         });
       }, sectionRef);
     });
@@ -98,10 +101,11 @@
         aria-hidden="true"
       >
         <div
-          class="absolute inset-[16%] rounded-full border border-brand-green/70"
+          class="absolute inset-4 rounded-full border border-white/20"
         ></div>
-        <span class="absolute left-1/2 top-0 h-full w-px bg-white/20"></span>
-        <span class="absolute left-0 top-1/2 h-px w-full bg-white/20"></span>
+        <div
+          class="absolute inset-10 rounded-full border border-white/10"
+        ></div>
       </div>
       <p
         class="absolute bottom-5 right-5 border-t border-white/35 pt-2 text-[0.68rem] uppercase tracking-[0.16em] text-white/75"
@@ -113,7 +117,7 @@
     <div class="careers-banner-content flex items-center lg:order-1">
       <div class="w-full px-5 py-20 sm:px-10 md:py-28 lg:px-[max(3rem,8vw)]">
         <h2
-          class="max-w-[10ch] font-display text-[clamp(3.25rem,5.5vw,6.5rem)] leading-[0.84] tracking-[-0.05em] text-white"
+          class="max-w-[10ch] font-display text-[clamp(2.5rem,5.5vw,6.5rem)] leading-[0.88] tracking-[-0.045em] text-white"
         >
           {$_('about.careers.heading') || careers.heading}
         </h2>

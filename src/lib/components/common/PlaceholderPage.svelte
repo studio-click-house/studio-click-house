@@ -4,11 +4,12 @@
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import { _ } from "svelte-i18n";
 
-  let { title, eyebrow, description, canonicalPath } = $props<{
+  let { title, eyebrow, description, canonicalPath, noindex = false } = $props<{
     title: string;
     eyebrow: string;
     description: string;
     canonicalPath: string;
+    noindex?: boolean;
   }>();
 
   let pageKey = $derived(canonicalPath.replaceAll("/", "").replace(/^-|-$/g, ""));
@@ -18,6 +19,7 @@
   title={`${title} | Studio Click House`}
   {description}
   {canonicalPath}
+  {noindex}
 />
 
 <main

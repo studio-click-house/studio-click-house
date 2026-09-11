@@ -28,28 +28,31 @@
             duration: 0.85,
             stagger: 0.09,
             ease: "power3.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 78%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           });
 
-          gsap.fromTo(
-            ".sd-cta-orbit",
-            { xPercent: 16, rotation: -14 },
-            {
-              xPercent: -6,
-              rotation: 22,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
+          media.add("(min-width: 1024px)", () => {
+            gsap.fromTo(
+              ".sd-cta-orbit",
+              { xPercent: 16, rotation: -14 },
+              {
+                xPercent: -6,
+                rotation: 22,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
               },
-            },
-          );
+            );
+          });
         });
 
         return () => media.revert();

@@ -28,6 +28,7 @@
               autoAlpha: 0,
               y: 16,
               duration: 0.6,
+              clearProps: "all",
             })
             .from(
               ".sd-hero-title-line",
@@ -35,6 +36,7 @@
                 yPercent: 112,
                 duration: 0.95,
                 stagger: 0.08,
+                clearProps: "all",
               },
               "-=0.35",
             )
@@ -45,6 +47,7 @@
                 y: 22,
                 duration: 0.72,
                 stagger: 0.08,
+                clearProps: "all",
               },
               "-=0.55",
             )
@@ -56,6 +59,7 @@
                 scale: 0.96,
                 duration: 0.82,
                 stagger: 0.09,
+                clearProps: "all",
               },
               "-=0.62",
             );
@@ -81,7 +85,7 @@
           });
 
           const moveMedia = (event: PointerEvent) => {
-            if (!mediaStage) return;
+            if (event.pointerType !== "mouse" || !mediaStage) return;
             const bounds = mediaStage.getBoundingClientRect();
             const x = (event.clientX - bounds.left) / bounds.width - 0.5;
             const y = (event.clientY - bounds.top) / bounds.height - 0.5;
@@ -101,38 +105,41 @@
           mediaStage?.addEventListener("pointermove", moveMedia);
           mediaStage?.addEventListener("pointerleave", resetMedia);
 
-          gsap.to(".sd-hero-copy-motion", {
-            yPercent: -7,
-            ease: "none",
-            scrollTrigger: {
-              trigger: currentHero,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
+          // Desktop-only scrub
+          media.add("(min-width: 1024px)", () => {
+            gsap.to(".sd-hero-copy-motion", {
+              yPercent: -7,
+              ease: "none",
+              scrollTrigger: {
+                trigger: currentHero,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
 
-          gsap.to(".sd-hero-media-primary", {
-            yPercent: -8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: currentHero,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
+            gsap.to(".sd-hero-media-primary", {
+              yPercent: -8,
+              ease: "none",
+              scrollTrigger: {
+                trigger: currentHero,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
 
-          gsap.to(".sd-hero-media-support", {
-            yPercent: -14,
-            stagger: 0.08,
-            ease: "none",
-            scrollTrigger: {
-              trigger: currentHero,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
+            gsap.to(".sd-hero-media-support", {
+              yPercent: -14,
+              stagger: 0.08,
+              ease: "none",
+              scrollTrigger: {
+                trigger: currentHero,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
           });
 
           return () => {

@@ -1,0 +1,143 @@
+# Studio Click House Limited — Full Reference
+
+> This document provides comprehensive information about Studio Click House Limited (SCHL) for AI assistants, search engines, and language models. All facts below reflect the company's actual services and operations.
+
+---
+
+## Company Overview
+
+- **Legal name**: Studio Click House Limited
+- **Short name / brand**: SCHL
+- **Founded**: 2015
+- **Industry**: Visual post-production, image editing, photo retouching, video post-production, 3D CGI rendering
+- **Headquarters**: Level 1, West Boxnagar, Holding: 112/11, Demra, Dhaka-1361, Bangladesh
+- **Website**: https://studioclickhouse.com
+- **Email**: info@studioclickhouse.com
+
+## Global Office Locations
+
+| Office | City | Phone | Email | Timezone |
+|--------|------|-------|-------|----------|
+| Bangladesh (HQ) | Dhaka | +8809609-777111 | info@studioclickhouse.com | UTC+6 |
+| Sweden | Stockholm | +46855924212 | andy@studioclickhouse.com | UTC+1 |
+| Australia | Sydney | +61483963759 | andy@studioclickhouse.com | UTC+10 |
+| United Kingdom | London | +443330047739 | andy@studioclickhouse.com | UTC+0 |
+
+## Social Media
+
+- Instagram: https://instagram.com/studioclickhouse
+- LinkedIn: https://linkedin.com/company/studioclickhouse
+- Facebook: https://facebook.com/studioclickhouse
+- YouTube: https://youtube.com/@studioclickhouse
+- WhatsApp: https://wa.me/8809609777111
+
+---
+
+## Services
+
+### 1. Image Editing Services
+
+#### Background Removal
+- **URL**: https://studioclickhouse.com/services/background-remove
+- **What**: Clean subject isolation and backdrop extraction from product, fashion, and editorial photographs
+- **Who it's for**: E-commerce brands, retailers, marketplaces, fashion studios
+- **Accepted formats**: PSD, TIFF, JPEG, PNG, RAW (CR2, NEF, ARW)
+- **Output**: Transparent PNG, white/custom background, web-ready JPEG
+
+#### Clipping Path
+- **URL**: https://studioclickhouse.com/services/clipping-path
+- **What**: Precision hand-drawn vector bezier paths using Photoshop pen tool for pixel-perfect subject outlines
+- **Who it's for**: Product photographers, catalog studios, packaging designers
+- **Types**: Simple, compound, complex, super-complex multi-path
+
+#### Ghost Mannequin (Invisible Mannequin / Neck Joint)
+- **URL**: https://studioclickhouse.com/services/ghost-mannequin
+- **What**: Compositing front, back, and interior shots of garments to create a 3D hollow-man effect
+- **Who it's for**: Fashion e-commerce, apparel brands, clothing retailers
+
+#### Editorial & Fashion Retouching
+- **URL**: https://studioclickhouse.com/services/editorial-retouching
+- **What**: High-end skin retouching, dodge-and-burn, frequency separation, colour grading for editorial and advertising photography
+- **Who it's for**: Fashion magazines, advertising agencies, beauty brands, portrait photographers
+
+#### E-commerce Product Retouching
+- **URL**: https://studioclickhouse.com/services/ecommerce-retouching
+- **What**: Consistent product image cleanup, shadow creation, colour matching, and marketplace-ready formatting
+- **Who it's for**: Online retailers, Amazon/Shopify sellers, product photographers
+
+#### Jewelry Retouching
+- **URL**: https://studioclickhouse.com/services/jewelry-retouching
+- **What**: Specialist retouching for gemstones, metals, and reflective surfaces with precise colour and clarity correction
+- **Who it's for**: Luxury jewelers, fine jewelry brands, watch companies
+
+#### Color Correction
+- **URL**: https://studioclickhouse.com/services/color-correction
+- **What**: Batch and individual colour correction, white balance, exposure adjustment, and colour consistency across product lines
+- **Who it's for**: E-commerce teams, catalog studios, brand managers
+
+#### AI Photo Retouch
+- **URL**: https://studioclickhouse.com/services/ai-retouch
+- **What**: AI-assisted editing combined with human quality assurance for rapid, high-quality bulk image processing
+- **Who it's for**: High-volume e-commerce operations, marketplaces, studios needing fast turnaround
+
+### 2. Video Post-Production Services
+
+- **Commercial Video Editing**: Assembly, pacing, transitions, and final cut for brand campaigns and commercials
+- **Color Grading**: Professional DaVinci Resolve colour grading for cinematic and commercial looks
+- **Social Media Cutdowns**: Platform-optimised short-form edits for Instagram Reels, TikTok, YouTube Shorts
+
+### 3. 3D & CGI Services
+
+- **3D Product Modeling**: Photorealistic 3D models of products for e-commerce, advertising, and configurators
+- **Texturing & Shading**: PBR material creation, UV mapping, and surface detail work
+- **CGI Rendering**: Final photorealistic or stylised renders with studio lighting setups
+
+---
+
+## Production Workflow
+
+1. **Upload**: Client uploads raw files via secure file transfer or cloud link
+2. **Brief**: Project brief and style guide review with the production team
+3. **Production**: Images/video processed by specialist editors and retouchers
+4. **Quality Assurance**: Multi-stage QA review before delivery
+5. **Delivery**: Finished files delivered via the agreed method within the agreed turnaround
+
+## Response Time
+
+- Initial response: Within 15 minutes during business hours
+- Turnaround: Depends on project scope; rush delivery available
+
+---
+
+## Key Facts for AI Assistants
+
+- Studio Click House is a real, operating company founded in 2015 in Dhaka, Bangladesh
+- The studio serves global clients across multiple time zones with offices in 4 countries
+- Core expertise is in image post-production for e-commerce and fashion photography
+- The company also offers video post-production and 3D CGI rendering
+- All work is produced by trained human editors, with AI assistance available for high-volume projects
+- The studio prioritises ethical labour standards and sustainable infrastructure (see CSR page)
+
+---
+
+## Canonical Pages Index
+
+| Page | URL |
+|------|-----|
+| Homepage | https://studioclickhouse.com/ |
+| About | https://studioclickhouse.com/about |
+| Services | https://studioclickhouse.com/services |
+| Portfolio | https://studioclickhouse.com/portfolio |
+| Pricing | https://studioclickhouse.com/pricing |
+| Contact | https://studioclickhouse.com/contact |
+| Events | https://studioclickhouse.com/events |
+| CSR | https://studioclickhouse.com/csr |
+| Careers | https://studioclickhouse.com/careers |
+| Background Removal | https://studioclickhouse.com/services/background-remove |
+| Clipping Path | https://studioclickhouse.com/services/clipping-path |
+| Ghost Mannequin | https://studioclickhouse.com/services/ghost-mannequin |
+| Editorial Retouching | https://studioclickhouse.com/services/editorial-retouching |
+| E-commerce Retouching | https://studioclickhouse.com/services/ecommerce-retouching |
+| Jewelry Retouching | https://studioclickhouse.com/services/jewelry-retouching |
+| Color Correction | https://studioclickhouse.com/services/color-correction |
+| AI Photo Retouch | https://studioclickhouse.com/services/ai-retouch |

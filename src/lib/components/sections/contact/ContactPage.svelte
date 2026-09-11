@@ -11,6 +11,7 @@
     Phone,
   } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { scrollToTarget } from "$lib/animations/lenis";
   import { contactServiceDetails, contactServices } from "$lib/content/contact";
   import { siteConfig } from "$lib/config/site";
   import ContactHeroCard from "./ContactHeroCard.svelte";
@@ -56,6 +57,10 @@
     formStatus = "We received your project details, we will reply shortly.";
   }
 
+  function handleScrollTo(target: string, offset = -60) {
+    scrollToTarget(target, { offset });
+  }
+
   onMount(() => {
     let active = true;
     let context: { revert: () => void } | undefined;
@@ -68,127 +73,91 @@
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          const heroTimeline = gsap
-            .timeline({ defaults: { ease: "expo.out" } })
-            .addLabel("copy")
-            .from(
+          // 1. Hero entrance reveal
+          const heroTl = gsap.timeline({
+            defaults: { ease: "power3.out" },
+          });
+
+          heroTl
+            .fromTo(
               ".contact-title-line",
-              {
-                yPercent: 108,
-                duration: 1,
-                stagger: 0.08,
-              },
-              "copy",
+              { yPercent: 110, opacity: 0 },
+              { yPercent: 0, opacity: 1, duration: 0.95, clearProps: "all" },
             )
-            .from(
+            .fromTo(
               ".contact-hero-reveal",
-              {
-                autoAlpha: 0,
-                y: 20,
-                duration: 0.7,
-                stagger: 0.07,
-              },
-              "-=0.52",
+              { y: 24, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.75, stagger: 0.1, clearProps: "all" },
+              "-=0.6",
             )
-            .from(
+            .fromTo(
               ".contact-hero-card-wrap",
-              {
-                autoAlpha: 0,
-                y: 34,
-                scale: 0.965,
-                duration: 0.9,
-                stagger: 0.09,
-              },
-              "copy+=0.18",
+              { y: 35, opacity: 0, scale: 0.97 },
+              { y: 0, opacity: 1, scale: 1, duration: 0.9, stagger: 0.12, clearProps: "all" },
+              "-=0.7",
             )
-            .from(
+            .fromTo(
               ".contact-channel",
-              {
-                autoAlpha: 0,
-                y: 26,
-                duration: 0.62,
-                stagger: 0.07,
-              },
-              "-=0.45",
+              { y: 20, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, clearProps: "all" },
+              "-=0.5",
             );
 
-          heroTimeline.addLabel("heroReady");
-
-          gsap.to(".contact-hero-copy", {
-            yPercent: -7,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#contact-hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
-
-          gsap.to(".contact-hero-card-main", {
-            yPercent: -9,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#contact-hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
-
-          gsap.to(".contact-hero-card-side", {
-            yPercent: -15,
-            stagger: 0.08,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#contact-hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
-
-          gsap.fromTo(
-            ".contact-signal-copy",
-            { yPercent: 18 },
-            {
-              yPercent: -12,
+          // 2. Desktop Parallax scrub (only on desktop >= 1024px to keep touch scrolling light & snappy)
+          media.add("(min-width: 1024px)", () => {
+            gsap.to(".contact-hero-card-side", {
+              yPercent: -15,
               ease: "none",
               scrollTrigger: {
-                trigger: signalSection,
-                start: "top bottom",
+                trigger: "#contact-hero",
+                start: "top top",
                 end: "bottom top",
-                scrub: true,
+                scrub: 1,
               },
-            },
-          );
-
-          gsap.from(".contact-brief-reveal", {
-            autoAlpha: 0,
-            y: 28,
-            duration: 0.82,
-            stagger: 0.08,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: briefSection,
-              start: "top 78%",
-              once: true,
-            },
+            });
           });
 
-          gsap.from(".contact-office-reveal", {
-            autoAlpha: 0,
-            y: 18,
-            duration: 0.45,
-            stagger: 0.04,
-            ease: "power2.out",
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: officesSection,
-              start: "top 85%",
-              once: true,
-            },
-          });
+          // 3. Project Brief Section Reveal
+          if (briefSection) {
+            gsap.fromTo(
+              briefSection.querySelectorAll(".contact-brief-reveal"),
+              { y: 32, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power2.out",
+                clearProps: "all",
+                scrollTrigger: {
+                  trigger: briefSection,
+                  start: "top 88%",
+                  once: true,
+                },
+              },
+            );
+          }
+
+          // 4. Global Offices Section Reveal
+          if (officesSection) {
+            gsap.fromTo(
+              officesSection.querySelectorAll(".contact-office-reveal"),
+              { y: 32, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.12,
+                ease: "power2.out",
+                clearProps: "all",
+                scrollTrigger: {
+                  trigger: officesSection,
+                  start: "top 90%",
+                  once: true,
+                },
+              },
+            );
+          }
         });
       }, pageRoot);
     });
@@ -211,22 +180,26 @@
         <div class="contact-hero-copy lg:col-span-7">
           <h1
             id="contact-page-title"
-            class="mt-5 max-w-none font-display text-[clamp(3.25rem,5.5vw,6.1rem)] leading-[0.9] tracking-[-0.05em] sm:whitespace-nowrap"
+            class="mt-4 sm:mt-5 max-w-none font-display text-[clamp(2.5rem,5.8vw,6rem)] leading-[0.94] tracking-[-0.04em]"
           >
             <span class="contact-title-mask">
               <span class="contact-title-line">{$_('contact.hero.title') || 'Start a project.'}</span>
             </span>
           </h1>
           <p
-            class="contact-hero-reveal mt-7 max-w-xl text-base leading-7 text-brand-dark/70 sm:text-lg"
+            class="contact-hero-reveal mt-5 sm:mt-7 max-w-xl text-base leading-7 text-brand-dark/70 sm:text-lg"
           >
             {$_('contact.hero.description') || 'Image editing, video post-production, and CGI with 24/7 support for international creative teams.'}
           </p>
           <div
-            class="contact-hero-reveal mt-8 flex flex-wrap items-center gap-5"
+            class="contact-hero-reveal mt-7 sm:mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
           >
             <a
               href="#project-brief"
+              onclick={(e) => {
+                e.preventDefault();
+                handleScrollTo("#project-brief");
+              }}
               class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-dark px-6 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
             >
               {$_('contact.hero.sendBrief') || 'Send a brief'}
@@ -245,8 +218,8 @@
           </div>
         </div>
 
-        <figure class="contact-hero-media lg:col-span-5">
-          <div class="grid grid-cols-[1.18fr_0.82fr] gap-3">
+        <figure class="contact-hero-media mx-auto w-full max-w-lg lg:max-w-none lg:col-span-5">
+          <div class="grid grid-cols-[1.18fr_0.82fr] gap-3 sm:gap-3.5">
             <div class="contact-hero-card-wrap contact-hero-card-main">
               <ContactHeroCard
                 src="/images/contact/project-handoff.png"
@@ -257,7 +230,7 @@
                 aspectClass="aspect-[3/4] w-full"
               />
             </div>
-            <div class="grid gap-3">
+            <div class="grid gap-3 sm:gap-3.5">
               <div class="contact-hero-card-wrap contact-hero-card-side">
                 <ContactHeroCard
                   src="/images/portfolio/photo-editing-showcase.png"
@@ -289,7 +262,7 @@
       aria-label="Direct contact options"
       class="w-full shrink-0 border-t border-brand-dark/10 bg-brand-light/80 py-6 sm:py-7 lg:py-8 backdrop-blur-sm"
     >
-      <div class="site-shell mx-auto grid content-center items-center gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      <div class="site-shell mx-auto grid content-center items-center gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         <a href={`mailto:${siteConfig.contact.email}`} class="contact-channel">
           <span class="contact-channel-icon shrink-0">
             <Mail size={18} aria-hidden="true" />
@@ -322,7 +295,14 @@
             <span>{siteConfig.contact.website}</span>
           </span>
         </a>
-        <a href="#global-offices" class="contact-channel">
+        <a
+          href="#global-offices"
+          onclick={(e) => {
+            e.preventDefault();
+            handleScrollTo("#global-offices");
+          }}
+          class="contact-channel"
+        >
           <span class="contact-channel-icon shrink-0">
             <MapPin size={18} aria-hidden="true" />
           </span>
@@ -339,7 +319,7 @@
     id="contact-signal"
     bind:this={signalSection}
     aria-labelledby="contact-signal-title"
-    class="relative overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
+    class="relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20 lg:py-24"
   >
     <!-- 3D Wave Canvas inset behind the text -->
     <ContactSignalField />
@@ -347,12 +327,12 @@
     <div class="site-shell relative z-10 mx-auto max-w-4xl text-center">
       <h2
         id="contact-signal-title"
-        class="text-balance font-display text-[clamp(2.4rem,4.6vw,4.5rem)] leading-[0.95] tracking-[-0.04em] text-brand-dark"
+        class="text-balance font-display text-[clamp(2.1rem,4.4vw,4.4rem)] leading-[0.96] tracking-[-0.035em] text-brand-dark"
       >
         {$_('contact.signal.title') || 'A clear brief turns scattered inputs into one production signal.'}
       </h2>
       <p
-        class="mx-auto mt-6 max-w-xl text-base leading-7 text-brand-dark/72 sm:text-lg"
+        class="mx-auto mt-5 max-w-xl text-base leading-7 text-brand-dark/72 sm:text-lg"
       >
         {$_('contact.signal.description') || 'You do not need to solve the workflow before writing. Bring the material and the intended finish; we can shape the route together.'}
       </p>
@@ -369,13 +349,13 @@
       <header class="contact-brief-reveal max-w-3xl">
         <h2
           id="project-brief-title"
-          class="text-balance font-display text-[clamp(2.6rem,4vw,4.6rem)] leading-[0.92] tracking-[-0.04em]"
+          class="text-balance font-display text-[clamp(2.4rem,4vw,4.4rem)] leading-[0.92] tracking-[-0.04em]"
         >
           {$_('contact.form.title') || 'Share your project details.'}
         </h2>
         <p
           id="project-brief-description"
-          class="mt-5 max-w-2xl text-base leading-7 text-brand-dark/68"
+          class="mt-4 max-w-2xl text-base leading-7 text-brand-dark/68 sm:mt-5"
         >
           {$_('contact.form.subtitle') || 'Provide the details you have. We will follow up on anything incomplete after reviewing.'}
         </p>
@@ -387,7 +367,7 @@
         <form
           id="contact-form"
           aria-describedby="project-brief-description"
-          class="rounded-[1rem] border border-brand-dark/14 bg-brand-light p-5 sm:p-6 lg:col-span-8 lg:p-7"
+          class="rounded-[1rem] border border-brand-dark/14 bg-brand-light p-5 sm:p-7 lg:col-span-8 lg:p-8"
           onsubmit={handleSubmit}
         >
           <div class="grid gap-4 sm:grid-cols-2">
@@ -446,8 +426,8 @@
                   aria-pressed={selectedService === service.name}
                   onclick={() => (selectedService = service.name)}
                 >
-                  <span>{service.name}</span>
-                  <span class="service-check" aria-hidden="true">
+                  <span class="truncate pr-2">{service.name}</span>
+                  <span class="service-check shrink-0" aria-hidden="true">
                     <Check size={14} />
                   </span>
                 </button>
@@ -475,7 +455,7 @@
               aria-live="polite"
             >
               {#if briefPrepared}
-                <p class="flex items-start gap-2 text-brand-dark/76">
+                <p class="flex items-start gap-2 text-brand-dark/76 font-medium">
                   <Check size={14} class="mt-0.5 shrink-0 text-brand-green" />
                   {formStatus}
                 </p>
@@ -504,48 +484,48 @@
                 width="1200"
                 height="900"
                 loading="lazy"
-                class="aspect-[4/3] w-full object-cover object-center"
+                class="aspect-[16/9] sm:aspect-[4/3] w-full object-cover object-center"
               />
-              <figcaption class="bg-brand-dark p-5 text-brand-light">
-                <p class="font-display text-2xl tracking-[-0.02em]">
+              <figcaption class="bg-brand-dark p-4 sm:p-5 text-brand-light">
+                <p class="font-display text-xl sm:text-2xl tracking-[-0.02em]">
                   {selectedServiceDetail.name}
                 </p>
-                <p class="mt-2 text-sm leading-6 text-brand-light/66">
+                <p class="mt-1.5 text-xs sm:text-sm leading-relaxed text-brand-light/66">
                   {selectedServiceDetail.descriptor}
                 </p>
               </figcaption>
             </figure>
-            <div class="p-5">
-              <h3 class="font-display text-2xl tracking-[-0.02em]">
+            <div class="p-4 sm:p-5">
+              <h3 class="font-display text-xl sm:text-2xl tracking-[-0.02em]">
                 {$_('contact.form.haveQuestions') || 'Have questions?'}
               </h3>
-              <p class="mt-2 text-sm leading-6 text-brand-dark/62">
+              <p class="mt-2 text-xs sm:text-sm leading-relaxed text-brand-dark/62">
                 {$_('contact.form.haveQuestionsNote') || 'Call or email the Dhaka studio before sending a brief.'}
               </p>
-              <div class="mt-5 grid gap-3 text-sm">
+              <div class="mt-4 sm:mt-5 grid gap-2.5 sm:gap-3 text-sm">
                 <a
                   href={`tel:${siteConfig.contact.phoneHref}`}
                   class="contact-detail-link"
                 >
                   <Phone size={15} />
-                  {siteConfig.contact.phone}
+                  <span>{siteConfig.contact.phone}</span>
                 </a>
-                <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3">
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
                     class="contact-detail-link"
                   >
                     <Mail size={15} />
-                    {siteConfig.contact.email}
+                    <span>{siteConfig.contact.email}</span>
                   </a>
                   <button
                     type="button"
                     onclick={copyStudioEmail}
-                    class="inline-flex items-center gap-1.5 rounded-[0.55rem] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green"
+                    class="inline-flex items-center gap-1.5 rounded-[0.55rem] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green cursor-pointer"
                     aria-live="polite"
                   >
                     {#if emailCopied}
-                      <Check size={12} /> Copied
+                      <Check size={12} class="text-brand-green" /> Copied
                     {:else}
                       <Copy size={12} /> Copy
                     {/if}
@@ -569,40 +549,40 @@
       <header class="contact-office-reveal max-w-3xl">
         <h2
           id="global-offices-title"
-          class="text-balance font-display text-[clamp(2.7rem,4.6vw,5.4rem)] leading-[0.9] tracking-[-0.045em]"
+          class="text-balance font-display text-[clamp(2.5rem,4.6vw,5.2rem)] leading-[0.9] tracking-[-0.045em]"
         >
           {$_('contact.offices.title') || 'Reach us here.'}
         </h2>
-        <p class="mt-5 max-w-xl text-base leading-7 text-brand-dark/66">
+        <p class="mt-4 max-w-xl text-base leading-7 text-brand-dark/66 sm:mt-5">
           {$_('contact.offices.description') || 'Our production team works across borders to bring every project to life.'}
         </p>
       </header>
 
-      <div class="mt-10 space-y-6">
+      <div class="mt-8 sm:mt-10 space-y-5 sm:space-y-6">
         <!-- Main Production Studio (Dhaka HQ) — Flagship Luxury Dark Card -->
         <article
-          class="contact-office-reveal relative overflow-hidden rounded-[1.5rem] bg-brand-dark p-7 text-brand-light sm:p-9 lg:p-11 border border-white/10 shadow-2xl transition-all duration-300 hover:border-brand-green/45 hover:shadow-[0_24px_64px_-16px_rgba(126,166,65,0.18)]"
+          class="contact-office-reveal relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] bg-brand-dark p-6 sm:p-8 lg:p-10 border border-white/10 shadow-2xl transition-all duration-300 hover:border-brand-green/45 hover:shadow-[0_24px_64px_-16px_rgba(126,166,65,0.18)]"
         >
           <!-- Ambient Green Luxury Glow -->
           <div
-            class="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-brand-green/14 blur-3xl"
+            class="pointer-events-none absolute -right-20 -top-20 h-80 w-80 sm:h-96 sm:w-96 rounded-full bg-brand-green/14 blur-3xl"
             aria-hidden="true"
           ></div>
 
           <!-- 2-Column Content: Details + Glassmorphic Channels -->
-          <div class="relative z-10 grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div class="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
             <div class="lg:col-span-5">
               <h3
-                class="font-display text-[clamp(2.8rem,5vw,4.8rem)] leading-[0.92] tracking-[-0.04em] text-brand-light"
+                class="font-display text-[clamp(2.4rem,4.5vw,4.5rem)] leading-[0.92] tracking-[-0.04em] text-brand-light"
               >
                 {primaryOffice.country}
               </h3>
-              <p class="mt-4 max-w-md text-sm leading-relaxed text-brand-light/75">
+              <p class="mt-3 sm:mt-4 max-w-md text-xs sm:text-sm leading-relaxed text-brand-light/75">
                 {primaryOffice.address}
               </p>
             </div>
 
-            <div class="grid gap-3.5 sm:grid-cols-2 lg:col-span-7">
+            <div class="grid gap-3 sm:grid-cols-2 lg:col-span-7">
               <a href={`tel:${primaryOffice.phoneHref}`} class="office-channel-dark">
                 <Phone size={16} class="text-brand-green shrink-0" />
                 <div>
@@ -639,27 +619,27 @@
           </div>
         </article>
 
-        <!-- 3 Regional Desks -->
-        <div class="regional-offices-grid">
-          {#each regionalOffices as office (office.id)}
+        <!-- 3 Regional Desks: Responsive 1-col (mobile) -> 2-col (iPad) -> 3-col (laptop/desktop) -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
+          {#each regionalOffices as office, idx (office.id)}
             <article
-              class="contact-office-reveal flex h-full flex-col justify-between rounded-2xl border border-brand-dark/16 bg-brand-paper/95 p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-brand-green/50 hover:shadow-md"
+              class="contact-office-reveal flex h-full flex-col justify-between rounded-2xl border border-brand-dark/16 bg-brand-paper/95 p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-brand-green/50 hover:shadow-md {idx === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}"
             >
               <div>
-                <h3 class="font-display text-3xl font-light tracking-[-0.035em] text-brand-dark">
+                <h3 class="font-display text-2xl sm:text-3xl font-light tracking-[-0.035em] text-brand-dark">
                   {office.country}
                 </h3>
                 <p class="mt-2 text-xs leading-relaxed text-brand-dark/75">{office.address}</p>
               </div>
 
-              <div class="mt-6 flex flex-col gap-1.5 border-t border-brand-dark/10 pt-4">
+              <div class="mt-6 flex flex-col gap-2 border-t border-brand-dark/10 pt-4">
                 <a href={`tel:${office.phoneHref}`} class="regional-contact-btn">
                   <Phone size={13} class="text-brand-green shrink-0" />
-                  <span>{office.phone}</span>
+                  <span class="truncate">{office.phone}</span>
                 </a>
                 <a href={`mailto:${office.email}`} class="regional-contact-btn">
                   <Mail size={13} class="text-brand-green shrink-0" />
-                  <span>{office.email}</span>
+                  <span class="truncate">{office.email}</span>
                 </a>
               </div>
             </article>
@@ -674,7 +654,7 @@
   .contact-title-mask {
     display: block;
     overflow: hidden;
-    padding-bottom: 0.08em;
+    padding-bottom: 0.12em;
   }
 
   .contact-title-line {
@@ -687,12 +667,12 @@
     width: 100%;
     min-width: 0;
     align-items: center;
-    gap: 0.95rem;
+    gap: 0.85rem;
     border: 1px solid
       color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
     border-radius: 0.75rem;
     background: var(--color-brand-paper);
-    padding: 1.05rem 1.25rem;
+    padding: 0.95rem 1.15rem;
     color: var(--color-brand-dark);
     transition:
       transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -773,7 +753,7 @@
       color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
     border-radius: 0.65rem;
     background: var(--color-brand-paper);
-    padding: 1rem;
+    padding: 0.9rem 1rem;
     transition:
       border-color 220ms ease,
       background-color 220ms ease;
@@ -789,10 +769,10 @@
     width: 100%;
     border: 0;
     background: transparent;
-    padding-top: 0.75rem;
+    padding-top: 0.5rem;
     color: var(--color-brand-dark);
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.3;
     outline: none;
   }
@@ -844,7 +824,7 @@
       color-mix(in srgb, var(--color-brand-dark) 18%, transparent);
     border-radius: 0.65rem;
     background: var(--color-brand-paper);
-    padding: 1rem;
+    padding: 0.9rem 1rem;
     transition:
       border-color 220ms ease,
       background-color 220ms ease;
@@ -857,10 +837,10 @@
     resize: vertical;
     border: 0;
     background: transparent;
-    padding-top: 0.9rem;
+    padding-top: 0.75rem;
     color: var(--color-brand-dark);
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.55;
     outline: none;
   }
@@ -885,6 +865,7 @@
     font-weight: 700;
     letter-spacing: 0.11em;
     text-transform: uppercase;
+    cursor: pointer;
     transition:
       background-color 220ms ease,
       color 220ms ease,
@@ -946,6 +927,7 @@
   .regional-contact-btn {
     display: inline-flex;
     width: fit-content;
+    max-width: 100%;
     align-items: center;
     gap: 0.6rem;
     color: color-mix(in srgb, var(--color-brand-dark) 80%, transparent);
@@ -962,6 +944,7 @@
   .contact-detail-link {
     display: inline-flex;
     width: fit-content;
+    max-width: 100%;
     align-items: center;
     gap: 0.6rem;
     color: color-mix(in srgb, var(--color-brand-dark) 76%, transparent);
@@ -975,19 +958,6 @@
 
   .contact-detail-link:hover {
     color: var(--color-brand-green);
-  }
-
-  .regional-offices-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
-    width: 100%;
-  }
-
-  @media (max-width: 860px) {
-    .regional-offices-grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   @media (min-width: 768px) {

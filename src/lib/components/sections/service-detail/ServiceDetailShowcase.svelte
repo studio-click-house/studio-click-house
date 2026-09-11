@@ -25,15 +25,16 @@
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
-                start: "top 76%",
+                start: "top 88%",
                 once: true,
               },
               defaults: { ease: "expo.out" },
             })
             .from(".sd-proof-copy", {
               autoAlpha: 0,
-              x: -28,
+              y: 22,
               duration: 0.82,
+              clearProps: "all",
             })
             .from(
               ".sd-proof-card",
@@ -43,6 +44,7 @@
                 scale: 0.965,
                 duration: 0.9,
                 stagger: 0.1,
+                clearProps: "all",
               },
               "-=0.5",
             )
@@ -52,42 +54,46 @@
                 yPercent: 110,
                 duration: 0.72,
                 stagger: 0.08,
+                clearProps: "all",
               },
               "-=0.62",
             );
 
-          gsap.to(".sd-proof-copy-motion", {
-            yPercent: -6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: currentSection,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
+          // Desktop-only scrub
+          media.add("(min-width: 1024px)", () => {
+            gsap.to(".sd-proof-copy-motion", {
+              yPercent: -6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: currentSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
 
-          gsap.to(".sd-proof-card-main", {
-            yPercent: -6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: currentSection,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
+            gsap.to(".sd-proof-card-main", {
+              yPercent: -6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: currentSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
 
-          gsap.to(".sd-proof-card-side", {
-            yPercent: -11,
-            stagger: 0.08,
-            ease: "none",
-            scrollTrigger: {
-              trigger: currentSection,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
+            gsap.to(".sd-proof-card-side", {
+              yPercent: -11,
+              stagger: 0.08,
+              ease: "none",
+              scrollTrigger: {
+                trigger: currentSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
           });
 
           gsap.fromTo(

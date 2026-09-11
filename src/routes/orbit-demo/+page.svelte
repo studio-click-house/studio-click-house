@@ -8,6 +8,7 @@
   title="Orbit Radial Animation Demo | Studio Click House"
   description="Standalone preview of the radial orbit pinning scroll animation."
   canonicalPath="/orbit-demo"
+  noindex={true}
 />
 
 <main id="main-content" class="min-h-screen bg-brand-dark text-brand-light">

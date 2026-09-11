@@ -3,11 +3,16 @@
   import { resolve } from "$app/paths";
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { scrollToTarget } from "$lib/animations/lenis";
   import { servicesHero } from "$lib/content/services";
   import { previewMedia } from "$lib/content/media";
   import { _ } from "svelte-i18n";
 
   let heroSection = $state<HTMLElement>();
+
+  function handleScroll(target: string) {
+    scrollToTarget(target, { offset: -60 });
+  }
 
   const disciplines = [
     {
@@ -46,6 +51,7 @@
               duration: 1.05,
               stagger: 0.08,
               delay: 0.12,
+              clearProps: "all",
             })
             .from(
               ".services-hero-media",
@@ -55,6 +61,7 @@
                 y: 32,
                 duration: 1.05,
                 transformOrigin: "center bottom",
+                clearProps: "all",
               },
               "-=0.72",
             )
@@ -65,43 +72,47 @@
                 y: 20,
                 duration: 0.72,
                 stagger: 0.07,
+                clearProps: "all",
               },
               "-=0.68",
             );
 
-          gsap.to(".services-hero-scroll-media", {
-            yPercent: 8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: heroSection,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
+          // Desktop-only parallax scrub for smooth touch scrolling on mobile & iPad
+          media.add("(min-width: 1024px)", () => {
+            gsap.to(".services-hero-scroll-media", {
+              yPercent: 8,
+              ease: "none",
+              scrollTrigger: {
+                trigger: heroSection,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
 
-          gsap.to(".services-hero-text-motion", {
-            y: -72,
-            ease: "none",
-            scrollTrigger: {
-              trigger: heroSection,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
+            gsap.to(".services-hero-text-motion", {
+              y: -54,
+              ease: "none",
+              scrollTrigger: {
+                trigger: heroSection,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
 
-          gsap.to(".services-hero-media-row", {
-            y: -20,
-            scale: 0.975,
-            transformOrigin: "center bottom",
-            ease: "none",
-            scrollTrigger: {
-              trigger: heroSection,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
+            gsap.to(".services-hero-media-row", {
+              y: -20,
+              scale: 0.98,
+              transformOrigin: "center bottom",
+              ease: "none",
+              scrollTrigger: {
+                trigger: heroSection,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
           });
         });
 
@@ -132,14 +143,14 @@
       <div class="services-hero-text-motion lg:col-span-8">
         <h1
           id="services-hero-title"
-          class="font-display text-[clamp(3.4rem,6.8vw,7.5rem)] leading-[0.84] tracking-[-0.05em]"
+          class="font-display text-[clamp(2.6rem,6.8vw,7.5rem)] leading-[0.88] tracking-[-0.045em]"
         >
-          <span class="block overflow-hidden pb-[0.08em]">
+          <span class="block overflow-hidden pb-[0.14em]">
             <span class="services-hero-title-line block"
               >{$_('services.hero.heading1') || 'Precision'} <em class="text-brand-green">{$_('services.hero.heading2') || 'finish.'}</em></span
             >
           </span>
-          <span class="block overflow-hidden pb-[0.08em]">
+          <span class="block overflow-hidden pb-[0.14em]">
             <span class="services-hero-title-line block">{$_('services.hero.heading3') || 'Built to scale.'}</span>
           </span>
         </h1>
@@ -164,6 +175,10 @@
             </a>
             <a
               href="#services-details"
+              onclick={(e) => {
+                e.preventDefault();
+                handleScroll("#services-details");
+              }}
               class="group inline-flex items-center gap-2 border-b border-brand-light/35 pb-1 text-sm font-medium text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
             >
               {$_('services.hero.viewCapabilities') || 'View capabilities'}
@@ -193,6 +208,10 @@
         {#each disciplines as discipline, discIdx (discipline.index)}
           <a
             href={`#service-showcase-${discipline.index === "01" ? "photo" : discipline.index === "02" ? "video" : "3d"}`}
+            onclick={(e) => {
+              e.preventDefault();
+              handleScroll(`#service-showcase-${discipline.index === "01" ? "photo" : discipline.index === "02" ? "video" : "3d"}`);
+            }}
             class="services-hero-meta group relative flex min-h-36 items-end overflow-hidden rounded-[1rem] bg-brand-light/[0.045] p-4 transition-colors duration-300 sm:min-h-52 lg:min-h-full lg:p-5"
           >
             <img

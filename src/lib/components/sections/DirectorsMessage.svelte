@@ -1,34 +1,88 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { MessageSquareQuote } from "lucide-svelte";
+  import { registerScrollTrigger } from "$lib/animations/gsap";
   import { testimonials } from "$lib/content/home";
   import { _ } from "svelte-i18n";
+
+  let sectionRef: HTMLElement;
+
+  onMount(() => {
+    let active = true;
+    let context: { revert: () => void } | undefined;
+
+    registerScrollTrigger().then((runtime) => {
+      if (!active || !runtime || !sectionRef) return;
+      const { gsap } = runtime;
+
+      context = gsap.context(() => {
+        const media = gsap.matchMedia();
+        media.add("(prefers-reduced-motion: no-preference)", () => {
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: sectionRef,
+                start: "top 88%",
+                once: true,
+              },
+            })
+            .from(".director-header-reveal", {
+              autoAlpha: 0,
+              y: 24,
+              duration: 0.75,
+              stagger: 0.08,
+              ease: "power2.out",
+              clearProps: "all",
+            })
+            .from(
+              ".director-quote-reveal",
+              {
+                autoAlpha: 0,
+                y: 28,
+                duration: 0.8,
+                stagger: 0.12,
+                ease: "power3.out",
+                clearProps: "all",
+              },
+              "-=0.45",
+            );
+        });
+      }, sectionRef);
+    });
+
+    return () => {
+      active = false;
+      context?.revert();
+    };
+  });
 </script>
 
 <section
   id="director-message"
+  bind:this={sectionRef}
   aria-labelledby="director-message-title"
   class="section-space bg-brand-dark text-brand-light"
 >
   <div class="site-shell grid gap-14 lg:grid-cols-12">
     <div class="lg:col-span-4">
-      <p class="eyebrow text-brand-green font-semibold">
+      <p class="director-header-reveal eyebrow text-brand-green font-semibold">
         {$_('about.directorsMessage.eyebrow') || 'From the Creative Director'}
       </p>
       <h2
         id="director-message-title"
-        class="mt-7 font-display text-5xl leading-[0.95] tracking-[-0.035em] sm:text-6xl"
+        class="director-header-reveal mt-7 font-display text-4xl sm:text-5xl lg:text-6xl leading-[0.95] tracking-[-0.035em]"
       >
         {$_('about.directorsMessage.title') || 'Driven by dedication and ready for every challenge.'}
       </h2>
     </div>
-    <div data-scroll-visual class="lg:col-span-8 lg:pt-14">
+    <div class="lg:col-span-8 lg:pt-14">
       {#if testimonials.length}
         <div
           class="divide-y divide-brand-light/15 border-y border-brand-light/15"
         >
           {#each testimonials as testimonial, index (`${testimonial.name}-${testimonial.company}`)}
             <blockquote
-              class="py-8 flex flex-col gap-6 md:flex-row md:items-start md:gap-8"
+              class="director-quote-reveal py-8 flex flex-col gap-6 md:flex-row md:items-start md:gap-8"
             >
               {#if testimonial.avatar}
                 <div

@@ -89,7 +89,7 @@
             .timeline({
               scrollTrigger: {
                 trigger: section,
-                start: "top 78%",
+                start: "top 88%",
                 once: true,
               },
               defaults: { ease: "power3.out" },
@@ -98,6 +98,7 @@
               autoAlpha: 0,
               y: 22,
               duration: 0.72,
+              clearProps: "all",
             })
             .from(
               ".sd-feature-card",
@@ -106,6 +107,7 @@
                 y: 26,
                 duration: 0.68,
                 stagger: 0.07,
+                clearProps: "all",
               },
               "-=0.4",
             );

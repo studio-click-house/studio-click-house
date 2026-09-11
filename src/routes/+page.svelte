@@ -17,14 +17,6 @@
   import { faqs } from "$lib/content/home";
 
   let { data } = $props();
-  const organizationData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/images/brand/schl-logo.png`,
-    description: siteConfig.description,
-  };
 
   const faqData = {
     "@context": "https://schema.org",
@@ -42,7 +34,6 @@
   description="Studio Click House is an editorial creative studio providing high-end photo retouching, image editing, video grading, and custom 3D CGI product renders for global brands and agencies."
   canonicalPath="/"
 />
-<JsonLd data={organizationData} />
 <JsonLd data={faqData} />
 
 <main id="main-content">

@@ -13,8 +13,14 @@
     upcomingEvent,
   } from "$lib/content/events";
   import { siteConfig } from "$lib/config/site";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
 
   let pageRoot = $state<HTMLElement>();
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Events", path: "/events" },
+  ]);
 
   const schemaData = {
     "@context": "https://schema.org",
@@ -24,12 +30,6 @@
     name: `Company Events & Activities | ${siteConfig.name}`,
     description:
       "A visual journal of upcoming and past Studio Click House company events, creative sessions, workshops, and studio activities.",
-    isPartOf: {
-      "@type": "WebSite",
-      "@id": `${siteConfig.url}/#website`,
-      url: siteConfig.url,
-      name: siteConfig.name,
-    },
   };
 </script>
 
@@ -40,6 +40,7 @@
 />
 
 <JsonLd data={schemaData} />
+<JsonLd data={breadcrumbData} />
 
 <main id="main-content" bind:this={pageRoot} class="relative overflow-clip">
   <EventsHero upcoming={upcomingEvent} archive={pastEvents} />

@@ -14,6 +14,7 @@ export async function registerScrollTrigger() {
 
   if (!isScrollTriggerRegistered) {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     isScrollTriggerRegistered = true;
   }
 

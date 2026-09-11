@@ -26,7 +26,7 @@
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
-                start: "top 76%",
+                start: "top 88%",
                 once: true,
               },
               defaults: { ease: "power3.out" },
@@ -36,6 +36,7 @@
               y: 28,
               duration: 0.82,
               stagger: 0.08,
+              clearProps: "all",
             })
             .from(
               ".sd-study-principle",
@@ -44,6 +45,7 @@
                 x: -18,
                 duration: 0.6,
                 stagger: 0.1,
+                clearProps: "all",
               },
               "-=0.45",
             )
@@ -54,6 +56,7 @@
                 scale: 0.88,
                 duration: 0.65,
                 stagger: 0.12,
+                clearProps: "all",
               },
               "-=0.3",
             );
@@ -64,6 +67,7 @@
             scale: 0.97,
             duration: 1.05,
             ease: "power3.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: ".sd-study-frame",
               start: "top 88%",

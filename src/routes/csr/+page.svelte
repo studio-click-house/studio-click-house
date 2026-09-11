@@ -2,7 +2,30 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import JsonLd from "$lib/components/seo/JsonLd.svelte";
+  import { siteConfig } from "$lib/config/site";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
   import { _ } from "svelte-i18n";
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "CSR", path: "/csr" },
+  ]);
+
+  const csrSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${siteConfig.url}/csr#webpage`,
+    url: `${siteConfig.url}/csr`,
+    name: `Corporate Social Responsibility | ${siteConfig.name}`,
+    description:
+      "Discover Studio Click House's commitment to sustainable green web-hosting footprints, ethical labor standards, and community support in creative ecosystems.",
+    provider: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
 
   const pillars = [
     {
@@ -28,6 +51,9 @@
   description="Discover Studio Click House's commitment to sustainable green web-hosting footprints, ethical labor standards, and community support in creative ecosystems."
   canonicalPath="/csr"
 />
+
+<JsonLd data={csrSchema} />
+<JsonLd data={breadcrumbData} />
 
 <main id="main-content" class="min-h-[100dvh] bg-brand-paper pt-32 pb-24">
   <div class="site-shell">

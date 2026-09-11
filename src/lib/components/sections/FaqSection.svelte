@@ -97,39 +97,40 @@
             .timeline({
               scrollTrigger: {
                 trigger: section,
-                start: "top 85%",
+                start: "top 95%",
                 toggleActions: "play none none none",
                 once: true,
               },
             })
             .from("#faq-section-title", {
               autoAlpha: 0,
-              y: 24,
-              duration: 0.7,
+              y: 18,
+              duration: 0.45,
               ease: "power3.out",
+              clearProps: "opacity,visibility,transform",
             })
             .from(
               ".faq-item-reveal",
               {
                 autoAlpha: 0,
-                y: 20,
-                duration: 0.6,
-                stagger: 0.07,
-                ease: "power3.out",
+                y: 14,
+                duration: 0.35,
+                stagger: 0.035,
+                ease: "power2.out",
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.4",
+              "-=0.35",
             )
             .from(
               ".faq-reveal-right",
               {
                 autoAlpha: 0,
-                x: 24,
-                duration: 0.8,
+                x: 20,
+                duration: 0.45,
                 ease: "power3.out",
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.5",
+              "-=0.3",
             );
         });
 

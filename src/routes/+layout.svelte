@@ -7,6 +7,8 @@
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import FloatingSocialBar from "$lib/components/layout/FloatingSocialBar.svelte";
   import SitePreloader from "$lib/components/animations/SitePreloader.svelte";
+  import JsonLd from "$lib/components/seo/JsonLd.svelte";
+  import { globalSchemaGraph } from "$lib/config/global-schema";
   import { afterNavigate } from "$app/navigation";
   import { createLenis } from "$lib/animations/lenis";
   import { refreshScrollTriggersAfterFonts, refreshScrollTriggers } from "$lib/animations/gsap";
@@ -75,6 +77,8 @@
   <link rel="preload" as="image" href="/images/brand/schl-logo-gray.png" />
   <link rel="preload" as="image" href="/images/brand/schl-logo.png" />
 </svelte:head>
+
+<JsonLd data={globalSchemaGraph} />
 
 <a
   href="#main-content"

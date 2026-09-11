@@ -2,15 +2,22 @@
   import { onMount } from "svelte";
   import { page } from "$app/state";
   import { resolve } from "$app/paths";
+  /* eslint-disable svelte/no-navigation-without-resolve -- resolveServiceHref returns a resolved pathname. */
   import {
+    ArrowLeft,
     ArrowUpRight,
+    Camera,
     ChevronDown,
+    ChevronRight,
+    Layers,
     LogIn,
     Menu,
+    Video,
     X,
   } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { navigationItems } from "$lib/content/home";
+  import { navigationItems, services } from "$lib/content/home";
+  import { resolveServiceHref } from "$lib/content/service-pages";
   import { _ } from "svelte-i18n";
   import MegaMenu from "./MegaMenu.svelte";
   import LanguageSwitcher from "./LanguageSwitcher.svelte";
@@ -18,8 +25,36 @@
   let isScrolled = $state(false);
   let isMegaMenuOpen = $state(false);
   let isMenuOpen = $state(false);
+  let mobileView = $state<"routes" | "services">("routes");
   let headerElement: HTMLElement;
   let megaMenuCloseTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  let mobileActiveCategory = $state<"Image Editing" | "Video Editing" | "3D Modeling">("Image Editing");
+
+  const mobileCategories = [
+    {
+      id: "Image Editing" as const,
+      key: "imageEditing",
+      label: "Photo Editing",
+      icon: Camera,
+    },
+    {
+      id: "Video Editing" as const,
+      key: "videoEditing",
+      label: "Video Editing",
+      icon: Video,
+    },
+    {
+      id: "3D Modeling" as const,
+      key: "modeling3d",
+      label: "3D Modeling",
+      icon: Layers,
+    },
+  ];
+
+  const mobileCategoryServices = $derived(
+    services.filter((s) => s.category === mobileActiveCategory)
+  );
 
   function openMegaMenu() {
     if (megaMenuCloseTimeout) {
@@ -37,8 +72,25 @@
   }
 
   function closeNavigationMenus() {
+    if (megaMenuCloseTimeout) {
+      clearTimeout(megaMenuCloseTimeout);
+      megaMenuCloseTimeout = undefined;
+    }
     isMegaMenuOpen = false;
+    isMenuOpen = false;
+    mobileView = "routes";
   }
+
+  $effect(() => {
+    page.url.pathname;
+    if (megaMenuCloseTimeout) {
+      clearTimeout(megaMenuCloseTimeout);
+      megaMenuCloseTimeout = undefined;
+    }
+    isMegaMenuOpen = false;
+    isMenuOpen = false;
+    mobileView = "routes";
+  });
 
   onMount(() => {
     let active = true;
@@ -208,8 +260,22 @@
         startNavigation();
     });
 
+    const handleDocumentClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      if (isMegaMenuOpen) {
+        const container = headerElement?.querySelector(".services-nav-container");
+        if (container && !container.contains(target)) {
+          isMegaMenuOpen = false;
+        }
+      }
+    };
+
+    window.addEventListener("click", handleDocumentClick);
+
     return () => {
       active = false;
+      window.removeEventListener("click", handleDocumentClick);
       window.removeEventListener(
         "site-preloader-header-reveal",
         handlePreloaderHeaderReveal,
@@ -261,25 +327,21 @@
       {#each navigationItems as item (item.href)}
         {#if item.label === "Services"}
           <div
-            class="relative"
+            class="services-nav-container relative inline-flex items-center"
             role="none"
             onmouseenter={openMegaMenu}
             onmouseleave={closeMegaMenuWithGrace}
           >
             <a
               href={resolve(item.href)}
-              onmouseenter={openMegaMenu}
-              onclick={(event) => {
-                if (!isMegaMenuOpen) {
-                  event.preventDefault();
-                  isMegaMenuOpen = true;
-                }
+              onclick={() => {
+                closeNavigationMenus();
               }}
               aria-current={page.url.pathname === item.href
                 ? "page"
                 : undefined}
-              class:active={isMegaMenuOpen || page.url.pathname === item.href}
-              class="nav-link inline-flex items-center gap-1.5 py-2 outline-none"
+              class:active={page.url.pathname === item.href}
+              class="nav-link inline-flex items-center py-2 outline-none"
             >
               <span class="nav-label">
                 {#each ($_('nav.' + item.label.toLowerCase()) || item.label).split("") as letter, letterIndex (letterIndex)}
@@ -290,14 +352,31 @@
                   >
                 {/each}
               </span>
-              <ChevronDown
-                size={11}
-                strokeWidth={1.8}
-                class="block shrink-0 transition-transform duration-300 {isMegaMenuOpen
-                  ? 'rotate-180'
-                  : ''}"
-              />
             </a>
+            <button
+              type="button"
+              aria-label={isMegaMenuOpen ? "Close services menu" : "Open services menu"}
+              aria-expanded={isMegaMenuOpen}
+              aria-haspopup="true"
+              onclick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                if (megaMenuCloseTimeout) {
+                  clearTimeout(megaMenuCloseTimeout);
+                  megaMenuCloseTimeout = undefined;
+                }
+                isMegaMenuOpen = !isMegaMenuOpen;
+              }}
+              class="group/arrow inline-flex items-center justify-center py-2 pl-1 pr-1.5 text-inherit transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-green cursor-pointer"
+            >
+              <ChevronDown
+                size={12}
+                strokeWidth={1.8}
+                class="block shrink-0 transition-all duration-300 {isMegaMenuOpen
+                  ? 'rotate-180 text-brand-green'
+                  : 'text-brand-light/60 group-hover/arrow:text-brand-green'}"
+              />
+            </button>
             <MegaMenu isOpen={isMegaMenuOpen} onClose={closeNavigationMenus} />
           </div>
         {:else}
@@ -360,6 +439,7 @@
         onclick={() => {
           isMenuOpen = !isMenuOpen;
           isMegaMenuOpen = false;
+          mobileView = "routes";
         }}
       >
         <span class="hidden sm:inline">{isMenuOpen ? "Close" : "Menu"}</span>
@@ -374,94 +454,210 @@
     {#if isMenuOpen}
       <div
         id="mobile-navigation-panel"
-        class="navigation-panel absolute inset-x-0 border border-brand-light/15 bg-brand-dark/92 text-brand-light shadow-2xl shadow-brand-dark/35 backdrop-blur-2xl lg:hidden"
+        class="navigation-panel absolute inset-x-0 border border-brand-light/15 bg-[#141211] text-brand-light shadow-2xl shadow-black/80 lg:hidden"
       >
-        <div
-          class="flex items-center justify-between border-b border-brand-light/10 bg-brand-light/5 px-5 py-4 sm:px-7"
-        >
-          <p
-            class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
+        {#if mobileView === "routes"}
+          <div
+            class="flex items-center justify-between border-b border-brand-light/10 bg-brand-light/5 px-5 py-4 sm:px-7"
           >
-            Explore the studio
-          </p>
-          <p
-            class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-light/40"
-          >
-            SCHL · Navigation
-          </p>
-        </div>
+            <p
+              class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
+            >
+              Explore the studio
+            </p>
+            <p
+              class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-light/40"
+            >
+              SCHL · Navigation
+            </p>
+          </div>
 
-        <ol aria-label="Mobile routes" class="mobile-route-grid">
-          {#each navigationItems as item, index (item.href)}
-            <li>
-              {#if item.label === "Services"}
-                <button
-                  type="button"
-                  onclick={() => (isMegaMenuOpen = !isMegaMenuOpen)}
-                  aria-expanded={isMegaMenuOpen}
-                  class="group/link flex h-full w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-brand-light/8"
-                >
-                  <span class="flex items-baseline gap-3">
-                    <span class="font-mono text-[0.55rem] text-brand-light/35">
-                      {String(index + 1).padStart(2, "0")}
+          <ol aria-label="Mobile routes" class="mobile-route-grid">
+            {#each navigationItems as item, index (item.href)}
+              <li>
+                {#if item.label === "Services"}
+                  <div class="flex h-full w-full items-stretch justify-between">
+                    <a
+                      href={resolve(item.href)}
+                      onclick={() => {
+                        closeNavigationMenus();
+                      }}
+                      aria-current={page.url.pathname === item.href ? "page" : undefined}
+                      class="group/link flex flex-1 items-center px-6 py-5 text-left transition-colors hover:bg-brand-light/8"
+                    >
+                      <span class="flex items-baseline gap-3">
+                        <span class="font-mono text-[0.55rem] text-brand-light/35">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
+                          {$_('nav.' + item.label.toLowerCase()) || item.label}
+                        </span>
+                      </span>
+                    </a>
+                    <button
+                      type="button"
+                      aria-label="Explore services submenu"
+                      onclick={(event) => {
+                        event.stopPropagation();
+                        mobileView = "services";
+                      }}
+                      class="flex items-center justify-center px-6 border-l border-brand-light/10 text-brand-light/45 hover:text-brand-green hover:bg-brand-light/8 transition-colors cursor-pointer group/arrow"
+                    >
+                      <ChevronRight
+                        size={18}
+                        strokeWidth={1.8}
+                        class="transition-transform duration-200 group-hover/arrow:translate-x-0.5 text-brand-green"
+                      />
+                    </button>
+                  </div>
+                {:else}
+                  <a
+                    href={resolve(item.href)}
+                    onclick={() => (isMenuOpen = false)}
+                    aria-current={page.url.pathname === item.href ? "page" : undefined}
+                    class="group/link flex h-full items-center justify-between px-6 py-5 transition-colors hover:bg-brand-light/8"
+                    style="transition-delay: {index * 35}ms"
+                  >
+                    <span class="flex items-baseline gap-3">
+                      <span class="font-mono text-[0.55rem] text-brand-light/35">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
+                        {$_('nav.' + item.label.toLowerCase()) || item.label}
+                      </span>
                     </span>
-                    <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
-                      {$_('nav.' + item.label.toLowerCase()) || item.label}
-                    </span>
-                  </span>
-                  <ChevronDown
-                    size={16}
-                    strokeWidth={1.6}
-                    class="text-brand-light/35 transition-transform duration-200 {isMegaMenuOpen ? 'rotate-180' : ''}"
-                  />
-                </button>
-              {:else}
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={1.6}
+                      class="text-brand-light/35 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-brand-green"
+                    />
+                  </a>
+                {/if}
+              </li>
+            {/each}
+          </ol>
+
+          <div
+            class="mobile-utilities flex items-stretch border-t border-brand-light/10"
+          >
+            <a
+              href={resolve("/login")}
+              onclick={() => (isMenuOpen = false)}
+              class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
+            >
+              {$_('nav.login') || 'Login'} <ArrowUpRight size={14} strokeWidth={1.7} />
+            </a>
+            <div class="flex items-center justify-center px-4 py-2">
+              <LanguageSwitcher />
+            </div>
+          </div>
+        {:else if mobileView === "services"}
+          <div class="mobile-services-panel animate-in flex flex-col">
+            <!-- Submenu Header with Back Button -->
+            <div class="flex items-center justify-between border-b border-brand-light/10 bg-brand-light/5 px-5 py-3.5 sm:px-7">
+              <button
+                type="button"
+                onclick={() => (mobileView = "routes")}
+                class="inline-flex items-center gap-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-brand-green hover:text-brand-light transition-colors cursor-pointer py-1"
+              >
+                <ArrowLeft size={14} strokeWidth={2} />
+                <span>{$_('common.back') || 'Back to Menu'}</span>
+              </button>
+              <span class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-light/40">
+                SCHL · Services
+              </span>
+            </div>
+
+            <!-- Submenu Content -->
+            <div class="p-5 sm:p-7 flex flex-col gap-4">
+              <!-- Title & Overview Link -->
+              <div class="flex items-center justify-between border-b border-brand-light/8 pb-3">
+                <div>
+                  <h3 class="font-display text-xl sm:text-2xl tracking-tight text-brand-light">
+                    {$_('nav.services') || 'Our Services'}
+                  </h3>
+                  <p class="font-sans text-[0.65rem] text-brand-light/50 mt-0.5">
+                    {$_('nav.divisions') || 'Explore our divisions & capabilities'}
+                  </p>
+                </div>
                 <a
-                  href={resolve(item.href)}
-                  onclick={() => (isMenuOpen = false)}
-                  aria-current={page.url.pathname === item.href ? "page" : undefined}
-                  class="group/link flex h-full items-center justify-between px-6 py-5 transition-colors hover:bg-brand-light/8"
-                  style="transition-delay: {index * 35}ms"
+                  href={resolve("/services")}
+                  onclick={closeNavigationMenus}
+                  class="inline-flex items-center gap-1.5 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-brand-green hover:underline shrink-0"
                 >
-                  <span class="flex items-baseline gap-3">
-                    <span class="font-mono text-[0.55rem] text-brand-light/35">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
-                      {$_('nav.' + item.label.toLowerCase()) || item.label}
-                    </span>
-                  </span>
-                  <ArrowUpRight
-                    size={14}
-                    strokeWidth={1.6}
-                    class="text-brand-light/35 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-brand-green"
-                  />
+                  <span>{$_('nav.all_services') || 'All Services'}</span>
+                  <ArrowUpRight size={13} strokeWidth={2} />
                 </a>
-              {/if}
-            </li>
-          {/each}
-        </ol>
+              </div>
 
-        {#if isMegaMenuOpen}
-          <div class="mobile-mega-menu-host">
-            <MegaMenu isOpen={isMegaMenuOpen} onClose={closeNavigationMenus} />
+              <!-- Division Tabs -->
+              <div class="grid grid-cols-3 gap-2">
+                {#each mobileCategories as cat (cat.id)}
+                  <button
+                    type="button"
+                    onclick={() => (mobileActiveCategory = cat.id)}
+                    class="flex flex-col items-center justify-center gap-1.5 rounded-lg border p-2.5 text-center transition-all cursor-pointer {mobileActiveCategory === cat.id ? 'border-brand-green bg-brand-green/15 text-brand-green shadow-[0_0_14px_rgba(126,166,65,0.2)]' : 'border-brand-light/10 bg-brand-light/5 text-brand-light/60 hover:border-brand-light/20 hover:text-brand-light'}"
+                  >
+                    <cat.icon size={15} strokeWidth={1.8} />
+                    <span class="font-sans text-[0.62rem] font-bold uppercase tracking-wider leading-tight">
+                      {$_(`nav.megaCategories.${cat.key}.label`, { default: cat.label })}
+                    </span>
+                  </button>
+                {/each}
+              </div>
+
+              <!-- Services List -->
+              <div class="rounded-xl border border-brand-light/8 bg-brand-light/[0.02] p-2">
+                <ul class="divide-y divide-brand-light/5">
+                  {#each mobileCategoryServices as service, sIndex (service.slug)}
+                    <li>
+                      <a
+                        href={resolveServiceHref(service.slug)}
+                        onclick={closeNavigationMenus}
+                        class="group/svc flex items-center justify-between p-3 rounded-lg hover:bg-brand-light/6 transition-colors"
+                      >
+                        <div class="flex items-center gap-3">
+                          <span class="font-mono text-[0.65rem] font-bold text-brand-green">
+                            {String(sIndex + 1).padStart(2, "0")}
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="font-sans text-xs font-semibold uppercase tracking-wider text-brand-light group-hover/svc:text-brand-green transition-colors">
+                              {$_(`home.services.${service.slug}.title`, { default: service.title })}
+                            </span>
+                            <span class="font-sans text-[0.6rem] text-brand-light/40 mt-0.5 line-clamp-1">
+                              {service.description}
+                            </span>
+                          </div>
+                        </div>
+                        <ArrowUpRight
+                          size={13}
+                          strokeWidth={1.8}
+                          class="text-brand-light/30 group-hover/svc:text-brand-green group-hover/svc:translate-x-0.5 group-hover/svc:-translate-y-0.5 transition-all shrink-0 ml-2"
+                        />
+                      </a>
+                    </li>
+                  {/each}
+                </ul>
+              </div>
+            </div>
+
+            <!-- Utility Footer -->
+            <div
+              class="mobile-utilities flex items-stretch border-t border-brand-light/10 mt-2"
+            >
+              <a
+                href={resolve("/login")}
+                onclick={() => (isMenuOpen = false)}
+                class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
+              >
+                {$_('nav.login') || 'Login'} <ArrowUpRight size={14} strokeWidth={1.7} />
+              </a>
+              <div class="flex items-center justify-center px-4 py-2">
+                <LanguageSwitcher />
+              </div>
+            </div>
           </div>
         {/if}
-
-        <div
-          class="mobile-utilities flex items-stretch border-t border-brand-light/10"
-        >
-          <a
-            href={resolve("/login")}
-            onclick={() => (isMenuOpen = false)}
-            class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
-          >
-            {$_('nav.login') || 'Login'} <ArrowUpRight size={14} strokeWidth={1.7} />
-          </a>
-          <div class="flex items-center justify-center px-4 py-2">
-            <LanguageSwitcher />
-          </div>
-        </div>
       </div>
     {/if}
   </nav>
@@ -659,38 +855,19 @@
     display: none;
   }
 
-  .mobile-mega-menu-host {
-    position: relative;
-    z-index: 60;
-    padding: 0.75rem 1rem 1rem;
+  .mobile-services-panel {
+    animation: reveal-subpanel 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  :global(.mobile-mega-menu-host .mega-menu-panel) {
-    position: relative;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: none;
-    margin: 0;
-    padding: 1rem;
-    transform: none !important;
-    box-sizing: border-box;
-  }
-
-  :global(.mobile-mega-menu-host .mega-menu-panel > div) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
-  }
-
-  :global(.mobile-mega-menu-host .mega-menu-panel > div > div:nth-child(2)) {
-    border-inline: 0;
-    padding-inline: 0;
-  }
-
-  :global(.mobile-mega-menu-host .mega-menu-panel > div > div:last-child) {
-    min-height: 14rem;
+  @keyframes reveal-subpanel {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   .mobile-route-grid {

@@ -7,4 +7,5 @@
   eyebrow="Journal"
   description="Articles about image craft, production thinking, and studio practice will be published here when original editorial content is ready."
   canonicalPath="/blog"
+  noindex={true}
 />

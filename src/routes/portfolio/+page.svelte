@@ -3,6 +3,7 @@
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import PortfolioExactHero from "$lib/components/sections/portfolio/PortfolioExactHero.svelte";
   import PortfolioExactIntroWatermark from "$lib/components/sections/portfolio/PortfolioExactIntroWatermark.svelte";
+  import PortfolioBeforeAfter from "$lib/components/sections/portfolio/PortfolioBeforeAfter.svelte";
   import PortfolioExactStaggeredCollage from "$lib/components/sections/portfolio/PortfolioExactStaggeredCollage.svelte";
   import PortfolioExactPanorama from "$lib/components/sections/portfolio/PortfolioExactPanorama.svelte";
   import PortfolioExactTabbedMatrix from "$lib/components/sections/portfolio/PortfolioExactTabbedMatrix.svelte";
@@ -12,6 +13,12 @@
   import PortfolioExactShowreel from "$lib/components/sections/portfolio/PortfolioExactShowreel.svelte";
   import PortfolioExactStats from "$lib/components/sections/portfolio/PortfolioExactStats.svelte";
   import { siteConfig } from "$lib/config/site";
+  import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
+
+  const breadcrumbData = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Portfolio", path: "/portfolio" },
+  ]);
 
   const portfolioSchema = {
     "@context": "https://schema.org",
@@ -43,39 +50,43 @@
 />
 
 <JsonLd data={portfolioSchema} />
+<JsonLd data={breadcrumbData} />
 
 <main
   id="main-content"
   class="relative bg-brand-light min-h-screen text-brand-dark overflow-x-hidden"
 >
-  <!-- 1. Hero with artistic display title -->
+  <!-- 1. Hero with editorial display title & atmosphere -->
   <PortfolioExactHero />
 
-  <!-- 2. 3-Column Intro + Giant STUDIO watermark with centered overlapping cutout photo -->
+  <!-- 2. Studio Introduction & 3 Technical Quality Pillars -->
   <PortfolioExactIntroWatermark />
 
-  <!-- 3. Staggered Asymmetric Collage + "Performing Craft" / "Craft" watermark divider -->
+  <!-- 3. Interactive Before/After Split Inspection Slider (Raw vs Retouched) -->
+  <PortfolioBeforeAfter />
+
+  <!-- 4. Staggered Asymmetric Editorial Collage -->
   <PortfolioExactStaggeredCollage />
 
-  <!-- 4. Full-Width Panoramic Weave Texture Photo -->
+  <!-- 5. Full-Width Panoramic Craft Spread -->
   <PortfolioExactPanorama />
 
-  <!-- 5. 4-Tab Matrix with Giant "26" Callout + 2-Column Schedule Grid + "Gallery ↗" label -->
+  <!-- 6. Interactive Disciplines & Deliverables Matrix -->
   <PortfolioExactTabbedMatrix />
 
-  <!-- 6. Tight 2-Tier 7-Image Mosaic Gallery -->
+  <!-- 7. Filterable Work Archive Gallery with Lightbox -->
   <PortfolioExactMosaicGallery />
 
-  <!-- 7. Centered Manifesto Quote with Brand Leaf Emblem -->
+  <!-- 8. Authentic Studio Craft Manifesto -->
   <PortfolioExactManifesto />
 
-  <!-- 8. Sponsor & Partner Minimal Monochrome Matrix -->
+  <!-- 9. Selected Luxury Brand Partners Matrix -->
   <PortfolioExactPartners />
 
-  <!-- 9. Featured Video / Showreel Spotlight with Centered Play Button -->
+  <!-- 10. Featured Studio Showreel with Interactive Controls -->
   <PortfolioExactShowreel />
 
-  <!-- 10. 9 : 60 : 250 : 50 Numbers Row with Colons + Bottom Botanical Flourish -->
+  <!-- 11. Verified Studio Metrics (5M+, 150+, 10+, 99.8%) & Luxury Studio CTA -->
   <PortfolioExactStats />
 </main>
 

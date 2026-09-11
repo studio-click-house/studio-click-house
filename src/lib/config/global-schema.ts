@@ -1,0 +1,70 @@
+import { siteConfig } from "$lib/config/site";
+
+export const globalSchemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      description: siteConfig.description,
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+      inLanguage: "en",
+    },
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      legalName: "Studio Click House Limited",
+      alternateName: siteConfig.shortName,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/images/brand/schl-logo.png`,
+        width: 600,
+        height: 300,
+      },
+      image: `${siteConfig.url}/images/brand/schl-logo.png`,
+      description: siteConfig.description,
+      foundingDate: "2015",
+      areaServed: "Worldwide",
+      email: siteConfig.contact.email,
+      telephone: siteConfig.contact.phone,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "Level 1, West Boxnagar, Holding: 112/11, Ward: 67, Sarulia, Demra",
+        addressLocality: "Dhaka",
+        postalCode: "1361",
+        addressCountry: "BD",
+      },
+      contactPoint: siteConfig.contact.offices.map((office) => ({
+        "@type": "ContactPoint",
+        telephone: office.phone,
+        email: office.email,
+        contactType: "customer support",
+        areaServed: office.country,
+        availableLanguage: "English",
+      })),
+      sameAs: [
+        siteConfig.links.linkedin,
+        siteConfig.links.instagram,
+        siteConfig.links.facebook,
+        siteConfig.links.youtube,
+      ].filter(Boolean),
+      knowsAbout: [
+        "Image Editing",
+        "Photo Retouching",
+        "Background Removal",
+        "Clipping Path",
+        "Ghost Mannequin",
+        "Color Correction",
+        "E-commerce Photography",
+        "Video Color Grading",
+        "3D CGI Rendering",
+        "Product Photography Post-Production",
+      ],
+    },
+  ],
+};

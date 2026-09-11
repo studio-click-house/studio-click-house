@@ -118,6 +118,7 @@
             stagger: 0.12,
             ease: "power4.out",
             delay: 0.1,
+            clearProps: "all",
           });
 
           // Positioning description text
@@ -130,6 +131,7 @@
               duration: 0.9,
               ease: "power3.out",
               delay: 0.45,
+              clearProps: "all",
             },
           );
 
@@ -162,28 +164,49 @@
             );
           }
 
-          // Banner reveal animation with scrub
+          // Banner reveal animation
           if (bannerRef) {
-            gsap.fromTo(
-              bannerRef,
-              {
-                autoAlpha: 0.4,
-                scale: 0.96,
-                clipPath: "inset(5% 3% 5% 3% round 1.5rem)",
-              },
-              {
-                scrollTrigger: {
-                  trigger: bannerRef,
-                  start: "top 85%",
-                  end: "top 25%",
-                  scrub: 0.8,
+            media.add("(min-width: 1024px)", () => {
+              gsap.fromTo(
+                bannerRef,
+                {
+                  autoAlpha: 0.4,
+                  scale: 0.96,
+                  clipPath: "inset(5% 3% 5% 3% round 1.5rem)",
                 },
-                autoAlpha: 1,
-                scale: 1,
-                clipPath: "inset(0% 0% 0% 0% round 1rem)",
-                ease: "none",
-              },
-            );
+                {
+                  scrollTrigger: {
+                    trigger: bannerRef,
+                    start: "top 88%",
+                    end: "top 30%",
+                    scrub: 0.8,
+                  },
+                  autoAlpha: 1,
+                  scale: 1,
+                  clipPath: "inset(0% 0% 0% 0% round 1rem)",
+                  ease: "none",
+                },
+              );
+            });
+
+            media.add("(max-width: 1023px)", () => {
+              gsap.fromTo(
+                bannerRef,
+                { autoAlpha: 0, y: 28 },
+                {
+                  scrollTrigger: {
+                    trigger: bannerRef,
+                    start: "top 88%",
+                    once: true,
+                  },
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: 0.8,
+                  ease: "power2.out",
+                  clearProps: "all",
+                },
+              );
+            });
           }
         });
 
@@ -227,7 +250,7 @@
     <div class="pt-5">
       <div>
         <h1
-          class="mb-8 font-display text-[clamp(4.25rem,9.2vw,10.5rem)] leading-[0.78] tracking-[-0.06em]"
+          class="mb-8 font-display text-[clamp(2.75rem,8.5vw,10.5rem)] leading-[0.84] tracking-[-0.05em]"
         >
           <span class="block overflow-hidden pb-2">
             <span
@@ -282,7 +305,7 @@
     <!-- Widescreen Video Banner Frame -->
     <div
       bind:this={bannerRef}
-      class="relative mt-8 aspect-[2.35/1] w-full overflow-hidden rounded-2xl bg-brand-dark shadow-2xl md:mt-12"
+      class="relative mt-8 aspect-[16/10] sm:aspect-[2.35/1] w-full overflow-hidden rounded-2xl bg-brand-dark shadow-2xl md:mt-12"
     >
       <div
         class="pointer-events-none absolute left-1/2 top-1/2 h-[130%] w-[118%] -translate-x-1/2 -translate-y-1/2 scale-[1.06]"

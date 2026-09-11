@@ -1,232 +1,344 @@
 <script lang="ts">
-  import { X } from "lucide-svelte";
+  import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { X, ZoomIn } from "lucide-svelte";
   import { tick } from "svelte";
   import { _ } from "svelte-i18n";
 
+  let gallerySection = $state<HTMLElement | null>(null);
+
   interface GalleryItem {
+    id: string;
     src: string;
     alt: string;
     title: string;
     category: string;
+    aspect: "square" | "tall" | "wide";
   }
 
   const galleryItems: GalleryItem[] = [
-    // Top Row (4 photos)
     {
-      src: "/images/portfolio/photo-editing-showcase.png",
-      alt: "Model beauty portrait profile retouch",
-      title: "Model Beauty Profile",
-      category: "Skin Retouching",
+      id: "gal-1",
+      src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Fashion model studio beauty portrait skin retouching",
+      title: "Model Studio Beauty Retouch",
+      category: "retouching",
+      aspect: "tall",
     },
     {
-      src: "/images/work-fields/gallery/jewelry-retouching.jpg",
-      alt: "Pearl bracelet and product styling retouch",
-      title: "Jewelry Styling Detail",
-      category: "Fine Jewelry",
+      id: "gal-2",
+      src: "https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Macro diamond ring polishing and sparkle enhancement",
+      title: "Diamond Ring Luxury Retouch",
+      category: "retouching",
+      aspect: "wide",
     },
     {
-      src: "/images/about/orbit/ai-product-compositing.jpg",
-      alt: "Fashion accessory studio shoot",
-      title: "Accessory Grading",
-      category: "Color Correction",
+      id: "gal-3",
+      src: "https://images.pexels.com/photos/3989394/pexels-photo-3989394.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Glass perfume bottle isolated with natural drop shadow",
+      title: "Perfume Glassware Isolation",
+      category: "clipping-path",
+      aspect: "wide",
     },
     {
-      src: "/images/work-fields/gallery/product-retouching.jpg",
-      alt: "Perfume glass bottle reflection",
-      title: "Glassware Isolation",
-      category: "Clipping Path",
-    },
-    // Bottom Row (3 photos)
-    {
-      src: "/images/work-fields/gallery/beauty-retouching.jpg",
-      alt: "Beauty model during a professional makeup production",
-      title: "Beauty Production",
-      category: "Editorial Retouch",
+      id: "gal-4",
+      src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Fashion model posing under color corrected studio lights",
+      title: "Editorial Silk Color Story",
+      category: "color-correction",
+      aspect: "tall",
     },
     {
-      src: "/images/work-fields/gallery/fashion-color.jpg",
-      alt: "Fashion model on a color-graded studio set",
-      title: "Fashion Color Story",
-      category: "Couture Campaign",
+      id: "gal-5",
+      src: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Mechanical chronograph watch dial separated into vector paths",
+      title: "Luxury Watch Multipath Mask",
+      category: "clipping-path",
+      aspect: "square",
     },
     {
-      src: "/images/portfolio/3d-cgi-showcase-v2.jpg",
-      alt: "CGI perfume bottle with wireframe construction overlay",
-      title: "CGI Product Finish",
-      category: "3D & CGI",
+      id: "gal-6",
+      src: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1200&q=80",
+      alt: "Hollow tailored coat with invisible ghost mannequin collar composite",
+      title: "Tailored Coat Ghost Mannequin",
+      category: "ghost-mannequin",
+      aspect: "tall",
+    },
+    {
+      id: "gal-7",
+      src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Female model skincare high-end facial skin retouching",
+      title: "Skincare Luminescence Retouch",
+      category: "retouching",
+      aspect: "tall",
+    },
+    {
+      id: "gal-8",
+      src: "https://images.pexels.com/photos/1460838/pexels-photo-1460838.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "High heels luxury shoes isolated with vector clipping path",
+      title: "Footwear Vector Clipping",
+      category: "clipping-path",
+      aspect: "square",
+    },
+    {
+      id: "gal-9",
+      src: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
+      alt: "3D CGI cosmetic packaging render with studio reflections and glass caustics",
+      title: "3D CGI Cosmetic Rendering",
+      category: "cgi",
+      aspect: "square",
+    },
+    {
+      id: "gal-10",
+      src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Model wearing color corrected silk evening dress",
+      title: "Garment Hue & Swatch Shift",
+      category: "color-correction",
+      aspect: "tall",
+    },
+    {
+      id: "gal-11",
+      src: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Sneaker product isolated with clean clipping path",
+      title: "Athletic Sneaker Path Isolation",
+      category: "clipping-path",
+      aspect: "square",
+    },
+    {
+      id: "gal-12",
+      src: "https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      alt: "Black and white fashion model portrait retouch",
+      title: "Monochrome Editorial Tone",
+      category: "retouching",
+      aspect: "tall",
     },
   ];
 
+  const categories = [
+    { id: "all", label: "All Works" },
+    { id: "retouching", label: "Editorial Retouch" },
+    { id: "clipping-path", label: "Vector Clipping" },
+    { id: "color-correction", label: "Color Calibration" },
+    { id: "ghost-mannequin", label: "Ghost Mannequin" },
+    { id: "cgi", label: "3D CGI" },
+  ] as const;
+
+  let activeFilter = $state<string>("all");
   let selectedImage = $state<GalleryItem | null>(null);
-  let selectedIndex = $state<number | null>(null);
   let closeButton = $state<HTMLButtonElement | null>(null);
 
-  function openImage(item: GalleryItem, index: number) {
+  const filteredItems = $derived(
+    activeFilter === "all"
+      ? galleryItems
+      : galleryItems.filter((item) => item.category === activeFilter)
+  );
+
+  function openImage(item: GalleryItem) {
     selectedImage = item;
-    selectedIndex = index;
   }
 
   function closeImage() {
     selectedImage = null;
-    selectedIndex = null;
   }
 
   $effect(() => {
     if (!selectedImage) return;
-
-    const previousOverflow = document.body.style.overflow;
-    const previousFocus = document.activeElement;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     void tick().then(() => closeButton?.focus());
 
-    const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeImage();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeImage();
     };
-
-    window.addEventListener("keydown", handleKeydown);
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeydown);
-      document.body.style.overflow = previousOverflow;
-      if (previousFocus instanceof HTMLElement) previousFocus.focus();
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  });
+
+  $effect(() => {
+    if (!gallerySection) return;
+    let active = true;
+    let context: { revert: () => void } | undefined;
+
+    registerScrollTrigger().then((runtime) => {
+      if (!active || !runtime || !gallerySection) return;
+      const { gsap } = runtime;
+      const root = gallerySection;
+
+      context = gsap.context(() => {
+        const media = gsap.matchMedia();
+        media.add(
+          {
+            isDesktop: "(min-width: 1024px)",
+            isTablet: "(min-width: 768px) and (max-width: 1023px)",
+            isMobile: "(max-width: 767px)",
+            reduceMotion: "(prefers-reduced-motion: reduce)",
+          },
+          (ctx) => {
+            const { isDesktop, isTablet, isMobile, reduceMotion } = ctx.conditions!;
+            const header = root.querySelector(".mosaic-header-group");
+            const tiles = root.querySelectorAll(".mosaic-item");
+
+            if (reduceMotion) {
+              gsap.set([header, ...tiles].filter(Boolean), { autoAlpha: 1, y: 0 });
+              return;
+            }
+
+            if (isMobile) {
+              if (header) {
+                gsap.from(header, {
+                  y: 34,
+                  autoAlpha: 0,
+                  duration: 0.75,
+                  ease: "power2.out",
+                  clearProps: "transform,opacity",
+                  scrollTrigger: {
+                    trigger: root,
+                    start: "top 78%",
+                    toggleActions: "play none none reverse",
+                  },
+                });
+              }
+
+              tiles.forEach((tile) => {
+                gsap.from(tile, {
+                  y: 36,
+                  scale: 0.96,
+                  autoAlpha: 0,
+                  duration: 0.7,
+                  ease: "power2.out",
+                  clearProps: "transform,opacity",
+                  scrollTrigger: {
+                    trigger: tile,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                  },
+                });
+              });
+            } else {
+              const yOffset = isDesktop ? 34 : 26;
+              const duration = isDesktop ? 0.85 : 0.75;
+
+              if (header) {
+                gsap.from(header, {
+                  y: yOffset,
+                  autoAlpha: 0,
+                  duration,
+                  ease: isDesktop ? "power3.out" : "power2.out",
+                  clearProps: "transform,opacity",
+                  scrollTrigger: {
+                    trigger: root,
+                    start: isDesktop ? "top 78%" : "top 80%",
+                    toggleActions: "play none none reverse",
+                  },
+                });
+              }
+
+              tiles.forEach((tile) => {
+                gsap.from(tile, {
+                  y: yOffset,
+                  scale: 0.97,
+                  autoAlpha: 0,
+                  duration,
+                  ease: isDesktop ? "power3.out" : "power2.out",
+                  clearProps: "transform,opacity",
+                  scrollTrigger: {
+                    trigger: tile,
+                    start: "top 82%",
+                    toggleActions: "play none none reverse",
+                  },
+                });
+              });
+            }
+          }
+        );
+        return () => media.revert();
+      }, root);
+    });
+
+    return () => {
+      active = false;
+      context?.revert();
     };
   });
 </script>
 
-<!-- Section 7: Tight 2-Tier Mosaic Gallery (Exact Match to Image Gallery Grid) -->
 <section
   id="portfolio-mosaic-gallery"
+  bind:this={gallerySection}
   aria-label="Mosaic Craft Gallery"
-  class="relative w-full bg-brand-light py-16 lg:py-24"
+  class="relative w-full bg-brand-light py-20 lg:py-32"
 >
   <div class="site-shell relative z-10">
-    <!-- Top Row of Mosaic (4 photos side-by-side matching image) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
-      {#each galleryItems.slice(0, 4) as item, index (item.src)}
+    <!-- Header & Interactive Category Filters -->
+    <div class="mosaic-header-group flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 lg:mb-16">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-green mb-3 block">
+          Work Archive
+        </span>
+        <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1] tracking-tight">
+          Selected Productions
+        </h2>
+      </div>
+
+      <!-- Clean Editorial Filter Tabs (Horizontally scrollable on mobile) -->
+      <nav class="flex overflow-x-auto no-scrollbar sm:flex-wrap gap-4 sm:gap-6 border-b border-brand-dark/10 pb-2 w-full md:w-auto" aria-label="Portfolio Category Filter">
+        {#each categories as cat (cat.id)}
+          <button
+            type="button"
+            onclick={() => (activeFilter = cat.id)}
+            class="font-mono text-xs uppercase tracking-wider pb-1 transition-colors cursor-pointer border-b-2 -mb-[9px] shrink-0 {activeFilter === cat.id ? 'border-brand-green text-brand-dark font-bold' : 'border-transparent text-brand-dark/50 hover:text-brand-dark'}"
+            aria-pressed={activeFilter === cat.id}
+          >
+            {cat.label}
+          </button>
+        {/each}
+      </nav>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      {#each filteredItems as item (item.id)}
         <button
           type="button"
-          onclick={() => openImage(item, index)}
-          class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left"
-          aria-label="View {$_(`portfolio.mosaic.items.${index}.title`) || item.title}"
+          onclick={() => openImage(item)}
+          class="group relative overflow-hidden rounded-2xl border border-brand-dark/10 bg-white text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300"
+          aria-label="View {item.title}"
         >
           <img
             src={item.src}
             alt={item.alt}
             loading="lazy"
             decoding="async"
-            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          <div
-            class="absolute inset-0 bg-brand-dark/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-white"
-          >
-            <span
-              class="font-mono text-[9px] uppercase tracking-wider text-brand-green font-semibold"
-            >
-              {$_(`portfolio.mosaic.items.${index}.category`) || item.category}
-            </span>
-            <span class="font-display text-xs sm:text-sm font-normal">
-              {$_(`portfolio.mosaic.items.${index}.title`) || item.title}
-            </span>
+
+          <!-- Editorial Gradient Overlay on Hover (Clean, No Floating Circular Pills) -->
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-brand-green font-semibold block mb-1">
+                {item.category.replace("-", " ")}
+              </span>
+              <h3 class="font-display text-lg font-normal text-white">
+                {item.title}
+              </h3>
+            </div>
           </div>
         </button>
       {/each}
     </div>
-
-    <!-- Bottom Row of Mosaic (3 photos: narrow portrait, wide landscape, square matching image) -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4">
-      <!-- Item 1: Narrow Portrait (3 cols) -->
-      <button
-        type="button"
-        onclick={() => openImage(galleryItems[4], 4)}
-        class="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
-        aria-label="View {$_('portfolio.mosaic.items.4.title') || galleryItems[4].title}"
-      >
-        <img
-          src={galleryItems[4].src}
-          alt={galleryItems[4].alt}
-          loading="lazy"
-          decoding="async"
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div
-          class="absolute inset-0 bg-brand-dark/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-white"
-        >
-          <span
-            class="font-mono text-[9px] uppercase tracking-wider text-brand-green font-semibold"
-          >
-            {$_('portfolio.mosaic.items.4.category') || galleryItems[4].category}
-          </span>
-          <span class="font-display text-xs sm:text-sm font-normal">
-            {$_('portfolio.mosaic.items.4.title') || galleryItems[4].title}
-          </span>
-        </div>
-      </button>
-
-      <!-- Item 2: Wide Landscape (6 cols) -->
-      <button
-        type="button"
-        onclick={() => openImage(galleryItems[5], 5)}
-        class="group relative aspect-[16/9] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-6"
-        aria-label="View {$_('portfolio.mosaic.items.5.title') || galleryItems[5].title}"
-      >
-        <img
-          src={galleryItems[5].src}
-          alt={galleryItems[5].alt}
-          loading="lazy"
-          decoding="async"
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div
-          class="absolute inset-0 bg-brand-dark/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white"
-        >
-          <span
-            class="font-mono text-[10px] uppercase tracking-wider text-brand-green font-semibold"
-          >
-            {$_('portfolio.mosaic.items.5.category') || galleryItems[5].category}
-          </span>
-          <span class="font-display text-base sm:text-lg font-normal">
-            {$_('portfolio.mosaic.items.5.title') || galleryItems[5].title}
-          </span>
-        </div>
-      </button>
-
-      <!-- Item 3: Square/Standard (3 cols) -->
-      <button
-        type="button"
-        onclick={() => openImage(galleryItems[6], 6)}
-        class="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light text-left md:col-span-3 md:h-full md:aspect-auto"
-        aria-label="View {$_('portfolio.mosaic.items.6.title') || galleryItems[6].title}"
-      >
-        <img
-          src={galleryItems[6].src}
-          alt={galleryItems[6].alt}
-          loading="lazy"
-          decoding="async"
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div
-          class="absolute inset-0 bg-brand-dark/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-white"
-        >
-          <span
-            class="font-mono text-[9px] uppercase tracking-wider text-brand-green font-semibold"
-          >
-            {$_('portfolio.mosaic.items.6.category') || galleryItems[6].category}
-          </span>
-          <span class="font-display text-xs sm:text-sm font-normal">
-            {$_('portfolio.mosaic.items.6.title') || galleryItems[6].title}
-          </span>
-        </div>
-      </button>
-    </div>
   </div>
 </section>
 
-<!-- Image Lightbox Modal -->
-{#if selectedImage && selectedIndex !== null}
+<!-- Lightbox Modal -->
+{#if selectedImage}
   <div
     role="dialog"
     aria-modal="true"
-    aria-label="{$_(`portfolio.mosaic.items.${selectedIndex}.title`) || selectedImage.title} preview"
+    aria-label="{selectedImage.title} preview"
     class="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark/90 p-4 sm:p-6 backdrop-blur-md"
     tabindex="-1"
   >
@@ -239,39 +351,40 @@
     ></button>
 
     <div
-      class="relative z-10 flex max-h-[90vh] max-w-4xl flex-col items-center overflow-hidden rounded-2xl bg-brand-dark border border-brand-light/10 shadow-2xl"
+      class="relative z-10 flex max-h-[92vh] max-w-5xl w-full flex-col items-center overflow-hidden rounded-3xl bg-brand-dark border border-white/15 shadow-2xl"
     >
       <button
         bind:this={closeButton}
         type="button"
         onclick={closeImage}
-        class="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-brand-dark/80 text-brand-light hover:bg-brand-green hover:text-brand-dark transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-green"
+        class="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white hover:bg-brand-green hover:text-brand-dark transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-green cursor-pointer"
         aria-label="{$_('portfolio.mosaic.closeModal') || 'Close preview'}"
       >
         <X class="h-5 w-5" />
       </button>
 
-      <div class="max-h-[75vh] w-full overflow-hidden bg-brand-dark/50">
+      <div class="max-h-[75vh] w-full overflow-hidden bg-black/40 flex items-center justify-center p-4">
         <img
           src={selectedImage.src}
           alt={selectedImage.alt}
-          class="h-full w-full object-contain max-h-[75vh]"
+          class="h-full w-full object-contain max-h-[72vh] rounded-xl"
         />
       </div>
 
       <div
-        class="flex w-full items-center justify-between border-t border-brand-light/10 bg-brand-dark px-6 py-4 text-brand-light"
+        class="flex w-full items-center justify-between border-t border-white/10 bg-brand-dark px-6 py-4 text-brand-light"
       >
         <div>
           <span
             class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold"
           >
-            {$_(`portfolio.mosaic.items.${selectedIndex}.category`) || selectedImage.category}
+            {selectedImage.category.replace("-", " ")}
           </span>
-          <h3 class="font-display text-lg font-normal text-brand-light">
-            {$_(`portfolio.mosaic.items.${selectedIndex}.title`) || selectedImage.title}
+          <h3 class="font-display text-xl font-normal text-white">
+            {selectedImage.title}
           </h3>
         </div>
+        <span class="font-mono text-xs text-brand-light/50">Studio Click House Archive</span>
       </div>
     </div>
   </div>

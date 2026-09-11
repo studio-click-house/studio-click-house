@@ -132,13 +132,15 @@
       context = gsap.context(() => {
         gsap.from(".pricing-container-reveal", {
           opacity: 0,
-          y: 40,
-          duration: 0.85,
-          ease: "power3.out",
+          y: 28,
+          duration: 0.65,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: "#pricing-cards-section",
-            start: "top 80%",
+            start: "top 90%",
+            once: true,
           },
+          clearProps: "all",
         });
       });
     });
@@ -152,39 +154,41 @@
 
 <div id="pricing-cards-section" class="relative bg-brand-light text-brand-dark">
   <div class="site-shell">
-    <!-- Unified 4-Column Grid Structure -->
+    <!-- Responsive Grid: 1 col on mobile, 2 cols on tablet/iPad, 4 cols on desktop -->
     <div
-      class="pricing-container-reveal relative w-full bg-white border border-brand-dark/10 rounded-[2rem] grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-brand-dark/10 shadow-sm z-10"
+      class="pricing-container-reveal relative w-full bg-brand-dark/10 border border-brand-dark/10 rounded-[1.5rem] sm:rounded-[2rem] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden shadow-sm z-10"
     >
       {#each plans as plan, planIdx (plan.id)}
         <!-- svelte-ignore a11y_no_static_element_interactions -->
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
         <div
           onmouseenter={() => (activePlanId = plan.id)}
-          class="relative flex flex-col justify-between p-8 md:p-10 transition-all duration-300 ease-out border-2 {
+          onclick={() => (activePlanId = plan.id)}
+          class="relative flex flex-col justify-between p-6 sm:p-7 xl:p-8 transition-all duration-300 ease-out bg-white {
             activePlanId === plan.id
-              ? 'scale-y-[1.03] scale-x-[1.01] z-30 bg-white border-brand-green rounded-[1.75rem] shadow-2xl'
-              : 'bg-transparent border-transparent z-10'
+              ? 'z-20 ring-2 ring-brand-green shadow-lg'
+              : 'z-10 hover:bg-brand-light/30'
           }"
         >
           <div>
             <!-- Header Solid Black Badge Block -->
             <div
-              class="w-full bg-brand-dark text-brand-light text-center py-4 px-6 rounded-xl font-mono text-[0.7rem] font-bold uppercase tracking-wider mb-8 flex items-center justify-center min-h-[70px] shadow-xs"
+              class="w-full bg-brand-dark text-brand-light text-center py-3.5 px-3 sm:px-4 rounded-xl font-mono text-[0.68rem] sm:text-[0.72rem] font-bold uppercase tracking-wider mb-6 flex items-center justify-center min-h-[58px] sm:min-h-[66px] shadow-xs"
             >
               {$_(`pricing.packages.plans.${planIdx}.name`) || plan.name}
             </div>
 
             <!-- Description -->
-            <p class="text-xs text-brand-dark/55 leading-relaxed mb-6 font-sans">
+            <p class="text-xs text-brand-dark/65 leading-relaxed mb-6 font-sans">
               {$_(`pricing.packages.plans.${planIdx}.description`) || plan.description}
             </p>
 
             <!-- Services & Prices Dashed List -->
-            <div class="mb-8">
+            <div class="mb-6 sm:mb-8">
               <ul class="space-y-0.5">
-              {#each plan.services as svc, svcIdx (`${svcIdx}-${svc.name}`)}
-                  <li class="flex items-center justify-between py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
-                    <span class="font-medium text-left pr-2">{$_(`pricing.packages.plans.${planIdx}.services.${svcIdx}.name`) || svc.name}</span>
+                {#each plan.services as svc, svcIdx (`${svcIdx}-${svc.name}`)}
+                  <li class="flex items-center justify-between gap-2 py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
+                    <span class="font-medium text-left pr-1 min-w-0 break-words leading-snug">{$_(`pricing.packages.plans.${planIdx}.services.${svcIdx}.name`) || svc.name}</span>
                     <span class="font-mono font-bold text-brand-green shrink-0">{svc.price}</span>
                   </li>
                 {/each}
@@ -192,8 +196,8 @@
             </div>
 
             <!-- Guarantees Checklist -->
-            <ul class="space-y-3 mb-8">
-            {#each plan.features as feature, featureIdx (`${featureIdx}-${feature}`)}
+            <ul class="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
+              {#each plan.features as feature, featureIdx (`${featureIdx}-${feature}`)}
                 <li class="flex items-start gap-2.5 text-xs text-brand-dark/75 font-mono">
                   <div
                     class="w-4 h-4 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-0.5"
@@ -209,10 +213,10 @@
           <!-- Button -->
           <a
             href={resolve(plan.buttonHref as "/contact")}
-            class="w-full py-3.5 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border {
+            class="min-h-[44px] w-full py-3 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border cursor-pointer {
               activePlanId === plan.id
-                ? 'bg-brand-green text-brand-light border-brand-green'
-                : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark'
+                ? 'bg-brand-green text-brand-light border-brand-green shadow-xs'
+                : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark hover:bg-brand-dark/10'
             }"
           >
             <span>{$_('pricing.packages.orderNow') || plan.buttonText}</span>

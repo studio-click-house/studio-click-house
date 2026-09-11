@@ -203,7 +203,7 @@
                   ? "40"
                   : "20"}
               bind:value={volume}
-              class="w-full accent-brand-green bg-brand-dark/15 h-1 rounded-lg cursor-pointer outline-none"
+              class="w-full accent-brand-green bg-brand-dark/15 h-2 rounded-lg cursor-pointer outline-none"
             />
             <div
               class="flex justify-between text-xs font-mono text-brand-dark/55 mt-3"
@@ -221,19 +221,19 @@
 
           <!-- Complexity -->
           <div
-            class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5"
+            class="rounded-xl border border-brand-dark/12 bg-brand-paper p-4 sm:p-5"
           >
-            <h3 class="mb-4 text-sm font-semibold text-brand-dark">
+            <h3 class="mb-3 sm:mb-4 text-sm font-semibold text-brand-dark">
               {$_('pricing.calculator.productionComplexity') || 'Production Complexity'}
             </h3>
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
               {#each pricingPageData.calculator.complexityOptions as option, index (option.label)}
                 <button
                   type="button"
                   class={cn(
-                    "py-2.5 rounded-[0.55rem] font-mono text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer text-center",
+                    "py-2 sm:py-2.5 px-1 sm:px-2 rounded-[0.55rem] font-mono text-[0.68rem] sm:text-xs uppercase tracking-tight sm:tracking-wider transition-all duration-200 cursor-pointer text-center",
                     selectedComplexity === index
-                      ? "bg-brand-dark text-brand-light font-bold"
+                      ? "bg-brand-dark text-brand-light font-bold shadow-xs"
                       : "border border-brand-dark/15 hover:bg-brand-dark/5 text-brand-dark/75",
                   )}
                   onclick={() => (selectedComplexity = index)}
@@ -249,16 +249,16 @@
         </div>
 
         <!-- Priority / Turnaround -->
-        <div class="rounded-xl border border-brand-dark/12 bg-brand-paper p-5">
-          <h3 class="mb-4 text-sm font-semibold text-brand-dark">
+        <div class="rounded-xl border border-brand-dark/12 bg-brand-paper p-4 sm:p-5">
+          <h3 class="mb-3 sm:mb-4 text-sm font-semibold text-brand-dark">
             {$_('pricing.calculator.deliveryPriority') || 'Delivery Priority'}
           </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
             {#each pricingPageData.calculator.turnaroundOptions as option, index (option.label)}
               <button
                 type="button"
                 class={cn(
-                  "p-3.5 rounded-[0.55rem] text-left border flex flex-col justify-between transition-all duration-200 cursor-pointer",
+                  "p-3 sm:p-3.5 rounded-[0.55rem] text-left border flex flex-col justify-between transition-all duration-200 cursor-pointer",
                   selectedTurnaround === index
                     ? "border-brand-dark bg-brand-dark text-brand-light font-semibold shadow-sm"
                     : "border-brand-dark/15 text-brand-dark/75 hover:border-brand-dark/30 bg-transparent",
@@ -284,9 +284,9 @@
         </div>
       </div>
 
-      <!-- Live estimate summary -->
+      <!-- Live estimate summary (sticky on desktop/laptop) -->
       <div
-        class="border-t border-brand-dark/10 bg-brand-paper p-6 sm:p-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:p-10"
+        class="border-t border-brand-dark/10 bg-brand-paper p-6 sm:p-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:p-8 xl:p-10 lg:sticky lg:top-24 lg:self-start"
       >
         <div class="flex h-full flex-col">
           <div
@@ -315,7 +315,7 @@
           <div class="py-8 border-b border-brand-dark/15">
             <div class="flex items-baseline gap-2">
               <span
-                class="font-display text-5xl font-bold tracking-tight text-brand-dark"
+                class="font-display text-4xl sm:text-5xl font-bold tracking-tight text-brand-dark"
               >
                 ${animatedPrice}
               </span>

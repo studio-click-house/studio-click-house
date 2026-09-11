@@ -39,35 +39,39 @@
             duration: 0.85,
             stagger: 0.08,
             ease: "power3.out",
+            clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 72%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           });
 
-          const galleryImages = gsap.utils.toArray<HTMLElement>(
-            ".standards-gallery-image",
-          );
-
-          galleryImages.forEach((image, index) => {
-            const direction = index % 2 === 0 ? 1 : -1;
-
-            gsap.fromTo(
-              image,
-              { yPercent: 7 * direction, scale: 1.08 },
-              {
-                yPercent: -7 * direction,
-                scale: 1.01,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: section,
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: true,
-                },
-              },
+          // Desktop-only image parallax scrub to keep touch scrolling lightweight on mobile & iPad
+          media.add("(min-width: 1024px)", () => {
+            const galleryImages = gsap.utils.toArray<HTMLElement>(
+              ".standards-gallery-image",
             );
+
+            galleryImages.forEach((image, index) => {
+              const direction = index % 2 === 0 ? 1 : -1;
+
+              gsap.fromTo(
+                image,
+                { yPercent: 7 * direction, scale: 1.08 },
+                {
+                  yPercent: -7 * direction,
+                  scale: 1.01,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: section,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                  },
+                },
+              );
+            });
           });
         });
 

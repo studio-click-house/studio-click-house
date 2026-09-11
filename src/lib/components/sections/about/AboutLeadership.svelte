@@ -70,6 +70,7 @@
   }
 
   function handlePointerDown(event: PointerEvent) {
+    if (event.pointerType === "touch") return;
     if (!carouselRef) return;
     isDragging = true;
     startX = event.pageX - carouselRef.offsetLeft;
@@ -84,7 +85,6 @@
 
   function handlePointerMove(event: PointerEvent) {
     if (!isDragging || !carouselRef) return;
-    event.preventDefault();
     const x = event.pageX - carouselRef.offsetLeft;
     const walk = (x - startX) * 1.6;
     carouselRef.scrollLeft = scrollLeft - walk;
@@ -121,49 +121,54 @@
             ".leadership-header-reveal",
             { autoAlpha: 0, y: 30 },
             {
-              scrollTrigger: { trigger: sectionRef, start: "top 80%" },
+              scrollTrigger: { trigger: sectionRef, start: "top 88%", once: true },
               autoAlpha: 1,
               y: 0,
               duration: 0.8,
               stagger: 0.1,
               ease: "power2.out",
+              clearProps: "all",
             },
           );
 
           gsap.fromTo(
             ".leader-card",
-            { autoAlpha: 0, y: 40, scale: 0.97 },
+            { autoAlpha: 0, y: 35, scale: 0.98 },
             {
               scrollTrigger: {
                 trigger: ".leadership-grid",
-                start: "top 80%",
+                start: "top 88%",
+                once: true,
               },
               autoAlpha: 1,
               y: 0,
               scale: 1,
               duration: 0.8,
-              stagger: 0.15,
+              stagger: 0.12,
               ease: "power3.out",
+              clearProps: "all",
             },
           );
 
-          const portraits =
-            gsap.utils.toArray<HTMLElement>(".leader-media img");
-          portraits.forEach((portrait) => {
-            gsap.fromTo(
-              portrait,
-              { yPercent: -4 },
-              {
-                scrollTrigger: {
-                  trigger: portrait.closest(".leader-card"),
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: 0.7,
+          media.add("(min-width: 1024px)", () => {
+            const portraits =
+              gsap.utils.toArray<HTMLElement>(".leader-media img");
+            portraits.forEach((portrait) => {
+              gsap.fromTo(
+                portrait,
+                { yPercent: -4 },
+                {
+                  scrollTrigger: {
+                    trigger: portrait.closest(".leader-card"),
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.7,
+                  },
+                  yPercent: 4,
+                  ease: "none",
                 },
-                yPercent: 4,
-                ease: "none",
-              },
-            );
+              );
+            });
           });
         });
       }, sectionRef);
@@ -289,7 +294,7 @@
           onpointercancel={handlePointerUp}
           onmouseenter={stopAutoplay}
           onmouseleave={startAutoplay}
-          class="flex gap-6 overflow-x-auto scroll-smooth pb-4 snap-x snap-proximity select-none cursor-grab active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+          class="flex gap-6 overflow-x-auto scroll-smooth pb-4 snap-x snap-proximity select-none cursor-grab active:cursor-grabbing touch-pan-y [&::-webkit-scrollbar]:hidden"
           style="scrollbar-width: none; -ms-overflow-style: none;"
         >
           {#each slideMembers as member, index (member.id)}
