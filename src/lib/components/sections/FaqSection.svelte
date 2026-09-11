@@ -169,7 +169,7 @@
 <section
   bind:this={section}
   id="faq"
-  aria-labelledby="faq-title"
+  aria-labelledby="faq-section-title"
   class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
 >
   <div class="site-shell relative z-10">

@@ -4,27 +4,27 @@
 
 ## Canonical Pages
 
-- Homepage: https://studioclickhouse.com/
-- About: https://studioclickhouse.com/about
-- Services: https://studioclickhouse.com/services
-- Portfolio: https://studioclickhouse.com/portfolio
-- Pricing: https://studioclickhouse.com/pricing
-- Contact: https://studioclickhouse.com/contact
-- Events: https://studioclickhouse.com/events
-- CSR: https://studioclickhouse.com/csr
-- Careers: https://studioclickhouse.com/careers
+- [Homepage](https://studioclickhouse.com/)
+- [About](https://studioclickhouse.com/about)
+- [Services](https://studioclickhouse.com/services)
+- [Portfolio](https://studioclickhouse.com/portfolio)
+- [Pricing](https://studioclickhouse.com/pricing)
+- [Contact](https://studioclickhouse.com/contact)
+- [Events](https://studioclickhouse.com/events)
+- [CSR](https://studioclickhouse.com/csr)
+- [Careers](https://studioclickhouse.com/careers)
 
 ## Service Categories
 
 ### Image Editing
-- Background Removal: https://studioclickhouse.com/services/background-remove
-- Clipping Path: https://studioclickhouse.com/services/clipping-path
-- Ghost Mannequin: https://studioclickhouse.com/services/ghost-mannequin
-- Editorial Retouching: https://studioclickhouse.com/services/editorial-retouching
-- E-commerce Retouching: https://studioclickhouse.com/services/ecommerce-retouching
-- Jewelry Retouching: https://studioclickhouse.com/services/jewelry-retouching
-- Color Correction: https://studioclickhouse.com/services/color-correction
-- AI Photo Retouch: https://studioclickhouse.com/services/ai-retouch
+- [Background Removal](https://studioclickhouse.com/services/background-remove)
+- [Clipping Path](https://studioclickhouse.com/services/clipping-path)
+- [Ghost Mannequin](https://studioclickhouse.com/services/ghost-mannequin)
+- [Editorial Retouching](https://studioclickhouse.com/services/editorial-retouching)
+- [E-commerce Retouching](https://studioclickhouse.com/services/ecommerce-retouching)
+- [Jewelry Retouching](https://studioclickhouse.com/services/jewelry-retouching)
+- [Color Correction](https://studioclickhouse.com/services/color-correction)
+- [AI Photo Retouch](https://studioclickhouse.com/services/ai-retouch)
 
 ### Video Post-Production
 - Commercial Editing
@@ -56,4 +56,4 @@
 
 ## Detailed Documentation
 
-For comprehensive service descriptions, file specifications, and workflow details, see: https://studioclickhouse.com/llms-full.txt
+For comprehensive service descriptions, file specifications, and workflow details, see [the full documentation](https://studioclickhouse.com/llms-full.txt).

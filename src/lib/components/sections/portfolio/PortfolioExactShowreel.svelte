@@ -124,7 +124,7 @@
         loop
         muted
         playsinline
-        preload="auto"
+        preload="metadata"
         class="h-full w-full object-cover object-center"
         aria-label="Studio Click House commercial and editorial video showcase"
       >

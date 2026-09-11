@@ -12,8 +12,6 @@ const staticPaths: { path: string; changefreq: string; priority: string }[] = [
   { path: "/csr", changefreq: "yearly", priority: "0.4" },
   { path: "/careers", changefreq: "monthly", priority: "0.5" },
   { path: "/contact", changefreq: "monthly", priority: "0.8" },
-  { path: "/privacy", changefreq: "yearly", priority: "0.3" },
-  { path: "/terms", changefreq: "yearly", priority: "0.3" },
 ];
 
 export const GET: RequestHandler = () => {

@@ -601,6 +601,7 @@
             data-shape={card.shape}
             class="orbit-card-item absolute rounded-2xl overflow-hidden cursor-pointer"
             role="button"
+            aria-label={$_(`home.aboutOrbit.cards.${card.id}.title`) || card.title}
             tabindex="0"
             onclick={() => onCardClick(index)}
             onkeydown={(e) => {

@@ -87,7 +87,7 @@
     loop
     muted
     playsinline
-    preload="auto"
+    preload="metadata"
     class="absolute inset-0 h-full w-full object-cover object-center scale-105 opacity-60"
     aria-label="Studio Click House high-fashion post-production studio showcase"
   >
