@@ -40,7 +40,7 @@ export const pricingCategories: PricingCategory[] = [
         basePrice: 3.50,
         unit: "image",
         description: "Combining multiple garment frames for a hollow-mannequin fit.",
-        features: ["Seamless neckline/cuff merging", "Interior fabric reconstruction", "Wrinkle softening & alignment", "Consistent symmetrical shaping"]
+        features: ["Neckline and cuff merging", "Interior fabric reconstruction", "Wrinkle softening and alignment", "Consistent garment shaping"]
       },
       {
         name: "Ecommerce Retouching",
@@ -63,7 +63,7 @@ export const pricingCategories: PricingCategory[] = [
         slug: "editorial-retouching",
         basePrice: 15.00,
         unit: "image",
-        description: "Bespoke lookbook, advertising, and high-fashion portrait finishing.",
+        description: "Lookbook, advertising, and high-fashion portrait finishing.",
         features: ["Frequency separation skin work", "Dodge & burn color balancing", "Garment styling & crease control", "Creative color grading & mood alignment"]
       }
     ]
@@ -85,7 +85,7 @@ export const pricingCategories: PricingCategory[] = [
         slug: "color-grading",
         basePrice: 90.00,
         unit: "video",
-        description: "Tonal matching, exposure correction, and bespoke look development.",
+        description: "Tonal matching, exposure correction, and look development.",
         features: ["LUT development & matching", "Skin tone preservation", "Secondary color corrections", "Cohesive look across multiple clips"]
       },
       {
@@ -94,7 +94,7 @@ export const pricingCategories: PricingCategory[] = [
         basePrice: 150.00,
         unit: "video",
         description: "Full-scale storytelling, narrative edits, sound design, and finishing.",
-        features: ["Creative pacing & assembly", "Sound design & audio mixing", "Bespoke text motion graphics", "Multiple revisions & aspect ratios"]
+        features: ["Creative pacing and assembly", "Sound design and audio mixing", "Custom text motion graphics", "Multiple revisions and aspect ratios"]
       }
     ]
   },
@@ -116,7 +116,7 @@ export const pricingCategories: PricingCategory[] = [
         basePrice: 120.00,
         unit: "asset",
         description: "Custom PBR texture mapping (roughness, metalness, normal).",
-        features: ["Authentic glass, metal, fabric", "Up to 4K resolution maps", "Seamless procedural textures", "Material tuning for targeted engines"]
+        features: ["Glass, metal, and fabric materials", "Up to 4K resolution maps", "Procedural textures", "Material tuning for target engines"]
       },
       {
         name: "CGI Rendering",
@@ -124,7 +124,7 @@ export const pricingCategories: PricingCategory[] = [
         basePrice: 180.00,
         unit: "render",
         description: "Photorealistic camera composition, studio lighting, and staging.",
-        features: ["Studio lighting setup", "Bespoke background staging", "Multiple camera angles", "Post-render retouching included"]
+        features: ["Studio lighting setup", "Custom background staging", "Multiple camera angles", "Post-render retouching included"]
       }
     ]
   },
@@ -138,7 +138,7 @@ export const pricingCategories: PricingCategory[] = [
         basePrice: 0.80,
         unit: "image",
         description: "AI-driven background replacement and scene composition.",
-        features: ["High-fidelity blending", "Bespoke style matching", "Upscaled output"]
+        features: ["High-fidelity blending", "Style matching", "Upscaled output"]
       },
       {
         name: "AI Product Relighting",
@@ -161,7 +161,7 @@ export const pricingCategories: PricingCategory[] = [
         slug: "ai-face-swap",
         basePrice: 1.50,
         unit: "image",
-        description: "Seamless matching of headshots and facial profiles.",
+        description: "Consistent matching of headshots and facial profiles.",
         features: ["Natural lighting match", "Consistent angle blending", "Facial hair/makeup matching"]
       },
       {
@@ -178,7 +178,7 @@ export const pricingCategories: PricingCategory[] = [
         basePrice: 1.00,
         unit: "image",
         description: "Tileable textures and custom fabric generation.",
-        features: ["Seamless tiling", "Material colorways", "Texture details"]
+        features: ["Tileable textures", "Material colorways", "Texture details"]
       }
     ]
   }

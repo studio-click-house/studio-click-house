@@ -13,6 +13,8 @@
 - **Headquarters**: Level 1, West Boxnagar, Holding: 112/11, Demra, Dhaka-1361, Bangladesh
 - **Website**: https://studioclickhouse.com
 - **Email**: info@studioclickhouse.com
+- **Standard image turnaround**: typically 12–24 hours when scope and volume allow; rush delivery is agreed per project.
+- **Trial**: free trial edits are available on sample images before a full batch begins.
 
 ## Global Office Locations
 
@@ -43,12 +45,14 @@
 - **Who it's for**: E-commerce brands, retailers, marketplaces, fashion studios
 - **Accepted formats**: PSD, TIFF, JPEG, PNG, RAW (CR2, NEF, ARW)
 - **Output**: Transparent PNG, white/custom background, web-ready JPEG
+- **Turnaround and QA**: Standard image work is commonly planned in a 12–24 hour window; every delivery receives artist and senior review.
 
 #### Clipping Path
 - **URL**: https://studioclickhouse.com/services/clipping-path
 - **What**: Precision hand-drawn vector bezier paths using Photoshop pen tool for pixel-perfect subject outlines
 - **Who it's for**: Product photographers, catalog studios, packaging designers
 - **Types**: Simple, compound, complex, super-complex multi-path
+- **Accepted formats**: PSD, PSB, TIFF, JPEG, PNG, and RAW files when the source requires it
 
 #### Ghost Mannequin (Invisible Mannequin / Neck Joint)
 - **URL**: https://studioclickhouse.com/services/ghost-mannequin
@@ -79,6 +83,14 @@
 - **URL**: https://studioclickhouse.com/services/ai-retouch
 - **What**: AI-assisted editing combined with human quality assurance for rapid, high-quality bulk image processing
 - **Who it's for**: High-volume e-commerce operations, marketplaces, studios needing fast turnaround
+
+### File formats and delivery
+
+SCHL accepts RAW files including CR2, NEF, ARW, and DNG, as well as PSD, PSB, TIFF, JPEG, and PNG files where suitable for the job. Final delivery format, color profile, naming, folder structure, and transfer method are agreed in the brief.
+
+### Volume and quality control
+
+Published production capacity includes 2,000+ image edits per day and 3,000+ garments per week. Capacity depends on complexity, references, and deadline. Each delivery passes an artist review and a senior quality-control review covering masks and paths, retouching, color consistency, file naming, and export settings.
 
 ### 2. Video Post-Production Services
 

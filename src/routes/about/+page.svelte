@@ -30,8 +30,8 @@
 </script>
 
 <PageMeta
-  title="About Us | Studio Click House — Dhaka Post-Production"
-  description="Discover the journey, team, and values of Studio Click House, a premier photo retouching, video color grading, and custom 3D CGI production studio based in Dhaka, Bangladesh."
+  title="About Studio Click House | SCHL"
+  description="Meet the team behind Studio Click House, a Dhaka-based post-production studio providing photo retouching, color grading, and 3D CGI worldwide."
   canonicalPath="/about"
 />
 

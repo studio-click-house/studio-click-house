@@ -44,8 +44,8 @@
 </script>
 
 <PageMeta
-  title="Portfolio | Selected Post-Production Work — Studio Click House"
-  description="Explore the Studio Click House portfolio showcasing selected work in luxury fashion retouching, pen path clipping, background isolation, and 3D CGI renders."
+  title="Retouching & CGI Portfolio | SCHL"
+  description="See selected SCHL work across fashion retouching, clipping paths, background removal, color correction, ghost mannequin, and 3D CGI."
   canonicalPath="/portfolio"
 />
 

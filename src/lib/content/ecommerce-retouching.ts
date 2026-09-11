@@ -56,7 +56,7 @@ export const ecommerceRetouchingPage: ServicePageData = {
   slug: "ecommerce-retouching",
   seo: {
     title:
-      "E-Commerce Product Retouching Service | High-Volume Catalog Editing — Studio Click House",
+      "E-commerce Product Retouching | Studio Click House",
     description:
       "High-volume e-commerce product image retouching by Studio Click House. Dust & scratch removal, white background compliance, color matching, and 24/7 overnight batch delivery.",
   },
@@ -74,7 +74,7 @@ export const ecommerceRetouchingPage: ServicePageData = {
   intro: {
     heading: "What is professional e-commerce retouching?",
     paragraphs: [
-      "In modern digital retail, your product photography is your salesperson. E-commerce retouching cleans up studio imperfections—micro-dust, sensor spots, scuffs, shipping creases, and reflections—while standardizing crop dimensions, margins, and color across thousands of SKUs. Our 24/7 production studio operates multi-shift teams to deliver flawless, conversion-optimized visuals that lower return rates and build customer trust.",
+      "E-commerce retouching cleans dust, sensor spots, scuffs, creases, and unwanted reflections while standardizing crop, margins, and color across product SKUs. Our multi-shift production team supports large catalog batches and agreed deadlines.",
     ],
     stages: [
       {
@@ -98,7 +98,7 @@ export const ecommerceRetouchingPage: ServicePageData = {
     ],
   },
   beforeAfter: {
-    heading: "See the catalog-ready transformation.",
+    heading: "See the catalog-ready finish",
     description:
       "Drag the slider to inspect how raw studio packshots are polished, cleaned of dust, and matched to strict marketplace guidelines.",
     beforeSrc: ecommerceRetouchingMedia.comparisonOriginal.src,
@@ -112,7 +112,7 @@ export const ecommerceRetouchingPage: ServicePageData = {
     caption: "Drag to compare · E-commerce product cleanup",
   },
   showcase: {
-    heading: "Engineered to scale with your retail volume.",
+    heading: "Product retouching for retail volume",
     description:
       "With over 150+ trained artists operating around the clock in Dhaka, we effortlessly scale to handle 2,000+ complex product edits per day during peak catalog and holiday seasons.",
     stats: [
@@ -224,11 +224,11 @@ export const ecommerceRetouchingPage: ServicePageData = {
     ],
   },
   features: {
-    heading: "Why retail leaders scale with Studio Click House",
+    heading: "Why e-commerce teams use Studio Click House",
     items: [
       {
         icon: "CheckCircle2",
-        title: "Marketplace Compliance Guaranteed",
+        title: "Marketplace-ready exports",
         description:
           "100% compliant with Amazon, Shopify, Walmart, Target, and eBay specifications for pure white RGB(255,255,255) backdrops and aspect ratios.",
       },
@@ -332,7 +332,7 @@ export const ecommerceRetouchingPage: ServicePageData = {
       {
         title: "Launch high-volume pipeline",
         description:
-          "Deliver seasonal catalog collections with guaranteed overnight turnarounds.",
+          "Keep seasonal catalog collections moving with agreed overnight turnaround windows.",
       },
     ],
   },

@@ -28,7 +28,7 @@ const editorialRetouchingMedia = {
   },
   introHair: {
     src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Editorial hair styling with meticulous flyaway strand cleanup and shine sculpting",
+    alt: "Editorial hair styling with flyaway cleanup and controlled shine",
     width: 1600,
     height: 2000,
   },
@@ -56,7 +56,7 @@ export const editorialRetouchingPage: ServicePageData = {
   slug: "editorial-retouching",
   seo: {
     title:
-      "Editorial Retouching Service | High-End Beauty & Magazine Post-Production — Studio Click House",
+      "Editorial Photo Retouching | Studio Click House",
     description:
       "High-end editorial photo retouching by Studio Click House. Frequency separation, micro dodge and burn, natural skin pore preservation, flyaway hair cleanup, and color grading for fashion magazines.",
   },
@@ -64,7 +64,7 @@ export const editorialRetouchingPage: ServicePageData = {
     title: "Editorial",
     titleAccent: "Retouching.",
     description:
-      "Fine-art post-production for high-fashion campaigns, beauty close-ups, and magazine covers. We employ manual dodge & burn and frequency separation to elevate every frame while preserving genuine skin texture and lighting character.",
+      "Photo retouching for fashion campaigns, beauty close-ups, and magazine covers. Manual dodge and burn and frequency separation refine each frame while keeping real skin texture and lighting character.",
     media: editorialRetouchingMedia.heroPortrait,
     supportingMedia: [
       editorialRetouchingMedia.heroFashion,
@@ -74,7 +74,7 @@ export const editorialRetouchingPage: ServicePageData = {
   intro: {
     heading: "What is high-end editorial retouching?",
     paragraphs: [
-      "Editorial retouching is the pinnacle of commercial post-production. It demands an uncompromising artistic touch where every blemish, flyaway hair, and tonal irregularity is addressed without resorting to destructive blurs or artificial plastic smoothing. Using 16-bit non-destructive workflows, our master retouchers sculpt light, harmonize complex skin tones, and refine garments to meet the rigorous standards of global fashion publications and luxury advertising houses.",
+      "Editorial retouching refines blemishes, flyaway hair, uneven tones, and garment details without flattening the image. Our artists use 16-bit non-destructive workflows, manual dodge and burn, and frequency separation to keep skin texture and lighting believable.",
     ],
     stages: [
       {
@@ -112,7 +112,7 @@ export const editorialRetouchingPage: ServicePageData = {
     caption: "Drag to compare · High-end skin & lighting retouching",
   },
   showcase: {
-    heading: "Trusted by top fashion photographers & luxury campaigns.",
+    heading: "Editorial retouching for fashion and beauty teams",
     description:
       "Our senior beauty artists collaborate with international commercial photographers, modeling agencies, and magazine editors to deliver cover-ready visuals under tight press deadlines.",
     stats: [
@@ -270,7 +270,7 @@ export const editorialRetouchingPage: ServicePageData = {
       {
         title: "Fashion & Beauty Photographers",
         description:
-          "Partner with trusted high-end retouchers who understand light, anatomy, and how to execute your creative vision flawlessly.",
+          "Work with retouchers who understand light, anatomy, and how to follow a creative brief.",
         media: editorialRetouchingMedia.audienceAgencies,
       },
       {
@@ -282,7 +282,7 @@ export const editorialRetouchingPage: ServicePageData = {
       {
         title: "Cosmetic & Luxury Fashion Brands",
         description:
-          "Produce captivating campaign imagery that communicates prestige, flawless texture, and authentic brand elegance.",
+          "Produce campaign imagery with controlled texture, considered lighting, and a finish that fits the brand.",
         media: previewMedia.photoEditingShowcase,
       },
     ],
@@ -315,7 +315,7 @@ export const editorialRetouchingPage: ServicePageData = {
     },
   ],
   cta: {
-    heading: "Elevate your next editorial campaign",
+    heading: "Prepare your next editorial campaign",
     description:
       "Send us your raw files and moodboard. Our senior retouchers will produce a complimentary test grade tailored to your art direction.",
     steps: [

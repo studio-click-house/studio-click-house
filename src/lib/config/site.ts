@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "SCHL",
   url: "https://studioclickhouse.com",
   description:
-    "Studio Click House provides image editing, retouching, and visual production for brands, studios, and production teams.",
+    "Studio Click House provides photo retouching, e-commerce image editing, color grading, and 3D CGI for brands, agencies, photographers, and studios.",
   ogImage: "/images/brand/schl-logo.png",
   links: {
     instagram: "https://instagram.com/studioclickhouse",

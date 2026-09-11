@@ -32,8 +32,8 @@
 </script>
 
 <PageMeta
-  title="Pricing & Project Scope | Studio Click House"
-  description="Get pricing estimates and project scope guides for high-volume image editing, fashion retouching, video grading, and custom 3D CGI product modeling at Studio Click House."
+  title="Photo Editing Pricing & Scope | SCHL"
+  description="Review SCHL pricing options for e-commerce image editing, fashion retouching, video post-production, and 3D CGI product modeling."
   canonicalPath="/pricing"
 />
 

@@ -10,7 +10,7 @@ export interface ServicesHeroData {
 
 export const servicesHero: ServicesHeroData = {
   eyebrow: "Our Capabilities",
-  title: "Precision finishing for brand assets.",
+  title: "Image editing and post-production for brand assets",
   description:
     "We provide pixel-perfect image retouching, commercial video editing, and photorealistic 3D CGI rendering. Built for high-volume catalogs, campaign creative, and global studio standards.",
   media: previewMedia.editingWorkspace,
@@ -35,7 +35,7 @@ export const servicesFaqs: FaqItem[] = [
   {
     question: "How do you guarantee color profile consistency?",
     answer:
-      "All editing suites run hardware-calibrated EIZO monitors calibrated to D50/D65 standards. We manage conversions between sRGB, Adobe RGB, Display P3, and CMYK color spaces to ensure assets look flawless across print and screens.",
+      "Our editing suites use calibrated EIZO monitors and manage sRGB, Adobe RGB, Display P3, and CMYK conversions for consistent print and screen output.",
   },
   {
     question: "How is client media secured and transferred?",

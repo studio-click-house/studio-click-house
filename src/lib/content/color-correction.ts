@@ -56,15 +56,15 @@ export const colorCorrectionPage: ServicePageData = {
   slug: "color-correction",
   seo: {
     title:
-      "Color Correction Service | Professional Image Color Editing — Studio Click House",
+      "Product Photo Color Correction | SCHL",
     description:
-      "Elevate the vibrancy and coherence of your images with Studio Click House's Color Correction service. Expert color adjustment for e-commerce, photography, and promotional materials.",
+      "Product photo color correction for e-commerce, catalogs, campaigns, and brand teams. Match white balance, exposure, skin tones, and product color across a series.",
   },
   hero: {
     title: "Color",
     titleAccent: "Correction.",
     description:
-      "Elevate the vibrancy and coherence of your images with precision color adjustment. Our expert team enhances every visual to align with your brand's aesthetic and meet production-grade standards.",
+      "Correct white balance, exposure, and product color so a complete image set looks consistent across screens, marketplaces, and print.",
     media: colorCorrectionMedia.heroPortrait,
     supportingMedia: [
       colorCorrectionMedia.heroProduct,
@@ -74,7 +74,7 @@ export const colorCorrectionPage: ServicePageData = {
   intro: {
     heading: "What is color correction?",
     paragraphs: [
-      "Color correction is all about transforming your footage into an eye-catching masterpiece. Adjusting each clip to get a consistent look entails fine-tuning white balance, fixing exposure, balancing whites and blacks, and increasing contrast and saturation. Even minor adjustments can make a tremendous difference to the overall quality of your images.",
+      "Color correction sets a reliable base for a consistent image series. We adjust white balance, exposure, black and white points, contrast, and saturation for product, fashion, and campaign work.",
     ],
     stages: [
       {
@@ -112,7 +112,7 @@ export const colorCorrectionPage: ServicePageData = {
     caption: "Drag to compare · Color transformation",
   },
   showcase: {
-    heading: "Why we deliver the best results.",
+    heading: "Color correction for consistent image sets",
     description:
       "We combine calibrated hardware, trained artists, and a rigorous multi-step review process to deliver consistent, production-grade color correction across every project.",
     stats: [
@@ -147,7 +147,7 @@ export const colorCorrectionPage: ServicePageData = {
   gallery: {
     heading: "Selected Work & Color Studies",
     description:
-      "A curated lookbook of high-precision color correction, skin tone calibration, and series harmonization delivered for brands and studios.",
+      "Selected color correction, skin-tone calibration, and image-series matching for brands and studios.",
     items: [
       {
         id: "gallery-fashion-editorial",
@@ -252,7 +252,7 @@ export const colorCorrectionPage: ServicePageData = {
       },
       {
         icon: "TicketCheck",
-        title: "100% Money-Back Guarantee",
+        title: "Clear review process",
         description:
           "Customer satisfaction is our top priority. We are confident in our ability to exceed your expectations, offering a 100% money-back guarantee if you're not completely satisfied.",
       },
@@ -310,7 +310,7 @@ export const colorCorrectionPage: ServicePageData = {
       question:
         "How does Studio Click House ensure the quality of its Color Correction service?",
       answer:
-        "We implement a meticulous three-step quality control process to ensure every image meets our high standards. Our team is committed to delivering exceptional quality in every project.",
+        "Every image goes through a three-step review for color, consistency, and export settings before delivery.",
     },
     {
       question:

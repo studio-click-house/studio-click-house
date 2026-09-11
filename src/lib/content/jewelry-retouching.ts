@@ -56,7 +56,7 @@ export const jewelryRetouchingPage: ServicePageData = {
   slug: "jewelry-retouching",
   seo: {
     title:
-      "High-End Jewelry Retouching Service | Diamond & Gemstone Editing — Studio Click House",
+      "Jewelry Photo Retouching | Studio Click House",
     description:
       "Specialized jewelry photo retouching by Studio Click House. Macro diamond sparkle, gemstone clarity, gold & platinum polishing, focus stacking alignment, and reflection cleanup for luxury brands.",
   },
@@ -64,7 +64,7 @@ export const jewelryRetouchingPage: ServicePageData = {
     title: "Jewelry",
     titleAccent: "Retouching.",
     description:
-      "High-precision macro retouching for fine jewelry, luxury watches, and gemstones. We eliminate micro-dust, polish metals, balance specular reflections, and enhance diamond sparkle without losing natural authenticity.",
+      "Macro retouching for fine jewelry, luxury watches, and gemstones. We remove dust, polish metals, control reflections, and enhance diamond sparkle without losing natural detail.",
     media: jewelryRetouchingMedia.heroJewelry,
     supportingMedia: [
       jewelryRetouchingMedia.heroPearls,
@@ -114,7 +114,7 @@ export const jewelryRetouchingPage: ServicePageData = {
   showcase: {
     heading: "Trusted by fine jewelers & luxury watchmakers.",
     description:
-      "From high-jewelry auction catalogs to online luxury storefronts, our dedicated jewelry specialists ensure every carat and curve reflects true craftsmanship.",
+      "From auction catalogs to online jewelry stores, our specialists clean dust, control reflections, and preserve the shape, color, and detail of each piece.",
     stats: [
       { value: "500%+", label: "Magnification inspection during cleanup" },
       { value: "100%", label: "Authentic gemstone color preservation" },
@@ -242,7 +242,7 @@ export const jewelryRetouchingPage: ServicePageData = {
         icon: "Focus",
         title: "Focus Stack Alignment",
         description:
-          "We seamlessly blend multi-bracket focus shots to ensure edge-to-edge sharpness from front prongs to rear shank.",
+          "We blend multi-bracket focus shots for edge-to-edge sharpness from front prongs to rear shank.",
       },
       {
         icon: "Sun",
@@ -270,7 +270,7 @@ export const jewelryRetouchingPage: ServicePageData = {
       {
         title: "Fine Jewelry Brands & Designers",
         description:
-          "Showcase high-value rings, necklaces, and bespoke pieces with the luxury elegance and sparkle your craftsmanship deserves.",
+          "Show rings, necklaces, watches, and one-off pieces with controlled reflections, clear stones, and natural metal detail.",
         media: jewelryRetouchingMedia.audienceJewelers,
       },
       {

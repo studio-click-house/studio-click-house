@@ -24,7 +24,7 @@ export const aboutPageData: AboutPageData = {
         value: 5,
         suffix: "M+",
         label: "Assets Delivered",
-        sublabel: "With zero compromise on SLA precision",
+        sublabel: "With clear delivery targets",
       },
     ],
     bannerMedia: {
@@ -39,7 +39,7 @@ export const aboutPageData: AboutPageData = {
     eyebrow: "Our People",
     heading: "The Team Behind Every Frame",
     subheading:
-      "We are a collective of pixel-obsessed retouchers, colorists, 3D generalists, and workflow architects operating seamlessly from our main studio in Dhaka.",
+      "Our Dhaka studio brings together retouchers, colorists, 3D artists, and production leads who keep commercial work accurate and on schedule.",
     heroCollectiveMedia: {
       src: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=2200",
       alt: "Full Studio Click House post-production collective gathered in the main production hall",
@@ -106,15 +106,15 @@ export const aboutPageData: AboutPageData = {
     items: [
       {
         number: "01",
-        title: "Uncompromising Craftsmanship",
-        tagline: "Fine-art precision across every single pixel",
+        title: "Careful, consistent finishing",
+        tagline: "Careful finishing at every scale",
         description:
-          "Whether processing 10,000 e-commerce lookbooks or a single hero billboard, we apply uncompromising attention to texture, lighting, and realistic skin tone fidelity.",
+          "From large e-commerce lookbooks to single hero images, we pay close attention to texture, lighting, and natural skin tones.",
       },
       {
         number: "02",
         title: "Speed with Scale",
-        tagline: "Overnight turnaround with guaranteed SLAs",
+        tagline: "Overnight turnaround with agreed delivery targets",
         description:
           "Our 24/7 dual-shift post-production model enables high-capacity throughput, offering global brands overnight turnarounds without sacrificing artistic control.",
       },
@@ -159,7 +159,7 @@ export const aboutPageData: AboutPageData = {
         title: "The Studio Is Founded",
         subtitle: "Dhaka, Bangladesh",
         description:
-          "Studio Click House started in a small workspace with just four passionate photo retouchers focused on high-end fashion catalog editing.",
+          "Studio Click House started in a small workspace with four photo retouchers focused on fashion catalog editing.",
         statsHighlight: "4 Retouchers · 10 Clients",
         media: {
           src: "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1000",
@@ -250,7 +250,7 @@ export const aboutPageData: AboutPageData = {
     eyebrow: "Join Our Team",
     heading: "Your Next Chapter Starts Here",
     description:
-      "We are always searching for passionate retouchers, video editors, 3D artists, and project leads who share our dedication to visual excellence.",
+      "We look for retouchers, video editors, 3D artists, and project leads who care about clear briefs, careful work, and reliable delivery.",
     ctaLabel: "View Open Positions",
     ctaHref: "/careers",
     bgMedia: {
@@ -285,7 +285,7 @@ export const aboutPageData: AboutPageData = {
         id: "leader-2",
         name: "Nusrat Jahan",
         role: "Head of Post-Production & Operations",
-        bio: "Spearheads daily 24/7 production scheduling, client SLA compliance, and quality control pipelines for our 150+ artist team.",
+        bio: "Runs daily production scheduling, delivery targets, and quality control for our 150+ artist team.",
         linkedinUrl: "https://linkedin.com",
         media: {
           src: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -384,7 +384,7 @@ export const aboutPageData: AboutPageData = {
   closingCta: {
     heading: "Need a partner close to the work?",
     description:
-      "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
+      "Send a test image or video clip. We’ll confirm the workflow, turnaround, and delivery format before production starts.",
     primaryCtaLabel: "Start a Project",
     primaryCtaHref: "/contact",
     secondaryCtaLabel: "Explore Our Portfolio",

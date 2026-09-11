@@ -6,7 +6,7 @@ export const portfolioPageData: PortfolioPageData = {
     headingLine1: "Visual craft,",
     headingLine2: "made tangible.",
     description:
-      "A curated selection of editorial retouching, precision clipping, color correction, and 3D CGI work produced for fashion brands, e-commerce studios, and global creative agencies.",
+      "Selected editorial retouching, hand-drawn clipping paths, color correction, and 3D CGI for fashion brands, e-commerce studios, and creative agencies.",
     heroMedia: {
       src: "https://images.pexels.com/photos/20194705/pexels-photo-20194705.jpeg?auto=compress&cs=tinysrgb&w=1800",
       alt: "Fashion editorial portrait showcasing Studio Click House post-production craft",
@@ -315,11 +315,11 @@ export const portfolioPageData: PortfolioPageData = {
 
   magazineIntro: {
     eyebrow: "The Creative Standard · Est. 2015",
-    title: "Where Pixel Precision Meets High-End Visual Art",
+    title: "Commercial image finishing, frame by frame",
     watermarkText: "STUDIO",
     paragraphs: [
-      "Studio Click House operates at the intersection of commercial scale and bespoke editorial craftsmanship. From high-fashion lookbooks to global e-commerce catalogs, our dedicated teams preserve tactile grain, subtle fold dynamics, and skin micro-textures.",
-      "Every frame undergoes stringent quality checks: pen-tool vector clipping paths, lossless frequency separation, CMYK/sRGB color matching, and bespoke lighting adjustments engineered to elevate conversion and brand perception.",
+      "Studio Click House handles both high-volume catalogs and detailed editorial work. Our teams preserve fabric texture, natural skin detail, and the small visual cues that make a product feel real.",
+      "Each delivery is reviewed for paths, masks, retouching, color consistency, and output settings before handoff."
     ],
     featuredImage: {
       src: "https://images.pexels.com/photos/2681751/pexels-photo-2681751.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -391,7 +391,7 @@ export const portfolioPageData: PortfolioPageData = {
       category: "Apparel Volume",
       title: "3D Hollow Neck Tailoring",
       description:
-        "Seamless front-and-back composite construction creating natural depth, collar alignment, and symmetrical drape.",
+        "Front-and-back compositing that creates natural depth, collar alignment, and balanced drape.",
       year: "2025",
       media: {
         src: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1000",
@@ -455,7 +455,7 @@ export const portfolioPageData: PortfolioPageData = {
     title: "2026 Craft & Process Showreel",
     subtitle: "Behind The Scenes · Layer by Layer",
     description:
-      "Experience how our artists take raw commercial camera files and transform them into catalog-ready masterpieces.",
+      "See how our artists take raw commercial camera files to catalog-ready delivery.",
     media: {
       src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1600",
       alt: "Studio Click House post-production process showreel preview",
@@ -475,7 +475,7 @@ export const portfolioPageData: PortfolioPageData = {
   cta: {
     heading: "Ready to see what we can do for your brand?",
     description:
-      "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
+      "Send a test image or video clip. We’ll confirm the workflow, turnaround, and delivery format before production starts.",
     primaryLabel: "Start a Project",
     primaryHref: "/contact",
     secondaryLabel: "Explore Services",

@@ -56,15 +56,15 @@ export const clippingPathPage: ServicePageData = {
   slug: "clipping-path",
   seo: {
     title:
-      "Hand-Drawn Clipping Path Service | Photoshop Vector Paths — Studio Click House",
+      "Clipping Path Services | Studio Click House",
     description:
-      "100% hand-crafted Photoshop clipping path service. Closed vector bezier curves, multi-path color isolation, and pre-press ready PSD/TIFF files for agencies and print catalogs.",
+      "Hand-drawn Photoshop clipping paths with compound paths, color separation, and pre-press-ready PSD or TIFF files for catalogs and agencies.",
   },
   hero: {
     title: "Clipping",
     titleAccent: "Path.",
     description:
-      "Precision hand-drawn vector paths created in Adobe Photoshop at 300%+ zoom. Guaranteed smooth bezier curves with zero jagged artifacts, embedded into layered PSDs or pre-press TIFFs.",
+      "Hand-drawn vector paths created in Adobe Photoshop at high magnification, supplied in layered PSD or pre-press TIFF files for print and digital use.",
     media: clippingPathMedia.heroPenPath,
     supportingMedia: [
       clippingPathMedia.heroStillLife,
@@ -74,7 +74,7 @@ export const clippingPathPage: ServicePageData = {
   intro: {
     heading: "What is hand-crafted clipping path?",
     paragraphs: [
-      "A clipping path is a closed vector path created using Photoshop's Pen Tool that isolates a 2D image from its background. Unlike automated software or magic-wand tools that leave jagged, pixelated halos, our experienced retouchers zoom in to 300% to manually plot smooth anchor points along natural object boundaries, ensuring flawless print and digital integration.",
+      "A clipping path is a closed vector path created with Photoshop's Pen Tool to isolate a 2D image from its background. Our retouchers plot smooth anchor points along natural object boundaries at high magnification for clean print and digital output.",
     ],
     stages: [
       {
@@ -112,7 +112,7 @@ export const clippingPathPage: ServicePageData = {
     caption: "Drag to compare · Vector pen tool path",
   },
   showcase: {
-    heading: "Built for catalog publishers & print production.",
+    heading: "Clipping paths for catalogs and print production",
     description:
       "Our team processes complex multi-path assignments for leading fashion lookbooks, commercial packaging designers, and global e-commerce retail networks.",
     stats: [
@@ -315,7 +315,7 @@ export const clippingPathPage: ServicePageData = {
     },
   ],
   cta: {
-    heading: "Need flawless vector clipping paths?",
+    heading: "Need clean vector clipping paths?",
     description:
       "Send us 3 sample images and experience our hand-crafted pen tool precision firsthand with a free trial edit.",
     steps: [

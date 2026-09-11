@@ -56,15 +56,15 @@ export const aiRetouchPage: ServicePageData = {
   slug: "ai-retouch",
   seo: {
     title:
-      "AI Retouching Service | Generative AI Speed + Master Artist QC — Studio Click House",
+      "AI Photo Retouching | Studio Click House",
     description:
-      "Next-generation AI-assisted image retouching by Studio Click House. Neural background generation, smart cleanup, and high-velocity batch processing verified by expert human retouchers.",
+      "AI-assisted photo retouching with human quality control for background generation, cleanup, and high-volume e-commerce image processing.",
   },
   hero: {
     title: "AI-Assisted",
     titleAccent: "Retouching.",
     description:
-      "The velocity of proprietary generative AI workflows paired with the precision of veteran retouchers. Accelerate seasonal catalog drops, background synthesis, and bulk cleanups at enterprise scale with guaranteed quality.",
+      "Use AI-assisted workflows for seasonal catalogs, background synthesis, and bulk cleanup, with trained retouchers checking the output before delivery.",
     media: aiRetouchMedia.heroWorkspace,
     supportingMedia: [
       aiRetouchMedia.heroModel,
@@ -74,7 +74,7 @@ export const aiRetouchPage: ServicePageData = {
   intro: {
     heading: "What is human-in-the-loop AI retouching?",
     paragraphs: [
-      "Pure AI tools often produce unpredictable artifacts, hallucinated details, and inconsistent brand colors. Studio Click House pioneers a hybrid 'human-in-the-loop' AI pipeline: our custom-trained neural models execute high-speed tasks like background replacement, bulk dust removal, and initial color passes in seconds, after which our senior digital artists refine the edges, inspect skin texture, and verify color fidelity to ensure 100% commercial excellence.",
+      "AI tools can introduce artifacts, invented details, and inconsistent color. Our AI-assisted workflow handles background replacement, bulk dust removal, and initial color passes; trained retouchers then check edges, skin texture, logos, and color before export.",
     ],
     stages: [
       {
@@ -112,7 +112,7 @@ export const aiRetouchPage: ServicePageData = {
     caption: "Drag to compare · AI background synthesis & lighting",
   },
   showcase: {
-    heading: "Unmatched velocity for massive catalog drops.",
+    heading: "AI-assisted retouching for large catalogs",
     description:
       "When you need 5,000+ images processed in hours rather than weeks, our AI-assisted pipeline delivers exponential speed advantages without compromising artistic integrity.",
     stats: [
@@ -260,7 +260,7 @@ export const aiRetouchPage: ServicePageData = {
         icon: "BadgePercent",
         title: "Cost-Efficient Bulk Rates",
         description:
-          "Unlock significant per-image cost savings for high-volume catalogs and digital marketing campaigns.",
+          "Reduce manual work on high-volume catalogs and digital marketing batches.",
       },
     ],
   },
@@ -291,7 +291,7 @@ export const aiRetouchPage: ServicePageData = {
     {
       question: "How does human-in-the-loop AI retouching work?",
       answer:
-        "Our proprietary AI models perform the initial heavy lifting—such as background separation, bulk dust removal, and preliminary color alignment. Then, experienced digital artists review the file under high zoom, hand-correcting fine details (such as fingers, hair, reflections, and logos) to ensure flawless commercial quality.",
+        "AI-assisted tools handle background separation, bulk dust removal, and initial color alignment. Digital artists then review each file at high zoom and correct details such as fingers, hair, reflections, and logos.",
     },
     {
       question: "Are our client images used to train public AI models?",
@@ -327,7 +327,7 @@ export const aiRetouchPage: ServicePageData = {
       {
         title: "Inspect AI + QC results",
         description:
-          "Review our rapid turnaround and flawless edge quality with zero risk.",
+          "Review our turnaround and edge quality before committing to a full batch.",
       },
       {
         title: "Scale enterprise volumes",

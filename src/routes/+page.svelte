@@ -30,8 +30,8 @@
 </script>
 
 <PageMeta
-  title="Studio Click House | Image Editing, Retouching & Visual Production"
-  description="Studio Click House is an editorial creative studio providing high-end photo retouching, image editing, video grading, and custom 3D CGI product renders for global brands and agencies."
+  title="Photo Retouching & CGI Production | SCHL"
+  description="Studio Click House provides photo retouching, clipping paths, color grading, and 3D CGI for e-commerce brands, agencies, photographers, and studios."
   canonicalPath="/"
 />
 <JsonLd data={faqData} />

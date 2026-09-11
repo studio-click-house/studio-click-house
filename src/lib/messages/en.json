@@ -230,11 +230,11 @@
     },
     "aboutDescription": {
       "eyebrow": "01 / STUDIO OVERVIEW",
-      "tagline": "The human craft and technical discipline behind world-class visuals.",
+      "tagline": "Human craft and technical discipline for commercial images.",
       "title1": "About Us",
       "title2": "Studio Click House.",
-      "paragraph1": "Studio Click House is an international visual post-production house serving world-class photographers, global fashion brands, e-commerce retailers, and creative agencies.",
-      "paragraph2": "We specialize in editorial image retouching, video color grading, and photorealistic 3D CGI product rendering. Combining meticulous human artistry with an overnight 24/7 production pipeline, our studio ensures every frame meets uncompromising creative and commercial standards.",
+      "paragraph1": "Studio Click House is a visual post-production studio for photographers, fashion brands, e-commerce retailers, and creative agencies.",
+      "paragraph2": "We handle editorial retouching, product image editing, video color grading, and photorealistic 3D CGI. Our Dhaka production team works across shifts to keep large batches moving while senior artists review the finish.",
       "quote": "Every pixel, shadow, and color gradient is shaped to reflect your brand's unique visual signature.",
       "stats": [
         { "value": "150+", "label": "Senior Specialists", "sub": "In-house retouchers & 3D artists" },
@@ -249,9 +249,9 @@
     "aiAbout": {
       "eyebrow": "02 / AI & PRECISION GRADING",
       "title1": "Intelligent colorways,",
-      "title2": "flawless finishing.",
-      "subtitle": "Experience our precision color-grading and AI-assisted finishing workflow. Interactive colorway adjustments maintain accurate fabric texture, realistic light diffusion, and immaculate detail across your entire product line.",
-      "copy": "Seamlessly switch between custom colorways below to inspect the micro-texture integrity and calibrated color fidelity.",
+      "title2": "careful finishing.",
+      "subtitle": "Explore our color-grading and AI-assisted finishing workflow. Colorway adjustments keep fabric texture, light, and product detail consistent across a range.",
+      "copy": "Switch between colorways to inspect fabric texture, skin tone, and product-color accuracy.",
       "explore": "Explore Services",
       "freeTrial": "Request a Trial"
     },
@@ -459,7 +459,7 @@
     "people": {
       "eyebrow": "Our People",
       "heading": "The Team Behind Every Frame",
-      "subheading": "We are a collective of pixel-obsessed retouchers, colorists, 3D generalists, and workflow architects operating seamlessly from our main studio in Dhaka.",
+      "subheading": "Our Dhaka studio brings together retouchers, colorists, 3D artists, and production leads who keep commercial work accurate and on schedule.",
       "collectiveTitle": "Studio Click House collective",
       "location1": "Dhaka headquarters",
       "location2": "Production floor / suites",
@@ -490,7 +490,7 @@
         {
           "subtitle": "Dhaka, Bangladesh",
           "title": "The Studio Is Founded",
-          "description": "Studio Click House started in a small workspace with just four passionate photo retouchers focused on high-end fashion catalog editing.",
+          "description": "Studio Click House started in a small workspace with four photo retouchers focused on fashion catalog editing.",
           "statsHighlight": "4 Retouchers · 10 Clients"
         },
         {
@@ -522,7 +522,7 @@
     "careers": {
       "eyebrow": "Join Our Team",
       "heading": "Your Next Chapter Starts Here",
-      "description": "We are always searching for passionate retouchers, video editors, 3D artists, and project leads who share our dedication to visual excellence.",
+      "description": "We look for retouchers, video editors, 3D artists, and project leads who care about clear briefs, careful work, and reliable delivery.",
       "tag": "Inside the studio",
       "ctaLabel": "View Open Positions",
       "stats": [
@@ -542,7 +542,7 @@
         },
         {
           "role": "Head of Post-Production & Operations",
-          "bio": "Spearheads daily 24/7 production scheduling, client SLA compliance, and quality control pipelines for our 150+ artist team."
+          "bio": "Runs daily production scheduling, delivery targets, and quality control for our 150+ artist team."
         },
         {
           "role": "Lead Colorist & Video Director",
@@ -639,7 +639,7 @@
       "eyebrow": "Transparent Studio Rates",
       "heading1": "Tailored production",
       "heading2": "estimates.",
-      "description": "Clear rates, guaranteed delivery SLAs, and scalable monthly retouching capacity tailored for global brands and creative studios.",
+      "description": "Clear rates, agreed delivery targets, and scalable monthly retouching capacity for global brands and creative studios.",
       "viewPackages": "View packages",
       "buildCustom": "Build custom quote",
       "stats": [
@@ -975,13 +975,13 @@
     },
     "intro": {
       "heading": "The High-End Post-Production Standard 2026",
-      "p1": "Studio Click House represents over a decade of dedicated craftsmanship in luxury fashion retouching, intricate clipping paths, invisible ghost mannequin reconstruction, and high-fidelity color grading for world-renowned brands.",
-      "p2": "Every image that passes through our workstations is handled by master digital artists adhering to lossless frequency separation, sub-pixel pen vector precision, and strict print-ready color standards."
+      "p1": "Studio Click House has more than a decade of experience in fashion retouching, hand-drawn clipping paths, ghost mannequin compositing, and color grading for commercial image sets.",
+      "p2": "Artists work in non-destructive PSD and TIFF workflows, using frequency separation, precise pen paths, and agreed color profiles for print and screen."
     },
     "collage": {
       "colorMastery": "Color Mastery",
       "pantonePrecision": "Pantone Precision",
-      "pantoneDesc": "Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks.",
+      "pantoneDesc": "Garment recoloring and skin-tone matching prepared for high-end print lookbooks.",
       "selectedCampaign": "Selected Campaign",
       "hauteCouture": "Haute Couture Retouch",
       "hauteCoutureDesc": "High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines.",
@@ -1013,7 +1013,7 @@
         },
         {
           "label": "Vector Clipping",
-          "desc": "Precision hand-drawn clipping paths and multipath masks for flawless background isolation and recoloring.",
+          "desc": "Hand-drawn clipping paths and multipath masks for clean background isolation and recoloring.",
           "deliverables": [
             "Single Path Vector Clipping",
             "Multi-Path Layering & Masking",
@@ -1023,7 +1023,7 @@
         },
         {
           "label": "Color & Swatches",
-          "desc": "Calibrating and shifting product colors for absolute brand accuracy and seamless SKU consistency.",
+          "desc": "Correcting and shifting product colors so every SKU matches the approved reference and the wider image set.",
           "deliverables": [
             "Swatch & Color Target Matching",
             "Cross-SKU Color Consistency",
@@ -1033,7 +1033,7 @@
         },
         {
           "label": "Special Scopes",
-          "desc": "Bespoke post-production including invisible ghost mannequin, collar construction, and custom 3D CGI.",
+          "desc": "Ghost mannequin compositing, collar construction, jewelry cleanup, and custom 3D CGI for specialist product work.",
           "deliverables": [
             "Ghost Mannequin / Invisible",
             "Collar & Neck Joint Insertion",
@@ -1119,8 +1119,8 @@
     },
     "intro": {
       "heading": "The High-End Post-Production Standard",
-      "p1": "Studio Click House represents over a decade of dedicated craftsmanship in luxury fashion retouching, intricate clipping paths, invisible ghost mannequin reconstruction, and high-fidelity color grading for world-renowned brands.",
-      "p2": "Every image that passes through our workstations is handled by master digital artists adhering to lossless frequency separation, sub-pixel pen vector precision, and strict print-ready color standards.",
+      "p1": "Studio Click House has more than a decade of experience in fashion retouching, hand-drawn clipping paths, ghost mannequin compositing, and color grading for commercial image sets.",
+      "p2": "Artists work in non-destructive PSD and TIFF workflows, using frequency separation, precise pen paths, and agreed color profiles for print and screen.",
       "detailLabel": "Sub-pixel Pen Vector Standard"
     },
     "beforeAfter": {
@@ -1137,7 +1137,7 @@
       "hauteCoutureDesc": "High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines.",
       "colorMastery": "Color Calibration",
       "pantonePrecision": "Pantone Precision",
-      "pantoneDesc": "Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks.",
+      "pantoneDesc": "Garment recoloring and skin-tone matching prepared for high-end print lookbooks.",
       "macroDetail": "Pore Architecture",
       "microContouring": "Micro Contouring",
       "microContouringDesc": "Non-destructive frequency separation preserving pore fidelity and natural skin luminescence.",
@@ -1145,7 +1145,7 @@
       "hollowJoint": "3D Hollow Joint Tailoring",
       "footwearIsolation": "Footwear Vector Isolation",
       "archiveBadge": "2026 Archive",
-      "performingCraft": "Precision Craftsmanship"
+      "performingCraft": "Precision finishing"
     },
     "matrix": {
       "eyebrow": "Disciplines & Scopes",
@@ -1166,7 +1166,7 @@
         },
         {
           "label": "Vector Clipping",
-          "desc": "Precision hand-drawn clipping paths and multipath masks for flawless background isolation and recoloring.",
+          "desc": "Hand-drawn clipping paths and multipath masks for clean background isolation and recoloring.",
           "deliverables": [
             "Single Path Vector Clipping",
             "Multi-Path Layering & Masking",
@@ -1176,7 +1176,7 @@
         },
         {
           "label": "Color & Swatches",
-          "desc": "Calibrating and shifting product colors for absolute brand accuracy and seamless SKU consistency.",
+          "desc": "Correcting and shifting product colors so every SKU matches the approved reference and the wider image set.",
           "deliverables": [
             "Swatch & Color Target Matching",
             "Cross-SKU Color Consistency",
@@ -1186,7 +1186,7 @@
         },
         {
           "label": "Special Scopes",
-          "desc": "Bespoke post-production including invisible ghost mannequin, collar construction, and custom 3D CGI.",
+          "desc": "Ghost mannequin compositing, collar construction, jewelry cleanup, and custom 3D CGI for specialist product work.",
           "deliverables": [
             "Ghost Mannequin / Invisible",
             "Collar & Neck Joint Insertion",

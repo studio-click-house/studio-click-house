@@ -10,7 +10,7 @@ const ghostMannequinMedia = {
   },
   heroBlazer: {
     src: "https://images.pexels.com/photos/37233404/pexels-photo-37233404.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Tailored suit jacket with seamless neck joint and symmetric lapel alignment",
+    alt: "Tailored suit jacket with a clean neck joint and balanced lapel alignment",
     width: 1600,
     height: 2000,
   },
@@ -56,15 +56,15 @@ export const ghostMannequinPage: ServicePageData = {
   slug: "ghost-mannequin",
   seo: {
     title:
-      "Ghost Mannequin Service | Invisible Mannequin Neck Joint Effect — Studio Click House",
+      "Ghost Mannequin Services | Studio Click House",
     description:
-      "Professional ghost mannequin & neck joint photo editing by Studio Click House. 3D hollow-man apparel compositing, inner tag alignment, wrinkle smoothing, and symmetric garment shaping.",
+      "Ghost mannequin and invisible mannequin editing for apparel brands, including neck joints, inner-label compositing, wrinkle cleanup, and garment shaping.",
   },
   hero: {
     title: "Ghost",
     titleAccent: "Mannequin.",
     description:
-      "Showcase the true fit, shape, and 3D volume of your apparel without distracting plastic mannequins. We seamlessly combine front, back, and inner collar shots into lifelike hollow-man presentations.",
+      "Show the fit and shape of apparel without a visible mannequin. We combine front, back, and inner-collar shots into clean hollow-man product images.",
     media: ghostMannequinMedia.heroApparel,
     supportingMedia: [
       ghostMannequinMedia.heroBlazer,
@@ -74,13 +74,13 @@ export const ghostMannequinPage: ServicePageData = {
   intro: {
     heading: "What is the ghost mannequin effect?",
     paragraphs: [
-      "The ghost mannequin (or invisible mannequin) technique creates a 3D, hollow-body effect for apparel photography by digitally removing the mannequin stand and compositing the inner neckline, brand tag, and interior lining into one seamless garment image. It gives shoppers a clear sense of how the clothing drapes and fits in real life while keeping catalog presentations uniform and distraction-free.",
+      "The ghost mannequin, or invisible mannequin, technique removes the mannequin stand and composites the inner neckline, brand tag, and lining into one hollow-body garment image. It shows shoppers how the garment is shaped while keeping catalog images consistent.",
     ],
     stages: [
       {
         label: "Neck Joint & Tag Compositing",
         description:
-          "We combine the primary front shot with the interior collar photo, aligning the brand label and inner stitching seamlessly.",
+          "We combine the front shot with the interior collar photo, aligning the brand label and inner stitching.",
         media: ghostMannequinMedia.introJoint,
       },
       {
@@ -112,7 +112,7 @@ export const ghostMannequinPage: ServicePageData = {
     caption: "Drag to compare · Ghost mannequin neck joint",
   },
   showcase: {
-    heading: "High-capacity apparel finishing for global fashion brands.",
+    heading: "Ghost mannequin editing for apparel catalogs",
     description:
       "Whether you sell tailored suits, activewear, lingerie, or luxury knitwear, our 24/7 post-production studio delivers consistent, high-volume ghost mannequin edits with rapid turnaround.",
     stats: [
@@ -228,7 +228,7 @@ export const ghostMannequinPage: ServicePageData = {
     items: [
       {
         icon: "Shirt",
-        title: "Seamless Inner Tag & Neck Joints",
+        title: "Inner Tag and Neck Joints",
         description:
           "We match interior fabric textures, stitching lines, and size labels precisely for a natural, authentic inside-collar view.",
       },
@@ -327,7 +327,7 @@ export const ghostMannequinPage: ServicePageData = {
       {
         title: "Review trial composite",
         description:
-          "Inspect our seamless neck joint and 3D volume shaping with zero risk.",
+          "Inspect our neck-joint and 3D volume work before committing to a full batch.",
       },
       {
         title: "Scale your collection",

@@ -43,8 +43,8 @@
 </script>
 
 <PageMeta
-  title="Contact Studio Click House | Start a Project"
-  description="Bring your unfinished visual material to the studio. Plan image editing, fashion retouching, or CGI product modeling workflows with the Studio Click House team."
+  title="Contact SCHL | Start a Retouching Project"
+  description="Send SCHL your brief, sample files, volume, and deadline for photo retouching, e-commerce editing, color grading, or 3D CGI."
   canonicalPath="/contact"
 />
 

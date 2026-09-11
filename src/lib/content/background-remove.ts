@@ -56,15 +56,15 @@ export const backgroundRemovePage: ServicePageData = {
   slug: "background-remove",
   seo: {
     title:
-      "Background Removal Service | Precision Product & Subject Isolation — Studio Click House",
+      "Background Removal Service | Studio Click House",
     description:
-      "Professional image background removal service by Studio Click House. 100% hand-drawn clipping paths, alpha channel masking, and natural shadow creation for e-commerce and advertising.",
+      "Product and fashion background removal with hand-drawn paths, alpha masks, and natural shadows for e-commerce, advertising, and print.",
   },
   hero: {
     title: "Background",
     titleAccent: "Removal.",
     description:
-      "Isolate products, models, and complex objects with pixel-level precision. Hand-drawn clipping paths and alpha channel masks guarantee flawless edges on pure white, transparent, or custom backgrounds.",
+      "Isolate products, models, and complex objects with clean edges. We use hand-drawn clipping paths and alpha masks for white, transparent, or custom backgrounds.",
     media: backgroundRemoveMedia.heroProduct,
     supportingMedia: [
       backgroundRemoveMedia.heroCosmetics,
@@ -112,7 +112,7 @@ export const backgroundRemovePage: ServicePageData = {
     caption: "Drag to compare · Background isolation",
   },
   showcase: {
-    heading: "Engineered for high-volume catalog precision.",
+    heading: "Background removal for high-volume catalogs",
     description:
       "From single hero campaign visuals to 5,000+ SKU seasonal drops, our 24/7 studio delivers pixel-perfect cutouts with overnight turnaround and strict quality inspection.",
     stats: [
