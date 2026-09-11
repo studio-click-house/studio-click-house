@@ -75,7 +75,7 @@
   <link rel="icon" href="/images/brand/schl-logo.png" />
   <link rel="preload" as="image" href="/images/brand/schl-logo-green.png" />
   <link rel="preload" as="image" href="/images/brand/schl-logo-gray.png" />
-  <link rel="preload" as="image" href="/images/brand/schl-logo.png" />
+  <link rel="preload" as="image" href="/images/brand/schl-logo.png" fetchpriority="high" />
 </svelte:head>
 
 <JsonLd data={globalSchemaGraph} />

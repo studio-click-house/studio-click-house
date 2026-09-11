@@ -561,6 +561,7 @@
         alt=""
         width="715"
         height="377"
+        fetchpriority="high"
       />
     </div>
     <span class="sr-only">Loading</span>
