@@ -111,7 +111,7 @@
           </span>
           <span class="desc-title-line block overflow-hidden pb-1">
             <span class="block will-change-transform">
-              <em class="font-display italic font-normal text-brand-green">Studio Click House.</em>
+              <em class="font-display italic font-normal text-brand-dark">Studio Click House.</em>
             </span>
           </span>
         </h2>

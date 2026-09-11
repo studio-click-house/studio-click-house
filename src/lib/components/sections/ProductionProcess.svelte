@@ -216,7 +216,7 @@
             })
             .from(".process-intro > *", {
               y: 42,
-              autoAlpha: 0.12,
+              autoAlpha: 1,
               duration: 0.42,
               stagger: 0.065,
             })
@@ -226,7 +226,7 @@
                 x: -72,
                 y: 44,
                 scale: 0.91,
-                autoAlpha: 0.16,
+                autoAlpha: 1,
                 duration: 0.58,
                 stagger: 0.08,
               },
@@ -238,7 +238,7 @@
                 x: 72,
                 y: 38,
                 scale: 0.92,
-                autoAlpha: 0.16,
+                autoAlpha: 1,
                 duration: 0.58,
               },
               0.06,
@@ -247,7 +247,7 @@
               ".process-tabs > button",
               {
                 y: 26,
-                autoAlpha: 0.1,
+                autoAlpha: 1,
                 duration: 0.34,
                 stagger: 0.045,
               },
