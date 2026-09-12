@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
@@ -80,5 +80,67 @@ const projectsShowcase = read("src/lib/components/sections/HorizontalProjectsSho
 assert(projectsShowcase.includes("flex-direction: column;"), "Mobile showcase panels must stack without horizontal clipping");
 assert(projectsShowcase.includes("min-width: 0;"), "Mobile showcase panels must be allowed to shrink within the viewport");
 assert(!projectsShowcase.includes("min-width: 88vw;"), "Mobile showcase panels must not expose clipped neighboring panels");
+assert(!projectsShowcase.includes('preload="metadata"'), "Showcase videos must not fetch multi-megabyte metadata during initial load");
+
+const scrollImageStory = read("src/lib/components/sections/ScrollImageStory.svelte");
+assert(!scrollImageStory.includes('preload="metadata"'), "Below-fold story videos must not fetch metadata during initial load");
+assert((scrollImageStory.match(/preload="none"/g) ?? []).length >= 2, "Both story videos must defer network loading until they approach the viewport");
+assert(!scrollImageStory.includes("animation: liveConduitStream"), "Decorative SVG conduits must not run continuous paint animations");
+
+const homeHero = read("src/lib/components/sections/HomeHero.svelte");
+assert(homeHero.includes('preload="none"'), "The hero video must not compete with critical first paint resources");
+assert(homeHero.includes('site-preloader-header-reveal'), "Hero text motion must begin behind the exiting preloader to avoid LCP render delay");
+
+assert(!clientMap.includes("globeFallbackTimer"), "The Three.js globe must load only near its viewport, never from an unconditional startup timer");
+
+const floatingSocialBar = read("src/lib/components/layout/FloatingSocialBar.svelte");
+assert(!floatingSocialBar.includes('preload = "auto"'), "The audio brief must not preload before explicit playback");
+assert(!floatingSocialBar.includes("tryAutoplay"), "The audio brief must not trigger a page-load network request through autoplay");
+
+const productionProcess = read("src/lib/components/sections/ProductionProcess.svelte");
+for (const colorway of ["emerald", "cobalt", "plum"]) {
+  assert(productionProcess.includes(`dress-color-${colorway}.webp`), `${colorway} colorway must use its optimized WebP asset`);
+  assert(!productionProcess.includes(`dress-color-${colorway}.png`), `${colorway} colorway must not use its multi-megabyte PNG asset`);
+}
+
+const optimizedHomeImages = [
+  "static/images/about/video-pipeline/stage-1-raw-synthesis.webp",
+  "static/images/about/video-pipeline/stage-2-motion-upscale.webp",
+  "static/images/about/video-pipeline/stage-3-master-grade.webp",
+  "static/images/about/ai-model-emerald.webp",
+  "static/images/about/ai-model-cobalt.webp",
+  "static/images/about/ghost-mannequin-input.webp",
+  "static/images/about/ghost-mannequin-emerald.webp",
+  "static/images/portfolio/photo-editing-showcase.webp",
+];
+for (const asset of optimizedHomeImages) {
+  assert(existsSync(join(root, asset)), `${asset} must exist`);
+}
+assert(!read("src/lib/components/sections/AiAboutSection.svelte").includes(".jpg\""), "AI workflow cards must use optimized WebP assets");
+assert(!scrollImageStory.includes("video-pipeline/stage-1-raw-synthesis.jpg"), "Video pipeline stage 1 must use WebP");
+assert(!scrollImageStory.includes("video-pipeline/stage-2-motion-upscale.jpg"), "Video pipeline stage 2 must use WebP");
+assert(!scrollImageStory.includes("video-pipeline/stage-3-master-grade.jpg"), "Video pipeline stage 3 must use WebP");
+assert(/photoEditingShowcase:\s*\{\s*src: "\/images\/portfolio\/photo-editing-showcase\.webp"/.test(read("src/lib/content/media.ts")), "Homepage showcase must use its optimized WebP asset");
+
+const viteConfig = read("vite.config.ts");
+assert(/build:\s*\{[^}]*sourcemap:\s*true/s.test(viteConfig), "Production client bundles must include source maps for diagnostics");
+assert(viteConfig.includes("onlyExplicitManualChunks: true"), "Manual 3D chunks must not absorb shared entry dependencies");
+
+const responsiveMediaPath = join(root, "src/lib/utils/responsive-media.ts");
+assert(existsSync(responsiveMediaPath), "Responsive remote-image source generation must exist");
+const { getRemoteImageSrcset } = await import("../src/lib/utils/responsive-media.ts");
+const responsivePexels = getRemoteImageSrcset("https://images.pexels.com/photos/1/example.jpeg?auto=compress&w=1800");
+assert(responsivePexels?.includes("w=480") && responsivePexels.includes("w=1200"), "Pexels images must expose responsive widths");
+const responsiveUnsplash = getRemoteImageSrcset("https://images.unsplash.com/photo-example?auto=format&w=2000&q=85");
+assert(responsiveUnsplash?.includes("w=480") && responsiveUnsplash.includes("q=80"), "Unsplash images must expose compressed responsive widths");
+assert.equal(getRemoteImageSrcset("/images/local.jpg"), undefined, "Local image paths must remain unchanged");
+
+for (const component of [
+  "src/lib/components/sections/HorizontalProjectsShowcase.svelte",
+  "src/lib/components/sections/about/AboutOrbitGallery.svelte",
+  "src/lib/components/sections/FaqSection.svelte",
+]) {
+  assert(read(component).includes("getRemoteImageSrcset"), `${component} must offer responsive remote images`);
+}
 
 console.log("Site regression checks passed.");

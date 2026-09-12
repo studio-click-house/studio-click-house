@@ -4,6 +4,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { aboutOrbitCards } from "$lib/content/about-orbit";
+  import { getRemoteImageSrcset } from "$lib/utils/responsive-media";
   import { _ } from "svelte-i18n";
 
   const frameRotations = [-2, 1, -1.5, 3, -2, 1.5, -1, 2] as const;
@@ -616,6 +617,8 @@
             >
               <img
                 src={card.media.src}
+                srcset={getRemoteImageSrcset(card.media.src)}
+                sizes="(min-width: 1024px) 28rem, 82vw"
                 alt={card.media.alt}
                 width={card.media.width}
                 height={card.media.height}

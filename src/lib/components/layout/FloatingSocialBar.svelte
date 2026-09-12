@@ -16,79 +16,42 @@
   const AUDIO_SRC = "/audio/Audio-Presentation.mp3";
 
   let isPlaying = $state(false);
-  let hasUserInteracted = $state(false);
   let audioElement: HTMLAudioElement | null = null;
+
+  function getAudioElement() {
+    if (audioElement) return audioElement;
+
+    audioElement = new Audio(AUDIO_SRC);
+    audioElement.preload = "none";
+    audioElement.onplay = () => {
+      isPlaying = true;
+    };
+    audioElement.onpause = () => {
+      isPlaying = false;
+    };
+    audioElement.onended = () => {
+      isPlaying = false;
+      if (audioElement) audioElement.currentTime = 0;
+    };
+
+    return audioElement;
+  }
 
   function toggleAudio(e?: MouseEvent) {
     if (e) {
       e.stopPropagation();
     }
-    if (!audioElement) return;
-
-    hasUserInteracted = true;
+    const audio = getAudioElement();
 
     if (isPlaying) {
-      audioElement.pause();
+      audio.pause();
     } else {
-      audioElement.play().catch(() => {
-        // Autoplay policy fallback
-      });
+      void audio.play().catch(() => undefined);
     }
   }
 
   onMount(() => {
-    audioElement = new Audio(AUDIO_SRC);
-    audioElement.preload = "auto";
-
-    audioElement.onplay = () => {
-      isPlaying = true;
-    };
-
-    audioElement.onpause = () => {
-      isPlaying = false;
-    };
-
-    audioElement.onended = () => {
-      isPlaying = false;
-      if (audioElement) {
-        audioElement.currentTime = 0;
-      }
-    };
-
-    const tryAutoplay = () => {
-      if (!hasUserInteracted && audioElement && audioElement.paused) {
-        audioElement.play().catch(() => {
-          // Browser requires user interaction before autoplay
-        });
-      }
-    };
-
-    window.addEventListener("site-preloader-complete", tryAutoplay, { once: true });
-    window.addEventListener("site-preloader-logo-landed", tryAutoplay, { once: true });
-
-    const handleFirstGesture = () => {
-      tryAutoplay();
-      cleanupListeners();
-    };
-
-    const cleanupListeners = () => {
-      window.removeEventListener("pointerdown", handleFirstGesture);
-      window.removeEventListener("click", handleFirstGesture);
-      window.removeEventListener("keydown", handleFirstGesture);
-      window.removeEventListener("touchstart", handleFirstGesture);
-      window.removeEventListener("scroll", handleFirstGesture);
-    };
-
-    window.addEventListener("pointerdown", handleFirstGesture, { once: true, passive: true });
-    window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
-    window.addEventListener("keydown", handleFirstGesture, { once: true, passive: true });
-    window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
-    window.addEventListener("scroll", handleFirstGesture, { once: true, passive: true });
-
     return () => {
-      cleanupListeners();
-      window.removeEventListener("site-preloader-complete", tryAutoplay);
-      window.removeEventListener("site-preloader-logo-landed", tryAutoplay);
       if (audioElement) {
         audioElement.pause();
         audioElement.src = "";

@@ -12,21 +12,21 @@
   } as const;
 
   const emeraldDress = {
-    src: "/images/about/colorways/dress-color-emerald.png",
+    src: "/images/about/colorways/dress-color-emerald.webp",
     alt: "Studio portrait after emerald color finishing",
     width: 1024,
     height: 1536,
   } as const;
 
   const cobaltDress = {
-    src: "/images/about/colorways/dress-color-cobalt.png",
+    src: "/images/about/colorways/dress-color-cobalt.webp",
     alt: "Studio portrait after cobalt color finishing",
     width: 1024,
     height: 1536,
   } as const;
 
   const plumDress = {
-    src: "/images/about/colorways/dress-color-plum.png",
+    src: "/images/about/colorways/dress-color-plum.webp",
     alt: "Studio portrait after plum color finishing",
     width: 1024,
     height: 1536,

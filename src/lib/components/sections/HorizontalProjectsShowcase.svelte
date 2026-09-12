@@ -6,6 +6,7 @@
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { showcaseProjects, workGalleryItems } from "$lib/content/home";
+  import { getRemoteImageSrcset } from "$lib/utils/responsive-media";
   import { _ } from "svelte-i18n";
   import type {
     PreviewMedia,
@@ -752,6 +753,8 @@
       <div class="absolute inset-0 z-0 pointer-events-none">
         <img
           src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2400&q=85"
+          srcset={getRemoteImageSrcset("https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2400&q=85")}
+          sizes="50vw"
           alt="Luxury high-fashion editorial studio photoshoot"
           width="2400"
           height="1600"
@@ -802,7 +805,7 @@
                     muted
                     loop
                     playsinline
-                    preload="metadata"
+                    preload="none"
                     aria-label={project.media.alt}
                     class="project-image h-full w-full object-cover"
                     style:object-position={project.media.objectPosition ||
@@ -811,6 +814,8 @@
                 {:else}
                   <img
                     src={project.media.src}
+                    srcset={getRemoteImageSrcset(project.media.src)}
+                    sizes="67vw"
                     alt={project.media.alt}
                     width={project.media.width}
                     height={project.media.height}
@@ -909,6 +914,8 @@
                     >
                       <img
                         src={finalShowcaseProject.media.src}
+                        srcset={getRemoteImageSrcset(finalShowcaseProject.media.src)}
+                        sizes="67vw"
                         alt=""
                         width={finalShowcaseProject.media.width}
                         height={finalShowcaseProject.media.height}
@@ -970,13 +977,15 @@
                           muted
                           loop
                           playsinline
-                          preload="metadata"
+                          preload="none"
                           aria-label={item.media.alt}
                           class="work-field-image h-full w-full object-cover"
                         ></video>
                       {:else}
                         <img
                           src={item.media.src}
+                          srcset={getRemoteImageSrcset(item.media.src)}
+                          sizes="67vw"
                           alt={item.media.alt}
                           width={item.media.width}
                           height={item.media.height}
@@ -1127,13 +1136,15 @@
                 muted
                 loop
                 playsinline
-                preload="metadata"
+                preload="none"
                 aria-label={item.media.alt}
                 class="work-card-image h-full w-full object-cover"
               ></video>
             {:else}
               <img
                 src={item.media.src}
+                srcset={getRemoteImageSrcset(item.media.src)}
+                sizes="calc(100vw - 2rem)"
                 alt={item.media.alt}
                 width={item.media.width}
                 height={item.media.height}

@@ -14,6 +14,7 @@ export default defineConfig({
   customLogger: logger,
   plugins: [tailwindcss(), sveltekit()],
   build: {
+    sourcemap: true,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       external: ["node:dns/promises"],
@@ -23,6 +24,7 @@ export default defineConfig({
         defaultHandler(warning);
       },
       output: {
+        onlyExplicitManualChunks: true,
         manualChunks: (id) => {
           const normalizedId = id.replaceAll("\\", "/");
           if (!normalizedId.includes("/node_modules/")) return;

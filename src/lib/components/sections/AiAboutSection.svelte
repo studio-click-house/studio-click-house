@@ -191,7 +191,7 @@
           <div class="stage-card">
             <div class="stage-frame">
               <img
-                src="/images/about/ghost-mannequin-input.jpg"
+                src="/images/about/ghost-mannequin-input.webp"
                 alt="Raw garment flat capture input"
                 class="stage-img"
                 width="560"
@@ -227,7 +227,7 @@
           <div class="stage-card stage-card-hero">
             <div class="stage-frame">
               <img
-                src="/images/about/ghost-mannequin-emerald.jpg"
+                src="/images/about/ghost-mannequin-emerald.webp"
                 alt="Symmetrical 3D ghost mannequin e-commerce capture"
                 class="stage-img"
                 width="560"
@@ -263,7 +263,7 @@
           <div class="stage-card">
             <div class="stage-frame">
               <img
-                src="/images/about/ai-model-emerald.jpg"
+                src="/images/about/ai-model-emerald.webp"
                 alt="AI-dressed model wearing emerald garment"
                 class="stage-img"
                 width="560"
@@ -299,7 +299,7 @@
           <div class="stage-card">
             <div class="stage-frame">
               <img
-                src="/images/about/ai-model-cobalt.jpg"
+                src="/images/about/ai-model-cobalt.webp"
                 alt="Cobalt blue colorway variant"
                 class="stage-img"
                 width="560"

@@ -244,8 +244,8 @@
         muted
         loop
         playsinline
-        preload="metadata"
-        poster={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.jpg`}
+        preload="none"
+        poster={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.webp`}
         class="story-image ai-visual-image absolute inset-x-0 top-[-12.5%] h-[125%] w-full object-cover"
         aria-hidden="true"
       >
@@ -310,7 +310,7 @@
             <div class="video-stage-card group">
               <div class="video-stage-frame">
                 <img
-                  src={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.jpg`}
+                  src={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.webp`}
                   alt="Raw AI text-to-video generative synthesis draft"
                   class="video-stage-img"
                   width="640"
@@ -380,7 +380,7 @@
             <div class="video-stage-card group">
               <div class="video-stage-frame">
                 <img
-                  src={`${base}/images/about/video-pipeline/stage-2-motion-upscale.jpg`}
+                  src={`${base}/images/about/video-pipeline/stage-2-motion-upscale.webp`}
                   alt="AI optical flow motion upscaling preview"
                   class="video-stage-img"
                   width="640"
@@ -468,14 +468,15 @@
                   muted
                   loop
                   playsinline
-                  poster={`${base}/images/about/video-pipeline/stage-3-master-grade.jpg`}
+                  preload="none"
+                  poster={`${base}/images/about/video-pipeline/stage-3-master-grade.webp`}
                   class="video-stage-img"
                   aria-label="Finished commercial color grading master clip"
                 >
                   <source src={`${base}/videos/stage-3-master-grade.mp4`} type="video/mp4" />
                   <source src={`${base}/videos/editing-video-720p.webm`} type="video/webm" />
                   <img
-                    src={`${base}/images/about/video-pipeline/stage-3-master-grade.jpg`}
+                    src={`${base}/images/about/video-pipeline/stage-3-master-grade.webp`}
                     alt="Finished ACES calibrated color grading master frame"
                     class="video-stage-img"
                     width="640"
@@ -786,10 +787,9 @@
     height: 24px;
   }
 
-  /* Live running flowing curved conduit line matching the pipeline aesthetic */
+  /* Static dashed conduit preserves the pipeline hierarchy without continuous SVG repainting. */
   .stage-branch-flow {
     stroke-dasharray: 5 4;
-    animation: liveConduitStream 1.6s linear infinite;
     stroke: var(--color-brand-green);
     filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-brand-green) 55%, transparent));
   }
@@ -864,15 +864,6 @@
     max-width: 68px;
     white-space: nowrap;
     transition: color 200ms ease;
-  }
-
-  @keyframes liveConduitStream {
-    0% {
-      stroke-dashoffset: 36;
-    }
-    100% {
-      stroke-dashoffset: 0;
-    }
   }
 
   /* ═══ Hover State on Bubbles ═══ */

@@ -6,6 +6,7 @@
   import { previewMedia } from "$lib/content/media";
   import type { FaqItem, PreviewMedia } from "$lib/types/content";
   import { _ } from "svelte-i18n";
+  import { getRemoteImageSrcset } from "$lib/utils/responsive-media";
 
   const defaultFaqImages = [
     previewMedia.jewelryMacro, // Q1: Formats
@@ -258,6 +259,8 @@
               {#each images as img, idx (img.src)}
                 <img
                   src={img.src}
+                  srcset={getRemoteImageSrcset(img.src)}
+                  sizes="(min-width: 1024px) 28rem, calc(100vw - 2rem)"
                   alt={img.alt}
                   width={img.width}
                   height={img.height}

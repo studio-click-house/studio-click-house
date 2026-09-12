@@ -18,6 +18,7 @@
     let active = true;
     let isHeroVisible = true;
     let isPreloaderComplete = !document.querySelector(".site-preloader");
+    let isPreloaderExiting = isPreloaderComplete;
     let startHeroMotion: (() => void) | undefined;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -79,11 +80,22 @@
 
     const handlePreloaderComplete = () => {
       isPreloaderComplete = true;
+      isPreloaderExiting = true;
       startHeroMotion?.();
       if (isHeroVisible) startVideo();
     };
 
+    const handlePreloaderHeaderReveal = () => {
+      isPreloaderExiting = true;
+      startHeroMotion?.();
+    };
+
     if (!isPreloaderComplete) {
+      window.addEventListener(
+        "site-preloader-header-reveal",
+        handlePreloaderHeaderReveal,
+        { once: true },
+      );
       window.addEventListener(
         "site-preloader-complete",
         handlePreloaderComplete,
@@ -125,7 +137,7 @@
           );
 
           startHeroMotion = () => timeline.play();
-          if (isPreloaderComplete) startHeroMotion();
+          if (isPreloaderExiting) startHeroMotion();
         });
         return () => media.revert();
       }, section);
@@ -137,6 +149,10 @@
       prefersReducedMotion.removeEventListener(
         "change",
         handleMotionPreferenceChange,
+      );
+      window.removeEventListener(
+        "site-preloader-header-reveal",
+        handlePreloaderHeaderReveal,
       );
       window.removeEventListener(
         "site-preloader-complete",
@@ -168,7 +184,7 @@
       muted
       loop
       playsinline
-      preload="metadata"
+      preload="none"
       aria-hidden="true"
       tabindex="-1"
       oncanplay={handleVideoCanPlay}

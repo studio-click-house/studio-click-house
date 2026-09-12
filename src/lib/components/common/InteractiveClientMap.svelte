@@ -21,7 +21,6 @@
     let active = true;
     let context: { revert: () => void } | undefined;
     let globeObserver: IntersectionObserver | undefined;
-    let globeFallbackTimer: number | undefined;
 
     const loadGlobe = () => {
       void import("./ThreeGlobe.svelte").then(({ default: component }) => {
@@ -39,9 +38,6 @@
         { rootMargin: "480px 0px" },
       );
       globeObserver.observe(sectionRoot);
-      globeFallbackTimer = window.setTimeout(() => {
-        if (!ThreeGlobe) loadGlobe();
-      }, 3000);
     } else {
       loadGlobe();
     }
@@ -107,7 +103,6 @@
     return () => {
       active = false;
       globeObserver?.disconnect();
-      if (globeFallbackTimer) window.clearTimeout(globeFallbackTimer);
       context?.revert();
     };
   });
