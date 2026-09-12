@@ -58,7 +58,7 @@
     {
       index: "04",
       label: "3D CGI & Scopes",
-      image: "/images/portfolio/3d-cgi-showcase-v2.jpg",
+      image: "/images/portfolio/3d-cgi-showcase-v2.webp",
       desc: "Bespoke 3D CGI product modeling, photorealistic rendering, wireframe visualization, and advanced luxury compositing.",
       sla: "24–48 Hours",
       deliverables: [

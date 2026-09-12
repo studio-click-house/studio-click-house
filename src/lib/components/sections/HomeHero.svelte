@@ -17,6 +17,7 @@
     let context: { revert: () => void } | undefined;
     let active = true;
     let isHeroVisible = true;
+    let hasVideoIntent = false;
     let isPreloaderComplete = !document.querySelector(".site-preloader");
     let isPreloaderExiting = isPreloaderComplete;
     let startHeroMotion: (() => void) | undefined;
@@ -25,7 +26,12 @@
     );
 
     const startVideo = () => {
-      if (!isPreloaderComplete || prefersReducedMotion.matches || !heroVideo)
+      if (
+        !hasVideoIntent ||
+        !isPreloaderComplete ||
+        prefersReducedMotion.matches ||
+        !heroVideo
+      )
         return;
       heroVideo.preload = "auto";
       if (heroVideo.readyState === HTMLMediaElement.HAVE_NOTHING) {
@@ -40,6 +46,22 @@
           // The poster remains visible if browser autoplay policy blocks playback.
         });
     };
+
+    const videoIntentEvents = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
+    const handleFirstVideoIntent = () => {
+      hasVideoIntent = true;
+      videoIntentEvents.forEach((eventName) =>
+        window.removeEventListener(eventName, handleFirstVideoIntent),
+      );
+      if (isHeroVisible) startVideo();
+    };
+
+    videoIntentEvents.forEach((eventName) =>
+      window.addEventListener(eventName, handleFirstVideoIntent, {
+        once: true,
+        passive: true,
+      }),
+    );
 
     let videoObserver: IntersectionObserver | undefined;
 
@@ -122,7 +144,7 @@
             timeline.from(
               line,
               {
-                yPercent: 110,
+                y: 18,
                 duration: durations[i] ?? 0.78,
                 ease: eases[i] ?? "power3.out",
               },
@@ -132,7 +154,7 @@
 
           timeline.from(
             ".hero-detail",
-            { autoAlpha: 0, y: 24, duration: 0.7, ease: "power2.out" },
+            { y: 24, duration: 0.7, ease: "power2.out" },
             0.55,
           );
 
@@ -149,6 +171,9 @@
       prefersReducedMotion.removeEventListener(
         "change",
         handleMotionPreferenceChange,
+      );
+      videoIntentEvents.forEach((eventName) =>
+        window.removeEventListener(eventName, handleFirstVideoIntent),
       );
       window.removeEventListener(
         "site-preloader-header-reveal",
@@ -221,14 +246,14 @@
       </h1>
     </div>
 
-    <div class="hero-detail mt-10 pt-6 lg:mt-0 lg:border-l lg:border-brand-light/15 lg:pl-8">
+    <div class="hero-detail mt-10 pt-6 lg:mt-0 lg:min-h-[11rem] lg:border-l lg:border-brand-light/15 lg:pl-8">
       <p class="text-sm leading-relaxed text-brand-light/70 sm:text-base">
         {$_('home.hero.subtitle') || 'Studio Click House shapes still and moving images for brands, studios, and production teams that care about the final frame.'}
       </p>
       <div class="mt-7 flex flex-wrap items-center gap-5">
         <a
           href={resolve("/contact")}
-          class="group inline-flex items-center gap-3 rounded-sm bg-brand-green px-5 py-3.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
+          class="group inline-flex items-center gap-3 rounded-sm bg-brand-green px-5 py-3.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
           >{$_('home.hero.cta') || 'Start a project'}
           <ArrowUpRight
             size={15}

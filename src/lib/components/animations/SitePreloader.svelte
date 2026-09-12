@@ -28,7 +28,12 @@
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const minimumDisplayDuration = reduceMotion ? 180 : 1500;
+    const isCompactViewport = window.innerWidth < 640;
+    const minimumDisplayDuration = reduceMotion
+      ? 180
+      : isCompactViewport
+        ? 900
+        : 1500;
     let formationTimeline: { kill: () => void } | undefined;
     let landingTimeline: { kill: () => void } | undefined;
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
@@ -160,7 +165,7 @@
             landing,
             {
               progress: 1,
-              duration: 0.82,
+              duration: isCompactViewport ? 0.52 : 0.82,
               ease: "none",
               onUpdate: renderLandingParticles,
             },
@@ -170,7 +175,7 @@
             backdrop,
             {
               autoAlpha: 0,
-              duration: 0.76,
+              duration: isCompactViewport ? 0.48 : 0.76,
               ease: "power2.inOut",
             },
             0.04,
@@ -194,8 +199,8 @@
         return;
       }
 
-      const sourceRect = logoElement.getBoundingClientRect();
       targetHeader?.classList.add("preloader-measure-target");
+      const sourceRect = logoElement.getBoundingClientRect();
       const targetRect = targetLogo.getBoundingClientRect();
       targetHeader?.classList.remove("preloader-measure-target");
       void playParticleLanding(sourceRect, targetRect);
@@ -435,7 +440,7 @@
           .timeline({ onComplete: completeFormation })
           .to(formation, {
             progress: 1,
-            duration: 1.46,
+            duration: isCompactViewport ? 0.9 : 1.46,
             ease: "none",
             onUpdate: renderParticles,
           })
@@ -477,7 +482,7 @@
     const waitForCriticalLogoAsset = async () => {
       const logoImage = new Image();
       logoImage.decoding = "async";
-      logoImage.src = "/images/brand/schl-logo.png";
+      logoImage.src = "/images/brand/schl-logo-360.webp";
 
       await Promise.race([
         new Promise<void>((resolve) => {
@@ -557,10 +562,10 @@
     >
       <img
         class="preloader-logo-complete"
-        src="/images/brand/schl-logo.png"
+        src="/images/brand/schl-logo-360.webp"
         alt=""
-        width="715"
-        height="377"
+        width="360"
+        height="190"
         fetchpriority="high"
       />
     </div>
@@ -618,7 +623,7 @@
     display: block;
     width: 100%;
     height: auto;
-    opacity: 0;
+    opacity: 0.08;
   }
 
   @media (max-width: 39.999rem) {

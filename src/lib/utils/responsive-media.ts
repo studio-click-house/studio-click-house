@@ -1,4 +1,4 @@
-const responsiveImageWidths = [480, 800, 1200] as const;
+const responsiveImageWidths = [240, 480, 800, 1200] as const;
 
 export function getRemoteImageSrcset(src: string) {
   let url: URL;

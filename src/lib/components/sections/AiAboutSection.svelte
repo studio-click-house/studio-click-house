@@ -192,6 +192,8 @@
             <div class="stage-frame">
               <img
                 src="/images/about/ghost-mannequin-input.webp"
+                srcset="/images/about/ghost-mannequin-input-320.webp 320w, /images/about/ghost-mannequin-input.webp 560w"
+                sizes="(min-width: 1024px) 16rem, 82vw"
                 alt="Raw garment flat capture input"
                 class="stage-img"
                 width="560"
@@ -228,6 +230,8 @@
             <div class="stage-frame">
               <img
                 src="/images/about/ghost-mannequin-emerald.webp"
+                srcset="/images/about/ghost-mannequin-emerald-320.webp 320w, /images/about/ghost-mannequin-emerald.webp 560w"
+                sizes="(min-width: 1024px) 16rem, 82vw"
                 alt="Symmetrical 3D ghost mannequin e-commerce capture"
                 class="stage-img"
                 width="560"
@@ -264,6 +268,8 @@
             <div class="stage-frame">
               <img
                 src="/images/about/ai-model-emerald.webp"
+                srcset="/images/about/ai-model-emerald-320.webp 320w, /images/about/ai-model-emerald.webp 560w"
+                sizes="(min-width: 1024px) 16rem, 82vw"
                 alt="AI-dressed model wearing emerald garment"
                 class="stage-img"
                 width="560"
@@ -300,6 +306,8 @@
             <div class="stage-frame">
               <img
                 src="/images/about/ai-model-cobalt.webp"
+                srcset="/images/about/ai-model-cobalt-320.webp 320w, /images/about/ai-model-cobalt.webp 560w"
+                sizes="(min-width: 1024px) 16rem, 82vw"
                 alt="Cobalt blue colorway variant"
                 class="stage-img"
                 width="560"

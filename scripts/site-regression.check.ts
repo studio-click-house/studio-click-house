@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
@@ -50,6 +50,17 @@ for (const file of mainContentFiles) {
 assert(!/<header[^>]*role="none"/.test(read("src/lib/components/layout/Navbar.svelte")), "Site header must keep its banner landmark");
 
 const appCss = read("src/app.css");
+const appHtml = read("src/app.html");
+assert(!appHtml.includes("api.fontshare.com"), "Switzer must not depend on a late external stylesheet");
+assert(!appHtml.includes("cdn.fontshare.com"), "Switzer must load from first-party font assets");
+for (const weight of [300, 400, 500, 600, 700, 800, 900]) {
+  const fontAsset = `static/fonts/switzer-${weight}.woff2`;
+  assert(existsSync(join(root, fontAsset)), `${fontAsset} must exist`);
+  assert(appCss.includes(`/fonts/switzer-${weight}.woff2`), `Switzer ${weight} must be declared locally`);
+}
+for (const weight of [400, 500, 600, 700]) {
+  assert(appHtml.includes(`/fonts/switzer-${weight}.woff2`), `Critical Switzer ${weight} must be preloaded`);
+}
 assert(appCss.includes("scrollbar-width: none"), "The document scrollbar must be visually hidden in Firefox");
 assert(appCss.includes("html::-webkit-scrollbar"), "The document scrollbar must be visually hidden in WebKit/Blink");
 assert(/html::-webkit-scrollbar\s*\{[^}]*display:\s*none;/s.test(appCss), "The WebKit/Blink scrollbar must not occupy visible space");
@@ -90,6 +101,17 @@ assert(!scrollImageStory.includes("animation: liveConduitStream"), "Decorative S
 const homeHero = read("src/lib/components/sections/HomeHero.svelte");
 assert(homeHero.includes('preload="none"'), "The hero video must not compete with critical first paint resources");
 assert(homeHero.includes('site-preloader-header-reveal'), "Hero text motion must begin behind the exiting preloader to avoid LCP render delay");
+assert(!/\.hero-detail",\s*\{\s*autoAlpha:\s*0/s.test(homeHero), "The hero detail must remain paintable while its entrance motion runs");
+assert(!/yPercent:\s*110/.test(homeHero), "Hero heading motion must not fully clip the LCP text while loading");
+assert(homeHero.includes("handleFirstVideoIntent"), "The large hero video must wait for explicit user intent");
+assert(homeHero.includes("lg:min-h-[11rem]"), "The desktop hero detail must reserve stable space during font swap");
+
+const preloader = read("src/lib/components/animations/SitePreloader.svelte");
+assert(preloader.includes("schl-logo-360.webp"), "The preloader must use its display-sized optimized logo");
+assert(/\.preloader-logo-complete\s*\{[^}]*opacity:\s*0\.08;/s.test(preloader), "The preloader must expose immediate first-paint content");
+assert(preloader.indexOf('classList.add("preloader-measure-target")') < preloader.indexOf("const sourceRect"), "Preloader layout reads must be batched after its measurement class write");
+assert(/isCompactViewport\s*\?\s*900\s*:\s*1500/.test(preloader), "Compact viewports must not retain the full desktop preloader delay");
+assert(preloader.includes("isCompactViewport ? 0.9 : 1.46"), "Compact preloader formation must finish sooner on slower devices");
 
 assert(!clientMap.includes("globeFallbackTimer"), "The Three.js globe must load only near its viewport, never from an unconditional startup timer");
 
@@ -112,6 +134,12 @@ const optimizedHomeImages = [
   "static/images/about/ghost-mannequin-input.webp",
   "static/images/about/ghost-mannequin-emerald.webp",
   "static/images/portfolio/photo-editing-showcase.webp",
+  "static/images/portfolio/3d-cgi-showcase-v2.webp",
+  "static/images/brand/schl-logo-360.webp",
+  "static/images/about/ai-model-emerald-320.webp",
+  "static/images/about/ai-model-cobalt-320.webp",
+  "static/images/about/ghost-mannequin-input-320.webp",
+  "static/images/about/ghost-mannequin-emerald-320.webp",
 ];
 for (const asset of optimizedHomeImages) {
   assert(existsSync(join(root, asset)), `${asset} must exist`);
@@ -121,6 +149,15 @@ assert(!scrollImageStory.includes("video-pipeline/stage-1-raw-synthesis.jpg"), "
 assert(!scrollImageStory.includes("video-pipeline/stage-2-motion-upscale.jpg"), "Video pipeline stage 2 must use WebP");
 assert(!scrollImageStory.includes("video-pipeline/stage-3-master-grade.jpg"), "Video pipeline stage 3 must use WebP");
 assert(/photoEditingShowcase:\s*\{\s*src: "\/images\/portfolio\/photo-editing-showcase\.webp"/.test(read("src/lib/content/media.ts")), "Homepage showcase must use its optimized WebP asset");
+assert(read("src/lib/content/media.ts").includes("/images/portfolio/3d-cgi-showcase-v2.webp"), "The 3D showcase must use WebP");
+assert(/cgiProductShowcaseV2:\s*\{[^}]*width:\s*1200,[^}]*height:\s*675,/s.test(read("src/lib/content/media.ts")), "The 3D showcase must declare its real WebP dimensions");
+assert(statSync(join(root, "static/images/portfolio/3d-cgi-showcase-v2.webp")).size < 100_000, "The 3D showcase WebP must stay below 100 KB");
+
+const homeContent = read("src/lib/content/home.ts");
+assert(/poster:\s*"https:\/\/images\.pexels\.com\/photos\/37848029\/[^"]+w=960"/.test(homeContent), "The video showcase must use a display-sized poster URL");
+
+const aiAbout = read("src/lib/components/sections/AiAboutSection.svelte");
+assert((aiAbout.match(/-320\.webp 320w/g) ?? []).length === 4, "AI workflow cards must provide 320px responsive candidates");
 
 const viteConfig = read("vite.config.ts");
 assert(/build:\s*\{[^}]*sourcemap:\s*true/s.test(viteConfig), "Production client bundles must include source maps for diagnostics");
@@ -130,7 +167,7 @@ const responsiveMediaPath = join(root, "src/lib/utils/responsive-media.ts");
 assert(existsSync(responsiveMediaPath), "Responsive remote-image source generation must exist");
 const { getRemoteImageSrcset } = await import("../src/lib/utils/responsive-media.ts");
 const responsivePexels = getRemoteImageSrcset("https://images.pexels.com/photos/1/example.jpeg?auto=compress&w=1800");
-assert(responsivePexels?.includes("w=480") && responsivePexels.includes("w=1200"), "Pexels images must expose responsive widths");
+assert(responsivePexels?.includes("w=240") && responsivePexels.includes("w=1200"), "Pexels images must expose responsive widths down to compact cards");
 const responsiveUnsplash = getRemoteImageSrcset("https://images.unsplash.com/photo-example?auto=format&w=2000&q=85");
 assert(responsiveUnsplash?.includes("w=480") && responsiveUnsplash.includes("q=80"), "Unsplash images must expose compressed responsive widths");
 assert.equal(getRemoteImageSrcset("/images/local.jpg"), undefined, "Local image paths must remain unchanged");

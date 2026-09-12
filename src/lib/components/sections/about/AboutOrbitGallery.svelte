@@ -618,7 +618,7 @@
               <img
                 src={card.media.src}
                 srcset={getRemoteImageSrcset(card.media.src)}
-                sizes="(min-width: 1024px) 28rem, 82vw"
+                sizes="(min-width: 1024px) 16rem, 82vw"
                 alt={card.media.alt}
                 width={card.media.width}
                 height={card.media.height}
