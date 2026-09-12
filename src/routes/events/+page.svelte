@@ -4,11 +4,13 @@
   import EventsHero from "$lib/components/sections/events/EventsHero.svelte";
   import EventsUpcoming from "$lib/components/sections/events/EventsUpcoming.svelte";
   import EventsArchive from "$lib/components/sections/events/EventsArchive.svelte";
+  import EventsGallery from "$lib/components/sections/events/EventsGallery.svelte";
   import EventsCulture from "$lib/components/sections/events/EventsCulture.svelte";
   import EventsClosing from "$lib/components/sections/events/EventsClosing.svelte";
   import EventsPageMotion from "$lib/components/sections/events/EventsPageMotion.svelte";
   import {
     eventActivities,
+    eventGalleryPhotos,
     pastEvents,
     upcomingEvent,
   } from "$lib/content/events";
@@ -46,6 +48,7 @@
   <EventsHero upcoming={upcomingEvent} archive={pastEvents} />
   <EventsUpcoming event={upcomingEvent} />
   <EventsArchive events={pastEvents} />
+  <EventsGallery photos={eventGalleryPhotos} />
   <EventsCulture activities={eventActivities} />
   <EventsClosing />
 </main>

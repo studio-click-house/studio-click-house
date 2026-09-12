@@ -24,13 +24,12 @@
           alt={event.imageAlt}
           width="1600"
           height="1040"
-          class="absolute inset-0 size-full scale-[1.08] object-cover"
-          data-event-parallax
+          class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out hover:scale-105"
         />
       </figure>
 
       <div
-        class="flex flex-col justify-between border-brand-dark/18 lg:col-span-5"
+        class="flex flex-col justify-between lg:col-span-5"
       >
         <div class="space-y-4 sm:space-y-5" data-event-copy>
           <h2
@@ -44,7 +43,7 @@
           </p>
         </div>
 
-        <div class="mt-8 space-y-6 border-t border-brand-dark/16 pt-6">
+        <div class="mt-8 space-y-6">
           <dl class="grid grid-cols-2 gap-5">
             <div class="grid gap-1.5">
               <dt

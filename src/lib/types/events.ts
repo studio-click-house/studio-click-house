@@ -11,6 +11,7 @@ export interface CompanyEvent {
   image: string;
   imageAlt: string;
   focus: string[];
+  gallery?: EventGalleryPhoto[];
 }
 
 export interface EventActivity {
@@ -19,4 +20,21 @@ export interface EventActivity {
   description: string;
   image: string;
   imageAlt: string;
+}
+
+export type EventCategory =
+  | "nepal-tour"
+  | "coxs-bazar"
+  | "dinner-buffet"
+  | "fun-day"
+  | "football-match"
+  | "mawa-evening";
+
+export interface EventGalleryPhoto {
+  id: string;
+  src: string;
+  alt: string;
+  category: EventCategory;
+  categoryLabel: string;
+  caption?: string;
 }

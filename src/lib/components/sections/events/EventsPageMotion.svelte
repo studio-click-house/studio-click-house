@@ -81,9 +81,6 @@
             const mediaBlocks =
               gsap.utils.toArray<HTMLElement>("[data-event-media]");
             for (const element of mediaBlocks) {
-              const image = element.querySelector<HTMLElement>(
-                "[data-event-parallax]",
-              );
               gsap.from(element, {
                 autoAlpha: 0,
                 y: 40,
@@ -96,19 +93,6 @@
                   once: true,
                 },
               });
-
-              if (image) {
-                gsap.to(image, {
-                  yPercent: 12,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: element,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 0.8,
-                  },
-                });
-              }
             }
 
             gsap.from("[data-event-culture-card]", {
