@@ -2,6 +2,7 @@
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import AboutHero from "$lib/components/sections/about/AboutHero.svelte";
+  import AboutVideo from "$lib/components/sections/about/AboutVideo.svelte";
   import AboutPeople from "$lib/components/sections/about/AboutPeople.svelte";
   import AboutTimeline from "$lib/components/sections/about/AboutTimeline.svelte";
   import AboutCareersBanner from "$lib/components/sections/about/AboutCareersBanner.svelte";
@@ -40,6 +41,7 @@
 
 <main id="main-content" class="relative bg-brand-light text-brand-dark">
   <AboutHero hero={aboutPageData.hero} />
+  <AboutVideo />
   <AboutPeople people={aboutPageData.people} />
   <AboutTimeline journey={aboutPageData.journey} />
   <AboutCareersBanner careers={aboutPageData.careers} />

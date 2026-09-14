@@ -14,6 +14,14 @@ export interface TeamMoment {
   media: PreviewMedia;
 }
 
+export interface StudioSnapshot {
+  id: string;
+  title: string;
+  category: string;
+  caption: string;
+  media: PreviewMedia;
+}
+
 export interface CoreValueItem {
   number: string;
   title: string;
@@ -54,6 +62,9 @@ export interface AboutPageData {
     subheading: string;
     heroCollectiveMedia: PreviewMedia;
     moments: TeamMoment[];
+    snapshots?: StudioSnapshot[];
+    snapshotsEyebrow?: string;
+    snapshotsHeading?: string;
   };
   values: {
     eyebrow: string;
