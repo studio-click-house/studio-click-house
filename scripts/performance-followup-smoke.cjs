@@ -12,11 +12,11 @@ const { chromium } = require(process.argv[2]);
     const page = await browser.newPage(profile);
     const heroVideoRequests = [];
     page.on("request", (request) => {
-      if (/hero%20section\.webm/.test(request.url())) {
+      if (/hero%20section\.(webm|mp4)/.test(request.url())) {
         heroVideoRequests.push(request.url());
       }
     });
-    await page.route("**/videos/hero%20section.webm", (route) => route.abort());
+    await page.route("**/videos/hero%20section.*", (route) => route.abort());
     await page.addInitScript(() => {
       window.__smoke = { cls: 0, shifts: [], fcp: 0, lcp: 0, preloaderComplete: 0 };
       addEventListener("site-preloader-complete", () => {

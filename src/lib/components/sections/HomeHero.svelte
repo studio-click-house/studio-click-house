@@ -216,7 +216,7 @@
       class:video-ready={isVideoReady}
       class="hero-video absolute inset-0 size-full object-cover object-[58%_center]"
     >
-      <source src="/videos/hero%20section.webm" type="video/webm" />
+      <source src="/videos/hero%20section.mp4" type="video/mp4" />
     </video>
   </div>
   <div
