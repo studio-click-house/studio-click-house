@@ -54,15 +54,14 @@
       ),
       media: {
         kind: "comparison",
-        beforeSrc: "/images/portfolio/model-raw.png",
-        beforeAlt: "Original studio portrait before photo editing",
-        afterSrc: "/images/portfolio/model-retouched.png",
-        afterAlt:
-          "Finished editorial portrait after professional color correction and skin retouching",
+        beforeSrc: "/images/services/product-services/product-industrial-metal-storage-rack-shelving-before.webp",
+        beforeAlt: "Storage rack photographed in its original outdoor setting",
+        afterSrc: "/images/services/product-services/product-industrial-metal-storage-rack-shelving-after.webp",
+        afterAlt: "Same storage rack isolated on a clean white background",
         beforeLabel: "Raw image",
         afterLabel: "Retouched",
-        width: 1024,
-        height: 1024,
+        width: 1506,
+        height: 2000,
       },
     },
     {
@@ -77,7 +76,7 @@
       media: {
         kind: "video",
         src: "/videos/editing-video-720p.webm",
-        poster: previewMedia.editingWorkspace.src,
+        poster: "/images/services/model-beauty/model-menswear-streetwear-studio-127.webp",
       },
     },
     {
@@ -307,7 +306,7 @@
               height={division.media.height}
               beforeWidth={division.media.width}
               beforeHeight={division.media.height}
-              ariaLabel="Compare the raw and retouched studio portrait"
+              ariaLabel="Compare the original storage rack photo with its cleaned product cutout"
             />
           {:else if division.media.kind === "video"}
             <figure
@@ -321,7 +320,7 @@
                 loop
                 playsinline
                 preload="metadata"
-                class="h-full w-full object-cover"
+                class="h-full w-full rounded-[clamp(0.85rem,1.5vw,1.25rem)] object-cover"
                 aria-label="Studio video editing and color grading preview"
               ></video>
             </figure>
@@ -335,7 +334,7 @@
                 width={division.media.width}
                 height={division.media.height}
                 loading="lazy"
-                class="h-full w-full object-cover"
+                class="h-full w-full rounded-[clamp(0.85rem,1.5vw,1.25rem)] object-cover"
               />
             </figure>
           {/if}

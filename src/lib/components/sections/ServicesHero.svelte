@@ -5,7 +5,6 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { scrollToTarget } from "$lib/animations/lenis";
   import { servicesHero } from "$lib/content/services";
-  import { previewMedia } from "$lib/content/media";
   import { _ } from "svelte-i18n";
 
   let heroSection = $state<HTMLElement>();
@@ -18,17 +17,32 @@
     {
       index: "01",
       label: "Image editing",
-      media: previewMedia.studioPortrait,
+      media: {
+        src: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
+        alt: "Finished editorial beauty portrait with refined makeup and skin retouching",
+        width: 1500,
+        height: 2000,
+      },
     },
     {
       index: "02",
       label: "Video post",
-      media: previewMedia.videoColorGrading,
+      media: {
+        src: "/images/services/model-beauty/model-fashion-black-outfit-studio-63-after.webp",
+        alt: "Finished fashion portrait prepared for commercial post-production",
+        width: 1544,
+        height: 2000,
+      },
     },
     {
       index: "03",
       label: "3D & CGI",
-      media: previewMedia.cgiProductShowcase,
+      media: {
+        src: "/images/about/orbit/ai-3d-cgi.jpg",
+        alt: "Photorealistic 3D CGI fragrance bottle render",
+        width: 1122,
+        height: 1402,
+      },
     },
   ];
 
@@ -200,7 +214,7 @@
           alt={servicesHero.media.alt}
           width={servicesHero.media.width}
           height={servicesHero.media.height}
-          class="services-hero-scroll-media h-[112%] w-full object-cover"
+          class="services-hero-scroll-media h-[112%] w-full rounded-[1rem] object-cover"
         />
       </figure>
 
@@ -220,7 +234,7 @@
               width={discipline.media.width}
               height={discipline.media.height}
               loading="lazy"
-              class="services-hero-scroll-media absolute inset-x-0 -top-[6%] h-[112%] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              class="services-hero-scroll-media absolute inset-x-0 -top-[6%] h-[112%] w-full rounded-[1rem] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
             <span
               class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/10 to-brand-dark/35"

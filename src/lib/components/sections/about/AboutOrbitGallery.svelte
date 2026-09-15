@@ -3,9 +3,11 @@
   import { onMount } from "svelte";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { aboutOrbitCards } from "$lib/content/about-orbit";
+  import { aboutOrbitCards, type AboutOrbitCard } from "$lib/content/about-orbit";
   import { getRemoteImageSrcset } from "$lib/utils/responsive-media";
   import { _ } from "svelte-i18n";
+
+  let { cards = aboutOrbitCards } = $props<{ cards?: AboutOrbitCard[] }>();
 
   const frameRotations = [-2, 1, -1.5, 3, -2, 1.5, -1, 2] as const;
   const stackLayout = [
@@ -597,7 +599,7 @@
 
       <!-- Left: Stacked cards -->
       <div bind:this={stackGroupRef} class="orbit-stack-group">
-        {#each aboutOrbitCards as card, index (card.id)}
+        {#each cards as card, index (card.id)}
           <div
             data-shape={card.shape}
             class="orbit-card-item absolute rounded-2xl overflow-hidden cursor-pointer"

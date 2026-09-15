@@ -15,6 +15,7 @@
   import { siteConfig } from "$lib/config/site";
   import { aboutPageData } from "$lib/content/about";
   import { faqs } from "$lib/content/home";
+  import { homeFaqImages, homeOrbitCards } from "$lib/content/home-media";
 
   let { data } = $props();
 
@@ -41,11 +42,11 @@
   <HomeHero />
   <AboutDescription />
   <AiAboutSection />
-  <AboutOrbitGallery />
+  <AboutOrbitGallery cards={homeOrbitCards} />
   <HorizontalProjectsShowcase />
   <CreativeMarquee items={data.clientLogoItems} />
   <ScrollImageStory />
   <ProductionProcess />        
-  <FaqSection />
+  <FaqSection images={homeFaqImages} />
   <ClientLocations closingCta={aboutPageData.closingCta} />
 </main>

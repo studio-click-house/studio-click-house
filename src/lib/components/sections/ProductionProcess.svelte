@@ -1,33 +1,21 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { previewMedia } from "$lib/content/media";
+  import type { PreviewMedia } from "$lib/types/content";
   import { _ } from "svelte-i18n";
+
+  function homeWorkImage(
+    src: string,
+    alt: string,
+    width: number,
+    height: number,
+  ): PreviewMedia {
+    return { src, alt, width, height, credit: "Studio Click House" };
+  }
 
   const originalDress = {
     src: "/images/about/colorways/dress-color-original.jpg",
     alt: "Original studio portrait before color finishing",
-    width: 1024,
-    height: 1536,
-  } as const;
-
-  const emeraldDress = {
-    src: "/images/about/colorways/dress-color-emerald.webp",
-    alt: "Studio portrait after emerald color finishing",
-    width: 1024,
-    height: 1536,
-  } as const;
-
-  const cobaltDress = {
-    src: "/images/about/colorways/dress-color-cobalt.webp",
-    alt: "Studio portrait after cobalt color finishing",
-    width: 1024,
-    height: 1536,
-  } as const;
-
-  const plumDress = {
-    src: "/images/about/colorways/dress-color-plum.webp",
-    alt: "Studio portrait after plum color finishing",
     width: 1024,
     height: 1536,
   } as const;
@@ -40,9 +28,19 @@
       description:
         "We review your source files, references, volume, output formats, and delivery priorities before production begins.",
       images: [
-        previewMedia.jewelryDetail,
+        homeWorkImage(
+          "/images/services/jewelry/jewelry-emerald-cut-diamond-solitaire-gold-ring-before.webp",
+          "Gold engagement ring before jewelry retouching",
+          1991,
+          2000,
+        ),
         originalDress,
-        previewMedia.studioPortrait,
+        homeWorkImage(
+          "/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-before.webp",
+          "Editorial beauty portrait before retouching",
+          2000,
+          1500,
+        ),
       ],
     },
     {
@@ -52,9 +50,24 @@
       description:
         "A sample image defines the approved finish, so color, texture, crop, and detail treatment are clear from the start.",
       images: [
-        previewMedia.perfumeShadow,
-        emeraldDress,
-        previewMedia.jewelryDetail,
+        homeWorkImage(
+          "/images/services/product-services/product-paw-osteocare-small-dogs-chews-packaging-before.webp",
+          "Pet supplement packaging before product retouching",
+          2000,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-after.webp",
+          "Ice-blue knit cardigan prepared as a clean apparel product image",
+          1333,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/jewelry/jewelry-jules-textured-gold-earrings-03-before.webp",
+          "Textured gold earrings before jewelry retouching",
+          1500,
+          2000,
+        ),
       ],
     },
     {
@@ -64,9 +77,24 @@
       description:
         "The project manager routes each batch to specialists whose experience matches the service and visual standard required.",
       images: [
-        previewMedia.monochromePortrait,
-        previewMedia.perfumeStillLife,
-        previewMedia.redStudioPortrait,
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-silk-headscarf-marchesa-after.webp",
+          "Silk headscarf prepared as a clean apparel product image",
+          1333,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
+          "Pink cream deodorant product photographed for an e-commerce listing",
+          2000,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/model-beauty/model-cue-designer-fashion-editorial-0137.webp",
+          "Designer fashion editorial portrait prepared for a campaign",
+          1600,
+          2000,
+        ),
       ],
     },
     {
@@ -76,9 +104,24 @@
       description:
         "Editors work from the approved reference while preserving consistent naming, dimensions, color, and finishing across the batch.",
       images: [
-        previewMedia.videoColorGrading,
-        cobaltDress,
-        previewMedia.product3dModel,
+        homeWorkImage(
+          "/images/services/model-beauty/beauty-skincare-facial-cream-retouch-0097-after.webp",
+          "Skincare beauty portrait after detailed retouching",
+          2000,
+          1500,
+        ),
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-4m-womens-structured-parka-4513-after.webp",
+          "Structured women's parka prepared for an apparel product listing",
+          1333,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-tri-bodysuit-bambino-front-after.webp",
+          "Patterned bodysuit prepared as a ghost mannequin product image",
+          1334,
+          2000,
+        ),
       ],
     },
     {
@@ -88,9 +131,24 @@
       description:
         "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio.",
       images: [
-        previewMedia.jewelryMacro,
-        plumDress,
-        previewMedia.perfumeStillLife,
+        homeWorkImage(
+          "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
+          "Sculptural gold bangle after detailed jewelry retouching",
+          1500,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/model-beauty/beauty-high-fashion-orchid-headpiece-portrait-after.webp",
+          "High-fashion beauty portrait with an orchid headpiece after retouching",
+          2000,
+          1500,
+        ),
+        homeWorkImage(
+          "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-after.webp",
+          "Black leather handbag after product retouching",
+          1500,
+          2000,
+        ),
       ],
     },
     {
@@ -99,7 +157,26 @@
       timing: "Final handoff",
       description:
         "Final files arrive organised and ready to use, with one clear feedback path for any consolidated finishing notes.",
-      images: [emeraldDress, cobaltDress, plumDress],
+      images: [
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-4m-mens-tailored-coat-007-after.webp",
+          "Tailored men's coat prepared for final apparel delivery",
+          1333,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-back-after.webp",
+          "Brown winter parka back view prepared for final apparel delivery",
+          1333,
+          2000,
+        ),
+        homeWorkImage(
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-womens-blouse-0023-after.webp",
+          "Women's blouse prepared as a final e-commerce product image",
+          1333,
+          2000,
+        ),
+      ],
     },
   ] as const;
 

@@ -19,10 +19,12 @@
 
   let { 
     items = faqs, 
-    images = defaultFaqImages 
+    images = defaultFaqImages,
+    imageFit = "cover",
   } = $props<{ 
     items?: FaqItem[]; 
-    images?: PreviewMedia[]; 
+    images?: PreviewMedia[];
+    imageFit?: "cover" | "contain";
   }>();
 
   let activeIndex = $state(0);
@@ -135,8 +137,7 @@
             );
         });
 
-        // Parallax image scroll trigger (matches scroll movement of Section 2)
-        media.add(
+        if (imageFit === "cover") media.add(
           "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
           () => {
             gsap.fromTo(
@@ -248,13 +249,15 @@
         class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none"
       >
         <div
-          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[1.5rem]"
+          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem]"
         >
           <!-- Colored Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">
             <!-- Scroll Parallax Wrapper -->
             <div
-              class="faq-parallax-image absolute inset-x-0 top-[-15%] h-[130%] pointer-events-none"
+              class="faq-parallax-image absolute inset-x-0 pointer-events-none {imageFit === 'contain'
+                ? 'inset-y-0 h-full'
+                : 'top-[-15%] h-[130%]'}"
             >
               {#each images as img, idx (img.src)}
                 <img
@@ -265,7 +268,9 @@
                   width={img.width}
                   height={img.height}
                   loading="lazy"
-                  class="absolute inset-0 size-full object-cover transition-all duration-700 ease-out"
+                  class="absolute inset-0 size-full transition-all duration-700 ease-out {imageFit === 'contain'
+                    ? 'rounded-[2rem] object-contain'
+                    : 'rounded-[2rem] object-cover'}"
                   class:opacity-100={activeImageIndex === idx}
                   class:scale-100={activeImageIndex === idx}
                   class:opacity-0={activeImageIndex !== idx}

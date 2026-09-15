@@ -245,7 +245,7 @@
         loop
         playsinline
         preload="none"
-        poster={`${base}/images/about/video-pipeline/stage-1-raw-synthesis.webp`}
+        poster={`${base}/images/services/model-beauty/model-soleil-blue-resortwear-editorial-1293.webp`}
         class="story-image ai-visual-image absolute inset-x-0 top-[-12.5%] h-[125%] w-full object-cover"
         aria-hidden="true"
       >

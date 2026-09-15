@@ -6,16 +6,22 @@
 
   const productionGallery = [
     {
-      src: "/images/work-fields/gallery/product-retouching.jpg",
-      alt: "Product image production with controlled water and lighting effects",
+      src: "/images/services/model-beauty/model-soleil-blue-resortwear-editorial-1293.webp",
+      alt: "Model wearing a blue resortwear look in a full editorial photograph",
+      width: 1333,
+      height: 2000,
     },
     {
-      src: "/images/work-fields/gallery/jewelry-retouching.jpg",
-      alt: "Jewelry and cosmetics arranged for detailed commercial retouching",
+      src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-after.webp",
+      alt: "Cereal, fruit, and berries photographed for a product campaign",
+      width: 1445,
+      height: 2000,
     },
     {
-      src: "/images/work-fields/gallery/fashion-color.jpg",
-      alt: "Fashion production scene under controlled studio lighting",
+      src: "/images/services/jewelry/jewelry-editorial-seashell-gold-necklace-model-2061-before.webp",
+      alt: "Editorial portrait featuring gold jewelry and a sculptural seashell",
+      width: 2000,
+      height: 1334,
     },
   ] as const;
 
@@ -47,32 +53,6 @@
             },
           });
 
-          // Desktop-only image parallax scrub to keep touch scrolling lightweight on mobile & iPad
-          media.add("(min-width: 1024px)", () => {
-            const galleryImages = gsap.utils.toArray<HTMLElement>(
-              ".standards-gallery-image",
-            );
-
-            galleryImages.forEach((image, index) => {
-              const direction = index % 2 === 0 ? 1 : -1;
-
-              gsap.fromTo(
-                image,
-                { yPercent: 7 * direction, scale: 1.08 },
-                {
-                  yPercent: -7 * direction,
-                  scale: 1.01,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: section,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 1,
-                  },
-                },
-              );
-            });
-          });
         });
 
         return () => media.revert();
@@ -99,7 +79,7 @@
       >
         {#each productionGallery as image, index (image.src)}
           <figure
-            class="standards-gallery-frame relative overflow-hidden rounded-[1.5rem] {index ===
+            class="standards-gallery-frame relative overflow-hidden rounded-[2rem] {index ===
             0
               ? 'col-span-2 aspect-[4/3] lg:col-span-4 lg:row-span-2 lg:aspect-auto'
               : 'aspect-[4/3] lg:col-span-3 lg:aspect-auto'}"
@@ -107,10 +87,10 @@
             <img
               src={image.src}
               alt={image.alt}
-              width="1920"
-              height="1080"
+              width={image.width}
+              height={image.height}
               loading="lazy"
-              class="standards-gallery-image absolute inset-x-0 -top-[8%] h-[116%] w-full object-cover"
+              class="standards-gallery-image h-full w-full rounded-[2rem] object-contain"
             />
           </figure>
         {/each}
@@ -157,3 +137,13 @@
     </div>
   </div>
 </section>
+
+<style>
+  .standards-gallery-frame {
+    border-radius: 2rem;
+  }
+
+  .standards-gallery-image {
+    border-radius: 2rem;
+  }
+</style>

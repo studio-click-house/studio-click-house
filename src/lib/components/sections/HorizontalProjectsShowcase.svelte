@@ -21,39 +21,39 @@
 
   const workFieldLandscapeMedia: Record<string, PreviewMedia> = {
     "product-finishing": {
-      src: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2000&q=85",
-      alt: "Luxury beauty cosmetic bottle photographed for high-end product retouching",
+      src: "/images/services/product-services/product-architectural-skylight-roof-window-section.webp",
+      alt: "Architectural roof-window product photographed for a clear commercial product image",
       width: 2000,
-      height: 1333,
-      credit: "Photo via Unsplash",
+      height: 1523,
+      credit: "Studio Click House",
     },
     "beauty-detail": {
-      src: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=2000&q=85",
-      alt: "High-end beauty editorial skin texture and tone retouching",
+      src: "/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp",
+      alt: "Two fashion models in dramatic editorial makeup and neon studio lighting",
       width: 2000,
-      height: 1333,
-      credit: "Photo via Unsplash",
+      height: 1500,
+      credit: "Studio Click House",
     },
     "fashion-color": {
-      src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2000&q=85",
-      alt: "High-fashion model in vibrant color grading and studio styling",
+      src: "/images/services/model-beauty/beauty-fashion-neon-escalator-crystal-glam.webp",
+      alt: "Fashion model in a crystal look against a vivid neon escalator backdrop",
       width: 2000,
-      height: 1333,
-      credit: "Photo via Unsplash",
+      height: 1500,
+      credit: "Studio Click House",
     },
     "jewelry-detail": {
-      src: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=2000&q=85",
-      alt: "Fine luxury gold jewelry and pearls arranged for close-up retouching",
-      width: 2000,
-      height: 1333,
-      credit: "Photo via Unsplash",
+      src: "/images/services/jewelry/jewelry-westwood-statement-gold-earrings-02-after.webp",
+      alt: "Pair of sculptural gold earrings with a polished finish",
+      width: 1500,
+      height: 2000,
+      credit: "Studio Click House",
     },
     "shadow-study": {
-      src: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=2000&q=85",
-      alt: "Luxury perfume bottle composed with directional natural shadows",
-      width: 2000,
-      height: 1333,
-      credit: "Photo via Unsplash",
+      src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-after.webp",
+      alt: "Metallic gold handbag photographed against a clean studio background",
+      width: 1500,
+      height: 2000,
+      credit: "Studio Click House",
     },
   };
   const withImageKind = (item: WorkGalleryItem): WorkFieldSectionItem => ({
@@ -73,7 +73,7 @@
     media: {
       kind: "video",
       src: "/videos/work-fields-studio-production.mp4",
-      poster: "/images/work-fields/studio-production-poster.jpg",
+      poster: "/images/services/model-beauty/model-cue-fashion-editorial-studio-0029.webp",
       alt: "Photographer producing commercial product imagery in a studio",
       width: 1920,
       height: 1080,
@@ -111,7 +111,13 @@
             category: finalShowcaseProject.category,
             description: finalShowcaseProject.description,
             tags: ["3D", "CGI"],
-            media: finalShowcaseProject.media,
+            media: {
+              ...finalShowcaseProject.media,
+              src: "/images/about/orbit/ai-3d-cgi.jpg",
+              alt: "3D CGI fragrance bottle render for commercial product visualization",
+              width: 1122,
+              height: 1402,
+            },
           },
           ...workFieldGalleryItems,
         ]
@@ -752,12 +758,11 @@
       <!-- Background Image with dark overlay for rich contrast -->
       <div class="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2400&q=85"
-          srcset={getRemoteImageSrcset("https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2400&q=85")}
+          src="/images/portfolio/portfolio-fashion-studio-hero.jpg"
           sizes="50vw"
-          alt="Luxury high-fashion editorial studio photoshoot"
+          alt="Photographer capturing a fashion model on a studio set"
           width="2400"
-          height="1600"
+          height="1350"
           loading="eager"
           class="h-full w-full object-cover object-center"
         />
@@ -908,17 +913,17 @@
                   class:work-field-handoff-slide={index === 0}
                   class="work-field-slide relative overflow-hidden"
                 >
-                  {#if index === 0 && finalShowcaseProject?.media.kind === "image"}
+                  {#if index === 0 && finalShowcaseProject && item.media.kind === "image"}
                     <div
                       class="work-field-handoff-media relative h-[70%] overflow-hidden"
                     >
                       <img
-                        src={finalShowcaseProject.media.src}
-                        srcset={getRemoteImageSrcset(finalShowcaseProject.media.src)}
+                        src={item.media.src}
+                        srcset={getRemoteImageSrcset(item.media.src)}
                         sizes="67vw"
                         alt=""
-                        width={finalShowcaseProject.media.width}
-                        height={finalShowcaseProject.media.height}
+                        width={item.media.width}
+                        height={item.media.height}
                         loading="lazy"
                         class="work-field-image h-full w-full object-cover object-center"
                       />

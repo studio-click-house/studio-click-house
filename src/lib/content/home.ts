@@ -406,8 +406,7 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     media: {
       kind: "video",
       src: "/videos/editing-video-720p.webm",
-      poster:
-        "https://images.pexels.com/photos/37848029/pexels-photo-37848029.jpeg?auto=compress&cs=tinysrgb&w=960",
+      poster: "/images/work-fields/studio-production-poster.jpg",
       alt: "Studio video editing and post-production preview",
       width: 1280,
       height: 720,

@@ -6,7 +6,7 @@
   import ServicesStandards from "$lib/components/sections/ServicesStandards.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import ServicesCta from "$lib/components/sections/ServicesCta.svelte";
-  import { servicesFaqs } from "$lib/content/services";
+  import { servicesFaqImages, servicesFaqs } from "$lib/content/services";
   import { siteConfig } from "$lib/config/site";
   import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
 
@@ -67,7 +67,7 @@
   <ServicesStandards />
 
   <!-- 4. Reused FAQ Section with custom Services FAQ content -->
-  <FaqSection items={servicesFaqs} />
+  <FaqSection items={servicesFaqs} images={servicesFaqImages} imageFit="contain" />
 
   <!-- 5. Closing Start a Project CTA -->
   <ServicesCta />
