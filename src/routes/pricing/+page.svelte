@@ -9,6 +9,7 @@
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import { siteConfig } from "$lib/config/site";
   import { aboutPageData } from "$lib/content/about";
+  import { pricingPageData, pricingFaqImages } from "$lib/content/pricing";
   import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
 
   const breadcrumbData = buildBreadcrumbSchema([
@@ -50,8 +51,8 @@
 
   <PricingAssurances />
 
-  <!-- Shared Studio FAQ Section ("our faq section alredy have just use it") -->
-  <FaqSection />
+  <!-- Dedicated Studio FAQ Section with Unique Scope & Imagery -->
+  <FaqSection items={pricingPageData.faqs} images={pricingFaqImages} />
 
   <!-- Closing Call-to-Action -->
   <AboutClosingCta closingCta={aboutPageData.closingCta} />

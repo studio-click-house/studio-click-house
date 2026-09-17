@@ -684,7 +684,7 @@
   .video-stage-card {
     position: relative;
     width: 100%;
-    border-radius: 0.95rem;
+    border-radius: 2rem;
     overflow: hidden;
     border: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
     background: var(--color-brand-paper);

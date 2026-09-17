@@ -108,6 +108,6 @@
       heading={pageData.audience.heading}
       items={pageData.audience.items}
     />
-    <FaqSection items={pageData.faqs} />
+    <FaqSection items={pageData.faqs} images={pageData.faqImages} />
     <ServiceDetailCta data={pageData.cta} />
 </main>

@@ -13,104 +13,128 @@
     title: string;
     category: string;
     aspect: "square" | "tall" | "wide";
+    fit?: "cover" | "contain";
+    bg?: string;
   }
 
   const galleryItems: GalleryItem[] = [
     {
       id: "gal-1",
-      src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Fashion model studio beauty portrait skin retouching",
-      title: "Model Studio Beauty Retouch",
+      src: "/images/services/model-beauty/model-rachel-gilbert-evening-dress-0081.webp",
+      alt: "Crystal evening clutch bag vector clipping path and fine reflection balancing",
+      title: "Crystal Evening Bag Retouch",
       category: "retouching",
       aspect: "tall",
+      fit: "contain",
+      bg: "bg-white",
     },
     {
       id: "gal-2",
-      src: "https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Macro diamond ring polishing and sparkle enhancement",
-      title: "Diamond Ring Luxury Retouch",
+      src: "/images/services/jewelry/jewelry-jules-textured-gold-earrings-03-after.webp",
+      alt: "Macro textured gold earrings surface polish and reflection balancing",
+      title: "Jules Textured Gold Earrings Retouch",
       category: "retouching",
       aspect: "wide",
+      fit: "cover",
+      bg: "bg-[#E8E8E8]",
     },
     {
       id: "gal-3",
-      src: "https://images.pexels.com/photos/3989394/pexels-photo-3989394.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Glass perfume bottle isolated with natural drop shadow",
-      title: "Perfume Glassware Isolation",
+      src: "/images/services/bags-accessories/accessories-astral-designer-sunglasses-side-profile-after.webp",
+      alt: "Astral designer sunglasses side profile vector clipping path and isolation",
+      title: "Astral Eyewear Sub-Pixel Clipping",
       category: "clipping-path",
       aspect: "wide",
+      fit: "contain",
+      bg: "bg-white",
     },
     {
       id: "gal-4",
-      src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Fashion model posing under color corrected studio lights",
-      title: "Editorial Silk Color Story",
+      src: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-patterned-jumpsuit-flatlay-after.webp",
+      alt: "Patterned jumpsuit fabric color matching and print calibration",
+      title: "Pattern & Colorway Calibration",
       category: "color-correction",
       aspect: "tall",
+      fit: "contain",
+      bg: "bg-[#F3EADD]",
     },
     {
       id: "gal-5",
-      src: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Mechanical chronograph watch dial separated into vector paths",
-      title: "Luxury Watch Multipath Mask",
-      category: "clipping-path",
-      aspect: "square",
+      src: "/images/services/bags-accessories/accessories-helen-kaminski-newport-straw-hat-3149-after.webp",
+      alt: "Helen Kaminski artisan woven straw hat summer editorial lookbook retouching",
+      title: "Helen Kaminski Summer Editorial Retouch",
+      category: "retouching",
+      aspect: "tall",
+      fit: "cover",
+      bg: "bg-[#B7B6B0]",
     },
     {
       id: "gal-6",
-      src: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1200&q=80",
-      alt: "Hollow tailored coat with invisible ghost mannequin collar composite",
-      title: "Tailored Coat Ghost Mannequin",
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-couture-ruffle-evening-gown-black-after.webp",
+      alt: "Black couture ruffle evening gown invisible ghost mannequin composite",
+      title: "Couture Ruffle Gown 3D Ghost Mannequin",
       category: "ghost-mannequin",
       aspect: "tall",
+      fit: "contain",
+      bg: "bg-white",
     },
     {
       id: "gal-7",
-      src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Female model skincare high-end facial skin retouching",
-      title: "Skincare Luminescence Retouch",
+      src: "/images/services/model-beauty/model-corporate-headshot-executive-male-3683-after.webp",
+      alt: "Corporate executive portrait natural skin retouching and lighting refinement",
+      title: "Executive Commercial Portrait Retouch",
       category: "retouching",
       aspect: "tall",
+      fit: "cover",
     },
     {
       id: "gal-8",
-      src: "https://images.pexels.com/photos/1460838/pexels-photo-1460838.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "High heels luxury shoes isolated with vector clipping path",
-      title: "Footwear Vector Clipping",
+      src: "/images/services/bags-accessories/accessories-antony-morato-designer-footwear-3080.webp",
+      alt: "Antony Morato designer leather footwear isolated with vector clipping",
+      title: "Antony Morato Footwear Vector Path",
       category: "clipping-path",
       aspect: "square",
+      fit: "contain",
+      bg: "bg-white",
     },
     {
       id: "gal-9",
-      src: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
-      alt: "3D CGI cosmetic packaging render with studio reflections and glass caustics",
-      title: "3D CGI Cosmetic Rendering",
+      src: "/images/portfolio/cgi-product-showcase.png",
+      alt: "Studio Click House 3D CGI photorealistic product rendering with caustics",
+      title: "Studio 3D CGI Product Modeling & Render",
       category: "cgi",
       aspect: "square",
+      fit: "cover",
     },
     {
       id: "gal-10",
-      src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Model wearing color corrected silk evening dress",
-      title: "Garment Hue & Swatch Shift",
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-nadine-black-mini-dress-232-after.webp",
+      alt: "Nadine designer mini dress fabric color correction and tone grading",
+      title: "Nadine Mini Dress Tone Calibration",
       category: "color-correction",
       aspect: "tall",
+      fit: "contain",
+      bg: "bg-[#E8E8E8]",
     },
     {
       id: "gal-11",
-      src: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Sneaker product isolated with clean clipping path",
-      title: "Athletic Sneaker Path Isolation",
+      src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-after.webp",
+      alt: "Industrial machinery rack server complex vector path extraction",
+      title: "Technical Equipment Alpha Cutout",
       category: "clipping-path",
       aspect: "square",
+      fit: "contain",
+      bg: "bg-[#202020]",
     },
     {
       id: "gal-12",
-      src: "https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      alt: "Black and white fashion model portrait retouch",
-      title: "Monochrome Editorial Tone",
-      category: "retouching",
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-printemps-zip-through-jacket-walnut-194-after.webp",
+      alt: "Walnut zip-through jacket invisible ghost mannequin hollow neck insertion",
+      title: "Printemps Zip Jacket 3D Neck Joint",
+      category: "ghost-mannequin",
       aspect: "tall",
+      fit: "contain",
+      bg: "bg-[#F2ECE7]",
     },
   ];
 
@@ -305,7 +329,7 @@
         <button
           type="button"
           onclick={() => openImage(item)}
-          class="group relative overflow-hidden rounded-2xl border border-brand-dark/10 bg-white text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300"
+          class="group relative overflow-hidden rounded-2xl border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center {item.fit === 'cover' ? 'p-0' : 'p-4 sm:p-6'}"
           aria-label="View {item.title}"
         >
           <img
@@ -313,7 +337,7 @@
             alt={item.alt}
             loading="lazy"
             decoding="async"
-            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            class="h-full w-full {item.fit === 'cover' ? 'object-cover object-top' : 'object-contain'} transition-transform duration-700 ease-out group-hover:scale-105"
           />
 
           <!-- Editorial Gradient Overlay on Hover (Clean, No Floating Circular Pills) -->
@@ -367,7 +391,7 @@
         <img
           src={selectedImage.src}
           alt={selectedImage.alt}
-          class="h-full w-full object-contain max-h-[72vh] rounded-xl"
+          class="h-full w-full object-contain max-h-[72vh] rounded-xl border border-white/10"
         />
       </div>
 

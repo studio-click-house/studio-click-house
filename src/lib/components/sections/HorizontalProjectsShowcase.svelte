@@ -1130,7 +1130,7 @@
       <div class="work-fields-mobile h-full gap-3">
         {#each workFieldGalleryItems as item (item.id)}
           <article
-            class="work-card relative h-full w-[calc(100vw-2rem)] shrink-0 snap-start overflow-hidden border border-brand-light/10 bg-brand-light/5"
+            class="work-card relative h-full w-[calc(100vw-2rem)] shrink-0 snap-start overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-light/5"
           >
             {#if item.media.kind === "video"}
               <video

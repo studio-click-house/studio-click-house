@@ -107,5 +107,6 @@ export interface ServicePageData {
     items: ServiceAudienceItem[];
   };
   faqs: FaqItem[];
+  faqImages?: PreviewMedia[];
   cta: ServiceDetailCtaData;
 }

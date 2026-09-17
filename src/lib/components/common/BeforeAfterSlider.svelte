@@ -50,7 +50,7 @@
   let active = true;
 
   const backCardClass =
-    "pointer-events-none absolute inset-0 m-0 size-full overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] bg-brand-dark opacity-[0.38] [filter:saturate(0.68)_brightness(0.8)] [transition:transform_0.45s_cubic-bezier(0.16,1,0.3,1),opacity_0.45s_ease] [will-change:transform,opacity] motion-reduce:transition-none";
+    "pointer-events-none absolute inset-0 m-0 size-full overflow-hidden rounded-[2rem] bg-brand-dark opacity-[0.38] [filter:saturate(0.68)_brightness(0.8)] [transition:transform_0.45s_cubic-bezier(0.16,1,0.3,1),opacity_0.45s_ease] [will-change:transform,opacity] motion-reduce:transition-none";
   const comparisonImageClass = "absolute inset-0 m-0 size-full overflow-hidden";
   const comparisonMediaClass =
     "absolute inset-0 size-full scale-[1.02] object-cover";
@@ -244,16 +244,19 @@
     aria-label={ariaLabel}
     onpointermove={handlePointerMove}
     onpointerleave={handlePointerLeave}
-    class="comparison-preview group relative z-[2] isolate m-0 aspect-[4/5] overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] text-brand-light [backface-visibility:hidden] [transform-style:preserve-3d] will-change-transform"
+    class="comparison-preview group relative z-[2] isolate m-0 aspect-[4/5] overflow-hidden rounded-[2rem] bg-white text-brand-light [backface-visibility:hidden] [transform-style:preserve-3d] will-change-transform"
   >
-    <figure class={comparisonImageClass}>
+    <figure
+      class="comparison-before {comparisonImageClass} z-[1] [will-change:clip-path]"
+      style={`--comparison-position: ${sliderPosition}%`}
+    >
       <img
         src={beforeSrc}
         alt={beforeAlt}
         width={beforeWidth}
         height={beforeHeight}
         loading="lazy"
-        class="{comparisonMediaClass} [filter:saturate(0.5)_contrast(0.9)_brightness(0.92)]"
+        class="{comparisonMediaClass} {beforeSrc === afterSrc ? '[filter:saturate(0.5)_contrast(0.9)_brightness(0.92)]' : ''}"
       />
     </figure>
 
@@ -301,6 +304,10 @@
 <style>
   .preview-stack {
     animation: preview-enter 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .comparison-before {
+    clip-path: inset(0 calc(100% - var(--comparison-position)) 0 0);
   }
 
   .comparison-after {

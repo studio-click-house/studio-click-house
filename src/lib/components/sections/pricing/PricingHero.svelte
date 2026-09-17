@@ -15,16 +15,16 @@
       offsetClass: "sm:translate-y-4",
       images: [
         {
-          src: "https://images.pexels.com/photos/37233404/pexels-photo-37233404.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Luxury fashion editorial portrait with skin retouching",
+          src: "/images/services/model-beauty/model-cue-chic-editorial-fashion-0161.webp",
+          alt: "High-fashion luxury lookbook editorial fashion retouching",
         },
         {
-          src: "https://images.pexels.com/photos/3785104/pexels-photo-3785104.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Professional studio beauty headshot",
+          src: "/images/services/model-beauty/model-black-silk-floral-slip-dress-05.webp",
+          alt: "Editorial silk gown fashion color and drape finishing",
         },
         {
-          src: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Creative garment catalog lighting retouching",
+          src: "/images/services/model-beauty/model-male-headshot-leather-jacket-2301-after.webp",
+          alt: "Studio male portrait frequency separation and skin micro-contouring",
         },
       ],
     },
@@ -34,16 +34,16 @@
       offsetClass: "sm:-translate-y-4",
       images: [
         {
-          src: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Photorealistic 3D product render of fragrance bottle",
+          src: "/images/services/product-services/product-furniture-modern-patterned-armchair-velvet.webp",
+          alt: "Photorealistic 3D CGI modern patterned velvet armchair rendering",
         },
         {
-          src: "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Luxury cosmetic tube render on pedestal",
+          src: "/images/services/jewelry/jewelry-aquamarine-emerald-gold-ring-4054.webp",
+          alt: "Luxury 3D emerald and gold fine jewelry macro render",
         },
         {
-          src: "https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Luxury wristwatch CGI close-up staging",
+          src: "/images/services/product-services/product-furniture-scandinavian-wood-side-table-dark.webp",
+          alt: "Architectural Scandinavian dark wood table product staging render",
         },
       ],
     },
@@ -53,16 +53,16 @@
       offsetClass: "sm:translate-y-2",
       images: [
         {
-          src: "https://images.pexels.com/photos/18302102/pexels-photo-18302102.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Luxury perfume still life with studio lighting",
+          src: "/images/services/product-services/service-retouching-pattern-change-after.webp",
+          alt: "Precision garment pattern change and color calibration master",
         },
         {
-          src: "https://images.pexels.com/photos/3018845/pexels-photo-3018845.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Warm color grading still life scene",
+          src: "/images/services/product-services/architectural-aerial-london-cityscape-photography-after.webp",
+          alt: "Cinematic commercial cityscape color grading and atmosphere finishing",
         },
         {
-          src: "https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Moody cinematographic still lighting details",
+          src: "/images/services/jewelry/jewelry-editorial-seashell-gold-necklace-model-2061-after.webp",
+          alt: "Editorial gold jewelry color grading and skin tone balance",
         },
       ],
     },

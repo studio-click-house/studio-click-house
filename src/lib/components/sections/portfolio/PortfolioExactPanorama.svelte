@@ -94,16 +94,16 @@
       class="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[24/9] max-h-[580px] rounded-2xl md:rounded-3xl border border-brand-dark/10 shadow-2xl overflow-hidden bg-brand-dark"
     >
       <img
-        src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=2400&q=85"
-        alt="Fine diamond ring macro refraction and gemstone brilliance"
-        width="2400"
-        height="900"
+        src="/images/services/jewelry/jewelry-oval-diamond-eternity-band-gold-after.webp"
+        alt="Macro fine jewelry oval diamond eternity band refraction and gold luster"
+        width="2000"
+        height="1995"
         loading="lazy"
         decoding="async"
-        class="panorama-frame-img h-full w-full object-cover object-center will-change-transform opacity-90"
+        class="panorama-frame-img h-full w-full object-cover object-center will-change-transform"
       />
 
-      <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-brand-dark/20 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/15 to-transparent pointer-events-none"></div>
 
       <!-- Editorial Spread Caption (Clean Typography, No Floating Pills) -->
       <div class="panorama-caption absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 flex flex-wrap items-end justify-between gap-4 text-brand-light z-10">

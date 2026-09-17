@@ -602,7 +602,7 @@
         {#each cards as card, index (card.id)}
           <div
             data-shape={card.shape}
-            class="orbit-card-item absolute rounded-2xl overflow-hidden cursor-pointer"
+            class="orbit-card-item absolute rounded-[2rem] overflow-hidden cursor-pointer"
             role="button"
             aria-label={$_(`home.aboutOrbit.cards.${card.id}.title`) || card.title}
             tabindex="0"
@@ -615,7 +615,7 @@
             }}
           >
             <figure
-              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-2xl shadow-xl transition-all duration-300 group hover:shadow-2xl"
+              class="orbit-card-visual relative h-full w-full overflow-hidden rounded-[2rem] shadow-xl transition-all duration-300 group hover:shadow-2xl"
             >
               <img
                 src={card.media.src}
@@ -626,7 +626,7 @@
                 height={card.media.height}
                 loading="lazy"
                 decoding="async"
-                class="h-full w-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                class="h-full w-full object-cover rounded-[2rem] transition-transform duration-500 group-hover:scale-105"
               />
 
               <!-- Sleek glass sheen overlay -->
@@ -929,7 +929,7 @@
   .orbit-card-item {
     width: clamp(8.5rem, 14vw, 15rem);
     aspect-ratio: 4 / 5;
-    border-radius: 1rem;
+    border-radius: 2rem;
     backface-visibility: hidden;
     transform-origin: center;
     transform-style: preserve-3d;
@@ -939,7 +939,7 @@
 
   .orbit-card-visual {
     transform-style: preserve-3d;
-    border-radius: 1rem;
+    border-radius: 2rem;
     border: none;
     outline: none;
   }
@@ -1105,7 +1105,7 @@
     .orbit-card-item {
       position: relative !important;
       width: 100%;
-      border-radius: 0.4rem;
+      border-radius: 1.5rem;
       transform: none !important;
     }
 

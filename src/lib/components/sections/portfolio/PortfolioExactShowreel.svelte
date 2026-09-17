@@ -120,7 +120,7 @@
     <div class="showreel-anim-target relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl md:rounded-3xl overflow-hidden border border-brand-dark/10 bg-brand-dark shadow-2xl group">
       <video
         bind:this={showreelVideo}
-        poster="/images/portfolio/portfolio-fashion-studio-hero.jpg"
+        poster="/images/work-fields/studio-production-poster.jpg"
         loop
         muted
         playsinline
@@ -130,10 +130,6 @@
       >
         <source
           src="/videos/work-fields-studio-production.mp4"
-          type="video/mp4"
-        />
-        <source
-          src="https://videos.pexels.com/video-files/29539460/12715672_1920_1080_30fps.mp4"
           type="video/mp4"
         />
       </video>

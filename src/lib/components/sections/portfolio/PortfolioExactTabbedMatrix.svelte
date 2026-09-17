@@ -13,13 +13,15 @@
     desc: string;
     sla: string;
     deliverables: string[];
+    fit: "cover" | "contain";
+    bg?: string;
   }
 
   const services: ServiceItem[] = [
     {
       index: "01",
       label: "Editorial Retouch",
-      image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1400&q=85",
+      image: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
       desc: "High-end fashion retouching, beauty cleaning, and fabric sculpting for global lookbooks and editorial campaigns.",
       sla: "12–24 Hours",
       deliverables: [
@@ -28,11 +30,12 @@
         "Anatomical & Fabric Sculpting",
         "High-End Beauty & Portraiture",
       ],
+      fit: "cover",
     },
     {
       index: "02",
       label: "Vector Clipping",
-      image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1400&q=85",
+      image: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-01-after.webp",
       desc: "Precision hand-drawn clipping paths and multipath masks for flawless background isolation and recoloring.",
       sla: "6–12 Hours",
       deliverables: [
@@ -41,11 +44,13 @@
         "Background Erasure & PNGs",
         "Contact Shadows & Reflections",
       ],
+      fit: "contain",
+      bg: "bg-[#E8E8E8]",
     },
     {
       index: "03",
       label: "Color & Swatches",
-      image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1400&q=85",
+      image: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-colorblock-knit-cardigan-flatlay-after.webp",
       desc: "Calibrating and shifting product colors for absolute brand accuracy and seamless SKU consistency.",
       sla: "12–18 Hours",
       deliverables: [
@@ -54,6 +59,8 @@
         "Product Color Changing",
         "Metallic & Sheen Enhancement",
       ],
+      fit: "contain",
+      bg: "bg-[#FAF8F4]",
     },
     {
       index: "04",
@@ -67,6 +74,8 @@
         "Glass, Caustics & Refractions",
         "Macro Jewelry & Luxury Bottles",
       ],
+      fit: "cover",
+      bg: "bg-[#050505]",
     },
   ];
 
@@ -172,12 +181,12 @@
       aria-labelledby="discipline-tab-{activeTab}"
       class="matrix-anim-target grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-2xl md:rounded-3xl border border-brand-dark/10 bg-white p-6 sm:p-8 lg:p-12 shadow-sm"
     >
-      <!-- Visual Column (Full Edge-to-Edge Frame) -->
-      <div class="lg:col-span-6 relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-brand-dark/5 border border-brand-dark/10">
+      <!-- Visual Column (Clean, Perfectly Fitted Preview Frame) -->
+      <div class="lg:col-span-6 relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-square xl:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden {current.bg || 'bg-white'} border border-brand-dark/10 flex items-center justify-center {current.fit === 'cover' ? 'p-0' : 'p-6 sm:p-10'} shadow-2xs">
         <img
           src={current.image}
           alt="{current.label} deliverable preview"
-          class="h-full w-full object-cover object-center transition-all duration-500"
+          class="h-full w-full {current.fit === 'cover' ? 'object-cover object-center' : 'object-contain object-center'} transition-all duration-500"
           loading="lazy"
           decoding="async"
         />

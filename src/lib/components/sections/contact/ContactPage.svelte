@@ -12,7 +12,11 @@
   } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { scrollToTarget } from "$lib/animations/lenis";
-  import { contactServiceDetails, contactServices } from "$lib/content/contact";
+  import {
+    contactHeroImages,
+    contactServiceDetails,
+    contactServices,
+  } from "$lib/content/contact";
   import { siteConfig } from "$lib/config/site";
   import ContactHeroCard from "./ContactHeroCard.svelte";
   import ContactSignalField from "./ContactSignalField.svelte";
@@ -222,8 +226,8 @@
           <div class="grid grid-cols-[1.18fr_0.82fr] gap-3 sm:gap-3.5">
             <div class="contact-hero-card-wrap contact-hero-card-main">
               <ContactHeroCard
-                src="/images/contact/project-handoff.png"
-                alt="Creative team reviewing fashion contact sheets and marked proofs"
+                src={contactHeroImages[0].src}
+                alt={contactHeroImages[0].alt}
                 width={1024}
                 height={1536}
                 loading="eager"
@@ -233,8 +237,8 @@
             <div class="grid gap-3 sm:gap-3.5">
               <div class="contact-hero-card-wrap contact-hero-card-side">
                 <ContactHeroCard
-                  src="/images/portfolio/photo-editing-showcase.png"
-                  alt="Finished fashion portrait with professional retouching"
+                  src={contactHeroImages[1].src}
+                  alt={contactHeroImages[1].alt}
                   width={1024}
                   height={1024}
                   loading="eager"
@@ -243,8 +247,8 @@
               </div>
               <div class="contact-hero-card-wrap contact-hero-card-side">
                 <ContactHeroCard
-                  src="/images/portfolio/cgi-product-showcase.png"
-                  alt="Finished CGI fragrance visualization"
+                  src={contactHeroImages[2].src}
+                  alt={contactHeroImages[2].alt}
                   width={1024}
                   height={1024}
                   loading="lazy"
@@ -475,7 +479,7 @@
 
         <aside class="lg:col-span-4">
           <div
-            class="overflow-hidden rounded-[1rem] border border-brand-dark/14 bg-brand-light lg:sticky lg:top-24"
+            class="overflow-hidden rounded-[1rem] border border-brand-dark/14 bg-brand-light"
           >
             <figure>
               <img
@@ -484,7 +488,7 @@
                 width="1200"
                 height="900"
                 loading="lazy"
-                class="aspect-[16/9] sm:aspect-[4/3] w-full object-cover object-center"
+                class="aspect-[4/3] w-full object-cover {selectedServiceDetail.objectPosition ?? 'object-center'} transition-[object-position] duration-300"
               />
               <figcaption class="bg-brand-dark p-4 sm:p-5 text-brand-light">
                 <p class="font-display text-xl sm:text-2xl tracking-[-0.02em]">

@@ -115,7 +115,7 @@
     <div class="filmstrip-track flex gap-5 py-2 hover:[animation-play-state:paused]">
       {#each marqueeItems as item, idx (`${item.id}-${idx}`)}
         <article
-          class="group relative aspect-[4/5] w-[17.5rem] shrink-0 overflow-hidden rounded-[0.95rem] transition-all duration-400 hover:-translate-y-1.5 sm:w-[20.5rem] lg:w-[23rem]"
+          class="group relative aspect-[4/5] w-[17.5rem] shrink-0 overflow-hidden rounded-[2rem] transition-all duration-400 hover:-translate-y-1.5 sm:w-[20.5rem] lg:w-[23rem]"
         >
           <!-- High-res Media with smooth zoom -->
           <img

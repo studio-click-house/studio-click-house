@@ -75,7 +75,7 @@
   aria-label="3D tilt visual card"
   onpointermove={handlePointerMove}
   onpointerleave={handlePointerLeave}
-  class="contact-hero-tilt-card relative overflow-hidden rounded-[0.75rem] border border-brand-mist/40 bg-brand-dark select-none [perspective:1000px] [transform-style:preserve-3d] will-change-transform {aspectClass}"
+  class="contact-hero-tilt-card relative overflow-hidden rounded-[0.75rem] select-none [perspective:1000px] [transform-style:preserve-3d] will-change-transform {aspectClass}"
 >
   <img
     {src}
@@ -83,6 +83,6 @@
     {width}
     {height}
     {loading}
-    class="absolute inset-0 size-full scale-[1.01] object-cover pointer-events-none"
+    class="absolute inset-0 size-full object-cover pointer-events-none"
   />
 </div>

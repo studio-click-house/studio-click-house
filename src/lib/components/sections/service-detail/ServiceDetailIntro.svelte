@@ -220,7 +220,7 @@
       {#if studyMedia && stages.length > 0}
         <div class="lg:sticky lg:top-28 lg:col-span-7 lg:self-start lg:pt-6">
           <figure
-            class="sd-study-frame relative mx-auto aspect-[4/5] w-full max-w-[29rem] overflow-hidden rounded-[1.25rem] border border-brand-dark/10 shadow-[0_20px_50px_rgba(0,0,0,0.12)] [transform-style:preserve-3d]"
+            class="sd-study-frame relative mx-auto aspect-[4/5] w-full max-w-[29rem] overflow-hidden rounded-[2rem] border border-brand-dark/10 shadow-[0_20px_50px_rgba(0,0,0,0.12)] [transform-style:preserve-3d]"
           >
             <img
               src={studyMedia.src}

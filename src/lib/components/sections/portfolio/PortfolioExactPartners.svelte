@@ -48,37 +48,37 @@
               return;
             }
 
-            const yOffset = isDesktop ? 26 : isTablet ? 22 : 32;
-            const duration = isDesktop ? 0.75 : isTablet ? 0.65 : 0.65;
-            const stagger = isDesktop ? 0.04 : isTablet ? 0.03 : 0.04;
-            const startTrigger = isDesktop ? "top 80%" : isTablet ? "top 80%" : "top 80%";
+            const yOffset = isDesktop ? 16 : isTablet ? 14 : 18;
+            const duration = isDesktop ? 0.6 : isTablet ? 0.5 : 0.5;
+            const stagger = isDesktop ? 0.03 : isTablet ? 0.02 : 0.03;
+            const startTrigger = "top 95%";
 
             if (header) {
               gsap.from(header, {
                 y: yOffset,
                 autoAlpha: 0,
                 duration,
-                ease: isDesktop ? "power3.out" : "power2.out",
-                clearProps: "transform,opacity",
+                ease: "power2.out",
+                clearProps: "all",
                 scrollTrigger: {
                   trigger: root,
                   start: startTrigger,
-                  toggleActions: "play none none reverse",
+                  once: true,
                 },
               });
             }
 
             gsap.from(tiles, {
               y: yOffset,
-              autoAlpha: 0,
+              opacity: 0,
               duration,
               stagger,
-              ease: isDesktop ? "power3.out" : "power2.out",
-              clearProps: "transform,opacity",
+              ease: "power2.out",
+              clearProps: "all",
               scrollTrigger: {
-                trigger: root.querySelector(".grid"),
+                trigger: root,
                 start: startTrigger,
-                toggleActions: "play none none reverse",
+                once: true,
               },
             });
           }

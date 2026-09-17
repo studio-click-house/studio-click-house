@@ -224,3 +224,35 @@ export const pricingPageData = {
     }
   ]
 };
+
+export const pricingFaqImages: import("$lib/types/content").PreviewMedia[] = [
+  {
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-boody-sleep-tee-lilac-0306-after.webp",
+    alt: "E-commerce volume batch production ghost mannequin apparel export",
+    width: 1500,
+    height: 2000,
+    credit: "Studio Click House",
+  },
+  {
+    src: "/images/services/jewelry/jewelry-westhill-diamond-halo-ring-set-0213.webp",
+    alt: "High-complexity multi-stone diamond fine jewelry macro retouching",
+    width: 2000,
+    height: 2000,
+    credit: "Studio Click House",
+  },
+  {
+    src: "/images/services/model-beauty/model-fashion-denim-jeans-tanktop-289-after.webp",
+    alt: "Single-look studio campaign editorial fashion portrait",
+    width: 1333,
+    height: 2000,
+    credit: "Studio Click House",
+  },
+  {
+    src: "/images/services/model-beauty/model-executive-headshot-male-gradient-bg-0145-after.webp",
+    alt: "Publication-ready executive headshot portrait delivery file",
+    width: 1333,
+    height: 2000,
+    credit: "Studio Click House",
+  },
+];
+

@@ -93,7 +93,7 @@
     <div class="sd-audience-grid grid gap-4 md:grid-cols-3 lg:gap-5">
       {#each items as item (item.title)}
         <article
-          class="sd-audience-card overflow-hidden rounded-[0.95rem] border border-brand-dark/10 bg-brand-paper"
+          class="sd-audience-card overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-paper"
         >
           <figure class="relative aspect-[4/3] overflow-hidden bg-brand-dark/5">
             <img

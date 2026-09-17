@@ -235,7 +235,7 @@
         ></div>
         <div class="relative grid grid-cols-[1.12fr_0.88fr] gap-3 sm:gap-4">
           <figure
-            class="sd-hero-media-card sd-hero-media-primary relative aspect-[4/5.25] overflow-hidden rounded-[1rem] border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45"
+            class="sd-hero-media-card sd-hero-media-primary relative aspect-[4/5.25] overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45"
           >
             <img
               src={data.media.src}
@@ -249,7 +249,7 @@
           <div class="grid content-center gap-3 py-[8%] sm:gap-4">
             {#each data.supportingMedia.slice(0, 2) as item (item.src)}
               <figure
-                class="sd-hero-media-card sd-hero-media-support relative aspect-[5/4] overflow-hidden rounded-[0.85rem] border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35"
+                class="sd-hero-media-card sd-hero-media-support relative aspect-[5/4] overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35"
               >
                 <img
                   src={item.src}

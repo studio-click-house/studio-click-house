@@ -24,7 +24,8 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (context) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = context.conditions!;
+            const { isDesktop, isTablet, isMobile, reduceMotion } =
+              context.conditions!;
             const cards = root.querySelectorAll(".collage-item");
 
             if (reduceMotion) {
@@ -69,7 +70,7 @@
                 },
               });
             }
-          }
+          },
         );
         return () => media.revert();
       }, root);
@@ -99,45 +100,54 @@
         >
           <div class="aspect-[4/3] w-full overflow-hidden bg-brand-dark/5">
             <img
-              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1600&q=85"
-              alt="Haute couture runway model editorial post-production"
-              width="1600"
-              height="900"
+              src="/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp"
+              alt="High-fashion night glam editorial lookbook retouching"
+              width="2000"
+              height="1500"
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          <div class="p-5 border-t border-brand-dark/10 flex items-center justify-between">
+          <div
+            class="p-5 border-t border-brand-dark/10 flex items-center justify-between"
+          >
             <span class="font-display text-base font-normal text-brand-dark">
-              {$_('portfolio.collage.selectedCampaign') || 'Editorial Showcase'}
+              {$_("portfolio.collage.selectedCampaign") || "Editorial Showcase"}
             </span>
-            <span class="font-mono text-xs text-brand-dark/50">Paris & Milan Seasons</span>
+            <span class="font-mono text-xs text-brand-dark/50"
+              >Paris & Milan Seasons</span
+            >
           </div>
         </div>
 
         <!-- Middle-Left: Micro-row (Text block on left + Garment Swatch on right) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6 items-center"
+        >
           <div class="collage-item flex flex-col justify-center">
             <h3 class="font-display text-2xl font-normal text-brand-dark mb-2">
-              {$_('portfolio.collage.pantonePrecision') || 'Pantone Precision'}
+              {$_("portfolio.collage.pantonePrecision") || "Pantone Precision"}
             </h3>
-            <p class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal">
-              {$_('portfolio.collage.pantoneDesc') || 'Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks.'}
+            <p
+              class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal"
+            >
+              {$_("portfolio.collage.pantoneDesc") ||
+                "Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks."}
             </p>
           </div>
 
           <div
-            class="collage-item group aspect-square overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
+            class="collage-item group aspect-square overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm flex items-center justify-center p-3 sm:p-4"
           >
             <img
-              src="https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&w=800&q=85"
-              alt="Pleated silk garment colorway calibration detail"
-              width="600"
-              height="600"
+              src="/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-front-after.webp"
+              alt="Antony Morato winter parka garment colorway calibration and tone fidelity"
+              width="2000"
+              height="2000"
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
             />
           </div>
         </div>
@@ -147,39 +157,51 @@
       <div class="md:col-span-6 flex flex-col gap-8">
         <!-- Top Right Story Header & Paragraph -->
         <div class="collage-item pt-2 pb-2">
-          <span class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold block mb-2">
-            {$_('portfolio.collage.selectedCampaign') || 'Selected Campaign'}
+          <span
+            class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold block mb-2"
+          >
+            {$_("portfolio.collage.selectedCampaign") || "Selected Campaign"}
           </span>
-          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-brand-dark leading-tight tracking-tight mb-3">
-            {$_('portfolio.collage.hauteCouture') || 'Haute Couture Retouch'}
+          <h2
+            class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-brand-dark leading-tight tracking-tight mb-3"
+          >
+            {$_("portfolio.collage.hauteCouture") || "Haute Couture Retouch"}
           </h2>
-          <p class="text-sm sm:text-base text-brand-dark/80 font-normal leading-relaxed max-w-lg">
-            {$_('portfolio.collage.hauteCoutureDesc') || 'High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines.'}
+          <p
+            class="text-sm sm:text-base text-brand-dark/80 font-normal leading-relaxed max-w-lg"
+          >
+            {$_("portfolio.collage.hauteCoutureDesc") ||
+              "High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines."}
           </p>
         </div>
 
         <!-- Middle-Right: Micro-row (Portrait Image on left + Description text on right) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6 items-center"
+        >
           <div
-            class="collage-item group aspect-[3/4] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
+            class="collage-item group aspect-[3/4] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm flex items-center justify-center p-2 sm:p-3"
           >
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85"
-              alt="High-end studio beauty editorial skin texture and micro-contouring"
-              width="1600"
-              height="900"
+              src="/images/services/model-beauty/model-female-headshot-white-blouse-0997-after.webp"
+              alt="High-end studio beauty editorial skin texture and micro-contouring retouch"
+              width="1333"
+              height="2000"
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
             />
           </div>
 
           <div class="collage-item flex flex-col justify-center">
             <h3 class="font-display text-2xl font-normal text-brand-dark mb-2">
-              {$_('portfolio.collage.microContouring') || 'Micro Contouring'}
+              {$_("portfolio.collage.microContouring") || "Micro Contouring"}
             </h3>
-            <p class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal">
-              {$_('portfolio.collage.microContouringDesc') || 'Non-destructive frequency separation preserving pore fidelity and natural skin luminescence.'}
+            <p
+              class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal"
+            >
+              {$_("portfolio.collage.microContouringDesc") ||
+                "Non-destructive frequency separation preserving pore fidelity and natural skin luminescence."}
             </p>
           </div>
         </div>
@@ -188,23 +210,28 @@
         <div
           class="collage-item group overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
         >
-          <div class="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-brand-dark/5">
+          <div
+            class="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-white flex items-center justify-center p-4 sm:p-8"
+          >
             <img
-              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=85"
-              alt="Athletic footwear vector pen clipping and studio contact shadow isolation"
-              width="1600"
-              height="900"
+              src="/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp"
+              alt="Antony Morato designer white leather sneakers vector pen clipping and contact shadow isolation"
+              width="1400"
+              height="2000"
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              class="h-full w-full object-contain object-center transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          <div class="flex items-center justify-between border-t border-brand-dark/10 p-4">
+          <div
+            class="flex items-center justify-between border-t border-brand-dark/10 p-4"
+          >
             <h4 class="font-display text-base font-normal text-brand-dark">
-              {$_('portfolio.collage.footwearIsolation') || 'Footwear Vector Isolation'}
+              {$_("portfolio.collage.footwearIsolation") ||
+                "Footwear Vector Isolation"}
             </h4>
             <span class="font-mono text-xs text-brand-dark/50">
-              {$_('portfolio.collage.archiveBadge') || '2026 Archive'}
+              {$_("portfolio.collage.archiveBadge") || "2026 Archive"}
             </span>
           </div>
         </div>
