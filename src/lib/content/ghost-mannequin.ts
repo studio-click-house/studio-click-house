@@ -2,20 +2,20 @@ import type { ServicePageData } from "$lib/types/service-detail";
 
 const ghostMannequinMedia = {
   heroPrimary: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-before.webp",
-    alt: "Ice-blue knit cardigan with precision neck joint and invisible mannequin hollow interior",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
+    alt: "Ice-blue knit cardigan finished ghost mannequin presentation with hollow interior and brand label",
     width: 1420,
     height: 2000,
   },
-  heroJacket: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-4m-womens-tailored-jacket-412-before.webp",
-    alt: "Tailored women's suit jacket with balanced lapels and composite interior neck lining",
-    width: 1334,
+  heroTee: {
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-flux-tee-walnut-brown-white.webp",
+    alt: "Walnut brown streetwear tee with precision neck joint and brand label",
+    width: 1420,
     height: 2000,
   },
-  heroCoat: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-4m-mens-tailored-coat-007-before.webp",
-    alt: "Men's tailored winter coat with structured shoulders and hollow-body drape",
+  heroKnit: {
+    src: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-colorblock-knit-cardigan-white.webp",
+    alt: "Colorblock knit cardigan ghost mannequin presentation with interior collar",
     width: 1333,
     height: 2000,
   },
@@ -50,21 +50,21 @@ const ghostMannequinMedia = {
     height: 2000,
   },
   showcaseShirt: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-mens-button-shirt-012-after.webp",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-mens-button-shirt-012-after-white.webp",
     alt: "Men's tailored button-down shirt with seamless invisible collar joint and inner label",
     width: 1429,
     height: 2000,
   },
   showcaseGown: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-chloe-black-gown-g1-after.webp",
-    alt: "Luxury evening gown hollow mannequin presentation with elegant drape",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-chloe-black-gown-g1-white.webp",
+    alt: "Luxury evening gown hollow mannequin presentation with elegant drape and neckline",
     width: 1500,
     height: 2000,
   },
-  showcaseKnitwear: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-womens-knitwear-0038-after.webp",
-    alt: "Fine knitwear top composited with interior neck opening and authentic volume",
-    width: 1429,
+  showcaseParka: {
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-front-after.webp",
+    alt: "Tailored winter parka with 3D hood volume and seamless ghost mannequin collar joint",
+    width: 2000,
     height: 2000,
   },
   galleryBlazer: {
@@ -104,22 +104,22 @@ const ghostMannequinMedia = {
     height: 2000,
   },
   audienceFashion: {
-    src: "/images/services/model-beauty/model-black-silk-floral-slip-dress-27.webp",
-    alt: "Fashion brand e-commerce lookbook and apparel catalog collection",
-    width: 1408,
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-couture-ruffle-evening-gown-black-square.webp",
+    alt: "Luxury couture evening gown ghost mannequin presentation with hollow neckline and flowing drape",
+    width: 2000,
     height: 2000,
   },
   audienceMarketplaces: {
-    src: "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-loungewear-pants-0959-after.webp",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-printemps-zip-through-jacket-walnut-square.webp",
     alt: "E-commerce marketplace apparel listing with clean white background and uniform drape",
-    width: 1500,
+    width: 2000,
     height: 2000,
   },
   audiencePhotographers: {
-    src: "/images/services/model-beauty/model-studio-spotlight-portrait-before.webp",
-    alt: "Commercial fashion photo studio lighting and camera setup",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-back-after.webp",
+    alt: "Commercial apparel photoshoot deliverable with 3D hood volume and inner lining composite",
     width: 2000,
-    height: 1333,
+    height: 2000,
   },
 } as const;
 
@@ -134,12 +134,13 @@ export const ghostMannequinPage: ServicePageData = {
   hero: {
     title: "Ghost",
     titleAccent: "Mannequin.",
+    theme: "light",
     description:
       "Show the fit and shape of apparel without a visible mannequin. We combine front, back, and inner-collar shots into clean hollow-man product images.",
     media: ghostMannequinMedia.heroPrimary,
     supportingMedia: [
-      ghostMannequinMedia.heroJacket,
-      ghostMannequinMedia.heroCoat,
+      ghostMannequinMedia.heroTee,
+      ghostMannequinMedia.heroKnit,
     ],
   },
   intro: {
@@ -186,6 +187,7 @@ export const ghostMannequinPage: ServicePageData = {
     heading: "Ghost mannequin editing for apparel catalogs",
     description:
       "Whether you sell tailored suits, activewear, lingerie, or luxury knitwear, our 24/7 post-production studio delivers consistent, high-volume ghost mannequin edits with rapid turnaround.",
+    theme: "light",
     stats: [
       { value: "3,000+", label: "Garments processed weekly" },
       { value: "100%", label: "Consistent hem & neckline alignment" },
@@ -197,7 +199,7 @@ export const ghostMannequinPage: ServicePageData = {
         alt: ghostMannequinMedia.showcaseShirt.alt,
         width: ghostMannequinMedia.showcaseShirt.width,
         height: ghostMannequinMedia.showcaseShirt.height,
-        caption: "Blazer & shirt neck joint",
+        caption: "3D hollow garment volume",
       },
       {
         src: ghostMannequinMedia.showcaseGown.src,
@@ -207,11 +209,11 @@ export const ghostMannequinPage: ServicePageData = {
         caption: "Dress & gown volume shaping",
       },
       {
-        src: ghostMannequinMedia.showcaseKnitwear.src,
-        alt: ghostMannequinMedia.showcaseKnitwear.alt,
-        width: ghostMannequinMedia.showcaseKnitwear.width,
-        height: ghostMannequinMedia.showcaseKnitwear.height,
-        caption: "Catalog series uniformity",
+        src: ghostMannequinMedia.showcaseParka.src,
+        alt: ghostMannequinMedia.showcaseParka.alt,
+        width: ghostMannequinMedia.showcaseParka.width,
+        height: ghostMannequinMedia.showcaseParka.height,
+        caption: "Outerwear hood & neckline composite",
       },
     ],
   },
@@ -387,37 +389,37 @@ export const ghostMannequinPage: ServicePageData = {
   ],
   faqImages: [
     {
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-boody-raglan-sleep-top-lilac-alt.webp",
-      alt: "Front and back garment photography setup showing collar label for invisible mannequin editing",
-      width: 1541,
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-printemps-zip-through-jacket-walnut-194-after.webp",
+      alt: "Tailored zip jacket showing symmetrical sleeves and hollow neck joint",
+      width: 1419,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-batwing-shirt-back-after.webp",
-      alt: "3D volume, sleeve symmetry, and bottom hem compositing on silk apparel",
-      width: 1333,
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-couture-ruffle-evening-gown-black-after.webp",
+      alt: "3D hollow volume, sleeve shaping, and flowing bottom hemline composite on luxury couture gown",
+      width: 1334,
       height: 2000,
       credit: "Studio Click House",
     },
     {
       src: "/images/services/ghost-mannequin-apparel/apparel-kids-heart-star-pajama-pants-flatlay-after.webp",
-      alt: "Wrinkle-smoothed garment presentation retaining natural fabric texture",
+      alt: "Wrinkle-smoothed garment presentation retaining natural fabric texture and waistband depth",
       width: 1333,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-boody-sleep-shorts-lilac-0265-after.webp",
-      alt: "Clean transparent background apparel cutout ready for e-commerce catalog",
-      width: 1541,
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-feather-throw-over-back-after.webp",
+      alt: "Designer throw-over silk outerwear showing clean hemline composite",
+      width: 1333,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-silk-headscarf-marchesa-before.webp",
-      alt: "High-end luxury fashion accessory trial sample for ghost mannequin service",
-      width: 1333,
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-nadine-black-mini-dress-232-after.webp",
+      alt: "Contemporary mini dress with clean shoulder joint and bottom hem shaping",
+      width: 1500,
       height: 2000,
       credit: "Studio Click House",
     },

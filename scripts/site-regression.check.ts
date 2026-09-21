@@ -107,6 +107,7 @@ assert(homeHero.includes("handleFirstVideoIntent"), "The large hero video must w
 assert(homeHero.includes("lg:min-h-[11rem]"), "The desktop hero detail must reserve stable space during font swap");
 
 const preloader = read("src/lib/components/animations/SitePreloader.svelte");
+assert(preloader.includes('(min-width: 64rem)'), "The preloader must be limited to desktop viewports");
 assert(preloader.includes("schl-logo-360.webp"), "The preloader must use its display-sized optimized logo");
 assert(/\.preloader-logo-complete\s*\{[^}]*opacity:\s*0\.08;/s.test(preloader), "The preloader must expose immediate first-paint content");
 assert(preloader.indexOf('classList.add("preloader-measure-target")') < preloader.indexOf("const sourceRect"), "Preloader layout reads must be batched after its measurement class write");

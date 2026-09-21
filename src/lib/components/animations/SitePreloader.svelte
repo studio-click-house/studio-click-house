@@ -25,6 +25,21 @@
   let logoElement = $state<HTMLDivElement>();
 
   onMount(() => {
+    const isDesktopViewport = window.matchMedia("(min-width: 64rem)").matches;
+
+    if (!isDesktopViewport) {
+      isVisible = false;
+      document.documentElement.dataset.preloaderComplete = "true";
+
+      const completionFrame = window.setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("site-preloader-header-reveal"));
+        window.dispatchEvent(new CustomEvent("site-preloader-logo-landed"));
+        window.dispatchEvent(new CustomEvent("site-preloader-complete"));
+      }, 0);
+
+      return () => window.clearTimeout(completionFrame);
+    }
+
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -580,6 +595,12 @@
     z-index: 200;
     overflow: hidden;
     pointer-events: auto;
+  }
+
+  @media (max-width: 63.999rem) {
+    .site-preloader {
+      display: none;
+    }
   }
 
   .site-preloader-exiting {

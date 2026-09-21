@@ -1,53 +1,52 @@
-import { previewMedia } from "$lib/content/media";
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const editorialRetouchingMedia = {
   heroPortrait: {
-    src: "https://images.pexels.com/photos/37233404/pexels-photo-37233404.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    src: "/images/services/model-beauty/model-cue-chic-editorial-fashion-0161.webp",
     alt: "High-end editorial beauty portrait with preserved natural skin texture and controlled highlights",
-    width: 1800,
-    height: 2400,
+    width: 1600,
+    height: 2000,
   },
   heroFashion: {
-    src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/model-beauty/model-cue-designer-fashion-editorial-0137.webp",
     alt: "High-fashion model in designer garment with refined magazine-grade color grading",
     width: 1600,
     height: 2000,
   },
   heroMonochrome: {
-    src: "https://images.pexels.com/photos/24972993/pexels-photo-24972993.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/model-beauty/beauty-high-fashion-orchid-headpiece-portrait-after.webp",
     alt: "Monochrome editorial portrait highlighting dramatic light sculpting and contrast",
-    width: 1600,
+    width: 1500,
     height: 2000,
   },
   introSkin: {
-    src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/model-beauty/beauty-skincare-facial-cream-retouch-0097-after.webp",
     alt: "Macro beauty shot showing frequency separation with authentic pore detail",
-    width: 1600,
-    height: 2000,
+    width: 2000,
+    height: 1500,
   },
   introHair: {
-    src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp",
     alt: "Editorial hair styling with flyaway cleanup and controlled shine",
-    width: 1600,
-    height: 2000,
+    width: 2000,
+    height: 1500,
   },
   comparisonOriginal: {
-    src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    src: "/images/services/model-beauty/beauty-portrait-close-up-skincare-retouch-0500-before.webp",
     alt: "Raw beauty portrait with uneven studio lighting, blemishes, and flyaway hairs",
-    width: 1400,
-    height: 1800,
+    width: 2000,
+    height: 1500,
   },
   comparisonEditorial: {
-    src: "https://images.pexels.com/photos/30231432/pexels-photo-30231432.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    src: "/images/services/model-beauty/beauty-portrait-close-up-skincare-retouch-0500-after.webp",
     alt: "Finished magazine-grade beauty retouching with authentic skin pores and dodge and burn sculpting",
-    width: 1400,
-    height: 1800,
+    width: 2000,
+    height: 1500,
   },
   audienceAgencies: {
-    src: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/model-beauty/model-male-headshot-leather-jacket-2301-after.webp",
     alt: "Editorial art director and beauty photographer reviewing high-resolution proofs",
-    width: 1600,
+    width: 1333,
     height: 2000,
   },
 } as const;
@@ -55,14 +54,15 @@ const editorialRetouchingMedia = {
 export const editorialRetouchingPage: ServicePageData = {
   slug: "editorial-retouching",
   seo: {
-    title:
-      "Editorial Photo Retouching | Studio Click House",
+    title: "Editorial Photo Retouching | Studio Click House",
     description:
       "High-end editorial photo retouching by Studio Click House. Frequency separation, micro dodge and burn, natural skin pore preservation, flyaway hair cleanup, and color grading for fashion magazines.",
   },
   hero: {
     title: "Editorial",
     titleAccent: "Retouching.",
+    theme: "light",
+    titleWidth: "wide",
     description:
       "Photo retouching for fashion campaigns, beauty close-ups, and magazine covers. Manual dodge and burn and frequency separation refine each frame while keeping real skin texture and lighting character.",
     media: editorialRetouchingMedia.heroPortrait,
@@ -93,7 +93,12 @@ export const editorialRetouchingPage: ServicePageData = {
         label: "Color Harmonization & Mood Grading",
         description:
           "Editorial grade tones, color balance, and filmic contrast are applied in calibrated 16-bit ProPhoto/Adobe RGB color spaces.",
-        media: previewMedia.redStudioPortrait,
+        media: {
+          src: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
+          alt: "Editorial makeup portrait with controlled color and contrast",
+          width: 2000,
+          height: 1500,
+        },
       },
     ],
   },
@@ -122,24 +127,24 @@ export const editorialRetouchingPage: ServicePageData = {
     ],
     gallery: [
       {
-        src: previewMedia.studioPortrait.src,
+        src: "/images/services/model-beauty/model-black-silk-floral-slip-dress-05.webp",
         alt: "Studio fashion portrait with refined skin tones and soft specular highlights",
-        width: previewMedia.studioPortrait.width,
-        height: previewMedia.studioPortrait.height,
+        width: 1408,
+        height: 2000,
         caption: "High-fashion beauty grade",
       },
       {
-        src: previewMedia.redStudioPortrait.src,
+        src: "/images/services/model-beauty/beauty-fashion-neon-escalator-crystal-glam.webp",
         alt: "Vivid editorial fashion story with saturated tonal styling",
-        width: previewMedia.redStudioPortrait.width,
-        height: previewMedia.redStudioPortrait.height,
+        width: 2000,
+        height: 1500,
         caption: "Color-driven campaign look",
       },
       {
-        src: previewMedia.monochromePortrait.src,
-        alt: "Dramatic black-and-white fashion portrait with sculpted shadows",
-        width: previewMedia.monochromePortrait.width,
-        height: previewMedia.monochromePortrait.height,
+        src: "/images/services/model-beauty/model-menswear-streetwear-studio-127.webp",
+        alt: "Dramatic fashion portrait with sculpted shadows",
+        width: 1400,
+        height: 2000,
         caption: "Monochrome contrast study",
       },
     ],
@@ -155,10 +160,10 @@ export const editorialRetouchingPage: ServicePageData = {
         category: "Beauty",
         technique: "Micro Dodge & Burn + Specular Shaping",
         media: {
-          src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/beauty-editorial-glam-leopard-portrait-298-after.webp",
           alt: "Macro beauty skin retouching",
-          width: 1200,
-          height: 1600,
+          width: 1500,
+          height: 2000,
         },
       },
       {
@@ -167,10 +172,10 @@ export const editorialRetouchingPage: ServicePageData = {
         category: "Fashion",
         technique: "Garment Fabric & Crease Refinement",
         media: {
-          src: "https://images.pexels.com/photos/2738173/pexels-photo-2738173.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/model-michael-lo-sordo-ivory-couture-0393-after.webp",
           alt: "High fashion editorial retouching",
-          width: 1200,
-          height: 1600,
+          width: 1333,
+          height: 2000,
         },
       },
       {
@@ -179,10 +184,10 @@ export const editorialRetouchingPage: ServicePageData = {
         category: "Hair Styling",
         technique: "Flyaway Removal & Volume Painting",
         media: {
-          src: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/beauty-high-fashion-orchid-headpiece-portrait-before.webp",
           alt: "Hair care campaign retouching",
-          width: 1200,
-          height: 1600,
+          width: 1500,
+          height: 2000,
         },
       },
       {
@@ -191,10 +196,10 @@ export const editorialRetouchingPage: ServicePageData = {
         category: "Editorial",
         technique: "Tone Curve & Color Grading",
         media: {
-          src: "https://images.pexels.com/photos/30231432/pexels-photo-30231432.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/model-rachel-gilbert-designer-gown-0094.webp",
           alt: "Fine art editorial portrait grade",
-          width: 1200,
-          height: 1600,
+          width: 1333,
+          height: 2000,
         },
       },
       {
@@ -203,10 +208,10 @@ export const editorialRetouchingPage: ServicePageData = {
         category: "Campaign",
         technique: "Atmospheric Lighting & Skin Tone Match",
         media: {
-          src: "https://images.pexels.com/photos/18336955/pexels-photo-18336955.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/model-soleil-blue-resortwear-editorial-1308.webp",
           alt: "Campaign location fashion retouching",
-          width: 1200,
-          height: 1600,
+          width: 1333,
+          height: 2000,
         },
       },
       {
@@ -215,10 +220,10 @@ export const editorialRetouchingPage: ServicePageData = {
         category: "Monochrome",
         technique: "Tonal Zone Luminance Sculpting",
         media: {
-          src: "https://images.pexels.com/photos/24972993/pexels-photo-24972993.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/model-executive-headshot-male-gradient-bg-0033.webp",
           alt: "Monochrome beauty lighting retouching",
-          width: 1200,
-          height: 1600,
+          width: 1333,
+          height: 2000,
         },
       },
     ],
@@ -277,13 +282,23 @@ export const editorialRetouchingPage: ServicePageData = {
         title: "Magazine Editors & Art Directors",
         description:
           "Ensure cover stories and editorial spreads meet high-resolution print press standards with zero digital artifacts.",
-        media: previewMedia.editingWorkspace,
+        media: {
+          src: "/images/services/model-beauty/model-female-headshot-white-blouse-0997-after.webp",
+          alt: "Editorial portrait prepared for magazine proofing and art direction review",
+          width: 1333,
+          height: 2000,
+        },
       },
       {
         title: "Cosmetic & Luxury Fashion Brands",
         description:
           "Produce campaign imagery with controlled texture, considered lighting, and a finish that fits the brand.",
-        media: previewMedia.photoEditingShowcase,
+        media: {
+          src: "/images/services/model-beauty/model-rachel-gilbert-evening-dress-0081.webp",
+          alt: "Luxury fashion campaign portrait with controlled texture and lighting",
+          width: 1333,
+          height: 2000,
+        },
       },
     ],
   },
@@ -312,6 +327,43 @@ export const editorialRetouchingPage: ServicePageData = {
       question: "Do you offer test edits on our RAW files?",
       answer:
         "Yes, we offer a complimentary test edit on 1 to 2 RAW files so you can review our skin texture fidelity and color styling before booking your project.",
+    },
+  ],
+  faqImages: [
+    {
+      src: "/images/services/model-beauty/beauty-skincare-facial-cream-retouch-0097-before.webp",
+      alt: "Beauty portrait before editorial skin retouching",
+      width: 2000,
+      height: 1500,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/model-beauty/model-cue-tailored-fashion-studio-0145.webp",
+      alt: "Tailored fashion portrait prepared for an editorial lookbook",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/model-beauty/model-fashion-male-suit-street-editorial-after.webp",
+      alt: "Editorial menswear portrait with refined garment texture and light",
+      width: 1544,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/model-beauty/model-corporate-headshot-executive-male-3683-after.webp",
+      alt: "Male portrait with natural skin texture and controlled tonal finish",
+      width: 1333,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/model-beauty/model-soleil-blue-summer-fashion-1862.webp",
+      alt: "Summer fashion editorial portrait with clean color and fabric detail",
+      width: 1333,
+      height: 2000,
+      credit: "Studio Click House",
     },
   ],
   cta: {

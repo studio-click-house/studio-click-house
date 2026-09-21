@@ -3,7 +3,7 @@ import type { ServicePageData } from "$lib/types/service-detail";
 
 const clippingPathMedia = {
   heroPenPath: {
-    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-01-before.webp",
+    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-01-after-white.webp",
     alt: "Luxury black leather handbag with hand-plotted pen tool vector clipping path",
     width: 1500,
     height: 2000,
@@ -15,19 +15,19 @@ const clippingPathMedia = {
     height: 2000,
   },
   heroJewelry: {
-    src: "/images/services/bags-accessories/accessories-salinas-designer-sunglasses-front-view-before.webp",
+    src: "/images/services/bags-accessories/accessories-salinas-designer-sunglasses-front-view-after.webp",
     alt: "Designer sunglasses with curved frame and lens knockout vector path",
     width: 1600,
     height: 2000,
   },
   introCurve: {
-    src: "/images/services/bags-accessories/accessories-astral-designer-sunglasses-side-profile-before.webp",
+    src: "/images/services/bags-accessories/accessories-astral-designer-sunglasses-side-profile-after.webp",
     alt: "Curved eyewear temple contour with sub-pixel bezier anchor points",
     width: 1600,
     height: 2000,
   },
   introComplex: {
-    src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-before.webp",
+    src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-after.webp",
     alt: "Metallic luxury bag with independent multi-path layer isolation for hardware and leather",
     width: 1500,
     height: 2000,
@@ -64,12 +64,12 @@ const clippingPathMedia = {
     height: 2000,
     caption: "Headwear contour vector path",
   },
-  showcaseApparel: {
-    src: "/images/services/ghost-mannequin-apparel/apparel-huxbaby-kids-patterned-romper-01.webp",
-    alt: "Children's patterned apparel contour with neckline and button clipping paths",
-    width: 1500,
+  showcaseFootwear: {
+    src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
+    alt: "Designer leather footwear vector clipping path contour",
+    width: 1400,
     height: 2000,
-    caption: "Apparel contour clipping",
+    caption: "Footwear contour vector path",
   },
   gallerySimple: {
     src: "/images/services/bags-accessories/accessories-mini-insignia-cap-race-green-01.webp",
@@ -78,7 +78,7 @@ const clippingPathMedia = {
     height: 2000,
   },
   galleryMedium: {
-    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-before.webp",
+    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-after.webp",
     alt: "Dual handle and metallic buckle multi-hole knockouts",
     width: 1500,
     height: 2000,
@@ -90,33 +90,33 @@ const clippingPathMedia = {
     height: 2000,
   },
   galleryApparel: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-couture-ruffle-evening-gown-black-before.webp",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-couture-ruffle-evening-gown-black-after.webp",
     alt: "Intricate evening gown fabric folds and ruffle silhouette pathing",
     width: 1334,
     height: 2000,
   },
   galleryCosmetics: {
-    src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-before.webp",
+    src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
     alt: "Product bottle with cap, label, and body multi-path isolation channels",
     width: 1526,
     height: 2000,
   },
   gallerySuperComplex: {
-    src: "/images/services/ghost-mannequin-apparel/apparel-ada-tactical-body-armour-vest-0059-before.webp",
+    src: "/images/services/ghost-mannequin-apparel/apparel-ada-tactical-body-armour-vest-0059-after.webp",
     alt: "Super complex tactical vest with multiple straps, buckles, and webbing knockouts",
     width: 1500,
     height: 2000,
   },
   audiencePublishers: {
-    src: "/images/services/ghost-mannequin-apparel/apparel-tinycottons-heart-print-jumpsuit-flatlay-after.webp",
-    alt: "Catalog children's apparel flatlay prepared with clean vector clipping path for print pre-press",
-    width: 1333,
+    src: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-colorblock-knit-cardigan-white.webp",
+    alt: "Catalog knitwear apparel flatlay prepared with clean vector clipping path for print pre-press",
+    width: 1600,
     height: 2000,
   },
   audienceAdvertising: {
-    src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-before.webp",
+    src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-after.webp",
     alt: "Commercial packaging and advertising flatlay packshot cutout",
-    width: 1445,
+    width: 1600,
     height: 2000,
   },
   audienceCommercial: {
@@ -138,6 +138,7 @@ export const clippingPathPage: ServicePageData = {
   hero: {
     title: "Clipping",
     titleAccent: "Path.",
+    theme: "light",
     description:
       "Hand-drawn vector paths created in Adobe Photoshop at high magnification, supplied in layered PSD or pre-press TIFF files for print and digital use.",
     media: clippingPathMedia.heroPenPath,
@@ -188,6 +189,7 @@ export const clippingPathPage: ServicePageData = {
   },
   showcase: {
     heading: "Clipping paths for catalogs and print production",
+    theme: "light",
     description:
       "Our team processes complex multi-path assignments for leading fashion lookbooks, commercial packaging designers, and global e-commerce retail networks.",
     stats: [
@@ -211,11 +213,11 @@ export const clippingPathPage: ServicePageData = {
         caption: clippingPathMedia.showcaseAccessories.caption,
       },
       {
-        src: clippingPathMedia.showcaseApparel.src,
-        alt: clippingPathMedia.showcaseApparel.alt,
-        width: clippingPathMedia.showcaseApparel.width,
-        height: clippingPathMedia.showcaseApparel.height,
-        caption: clippingPathMedia.showcaseApparel.caption,
+        src: clippingPathMedia.showcaseFootwear.src,
+        alt: clippingPathMedia.showcaseFootwear.alt,
+        width: clippingPathMedia.showcaseFootwear.width,
+        height: clippingPathMedia.showcaseFootwear.height,
+        caption: clippingPathMedia.showcaseFootwear.caption,
       },
     ],
   },
@@ -361,37 +363,37 @@ export const clippingPathPage: ServicePageData = {
   ],
   faqImages: [
     {
-      src: "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-before.webp",
-      alt: "Sculptural gold jewelry bangle vector clipping path outline",
+      src: "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
+      alt: "Sculptural gold jewelry bangle vector clipping path knockout",
       width: 1500,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-before.webp",
-      alt: "Cosmetic product bottle with clean vector path isolation",
-      width: 1526,
+      src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-01-after.webp",
+      alt: "Luxury metallic handbag multi-path vector isolation",
+      width: 1500,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/jewelry/jewelry-westwood-statement-gold-earrings-02-before.webp",
+      src: "/images/services/jewelry/jewelry-westwood-statement-gold-earrings-02-after.webp",
       alt: "Statement gold earrings outlined with multi-point vector pathing",
       width: 1500,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-flux-tee-walnut-brown-after.webp",
-      alt: "Apparel t-shirt cleanly isolated with manual pen tool path",
-      width: 1420,
+      src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
+      alt: "Cosmetic product bottle with clean vector path isolation",
+      width: 1526,
       height: 2000,
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-boody-raglan-sleep-top-lilac-after.webp",
-      alt: "High-volume catalog sleep top cutout with precision vector clipping path",
-      width: 1541,
+      src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
+      alt: "High-volume catalog footwear cutout with precision vector clipping path",
+      width: 1400,
       height: 2000,
       credit: "Studio Click House",
     },

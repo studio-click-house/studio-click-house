@@ -4,9 +4,11 @@
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceShowcaseData } from "$lib/types/service-detail";
+  import { cn } from "$lib/utils";
 
   let { data } = $props<{ data: ServiceShowcaseData }>();
   let section = $state<HTMLElement>();
+  const isLight = $derived(data.theme === "light");
 
   onMount(() => {
     let active = true;
@@ -172,7 +174,7 @@
         <div class="grid grid-cols-[1.12fr_0.88fr] gap-3 sm:gap-4">
           {#if data.gallery?.[0] && data.stats?.[0]}
             <figure
-              class="sd-proof-card sd-proof-card-main group relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-brand-dark cursor-pointer"
+              class="sd-proof-card sd-proof-card-main group relative aspect-[4/5] overflow-hidden rounded-[2rem] cursor-pointer transition-all duration-300 bg-white"
             >
               <img
                 src={data.gallery[0].src}
@@ -180,12 +182,14 @@
                 width={data.gallery[0].width}
                 height={data.gallery[0].height}
                 loading="lazy"
-                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <span
-                class="absolute inset-0 bg-gradient-to-t from-brand-dark/92 via-brand-dark/15 to-transparent transition-opacity duration-500 group-hover:opacity-85"
+                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/92 via-brand-dark/20 to-transparent transition-opacity duration-500 group-hover:opacity-85"
               ></span>
-              <figcaption class="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+              <figcaption
+                class="absolute inset-x-0 bottom-0 p-5 sm:p-6 text-brand-light"
+              >
                 <span class="block overflow-hidden pb-1">
                   <span
                     class="sd-proof-metric-reveal block font-display text-[clamp(2.7rem,4vw,4.25rem)] leading-none tracking-[-0.04em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
@@ -194,7 +198,7 @@
                   </span>
                 </span>
                 <span
-                  class="mt-2 block max-w-[24ch] text-sm leading-5 text-brand-light/68"
+                  class="mt-2 block max-w-[24ch] text-sm leading-5 text-brand-light/80"
                 >
                   {data.stats[0].label}
                 </span>
@@ -202,11 +206,11 @@
             </figure>
           {/if}
 
-          <div class="grid content-center gap-3 py-[7%] sm:gap-4">
+          <div class="grid content-center gap-3 py-[3%] sm:gap-4">
             {#each [1, 2] as index (index)}
               {#if data.gallery?.[index] && data.stats?.[index]}
                 <figure
-                  class="sd-proof-card sd-proof-card-side group relative aspect-[5/4] overflow-hidden rounded-[2rem] bg-brand-dark cursor-pointer"
+                  class="sd-proof-card sd-proof-card-side group relative aspect-[4/3.15] overflow-hidden rounded-[1.75rem] cursor-pointer transition-all duration-300 bg-white"
                 >
                   <img
                     src={data.gallery[index].src}
@@ -214,12 +218,14 @@
                     width={data.gallery[index].width}
                     height={data.gallery[index].height}
                     loading="lazy"
-                    class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   <span
-                    class="absolute inset-0 bg-gradient-to-t from-brand-dark/94 via-brand-dark/20 to-brand-dark/5 transition-opacity duration-500 group-hover:opacity-85"
+                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/94 via-brand-dark/25 to-transparent transition-opacity duration-500 group-hover:opacity-85"
                   ></span>
-                  <figcaption class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                  <figcaption
+                    class="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-brand-light"
+                  >
                     <span class="block overflow-hidden pb-1">
                       <span
                         class="sd-proof-metric-reveal block font-display text-[clamp(1.8rem,3vw,2.8rem)] leading-none tracking-[-0.035em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
@@ -228,7 +234,7 @@
                       </span>
                     </span>
                     <span
-                      class="mt-1.5 block text-xs leading-4 text-brand-light/66 sm:text-sm sm:leading-5"
+                      class="mt-1.5 block text-xs leading-4 sm:text-sm sm:leading-5 text-brand-light/80"
                     >
                       {data.stats[index].label}
                     </span>

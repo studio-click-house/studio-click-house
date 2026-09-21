@@ -79,6 +79,7 @@
             height={data.height}
             beforeLabel={data.beforeLabel}
             afterLabel={data.afterLabel}
+            mediaFit="contain"
             ariaLabel="Compare before and after service results"
           />
         </div>

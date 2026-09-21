@@ -137,26 +137,6 @@
             );
         });
 
-        if (imageFit === "cover") media.add(
-          "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
-          () => {
-            gsap.fromTo(
-              ".faq-parallax-image",
-              { yPercent: 12 },
-              {
-                yPercent: -12,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: section,
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: 0.55,
-                },
-              },
-            );
-          },
-        );
-
         return () => media.revert();
       }, section);
     });
@@ -249,16 +229,12 @@
         class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none"
       >
         <div
-          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem]"
+          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem] border border-brand-dark/10 shadow-xl shadow-brand-dark/5"
         >
-          <!-- Colored Image viewport -->
+          <!-- Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">
-            <!-- Scroll Parallax Wrapper -->
-            <div
-              class="faq-parallax-image absolute inset-x-0 pointer-events-none {imageFit === 'contain'
-                ? 'inset-y-0 h-full'
-                : 'top-[-15%] h-[130%]'}"
-            >
+            <!-- Full Frame Wrapper -->
+            <div class="absolute inset-0 size-full pointer-events-none">
               {#each images as img, idx (img.src)}
                 <img
                   src={img.src}
@@ -268,9 +244,7 @@
                   width={img.width}
                   height={img.height}
                   loading="lazy"
-                  class="absolute inset-0 size-full transition-all duration-700 ease-out {imageFit === 'contain'
-                    ? 'rounded-[2rem] object-contain'
-                    : 'rounded-[2rem] object-cover'}"
+                  class="absolute inset-0 size-full rounded-[2rem] object-cover object-center transition-all duration-700 ease-out"
                   class:opacity-100={activeImageIndex === idx}
                   class:scale-100={activeImageIndex === idx}
                   class:opacity-0={activeImageIndex !== idx}

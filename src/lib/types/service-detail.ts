@@ -11,6 +11,8 @@ export interface ServiceDetailHeroData {
   description: string;
   media: ServiceVisualMedia;
   supportingMedia: ServiceVisualMedia[];
+  theme?: "light" | "dark";
+  titleWidth?: "standard" | "wide";
 }
 
 export interface ServiceIntroData {
@@ -33,6 +35,7 @@ export interface ServiceAudienceItem {
   title: string;
   description: string;
   media: ServiceVisualMedia;
+  fit?: "contain" | "cover";
 }
 
 export interface ServiceBeforeAfterData {
@@ -62,6 +65,7 @@ export interface ServiceShowcaseData {
   description?: string;
   stats?: { value: string; label: string }[];
   gallery?: ServiceShowcaseGalleryItem[];
+  theme?: "light" | "dark";
 }
 
 export interface ServiceGalleryItem {

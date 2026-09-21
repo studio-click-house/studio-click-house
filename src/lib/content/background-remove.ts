@@ -1,51 +1,50 @@
-import { previewMedia } from "$lib/content/media";
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const backgroundRemoveMedia = {
   heroProduct: {
-    src: "https://images.pexels.com/photos/11711811/pexels-photo-11711811.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-after.webp",
     alt: "Perfume bottle isolated with clean directional lighting and crisp product boundaries",
-    width: 1800,
-    height: 2400,
+    width: 1600,
+    height: 2000,
   },
   heroCosmetics: {
-    src: "https://images.pexels.com/photos/12352170/pexels-photo-12352170.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/product-services/product-paw-osteosupport-cats-packaging-bottle.webp",
     alt: "Cosmetic bottles cutout with transparent glass edge preservation",
     width: 1600,
     height: 2000,
   },
   heroApparel: {
-    src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
     alt: "Fashion apparel isolated against a pure studio background",
     width: 1600,
     height: 2000,
   },
   introPerfume: {
-    src: "https://images.pexels.com/photos/18302102/pexels-photo-18302102.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
     alt: "Fragrance bottle cut out cleanly with natural drop shadow",
     width: 1600,
     height: 2000,
   },
   introShoes: {
-    src: "https://images.pexels.com/photos/1456706/pexels-photo-1456706.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
     alt: "Footwear cutout showcasing crisp sole curves and lace separation",
     width: 1600,
     height: 2000,
   },
   comparisonOriginal: {
-    src: "https://images.pexels.com/photos/3373739/pexels-photo-3373739.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Product photographed with busy cluttered background before removal",
-    width: 1400,
-    height: 1800,
+    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-before.webp",
+    alt: "Leather bag photographed before background removal",
+    width: 1600,
+    height: 2000,
   },
   comparisonCutout: {
-    src: "https://images.pexels.com/photos/3373745/pexels-photo-3373745.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Product isolated with pure white background and soft natural ground shadow",
-    width: 1400,
-    height: 1800,
+    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-after.webp",
+    alt: "Leather bag isolated with a clean background and natural contact shadow",
+    width: 1600,
+    height: 2000,
   },
   audienceEcommerce: {
-    src: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    src: "/images/services/product-services/product-paw-osteocare-small-dogs-chews-packaging-after.webp",
     alt: "Online marketplace catalog manager preparing product listings",
     width: 1600,
     height: 2000,
@@ -55,14 +54,15 @@ const backgroundRemoveMedia = {
 export const backgroundRemovePage: ServicePageData = {
   slug: "background-remove",
   seo: {
-    title:
-      "Background Removal Service | Studio Click House",
+    title: "Background Removal Service | Studio Click House",
     description:
       "Product and fashion background removal with hand-drawn paths, alpha masks, and natural shadows for e-commerce, advertising, and print.",
   },
   hero: {
     title: "Background",
     titleAccent: "Removal.",
+    theme: "light",
+    titleWidth: "wide",
     description:
       "Isolate products, models, and complex objects with clean edges. We use hand-drawn clipping paths and alpha masks for white, transparent, or custom backgrounds.",
     media: backgroundRemoveMedia.heroProduct,
@@ -93,7 +93,12 @@ export const backgroundRemovePage: ServicePageData = {
         label: "Shadow & Reflection Synthesis",
         description:
           "We add natural drop shadows, cast reflections, or pure transparency suited for marketplace standards.",
-        media: previewMedia.perfumeShadow,
+        media: {
+          src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-01-after-white.webp",
+          alt: "Leather bag isolated with a natural contact shadow",
+          width: 1600,
+          height: 2000,
+        },
       },
     ],
   },
@@ -122,24 +127,24 @@ export const backgroundRemovePage: ServicePageData = {
     ],
     gallery: [
       {
-        src: previewMedia.perfumeShadow.src,
+        src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
         alt: "Isolated perfume bottle with generated directional contact shadow",
-        width: previewMedia.perfumeShadow.width,
-        height: previewMedia.perfumeShadow.height,
+        width: 1600,
+        height: 2000,
         caption: "Product isolation & ground shadow",
       },
       {
-        src: previewMedia.jewelryDetail.src,
+        src: "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
         alt: "Macro jewelry cutout with preserved fine metal edges",
-        width: previewMedia.jewelryDetail.width,
-        height: previewMedia.jewelryDetail.height,
+        width: 1600,
+        height: 2000,
         caption: "Fine jewelry path extraction",
       },
       {
-        src: previewMedia.monochromePortrait.src,
+        src: "/images/services/model-beauty/model-fashion-black-outfit-studio-63-after.webp",
         alt: "Fashion model cutout with clean silhouette definition",
-        width: previewMedia.monochromePortrait.width,
-        height: previewMedia.monochromePortrait.height,
+        width: 1333,
+        height: 2000,
         caption: "Complex hair & silhouette masking",
       },
     ],
@@ -155,10 +160,10 @@ export const backgroundRemovePage: ServicePageData = {
         category: "E-commerce",
         technique: "Compound Pen Path & Sole Clean",
         media: {
-          src: "https://images.pexels.com/photos/1456706/pexels-photo-1456706.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/bags-accessories/accessories-antony-morato-designer-footwear-3080.webp",
           alt: "Footwear cutout on clean backdrop",
-          width: 1200,
-          height: 1600,
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -167,10 +172,10 @@ export const backgroundRemovePage: ServicePageData = {
         category: "Beauty",
         technique: "Refraction & Glass Alpha Mask",
         media: {
-          src: "https://images.pexels.com/photos/12352170/pexels-photo-12352170.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-before.webp",
           alt: "Cosmetic bottle isolated with glass transparency",
-          width: 1200,
-          height: 1600,
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -179,10 +184,10 @@ export const backgroundRemovePage: ServicePageData = {
         category: "Fashion",
         technique: "Multi-Channel Hair Extraction",
         media: {
-          src: "https://images.pexels.com/photos/37233404/pexels-photo-37233404.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/model-beauty/beauty-high-fashion-orchid-headpiece-portrait-after.webp",
           alt: "Model cutout with preserved flyaway hair",
-          width: 1200,
-          height: 1600,
+          width: 1500,
+          height: 2000,
         },
       },
       {
@@ -191,10 +196,10 @@ export const backgroundRemovePage: ServicePageData = {
         category: "Jewelry",
         technique: "Sub-Pixel Bezier Outline",
         media: {
-          src: "https://images.pexels.com/photos/11064129/pexels-photo-11064129.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/jewelry/jewelry-oval-diamond-solitaire-engagement-ring-whitegold-after.webp",
           alt: "Luxury jewelry necklace on transparent backdrop",
-          width: 1200,
-          height: 1600,
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -203,10 +208,10 @@ export const backgroundRemovePage: ServicePageData = {
         category: "Apparel",
         technique: "Edge Smoothing & Contact Shadow",
         media: {
-          src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-printemps-zip-through-jacket-walnut-194-after.webp",
           alt: "Fashion garment cutout on pure white",
-          width: 1200,
-          height: 1600,
+          width: 1419,
+          height: 2000,
         },
       },
       {
@@ -215,10 +220,10 @@ export const backgroundRemovePage: ServicePageData = {
         category: "Packshot",
         technique: "Transparent Reflection Retention",
         media: {
-          src: "https://images.pexels.com/photos/18302102/pexels-photo-18302102.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/product-services/product-harbour-early-learning-childcare-kit-flatlay-after.webp",
           alt: "Fragrance bottle on pure white with natural base shadow",
-          width: 1200,
-          height: 1600,
+          width: 1600,
+          height: 2000,
         },
       },
     ],
@@ -277,13 +282,23 @@ export const backgroundRemovePage: ServicePageData = {
         title: "Advertising & Creative Agencies",
         description:
           "Obtain clean, isolated subject assets ready for multi-layer compositing, billboard layouts, and digital campaign banners.",
-        media: previewMedia.editingWorkspace,
+        media: {
+          src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-before.webp",
+          alt: "Industrial product prepared for layered compositing and clean background removal",
+          width: 1600,
+          height: 2000,
+        },
       },
       {
         title: "Commercial Photographers",
         description:
           "Offload time-consuming post-shoot clipping work to our dedicated team and focus on shooting higher-margin campaigns.",
-        media: previewMedia.studioPortrait,
+        media: {
+          src: "/images/services/bags-accessories/accessories-mira-leather-belt-nude-01-after.webp",
+          alt: "Accessory product isolated for commercial photography delivery",
+          width: 1600,
+          height: 2000,
+        },
       },
     ],
   },
@@ -312,6 +327,43 @@ export const backgroundRemovePage: ServicePageData = {
       question: "Do you offer free test edits?",
       answer:
         "Yes, we provide free trial edits for up to 3 sample images so you can evaluate our path precision and quality before placing a full batch order.",
+    },
+  ],
+  faqImages: [
+    {
+      src: "/images/services/bags-accessories/accessories-josel-trucker-hat-black-01.webp",
+      alt: "Black trucker hat isolated with clean edge separation",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/jewelry/jewelry-westhill-halo-diamond-signet-ring-0126.webp",
+      alt: "Diamond ring isolated with precise fine-edge extraction",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/product-services/product-furniture-classic-wooden-spindle-chair.webp",
+      alt: "Wooden furniture product prepared for a clean catalog background",
+      width: 570,
+      height: 570,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-after.webp",
+      alt: "Food product flatlay separated for a clean commercial presentation",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/product-services/product-furniture-scandinavian-oak-chair-hero.png",
+      alt: "Scandinavian chair isolated for a clean product catalog background",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
     },
   ],
   cta: {

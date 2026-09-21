@@ -1,52 +1,51 @@
-import { previewMedia } from "$lib/content/media";
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const ecommerceRetouchingMedia = {
   heroPackshot: {
-    src: "https://images.pexels.com/photos/10928896/pexels-photo-10928896.jpeg?auto=compress&cs=tinysrgb&w=1800",
-    alt: "E-commerce cosmetic product packshot retouched to pure marketplace standards",
-    width: 1800,
-    height: 2400,
+    src: "/images/services/product-services/product-furniture-scandinavian-oak-chair-hero.png",
+    alt: "Realistic light oak dining chair photographed for an e-commerce catalog",
+    width: 1122,
+    height: 1402,
   },
   heroFootwear: {
-    src: "https://images.pexels.com/photos/1456706/pexels-photo-1456706.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Footwear packshot with clean white background and realistic contact shadow",
+    src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
+    alt: "White leather sneakers prepared for a clean e-commerce catalog presentation",
     width: 1600,
     height: 2000,
   },
   heroWatch: {
-    src: "https://images.pexels.com/photos/11064129/pexels-photo-11064129.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Luxury watch with dust and scratch cleanup for online store listing",
+    src: "/images/services/product-services/product-industrial-metal-storage-rack-shelving-after.webp",
+    alt: "Industrial storage rack prepared as a clean e-commerce product listing",
     width: 1600,
     height: 2000,
   },
   introDust: {
-    src: "https://images.pexels.com/photos/9496254/pexels-photo-9496254.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Sub-pixel dust, fingerprint, and scratch cleanup on glass bottle",
+    src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-before.webp",
+    alt: "Raw cosmetic product image before dust, scuff, and surface cleanup",
     width: 1600,
     height: 2000,
   },
   introAlignment: {
-    src: "https://images.pexels.com/photos/12352170/pexels-photo-12352170.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Batch margin, crop, and vertical axis alignment across product line",
+    src: "/images/services/product-services/product-industrial-metal-storage-rack-shelving-after.webp",
+    alt: "Industrial product cutout aligned with a consistent catalog crop and margin",
     width: 1600,
     height: 2000,
   },
   comparisonOriginal: {
-    src: "https://images.pexels.com/photos/9496254/pexels-photo-9496254.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Raw studio product shot with micro-dust, scuffs, and uneven background tone",
-    width: 1400,
-    height: 1800,
+    src: "/images/services/model-beauty/model-fashion-denim-jeans-tanktop-289-before.webp",
+    alt: "Fashion model wearing a denim outfit before e-commerce model retouching",
+    width: 1333,
+    height: 2000,
   },
   comparisonRetouched: {
-    src: "https://images.pexels.com/photos/11711811/pexels-photo-11711811.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Finished e-commerce packshot on pure white with clean reflections and balanced color",
-    width: 1400,
-    height: 1800,
+    src: "/images/services/model-beauty/model-fashion-denim-jeans-tanktop-289-after.webp",
+    alt: "Fashion model wearing a denim outfit after e-commerce model retouching",
+    width: 1333,
+    height: 2000,
   },
   audienceRetailers: {
-    src: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "E-commerce operations manager updating high-volume online catalog",
+    src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-after.webp",
+    alt: "Food product flatlay prepared for a consistent high-volume online catalog",
     width: 1600,
     height: 2000,
   },
@@ -55,14 +54,15 @@ const ecommerceRetouchingMedia = {
 export const ecommerceRetouchingPage: ServicePageData = {
   slug: "ecommerce-retouching",
   seo: {
-    title:
-      "E-commerce Product Retouching | Studio Click House",
+    title: "E-commerce Product Retouching | Studio Click House",
     description:
       "High-volume e-commerce product image retouching by Studio Click House. Dust & scratch removal, white background compliance, color matching, and 24/7 overnight batch delivery.",
   },
   hero: {
     title: "Ecommerce",
     titleAccent: "Retouching.",
+    theme: "light",
+    titleWidth: "wide",
     description:
       "High-capacity, high-conversion product retouching built for Amazon, Shopify, eBay, and luxury online retailers. We eliminate dust, scratches, and inconsistencies to deliver uniform, pristine catalog listings overnight.",
     media: ecommerceRetouchingMedia.heroPackshot,
@@ -93,23 +93,28 @@ export const ecommerceRetouchingPage: ServicePageData = {
         label: "True-Color Swatch Verification",
         description:
           "We cross-reference product hues against physical color swatches to prevent customer returns caused by color discrepancy.",
-        media: previewMedia.perfumeStillLife,
+        media: {
+          src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-after.webp",
+          alt: "Food product flatlay retouched with consistent color and clean presentation",
+          width: 1600,
+          height: 2000,
+        },
       },
     ],
   },
   beforeAfter: {
     heading: "See the catalog-ready finish",
     description:
-      "Drag the slider to inspect how raw studio packshots are polished, cleaned of dust, and matched to strict marketplace guidelines.",
+      "Drag the slider to inspect how a fashion model image is cleaned and refined for a consistent e-commerce catalog presentation.",
     beforeSrc: ecommerceRetouchingMedia.comparisonOriginal.src,
     beforeAlt: ecommerceRetouchingMedia.comparisonOriginal.alt,
     afterSrc: ecommerceRetouchingMedia.comparisonRetouched.src,
     afterAlt: ecommerceRetouchingMedia.comparisonRetouched.alt,
-    beforeLabel: "Raw capture",
-    afterLabel: "Marketplace ready",
+    beforeLabel: "Raw model image",
+    afterLabel: "Catalog ready",
     width: ecommerceRetouchingMedia.comparisonRetouched.width,
     height: ecommerceRetouchingMedia.comparisonRetouched.height,
-    caption: "Drag to compare · E-commerce product cleanup",
+    caption: "Drag to compare · Fashion catalog retouching",
   },
   showcase: {
     heading: "Product retouching for retail volume",
@@ -122,24 +127,24 @@ export const ecommerceRetouchingPage: ServicePageData = {
     ],
     gallery: [
       {
-        src: previewMedia.perfumeShadow.src,
-        alt: "Perfume product on pure white with natural ground shadow",
-        width: previewMedia.perfumeShadow.width,
-        height: previewMedia.perfumeShadow.height,
+        src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
+        alt: "Yellow cosmetic product packshot with a clean catalog finish",
+        width: 1600,
+        height: 2000,
         caption: "Packshot on pure white",
       },
       {
-        src: previewMedia.jewelryMacro.src,
-        alt: "Jewelry macro showing polished metal surfaces and sparkling gem facets",
-        width: previewMedia.jewelryMacro.width,
-        height: previewMedia.jewelryMacro.height,
+        src: "/images/services/jewelry/jewelry-aquamarine-emerald-gold-ring-4030.webp",
+        alt: "Retouched gemstone ring with polished metal and clear facets",
+        width: 1600,
+        height: 2000,
         caption: "Luxury accessory cleanup",
       },
       {
-        src: previewMedia.photoEditingShowcase.src,
-        alt: "Fashion garment line showing consistent lighting and wrinkle removal",
-        width: previewMedia.photoEditingShowcase.width,
-        height: previewMedia.photoEditingShowcase.height,
+        src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
+        alt: "Finished knit cardigan prepared for a consistent apparel catalog",
+        width: 1600,
+        height: 2000,
         caption: "Apparel catalog uniformity",
       },
     ],
@@ -155,10 +160,10 @@ export const ecommerceRetouchingPage: ServicePageData = {
         category: "Beauty",
         technique: "Glass Reflection & Label Alignment",
         media: {
-          src: "https://images.pexels.com/photos/10928896/pexels-photo-10928896.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
           alt: "Cosmetic product catalog retouching",
-          width: 1200,
-          height: 1600,
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -167,10 +172,10 @@ export const ecommerceRetouchingPage: ServicePageData = {
         category: "Footwear",
         technique: "Sole Clean, Shape Symmetry & Drop Shadow",
         media: {
-          src: "https://images.pexels.com/photos/1456706/pexels-photo-1456706.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
           alt: "Sneaker e-commerce retouching",
-          width: 1200,
-          height: 1600,
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -179,10 +184,10 @@ export const ecommerceRetouchingPage: ServicePageData = {
         category: "Fashion",
         technique: "Wrinkle Smoothing & Inner Collar Joint",
         media: {
-          src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Apparel e-commerce catalog image",
-          width: 1200,
-          height: 1600,
+          src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
+          alt: "Apparel e-commerce catalog image with a finished ghost mannequin presentation",
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -191,10 +196,10 @@ export const ecommerceRetouchingPage: ServicePageData = {
         category: "Accessories",
         technique: "Hardware Polishing & Leather Grain Preservation",
         media: {
-          src: "https://images.pexels.com/photos/11064129/pexels-photo-11064129.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-after.webp",
           alt: "Leather accessory product retouching",
-          width: 1200,
-          height: 1600,
+          width: 1500,
+          height: 2000,
         },
       },
       {
@@ -203,10 +208,10 @@ export const ecommerceRetouchingPage: ServicePageData = {
         category: "Fragrance",
         technique: "Refraction Control & Specular Highlight Painting",
         media: {
-          src: "https://images.pexels.com/photos/18302102/pexels-photo-18302102.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Perfume bottle e-commerce packshot",
-          width: 1200,
-          height: 1600,
+          src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
+          alt: "Cosmetic bottle e-commerce packshot",
+          width: 1600,
+          height: 2000,
         },
       },
       {
@@ -215,10 +220,10 @@ export const ecommerceRetouchingPage: ServicePageData = {
         category: "Tech",
         technique: "Matte Texture & Bezel Cleanup",
         media: {
-          src: "https://images.pexels.com/photos/37848029/pexels-photo-37848029.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Electronics product listing image",
-          width: 1200,
-          height: 1600,
+          src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-after.webp",
+          alt: "Complex product cutout prepared for a catalog listing",
+          width: 1600,
+          height: 2000,
         },
       },
     ],
@@ -277,24 +282,36 @@ export const ecommerceRetouchingPage: ServicePageData = {
         title: "Amazon & Marketplace Sellers",
         description:
           "Ensure your main and secondary product images pass strict marketplace compliance without risking listing suppression.",
-        media: previewMedia.photoEditingShowcase,
+        media: {
+          src: "/images/services/product-services/product-harbour-early-learning-childcare-kit-flatlay-after.webp",
+          alt: "Children's product kit presented as a clean marketplace flatlay",
+          width: 1600,
+          height: 2000,
+        },
       },
       {
         title: "Commercial Catalog Studios",
         description:
           "Scale your production throughput overnight by delegating high-volume cleanup and clipping work to our dedicated 24/7 floor.",
-        media: previewMedia.editingWorkspace,
+        media: {
+          src: "/images/services/product-services/product-industrial-metal-storage-rack-shelving-after.webp",
+          alt: "Industrial product image prepared for a high-volume catalog",
+          width: 1600,
+          height: 2000,
+        },
       },
     ],
   },
   faqs: [
     {
-      question: "How do you guarantee batch consistency across thousands of SKUs?",
+      question:
+        "How do you guarantee batch consistency across thousands of SKUs?",
       answer:
         "We establish custom brand style guides for every client, documenting exact crop percentages, margin sizes, shadow softness, and color profiles. Automated verification scripts and senior QC managers verify that every file adheres strictly to these parameters.",
     },
     {
-      question: "What is your standard turnaround time for a 1,000-image batch?",
+      question:
+        "What is your standard turnaround time for a 1,000-image batch?",
       answer:
         "Standard batches of 500 to 1,000 images are delivered within 24 to 36 hours. For ongoing enterprise partnerships, we allocate dedicated artist pods operating 24/7 to guarantee consistent daily throughput.",
     },
@@ -304,7 +321,8 @@ export const ecommerceRetouchingPage: ServicePageData = {
         "Yes. We can deliver multiple export formats per SKU—such as square 2000x2000px on pure white for Amazon, 4:5 vertical crops for social storefronts, and transparent PNGs for banner compositing.",
     },
     {
-      question: "Do you offer shadow creation as part of e-commerce retouching?",
+      question:
+        "Do you offer shadow creation as part of e-commerce retouching?",
       answer:
         "Yes, we can preserve the original studio shadow, create a soft drop shadow, or add an elegant reflection shadow beneath the product.",
     },
@@ -312,6 +330,43 @@ export const ecommerceRetouchingPage: ServicePageData = {
       question: "How do we get started with a trial batch?",
       answer:
         "Simply send us 3 to 5 sample images along with your catalog guidelines. We will deliver free test edits within 24 hours so you can verify our quality firsthand.",
+    },
+  ],
+  faqImages: [
+    {
+      src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
+      alt: "Yellow cosmetic packshot with clean white-background retouching",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
+      alt: "White leather sneakers prepared for a marketplace product listing",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
+      alt: "Ice-blue cardigan prepared for a uniform apparel catalog",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/product-services/product-harbour-early-learning-childcare-kit-flatlay-after.webp",
+      alt: "Children's product kit flatlay with a clean commercial finish",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-after.webp",
+      alt: "Metallic handbag retouched for a consistent accessories catalog",
+      width: 1500,
+      height: 2000,
+      credit: "Studio Click House",
     },
   ],
   cta: {

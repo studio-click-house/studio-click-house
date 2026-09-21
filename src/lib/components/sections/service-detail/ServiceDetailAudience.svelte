@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceAudienceItem } from "$lib/types/service-detail";
+  import { cn } from "$lib/utils";
 
   let { heading, items } = $props<{
     heading: string;
@@ -92,24 +93,39 @@
 
     <div class="sd-audience-grid grid gap-4 md:grid-cols-3 lg:gap-5">
       {#each items as item (item.title)}
+        {@const isContain = item.fit === "contain"}
         <article
-          class="sd-audience-card overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-paper"
+          class="sd-audience-card group flex flex-col overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-brand-dark/5 hover:border-brand-dark/20"
         >
-          <figure class="relative aspect-[4/3] overflow-hidden bg-brand-dark/5">
+          <figure
+            class={cn(
+              "relative aspect-[4/3.15] overflow-hidden flex items-center justify-center transition-colors duration-300",
+              isContain
+                ? "bg-white p-3 sm:p-4"
+                : "bg-brand-dark/5"
+            )}
+          >
             <img
               src={item.media.src}
               alt={item.media.alt}
               width={item.media.width}
               height={item.media.height}
               loading="lazy"
-              class="sd-audience-parallax-img absolute inset-x-0 -top-[4%] h-[108%] w-full object-cover"
+              class={cn(
+                "transition-transform duration-700 ease-out group-hover:scale-105",
+                isContain
+                  ? "size-full object-contain"
+                  : "absolute inset-0 size-full object-cover object-center"
+              )}
             />
           </figure>
-          <div class="p-5 sm:p-6">
-            <h3 class="text-xl font-semibold tracking-[-0.015em]">
+          <div class="flex flex-1 flex-col p-5 sm:p-6">
+            <h3
+              class="text-xl font-semibold tracking-[-0.015em] text-brand-dark transition-colors duration-300 group-hover:text-brand-green"
+            >
               {item.title}
             </h3>
-            <p class="mt-3 text-sm leading-6 text-brand-dark/62">
+            <p class="mt-2.5 text-sm leading-6 text-brand-dark/65">
               {item.description}
             </p>
           </div>

@@ -4,10 +4,15 @@
   import { ArrowRight, ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceDetailHeroData } from "$lib/types/service-detail";
+  import { cn } from "$lib/utils";
   import { _ } from "svelte-i18n";
 
   let { data } = $props<{ data: ServiceDetailHeroData }>();
   let heroSection = $state<HTMLElement>();
+  const isLight = $derived(data.theme === "light");
+  const titleWidthClass = $derived(
+    data.titleWidth === "wide" ? "max-w-[11ch]" : "max-w-[9ch]",
+  );
 
   onMount(() => {
     let active = true;
@@ -163,14 +168,29 @@
   bind:this={heroSection}
   id="service-detail-hero"
   aria-labelledby="service-detail-hero-title"
-  class="relative isolate min-h-dvh overflow-hidden bg-brand-dark pt-24 text-brand-light sm:pt-28"
+  class={cn(
+    "relative isolate min-h-dvh overflow-hidden pt-24 sm:pt-28 transition-colors duration-300",
+    isLight
+      ? "bg-brand-light text-brand-dark"
+      : "bg-brand-dark text-brand-light",
+  )}
 >
   <div
-    class="pointer-events-none absolute inset-0 opacity-45 [background:radial-gradient(ellipse_62%_56%_at_24%_42%,color-mix(in_srgb,var(--color-brand-green)_14%,transparent),transparent_58%)]"
+    class={cn(
+      "pointer-events-none absolute inset-0",
+      isLight
+        ? "opacity-60 [background:radial-gradient(ellipse_62%_56%_at_24%_42%,rgba(126,166,65,0.08),transparent_58%)]"
+        : "opacity-45 [background:radial-gradient(ellipse_62%_56%_at_24%_42%,color-mix(in_srgb,var(--color-brand-green)_14%,transparent),transparent_58%)]",
+    )}
     aria-hidden="true"
   ></div>
   <div
-    class="sd-hero-glow pointer-events-none absolute -right-[10rem] top-[8%] size-[38rem] rounded-full bg-brand-green/20 opacity-80 blur-[100px]"
+    class={cn(
+      "sd-hero-glow pointer-events-none absolute -right-[10rem] top-[8%] size-[38rem] rounded-full",
+      isLight
+        ? "bg-brand-green/10 opacity-70 blur-[120px]"
+        : "bg-brand-green/20 opacity-80 blur-[100px]",
+    )}
     aria-hidden="true"
   ></div>
 
@@ -182,14 +202,24 @@
         <p
           class="sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
         >
-          {$_('serviceDetail.kicker') || 'Image post-production service'}
+          {$_("serviceDetail.kicker") || "Image post-production service"}
         </p>
         <h1
           id="service-detail-hero-title"
-          class="mt-5 max-w-[9ch] font-display text-[clamp(4rem,7vw,7.8rem)] leading-[0.84] tracking-[-0.055em]"
+          class={cn(
+            "mt-5 font-display text-[clamp(4rem,7vw,7.8rem)] leading-[0.84] tracking-[-0.055em]",
+            titleWidthClass,
+          )}
         >
           <span class="block overflow-hidden pb-[0.08em]">
-            <span class="sd-hero-title-line block">{data.title}</span>
+            <span
+              class={cn(
+                "sd-hero-title-line block",
+                isLight ? "text-brand-dark" : "text-brand-light",
+              )}
+            >
+              {data.title}
+            </span>
           </span>
           <span class="block overflow-hidden pb-[0.08em]">
             <span class="sd-hero-title-line block text-brand-green">
@@ -199,7 +229,10 @@
         </h1>
 
         <p
-          class="sd-hero-copy-reveal mt-7 max-w-[44ch] text-base leading-7 text-brand-light/66 sm:text-lg"
+          class={cn(
+            "sd-hero-copy-reveal mt-7 max-w-[44ch] text-base leading-7 sm:text-lg",
+            isLight ? "text-brand-dark/70" : "text-brand-light/66",
+          )}
         >
           {data.description}
         </p>
@@ -207,18 +240,28 @@
         <div class="sd-hero-copy-reveal mt-8 flex flex-wrap items-center gap-3">
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+            class={cn(
+              "group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green",
+              isLight
+                ? "hover:bg-brand-dark hover:text-white"
+                : "hover:bg-brand-light",
+            )}
           >
-            {$_('serviceDetail.placeOrder') || 'Place an order'}
+            {$_("serviceDetail.placeOrder") || "Place an order"}
             <ArrowUpRight
               class="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </a>
           <a
             href={resolve("/pricing")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-brand-light/22 px-5 text-sm font-semibold text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+            class={cn(
+              "group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] px-5 text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green",
+              isLight
+                ? "border border-brand-dark/20 bg-white/70 text-brand-dark hover:border-brand-green hover:text-brand-green hover:bg-white"
+                : "border border-brand-light/22 text-brand-light hover:border-brand-green hover:text-brand-green",
+            )}
           >
-            {$_('serviceDetail.getPriceIdea') || 'Get price idea'}
+            {$_("serviceDetail.getPriceIdea") || "Get price idea"}
             <ArrowRight
               class="size-4 transition-transform duration-300 group-hover:translate-x-1"
             />
@@ -230,33 +273,48 @@
         class="sd-hero-media-stage relative mx-auto w-full max-w-[42rem] lg:col-span-6 lg:mx-0 lg:justify-self-end"
       >
         <div
-          class="pointer-events-none absolute inset-[8%] rounded-full bg-brand-green/24 blur-[86px]"
+          class={cn(
+            "pointer-events-none absolute inset-[8%] rounded-full blur-[86px]",
+            isLight ? "bg-brand-green/12" : "bg-brand-green/24",
+          )}
           aria-hidden="true"
         ></div>
-        <div class="relative grid grid-cols-[1.12fr_0.88fr] gap-3 sm:gap-4">
+        <div
+          class="relative grid grid-cols-[1.12fr_0.88fr] items-center gap-3 sm:gap-4"
+        >
           <figure
-            class="sd-hero-media-card sd-hero-media-primary relative aspect-[4/5.25] overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45"
+            class={cn(
+              "sd-hero-media-card sd-hero-media-primary relative aspect-[3/3.85] overflow-hidden rounded-[2rem] p-3 sm:p-5 transition-all duration-300",
+              isLight
+                ? "border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6"
+                : "border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45",
+            )}
           >
             <img
               src={data.media.src}
               alt={data.media.alt}
               width={data.media.width}
               height={data.media.height}
-              class="size-full object-cover"
+              class="size-full object-contain"
             />
           </figure>
 
-          <div class="grid content-center gap-3 py-[8%] sm:gap-4">
+          <div class="grid content-center gap-3 py-[3%] sm:gap-4">
             {#each data.supportingMedia.slice(0, 2) as item (item.src)}
               <figure
-                class="sd-hero-media-card sd-hero-media-support relative aspect-[5/4] overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35"
+                class={cn(
+                  "sd-hero-media-card sd-hero-media-support relative aspect-[4/3.15] overflow-hidden rounded-[1.75rem] p-2.5 sm:p-3.5 transition-all duration-300",
+                  isLight
+                    ? "border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/5"
+                    : "border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35",
+                )}
               >
                 <img
                   src={item.src}
                   alt={item.alt}
                   width={item.width}
                   height={item.height}
-                  class="size-full object-cover"
+                  class="size-full object-contain"
                 />
               </figure>
             {/each}

@@ -20,6 +20,7 @@
     backRightSrc?: string;
     backRightWidth?: number;
     backRightHeight?: number;
+    mediaFit?: "cover" | "contain";
   }
 
   let {
@@ -40,6 +41,7 @@
     backRightSrc = afterSrc,
     backRightWidth = width,
     backRightHeight = height,
+    mediaFit = "cover",
   }: Props = $props();
 
   let sliderPosition = $state(52);
@@ -52,8 +54,9 @@
   const backCardClass =
     "pointer-events-none absolute inset-0 m-0 size-full overflow-hidden rounded-[2rem] bg-brand-dark opacity-[0.38] [filter:saturate(0.68)_brightness(0.8)] [transition:transform_0.45s_cubic-bezier(0.16,1,0.3,1),opacity_0.45s_ease] [will-change:transform,opacity] motion-reduce:transition-none";
   const comparisonImageClass = "absolute inset-0 m-0 size-full overflow-hidden";
-  const comparisonMediaClass =
-    "absolute inset-0 size-full scale-[1.02] object-cover";
+  const comparisonMediaClass = $derived(
+    `absolute inset-0 size-full object-${mediaFit} object-center`,
+  );
   const mediaLabelClass =
     "absolute top-[0.8rem] z-[5] rounded-full border border-brand-light/30 bg-brand-dark/40 px-3 py-[0.38rem] font-mono text-[0.46rem] uppercase tracking-[0.13em] text-brand-light backdrop-blur-[0.35rem]";
 
@@ -206,7 +209,8 @@
 </script>
 
 <div
-  class="preview-stack relative z-[1] aspect-[4/5] w-full [perspective:1000px] [transform-style:preserve-3d] motion-reduce:animate-none"
+  class="preview-stack relative z-[1] w-full [perspective:1000px] [transform-style:preserve-3d] motion-reduce:animate-none"
+  style={`aspect-ratio: ${width} / ${height}`}
 >
   <figure
     bind:this={backCardLeft}
@@ -244,7 +248,7 @@
     aria-label={ariaLabel}
     onpointermove={handlePointerMove}
     onpointerleave={handlePointerLeave}
-    class="comparison-preview group relative z-[2] isolate m-0 aspect-[4/5] overflow-hidden rounded-[2rem] bg-white text-brand-light [backface-visibility:hidden] [transform-style:preserve-3d] will-change-transform"
+    class="comparison-preview group relative z-[2] isolate m-0 size-full overflow-hidden rounded-[2rem] bg-white text-brand-light [backface-visibility:hidden] [transform-style:preserve-3d] will-change-transform"
   >
     <figure
       class="comparison-before {comparisonImageClass} z-[1] [will-change:clip-path]"
@@ -256,7 +260,9 @@
         width={beforeWidth}
         height={beforeHeight}
         loading="lazy"
-        class="{comparisonMediaClass} {beforeSrc === afterSrc ? '[filter:saturate(0.5)_contrast(0.9)_brightness(0.92)]' : ''}"
+        class="{comparisonMediaClass} {beforeSrc === afterSrc
+          ? '[filter:saturate(0.5)_contrast(0.9)_brightness(0.92)]'
+          : ''}"
       />
     </figure>
 
@@ -274,8 +280,20 @@
       />
     </figure>
 
-    <span class="{mediaLabelClass} left-[0.8rem]">{beforeLabel ? (beforeLabel === "Before" ? ($_('slider.before') || beforeLabel) : beforeLabel) : ($_('slider.before') || 'Before')}</span>
-    <span class="{mediaLabelClass} right-[0.8rem]">{afterLabel ? (afterLabel === "After" ? ($_('slider.after') || afterLabel) : afterLabel) : ($_('slider.after') || 'After')}</span>
+    <span class="{mediaLabelClass} left-[0.8rem]"
+      >{beforeLabel
+        ? beforeLabel === "Before"
+          ? $_("slider.before") || beforeLabel
+          : beforeLabel
+        : $_("slider.before") || "Before"}</span
+    >
+    <span class="{mediaLabelClass} right-[0.8rem]"
+      >{afterLabel
+        ? afterLabel === "After"
+          ? $_("slider.after") || afterLabel
+          : afterLabel
+        : $_("slider.after") || "After"}</span
+    >
 
     <span
       class="comparison-divider pointer-events-none absolute inset-y-0 z-[4] w-px bg-brand-light/80 [will-change:left]"
