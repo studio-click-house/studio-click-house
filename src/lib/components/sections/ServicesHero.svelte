@@ -145,10 +145,14 @@
   bind:this={heroSection}
   id="services-hero"
   aria-labelledby="services-hero-title"
-  class="relative isolate min-h-dvh overflow-hidden bg-brand-dark pb-10 pt-24 text-brand-light sm:pb-12 sm:pt-28"
+  class="relative isolate min-h-dvh overflow-hidden bg-brand-light pb-10 pt-24 text-brand-dark transition-colors duration-300 sm:pb-12 sm:pt-28"
 >
   <div
-    class="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(circle_at_76%_38%,color-mix(in_srgb,var(--color-brand-green)_18%,transparent),transparent_31%)]"
+    class="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(ellipse_62%_56%_at_24%_42%,rgba(126,166,65,0.08),transparent_58%)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -right-[10rem] top-[8%] size-[38rem] rounded-full bg-brand-green/10 opacity-70 blur-[120px]"
     aria-hidden="true"
   ></div>
 
@@ -157,7 +161,7 @@
       <div class="services-hero-text-motion lg:col-span-8">
         <h1
           id="services-hero-title"
-          class="font-display text-[clamp(2.6rem,6.8vw,7.5rem)] leading-[0.88] tracking-[-0.045em]"
+          class="font-display text-[clamp(2.6rem,6.8vw,7.5rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark"
         >
           <span class="block overflow-hidden pb-[0.14em]">
             <span class="services-hero-title-line block"
@@ -173,14 +177,14 @@
       <div class="services-hero-text-motion lg:col-span-4 lg:self-end lg:pb-3">
         <div class="services-hero-meta">
           <p
-            class="max-w-[34rem] text-base leading-[1.6] text-brand-light/68 lg:max-w-[30ch]"
+            class="max-w-[34rem] text-base leading-[1.6] text-brand-dark/70 lg:max-w-[30ch]"
           >
             {$_('services.hero.description') || servicesHero.description}
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-5">
             <a
               href={resolve("/contact")}
-              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
+              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-dark hover:text-white focus-visible:outline-brand-green"
             >
               {$_('services.hero.discussProject') || 'Discuss a project'}
               <ArrowUpRight
@@ -193,7 +197,7 @@
                 e.preventDefault();
                 handleScroll("#services-details");
               }}
-              class="group inline-flex items-center gap-2 border-b border-brand-light/35 pb-1 text-sm font-medium text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+              class="group inline-flex items-center gap-2 border-b border-brand-dark/30 pb-1 text-sm font-medium text-brand-dark/85 transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
             >
               {$_('services.hero.viewCapabilities') || 'View capabilities'}
               <ArrowDown
@@ -207,14 +211,14 @@
 
     <div class="services-hero-media-row grid gap-4 lg:grid-cols-12 lg:gap-6">
       <figure
-        class="services-hero-media relative aspect-[16/10] overflow-hidden rounded-[1rem] lg:col-span-6 lg:aspect-[16/8]"
+        class="services-hero-media relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6 lg:col-span-6 lg:aspect-[16/8]"
       >
         <img
           src={servicesHero.media.src}
           alt={servicesHero.media.alt}
           width={servicesHero.media.width}
           height={servicesHero.media.height}
-          class="services-hero-scroll-media h-[112%] w-full rounded-[1rem] object-cover"
+          class="services-hero-scroll-media h-[112%] w-full rounded-[2rem] object-cover"
         />
       </figure>
 
@@ -226,7 +230,7 @@
               e.preventDefault();
               handleScroll(`#service-showcase-${discipline.index === "01" ? "photo" : discipline.index === "02" ? "video" : "3d"}`);
             }}
-            class="services-hero-meta group relative flex min-h-36 items-end overflow-hidden rounded-[1rem] bg-brand-light/[0.045] p-4 transition-colors duration-300 sm:min-h-52 lg:min-h-full lg:p-5"
+            class="services-hero-meta group relative flex min-h-36 items-end overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark/[0.04] p-4 shadow-lg shadow-brand-dark/5 transition-colors duration-300 sm:min-h-52 lg:min-h-full lg:p-5"
           >
             <img
               src={discipline.media.src}
@@ -234,7 +238,7 @@
               width={discipline.media.width}
               height={discipline.media.height}
               loading="lazy"
-              class="services-hero-scroll-media absolute inset-x-0 -top-[6%] h-[112%] w-full rounded-[1rem] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              class="services-hero-scroll-media absolute inset-x-0 -top-[6%] h-[112%] w-full rounded-[2rem] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
             <span
               class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/10 to-brand-dark/35"

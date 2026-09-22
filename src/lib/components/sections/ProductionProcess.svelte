@@ -171,8 +171,8 @@
           2000,
         ),
         homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-womens-blouse-0023-after.webp",
-          "Women's blouse prepared as a final e-commerce product image",
+          "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-womens-knitwear-0038-after.webp",
+          "Women's knitwear prepared as a final e-commerce product image",
           1333,
           2000,
         ),

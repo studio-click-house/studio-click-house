@@ -128,7 +128,7 @@
   class="relative w-full bg-brand-light py-16 sm:py-20 lg:py-32 overflow-hidden scroll-mt-20 sm:scroll-mt-28"
 >
 
-  <div class="site-shell relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="site-shell relative z-10">
     <!-- Mobile Editorial Header (Shown only on mobile/tablet screens < lg so user reads headline first) -->
     <div class="lg:hidden w-full max-w-md mx-auto mb-8 text-center process-fade-item">
       <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-green font-semibold block mb-2">
@@ -142,14 +142,14 @@
       </p>
     </div>
 
-    <!-- Centered 2-Column Composition matching Orbit Gallery: Left Stacked Visuals, Right Interactive Steps -->
-    <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 xl:gap-20">
-      <!-- Left Column: Rich Portrait Visual with Visible Stacked Card Depth -->
-      <div class="w-full lg:w-auto shrink-0 flex flex-col items-center justify-center process-fade-item">
-        <div class="relative w-[270px] sm:w-[360px] lg:w-[410px] max-w-[calc(100vw-3rem)] aspect-[3/4] flex items-center justify-center">
-          <!-- Stack Card Layer 2 (Backmost with photo glimpse & rotation) -->
+    <!-- 12-Column Responsive Grid matching Service & Portfolio Standards -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
+      <!-- Left Column: Rich Portrait Visual with Balanced Stacked Card Depth (Columns 1-5) -->
+      <div class="w-full lg:col-span-5 flex flex-col items-center justify-center process-fade-item">
+        <div class="relative w-[270px] sm:w-[350px] lg:w-[360px] xl:w-[400px] max-w-[calc(100vw-3rem)] aspect-[3/4] flex items-center justify-center">
+          <!-- Stack Card Layer 2 (Backmost with photo glimpse & subtle rotation) -->
           <div
-            class="absolute inset-0 rounded-3xl overflow-hidden shadow-lg transform translate-x-3 translate-y-2 rotate-3 sm:translate-x-5 sm:translate-y-3.5 sm:rotate-4 pointer-events-none transition-transform duration-500 border border-brand-dark/10 bg-brand-dark/15"
+            class="absolute inset-0 rounded-3xl overflow-hidden shadow-lg transform translate-x-2 translate-y-1.5 rotate-2 sm:translate-x-3 sm:translate-y-2.5 sm:rotate-2.5 pointer-events-none transition-transform duration-500 border border-brand-dark/10 bg-brand-dark/15"
           >
             <img
               src="/images/portfolio/model-raw.png"
@@ -163,7 +163,7 @@
 
           <!-- Stack Card Layer 1 (Middle with photo glimpse & counter-rotation) -->
           <div
-            class="absolute inset-0 rounded-3xl overflow-hidden shadow-xl transform translate-x-1.5 translate-y-1 -rotate-1 sm:translate-x-2.5 sm:translate-y-1.5 sm:-rotate-2 pointer-events-none transition-transform duration-500 border border-brand-dark/10 bg-brand-dark/25"
+            class="absolute inset-0 rounded-3xl overflow-hidden shadow-xl transform -translate-x-1.5 translate-y-1 -rotate-1 sm:-translate-x-2 sm:translate-y-1.5 sm:-rotate-1.5 pointer-events-none transition-transform duration-500 border border-brand-dark/10 bg-brand-dark/25"
           >
             <img
               src="/images/portfolio/model-clipping.png"
@@ -209,7 +209,7 @@
         </div>
 
         <!-- Mobile/Tablet Interactive Stepper Controls (Directly below preview card) -->
-        <div class="mt-5 flex items-center justify-between w-[270px] sm:w-[360px] max-w-[calc(100vw-3rem)] lg:hidden bg-white px-3 py-2 rounded-2xl border border-brand-dark/10 shadow-xs">
+        <div class="mt-5 flex items-center justify-between w-[270px] sm:w-[350px] max-w-[calc(100vw-3rem)] lg:hidden bg-white px-3 py-2 rounded-2xl border border-brand-dark/10 shadow-xs">
           <button
             type="button"
             onclick={prevStage}
@@ -239,14 +239,14 @@
         </div>
       </div>
 
-      <!-- Right Column: Editorial Narrative & Steps List -->
-      <div class="w-full lg:max-w-[540px] flex flex-col process-fade-item">
+      <!-- Right Column: Editorial Narrative & Steps List (Columns 6-12) -->
+      <div class="w-full lg:col-span-7 flex flex-col justify-center process-fade-item lg:pl-4 xl:pl-8">
         <!-- Desktop Title & Intro (Hidden on mobile) -->
         <div class="hidden lg:block mb-7">
           <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-green font-semibold block mb-2">
             Inspection Craft
           </span>
-          <h2 class="font-display text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.65rem] font-normal text-brand-dark leading-[1.15] tracking-tight mb-3 xl:whitespace-nowrap">
+          <h2 class="font-display text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.65rem] font-normal text-brand-dark leading-[1.12] tracking-tight mb-3 max-w-[22ch]">
             From Studio RAW to <em class="font-display italic font-normal text-brand-green">Campaign Master.</em>
           </h2>
           <p class="text-sm sm:text-base text-brand-dark/75 leading-relaxed font-normal max-w-lg">
@@ -255,7 +255,7 @@
         </div>
 
         <!-- Interactive Steps with Sliding Vertical Indicator Rail -->
-        <div class="relative flex gap-3.5 sm:gap-4 items-stretch w-full">
+        <div class="relative flex gap-3.5 sm:gap-4 items-stretch w-full max-w-xl">
           <!-- Rail Indicator (Tracks Active Step) -->
           <div class="relative hidden w-[3px] rounded-full bg-brand-dark/10 sm:block overflow-hidden my-1.5 shrink-0">
             <div

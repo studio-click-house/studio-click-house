@@ -75,11 +75,11 @@
   <div class="site-shell">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
       <div
-        class="standards-reveal standards-gallery grid grid-cols-2 gap-3 lg:col-span-7 lg:h-[37rem] lg:grid-cols-7 lg:grid-rows-2"
+        class="standards-reveal standards-gallery grid grid-cols-2 gap-4 lg:col-span-7 lg:h-[37rem] lg:grid-cols-7 lg:grid-rows-2"
       >
         {#each productionGallery as image, index (image.src)}
           <figure
-            class="standards-gallery-frame relative overflow-hidden rounded-[2rem] {index ===
+            class="standards-gallery-frame relative isolate overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/5 {index ===
             0
               ? 'col-span-2 aspect-[4/3] lg:col-span-4 lg:row-span-2 lg:aspect-auto'
               : 'aspect-[4/3] lg:col-span-3 lg:aspect-auto'}"
@@ -90,7 +90,7 @@
               width={image.width}
               height={image.height}
               loading="lazy"
-              class="standards-gallery-image h-full w-full rounded-[2rem] object-contain"
+              class="standards-gallery-image size-full rounded-[2rem] object-cover transition-transform duration-500 hover:scale-[1.03]"
             />
           </figure>
         {/each}
@@ -141,6 +141,8 @@
 <style>
   .standards-gallery-frame {
     border-radius: 2rem;
+    isolation: isolate;
+    transform: translateZ(0);
   }
 
   .standards-gallery-image {

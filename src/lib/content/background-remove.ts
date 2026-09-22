@@ -345,8 +345,8 @@ export const backgroundRemovePage: ServicePageData = {
       credit: "Studio Click House",
     },
     {
-      src: "/images/services/product-services/product-furniture-classic-wooden-spindle-chair.webp",
-      alt: "Wooden furniture product prepared for a clean catalog background",
+      src: "/images/services/product-services/product-furniture-scandinavian-wood-dining-chair-natural.webp",
+      alt: "Scandinavian wood dining chair prepared for a clean catalog background",
       width: 570,
       height: 570,
       credit: "Studio Click House",

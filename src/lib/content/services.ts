@@ -44,10 +44,10 @@ export const servicesFaqImages: PreviewMedia[] = [
     credit: "Studio Click House",
   },
   {
-    src: "/images/services/product-services/product-furniture-classic-wooden-spindle-chair.webp",
-    alt: "Classic wooden spindle chair shown in a finished product image",
-    width: 1500,
-    height: 2000,
+    src: "/images/services/product-services/product-furniture-scandinavian-oak-chair-hero.png",
+    alt: "Scandinavian oak chair shown in a finished catalog product image",
+    width: 1122,
+    height: 1402,
     credit: "Studio Click House",
   },
   {

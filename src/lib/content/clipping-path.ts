@@ -33,8 +33,8 @@ const clippingPathMedia = {
     height: 2000,
   },
   introPrePress: {
-    src: "/images/services/ghost-mannequin-apparel/apparel-squad-indigo-denim-jeans-flatlay.webp",
-    alt: "Denim apparel flatlay with complex seam paths prepped for pre-press CMYK separation",
+    src: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-patterned-jumpsuit-flatlay-after.webp",
+    alt: "Patterned apparel flatlay with complex seam paths prepped for pre-press CMYK separation",
     width: 1600,
     height: 2000,
   },

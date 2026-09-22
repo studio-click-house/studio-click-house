@@ -310,7 +310,7 @@
             />
           {:else if division.media.kind === "video"}
             <figure
-              class="relative aspect-[4/5] overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] bg-brand-dark"
+              class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"
             >
               <video
                 src={division.media.src}
@@ -320,13 +320,13 @@
                 loop
                 playsinline
                 preload="metadata"
-                class="h-full w-full rounded-[clamp(0.85rem,1.5vw,1.25rem)] object-cover"
+                class="h-full w-full rounded-[2rem] object-cover"
                 aria-label="Studio video editing and color grading preview"
               ></video>
             </figure>
           {:else}
             <figure
-              class="relative aspect-[4/5] overflow-hidden rounded-[clamp(0.85rem,1.5vw,1.25rem)] bg-brand-dark"
+              class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"
             >
               <img
                 src={division.media.src}
@@ -334,7 +334,7 @@
                 width={division.media.width}
                 height={division.media.height}
                 loading="lazy"
-                class="h-full w-full rounded-[clamp(0.85rem,1.5vw,1.25rem)] object-cover"
+                class="h-full w-full rounded-[2rem] object-cover"
               />
             </figure>
           {/if}
