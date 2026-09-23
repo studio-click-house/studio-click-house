@@ -152,11 +152,13 @@
             );
           });
 
-          timeline.from(
-            ".hero-detail",
-            { y: 24, duration: 0.7, ease: "power2.out" },
-            0.55,
-          );
+          if (window.matchMedia("(min-width: 64rem)").matches) {
+            timeline.from(
+              ".hero-detail",
+              { y: 24, duration: 0.7, ease: "power2.out" },
+              0.55,
+            );
+          }
 
           startHeroMotion = () => timeline.play();
           if (isPreloaderExiting) startHeroMotion();

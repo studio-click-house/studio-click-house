@@ -662,7 +662,6 @@
     position: relative;
     overflow: hidden;
     border-radius: 2rem;
-    border: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
     background: var(--color-brand-mist);
     box-shadow: 0 1.25rem 3rem -0.75rem color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
     will-change: transform, opacity;

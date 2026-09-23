@@ -1,75 +1,144 @@
-import { previewMedia } from "$lib/content/media";
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const aiRetouchMedia = {
-  heroWorkspace: {
-    src: "https://images.pexels.com/photos/37848029/pexels-photo-37848029.jpeg?auto=compress&cs=tinysrgb&w=1800",
-    alt: "AI-assisted post-production workspace with multi-display neural network rendering",
-    width: 1800,
-    height: 2400,
+  heroFashion: {
+    src: "/images/services/ai-retouch/hero-user-model-portrait.webp",
+    alt: "Fashion model in a sculptural plum gown photographed in a pale studio",
+    width: 1448,
+    height: 1086,
   },
-  heroModel: {
-    src: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "AI background synthesis and lighting adaptation on fashion model shoot",
-    width: 1600,
-    height: 2000,
+  heroScene: {
+    src: "/images/services/ai-retouch/hero-user-model-scene.webp",
+    alt: "Fashion model in a plum gown seated in a studio while a color reference is checked",
+    width: 1448,
+    height: 1086,
   },
-  heroProduct: {
-    src: "https://images.pexels.com/photos/10928896/pexels-photo-10928896.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Automated batch background replacement with realistic contact shadows",
-    width: 1600,
-    height: 2000,
+  heroAiDistinctModel: {
+    src: "/images/services/ai-retouch/hero-ai-distinct-model.webp",
+    alt: "Curly-haired fashion model in a red dress against a pale studio backdrop",
+    width: 1448,
+    height: 1086,
   },
-  introNeural: {
-    src: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Neural mask generation isolating complex edges and object geometry",
-    width: 1600,
-    height: 2000,
+  introMasking: {
+    src: "/images/services/ai-retouch/ai-ecommerce-masking.jpg",
+    alt: "Sneaker outline showing detailed e-commerce subject masking",
+    width: 1122,
+    height: 1402,
   },
-  introHumanQC: {
-    src: "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Senior artist performing manual quality assurance and touchup on AI output",
-    width: 1600,
-    height: 2000,
+  introColor: {
+    src: "/images/services/ai-retouch/ai-color-grading.jpg",
+    alt: "Fashion portrait showing a digitally refined color grade",
+    width: 1122,
+    height: 1402,
+  },
+  introJewelry: {
+    src: "/images/services/ai-retouch/ai-jewelry-retouching.jpg",
+    alt: "Fine jewelry detail prepared for a high-resolution retouching pass",
+    width: 1122,
+    height: 1402,
   },
   comparisonOriginal: {
-    src: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Raw batch photo with plain studio background before AI environment synthesis",
-    width: 1400,
-    height: 1800,
-  },
-  comparisonAi: {
-    src: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    alt: "Finished image with AI-synthesized contextual background and balanced studio lighting",
-    width: 1400,
-    height: 1800,
-  },
-  audienceBrands: {
-    src: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "High-growth digital brand team scaling high-volume seasonal campaign assets",
+    src: "/images/services/ai-retouch/apparel-chloe-gown-color-shift-before.webp",
+    alt: "Magenta evening gown before catalog color retouching",
     width: 1600,
     height: 2000,
+  },
+  comparisonRetouched: {
+    src: "/images/services/ai-retouch/apparel-chloe-gown-color-shift-after.webp",
+    alt: "The same evening gown after a dark color shift and cleanup",
+    width: 1600,
+    height: 2000,
+  },
+  showcaseBeauty: {
+    src: "/images/services/ai-retouch/ai-beauty-retouching.jpg",
+    alt: "Beauty portrait with mapped facial details for retouching",
+    width: 1122,
+    height: 1402,
+  },
+  showcaseFashion: {
+    src: "/images/services/ai-retouch/ai-fashion-retouching.jpg",
+    alt: "Editorial model image with AI-assisted fashion retouching details",
+    width: 1122,
+    height: 1402,
+  },
+  showcaseVideo: {
+    src: "/images/services/ai-retouch/ai-video-editing.jpg",
+    alt: "Editorial portrait surrounded by a digital video editing workflow",
+    width: 1122,
+    height: 1402,
+  },
+  galleryProduct: {
+    src: "/images/services/ai-retouch/ai-product-compositing.jpg",
+    alt: "Cosmetic bottle rendered within a composed product scene",
+    width: 1122,
+    height: 1402,
+  },
+  galleryCobalt: {
+    src: "/images/services/ai-retouch/ai-model-cobalt.jpg",
+    alt: "Generated fashion model wearing a cobalt evening gown",
+    width: 896,
+    height: 1200,
+  },
+  galleryMasking: {
+    src: "/images/services/ai-retouch/ghost-mannequin-input.jpg",
+    alt: "Green dress isolated on a ghost mannequin for apparel image preparation",
+    width: 896,
+    height: 1200,
+  },
+  galleryBeauty: {
+    src: "/images/services/ai-retouch/beauty-editorial-glam-leopard-portrait-298-before.webp",
+    alt: "Beauty editorial portrait with leopard styling prepared for retouching",
+    width: 1500,
+    height: 2000,
+  },
+  galleryApparel: {
+    src: "/images/services/ai-retouch/ghost-mannequin-emerald.jpg",
+    alt: "Emerald dress presented on a ghost mannequin against a clean backdrop",
+    width: 896,
+    height: 1200,
+  },
+  galleryEmerald: {
+    src: "/images/services/ai-retouch/ai-model-emerald.jpg",
+    alt: "Generated fashion model wearing an emerald evening gown",
+    width: 896,
+    height: 1200,
+  },
+  audienceBeauty: {
+    src: "/images/services/ai-retouch/beauty-retouching.jpg",
+    alt: "Beauty portrait receiving a makeup retouching pass",
+    width: 1600,
+    height: 900,
+  },
+  audienceFashion: {
+    src: "/images/services/ai-retouch/jewelry-retouching.jpg",
+    alt: "Close-up jewelry composition prepared for detail retouching",
+    width: 1600,
+    height: 900,
+  },
+  audienceCommerce: {
+    src: "/images/services/ai-retouch/product-retouching.jpg",
+    alt: "Product image prepared for an e-commerce catalog",
+    width: 1600,
+    height: 900,
   },
 } as const;
 
 export const aiRetouchPage: ServicePageData = {
   slug: "ai-retouch",
   seo: {
-    title:
-      "AI Photo Retouching | Studio Click House",
+    title: "AI Photo Retouching | Studio Click House",
     description:
       "AI-assisted photo retouching with human quality control for background generation, cleanup, and high-volume e-commerce image processing.",
   },
   hero: {
     title: "AI-Assisted",
     titleAccent: "Retouching.",
+    theme: "light",
     description:
       "Use AI-assisted workflows for seasonal catalogs, background synthesis, and bulk cleanup, with trained retouchers checking the output before delivery.",
-    media: aiRetouchMedia.heroWorkspace,
-    supportingMedia: [
-      aiRetouchMedia.heroModel,
-      aiRetouchMedia.heroProduct,
-    ],
+    media: aiRetouchMedia.heroAiDistinctModel,
+    mediaFit: "cover",
+    supportingMedia: [aiRetouchMedia.heroFashion, aiRetouchMedia.heroScene],
   },
   intro: {
     heading: "What is human-in-the-loop AI retouching?",
@@ -81,35 +150,35 @@ export const aiRetouchPage: ServicePageData = {
         label: "Automated Neural Segmentation",
         description:
           "Custom AI models rapidly segment subjects, identify skin blemishes, and isolate complex foreground objects.",
-        media: aiRetouchMedia.introNeural,
+        media: aiRetouchMedia.introMasking,
       },
       {
         label: "Contextual Background Synthesis",
         description:
           "Generate hyper-realistic studio, lifestyle, or textured backdrops that automatically match subject lighting and shadows.",
-        media: previewMedia.cgiProductShowcaseV2,
+        media: aiRetouchMedia.introColor,
       },
       {
         label: "Master Artist Quality Control",
         description:
           "Senior human retouchers inspect every image under high magnification, hand-correcting any anomalies before export.",
-        media: aiRetouchMedia.introHumanQC,
+        media: aiRetouchMedia.introJewelry,
       },
     ],
   },
   beforeAfter: {
     heading: "See the hybrid AI velocity.",
     description:
-      "Drag the slider to inspect how a basic studio product shot is transformed into a rich lifestyle scene using AI background synthesis with human master lighting refinement.",
+      "Compare a vivid evening-gown original with a dark catalog color shift, keeping the garment shape and folds consistent.",
     beforeSrc: aiRetouchMedia.comparisonOriginal.src,
     beforeAlt: aiRetouchMedia.comparisonOriginal.alt,
-    afterSrc: aiRetouchMedia.comparisonAi.src,
-    afterAlt: aiRetouchMedia.comparisonAi.alt,
-    beforeLabel: "Basic studio raw",
-    afterLabel: "AI scene synthesis",
-    width: aiRetouchMedia.comparisonAi.width,
-    height: aiRetouchMedia.comparisonAi.height,
-    caption: "Drag to compare · AI background synthesis & lighting",
+    afterSrc: aiRetouchMedia.comparisonRetouched.src,
+    afterAlt: aiRetouchMedia.comparisonRetouched.alt,
+    beforeLabel: "Original",
+    afterLabel: "Retouched",
+    width: aiRetouchMedia.comparisonRetouched.width,
+    height: aiRetouchMedia.comparisonRetouched.height,
+    caption: "Drag to compare · AI-assisted color shift",
   },
   showcase: {
     heading: "AI-assisted retouching for large catalogs",
@@ -122,25 +191,16 @@ export const aiRetouchPage: ServicePageData = {
     ],
     gallery: [
       {
-        src: previewMedia.photoEditingShowcase.src,
-        alt: "Fashion model with AI-assisted background enhancement and natural skin texture",
-        width: previewMedia.photoEditingShowcase.width,
-        height: previewMedia.photoEditingShowcase.height,
-        caption: "AI fashion enhancement",
+        ...aiRetouchMedia.showcaseBeauty,
+        caption: "AI beauty retouching",
       },
       {
-        src: previewMedia.cgiProductShowcaseV2.src,
-        alt: "Product shot with AI-generated lifestyle staging and realistic light refraction",
-        width: previewMedia.cgiProductShowcaseV2.width,
-        height: previewMedia.cgiProductShowcaseV2.height,
-        caption: "AI lifestyle environment",
+        ...aiRetouchMedia.showcaseFashion,
+        caption: "AI fashion retouching",
       },
       {
-        src: previewMedia.editingWorkspace.src,
-        alt: "Multi-shift digital artists monitoring AI pipeline batches on calibrated monitors",
-        width: previewMedia.editingWorkspace.width,
-        height: previewMedia.editingWorkspace.height,
-        caption: "24/7 human quality assurance",
+        ...aiRetouchMedia.showcaseVideo,
+        caption: "AI video workflow",
       },
     ],
   },
@@ -155,10 +215,7 @@ export const aiRetouchPage: ServicePageData = {
         category: "Product Staging",
         technique: "AI Environment Synthesis & Light Harmonization",
         media: {
-          src: "https://images.pexels.com/photos/10928896/pexels-photo-10928896.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Virtual product staging with AI",
-          width: 1200,
-          height: 1600,
+          ...aiRetouchMedia.galleryProduct,
         },
       },
       {
@@ -167,10 +224,7 @@ export const aiRetouchPage: ServicePageData = {
         category: "Fast Fashion",
         technique: "Neural Swatch Shifting & Fabric Retention",
         media: {
-          src: "https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Apparel color shifting with AI",
-          width: 1200,
-          height: 1600,
+          ...aiRetouchMedia.galleryCobalt,
         },
       },
       {
@@ -179,10 +233,7 @@ export const aiRetouchPage: ServicePageData = {
         category: "Cleanup",
         technique: "Generative Fill & Texture Matching",
         media: {
-          src: "https://images.pexels.com/photos/37848029/pexels-photo-37848029.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Smart distraction removal with AI",
-          width: 1200,
-          height: 1600,
+          ...aiRetouchMedia.galleryMasking,
         },
       },
       {
@@ -191,10 +242,7 @@ export const aiRetouchPage: ServicePageData = {
         category: "Beauty",
         technique: "Neural Blemish Isolation + Manual Polish",
         media: {
-          src: "https://images.pexels.com/photos/3762467/pexels-photo-3762467.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Beauty prep with AI",
-          width: 1200,
-          height: 1600,
+          ...aiRetouchMedia.galleryBeauty,
         },
       },
       {
@@ -203,10 +251,7 @@ export const aiRetouchPage: ServicePageData = {
         category: "E-Commerce",
         technique: "Batch White Balance & Contact Shadow",
         media: {
-          src: "https://images.pexels.com/photos/18302102/pexels-photo-18302102.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Automated catalog packaging with AI",
-          width: 1200,
-          height: 1600,
+          ...aiRetouchMedia.galleryApparel,
         },
       },
       {
@@ -215,10 +260,7 @@ export const aiRetouchPage: ServicePageData = {
         category: "Creative",
         technique: "Generative Atmosphere & Lighting LUTs",
         media: {
-          src: "https://images.pexels.com/photos/30231432/pexels-photo-30231432.jpeg?auto=compress&cs=tinysrgb&w=1200",
-          alt: "Creative mood styling with AI",
-          width: 1200,
-          height: 1600,
+          ...aiRetouchMedia.galleryEmerald,
         },
       },
     ],
@@ -271,19 +313,19 @@ export const aiRetouchPage: ServicePageData = {
         title: "Fast-Fashion & High-Volume Retailers",
         description:
           "Process thousands of seasonal catalog SKUs overnight, slashing post-production costs while keeping presentation quality high.",
-        media: aiRetouchMedia.audienceBrands,
+        media: aiRetouchMedia.audienceBeauty,
       },
       {
         title: "Digital Marketing & Ad Agencies",
         description:
           "Generate dozens of creative lifestyle background variations for social ads and A/B testing without costly location reshoots.",
-        media: previewMedia.photoEditingShowcase,
+        media: aiRetouchMedia.audienceFashion,
       },
       {
         title: "E-Commerce Aggregators & Brands",
         description:
           "Standardize thousands of supplier product images with automated alignment, shadow generation, and white-background compliance.",
-        media: previewMedia.editingWorkspace,
+        media: aiRetouchMedia.audienceCommerce,
       },
     ],
   },
@@ -304,7 +346,8 @@ export const aiRetouchPage: ServicePageData = {
         "AI-assisted retouching typically reduces per-image production costs by 40% to 60% for high-volume batches (500+ images), while maintaining quality comparable to purely manual workflows.",
     },
     {
-      question: "Can AI generate realistic lifestyle backgrounds for studio packshots?",
+      question:
+        "Can AI generate realistic lifestyle backgrounds for studio packshots?",
       answer:
         "Yes. We can place plain studio product photos into photorealistic kitchen, bathroom, outdoor, or luxury marble settings, matching the lighting angle, color temperature, and contact shadows.",
     },
@@ -312,6 +355,43 @@ export const aiRetouchPage: ServicePageData = {
       question: "Can we test this with our own product batch?",
       answer:
         "Yes, send us up to 5 sample images, and our team will provide a complimentary test edit demonstrating both our AI processing speed and human QC polish.",
+    },
+  ],
+  faqImages: [
+    {
+      src: "/images/services/ai-retouch/ai-ecommerce-masking.jpg",
+      alt: "E-commerce product subject isolated for a consistent catalog background",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/ai-retouch/ai-color-grading.jpg",
+      alt: "AI color workflow preparing a fashion portrait for human review",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/ai-retouch/ai-beauty-retouching.jpg",
+      alt: "Beauty portrait prepared for an AI-assisted retouching pass",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/ai-retouch/ai-product-compositing.jpg",
+      alt: "Product scene composed for an AI-generated lifestyle background",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
+    {
+      src: "/images/services/ai-retouch/ai-jewelry-retouching.jpg",
+      alt: "Jewelry detail prepared for a retouching quality check",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
     },
   ],
   cta: {

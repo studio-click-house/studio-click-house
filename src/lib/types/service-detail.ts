@@ -10,6 +10,7 @@ export interface ServiceDetailHeroData {
   titleAccent: string;
   description: string;
   media: ServiceVisualMedia;
+  mediaFit?: "contain" | "cover";
   supportingMedia: ServiceVisualMedia[];
   theme?: "light" | "dark";
   titleWidth?: "standard" | "wide";
@@ -58,6 +59,7 @@ export interface ServiceShowcaseGalleryItem {
   width: number;
   height: number;
   caption?: string;
+  objectPosition?: string;
 }
 
 export interface ServiceShowcaseData {

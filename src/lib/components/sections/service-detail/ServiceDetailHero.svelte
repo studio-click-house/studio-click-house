@@ -284,7 +284,8 @@
         >
           <figure
             class={cn(
-              "sd-hero-media-card sd-hero-media-primary relative aspect-[3/3.85] overflow-hidden rounded-[2rem] p-3 sm:p-5 transition-all duration-300",
+              "sd-hero-media-card sd-hero-media-primary relative aspect-[3/3.85] overflow-hidden rounded-[2rem] transition-all duration-300",
+              data.mediaFit === "cover" ? "p-0" : "p-3 sm:p-5",
               isLight
                 ? "border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6"
                 : "border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45",
@@ -295,7 +296,10 @@
               alt={data.media.alt}
               width={data.media.width}
               height={data.media.height}
-              class="size-full object-contain"
+              class={cn(
+                "size-full",
+                data.mediaFit === "cover" ? "object-cover" : "object-contain",
+              )}
             />
           </figure>
 
@@ -303,7 +307,10 @@
             {#each data.supportingMedia.slice(0, 2) as item (item.src)}
               <figure
                 class={cn(
-                  "sd-hero-media-card sd-hero-media-support relative aspect-[4/3.15] overflow-hidden rounded-[1.75rem] p-2.5 sm:p-3.5 transition-all duration-300",
+                  "sd-hero-media-card sd-hero-media-support relative overflow-hidden rounded-[1.75rem] transition-all duration-300",
+                  item.width > item.height
+                    ? "aspect-[4/3] p-0"
+                    : "aspect-[4/3.15] p-2.5 sm:p-3.5",
                   isLight
                     ? "border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/5"
                     : "border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35",
@@ -314,7 +321,12 @@
                   alt={item.alt}
                   width={item.width}
                   height={item.height}
-                  class="size-full object-contain"
+                  class={cn(
+                    "size-full",
+                    item.width > item.height
+                      ? "object-cover"
+                      : "object-contain",
+                  )}
                 />
               </figure>
             {/each}

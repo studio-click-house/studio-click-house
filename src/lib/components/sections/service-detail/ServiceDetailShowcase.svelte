@@ -183,6 +183,7 @@
                 height={data.gallery[0].height}
                 loading="lazy"
                 class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                style:object-position={data.gallery[0].objectPosition ?? "center"}
               />
               <span
                 class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/92 via-brand-dark/20 to-transparent transition-opacity duration-500 group-hover:opacity-85"

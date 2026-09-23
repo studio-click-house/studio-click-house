@@ -229,7 +229,8 @@
         class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none"
       >
         <div
-          class="relative overflow-hidden aspect-[4/5] w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem] border border-brand-dark/10 shadow-xl shadow-brand-dark/5"
+          class="relative overflow-hidden w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem]"
+          style={`aspect-ratio: ${images[activeImageIndex] && images[activeImageIndex].width / images[activeImageIndex].height < 0.72 ? "2 / 3" : "4 / 5"}`}
         >
           <!-- Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">
@@ -244,11 +245,14 @@
                   width={img.width}
                   height={img.height}
                   loading="lazy"
-                  class="absolute inset-0 size-full rounded-[2rem] object-cover object-center transition-all duration-700 ease-out"
+                  class="absolute inset-0 size-full rounded-[2rem] object-center transition-all duration-700 ease-out"
+                  class:object-contain={imageFit === "contain"}
+                  class:object-cover={imageFit === "cover"}
                   class:opacity-100={activeImageIndex === idx}
                   class:scale-100={activeImageIndex === idx}
                   class:opacity-0={activeImageIndex !== idx}
                   class:scale-105={activeImageIndex !== idx}
+                  style:scale={activeImageIndex === idx && img.src === "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp" ? 1.08 : undefined}
                 />
               {/each}
             </div>

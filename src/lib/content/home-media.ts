@@ -8,10 +8,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Intelligent finishing",
     shape: "tall",
     media: {
-      src: "/images/services/model-beauty/model-michael-lo-sordo-ivory-couture-0393-after.webp",
+      src: "/images/home/orbit-1.webp",
       alt: "Fashion model wearing an ivory couture gown, finished for an editorial campaign",
-      width: 1333,
-      height: 2000,
+      width: 480,
+      height: 720,
     },
   },
   {
@@ -20,10 +20,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Generative studio",
     shape: "compact",
     media: {
-      src: "/images/services/product-services/product-paw-osteosupport-cats-packaging-bottle.webp",
+      src: "/images/home/orbit-2.webp",
       alt: "Pet supplement bottle with a cat illustration and product details on the label",
-      width: 2000,
-      height: 2000,
+      width: 480,
+      height: 600,
     },
   },
   {
@@ -32,10 +32,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "AI visualization",
     shape: "portrait",
     media: {
-      src: "/images/portfolio/cgi-product-showcase.png",
+      src: "/images/home/orbit-3.webp",
       alt: "Photorealistic amber fragrance bottle render against a dark textured background",
-      width: 1024,
-      height: 1024,
+      width: 480,
+      height: 480,
     },
   },
   {
@@ -44,7 +44,7 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Cinematic AI",
     shape: "tall",
     media: {
-      src: "/images/services/product-services/service-retouching-color-change-after.webp",
+      src: "/images/home/orbit-4.webp",
       alt: "Fashion model wearing a recolored magenta top on a neutral background",
       width: 375,
       height: 479,
@@ -56,10 +56,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Smart isolation",
     shape: "portrait",
     media: {
-      src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-01-after.webp",
+      src: "/images/home/orbit-5.webp",
       alt: "Black leather handbag isolated against a clean light background",
-      width: 1500,
-      height: 2000,
+      width: 480,
+      height: 600,
     },
   },
   {
@@ -68,10 +68,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Precision detail",
     shape: "compact",
     media: {
-      src: "/images/services/jewelry/jewelry-pink-sapphire-diamond-halo-platinum-ring-after.webp",
+      src: "/images/home/orbit-6.webp",
       alt: "Pink sapphire ring surrounded by a halo of small diamonds",
-      width: 2000,
-      height: 1997,
+      width: 480,
+      height: 600,
     },
   },
   {
@@ -80,10 +80,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Natural texture",
     shape: "portrait",
     media: {
-      src: "/images/services/model-beauty/beauty-editorial-glam-leopard-portrait-298-after.webp",
+      src: "/images/home/orbit-7.webp",
       alt: "Close-up beauty portrait with editorial makeup and natural skin texture",
-      width: 1500,
-      height: 2000,
+      width: 480,
+      height: 640,
     },
   },
   {
@@ -92,10 +92,10 @@ export const homeOrbitCards: AboutOrbitCard[] = [
     category: "Intelligent motion",
     shape: "tall",
     media: {
-      src: "/images/services/model-beauty/model-fashion-male-suit-street-editorial-after.webp",
+      src: "/images/home/orbit-8.webp",
       alt: "Fashion model in a blue suit photographed on a city street",
-      width: 1544,
-      height: 2000,
+      width: 480,
+      height: 622,
     },
   },
 ];
@@ -139,7 +139,7 @@ export const homeFaqImages: PreviewMedia[] = [
   {
     src: "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp",
     alt: "Magnolia Lounge sleepwear top shown as a clean apparel product image",
-    width: 1500,
+    width: 1600,
     height: 2000,
     credit: "Studio Click House",
   },

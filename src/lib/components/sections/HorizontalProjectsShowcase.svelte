@@ -19,39 +19,39 @@
     media: ShowcaseProjectMedia;
   };
 
-  const workFieldLandscapeMedia: Record<string, PreviewMedia> = {
+  const workFieldPortraitMedia: Record<string, PreviewMedia> = {
     "product-finishing": {
       src: "/images/services/product-services/product-architectural-skylight-roof-window-section.webp",
       alt: "Architectural roof-window product photographed for a clear commercial product image",
-      width: 2000,
-      height: 1523,
+      width: 1600,
+      height: 2000,
       credit: "Studio Click House",
     },
     "beauty-detail": {
-      src: "/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp",
-      alt: "Two fashion models in dramatic editorial makeup and neon studio lighting",
-      width: 2000,
-      height: 1500,
+      src: "/images/services/model-beauty/beauty-editorial-glam-leopard-portrait-298-after.webp",
+      alt: "Beauty portrait with polished editorial makeup and leopard print styling",
+      width: 1500,
+      height: 2000,
       credit: "Studio Click House",
     },
     "fashion-color": {
-      src: "/images/services/model-beauty/beauty-fashion-neon-escalator-crystal-glam.webp",
-      alt: "Fashion model in a crystal look against a vivid neon escalator backdrop",
-      width: 2000,
-      height: 1500,
+      src: "/images/services/model-beauty/model-fashion-male-suit-street-editorial-after.webp",
+      alt: "Fashion model in a blue suit photographed on a city street",
+      width: 1544,
+      height: 2000,
       credit: "Studio Click House",
     },
     "jewelry-detail": {
       src: "/images/services/jewelry/jewelry-westwood-statement-gold-earrings-02-after.webp",
       alt: "Pair of sculptural gold earrings with a polished finish",
-      width: 1500,
+      width: 1600,
       height: 2000,
       credit: "Studio Click House",
     },
     "shadow-study": {
       src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-after.webp",
       alt: "Metallic gold handbag photographed against a clean studio background",
-      width: 1500,
+      width: 1600,
       height: 2000,
       credit: "Studio Click House",
     },
@@ -59,7 +59,7 @@
   const withImageKind = (item: WorkGalleryItem): WorkFieldSectionItem => ({
     ...item,
     media: {
-      ...(workFieldLandscapeMedia[item.id] ?? item.media),
+      ...(workFieldPortraitMedia[item.id] ?? item.media),
       kind: "image",
     },
   });
@@ -293,7 +293,7 @@
 
             const viewportWidth = () => window.innerWidth;
             const stageHeight = () => localStage.clientHeight;
-            const workFieldCardRatio = 0.48;
+            const workFieldCardRatio = 0.9;
             const workFieldTrackSteps = Math.max(
               1,
               workFieldItems.length - 1 / workFieldCardRatio,
@@ -359,6 +359,7 @@
             });
             gsap.set(workFieldsMediaTrack, {
               y: 0,
+              width: "100%",
               force3D: true,
             });
             gsap.set(workFieldsMediaViewport, {
@@ -383,10 +384,20 @@
               force3D: true,
             });
             gsap.set(workFieldImages, {
-              scale: 1.02,
+              scale: 1,
               transformOrigin: "center center",
               force3D: true,
             });
+            gsap.set(
+              workFieldImages.filter((image) =>
+                image.classList.contains("work-field-shadow-image"),
+              ),
+              {
+                scale: 1.14,
+                transformOrigin: "center top",
+                force3D: true,
+              },
+            );
             gsap.set(workFieldsIntroPanel, { autoAlpha: 1 });
             gsap.set(workFieldsIntroLines, {
               yPercent: 115,
@@ -405,7 +416,7 @@
                 trigger: localSection,
                 start: "top top+=70",
                 end: () =>
-                  `+=${stageHeight() * (3.9 + workFieldTrackSteps * 0.48)}`,
+                  `+=${stageHeight() * (3.9 + workFieldTrackSteps * workFieldCardRatio)}`,
                 pin: localStage,
                 pinSpacing: true,
                 scrub: true,
@@ -624,7 +635,7 @@
               .to(
                 handoffSlide,
                 {
-                  height: "48%",
+                  height: `${workFieldCardRatio * 100}%`,
                   duration: 0.9,
                   ease: "none",
                 },
@@ -649,6 +660,15 @@
                   ease: "power3.out",
                 },
                 "workFields+=0.08",
+              )
+              .to(
+                workFieldsMediaTrack,
+                {
+                  width: "50%",
+                  duration: 0.9,
+                  ease: "none",
+                },
+                "workFields",
               )
               .to(
                 workFieldsMediaTrack,
@@ -758,12 +778,12 @@
       <!-- Background Image with dark overlay for rich contrast -->
       <div class="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="/images/portfolio/portfolio-fashion-studio-hero.jpg"
-          sizes="50vw"
+          src="/images/home/showcase-intro.webp"
           alt="Photographer capturing a fashion model on a studio set"
-          width="2400"
-          height="1350"
-          loading="eager"
+          width="1200"
+          height="675"
+          loading="lazy"
+          decoding="async"
           class="h-full w-full object-cover object-center"
         />
         <!-- Dark gradient overlay to pop the white text -->
@@ -904,7 +924,7 @@
 
       <div class="work-fields-desktop relative h-full w-full">
         <div
-          class="work-fields-media-viewport absolute inset-y-0 left-0 h-full w-[66.6%] overflow-hidden bg-brand-dark"
+          class="work-fields-media-viewport absolute inset-y-0 left-0 h-full w-[66.6%] overflow-hidden bg-brand-light"
         >
           <div class="work-fields-media-content h-full w-full">
             <div class="work-fields-media-track h-full">
@@ -996,6 +1016,7 @@
                           height={item.media.height}
                           loading="lazy"
                           class="work-field-image h-full w-full object-cover"
+                          class:work-field-shadow-image={item.id === "shadow-study"}
                         />
                       {/if}
                     </div>
@@ -1222,15 +1243,11 @@
   }
 
   .work-field-slide {
-    height: 48%;
+    height: 90%;
   }
 
   .work-field-handoff-slide {
     height: 100%;
-  }
-
-  .work-field-image-shell {
-    transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .work-field-hover-shade {
@@ -1259,11 +1276,6 @@
 
   .work-field-slide-arrow-icon {
     transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .work-field-slide:hover .work-field-image-shell,
-  .work-field-slide:focus-within .work-field-image-shell {
-    transform: scale(1.045);
   }
 
   .work-field-slide:hover .work-field-hover-shade,
@@ -1510,10 +1522,6 @@
   }
 
   @media (hover: none), (prefers-reduced-motion: reduce) {
-    .work-field-image-shell {
-      transition: none;
-    }
-
     .work-field-hover-shade {
       opacity: 1;
       transition: none;
