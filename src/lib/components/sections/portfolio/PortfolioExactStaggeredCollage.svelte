@@ -123,7 +123,7 @@
 
         <!-- Middle-Left: Micro-row (Text block on left + Garment Swatch on right) -->
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6 items-center"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center"
         >
           <div class="collage-item flex flex-col justify-center">
             <h3 class="font-display text-2xl font-normal text-brand-dark mb-2">
@@ -177,10 +177,10 @@
 
         <!-- Middle-Right: Micro-row (Portrait Image on left + Description text on right) -->
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6 items-center"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center"
         >
           <div
-            class="collage-item group aspect-[3/4] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm flex items-center justify-center p-2 sm:p-3"
+            class="collage-item group aspect-[3/4] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
           >
             <img
               src="/images/services/model-beauty/model-female-headshot-white-blouse-0997-after.webp"
@@ -189,7 +189,7 @@
               height="2000"
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
+              class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
           </div>
 

@@ -15,6 +15,7 @@
     aspect: "square" | "tall" | "wide";
     fit?: "cover" | "contain";
     bg?: string;
+    zoom?: boolean;
   }
 
   const galleryItems: GalleryItem[] = [
@@ -56,7 +57,7 @@
       category: "color-correction",
       aspect: "tall",
       fit: "contain",
-      bg: "bg-[#F3EADD]",
+      bg: "bg-white",
     },
     {
       id: "gal-5",
@@ -113,7 +114,8 @@
       title: "Nadine Mini Dress Tone Calibration",
       category: "color-correction",
       aspect: "tall",
-      fit: "contain",
+      fit: "cover",
+      zoom: true,
       bg: "bg-[#E8E8E8]",
     },
     {
@@ -128,13 +130,13 @@
     },
     {
       id: "gal-12",
-      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-printemps-zip-through-jacket-walnut-194-after.webp",
-      alt: "Walnut zip-through jacket invisible ghost mannequin hollow neck insertion",
-      title: "Printemps Zip Jacket 3D Neck Joint",
-      category: "ghost-mannequin",
+      src: "/images/services/model-beauty/model-black-silk-floral-slip-dress-27.webp",
+      alt: "Editorial portrait of a model wearing a black floral silk slip dress",
+      title: "Black Silk Slip Dress Editorial Retouch",
+      category: "retouching",
       aspect: "tall",
-      fit: "contain",
-      bg: "bg-[#F2ECE7]",
+      fit: "cover",
+      bg: "bg-[#E8E8E8]",
     },
   ];
 
@@ -329,7 +331,7 @@
         <button
           type="button"
           onclick={() => openImage(item)}
-          class="group relative overflow-hidden rounded-2xl border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center {item.fit === 'cover' ? 'p-0' : 'p-4 sm:p-6'}"
+          class="group relative overflow-hidden rounded-2xl border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center"
           aria-label="View {item.title}"
         >
           <img
@@ -337,7 +339,7 @@
             alt={item.alt}
             loading="lazy"
             decoding="async"
-            class="h-full w-full {item.fit === 'cover' ? 'object-cover object-top' : 'object-contain'} transition-transform duration-700 ease-out group-hover:scale-105"
+            class="absolute inset-0 h-full w-full {item.fit === 'cover' ? 'object-cover object-top' : 'object-contain'} {item.zoom ? 'scale-[1.06] group-hover:scale-[1.11]' : 'group-hover:scale-105'} transition-transform duration-700 ease-out"
           />
 
           <!-- Editorial Gradient Overlay on Hover (Clean, No Floating Circular Pills) -->

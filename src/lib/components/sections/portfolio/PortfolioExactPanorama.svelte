@@ -94,10 +94,10 @@
       class="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[24/9] max-h-[580px] rounded-2xl md:rounded-3xl border border-brand-dark/10 shadow-2xl overflow-hidden bg-brand-dark"
     >
       <img
-        src="/images/services/jewelry/jewelry-oval-diamond-eternity-band-gold-after.webp"
-        alt="Macro fine jewelry oval diamond eternity band refraction and gold luster"
-        width="2000"
-        height="1995"
+        src="/images/services/ai-retouch/jewelry-retouching.jpg"
+        alt="Pearl necklace and gold jewelry arranged for a fine-jewelry retouching showcase"
+        width="1600"
+        height="900"
         loading="lazy"
         decoding="async"
         class="panorama-frame-img h-full w-full object-cover object-center will-change-transform"
