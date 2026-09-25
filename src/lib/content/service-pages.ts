@@ -21,16 +21,39 @@ export const servicePages: Record<string, ServicePageData> = {
   "ai-retouch": aiRetouchPage,
 };
 
-export const implementedServiceSlugs = Object.keys(servicePages);
+export const implementedServiceSlugs = [...Object.keys(servicePages), "video-editing", "3d-modeling"];
 
-const videoServiceSlugs = new Set(["commercial-editing", "color-grading", "social-cutdowns", "video-editing"]);
-const threeDimensionalServiceSlugs = new Set(["3d-product-modeling", "texturing-shading", "cgi-rendering", "3d-modeling"]);
+const videoServiceSlugs = new Set([
+  "commercial-editing",
+  "color-grading",
+  "social-cutdowns",
+  "ai-video-generation",
+  "video-editing",
+]);
+const threeDimensionalServiceSlugs = new Set([
+  "product-modeling",
+  "3d-product-modeling",
+  "texturing-shading",
+  "cgi-rendering",
+  "turntables-motion",
+  "3d-modeling",
+]);
 
 export function resolveServiceHref(slug: string): ResolvedPathname {
   if (servicePages[slug]) {
     return resolve("/services/[slug]", { slug });
   }
-  if (videoServiceSlugs.has(slug)) return resolve("/services#video-editing");
-  if (threeDimensionalServiceSlugs.has(slug)) return resolve("/services#3d-modeling");
+  if (slug === "video-editing") {
+    return resolve("/services/video-editing");
+  }
+  if (videoServiceSlugs.has(slug)) {
+    return `/services/video-editing#${slug}` as ResolvedPathname;
+  }
+  if (slug === "3d-modeling") {
+    return resolve("/services/3d-modeling");
+  }
+  if (threeDimensionalServiceSlugs.has(slug)) {
+    return `/services/3d-modeling#${slug}` as ResolvedPathname;
+  }
   return resolve("/services#photo-editing");
 }

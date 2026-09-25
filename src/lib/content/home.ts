@@ -28,14 +28,26 @@ export const services: ServiceItem[] = [
     slug: "ai-retouch",
     description:
       "Next-gen AI-assisted editing for rapid, high-quality bulk processing.",
-    media: previewMedia.editingWorkspace,
+    media: {
+      src: "/images/services/ai-retouch/hero-ai-fashion.webp",
+      alt: "Fashion model in sculptural gown enhanced with AI retouching workflow",
+      width: 1448,
+      height: 1086,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
     title: "Background remove",
     slug: "background-remove",
     description: "Clean subject isolation and backdrop extraction.",
-    media: previewMedia.perfumeShadow,
+    media: {
+      src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-01-before.webp",
+      alt: "Designer leather handbag prepared for clean background removal",
+      width: 1500,
+      height: 2000,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
@@ -43,7 +55,13 @@ export const services: ServiceItem[] = [
     slug: "clipping-path",
     description:
       "Precise subject isolation for clean, flexible image production.",
-    media: previewMedia.perfumeStillLife,
+    media: {
+      src: "/images/services/bags-accessories/accessories-astral-designer-sunglasses-side-profile-before.webp",
+      alt: "Designer sunglasses profile with crisp contours for vector clipping path",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
@@ -51,7 +69,13 @@ export const services: ServiceItem[] = [
     slug: "ghost-mannequin",
     description:
       "Garment construction that keeps shape and fit visually clear.",
-    media: previewMedia.monochromePortrait,
+    media: {
+      src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
+      alt: "Ice-blue knit cardigan ghost mannequin with hollow 3D collar joint",
+      width: 1420,
+      height: 2000,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
@@ -59,7 +83,13 @@ export const services: ServiceItem[] = [
     slug: "editorial-retouching",
     description:
       "High-end, detailed finishing guided by material, light, and brand context.",
-    media: previewMedia.studioPortrait,
+    media: {
+      src: "/images/services/ai-retouch/ai-fashion-retouching.jpg",
+      alt: "High-end editorial fashion beauty retouching with authentic skin texture and micro dodge and burn",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
@@ -67,7 +97,13 @@ export const services: ServiceItem[] = [
     slug: "ecommerce-retouching",
     description:
       "Polished image enhancement tailored for high-volume online store listings.",
-    media: previewMedia.jewelryDetail,
+    media: {
+      src: "/images/services/model-beauty/beauty-portrait-close-up-skincare-retouch-0500-after.webp",
+      alt: "Close-up skincare portrait with professional commercial e-commerce retouching",
+      width: 2000,
+      height: 1500,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
@@ -75,7 +111,13 @@ export const services: ServiceItem[] = [
     slug: "jewelry-retouching",
     description:
       "Close-detail cleanup that protects reflections, texture, and form.",
-    media: previewMedia.jewelryMacro,
+    media: {
+      src: "/images/services/jewelry/jewelry-aquamarine-emerald-gold-ring-4054.webp",
+      alt: "Fine luxury diamond and gemstone ring with specular reflection preservation",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
   {
@@ -83,7 +125,13 @@ export const services: ServiceItem[] = [
     slug: "color-correction",
     description:
       "Controlled color alignment across individual frames and full batches.",
-    media: previewMedia.redStudioPortrait,
+    media: {
+      src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-before.webp",
+      alt: "Cosmetic cream deodorant product color balanced on glass studio surface",
+      width: 1600,
+      height: 2000,
+      credit: "Studio Click House",
+    },
     category: "Image Editing",
   },
 
@@ -93,7 +141,13 @@ export const services: ServiceItem[] = [
     slug: "commercial-editing",
     description:
       "Polished post-production for brand reels, commercial spots, and product campaigns.",
-    media: previewMedia.videoColorGrading,
+    media: {
+      src: "/images/about/orbit/ai-video-editing.jpg",
+      alt: "Professional commercial video editing suite with multi-track timeline and sequence grading",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
     category: "Video Editing",
   },
   {
@@ -101,7 +155,13 @@ export const services: ServiceItem[] = [
     slug: "color-grading",
     description:
       "Calibrated color balance and aesthetic toning for cohesive video sets.",
-    media: previewMedia.redStudioPortrait,
+    media: {
+      src: "/images/about/orbit/ai-color-grading.jpg",
+      alt: "Cinematic color grading console with color wheels and waveform monitors",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
     category: "Video Editing",
   },
   {
@@ -109,7 +169,27 @@ export const services: ServiceItem[] = [
     slug: "social-cutdowns",
     description:
       "Punchy, fast-turnaround video revisions tailored for social platforms.",
-    media: previewMedia.editingWorkspace,
+    media: {
+      src: "/images/about/video-pipeline/stage-2-motion-upscale.webp",
+      alt: "Fast-paced social video revision and motion upscale sequence",
+      width: 1200,
+      height: 670,
+      credit: "Studio Click House",
+    },
+    category: "Video Editing",
+  },
+  {
+    title: "AI video generation",
+    slug: "ai-video-generation",
+    description:
+      "Generative motion synthesis, neural camera extensions, and cinematic AI sequences.",
+    media: {
+      src: "/images/about/video-pipeline/stage-1-raw-synthesis.webp",
+      alt: "Neural AI motion synthesis and generative video pipeline",
+      width: 1200,
+      height: 670,
+      credit: "Studio Click House",
+    },
     category: "Video Editing",
   },
 
@@ -119,7 +199,13 @@ export const services: ServiceItem[] = [
     slug: "3d-product-modeling",
     description:
       "Accurate, lightweight 3D models built directly from reference designs.",
-    media: previewMedia.product3dModel,
+    media: {
+      src: "/images/about/orbit/ai-3d-cgi.jpg",
+      alt: "3D wireframe mesh modeling transitioning to finished product geometry",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+    },
     category: "3D Modeling",
   },
   {
@@ -127,7 +213,13 @@ export const services: ServiceItem[] = [
     slug: "texturing-shading",
     description:
       "Custom PBR material maps depicting authentic metal, glass, and fabrics.",
-    media: previewMedia.jewelryMacro,
+    media: {
+      src: "/images/portfolio/3d-cgi-showcase-v2.webp",
+      alt: "3D PBR material texturing, displacement maps, and realistic shader development",
+      width: 1200,
+      height: 675,
+      credit: "Studio Click House",
+    },
     category: "3D Modeling",
   },
   {
@@ -135,7 +227,13 @@ export const services: ServiceItem[] = [
     slug: "cgi-rendering",
     description:
       "Photorealistic 3D product renders with custom studio staging.",
-    media: previewMedia.perfumeStillLife,
+    media: {
+      src: "/images/portfolio/cgi-product-showcase.png",
+      alt: "Photorealistic 3D CGI product render of a luxury glass perfume bottle",
+      width: 1024,
+      height: 1024,
+      credit: "Studio Click House",
+    },
     category: "3D Modeling",
   },
 ];

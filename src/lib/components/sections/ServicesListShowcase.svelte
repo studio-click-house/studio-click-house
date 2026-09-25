@@ -8,6 +8,7 @@
   import { previewMedia } from "$lib/content/media";
   import { services } from "$lib/content/home";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
+  import ShowcaseProduct3DViewer from "$lib/components/common/ShowcaseProduct3DViewer.svelte";
   import { _ } from "svelte-i18n";
 
   type DivisionMedia =
@@ -33,6 +34,10 @@
         alt: string;
         width: number;
         height: number;
+      }
+    | {
+        kind: "3d";
+        modelPath?: string;
       };
 
   const divisions: Array<{
@@ -89,11 +94,8 @@
         (service) => service.category === "3D Modeling",
       ),
       media: {
-        kind: "image",
-        src: previewMedia.cgiProductShowcaseV2.src,
-        alt: previewMedia.cgiProductShowcaseV2.alt,
-        width: previewMedia.cgiProductShowcaseV2.width,
-        height: previewMedia.cgiProductShowcaseV2.height,
+        kind: "3d",
+        modelPath: "/models/SheenChair.glb",
       },
     },
   ];
@@ -313,17 +315,26 @@
               class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"
             >
               <video
-                src={division.media.src}
                 poster={division.media.poster}
                 autoplay
                 muted
                 loop
                 playsinline
-                preload="metadata"
+                preload="auto"
                 class="h-full w-full rounded-[2rem] object-cover"
                 aria-label="Studio video editing and color grading preview"
-              ></video>
+                onloadedmetadata={(e) => {
+                  const v = e.currentTarget;
+                  v.muted = true;
+                  v.play().catch(() => {});
+                }}
+              >
+                <source src="/videos/editing_video.mp4" type="video/mp4" />
+                <source src="/videos/editing-video-720p.webm" type="video/webm" />
+              </video>
             </figure>
+          {:else if division.media.kind === "3d"}
+            <ShowcaseProduct3DViewer modelPath={division.media.modelPath} />
           {:else}
             <figure
               class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"

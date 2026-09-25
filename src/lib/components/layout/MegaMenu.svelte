@@ -60,12 +60,6 @@
     },
   ];
 
-  const previewRevealVariants = [
-    { clipPath: "inset(0% 100% 0% 0%)", x: -24, y: 0 },
-    { clipPath: "inset(0% 0% 0% 100%)", x: 24, y: 0 },
-    { clipPath: "inset(100% 0% 0% 0%)", x: 0, y: 20 },
-    { clipPath: "inset(0% 0% 100% 0%)", x: 0, y: -20 },
-  ] as const;
 
   onMount(() => {
     import("gsap").then((m) => {
@@ -168,47 +162,6 @@
     );
   });
 
-  // Alternate the preview direction so service browsing stays tactile.
-  $effect(() => {
-    if (!browser || !gsapModule || !menuContainer || !isOpen) return;
-    const gsap = gsapModule;
-
-    // Establish dependency tracking
-    const _slug = activeServiceSlug;
-
-    const activeFrame = menuContainer.querySelector(`.mega-thumb-${_slug}`);
-    const activeImage = menuContainer.querySelector(`.mega-thumb-${_slug} img`);
-    if (activeImage && activeFrame) {
-      const serviceIndex = services.findIndex(
-        (service) => service.slug === _slug,
-      );
-      const revealVariant =
-        previewRevealVariants[serviceIndex % previewRevealVariants.length];
-
-      gsap.fromTo(
-        activeFrame,
-        { clipPath: revealVariant.clipPath },
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 0.42,
-          ease: "power3.out",
-          overwrite: "auto",
-        },
-      );
-      gsap.fromTo(
-        activeImage,
-        { scale: 1.1, x: revealVariant.x, y: revealVariant.y },
-        {
-          scale: 1,
-          x: 0,
-          y: 0,
-          duration: 0.52,
-          ease: "power3.out",
-          overwrite: "auto",
-        },
-      );
-    }
-  });
 
   function handleCategoryHover(
     catId: "Image Editing" | "Video Editing" | "3D Modeling",
@@ -293,7 +246,7 @@
       </p>
       <ul class="flex flex-col gap-2.5">
         {#each activeCategoryServices as service, sIndex (service.slug)}
-          {#if service.slug === "ai-retouch"}
+          {#if service.slug === "ai-retouch" || service.slug === "ai-video-generation"}
             <li
               class="middle-service-item relative rounded-lg border border-brand-green/50 bg-brand-green/[0.08] p-2.5 my-1 transition-all duration-300 ease-out hover:border-brand-green hover:bg-brand-green/[0.14] hover:shadow-[0_0_18px_rgba(126,166,65,0.25)] {service.slug ===
               activeServiceSlug
@@ -382,21 +335,22 @@
 
     <!-- Right Column: Image Preview Frame -->
     <div
-      class="relative h-full min-h-[22rem] w-full overflow-hidden rounded-lg border border-brand-light/10 bg-brand-dark/30"
+      class="relative h-full min-h-[22rem] w-full overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-dark/30 shadow-inner"
     >
       {#each services as service (service.slug)}
         <div
-          class="mega-thumb-{service.slug} absolute inset-0 size-full transition-opacity duration-300"
-          style="opacity: {service.slug === activeServiceSlug
-            ? 1
-            : 0}; z-index: {service.slug === activeServiceSlug ? 1 : 0}"
+          class="mega-thumb-{service.slug} absolute inset-0 size-full pointer-events-none transition-all duration-700 ease-out {service.slug ===
+          activeServiceSlug
+            ? 'opacity-100 scale-100 z-10'
+            : 'opacity-0 scale-105 z-0'}"
         >
           <img
             src={service.media.src}
             alt={service.media.alt}
             width={service.media.width}
             height={service.media.height}
-            class="size-full object-cover"
+            loading="lazy"
+            class="size-full rounded-[2rem] object-cover transition-transform duration-700 ease-out"
           />
         </div>
       {/each}

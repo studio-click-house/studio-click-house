@@ -21,14 +21,23 @@
     items = faqs, 
     images = defaultFaqImages,
     imageFit = "cover",
+    title = "",
   } = $props<{ 
     items?: FaqItem[]; 
     images?: PreviewMedia[];
     imageFit?: "cover" | "contain";
+    title?: string;
   }>();
+
+  let isCustom = $derived(items !== faqs);
 
   let activeIndex = $state(0);
   let activeImageIndex = $state(0);
+  let safeImageIndex = $derived(
+    images && images.length > 0
+      ? ((activeImageIndex % images.length) + images.length) % images.length
+      : 0
+  );
   let section: HTMLElement;
   let answerContainers: HTMLElement[] = [];
   function handleFaqClick(index: number, isHover = false) {
@@ -164,7 +173,7 @@
             id="faq-section-title"
             class="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
           >
-            {$_('home.faq.title')}
+            {title || $_('home.faq.title')}
           </h2>
         </div>
 
@@ -190,7 +199,7 @@
                   class="font-sans font-semibold text-[1.02rem] sm:text-[1.12rem] leading-snug text-brand-dark transition-colors duration-200 group-hover:text-brand-green"
                   class:text-brand-green={activeIndex === index}
                 >
-                  {$_(`home.faqs.${index}.question`) || item.question}
+                  {isCustom ? item.question : ($_(`home.faqs.${index}.question`) || item.question)}
                 </h3>
 
                 <!-- Circular Plus icon pill matching screenshot -->
@@ -215,7 +224,7 @@
               >
                 <div class="px-5 pb-5 pt-1 sm:px-6 sm:pb-6 border-t border-brand-dark/6 mt-0.5 pt-3.5">
                   <p class="max-w-2xl text-sm leading-relaxed text-brand-dark/70 sm:text-[0.95rem]">
-                    {$_(`home.faqs.${index}.answer`) || item.answer}
+                    {isCustom ? item.answer : ($_(`home.faqs.${index}.answer`) || item.answer)}
                   </p>
                 </div>
               </div>
@@ -230,7 +239,7 @@
       >
         <div
           class="relative overflow-hidden w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem]"
-          style={`aspect-ratio: ${images[activeImageIndex] && images[activeImageIndex].width / images[activeImageIndex].height < 0.72 ? "2 / 3" : "4 / 5"}`}
+          style={`aspect-ratio: ${images[safeImageIndex] && images[safeImageIndex].width / images[safeImageIndex].height < 0.72 ? "2 / 3" : "4 / 5"}`}
         >
           <!-- Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">
@@ -248,11 +257,11 @@
                   class="absolute inset-0 size-full rounded-[2rem] object-center transition-all duration-700 ease-out"
                   class:object-contain={imageFit === "contain"}
                   class:object-cover={imageFit === "cover"}
-                  class:opacity-100={activeImageIndex === idx}
-                  class:scale-100={activeImageIndex === idx}
-                  class:opacity-0={activeImageIndex !== idx}
-                  class:scale-105={activeImageIndex !== idx}
-                  style:scale={activeImageIndex === idx && img.src === "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp" ? 1.08 : undefined}
+                  class:opacity-100={safeImageIndex === idx}
+                  class:scale-100={safeImageIndex === idx}
+                  class:opacity-0={safeImageIndex !== idx}
+                  class:scale-105={safeImageIndex !== idx}
+                  style:scale={safeImageIndex === idx && img.src === "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp" ? 1.08 : undefined}
                 />
               {/each}
             </div>
