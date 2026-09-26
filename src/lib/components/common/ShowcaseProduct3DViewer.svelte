@@ -112,31 +112,38 @@
       const loader = new GLTFLoader();
       loader.setDRACOLoader(dracoLoader);
 
-      loader.load(modelPath, (gltf) => {
-        if (!active) return;
-        loadedModel = gltf.scene;
+      loader.load(
+        modelPath,
+        (gltf) => {
+          if (!active) return;
+          loadedModel = gltf.scene;
 
-        loadedModel.updateWorldMatrix(true, true);
-        const box = new THREE.Box3().setFromObject(loadedModel);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
+          loadedModel.updateWorldMatrix(true, true);
+          const box = new THREE.Box3().setFromObject(loadedModel);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
 
-        // Center geometric pivot
-        loadedModel.position.x = -center.x;
-        loadedModel.position.y = -center.y;
-        loadedModel.position.z = -center.z;
+          // Center geometric pivot
+          loadedModel.position.x = -center.x;
+          loadedModel.position.y = -center.y;
+          loadedModel.position.z = -center.z;
 
-        // Calculate rotation envelope radius in ground plane (X-Z) so 360 rotation never clips
-        const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
-        const effectiveDimension = Math.max(radiusXZ * 2, size.y);
-        const scale = 2.45 / effectiveDimension;
-        loadedModel.scale.setScalar(scale);
+          // Calculate rotation envelope radius in ground plane (X-Z) so 360 rotation never clips
+          const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
+          const effectiveDimension = Math.max(radiusXZ * 2, size.y);
+          const scale = 2.45 / effectiveDimension;
+          loadedModel.scale.setScalar(scale);
 
-        // Adjust shadow plane height right under the scaled model base
-        shadowMesh.position.y = -(size.y * scale) / 2 - 0.04;
+          // Adjust shadow plane height right under the scaled model base
+          shadowMesh.position.y = -(size.y * scale) / 2 - 0.04;
 
-        modelGroup.add(loadedModel);
-      });
+          modelGroup.add(loadedModel);
+        },
+        undefined,
+        (error) => {
+          console.error(`Failed to load 3D model from ${modelPath}:`, error);
+        }
+      );
 
       // Interactive Drag & Turntable Rotation
       let isDragging = false;

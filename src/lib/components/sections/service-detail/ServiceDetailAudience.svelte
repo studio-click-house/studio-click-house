@@ -4,8 +4,9 @@
   import type { ServiceAudienceItem } from "$lib/types/service-detail";
   import { cn } from "$lib/utils";
 
-  let { heading, items } = $props<{
+  let { heading, description, items } = $props<{
     heading: string;
+    description?: string;
     items: ServiceAudienceItem[];
   }>();
 
@@ -23,9 +24,9 @@
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.from(".sd-audience-heading", {
+          gsap.from(".sd-audience-header", {
             autoAlpha: 0,
-            y: 22,
+            y: 24,
             duration: 0.72,
             ease: "power3.out",
             clearProps: "all",
@@ -38,9 +39,9 @@
 
           gsap.from(".sd-audience-card", {
             autoAlpha: 0,
-            y: 30,
+            y: 32,
             duration: 0.74,
-            stagger: 0.09,
+            stagger: 0.1,
             ease: "power3.out",
             clearProps: "all",
             scrollTrigger: {
@@ -48,19 +49,6 @@
               start: "top 88%",
               once: true,
             },
-          });
-
-          media.add("(min-width: 1024px)", () => {
-            gsap.to(".sd-audience-parallax-img", {
-              yPercent: 6,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.8,
-              },
-            });
           });
         });
 
@@ -82,28 +70,31 @@
   class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
 >
   <div class="site-shell relative z-10">
-    <div class="sd-audience-heading mb-9 lg:mb-11">
+    <div
+      class="sd-audience-header mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-12"
+    >
       <h2
         id="service-detail-audience-title"
-        class="max-w-2xl font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
+        class="max-w-[16ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
       >
         {heading}
       </h2>
+      {#if description}
+        <p class="max-w-[42ch] text-base leading-7 text-brand-dark/64 lg:pb-1">
+          {description}
+        </p>
+      {/if}
     </div>
 
-    <div class="sd-audience-grid grid gap-4 md:grid-cols-3 lg:gap-5">
+    <div class="sd-audience-grid grid gap-5 md:grid-cols-3 lg:gap-6">
       {#each items as item (item.title)}
-        {@const isContain = item.fit === "contain"}
+        {@const isCover = item.fit === "cover"}
         <article
-          class="sd-audience-card group flex flex-col overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-brand-dark/5 hover:border-brand-dark/20"
+          class="sd-audience-card group flex flex-col justify-between overflow-hidden rounded-[1.75rem] border border-brand-dark/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-dark/20 hover:shadow-lg"
         >
+          <!-- Compact clean image presentation -->
           <figure
-            class={cn(
-              "relative aspect-[4/3.15] overflow-hidden flex items-center justify-center transition-colors duration-300",
-              isContain
-                ? "bg-white p-3 sm:p-4"
-                : "bg-brand-dark/5"
-            )}
+            class="relative aspect-[4/3.2] w-full overflow-hidden bg-white flex items-center justify-center p-4 sm:p-5"
           >
             <img
               src={item.media.src}
@@ -112,20 +103,21 @@
               height={item.media.height}
               loading="lazy"
               class={cn(
-                "transition-transform duration-700 ease-out group-hover:scale-105",
-                isContain
-                  ? "size-full object-contain"
-                  : "absolute inset-0 size-full object-cover object-center"
+                "size-full transition-transform duration-700 ease-out group-hover:scale-[1.03]",
+                isCover ? "object-cover object-top" : "object-contain object-center"
               )}
             />
           </figure>
-          <div class="flex flex-1 flex-col p-5 sm:p-6">
+
+          <!-- Card Content Body: Just Title & Description -->
+          <div class="flex flex-1 flex-col p-5 sm:p-6 pt-1 sm:pt-1">
             <h3
-              class="text-xl font-semibold tracking-[-0.015em] text-brand-dark transition-colors duration-300 group-hover:text-brand-green"
+              class="font-sans text-lg sm:text-[1.12rem] font-semibold tracking-[-0.015em] leading-snug text-brand-dark transition-colors duration-300 group-hover:text-brand-green"
             >
               {item.title}
             </h3>
-            <p class="mt-2.5 text-sm leading-6 text-brand-dark/65">
+
+            <p class="mt-2 text-sm leading-relaxed text-brand-dark/65">
               {item.description}
             </p>
           </div>

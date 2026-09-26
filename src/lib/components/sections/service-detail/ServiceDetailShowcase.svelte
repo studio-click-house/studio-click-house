@@ -23,7 +23,7 @@
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap
+          const tl = gsap
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
@@ -49,8 +49,10 @@
                 clearProps: "all",
               },
               "-=0.5",
-            )
-            .from(
+            );
+
+          if (currentSection.querySelector(".sd-proof-metric-reveal")) {
+            tl.from(
               ".sd-proof-metric-reveal",
               {
                 yPercent: 110,
@@ -60,6 +62,7 @@
               },
               "-=0.62",
             );
+          }
 
           // Desktop-only scrub
           media.add("(min-width: 1024px)", () => {
@@ -74,28 +77,46 @@
               },
             });
 
-            gsap.to(".sd-proof-card-main", {
-              yPercent: -6,
-              ease: "none",
-              scrollTrigger: {
-                trigger: currentSection,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
+            if (currentSection.querySelector(".sd-proof-card-main")) {
+              gsap.to(".sd-proof-card-main", {
+                yPercent: -6,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: currentSection,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
+              });
+            }
 
-            gsap.to(".sd-proof-card-side", {
-              yPercent: -11,
-              stagger: 0.08,
-              ease: "none",
-              scrollTrigger: {
-                trigger: currentSection,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
+            if (currentSection.querySelector(".sd-proof-card-side")) {
+              gsap.to(".sd-proof-card-side", {
+                yPercent: -11,
+                stagger: 0.08,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: currentSection,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
+              });
+            }
+
+            if (currentSection.querySelector(".sd-proof-card-ba")) {
+              gsap.to(".sd-proof-card-ba", {
+                yPercent: -6,
+                stagger: 0.06,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: currentSection,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
+              });
+            }
           });
 
           gsap.fromTo(
@@ -148,6 +169,17 @@
           </p>
         {/if}
 
+        {#if data.bullets && data.bullets.length > 0}
+          <ul class="mt-6 space-y-2.5">
+            {#each data.bullets as bullet}
+              <li class="flex items-center gap-2.5 text-sm text-brand-dark/75">
+                <span class="size-1.5 shrink-0 rounded-full bg-brand-green"></span>
+                <span>{bullet}</span>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={resolve("/contact")}
@@ -171,80 +203,123 @@
       </div>
 
       <div class="relative lg:col-span-7">
-        <div class="grid grid-cols-[1.12fr_0.88fr] gap-3 sm:gap-4">
-          {#if data.gallery?.[0] && data.stats?.[0]}
+        {#if data.beforeAfter}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <!-- Before Card -->
             <figure
-              class="sd-proof-card sd-proof-card-main group relative aspect-[4/5] overflow-hidden rounded-[2rem] cursor-pointer transition-all duration-300 bg-white"
+              class="sd-proof-card sd-proof-card-ba group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20"
             >
               <img
-                src={data.gallery[0].src}
-                alt={data.gallery[0].alt}
-                width={data.gallery[0].width}
-                height={data.gallery[0].height}
+                src={data.beforeAfter.before.src}
+                alt={data.beforeAfter.before.alt}
+                width={data.beforeAfter.before.width}
+                height={data.beforeAfter.before.height}
                 loading="lazy"
-                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                style:object-position={data.gallery[0].objectPosition ?? "center"}
+                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
               <span
-                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/92 via-brand-dark/20 to-transparent transition-opacity duration-500 group-hover:opacity-85"
-              ></span>
-              <figcaption
-                class="absolute inset-x-0 bottom-0 p-5 sm:p-6 text-brand-light"
+                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
               >
-                <span class="block overflow-hidden pb-1">
-                  <span
-                    class="sd-proof-metric-reveal block font-display text-[clamp(2.7rem,4vw,4.25rem)] leading-none tracking-[-0.04em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
-                  >
-                    {data.stats[0].value}
-                  </span>
-                </span>
-                <span
-                  class="mt-2 block max-w-[24ch] text-sm leading-5 text-brand-light/80"
-                >
-                  {data.stats[0].label}
-                </span>
-              </figcaption>
+                {data.beforeAfter.before.label || "Before"}
+              </span>
             </figure>
-          {/if}
 
-          <div class="grid content-center gap-3 py-[3%] sm:gap-4">
-            {#each [1, 2] as index (index)}
-              {#if data.gallery?.[index] && data.stats?.[index]}
-                <figure
-                  class="sd-proof-card sd-proof-card-side group relative aspect-[4/3.15] overflow-hidden rounded-[1.75rem] cursor-pointer transition-all duration-300 bg-white"
-                >
-                  <img
-                    src={data.gallery[index].src}
-                    alt={data.gallery[index].alt}
-                    width={data.gallery[index].width}
-                    height={data.gallery[index].height}
-                    loading="lazy"
-                    class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <span
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/94 via-brand-dark/25 to-transparent transition-opacity duration-500 group-hover:opacity-85"
-                  ></span>
-                  <figcaption
-                    class="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-brand-light"
-                  >
-                    <span class="block overflow-hidden pb-1">
-                      <span
-                        class="sd-proof-metric-reveal block font-display text-[clamp(1.8rem,3vw,2.8rem)] leading-none tracking-[-0.035em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
-                      >
-                        {data.stats[index].value}
-                      </span>
-                    </span>
-                    <span
-                      class="mt-1.5 block text-xs leading-4 sm:text-sm sm:leading-5 text-brand-light/80"
-                    >
-                      {data.stats[index].label}
-                    </span>
-                  </figcaption>
-                </figure>
-              {/if}
-            {/each}
+            <!-- After Card -->
+            <figure
+              class="sd-proof-card sd-proof-card-ba group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30"
+            >
+              <img
+                src={data.beforeAfter.after.src}
+                alt={data.beforeAfter.after.alt}
+                width={data.beforeAfter.after.width}
+                height={data.beforeAfter.after.height}
+                loading="lazy"
+                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+              />
+              <span
+                class="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
+              >
+                <span class="size-1.5 rounded-full bg-brand-green"></span>
+                {data.beforeAfter.after.label || "After"}
+              </span>
+            </figure>
           </div>
-        </div>
+        {:else}
+          <div class="grid grid-cols-[1.12fr_0.88fr] gap-3 sm:gap-4">
+            {#if data.gallery?.[0] && data.stats?.[0]}
+              <figure
+                class="sd-proof-card sd-proof-card-main group relative aspect-[4/5] overflow-hidden rounded-[2rem] cursor-pointer transition-all duration-300 bg-white"
+              >
+                <img
+                  src={data.gallery[0].src}
+                  alt={data.gallery[0].alt}
+                  width={data.gallery[0].width}
+                  height={data.gallery[0].height}
+                  loading="lazy"
+                  class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  style:object-position={data.gallery[0].objectPosition ?? "center"}
+                />
+                <span
+                  class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/92 via-brand-dark/20 to-transparent transition-opacity duration-500 group-hover:opacity-85"
+                ></span>
+                <figcaption
+                  class="absolute inset-x-0 bottom-0 p-5 sm:p-6 text-brand-light"
+                >
+                  <span class="block overflow-hidden pb-1">
+                    <span
+                      class="sd-proof-metric-reveal block font-display text-[clamp(2.7rem,4vw,4.25rem)] leading-none tracking-[-0.04em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
+                    >
+                      {data.stats[0].value}
+                    </span>
+                  </span>
+                  <span
+                    class="mt-2 block max-w-[24ch] text-sm leading-5 text-brand-light/80"
+                  >
+                    {data.stats[0].label}
+                  </span>
+                </figcaption>
+              </figure>
+            {/if}
+
+            <div class="grid content-center gap-3 py-[3%] sm:gap-4">
+              {#each [1, 2] as index (index)}
+                {#if data.gallery?.[index] && data.stats?.[index]}
+                  <figure
+                    class="sd-proof-card sd-proof-card-side group relative aspect-[4/3.15] overflow-hidden rounded-[1.75rem] cursor-pointer transition-all duration-300 bg-white"
+                  >
+                    <img
+                      src={data.gallery[index].src}
+                      alt={data.gallery[index].alt}
+                      width={data.gallery[index].width}
+                      height={data.gallery[index].height}
+                      loading="lazy"
+                      class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    <span
+                      class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/94 via-brand-dark/25 to-transparent transition-opacity duration-500 group-hover:opacity-85"
+                    ></span>
+                    <figcaption
+                      class="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-brand-light"
+                    >
+                      <span class="block overflow-hidden pb-1">
+                        <span
+                          class="sd-proof-metric-reveal block font-display text-[clamp(1.8rem,3vw,2.8rem)] leading-none tracking-[-0.035em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
+                        >
+                          {data.stats[index].value}
+                        </span>
+                      </span>
+                      <span
+                        class="mt-1.5 block text-xs leading-4 sm:text-sm sm:leading-5 text-brand-light/80"
+                      >
+                        {data.stats[index].label}
+                      </span>
+                    </figcaption>
+                  </figure>
+                {/if}
+              {/each}
+            </div>
+          </div>
+        {/if}
       </div>
     </div>
   </div>

@@ -17,11 +17,25 @@
 /.svelte-kit/
 /build/
 
-# misc
+# misc & OS
 .DS_Store
 *.pem
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# debug
+# documents & large files
+*.pdf
+
+# editor & IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# debug & logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -37,6 +51,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# agent customizations
+# agent customizations & temporary scripts
 /.agents/
 /.codex/
+.tempmediaStorage/
+extract.js

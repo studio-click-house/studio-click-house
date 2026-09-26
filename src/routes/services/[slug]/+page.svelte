@@ -106,6 +106,7 @@
     />
     <ServiceDetailAudience
       heading={pageData.audience.heading}
+      description={pageData.audience.description}
       items={pageData.audience.items}
     />
     <FaqSection items={pageData.faqs} images={pageData.faqImages} />

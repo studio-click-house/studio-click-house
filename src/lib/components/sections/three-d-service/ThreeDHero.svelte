@@ -159,6 +159,10 @@
           loadedModel.scale.setScalar(scale);
 
           modelGroup.add(loadedModel);
+        },
+        undefined,
+        (error) => {
+          console.error("Failed to load MaterialsVariantsShoe.glb:", error);
         }
       );
 

@@ -136,28 +136,35 @@
       const loader = new GLTFLoader();
       loader.setDRACOLoader(dracoLoader);
 
-      loader.load("/models/iphone15pro.glb", (gltf) => {
-        if (!active) return;
-        loadedModel = gltf.scene;
+      loader.load(
+        "/models/iphone15pro.glb",
+        (gltf) => {
+          if (!active) return;
+          loadedModel = gltf.scene;
 
-        loadedModel.updateWorldMatrix(true, true);
-        const box = new THREE.Box3().setFromObject(loadedModel);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
+          loadedModel.updateWorldMatrix(true, true);
+          const box = new THREE.Box3().setFromObject(loadedModel);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
 
-        // Center geometric pivot
-        loadedModel.position.x = -center.x;
-        loadedModel.position.y = -center.y;
-        loadedModel.position.z = -center.z;
+          // Center geometric pivot
+          loadedModel.position.x = -center.x;
+          loadedModel.position.y = -center.y;
+          loadedModel.position.z = -center.z;
 
-        // Balanced fill ratio (~72% of viewport) with safe breathing room at top and bottom
-        const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
-        const effectiveDimension = Math.max(radiusXZ * 2, size.y);
-        const scale = 2.45 / effectiveDimension;
-        loadedModel.scale.setScalar(scale);
+          // Balanced fill ratio (~72% of viewport) with safe breathing room at top and bottom
+          const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
+          const effectiveDimension = Math.max(radiusXZ * 2, size.y);
+          const scale = 2.45 / effectiveDimension;
+          loadedModel.scale.setScalar(scale);
 
-        modelGroup.add(loadedModel);
-      });
+          modelGroup.add(loadedModel);
+        },
+        undefined,
+        (error) => {
+          console.error("Failed to load iphone15pro.glb:", error);
+        }
+      );
 
       // Initial aesthetic beauty angle (three-quarters perspective highlighting screen & titanium rail)
       let isDragging = false;

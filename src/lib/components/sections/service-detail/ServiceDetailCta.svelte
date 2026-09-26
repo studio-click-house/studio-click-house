@@ -70,38 +70,33 @@
   bind:this={section}
   id="service-detail-cta"
   aria-labelledby="service-detail-cta-title"
-  class="relative overflow-hidden bg-brand-dark py-16 text-brand-light sm:py-20 lg:py-24"
+  class="relative overflow-hidden bg-brand-light py-18 text-brand-dark sm:py-20 lg:py-24"
 >
-  <!-- Decorative orbits -->
   <div
-    class="sd-cta-orbit pointer-events-none absolute -right-[14rem] -top-[18rem] h-[42rem] w-[42rem] rounded-full border border-brand-green/20"
+    class="sd-cta-orbit pointer-events-none absolute -right-[14rem] -top-[18rem] h-[42rem] w-[42rem] rounded-full border border-brand-green/30"
     aria-hidden="true"
   ></div>
   <div
-    class="sd-cta-orbit pointer-events-none absolute -right-[6rem] -top-[10rem] h-[26rem] w-[26rem] rounded-full border border-brand-light/8"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="pointer-events-none absolute -bottom-56 left-[8%] size-[34rem] rounded-full bg-brand-green/14 blur-[125px]"
+    class="sd-cta-orbit pointer-events-none absolute -right-[6rem] -top-[10rem] h-[26rem] w-[26rem] rounded-full border border-brand-dark/12"
     aria-hidden="true"
   ></div>
 
   <div class="site-shell relative z-10">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
-      <!-- Left: Heading -->
-      <div class="sd-cta-reveal lg:col-span-7">
+      <!-- Left: Display Heading -->
+      <div class="sd-cta-reveal lg:col-span-8">
         <h2
           id="service-detail-cta-title"
-          class="max-w-2xl font-display text-[clamp(2.4rem,3.8vw,3.8rem)] leading-[0.98] tracking-[-0.04em]"
+          class="max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"
         >
           {data.heading}
         </h2>
       </div>
 
       <!-- Right: Description + Actions -->
-      <div class="sd-cta-reveal lg:col-span-5 lg:pb-2">
+      <div class="sd-cta-reveal lg:col-span-4 lg:pb-2">
         <p
-          class="max-w-[38ch] text-sm leading-[1.65] text-brand-light/65 sm:text-base"
+          class="max-w-[34ch] text-sm leading-[1.65] text-brand-dark/72 sm:text-base"
         >
           {data.description}
         </p>
@@ -109,45 +104,44 @@
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-5 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
+            class="group inline-flex min-h-12 items-center gap-6 rounded-sm bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
           >
-            {$_('serviceDetail.placeOrder') || 'Place an order'}
+            {$_('serviceDetail.placeOrder') || 'Start a project'}
             <ArrowUpRight
               class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
           </a>
           <a
-            href={resolve("/pricing")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-brand-light/20 px-5 text-sm font-semibold text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+            href={resolve("/contact")}
+            class="group inline-flex min-h-12 items-center gap-3 rounded-sm border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
           >
-            {$_('serviceDetail.getPriceIdea') || 'Get price idea'}
+            {$_('services.cta.requestTest') || 'Request a test edit'}
             <ArrowRight
               class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             />
           </a>
         </div>
+
+        <a
+          href={resolve("/pricing")}
+          class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-dark/65 transition-colors duration-300 hover:text-brand-green"
+        >
+          {$_('services.cta.viewRateGuide') || 'View rate guide'}
+          <ArrowRight class="h-4 w-4" />
+        </a>
       </div>
     </div>
 
-    <!-- Workflow steps -->
+    <!-- Workflow steps: Rounded brand-paper container matching /services CTA -->
     <div
-      class="sd-cta-reveal mt-12 grid gap-8 rounded-[1rem] border border-brand-light/8 bg-brand-light/[0.04] p-6 sm:grid-cols-3 sm:p-8 lg:mt-14"
+      class="sd-cta-reveal mt-14 grid gap-8 rounded-[1.5rem] bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
     >
-      {#each data.steps as step, index (step.title)}
-        <div class="flex gap-5">
-          <span
-            class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-brand-green/30 font-mono text-xs font-medium text-brand-green"
-          >
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <div>
-            <h3 class="text-base font-semibold text-brand-light">
-              {step.title}
-            </h3>
-            <p class="mt-1.5 text-sm leading-[1.55] text-brand-light/55">
-              {step.description}
-            </p>
-          </div>
+      {#each data.steps as step (step.title)}
+        <div>
+          <h3 class="text-base font-semibold">{step.title}</h3>
+          <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
+            {step.description}
+          </p>
         </div>
       {/each}
     </div>

@@ -5,6 +5,7 @@
 
   let { data } = $props<{ data: ServiceIntroData }>();
   let section = $state<HTMLElement>();
+  let activeStep = $state(0);
 
   const stages = $derived(data.stages ?? []);
   const studyMedia = $derived(stages[0]?.media);
@@ -16,7 +17,7 @@
     registerScrollTrigger().then((runtime) => {
       const currentSection = section;
       if (!active || !runtime || !currentSection) return;
-      const { gsap } = runtime;
+      const { gsap, ScrollTrigger } = runtime;
 
       context = gsap.context(() => {
         const media = gsap.matchMedia();
@@ -39,102 +40,16 @@
               clearProps: "all",
             })
             .from(
-              ".sd-study-principle",
+              ".sd-study-frame",
               {
                 autoAlpha: 0,
-                x: -18,
-                duration: 0.6,
-                stagger: 0.1,
+                y: 40,
+                duration: 0.9,
                 clearProps: "all",
               },
-              "-=0.45",
-            )
-            .from(
-              ".sd-study-focus",
-              {
-                autoAlpha: 0,
-                scale: 0.88,
-                duration: 0.65,
-                stagger: 0.12,
-                clearProps: "all",
-              },
-              "-=0.3",
+              "-=0.5",
             );
-
-          gsap.from(".sd-study-frame", {
-            autoAlpha: 0,
-            y: 90,
-            scale: 0.97,
-            duration: 1.05,
-            ease: "power3.out",
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: ".sd-study-frame",
-              start: "top 88%",
-              once: true,
-            },
-          });
         });
-
-        media.add(
-          "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
-          () => {
-            const progressTimeline = gsap.timeline({
-              scrollTrigger: {
-                trigger: currentSection,
-                start: "top 12%",
-                end: "bottom 72%",
-                scrub: true,
-              },
-            });
-
-            progressTimeline
-              .fromTo(
-                ".sd-study-progress",
-                { scaleY: 0 },
-                {
-                  scaleY: 1,
-                  transformOrigin: "top center",
-                  ease: "none",
-                  duration: 1,
-                },
-                0,
-              )
-              .fromTo(
-                ".sd-study-scan",
-                { yPercent: -115, autoAlpha: 0.12 },
-                {
-                  yPercent: 115,
-                  autoAlpha: 0.72,
-                  ease: "none",
-                  duration: 1,
-                },
-                0,
-              )
-              .to(
-                ".sd-study-image",
-                {
-                  scale: 1.035,
-                  yPercent: 2,
-                  ease: "none",
-                  duration: 1,
-                },
-                0,
-              );
-
-            gsap.to(".sd-study-glow", {
-              xPercent: 44,
-              yPercent: -26,
-              ease: "none",
-              scrollTrigger: {
-                trigger: currentSection,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            });
-          },
-        );
 
         return () => media.revert();
       }, currentSection);
@@ -154,9 +69,10 @@
   class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
 >
   <div class="site-shell relative z-10">
-    <div class="grid gap-14 lg:grid-cols-12 lg:gap-16">
+    <div class="grid items-start gap-14 lg:grid-cols-12 lg:gap-16">
+      <!-- Left Column: Copy + Interactive Steps List -->
       <div class="lg:col-span-5">
-        <div class="lg:sticky lg:top-28">
+        <div>
           <h2
             id="service-detail-intro-title"
             class="sd-intro-copy max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
@@ -165,7 +81,7 @@
           </h2>
 
           <div class="mt-7 max-w-[34rem]">
-          {#each data.paragraphs as paragraph (paragraph)}
+            {#each data.paragraphs as paragraph (paragraph)}
               <p
                 class="sd-intro-copy text-base leading-[1.7] text-brand-dark/64 sm:text-[1.03rem] [&+&]:mt-4"
               >
@@ -175,146 +91,90 @@
           </div>
 
           {#if stages.length > 0}
-            <div class="relative mt-9 max-w-[34rem] pl-9">
-              <span
-                class="absolute bottom-5 left-[0.42rem] top-5 w-px bg-brand-dark/12"
+            <div class="relative mt-8 max-w-[34rem] flex gap-3 sm:gap-4 items-stretch">
+              <!-- Sliding glowing green indicator rail (matching AboutOrbitGallery) -->
+              <div
+                class="relative hidden w-[3px] rounded-full bg-brand-dark/10 sm:block overflow-hidden my-1 shrink-0"
                 aria-hidden="true"
               >
-                <span
-                  class="sd-study-progress block size-full origin-top bg-brand-green"
-                ></span>
-              </span>
+                <div
+                  class="absolute left-0 w-full rounded-full bg-brand-green shadow-[0_0_12px_rgba(126,166,65,0.9)] transition-all duration-300 ease-out"
+                  style="top: {(activeStep / stages.length) * 100}%; height: {100 / stages.length}%;"
+                ></div>
+              </div>
 
-              <ol>
+              <!-- Interactive Step Cards -->
+              <div
+                class="flex-1 flex flex-col gap-2.5 w-full"
+                role="tablist"
+                aria-label="Garment workflow stages"
+              >
                 {#each stages as stage, index (stage.label)}
-                  <li
-                    class="sd-study-principle relative border-t border-brand-dark/10 py-4 first:border-t-0"
+                  {@const isActive = activeStep === index}
+                  <button
+                    type="button"
+                    class="group text-left w-full cursor-pointer rounded-[1rem] p-3.5 sm:p-4 transition-all duration-300 {isActive
+                      ? 'bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] border border-brand-dark/9 translate-x-1.5'
+                      : 'bg-transparent border border-transparent hover:bg-brand-dark/[0.03] hover:translate-x-1'}"
+                    role="tab"
+                    tabindex="0"
+                    aria-selected={isActive}
+                    onclick={() => (activeStep = index)}
+                    onmouseenter={() => (activeStep = index)}
                   >
-                    <span
-                      class="absolute -left-9 top-[1.15rem] grid size-3.5 place-items-center rounded-full border border-brand-green/50 bg-brand-light"
-                      aria-hidden="true"
-                    >
-                      <span class="size-1 rounded-full bg-brand-green"></span>
-                    </span>
-                    <p
-                      class="font-mono text-[0.51rem] font-semibold uppercase tracking-[0.15em] text-brand-green"
-                    >
-                      Principle 0{index + 1}
-                    </p>
-                    <h3
-                      class="mt-1.5 text-base font-semibold tracking-[-0.015em]"
-                    >
-                      {stage.label}
-                    </h3>
-                    <p class="mt-1.5 text-sm leading-6 text-brand-dark/53">
-                      {stage.description}
-                    </p>
-                  </li>
+                    <div class="flex items-start gap-3.5 sm:gap-4 w-full">
+                      <!-- Large editorial numeral (matches AboutOrbitGallery exactly) -->
+                      <span
+                        class="font-display text-2xl sm:text-[1.85rem] font-light leading-none select-none transition-colors duration-300 w-7 sm:w-8 shrink-0 pt-0.5 {isActive
+                          ? 'text-brand-green'
+                          : 'text-brand-dark/25 group-hover:text-brand-dark/60'}"
+                      >
+                        0{index + 1}
+                      </span>
+
+                      <!-- Title + Description -->
+                      <div class="flex-1 min-w-0">
+                        <h3
+                          class="font-sans font-semibold text-[0.95rem] sm:text-[1rem] leading-tight text-brand-dark tracking-[-0.01em]"
+                        >
+                          {stage.label}
+                        </h3>
+
+                        <p
+                          class="mt-1.5 text-xs sm:text-[0.84rem] leading-relaxed transition-colors duration-300 {isActive
+                            ? 'text-brand-dark/85 font-normal'
+                            : 'text-brand-dark/55'}"
+                        >
+                          {stage.description}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
                 {/each}
-              </ol>
+              </div>
             </div>
           {/if}
         </div>
       </div>
 
-      {#if studyMedia && stages.length > 0}
-        <div class="lg:sticky lg:top-28 lg:col-span-7 lg:self-start lg:pt-6">
+      <!-- Right Column: Single Clean Image Frame with Interactive Frosted Pointer Tabs -->
+      {#if studyMedia}
+        <div class="lg:col-span-7 lg:self-start lg:pt-2">
           <figure
-            class="sd-study-frame relative mx-auto aspect-[4/5] w-full max-w-[29rem] overflow-hidden rounded-[2rem] border border-brand-dark/10 shadow-[0_20px_50px_rgba(0,0,0,0.12)] [transform-style:preserve-3d]"
+            class="sd-study-frame relative mx-auto aspect-[4/5] w-full max-w-[30rem] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/[0.04]"
           >
+            <!-- Direct Single Clean Image (No overlays, no pill tags) -->
             <img
               src={studyMedia.src}
               alt={studyMedia.alt}
               width={studyMedia.width}
               height={studyMedia.height}
-              loading="lazy"
-              class="sd-study-image absolute inset-0 size-full scale-[1.01] object-cover"
+              loading="eager"
+              class="sd-study-image size-full object-cover object-center"
             />
-
-            <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/30 via-transparent to-brand-dark/10"
-              aria-hidden="true"
-            ></div>
-            <div
-              class="sd-study-scan pointer-events-none absolute inset-x-[-12%] top-1/2 h-40 bg-gradient-to-b from-transparent via-brand-green/20 to-transparent blur-2xl"
-              aria-hidden="true"
-            ></div>
-
-            <div
-              class="sd-study-focus-field absolute inset-0"
-              aria-hidden="true"
-            >
-              {#each stages as stage, index (stage.label)}
-                <div class="sd-study-focus" data-focus={index + 1}>
-                  <span class="sd-study-focus-line"></span>
-                  <span class="sd-study-focus-label">{stage.label}</span>
-                </div>
-              {/each}
-            </div>
           </figure>
         </div>
       {/if}
     </div>
   </div>
 </section>
-
-<style>
-  .sd-study-focus {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    transform-origin: center;
-    z-index: 10;
-  }
-
-  .sd-study-focus[data-focus="1"] {
-    right: 5%;
-    top: 18%;
-  }
-
-  .sd-study-focus[data-focus="2"] {
-    left: 5%;
-    top: 45%;
-    flex-direction: row-reverse;
-  }
-
-  .sd-study-focus[data-focus="3"] {
-    right: 5%;
-    top: 68%;
-  }
-
-  .sd-study-focus-line {
-    width: clamp(2rem, 6vw, 4.5rem);
-    height: 1.5px;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  .sd-study-focus-label {
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    border-radius: 999px;
-    background: rgba(18, 17, 16, 0.92);
-    padding: 0.42rem 0.8rem;
-    color: #ffffff;
-    font-family: var(--font-mono);
-    font-size: 0.52rem;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(8px);
-    white-space: nowrap;
-  }
-
-  @media (max-width: 639px) {
-    .sd-study-focus-label {
-      max-width: 9.5rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 0.46rem;
-      padding: 0.35rem 0.6rem;
-    }
-  }
-</style>

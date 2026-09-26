@@ -149,6 +149,10 @@
           loadedModel.scale.setScalar(scale);
 
           modelGroup.add(loadedModel);
+        },
+        undefined,
+        (error) => {
+          console.error("Failed to load headphones.glb:", error);
         }
       );
 

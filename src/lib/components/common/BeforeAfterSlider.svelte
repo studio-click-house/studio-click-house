@@ -21,6 +21,7 @@
     backRightWidth?: number;
     backRightHeight?: number;
     mediaFit?: "cover" | "contain";
+    showLabels?: boolean;
   }
 
   let {
@@ -34,6 +35,7 @@
     beforeHeight = height,
     beforeLabel = "Before",
     afterLabel = "After",
+    showLabels = true,
     ariaLabel = "Compare before and after images",
     backLeftSrc = beforeSrc,
     backLeftWidth = beforeWidth,
@@ -280,20 +282,20 @@
       />
     </figure>
 
-    <span class="{mediaLabelClass} left-[0.8rem]"
-      >{beforeLabel
-        ? beforeLabel === "Before"
+    {#if showLabels && beforeLabel}
+      <span class="{mediaLabelClass} left-[0.8rem]"
+        >{beforeLabel === "Before"
           ? $_("slider.before") || beforeLabel
-          : beforeLabel
-        : $_("slider.before") || "Before"}</span
-    >
-    <span class="{mediaLabelClass} right-[0.8rem]"
-      >{afterLabel
-        ? afterLabel === "After"
+          : beforeLabel}</span
+      >
+    {/if}
+    {#if showLabels && afterLabel}
+      <span class="{mediaLabelClass} right-[0.8rem]"
+        >{afterLabel === "After"
           ? $_("slider.after") || afterLabel
-          : afterLabel
-        : $_("slider.after") || "After"}</span
-    >
+          : afterLabel}</span
+      >
+    {/if}
 
     <span
       class="comparison-divider pointer-events-none absolute inset-y-0 z-[4] w-px bg-brand-light/80 [will-change:left]"

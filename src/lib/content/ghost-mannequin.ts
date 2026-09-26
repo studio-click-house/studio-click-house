@@ -2,28 +2,28 @@ import type { ServicePageData } from "$lib/types/service-detail";
 
 const ghostMannequinMedia = {
   heroPrimary: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
-    alt: "Ice-blue knit cardigan finished ghost mannequin presentation with hollow interior and brand label",
-    width: 1420,
-    height: 2000,
+    src: "/images/ghost-mannequin/ghost-mannequin-camilla-silk-headscarf-marchesa-after.webp",
+    alt: "Finished ghost mannequin silk headscarf presentation with natural fold shaping",
+    width: 1333,
+    height: 1666,
   },
   heroTee: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-flux-tee-walnut-brown-white.webp",
-    alt: "Walnut brown streetwear tee with precision neck joint and brand label",
-    width: 1420,
+    src: "/images/ghost-mannequin/ghost-mannequin-antony-morato-winter-parka-brown-back-before.webp",
+    alt: "Winter parka on physical mannequin before retouching",
+    width: 1600,
     height: 2000,
   },
   heroKnit: {
-    src: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-colorblock-knit-cardigan-white.webp",
-    alt: "Colorblock knit cardigan ghost mannequin presentation with interior collar",
-    width: 1333,
-    height: 2000,
+    src: "/images/ghost-mannequin/ghost-mannequin-camilla-tri-bodysuit-bambino-front-after.webp",
+    alt: "Ghost mannequin bodysuit presentation with seamless shaping",
+    width: 1334,
+    height: 1668,
   },
   introBlouseSilk: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-batwing-shirt-front.webp",
+    src: "/images/ghost-mannequin/ghost-mannequin-camilla-batwing-shirt-front.webp",
     alt: "Silk designer blouse showing intricate neckline compositing and inner brand label",
     width: 1333,
-    height: 2000,
+    height: 1666,
   },
   introBlouseTailored: {
     src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-he-ss23-womens-blouse-0023-before.webp",
@@ -38,15 +38,15 @@ const ghostMannequinMedia = {
     height: 2000,
   },
   comparisonBefore: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-feather-throw-over-front-before.webp",
-    alt: "Apparel photographed on physical mannequin stand with studio rolling dolly before editing",
-    width: 1333,
+    src: "/images/ghost-mannequin/ghost-mannequin-symmetric-jacket-before.webp",
+    alt: "Apparel jacket photographed on physical mannequin before symmetry shaping and ghost composite",
+    width: 1600,
     height: 2000,
   },
   comparisonAfter: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-feather-throw-over-front-after.webp",
-    alt: "Finished hollow-man ghost mannequin presentation with composited inner neck label and 3D volume",
-    width: 1333,
+    src: "/images/ghost-mannequin/ghost-mannequin-symmetric-jacket-after.webp",
+    alt: "Finished hollow-man ghost mannequin presentation with symmetric lapels, inner lining, and 3D depth",
+    width: 1600,
     height: 2000,
   },
   showcaseShirt: {
@@ -138,6 +138,8 @@ export const ghostMannequinPage: ServicePageData = {
     description:
       "Show the fit and shape of apparel without a visible mannequin. We combine front, back, and inner-collar shots into clean hollow-man product images.",
     media: ghostMannequinMedia.heroPrimary,
+    mediaFit: "cover",
+    aspectRatio: "4/5",
     supportingMedia: [
       ghostMannequinMedia.heroTee,
       ghostMannequinMedia.heroKnit,
@@ -172,55 +174,52 @@ export const ghostMannequinPage: ServicePageData = {
   beforeAfter: {
     heading: "See the 3D hollow-man transformation.",
     description:
-      "Drag the slider to inspect how a plastic mannequin stand is removed and replaced with a realistic inner collar joint, clean neck label, and balanced drape.",
+      "Inspect how a physical mannequin stand is removed and composited with a realistic inner collar joint, clean neck label, balanced drape, and natural fabric volume.",
+    bullets: [
+      "Invisible neck joint & interior label compositing",
+      "Balanced 3D drape, lapel symmetry & natural curve",
+      "Wrinkle cleanup with realistic interior shadow depth",
+    ],
     beforeSrc: ghostMannequinMedia.comparisonBefore.src,
     beforeAlt: ghostMannequinMedia.comparisonBefore.alt,
     afterSrc: ghostMannequinMedia.comparisonAfter.src,
     afterAlt: ghostMannequinMedia.comparisonAfter.alt,
-    beforeLabel: "On mannequin",
-    afterLabel: "Invisible 3D ghost",
+    beforeLabel: "Before",
+    afterLabel: "After",
+    showLabels: true,
     width: ghostMannequinMedia.comparisonAfter.width,
     height: ghostMannequinMedia.comparisonAfter.height,
-    caption: "Drag to compare · Ghost mannequin neck joint & 3D volume",
+    layout: "cards",
   },
   showcase: {
-    heading: "Ghost mannequin editing for apparel catalogs",
+    heading: "Ghost mannequin & flat lay apparel catalogs",
     description:
-      "Whether you sell tailored suits, activewear, lingerie, or luxury knitwear, our 24/7 post-production studio delivers consistent, high-volume ghost mannequin edits with rapid turnaround.",
+      "From overhead flat lays to structured ghost mannequin sets, we balance garment geometry, align sleeves and collars, and soften unwanted creases while preserving natural fabric weave and fold depth.",
+    bullets: [
+      "Flat lay straightening & sleeve symmetry",
+      "Fabric texture preservation with gentle de-wrinkling",
+      "High-volume e-commerce catalog consistency",
+    ],
     theme: "light",
-    stats: [
-      { value: "3,000+", label: "Garments processed weekly" },
-      { value: "100%", label: "Consistent hem & neckline alignment" },
-      { value: "24h", label: "Standard catalog turnaround" },
-    ],
-    gallery: [
-      {
-        src: ghostMannequinMedia.showcaseShirt.src,
-        alt: ghostMannequinMedia.showcaseShirt.alt,
-        width: ghostMannequinMedia.showcaseShirt.width,
-        height: ghostMannequinMedia.showcaseShirt.height,
-        caption: "3D hollow garment volume",
+    beforeAfter: {
+      before: {
+        src: "/images/ghost-mannequin/apparel-tiny-big-sister-patterned-jumpsuit-flatlay-before.webp",
+        alt: "Apparel patterned jumpsuit unedited overhead flat lay before styling and straightening",
+        width: 1333,
+        height: 1666,
+        label: "Before",
       },
-      {
-        src: ghostMannequinMedia.showcaseGown.src,
-        alt: ghostMannequinMedia.showcaseGown.alt,
-        width: ghostMannequinMedia.showcaseGown.width,
-        height: ghostMannequinMedia.showcaseGown.height,
-        caption: "Dress & gown volume shaping",
+      after: {
+        src: "/images/ghost-mannequin/apparel-tiny-big-sister-patterned-jumpsuit-flatlay-after.webp",
+        alt: "Apparel patterned jumpsuit finished flat lay presentation with symmetrical sleeves and de-wrinkled texture",
+        width: 1333,
+        height: 1666,
+        label: "After",
       },
-      {
-        src: ghostMannequinMedia.showcaseParka.src,
-        alt: ghostMannequinMedia.showcaseParka.alt,
-        width: ghostMannequinMedia.showcaseParka.width,
-        height: ghostMannequinMedia.showcaseParka.height,
-        caption: "Outerwear hood & neckline composite",
-      },
-    ],
+    },
   },
   gallery: {
     heading: "Selected Apparel Categories",
-    description:
-      "Explore diverse ghost mannequin executions across casual tops, luxury outerwear, activewear, and intricate dresses.",
     items: [
       {
         id: "gallery-gm-blazer",
@@ -339,23 +338,43 @@ export const ghostMannequinPage: ServicePageData = {
   },
   audience: {
     heading: "Who benefits from this service?",
+    description:
+      "Reliable, high-volume apparel post-production tailored for lookbooks, multi-vendor marketplaces, and high-throughput photo studios.",
     items: [
       {
         title: "Fashion Brands & Apparel Retailers",
         description:
           "Create uniform, high-converting product pages that clearly communicate fit and cut without the cost of hiring on-model shoots.",
+        deliverable: "Lookbook & Catalog Alignment",
+        examples: [
+          "Inner collar & brand tag alignment",
+          "Uniform multi-garment silhouette symmetry",
+          "Optimized for Shopify, Magento & BigCommerce",
+        ],
         media: ghostMannequinMedia.audienceFashion,
       },
       {
         title: "E-Commerce Marketplaces",
         description:
           "Standardize third-party seller clothing images to maintain a cohesive, professional aesthetic across your storefront.",
+        deliverable: "High-Volume Batch Processing",
+        examples: [
+          "Amazon, ASOS & Zalando guideline compliance",
+          "Pure white clipping & transparent alpha backgrounds",
+          "Automated QA & rapid 24h turnaround at scale",
+        ],
         media: ghostMannequinMedia.audienceMarketplaces,
       },
       {
         title: "Commercial Fashion Photographers",
         description:
           "Provide end-to-end hollow-man composite deliverables to your apparel clients without spending hours on Photoshop neck joints.",
+        deliverable: "Studio Production Extension",
+        examples: [
+          "Complex neck joint & inner lining compositing",
+          "Crease de-wrinkling while retaining fabric weave",
+          "Layered PSDs with native shadow isolation",
+        ],
         media: ghostMannequinMedia.audiencePhotographers,
       },
     ],

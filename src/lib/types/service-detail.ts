@@ -14,6 +14,8 @@ export interface ServiceDetailHeroData {
   supportingMedia: ServiceVisualMedia[];
   theme?: "light" | "dark";
   titleWidth?: "standard" | "wide";
+  aspectRatio?: "4/5" | "standard";
+  kicker?: string;
 }
 
 export interface ServiceIntroData {
@@ -37,6 +39,8 @@ export interface ServiceAudienceItem {
   description: string;
   media: ServiceVisualMedia;
   fit?: "contain" | "cover";
+  deliverable?: string;
+  examples?: string[];
 }
 
 export interface ServiceBeforeAfterData {
@@ -46,11 +50,16 @@ export interface ServiceBeforeAfterData {
   beforeAlt: string;
   afterSrc: string;
   afterAlt: string;
-  beforeLabel: string;
-  afterLabel: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  showLabels?: boolean;
   width: number;
   height: number;
   caption?: string;
+  bullets?: string[];
+  showButtons?: boolean;
+  layout?: "slider" | "cards";
+  textPosition?: "left" | "right";
 }
 
 export interface ServiceShowcaseGalleryItem {
@@ -65,8 +74,13 @@ export interface ServiceShowcaseGalleryItem {
 export interface ServiceShowcaseData {
   heading: string;
   description?: string;
+  bullets?: string[];
   stats?: { value: string; label: string }[];
   gallery?: ServiceShowcaseGalleryItem[];
+  beforeAfter?: {
+    before: ServiceVisualMedia & { label?: string; caption?: string };
+    after: ServiceVisualMedia & { label?: string; caption?: string };
+  };
   theme?: "light" | "dark";
 }
 
@@ -110,6 +124,7 @@ export interface ServicePageData {
   };
   audience: {
     heading: string;
+    description?: string;
     items: ServiceAudienceItem[];
   };
   faqs: FaqItem[];

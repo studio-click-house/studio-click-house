@@ -132,27 +132,34 @@
       const loader = new GLTFLoader();
       loader.setDRACOLoader(dracoLoader);
 
-      loader.load("/models/SunglassesKhronos.glb", (gltf) => {
-        if (!active) return;
-        loadedModel = gltf.scene;
+      loader.load(
+        "/models/SunglassesKhronos.glb",
+        (gltf) => {
+          if (!active) return;
+          loadedModel = gltf.scene;
 
-        loadedModel.updateWorldMatrix(true, true);
-        const box = new THREE.Box3().setFromObject(loadedModel);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
+          loadedModel.updateWorldMatrix(true, true);
+          const box = new THREE.Box3().setFromObject(loadedModel);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
 
-        loadedModel.position.x = -center.x;
-        loadedModel.position.y = -center.y;
-        loadedModel.position.z = -center.z;
+          loadedModel.position.x = -center.x;
+          loadedModel.position.y = -center.y;
+          loadedModel.position.z = -center.z;
 
-        // Calculate rotation envelope radius in ground plane (X-Z) so 360 side profile never clips
-        const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
-        const effectiveDimension = Math.max(radiusXZ * 2, size.y);
-        const scale = 2.45 / effectiveDimension;
-        loadedModel.scale.setScalar(scale);
+          // Calculate rotation envelope radius in ground plane (X-Z) so 360 side profile never clips
+          const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
+          const effectiveDimension = Math.max(radiusXZ * 2, size.y);
+          const scale = 2.45 / effectiveDimension;
+          loadedModel.scale.setScalar(scale);
 
-        modelGroup.add(loadedModel);
-      });
+          modelGroup.add(loadedModel);
+        },
+        undefined,
+        (error) => {
+          console.error("Failed to load SunglassesKhronos.glb:", error);
+        }
+      );
 
       // Round Move & Drag Interaction
       let isDragging = false;

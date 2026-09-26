@@ -13,6 +13,11 @@ logger.warn = (msg, options) => {
 export default defineConfig({
   customLogger: logger,
   plugins: [tailwindcss(), sveltekit()],
+  server: {
+    watch: {
+      ignored: ["**/*.pdf"],
+    },
+  },
   build: {
     sourcemap: true,
     chunkSizeWarningLimit: 1000,

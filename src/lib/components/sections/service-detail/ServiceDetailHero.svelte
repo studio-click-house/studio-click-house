@@ -13,6 +13,7 @@
   const titleWidthClass = $derived(
     data.titleWidth === "wide" ? "max-w-[11ch]" : "max-w-[9ch]",
   );
+  const isFourFive = $derived(data.aspectRatio === "4/5");
 
   onMount(() => {
     let active = true;
@@ -27,24 +28,27 @@
         const media = gsap.matchMedia();
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap
-            .timeline({ defaults: { ease: "expo.out" } })
-            .from(".sd-hero-kicker", {
+          const heroTl = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+          if (currentHero.querySelector(".sd-hero-kicker")) {
+            heroTl.from(".sd-hero-kicker", {
               autoAlpha: 0,
               y: 16,
               duration: 0.6,
               clearProps: "all",
-            })
-            .from(
-              ".sd-hero-title-line",
-              {
-                yPercent: 112,
-                duration: 0.95,
-                stagger: 0.08,
-                clearProps: "all",
-              },
-              "-=0.35",
-            )
+            });
+          }
+
+          heroTl.from(
+            ".sd-hero-title-line",
+            {
+              yPercent: 112,
+              duration: 0.95,
+              stagger: 0.08,
+              clearProps: "all",
+            },
+            currentHero.querySelector(".sd-hero-kicker") ? "-=0.35" : 0,
+          )
             .from(
               ".sd-hero-copy-reveal",
               {
@@ -199,15 +203,18 @@
   >
     <div class="grid w-full items-center gap-12 lg:grid-cols-12 lg:gap-12">
       <div class="sd-hero-copy-motion lg:col-span-6">
-        <p
-          class="sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
-        >
-          {$_("serviceDetail.kicker") || "Image post-production service"}
-        </p>
+        {#if data.kicker}
+          <p
+            class="sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
+          >
+            {data.kicker}
+          </p>
+        {/if}
         <h1
           id="service-detail-hero-title"
           class={cn(
-            "mt-5 font-display text-[clamp(4rem,7vw,7.8rem)] leading-[0.84] tracking-[-0.055em]",
+            data.kicker ? "mt-5" : "",
+            "font-display text-[clamp(4rem,7vw,7.8rem)] leading-[0.84] tracking-[-0.055em]",
             titleWidthClass,
           )}
         >
@@ -280,12 +287,19 @@
           aria-hidden="true"
         ></div>
         <div
-          class="relative grid grid-cols-[1.12fr_0.88fr] items-center gap-3 sm:gap-4"
+          class={cn(
+            "relative grid items-center gap-3 sm:gap-4",
+            isFourFive
+              ? "grid-cols-[2.05fr_1fr]"
+              : "grid-cols-[1.12fr_0.88fr]",
+          )}
         >
           <figure
             class={cn(
-              "sd-hero-media-card sd-hero-media-primary relative aspect-[3/3.85] overflow-hidden rounded-[2rem] transition-all duration-300",
-              data.mediaFit === "cover" ? "p-0" : "p-3 sm:p-5",
+              "sd-hero-media-card sd-hero-media-primary relative overflow-hidden rounded-[2rem] transition-all duration-300",
+              isFourFive
+                ? "aspect-[4/5] p-0"
+                : (data.mediaFit === "cover" ? "aspect-[3/3.85] p-0" : "aspect-[3/3.85] p-3 sm:p-5"),
               isLight
                 ? "border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6"
                 : "border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45",
@@ -298,19 +312,26 @@
               height={data.media.height}
               class={cn(
                 "size-full",
-                data.mediaFit === "cover" ? "object-cover" : "object-contain",
+                isFourFive || data.mediaFit === "cover" ? "object-cover" : "object-contain",
               )}
             />
           </figure>
 
-          <div class="grid content-center gap-3 py-[3%] sm:gap-4">
+          <div
+            class={cn(
+              "grid content-center gap-3 sm:gap-4",
+              !isFourFive && "py-[3%]",
+            )}
+          >
             {#each data.supportingMedia.slice(0, 2) as item (item.src)}
               <figure
                 class={cn(
-                  "sd-hero-media-card sd-hero-media-support relative overflow-hidden rounded-[1.75rem] transition-all duration-300",
-                  item.width > item.height
-                    ? "aspect-[4/3] p-0"
-                    : "aspect-[4/3.15] p-2.5 sm:p-3.5",
+                  "sd-hero-media-card sd-hero-media-support relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] transition-all duration-300",
+                  isFourFive
+                    ? "aspect-[4/5] p-0"
+                    : (item.width > item.height
+                        ? "aspect-[4/3] p-0"
+                        : "aspect-[4/3.15] p-2.5 sm:p-3.5"),
                   isLight
                     ? "border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/5"
                     : "border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35",
@@ -323,7 +344,7 @@
                   height={item.height}
                   class={cn(
                     "size-full",
-                    item.width > item.height
+                    isFourFive || item.width > item.height
                       ? "object-cover"
                       : "object-contain",
                   )}
