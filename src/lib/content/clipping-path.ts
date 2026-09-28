@@ -2,29 +2,35 @@ import type { PreviewMedia } from "$lib/types/content";
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const clippingPathMedia = {
-  heroPenPath: {
-    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-01-after-white.webp",
-    alt: "Luxury black leather handbag with hand-plotted pen tool vector clipping path",
-    width: 1500,
-    height: 2000,
+  heroBicycle: {
+    src: "/images/clipping-path/clipping-path-precision-path-bicycle.webp",
+    alt: "Bicycle outlined with precise Photoshop pen-tool path points",
+    width: 1122,
+    height: 1402,
   },
-  heroStillLife: {
-    src: "/images/services/jewelry/jewelry-westhill-diamond-halo-ring-set-alt-0213.webp",
-    alt: "Fine jewelry diamond ring set outlined with precision vector clipping path",
-    width: 1334,
-    height: 2000,
+  heroApparel: {
+    src: "/images/clipping-path/clipping-path-apparel-tshirt-pen-path.webp",
+    alt: "Brown T-shirt outlined with precise Photoshop pen-tool path points",
+    width: 1122,
+    height: 1402,
   },
-  heroJewelry: {
-    src: "/images/services/bags-accessories/accessories-salinas-designer-sunglasses-front-view-after.webp",
-    alt: "Designer sunglasses with curved frame and lens knockout vector path",
-    width: 1600,
-    height: 2000,
+  heroFootwear: {
+    src: "/images/clipping-path/clipping-path-footwear-sneaker-pen-path.webp",
+    alt: "Pair of dark sneakers outlined with detailed pen-tool path points",
+    width: 1122,
+    height: 1402,
   },
   introCurve: {
     src: "/images/services/bags-accessories/accessories-astral-designer-sunglasses-side-profile-after.webp",
     alt: "Curved eyewear temple contour with sub-pixel bezier anchor points",
     width: 1600,
     height: 2000,
+  },
+  introPathExamples: {
+    src: "/images/clipping-path/clipping-path-multi-product-detail-path-examples.webp",
+    alt: "Pen-tool path examples around handbags and footwear, including close-ups of leather and stitching",
+    width: 1122,
+    height: 1402,
   },
   introComplex: {
     src: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-810-after.webp",
@@ -50,26 +56,17 @@ const clippingPathMedia = {
     width: 1500,
     height: 2000,
   },
-  showcaseJewelry: {
-    src: "/images/services/jewelry/jewelry-westhill-halo-diamond-signet-ring-0126.webp",
-    alt: "Multi-hole diamond halo ring vector clipping path knockout",
-    width: 1334,
-    height: 2000,
-    caption: "Multi-path jewelry knockout",
+  showcaseWatch: {
+    src: "/images/clipping-path/clipping-path-multi-path-luxury-watch.webp",
+    alt: "Luxury watch with separate precision clipping paths around its case, dial, and details",
+    width: 1122,
+    height: 1402,
   },
-  showcaseAccessories: {
-    src: "/images/services/bags-accessories/accessories-josel-trucker-hat-black-01.webp",
-    alt: "Structured headwear with curved visor and eyelet knockout paths",
-    width: 1600,
-    height: 2000,
-    caption: "Headwear contour vector path",
-  },
-  showcaseFootwear: {
-    src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
-    alt: "Designer leather footwear vector clipping path contour",
-    width: 1400,
-    height: 2000,
-    caption: "Footwear contour vector path",
+  showcaseFashion: {
+    src: "/images/clipping-path/clipping-path-multi-path-fashion-model.webp",
+    alt: "Fashion model and handbag outlined with separate clipping paths for garment details",
+    width: 1122,
+    height: 1402,
   },
   gallerySimple: {
     src: "/images/services/bags-accessories/accessories-mini-insignia-cap-race-green-01.webp",
@@ -141,10 +138,10 @@ export const clippingPathPage: ServicePageData = {
     theme: "light",
     description:
       "Hand-drawn vector paths created in Adobe Photoshop at high magnification, supplied in layered PSD or pre-press TIFF files for print and digital use.",
-    media: clippingPathMedia.heroPenPath,
+    media: clippingPathMedia.heroBicycle,
     supportingMedia: [
-      clippingPathMedia.heroStillLife,
-      clippingPathMedia.heroJewelry,
+      clippingPathMedia.heroApparel,
+      clippingPathMedia.heroFootwear,
     ],
   },
   intro: {
@@ -157,7 +154,7 @@ export const clippingPathPage: ServicePageData = {
         label: "Sub-Pixel Bezier Curves",
         description:
           "Anchor points are plotted along natural inner object edges to avoid background color spill or harsh cutout borders.",
-        media: clippingPathMedia.introCurve,
+        media: clippingPathMedia.introPathExamples,
       },
       {
         label: "Multi-Path Layer Isolation",
@@ -176,51 +173,94 @@ export const clippingPathPage: ServicePageData = {
   beforeAfter: {
     heading: "See the bezier precision.",
     description:
-      "Drag the slider to inspect the razor-sharp boundary definition of a manual Photoshop clipping path versus raw photo edges.",
+      "Compare the original machinery photo with the finished clipping path, keeping the frame, pipes, and components cleanly defined.",
+    bullets: [
+      "Trace smooth paths around complex contours",
+      "Keep narrow gaps and inner edges clearly defined",
+      "Prepare clean silhouettes for production use",
+    ],
     beforeSrc: clippingPathMedia.comparisonOriginal.src,
     beforeAlt: clippingPathMedia.comparisonOriginal.alt,
     afterSrc: clippingPathMedia.comparisonClipped.src,
     afterAlt: clippingPathMedia.comparisonClipped.alt,
-    beforeLabel: "Unclipped raw",
-    afterLabel: "Vector clipped",
+    beforeLabel: "Before",
+    afterLabel: "After",
     width: clippingPathMedia.comparisonClipped.width,
     height: clippingPathMedia.comparisonClipped.height,
-    caption: "Drag to compare · Vector pen tool path",
+    layout: "cards",
+    textPosition: "right",
   },
   showcase: {
-    heading: "Clipping paths for catalogs and print production",
+    heading: "Multi-Path Clipping for Complex Products",
     theme: "light",
     description:
-      "Our team processes complex multi-path assignments for leading fashion lookbooks, commercial packaging designers, and global e-commerce retail networks.",
-    stats: [
-      { value: "300%+", label: "Zoom level precision on every path" },
-      { value: "100%", label: "Manual pen tool craft (zero AI halo)" },
-      { value: "50k+", label: "Paths delivered per month" },
+      "From detailed watch components to layered fashion and accessories, each element gets its own precise path for flexible editing and clean production output.",
+    bullets: [
+      "Separate product components into editable paths",
+      "Preserve fine edges around hardware, clothing, and accessories",
+      "Deliver organized paths for retouching and production",
     ],
-    gallery: [
-      {
-        src: clippingPathMedia.showcaseJewelry.src,
-        alt: clippingPathMedia.showcaseJewelry.alt,
-        width: clippingPathMedia.showcaseJewelry.width,
-        height: clippingPathMedia.showcaseJewelry.height,
-        caption: clippingPathMedia.showcaseJewelry.caption,
+    beforeAfter: {
+      before: {
+        ...clippingPathMedia.showcaseWatch,
+        label: "Multi-path",
       },
-      {
-        src: clippingPathMedia.showcaseAccessories.src,
-        alt: clippingPathMedia.showcaseAccessories.alt,
-        width: clippingPathMedia.showcaseAccessories.width,
-        height: clippingPathMedia.showcaseAccessories.height,
-        caption: clippingPathMedia.showcaseAccessories.caption,
+      after: {
+        ...clippingPathMedia.showcaseFashion,
+        label: "Multi-path",
       },
-      {
-        src: clippingPathMedia.showcaseFootwear.src,
-        alt: clippingPathMedia.showcaseFootwear.alt,
-        width: clippingPathMedia.showcaseFootwear.width,
-        height: clippingPathMedia.showcaseFootwear.height,
-        caption: clippingPathMedia.showcaseFootwear.caption,
-      },
-    ],
+    },
   },
+  productTypes: [
+    {
+      id: "upholstered-chair",
+      code: "01",
+      title: "Upholstered Furniture",
+      subtitle: "Trace curved chair silhouettes and detailed upholstery edges.",
+      src: "/images/clipping-path/clipping-path-upholstered-accent-chair.webp",
+      alt: "Upholstered accent chair outlined with a precision clipping path",
+    },
+    {
+      id: "diamond-ring",
+      code: "02",
+      title: "Fine Jewelry",
+      subtitle: "Define gemstone settings and inner openings with compound paths.",
+      src: "/images/clipping-path/clipping-path-diamond-ring.webp",
+      alt: "Diamond ring with separate outer and inner clipping paths",
+    },
+    {
+      id: "baseball-cap",
+      code: "03",
+      title: "Caps & Headwear",
+      subtitle: "Follow the crown and curved brim through detailed contours.",
+      src: "/images/clipping-path/clipping-path-teal-baseball-cap.webp",
+      alt: "Teal baseball cap outlined with a precision clipping path",
+    },
+    {
+      id: "model-straw-hat",
+      code: "04",
+      title: "On-Model Fashion",
+      subtitle: "Isolate the model, hair, and hat with a clean connected silhouette.",
+      src: "/images/clipping-path/clipping-path-model-straw-hat.webp",
+      alt: "Fashion model wearing a straw hat outlined with a clipping path",
+    },
+    {
+      id: "designer-sunglasses",
+      code: "05",
+      title: "Eyewear",
+      subtitle: "Separate frame contours, lenses, and open spaces accurately.",
+      src: "/images/clipping-path/clipping-path-designer-sunglasses.webp",
+      alt: "Designer sunglasses with frame and lens contours traced for clipping",
+    },
+    {
+      id: "zebra-print-pump",
+      code: "06",
+      title: "Patterned Footwear",
+      subtitle: "Keep pointed toes, heels, and cut-ins crisp around bold patterns.",
+      src: "/images/clipping-path/clipping-path-zebra-print-pump.webp",
+      alt: "Zebra-print pointed pump outlined with a precision clipping path",
+    },
+  ],
   gallery: {
     heading: "Selected Path Complexity Levels",
     description:

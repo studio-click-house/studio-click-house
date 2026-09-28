@@ -1,27 +1,27 @@
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const colorCorrectionMedia = {
-  heroProductMain: {
-    src: "/images/services/product-services/color-correction-cobalt-serum-hero.png",
-    alt: "Cobalt blue serum bottle photographed with accurate product color",
+  heroPatternChange: {
+    src: "/images/color-correction/color-correction-pattern-change-trousers.webp",
+    alt: "Printed trousers with an illustrated canal scene in teal and warm neutral tones",
     width: 1122,
     height: 1402,
   },
-  heroProduct: {
-    src: "/images/services/product-services/product-food-cereal-granola-muesli-flatlay-berries-after.webp",
-    alt: "Food product flatlay with corrected berry, grain, and neutral tones",
+  heroGarmentAfter: {
+    src: "/images/color-correction/product-services-color-correction-editorial-garment-after.webp",
+    alt: "Editorial garment after color correction with a blue canal print",
     width: 1600,
     height: 2000,
   },
-  heroColorStudy: {
-    src: "/images/services/product-services/product-paw-osteosupport-cats-packaging-bottle.webp",
-    alt: "Pet care packaging with controlled label and product color",
+  heroGarmentBefore: {
+    src: "/images/color-correction/product-services-color-correction-editorial-garment-before.webp",
+    alt: "Editorial garment before color correction with a purple canal print",
     width: 1600,
     height: 2000,
   },
-  introSerum: {
-    src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
-    alt: "Pink cosmetic cream product with neutral highlights and controlled shadows",
+  introFashionBoard: {
+    src: "/images/color-correction/color-correction-fashion-capsule-color-match-board.webp",
+    alt: "Fashion capsule color-matching board showing neutral garments beside coordinated blue versions",
     width: 1600,
     height: 2000,
   },
@@ -42,6 +42,18 @@ const colorCorrectionMedia = {
     alt: "Cosmetic cream product after color correction",
     width: 1600,
     height: 2000,
+  },
+  patternChangeBefore: {
+    src: "/images/color-correction/service-retouching-pattern-change-before.webp",
+    alt: "Blue patterned dress before the pattern change",
+    width: 400,
+    height: 500,
+  },
+  patternChangeAfter: {
+    src: "/images/color-correction/service-retouching-pattern-change-after.webp",
+    alt: "Black floral dress after the pattern change",
+    width: 400,
+    height: 500,
   },
   audienceProduct: {
     src: "/images/services/product-services/product-furniture-scandinavian-round-stool-light-wood.webp",
@@ -65,10 +77,11 @@ export const colorCorrectionPage: ServicePageData = {
     titleWidth: "wide",
     description:
       "Correct white balance, exposure, and product color so a complete image set looks consistent across screens, marketplaces, and print.",
-    media: colorCorrectionMedia.heroProductMain,
+    aspectRatio: "4/5",
+    media: colorCorrectionMedia.heroPatternChange,
     supportingMedia: [
-      colorCorrectionMedia.heroProduct,
-      colorCorrectionMedia.heroColorStudy,
+      colorCorrectionMedia.heroGarmentAfter,
+      colorCorrectionMedia.heroGarmentBefore,
     ],
   },
   intro: {
@@ -81,7 +94,7 @@ export const colorCorrectionPage: ServicePageData = {
         label: "Neutralize the source",
         description:
           "Correct white balance and exposure so the image begins from a clean, dependable base.",
-        media: colorCorrectionMedia.introSerum,
+        media: colorCorrectionMedia.introFashionBoard,
       },
       {
         label: "Match the series",
@@ -103,52 +116,90 @@ export const colorCorrectionPage: ServicePageData = {
     ],
   },
   beforeAfter: {
-    heading: "See the difference.",
+    heading: "See the color correction difference.",
     description:
-      "Drag the slider to inspect how controlled color adjustment improves product tone, packaging color, and studio detail.",
+      "Compare the original cosmetic image with its color-corrected finish, refining product tone while keeping the cream and packaging details clear.",
+    bullets: [
+      "Match product hues to supplied color references",
+      "Correct color casts and uneven lighting",
+      "Keep tones consistent across image sets",
+    ],
     beforeSrc: colorCorrectionMedia.comparisonOriginal.src,
     beforeAlt: colorCorrectionMedia.comparisonOriginal.alt,
     afterSrc: colorCorrectionMedia.comparisonCorrected.src,
     afterAlt: colorCorrectionMedia.comparisonCorrected.alt,
-    beforeLabel: "Original",
-    afterLabel: "Color corrected",
+    beforeLabel: "Before",
+    afterLabel: "After",
     width: colorCorrectionMedia.comparisonCorrected.width,
     height: colorCorrectionMedia.comparisonCorrected.height,
-    caption: "Drag to compare · Color transformation",
+    layout: "cards",
+    textPosition: "right",
   },
   showcase: {
-    heading: "Color correction for consistent image sets",
+    heading: "Pattern change retouching",
+    theme: "light",
     description:
-      "We combine calibrated hardware, trained artists, and a rigorous multi-step review process to deliver consistent, production-grade color correction across every project.",
-    stats: [
-      { value: "150+", label: "Trained digital artists working daily" },
-      { value: "24/7", label: "Production capacity across time zones" },
-      { value: "3-step", label: "Quality control on every image" },
+      "Change a garment's pattern while keeping its shape, folds, and fabric detail consistent in the finished image.",
+    bullets: [
+      "Replace or refine garment patterns",
+      "Preserve fabric folds and garment details",
+      "Keep edits consistent across a product range",
     ],
-    gallery: [
-      {
-        src: "/images/services/product-services/color-correction-coral-perfume-showcase.png",
-        alt: "Coral perfume product with accurate color and controlled highlights",
-        width: 1122,
-        height: 1402,
-        caption: "Product color balancing",
-      },
-      {
-        src: "/images/services/jewelry/jewelry-westhill-organic-gold-band-ring-0122.webp",
-        alt: "Gold jewelry product with accurate metal color reproduction",
-        width: 1600,
-        height: 2000,
-        caption: "Jewelry color matching",
-      },
-      {
-        src: "/images/services/bags-accessories/accessories-astral-designer-sunglasses-side-profile-after.webp",
-        alt: "Sunglasses product with refined reflective color detail",
-        width: 1600,
-        height: 2000,
-        caption: "Reflective product color finish",
-      },
-    ],
+    beforeAfter: {
+      before: { ...colorCorrectionMedia.patternChangeBefore, label: "Before" },
+      after: { ...colorCorrectionMedia.patternChangeAfter, label: "After" },
+    },
   },
+  productTypes: [
+    {
+      id: "textile-pattern-change-after",
+      code: "01",
+      title: "Textile Pattern Change — After",
+      subtitle: "Finished patterned textile retouching.",
+      src: "/images/color-correction/product-services-pattern-change-recolor-textile-after.webp",
+      alt: "Textile after a pattern change, shown as a multicolor floral dress",
+    },
+    {
+      id: "textile-pattern-change-before",
+      code: "02",
+      title: "Textile Pattern Change — Before",
+      subtitle: "Original garment before the pattern edit.",
+      src: "/images/color-correction/product-services-pattern-change-recolor-textile-before.webp",
+      alt: "Green textile dress before its pattern change",
+    },
+    {
+      id: "chloe-gown-color-change-before",
+      code: "03",
+      title: "Gown Color Change — Before",
+      subtitle: "Original gown before the color change.",
+      src: "/images/color-correction/ghost-mannequin-chloe-black-gown-g1-before.webp",
+      alt: "Magenta gown before color change retouching",
+    },
+    {
+      id: "chloe-gown-color-change-after",
+      code: "04",
+      title: "Gown Color Change — After",
+      subtitle: "Black gown after the color change.",
+      src: "/images/color-correction/ghost-mannequin-chloe-black-gown-g1-after.webp",
+      alt: "Black gown after color change retouching",
+    },
+    {
+      id: "fashion-color-change-after",
+      code: "05",
+      title: "Fashion Color Change — After",
+      subtitle: "Finished color change with garment details retained.",
+      src: "/images/color-correction/service-retouching-color-change-after.webp",
+      alt: "Model wearing the recolored garment after retouching",
+    },
+    {
+      id: "fashion-color-change-before",
+      code: "06",
+      title: "Fashion Color Change — Before",
+      subtitle: "Original garment before color retouching.",
+      src: "/images/color-correction/service-retouching-color-change-before.webp",
+      alt: "Model wearing the original garment before color retouching",
+    },
+  ],
   gallery: {
     heading: "Selected Work & Color Studies",
     description:

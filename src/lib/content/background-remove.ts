@@ -2,28 +2,28 @@ import type { ServicePageData } from "$lib/types/service-detail";
 
 const backgroundRemoveMedia = {
   heroProduct: {
-    src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-after.webp",
-    alt: "Perfume bottle isolated with clean directional lighting and crisp product boundaries",
-    width: 1600,
-    height: 2000,
+    src: "/images/services/product-services/product-furniture-scandinavian-round-stool-light-wood.webp",
+    alt: "Light wood Scandinavian round stool isolated against a clean background",
+    width: 456,
+    height: 570,
   },
   heroCosmetics: {
-    src: "/images/services/product-services/product-paw-osteosupport-cats-packaging-bottle.webp",
-    alt: "Cosmetic bottles cutout with transparent glass edge preservation",
+    src: "/images/services/jewelry/jewelry-by-charlotte-gold-stud-earrings-0120.webp",
+    alt: "Gold stud earrings isolated for a clean product presentation",
     width: 1600,
     height: 2000,
   },
   heroApparel: {
-    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-white.webp",
-    alt: "Fashion apparel isolated against a pure studio background",
+    src: "/images/services/bags-accessories/accessories-josel-trucker-hat-black-01.webp",
+    alt: "Black trucker hat isolated for a clean product presentation",
     width: 1600,
     height: 2000,
   },
-  introPerfume: {
-    src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
-    alt: "Fragrance bottle cut out cleanly with natural drop shadow",
-    width: 1600,
-    height: 2000,
+  introCatalogExamples: {
+    src: "/images/background-remove/background-removal-before-after-catalog-examples.webp",
+    alt: "Before-and-after background removal examples for a fashion model, handbag, sneakers, blazer, and sunglasses",
+    width: 1122,
+    height: 1402,
   },
   introShoes: {
     src: "/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp",
@@ -32,16 +32,16 @@ const backgroundRemoveMedia = {
     height: 2000,
   },
   comparisonOriginal: {
-    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-before.webp",
-    alt: "Leather bag photographed before background removal",
-    width: 1600,
-    height: 2000,
+    src: "/images/services/all_images/product-services-background-replacement-cosmetic-after.webp",
+    alt: "Fashion model on a clean studio background before background removal",
+    width: 500,
+    height: 625,
   },
   comparisonCutout: {
-    src: "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-after.webp",
-    alt: "Leather bag isolated with a clean background and natural contact shadow",
-    width: 1600,
-    height: 2000,
+    src: "/images/services/all_images/product-services-background-replacement-cosmetic-before.webp",
+    alt: "The same fashion model isolated over a transparent checkerboard after background removal",
+    width: 498,
+    height: 622,
   },
   audienceEcommerce: {
     src: "/images/services/product-services/product-paw-osteocare-small-dogs-chews-packaging-after.webp",
@@ -63,6 +63,8 @@ export const backgroundRemovePage: ServicePageData = {
     titleAccent: "Removal.",
     theme: "light",
     titleWidth: "wide",
+    mediaFit: "cover",
+    aspectRatio: "4/5",
     description:
       "Isolate products, models, and complex objects with clean edges. We use hand-drawn clipping paths and alpha masks for white, transparent, or custom backgrounds.",
     media: backgroundRemoveMedia.heroProduct,
@@ -81,7 +83,7 @@ export const backgroundRemovePage: ServicePageData = {
         label: "Hand-Drawn Vector Path",
         description:
           "Our artists trace every curve manually using Photoshop's Pen Tool for razor-sharp, natural outlines.",
-        media: backgroundRemoveMedia.introPerfume,
+        media: backgroundRemoveMedia.introCatalogExamples,
       },
       {
         label: "Alpha Channel Hair Masking",
@@ -105,49 +107,49 @@ export const backgroundRemovePage: ServicePageData = {
   beforeAfter: {
     heading: "See the cutout difference.",
     description:
-      "Drag the slider to inspect how background removal isolates the subject while preserving clean edges and realistic contact shadows.",
+      "Compare the original photo with the isolated result, with clean edges and a natural contact shadow.",
+    bullets: [
+      "Isolate the subject while preserving fine edges",
+      "Keep a natural contact shadow when needed",
+      "Prepare clean cutouts for catalogs and campaigns",
+    ],
     beforeSrc: backgroundRemoveMedia.comparisonOriginal.src,
     beforeAlt: backgroundRemoveMedia.comparisonOriginal.alt,
     afterSrc: backgroundRemoveMedia.comparisonCutout.src,
     afterAlt: backgroundRemoveMedia.comparisonCutout.alt,
-    beforeLabel: "Raw photo",
-    afterLabel: "Isolated cutout",
+    beforeLabel: "Before",
+    afterLabel: "After",
     width: backgroundRemoveMedia.comparisonCutout.width,
     height: backgroundRemoveMedia.comparisonCutout.height,
-    caption: "Drag to compare · Background isolation",
+    layout: "cards",
+    textPosition: "right",
   },
   showcase: {
-    heading: "Background removal for high-volume catalogs",
+    heading: "From photographed chair to clean catalog cutout.",
     description:
-      "From single hero campaign visuals to 5,000+ SKU seasonal drops, our 24/7 studio delivers pixel-perfect cutouts with overnight turnaround and strict quality inspection.",
-    stats: [
-      { value: "2,000+", label: "Images processed per day" },
-      { value: "100%", label: "Hand-drawn pen tool paths" },
-      { value: "12-24h", label: "Standard turnaround window" },
+      "See the same wooden spindle chair isolated from its original studio setting for a clean catalog presentation.",
+    bullets: [
+      "Keep the chair shape and wood finish consistent",
+      "Separate the spindle, seat, and leg details cleanly",
+      "Prepare a polished white-background product image",
     ],
-    gallery: [
-      {
-        src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
-        alt: "Isolated perfume bottle with generated directional contact shadow",
+    theme: "light",
+    beforeAfter: {
+      before: {
+        src: "/images/background-remove/product-furniture-classic-wooden-spindle-chair before.webp",
+        alt: "Wooden spindle chair photographed against its original studio background",
         width: 1600,
         height: 2000,
-        caption: "Product isolation & ground shadow",
+        label: "Before",
       },
-      {
-        src: "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
-        alt: "Macro jewelry cutout with preserved fine metal edges",
-        width: 1600,
-        height: 2000,
-        caption: "Fine jewelry path extraction",
+      after: {
+        src: "/images/background-remove/product-furniture-classic-wooden-spindle-chair after.webp",
+        alt: "The same wooden spindle chair isolated on a clean white background",
+        width: 1122,
+        height: 1402,
+        label: "After",
       },
-      {
-        src: "/images/services/model-beauty/model-fashion-black-outfit-studio-63-after.webp",
-        alt: "Fashion model cutout with clean silhouette definition",
-        width: 1333,
-        height: 2000,
-        caption: "Complex hair & silhouette masking",
-      },
-    ],
+    },
   },
   gallery: {
     heading: "Selected Cutout Projects",
@@ -302,6 +304,56 @@ export const backgroundRemovePage: ServicePageData = {
       },
     ],
   },
+  productTypes: [
+    {
+      id: "on-model-apparel",
+      code: "01",
+      title: "On-Model Apparel",
+      subtitle: "Fashion cutouts with clean edges around the model and garment.",
+      src: "/images/background-remove/background-removal-blue-jumpsuit-model.webp",
+      alt: "Model wearing a blue jumpsuit isolated on a white background",
+    },
+    {
+      id: "leather-handbag",
+      code: "02",
+      title: "Leather Handbags",
+      subtitle: "Preserve leather grain, stitching, and polished hardware.",
+      src: "/images/background-remove/background-removal-emerald-leather-handbag.webp",
+      alt: "Emerald green leather handbag isolated on a white background",
+    },
+    {
+      id: "footwear",
+      code: "03",
+      title: "Footwear",
+      subtitle: "Clean isolation for sneaker panels, laces, and soles.",
+      src: "/images/background-remove/background-removal-beige-sneakers.webp",
+      alt: "Pair of beige and white sneakers isolated on a white background",
+    },
+    {
+      id: "watches",
+      code: "04",
+      title: "Watches & Jewelry",
+      subtitle: "Careful edge work for reflective metal and fine details.",
+      src: "/images/background-remove/background-removal-rose-gold-watch.webp",
+      alt: "Rose gold wristwatch isolated on a white background",
+    },
+    {
+      id: "furniture",
+      code: "05",
+      title: "Furniture & Home",
+      subtitle: "Define upholstery, curved forms, and furniture legs cleanly.",
+      src: "/images/background-remove/background-removal-olive-accent-chair.webp",
+      alt: "Olive green upholstered accent chair isolated on a white background",
+    },
+    {
+      id: "denim",
+      code: "06",
+      title: "Denim Apparel",
+      subtitle: "Keep denim weave, stitching, and garment shape clear.",
+      src: "/images/background-remove/background-removal-denim-jacket.webp",
+      alt: "Folded dark denim jacket isolated on a white background",
+    },
+  ],
   faqs: [
     {
       question: "How do you handle complex hair, fur, and transparent objects?",

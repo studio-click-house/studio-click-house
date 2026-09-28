@@ -10,7 +10,7 @@
     ArrowUpRight,
   } from "lucide-svelte";
   import { services } from "$lib/content/home";
-  import { resolveServiceHref } from "$lib/content/service-pages";
+  import { resolveServiceHref, servicePages } from "$lib/content/service-pages";
   import { _ } from "svelte-i18n";
 
   let { isOpen = false, onClose } = $props<{
@@ -335,9 +335,11 @@
 
     <!-- Right Column: Image Preview Frame -->
     <div
-      class="relative h-full min-h-[22rem] w-full overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-dark/30 shadow-inner"
+      class="relative mx-auto aspect-[4/5] w-full max-w-[22rem] overflow-hidden rounded-[2rem] border border-brand-light/10 bg-brand-light shadow-inner"
     >
       {#each services as service (service.slug)}
+        {@const previewMedia =
+          servicePages[service.slug]?.intro.stages?.[0]?.media ?? service.media}
         <div
           class="mega-thumb-{service.slug} absolute inset-0 size-full pointer-events-none transition-all duration-700 ease-out {service.slug ===
           activeServiceSlug
@@ -345,12 +347,12 @@
             : 'opacity-0 scale-105 z-0'}"
         >
           <img
-            src={service.media.src}
-            alt={service.media.alt}
-            width={service.media.width}
-            height={service.media.height}
+            src={previewMedia.src}
+            alt={previewMedia.alt}
+            width={previewMedia.width}
+            height={previewMedia.height}
             loading="lazy"
-            class="size-full rounded-[2rem] object-cover transition-transform duration-700 ease-out"
+            class="size-full rounded-[2rem] object-contain transition-transform duration-700 ease-out"
           />
         </div>
       {/each}

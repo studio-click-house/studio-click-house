@@ -44,6 +44,7 @@ export interface ServiceAudienceItem {
 }
 
 export interface ServiceBeforeAfterData {
+  sectionId?: string;
   heading: string;
   description?: string;
   beforeSrc: string;
@@ -98,6 +99,15 @@ export interface ServiceGalleryData {
   items: ServiceGalleryItem[];
 }
 
+export interface ServiceProductTypeItem {
+  id: string;
+  code: string;
+  title: string;
+  subtitle: string;
+  src: string;
+  alt: string;
+}
+
 export interface ServiceDetailCtaData {
   heading: string;
   description: string;
@@ -117,6 +127,7 @@ export interface ServicePageData {
   intro: ServiceIntroData;
   beforeAfter: ServiceBeforeAfterData;
   showcase: ServiceShowcaseData;
+  additionalBeforeAfter?: ServiceBeforeAfterData[];
   gallery?: ServiceGalleryData;
   features: {
     heading: string;
@@ -127,6 +138,7 @@ export interface ServicePageData {
     description?: string;
     items: ServiceAudienceItem[];
   };
+  productTypes?: ServiceProductTypeItem[];
   faqs: FaqItem[];
   faqImages?: PreviewMedia[];
   cta: ServiceDetailCtaData;

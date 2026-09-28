@@ -8,8 +8,8 @@
   import ServiceDetailBeforeAfter from "$lib/components/sections/service-detail/ServiceDetailBeforeAfter.svelte";
   import ServiceDetailShowcase from "$lib/components/sections/service-detail/ServiceDetailShowcase.svelte";
   import ServiceDetailFeatures from "$lib/components/sections/service-detail/ServiceDetailFeatures.svelte";
-  import ServiceDetailGallery from "$lib/components/sections/service-detail/ServiceDetailGallery.svelte";
-  import ServiceDetailAudience from "$lib/components/sections/service-detail/ServiceDetailAudience.svelte";
+  import ServiceDetailProductTypes from "$lib/components/sections/service-detail/ServiceDetailProductTypes.svelte";
+  import ServiceDetailTrust from "$lib/components/sections/service-detail/ServiceDetailTrust.svelte";
   import ServiceDetailCta from "$lib/components/sections/service-detail/ServiceDetailCta.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import { siteConfig } from "$lib/config/site";
@@ -77,38 +77,38 @@
 </script>
 
 <PageMeta
-    title={pageData.seo.title}
-    description={pageData.seo.description}
-    canonicalPath={`/services/${pageData.slug}`}
-  />
+  title={pageData.seo.title}
+  description={pageData.seo.description}
+  canonicalPath={`/services/${pageData.slug}`}
+/>
 
 {#if serviceSchemaData}
-    <JsonLd data={serviceSchemaData} />
+  <JsonLd data={serviceSchemaData} />
 {/if}
 {#if faqSchemaData}
-    <JsonLd data={faqSchemaData} />
+  <JsonLd data={faqSchemaData} />
 {/if}
 {#if breadcrumbData}
-    <JsonLd data={breadcrumbData} />
+  <JsonLd data={breadcrumbData} />
 {/if}
 
 <main id="main-content" class="relative min-h-screen bg-brand-light">
-    <ServiceDetailHero data={pageData.hero} />
-    <ServiceDetailIntro data={pageData.intro} />
-    <ServiceDetailBeforeAfter data={pageData.beforeAfter} />
-    <ServiceDetailShowcase data={pageData.showcase} />
-    {#if pageData.gallery}
-      <ServiceDetailGallery data={pageData.gallery} />
-    {/if}
-    <ServiceDetailFeatures
-      heading={pageData.features.heading}
-      items={pageData.features.items}
+  <ServiceDetailHero data={pageData.hero} />
+  <ServiceDetailIntro data={pageData.intro} />
+  <ServiceDetailBeforeAfter data={pageData.beforeAfter} />
+  <ServiceDetailShowcase data={pageData.showcase} />
+  {#each pageData.additionalBeforeAfter ?? [] as comparison}
+    <ServiceDetailBeforeAfter
+      data={comparison}
+      sectionId={comparison.sectionId}
     />
-    <ServiceDetailAudience
-      heading={pageData.audience.heading}
-      description={pageData.audience.description}
-      items={pageData.audience.items}
-    />
-    <FaqSection items={pageData.faqs} images={pageData.faqImages} />
-    <ServiceDetailCta data={pageData.cta} />
+  {/each}
+  <ServiceDetailFeatures
+    heading={pageData.features.heading}
+    items={pageData.features.items}
+  />
+  <ServiceDetailProductTypes items={pageData.productTypes} />
+  <ServiceDetailTrust />
+  <FaqSection items={pageData.faqs} images={pageData.faqImages} />
+  <ServiceDetailCta data={pageData.cta} />
 </main>

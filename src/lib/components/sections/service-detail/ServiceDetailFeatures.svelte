@@ -1,75 +1,19 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import {
-    BadgeDollarSign,
-    BadgePercent,
-    CheckCircle,
-    CheckCircle2,
-    Clock,
-    Cpu,
-    Eye,
-    FileCheck,
-    Focus,
-    FolderTree,
-    Gem,
-    Headphones,
-    Layers,
-    Lock,
-    Maximize2,
-    Palette,
-    PenTool,
-    Scale,
-    Scissors,
-    ShieldAlert,
-    ShieldCheck,
-    Shirt,
-    Sliders,
-    Sparkles,
-    Sun,
-    TicketCheck,
-    UserCheck,
-    Wand2,
-    Zap,
-  } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceFeatureItem } from "$lib/types/service-detail";
 
-  let { heading, items } = $props<{
+  let {
+    heading,
+    eyebrow = "Studio Capabilities",
+    description = "From clean product cutouts to complex multi-layered edge isolation, our studio handles fine details, transparent materials, and consistent outputs at scale.",
+    items,
+  } = $props<{
     heading: string;
+    eyebrow?: string;
+    description?: string;
     items: ServiceFeatureItem[];
   }>();
-
-  const iconMap: Record<string, typeof BadgeDollarSign> = {
-    BadgeDollarSign,
-    BadgePercent,
-    CheckCircle,
-    CheckCircle2,
-    Clock,
-    Cpu,
-    Eye,
-    FileCheck,
-    Focus,
-    FolderTree,
-    Gem,
-    Headphones,
-    Layers,
-    Lock,
-    Maximize2,
-    Palette,
-    PenTool,
-    Scale,
-    Scissors,
-    ShieldAlert,
-    ShieldCheck,
-    Shirt,
-    Sliders,
-    Sparkles,
-    Sun,
-    TicketCheck,
-    UserCheck,
-    Wand2,
-    Zap,
-  };
 
   let section = $state<HTMLElement>();
 
@@ -94,19 +38,19 @@
               },
               defaults: { ease: "power3.out" },
             })
-            .from(".sd-features-heading", {
+            .from(".sd-features-header", {
               autoAlpha: 0,
               y: 22,
               duration: 0.72,
               clearProps: "all",
             })
             .from(
-              ".sd-feature-card",
+              ".sd-feature-cell",
               {
                 autoAlpha: 0,
-                y: 26,
-                duration: 0.68,
-                stagger: 0.07,
+                y: 20,
+                duration: 0.65,
+                stagger: 0.05,
                 clearProps: "all",
               },
               "-=0.4",
@@ -128,38 +72,65 @@
   bind:this={section}
   id="service-detail-features"
   aria-labelledby="service-detail-features-title"
-  class="relative isolate overflow-hidden py-16 text-brand-dark sm:py-20 lg:py-24"
+  class="relative isolate overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
 >
   <div class="site-shell relative z-10">
-    <div class="sd-features-heading mb-9 lg:mb-11">
-      <h2
-        id="service-detail-features-title"
-        class="max-w-2xl font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
-      >
-        {heading}
-      </h2>
+    <!-- Split Header matching reference -->
+    <div
+      class="sd-features-header mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12"
+    >
+      <div>
+        <span
+          class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50"
+        >
+          {eyebrow}
+        </span>
+        <h2
+          id="service-detail-features-title"
+          class="mt-3 max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+        >
+          {heading}
+        </h2>
+      </div>
+
+      {#if description}
+        <p
+          class="shrink-0 max-w-[38ch] text-sm leading-relaxed text-brand-dark/65 sm:text-base lg:pb-0.5"
+        >
+          {description}
+        </p>
+      {/if}
     </div>
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {#each items as item (item.title)}
-        {@const IconComponent = iconMap[item.icon] || Sparkles}
-        <article
-          class="sd-feature-card group rounded-[0.9rem] border border-brand-dark/10 bg-brand-light p-6 transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-brand-green/35 hover:shadow-[0_14px_34px_rgb(32_33_31_/_0.06)] sm:p-7"
+    <!-- Rounded Cards — always visible, subtle border, no full-fill hover -->
+    <div
+      class="sd-features-grid grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6"
+    >
+      {#each items as item, i (item.title)}
+        <div
+          class="sd-feature-cell group relative flex flex-col justify-start rounded-[1.75rem] border border-brand-dark/10 bg-white/80 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-green hover:shadow-md sm:rounded-[2rem] sm:p-9 lg:p-10"
         >
-          <div
-            class="flex size-10 items-center justify-center rounded-[0.55rem] bg-brand-green/12 text-brand-green transition-colors duration-300 group-hover:bg-brand-green group-hover:text-brand-dark"
+          <!-- Big Bold Watermark Number -->
+          <span
+            class="font-display text-4xl font-black tracking-tight text-brand-dark/15 transition-colors duration-300 group-hover:text-brand-green/40 sm:text-5xl"
           >
-            {#if IconComponent}
-              <IconComponent class="size-[1.15rem]" strokeWidth={1.8} />
-            {/if}
-          </div>
-          <h3 class="mt-6 text-lg font-semibold tracking-[-0.01em]">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+
+          <!-- Bold Uppercase Title -->
+          <h3
+            class="mt-5 font-display text-base font-extrabold uppercase tracking-tight text-brand-dark sm:text-lg"
+          >
             {item.title}
           </h3>
-          <p class="mt-3 max-w-[42ch] text-sm leading-6 text-brand-dark/62">
+
+          <!-- Description -->
+          <p
+            class="mt-3 text-sm leading-relaxed text-brand-dark/65"
+          >
             {item.description}
           </p>
-        </article>
+        </div>
       {/each}
     </div>
   </div>

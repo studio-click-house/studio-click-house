@@ -5,10 +5,33 @@
 
   let { data } = $props<{ data: ServiceIntroData }>();
   let section = $state<HTMLElement>();
-  let activeStep = $state(0);
 
   const stages = $derived(data.stages ?? []);
-  const studyMedia = $derived(stages[0]?.media);
+
+  // Split stages across left and right side of the center image (2 on left, 2 on right)
+  const leftStages = $derived(
+    stages.length <= 2 ? stages.slice(0, 1) : stages.slice(0, 2),
+  );
+
+  const rightStages = $derived.by(() => {
+    if (stages.length <= 2) {
+      return stages.slice(1);
+    }
+    const right = [...stages.slice(2)];
+    // If only 3 stages total, add a complementary 4th standard point for visual symmetry
+    if (right.length === 1) {
+      right.push({
+        label: "Production-Ready Export",
+        description:
+          "Layered PSD, embedded vector clipping paths, transparent PNG, and marketplace sRGB outputs.",
+        media: stages[0]?.media,
+      });
+    }
+    return right;
+  });
+
+  // Center visual: Static image, no swapping on hover
+  const mainMedia = $derived(stages[0]?.media);
 
   onMount(() => {
     let active = true;
@@ -17,7 +40,7 @@
     registerScrollTrigger().then((runtime) => {
       const currentSection = section;
       if (!active || !runtime || !currentSection) return;
-      const { gsap, ScrollTrigger } = runtime;
+      const { gsap } = runtime;
 
       context = gsap.context(() => {
         const media = gsap.matchMedia();
@@ -32,22 +55,43 @@
               },
               defaults: { ease: "power3.out" },
             })
-            .from(".sd-intro-copy", {
+            .from(".sd-intro-header", {
               autoAlpha: 0,
-              y: 28,
-              duration: 0.82,
-              stagger: 0.08,
+              y: 22,
+              duration: 0.72,
               clearProps: "all",
             })
             .from(
-              ".sd-study-frame",
+              ".sd-intro-left-point",
               {
                 autoAlpha: 0,
-                y: 40,
-                duration: 0.9,
+                x: -20,
+                duration: 0.7,
+                stagger: 0.12,
+                clearProps: "all",
+              },
+              "-=0.4",
+            )
+            .from(
+              ".sd-intro-center-media",
+              {
+                autoAlpha: 0,
+                scale: 0.97,
+                duration: 0.75,
                 clearProps: "all",
               },
               "-=0.5",
+            )
+            .from(
+              ".sd-intro-right-point",
+              {
+                autoAlpha: 0,
+                x: 20,
+                duration: 0.7,
+                stagger: 0.12,
+                clearProps: "all",
+              },
+              "-=0.6",
             );
         });
 
@@ -66,115 +110,105 @@
   bind:this={section}
   id="service-detail-intro"
   aria-labelledby="service-detail-intro-title"
-  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
 >
   <div class="site-shell relative z-10">
-    <div class="grid items-start gap-14 lg:grid-cols-12 lg:gap-16">
-      <!-- Left Column: Copy + Interactive Steps List -->
-      <div class="lg:col-span-5">
-        <div>
-          <h2
-            id="service-detail-intro-title"
-            class="sd-intro-copy max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
+    <!-- Centered Editorial Header: Title only -->
+    <div class="sd-intro-header mb-14 text-center sm:mb-18 lg:mb-20">
+      <span
+        class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50"
+      >
+        Service Overview
+      </span>
+      <h2
+        id="service-detail-intro-title"
+        class="mx-auto mt-3 max-w-[22ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+      >
+        {data.heading}
+      </h2>
+    </div>
+
+    <!-- Centerpiece Stage: Left Points (2) | Center Image | Right Points (2) -->
+    <div
+      class="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-12 lg:gap-8 xl:gap-12"
+    >
+      <!-- Left Column: Simple Text Points (01, 02) with Green Hover & No Dividers -->
+      <div class="flex flex-col justify-between gap-6 lg:col-span-4">
+        {#each leftStages as stage, index (stage.label)}
+          {@const stepIndex = index}
+          <div
+            class="sd-intro-left-point group flex flex-col items-start rounded-[1.75rem] border border-transparent bg-transparent p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-brand-green hover:bg-white/80 hover:shadow-md sm:rounded-[2rem] sm:p-7"
           >
-            {data.heading}
-          </h2>
-
-          <div class="mt-7 max-w-[34rem]">
-            {#each data.paragraphs as paragraph (paragraph)}
-              <p
-                class="sd-intro-copy text-base leading-[1.7] text-brand-dark/64 sm:text-[1.03rem] [&+&]:mt-4"
-              >
-                {paragraph}
-              </p>
-            {/each}
+            <!-- Count in muted gray -->
+            <span
+              class="font-display text-2xl font-black tracking-tight text-brand-dark/25 transition-colors duration-300 group-hover:text-brand-dark/40 sm:text-3xl"
+            >
+              0{stepIndex + 1}
+            </span>
+            <!-- Simple clean title -->
+            <h3
+              class="mt-2.5 font-display text-base font-extrabold uppercase tracking-tight text-brand-dark sm:text-lg"
+            >
+              {stage.label}
+            </h3>
+            <!-- Simple clean description -->
+            <p
+              class="mt-2 text-sm leading-relaxed text-brand-dark/65 transition-colors duration-300 group-hover:text-brand-dark/90 sm:text-[0.93rem]"
+            >
+              {stage.description}
+            </p>
           </div>
-
-          {#if stages.length > 0}
-            <div class="relative mt-8 max-w-[34rem] flex gap-3 sm:gap-4 items-stretch">
-              <!-- Sliding glowing green indicator rail (matching AboutOrbitGallery) -->
-              <div
-                class="relative hidden w-[3px] rounded-full bg-brand-dark/10 sm:block overflow-hidden my-1 shrink-0"
-                aria-hidden="true"
-              >
-                <div
-                  class="absolute left-0 w-full rounded-full bg-brand-green shadow-[0_0_12px_rgba(126,166,65,0.9)] transition-all duration-300 ease-out"
-                  style="top: {(activeStep / stages.length) * 100}%; height: {100 / stages.length}%;"
-                ></div>
-              </div>
-
-              <!-- Interactive Step Cards -->
-              <div
-                class="flex-1 flex flex-col gap-2.5 w-full"
-                role="tablist"
-                aria-label="Garment workflow stages"
-              >
-                {#each stages as stage, index (stage.label)}
-                  {@const isActive = activeStep === index}
-                  <button
-                    type="button"
-                    class="group text-left w-full cursor-pointer rounded-[1rem] p-3.5 sm:p-4 transition-all duration-300 {isActive
-                      ? 'bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] border border-brand-dark/9 translate-x-1.5'
-                      : 'bg-transparent border border-transparent hover:bg-brand-dark/[0.03] hover:translate-x-1'}"
-                    role="tab"
-                    tabindex="0"
-                    aria-selected={isActive}
-                    onclick={() => (activeStep = index)}
-                    onmouseenter={() => (activeStep = index)}
-                  >
-                    <div class="flex items-start gap-3.5 sm:gap-4 w-full">
-                      <!-- Large editorial numeral (matches AboutOrbitGallery exactly) -->
-                      <span
-                        class="font-display text-2xl sm:text-[1.85rem] font-light leading-none select-none transition-colors duration-300 w-7 sm:w-8 shrink-0 pt-0.5 {isActive
-                          ? 'text-brand-green'
-                          : 'text-brand-dark/25 group-hover:text-brand-dark/60'}"
-                      >
-                        0{index + 1}
-                      </span>
-
-                      <!-- Title + Description -->
-                      <div class="flex-1 min-w-0">
-                        <h3
-                          class="font-sans font-semibold text-[0.95rem] sm:text-[1rem] leading-tight text-brand-dark tracking-[-0.01em]"
-                        >
-                          {stage.label}
-                        </h3>
-
-                        <p
-                          class="mt-1.5 text-xs sm:text-[0.84rem] leading-relaxed transition-colors duration-300 {isActive
-                            ? 'text-brand-dark/85 font-normal'
-                            : 'text-brand-dark/55'}"
-                        >
-                          {stage.description}
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                {/each}
-              </div>
-            </div>
-          {/if}
-        </div>
+        {/each}
       </div>
 
-      <!-- Right Column: Single Clean Image Frame with Interactive Frosted Pointer Tabs -->
-      {#if studyMedia}
-        <div class="lg:col-span-7 lg:self-start lg:pt-2">
+      <!-- Centerpiece Visual (Static image, no hover swap) -->
+      <div
+        class="sd-intro-center-media order-first flex items-center justify-center lg:order-none lg:col-span-4"
+      >
+        {#if mainMedia}
           <figure
-            class="sd-study-frame relative mx-auto aspect-[4/5] w-full max-w-[30rem] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/[0.04]"
+            class="relative mx-auto aspect-[4/5] w-full max-w-[22rem] overflow-hidden rounded-[1.75rem] border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/[0.04] sm:rounded-[2rem] lg:max-w-full"
           >
-            <!-- Direct Single Clean Image (No overlays, no pill tags) -->
             <img
-              src={studyMedia.src}
-              alt={studyMedia.alt}
-              width={studyMedia.width}
-              height={studyMedia.height}
+              src={mainMedia.src}
+              alt={mainMedia.alt}
+              width={mainMedia.width}
+              height={mainMedia.height}
               loading="eager"
-              class="sd-study-image size-full object-cover object-center"
+              class="size-full object-cover object-center"
             />
           </figure>
-        </div>
-      {/if}
+        {/if}
+      </div>
+
+      <!-- Right Column: Simple Text Points (03, 04) with Green Hover & No Dividers -->
+      <div class="flex flex-col justify-between gap-6 lg:col-span-4">
+        {#each rightStages as stage, index (stage.label)}
+          {@const stepIndex = leftStages.length + index}
+          <div
+            class="sd-intro-right-point group flex flex-col items-start rounded-[1.75rem] border border-transparent bg-transparent p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-brand-green hover:bg-white/80 hover:shadow-md sm:rounded-[2rem] sm:p-7"
+          >
+            <!-- Count in muted gray -->
+            <span
+              class="font-display text-2xl font-black tracking-tight text-brand-dark/25 transition-colors duration-300 group-hover:text-brand-dark/40 sm:text-3xl"
+            >
+              0{stepIndex + 1}
+            </span>
+            <!-- Simple clean title -->
+            <h3
+              class="mt-2.5 font-display text-base font-extrabold uppercase tracking-tight text-brand-dark sm:text-lg"
+            >
+              {stage.label}
+            </h3>
+            <!-- Simple clean description -->
+            <p
+              class="mt-2 text-sm leading-relaxed text-brand-dark/65 transition-colors duration-300 group-hover:text-brand-dark/90 sm:text-[0.93rem]"
+            >
+              {stage.description}
+            </p>
+          </div>
+        {/each}
+      </div>
     </div>
   </div>
 </section>

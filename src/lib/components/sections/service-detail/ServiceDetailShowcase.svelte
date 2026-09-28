@@ -207,7 +207,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <!-- Before Card -->
             <figure
-              class="sd-proof-card sd-proof-card-ba group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20"
+              class="sd-proof-card sd-proof-card-ba group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20 sm:-translate-y-2"
             >
               <img
                 src={data.beforeAfter.before.src}
@@ -226,7 +226,7 @@
 
             <!-- After Card -->
             <figure
-              class="sd-proof-card sd-proof-card-ba group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30"
+              class="sd-proof-card sd-proof-card-ba group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30 sm:translate-y-8"
             >
               <img
                 src={data.beforeAfter.after.src}
@@ -237,9 +237,8 @@
                 class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
               <span
-                class="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
+                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
               >
-                <span class="size-1.5 rounded-full bg-brand-green"></span>
                 {data.beforeAfter.after.label || "After"}
               </span>
             </figure>
