@@ -158,7 +158,7 @@
         <!-- Top Right Story Header & Paragraph -->
         <div class="collage-item pt-2 pb-2">
           <span
-            class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold block mb-2"
+            class="font-mono text-xs uppercase tracking-widest text-brand-dark/50 font-semibold block mb-2"
           >
             {$_("portfolio.collage.selectedCampaign") || "Selected Campaign"}
           </span>

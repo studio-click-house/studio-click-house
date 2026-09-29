@@ -489,8 +489,8 @@ export const ecommerceRetouchingPage: ServicePageData = {
     {
       src: "/images/services/product-services/product-gem-whole-body-cream-deodorant-yellow-cream-after.webp",
       alt: "Yellow cosmetic packshot with clean white-background retouching",
-      width: 1600,
-      height: 2000,
+      width: 1526,
+      height: 1908,
       credit: "Studio Click House",
     },
     {

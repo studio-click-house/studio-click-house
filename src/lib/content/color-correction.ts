@@ -387,8 +387,8 @@ export const colorCorrectionPage: ServicePageData = {
   ],
   faqImages: [
     {
-      src: "/images/services/product-services/product-industrial-metal-storage-rack-shelving-before.webp",
-      alt: "Outdoor metal shelving product before color correction",
+      src: "/images/color-correction/product-services-color-correction-editorial-garment-after.webp",
+      alt: "Fashion trousers with a balanced blue canal print after color correction",
       width: 1600,
       height: 2000,
       credit: "Studio Click House",

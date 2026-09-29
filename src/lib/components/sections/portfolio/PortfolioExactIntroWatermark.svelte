@@ -1,7 +1,6 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
-  import { CheckCircle2, ShieldCheck, Layers } from "lucide-svelte";
 
   let section = $state<HTMLElement | null>(null);
 
@@ -72,7 +71,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-16 lg:mb-20">
       <!-- Left Column: Bold Headline & Ethos -->
       <div class="lg:col-span-6 intro-fade-item">
-        <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-green mb-3 block">
+        <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
           Editorial Standard
         </span>
         <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-brand-dark leading-[1.08] tracking-tight">
@@ -96,10 +95,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 divide-y md:divide-y-0 md:divide-x divide-brand-dark/10">
         <!-- Quality Pillar 1 -->
         <div class="flex flex-col gap-3 pt-4 md:pt-0 md:pr-6">
-          <div class="flex items-center gap-2.5 text-brand-green">
-            <CheckCircle2 class="size-5 shrink-0" />
-            <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark">16-Bit Precision</span>
-          </div>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark">16-Bit Precision</span>
           <p class="text-xs sm:text-sm text-brand-dark/70 leading-relaxed font-normal">
             Lossless frequency separation preserving micro pore texture, fine hair flyaways, and fabric textile weave without plastic artificial smoothing.
           </p>
@@ -107,10 +103,7 @@
 
         <!-- Quality Pillar 2 -->
         <div class="flex flex-col gap-3 pt-6 md:pt-0 md:px-6">
-          <div class="flex items-center gap-2.5 text-brand-green">
-            <Layers class="size-5 shrink-0" />
-            <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark">Sub-Pixel Pen Paths</span>
-          </div>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark">Sub-Pixel Pen Paths</span>
           <p class="text-xs sm:text-sm text-brand-dark/70 leading-relaxed font-normal">
             Hand-drawn Bézier curves with zero jagged anti-aliasing artifacts, embedded as persistent Photoshop paths for versatile client isolation.
           </p>
@@ -118,10 +111,7 @@
 
         <!-- Quality Pillar 3 -->
         <div class="flex flex-col gap-3 pt-6 md:pt-0 md:pl-6">
-          <div class="flex items-center gap-2.5 text-brand-green">
-            <ShieldCheck class="size-5 shrink-0" />
-            <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark">Delta-E Color Lock</span>
-          </div>
+          <span class="font-mono text-xs font-bold uppercase tracking-wider text-brand-dark">Delta-E Color Lock</span>
           <p class="text-xs sm:text-sm text-brand-dark/70 leading-relaxed font-normal">
             Certified Pantone and digital swatch calibration ensuring 100% SKU color fidelity across lookbooks, e-commerce listings, and billboard prints.
           </p>

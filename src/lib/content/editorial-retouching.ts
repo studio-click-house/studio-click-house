@@ -382,10 +382,10 @@ export const editorialRetouchingPage: ServicePageData = {
   ],
   faqImages: [
     {
-      src: "/images/services/model-beauty/beauty-skincare-facial-cream-retouch-0097-before.webp",
-      alt: "Beauty portrait before editorial skin retouching",
-      width: 2000,
-      height: 1500,
+      src: "/images/editorial-retouching/model-male-headshot-leather-jacket-2301-step2.webp",
+      alt: "Male editorial headshot with refined skin detail and a black leather jacket",
+      width: 1333,
+      height: 1666,
       credit: "Studio Click House",
     },
     {

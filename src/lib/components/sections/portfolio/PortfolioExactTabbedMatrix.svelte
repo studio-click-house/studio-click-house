@@ -1,7 +1,6 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
-  import { CheckCircle2, Clock, Sparkles } from "lucide-svelte";
 
   let sectionElement = $state<HTMLElement | null>(null);
   let activeTab = $state(0);
@@ -145,7 +144,7 @@
   <div class="site-shell relative z-10">
     <!-- Editorial Section Header -->
     <div class="matrix-anim-target max-w-3xl mb-10 lg:mb-14">
-      <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-green mb-3 block">
+      <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
         {$_('portfolio.matrix.eyebrow') || 'Disciplines & Scopes'}
       </span>
       <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1.05] tracking-tight mb-4">
@@ -166,7 +165,7 @@
           aria-selected={activeTab === index}
           aria-controls="discipline-panel-{index}"
           onclick={() => (activeTab = index)}
-          class="flex items-center gap-2 pb-2 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer border-b-2 -mb-[13px] shrink-0 {activeTab === index ? 'border-brand-green text-brand-dark font-bold' : 'border-transparent text-brand-dark/50 hover:text-brand-dark'}"
+          class="flex items-center gap-2 pb-2 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer border-b-2 -mb-3 shrink-0 {activeTab === index ? 'border-brand-green text-brand-dark font-bold' : 'border-transparent text-brand-dark/50 hover:text-brand-dark'}"
         >
           <span class="text-brand-green">{item.index}</span>
           <span>{item.label}</span>
@@ -216,8 +215,7 @@
           </span>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
             {#each current.deliverables as del (del)}
-              <div class="flex items-center gap-2">
-                <CheckCircle2 class="size-4 text-brand-green shrink-0" />
+              <div>
                 <span class="text-xs sm:text-sm text-brand-dark/85 font-medium leading-tight">{del}</span>
               </div>
             {/each}

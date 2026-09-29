@@ -102,7 +102,7 @@
 >
   <div class="site-shell max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="partners-header">
-      <span class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-green mb-2.5 block">
+      <span class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-dark/50 mb-2.5 block">
         Trust & Scale
       </span>
       <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-brand-dark mb-8 sm:mb-10">
@@ -118,11 +118,6 @@
         <div
           class="partner-tile group relative flex flex-col min-h-24 sm:min-h-32 lg:min-h-36 items-center justify-center p-3 sm:p-5 bg-white transition-all duration-300 hover:bg-white cursor-pointer select-none"
         >
-          <!-- Subtle radial backlight glow on tile hover -->
-          <div
-            class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(126,166,65,0.12),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          ></div>
-
           <!-- Logo with scale, color restore, and elevation on hover -->
           <img
             src={partner.src}

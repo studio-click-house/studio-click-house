@@ -103,12 +103,12 @@
         class="panorama-frame-img h-full w-full object-cover object-center will-change-transform"
       />
 
-      <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/15 to-transparent pointer-events-none"></div>
+      <div class="absolute inset-0 bg-brand-dark/45 pointer-events-none"></div>
 
       <!-- Editorial Spread Caption (Clean Typography, No Floating Pills) -->
       <div class="panorama-caption absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 flex flex-wrap items-end justify-between gap-4 text-brand-light z-10">
         <div>
-          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-brand-green font-semibold block mb-1">
+          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-brand-light/70 font-semibold block mb-1">
             Macro Materiality
           </span>
           <h3 class="font-display text-xl sm:text-3xl font-normal text-white drop-shadow-sm">

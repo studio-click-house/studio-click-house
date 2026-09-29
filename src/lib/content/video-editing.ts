@@ -8,16 +8,6 @@ export interface VideoHeroData {
   videoPoster: string;
 }
 
-export interface VideoServiceOverviewItem {
-  id: string;
-  number: string;
-  title: string;
-  description: string;
-  image: string;
-  deliverables: string[];
-  ctaLabel: string;
-}
-
 export interface VideoCommercialData {
   id: string;
   heading: string;
@@ -112,7 +102,6 @@ export interface VideoEditingPageData {
     description: string;
   };
   hero: VideoHeroData;
-  servicesOverview: VideoServiceOverviewItem[];
   commercial: VideoCommercialData;
   grading: VideoColorGradingData;
   social: VideoSocialCutdownsData;
@@ -135,68 +124,9 @@ export const videoEditingPageData: VideoEditingPageData = {
     titleAccent: "& AI motion.",
     description:
       "Full-service post-production for brands and creative agencies—commercial storytelling, DaVinci Resolve color grading, 9:16 social cutdowns, and generative AI motion.",
-    videoSrc: "/videos/ai section video.mp4",
+    videoSrc: "/images/services/video-editing/video-editor-suite-multitrack-timeline-ultrawide.mp4",
     videoPoster: "/images/about/orbit/ai-video-editing.jpg",
   },
-
-  servicesOverview: [
-    {
-      id: "commercial-editing",
-      number: "01",
-      title: "Commercial Video Editing",
-      description:
-        "Offline narrative assembly, pacing, music synchronization, and sound design for brand commercials, product spots, and campaign films.",
-      image: "/images/work-fields/studio-production-poster.jpg",
-      deliverables: [
-        "First rough cut in 24–48 hours",
-        "Full music & sound design sync",
-        "Frame.io timecode review links",
-      ],
-      ctaLabel: "View Commercial Editing Sample",
-    },
-    {
-      id: "color-grading",
-      number: "02",
-      title: "Color Grading & Finishing",
-      description:
-        "DaVinci Resolve color science for camera RAW and Log files. Accurate skin tone calibration, multi-camera balance, and custom film looks.",
-      image: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
-      deliverables: [
-        "Camera Log to Rec.709 conversion",
-        "Natural skin tone preservation",
-        "Multi-camera sensor matching",
-      ],
-      ctaLabel: "View Color Grading Before/After",
-    },
-    {
-      id: "social-cutdowns",
-      number: "03",
-      title: "Social Media Cutdowns",
-      description:
-        "Reformatting horizontal 16:9 master videos into high-engagement 9:16 vertical reels for TikTok, Instagram Reels, and YouTube Shorts.",
-      image: "/images/services/model-beauty/model-soleil-blue-resortwear-editorial-1308.webp",
-      deliverables: [
-        "Dynamic keyframed focal centering",
-        "Safe zone margin protection",
-        "6s, 15s, and 30s cut variations",
-      ],
-      ctaLabel: "View Social Cutdown Comparison",
-    },
-    {
-      id: "ai-video-generation",
-      number: "04",
-      title: "AI Video Generation",
-      description:
-        "Transforming static product photography, fashion lookbooks, and campaign stills into fluid, photorealistic 4K motion sequences.",
-      image: "/images/services/model-beauty/model-cue-designer-fashion-editorial-0137.webp",
-      deliverables: [
-        "Still-to-video motion synthesis",
-        "Temporal stabilization & de-flicker",
-        "Color-matched to live rushes",
-      ],
-      ctaLabel: "View AI Video Generation Sample",
-    },
-  ],
 
   commercial: {
     id: "commercial-editing",
@@ -223,7 +153,7 @@ export const videoEditingPageData: VideoEditingPageData = {
       },
     ],
     sampleVideo: {
-      src: "/videos/editing-video-720p.webm",
+      src: "/images/services/video-editing/video-editing-timeline-playhead-scrubber-closeup.mp4",
       poster: "/images/work-fields/studio-production-poster.jpg",
       title: "Commercial Sequence Sample",
       description: "Sample commercial cut demonstrating match-cuts, audio rhythm, and pacing.",
@@ -427,10 +357,10 @@ export const videoEditingPageData: VideoEditingPageData = {
 
   faqImages: [
     {
-      src: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
-      alt: "Commercial beauty and editorial fashion color grading",
-      width: 1200,
-      height: 1500,
+      src: "/images/about/orbit/ai-video-editing.jpg",
+      alt: "Video post-production timeline with campaign footage and audio tracks",
+      width: 1122,
+      height: 1402,
       credit: "Studio Click House",
     },
     {

@@ -97,9 +97,7 @@
     />
   </video>
 
-  <!-- Editorial Film Overlays (Pure Studio Tones, No Generic AI Glow) -->
-  <div class="absolute inset-0 bg-brand-dark/65"></div>
-  <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/40"></div>
+  <div class="absolute inset-0 bg-brand-dark/70"></div>
 
   <div class="site-shell relative z-10 flex flex-col items-center text-center text-brand-light max-w-5xl mx-auto">
     <!-- Studio Eyebrow (Clean Editorial Typography, No AI Pill) -->

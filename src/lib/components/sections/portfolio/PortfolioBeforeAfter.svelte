@@ -17,7 +17,7 @@
       step: "02",
       title: "Pen Vector Path",
       desc: "Hand-drawn Bézier anchor paths mapping garment contours, silhouette edges, and fabric folds.",
-      image: "/images/portfolio/model-clipping.png",
+      image: "/images/portfolio/model-clipping-4x5.png",
       badge: "Vector Clipping",
     },
     {
@@ -38,7 +38,7 @@
       step: "05",
       title: "Campaign Color Master",
       desc: "Selective emerald garment color grading, skin frequency separation, and print-calibrated delivery.",
-      image: "/images/portfolio/model-color-corrected.png",
+      image: "/images/portfolio/model-color-master-4x5.png",
       badge: "Color Master",
     },
   ];
@@ -131,7 +131,7 @@
   <div class="site-shell relative z-10">
     <!-- Mobile Editorial Header (Shown only on mobile/tablet screens < lg so user reads headline first) -->
     <div class="lg:hidden w-full max-w-md mx-auto mb-8 text-center process-fade-item">
-      <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-green font-semibold block mb-2">
+      <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-dark/50 font-semibold block mb-2">
         Inspection Craft
       </span>
       <h2 class="font-display text-2xl sm:text-3xl font-normal text-brand-dark leading-tight tracking-tight mb-2">
@@ -144,60 +144,27 @@
 
     <!-- 12-Column Responsive Grid matching Service & Portfolio Standards -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
-      <!-- Left Column: Rich Portrait Visual with Balanced Stacked Card Depth (Columns 1-5) -->
+      <!-- Left Column: Fixed-size stage image (Columns 1-5) -->
       <div class="w-full lg:col-span-5 flex flex-col items-center justify-center process-fade-item">
-        <div class="relative w-[270px] sm:w-[350px] lg:w-[360px] xl:w-[400px] max-w-[calc(100vw-3rem)] aspect-[3/4] flex items-center justify-center">
-          <!-- Stack Card Layer 2 (Backmost with photo glimpse & subtle rotation) -->
+        <div class="relative w-[280px] sm:w-[360px] lg:w-[380px] xl:w-[420px] max-w-[calc(100vw-3rem)] aspect-[4/5] flex items-center justify-center">
+          <!-- One frame keeps every process stage the same size. -->
           <div
-            class="absolute inset-0 rounded-3xl overflow-hidden shadow-lg transform translate-x-2 translate-y-1.5 rotate-2 sm:translate-x-3 sm:translate-y-2.5 sm:rotate-2.5 pointer-events-none transition-transform duration-500 border border-brand-dark/10 bg-brand-dark/15"
-          >
-            <img
-              src="/images/portfolio/model-raw.png"
-              alt=""
-              class="w-full h-full object-cover object-center opacity-40 blur-[0.5px]"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-brand-dark/25"></div>
-          </div>
-
-          <!-- Stack Card Layer 1 (Middle with photo glimpse & counter-rotation) -->
-          <div
-            class="absolute inset-0 rounded-3xl overflow-hidden shadow-xl transform -translate-x-1.5 translate-y-1 -rotate-1 sm:-translate-x-2 sm:translate-y-1.5 sm:-rotate-1.5 pointer-events-none transition-transform duration-500 border border-brand-dark/10 bg-brand-dark/25"
-          >
-            <img
-              src="/images/portfolio/model-clipping.png"
-              alt=""
-              class="w-full h-full object-cover object-center opacity-65"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-brand-dark/15"></div>
-          </div>
-
-          <!-- Front Visual Card: Prominent Portrait with Smooth Crossfade -->
-          <div
-            class="relative w-full h-full rounded-3xl overflow-hidden bg-white shadow-2xl border border-brand-dark/10 z-10 select-none"
+            class="relative w-full h-full rounded-2xl overflow-hidden bg-white shadow-lg border border-brand-dark/10 z-10 select-none"
           >
             <!-- Images Layer with crossfade -->
             {#each stages as stage, idx (stage.step)}
               <img
                 src={stage.image}
                 alt="{stage.title} portrait view"
-                class="absolute inset-0 h-full w-full object-cover object-center transition-all duration-500 ease-out pointer-events-none {activeStageIndex === idx
-                  ? 'opacity-100 scale-100 z-10'
-                  : 'opacity-0 scale-105 z-0'}"
+                class="absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-out pointer-events-none {activeStageIndex === idx
+                  ? 'opacity-100 z-10'
+                  : 'opacity-0 z-0'}"
                 loading="lazy"
                 decoding="async"
               />
             {/each}
 
-            <!-- Bottom ambient gradient for editorial depth -->
-            <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/40 via-transparent to-transparent opacity-70 z-20"
-            ></div>
-
-            <!-- Glass Badge on Top-Left (Matches Orbit Gallery Card Pill) -->
+            <!-- Contrast label for the active production stage -->
             <div
               class="pointer-events-none absolute top-4 left-4 z-30 inline-flex items-center rounded-xl border border-white/25 bg-brand-dark/50 px-3.5 py-1.5 text-brand-light backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all duration-300"
             >
@@ -209,7 +176,7 @@
         </div>
 
         <!-- Mobile/Tablet Interactive Stepper Controls (Directly below preview card) -->
-        <div class="mt-5 flex items-center justify-between w-[270px] sm:w-[350px] max-w-[calc(100vw-3rem)] lg:hidden bg-white px-3 py-2 rounded-2xl border border-brand-dark/10 shadow-xs">
+        <div class="mt-5 flex items-center justify-between w-[280px] sm:w-[360px] max-w-[calc(100vw-3rem)] lg:hidden bg-white px-3 py-2 rounded-2xl border border-brand-dark/10 shadow-xs">
           <button
             type="button"
             onclick={prevStage}
@@ -243,7 +210,7 @@
       <div class="w-full lg:col-span-7 flex flex-col justify-center process-fade-item lg:pl-4 xl:pl-8">
         <!-- Desktop Title & Intro (Hidden on mobile) -->
         <div class="hidden lg:block mb-7">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-green font-semibold block mb-2">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-dark/50 font-semibold block mb-2">
             Inspection Craft
           </span>
           <h2 class="font-display text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.65rem] font-normal text-brand-dark leading-[1.12] tracking-tight mb-3 max-w-[22ch]">
@@ -307,4 +274,3 @@
     </div>
   </div>
 </section>
-

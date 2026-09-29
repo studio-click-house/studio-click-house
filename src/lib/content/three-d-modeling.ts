@@ -383,10 +383,10 @@ export const threeDModelingPageData: ThreeDModelingPageData = {
 
   faqImages: [
     {
-      src: "/images/portfolio/3d-cgi-showcase-v2.webp",
-      alt: "3D CAD modeling, topology, and clay product preview",
-      width: 1200,
-      height: 1500,
+      src: "/images/about/orbit/ai-3d-cgi.jpg",
+      alt: "3D product model with a visible wireframe and detailed CGI finish",
+      width: 1122,
+      height: 1402,
       credit: "Studio Click House",
     },
     {

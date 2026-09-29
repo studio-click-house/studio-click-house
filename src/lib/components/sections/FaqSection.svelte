@@ -30,14 +30,9 @@
   }>();
 
   let isCustom = $derived(items !== faqs);
+  let sectionImage = $derived(images[0]);
 
   let activeIndex = $state(0);
-  let activeImageIndex = $state(0);
-  let safeImageIndex = $derived(
-    images && images.length > 0
-      ? ((activeImageIndex % images.length) + images.length) % images.length
-      : 0
-  );
   let section: HTMLElement;
   let answerContainers: HTMLElement[] = [];
   function handleFaqClick(index: number, isHover = false) {
@@ -65,7 +60,6 @@
 
     const previousIndex = activeIndex;
     activeIndex = index;
-    activeImageIndex = index; // Keep the last image visible even when accordion is collapsed
 
     registerScrollTrigger().then((runtime) => {
       if (!runtime) return;
@@ -239,32 +233,25 @@
       >
         <div
           class="relative overflow-hidden w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem]"
-          style={`aspect-ratio: ${images[safeImageIndex] && images[safeImageIndex].width / images[safeImageIndex].height < 0.72 ? "2 / 3" : "4 / 5"}`}
+          style={`aspect-ratio: ${sectionImage && sectionImage.width / sectionImage.height < 0.72 ? "2 / 3" : "4 / 5"}`}
         >
           <!-- Image viewport -->
           <div class="relative size-full overflow-hidden bg-brand-light">
-            <!-- Full Frame Wrapper -->
-            <div class="absolute inset-0 size-full pointer-events-none">
-              {#each images as img, idx (img.src)}
-                <img
-                  src={img.src}
-                  srcset={getRemoteImageSrcset(img.src)}
-                  sizes="(min-width: 1024px) 28rem, calc(100vw - 2rem)"
-                  alt={img.alt}
-                  width={img.width}
-                  height={img.height}
-                  loading="lazy"
-                  class="absolute inset-0 size-full rounded-[2rem] object-center transition-all duration-700 ease-out"
-                  class:object-contain={imageFit === "contain"}
-                  class:object-cover={imageFit === "cover"}
-                  class:opacity-100={safeImageIndex === idx}
-                  class:scale-100={safeImageIndex === idx}
-                  class:opacity-0={safeImageIndex !== idx}
-                  class:scale-105={safeImageIndex !== idx}
-                  style:scale={safeImageIndex === idx && img.src === "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp" ? 1.08 : undefined}
-                />
-              {/each}
-            </div>
+            {#if sectionImage}
+              <img
+                src={sectionImage.src}
+                srcset={getRemoteImageSrcset(sectionImage.src)}
+                sizes="(min-width: 1024px) 28rem, calc(100vw - 2rem)"
+                alt={sectionImage.alt}
+                width={sectionImage.width}
+                height={sectionImage.height}
+                loading="lazy"
+                class="size-full rounded-[2rem] object-center"
+                class:object-contain={imageFit === "contain"}
+                class:object-cover={imageFit === "cover"}
+                style:scale={sectionImage.src === "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp" ? 1.08 : undefined}
+              />
+            {/if}
           </div>
         </div>
       </div>

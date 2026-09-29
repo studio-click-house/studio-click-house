@@ -388,8 +388,8 @@ export const jewelryRetouchingPage: ServicePageData = {
     {
       src: "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
       alt: "Sculptural gold jewelry bangle retouched with pristine reflection balance",
-      width: 1600,
-      height: 2000,
+      width: 1500,
+      height: 1875,
       credit: "Studio Click House",
     },
     {

@@ -23,10 +23,10 @@ export const servicesHero: ServicesHeroData = {
 
 export const servicesFaqImages: PreviewMedia[] = [
   {
-    src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-before.webp",
-    alt: "Industrial server rack photographed in its workshop setting",
+    src: "/images/services/product-services/product-industrial-machinery-rack-server-cutout-after.webp",
+    alt: "Industrial server rack isolated on a clean background for a product catalog",
     width: 1500,
-    height: 2000,
+    height: 1875,
     credit: "Studio Click House",
   },
   {

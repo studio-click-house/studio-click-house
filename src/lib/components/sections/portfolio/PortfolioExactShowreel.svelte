@@ -105,7 +105,7 @@
   <div class="site-shell max-w-6xl mx-auto">
     <!-- Header -->
     <div class="showreel-anim-target max-w-2xl mb-8 sm:mb-12">
-      <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-green mb-3 block">
+      <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
         Process Spotlight
       </span>
       <h2 class="font-display text-3xl sm:text-5xl font-normal tracking-tight text-brand-dark mb-3">

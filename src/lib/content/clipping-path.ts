@@ -136,6 +136,7 @@ export const clippingPathPage: ServicePageData = {
     title: "Clipping",
     titleAccent: "Path.",
     theme: "light",
+    aspectRatio: "4/5",
     description:
       "Hand-drawn vector paths created in Adobe Photoshop at high magnification, supplied in layered PSD or pre-press TIFF files for print and digital use.",
     media: clippingPathMedia.heroBicycle,
@@ -406,7 +407,7 @@ export const clippingPathPage: ServicePageData = {
       src: "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
       alt: "Sculptural gold jewelry bangle vector clipping path knockout",
       width: 1500,
-      height: 2000,
+      height: 1875,
       credit: "Studio Click House",
     },
     {

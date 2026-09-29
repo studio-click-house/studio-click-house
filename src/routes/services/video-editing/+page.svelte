@@ -66,10 +66,7 @@
 
 <main id="main-content" class="relative min-h-screen bg-brand-light text-brand-dark">
   <!-- 1. Hero with Controlled Showreel & Immediate 4-Service Navigation -->
-  <VideoHero 
-    data={videoEditingPageData.hero} 
-    services={videoEditingPageData.servicesOverview}
-  />
+  <VideoHero data={videoEditingPageData.hero} />
 
   <!-- 2. Service 01: Commercial Video Editing & Sample Reel -->
   <VideoCommercialEditing data={videoEditingPageData.commercial} />

@@ -202,7 +202,7 @@
     class="site-shell relative z-10 flex min-h-[calc(100dvh-6rem)] items-center py-12 sm:min-h-[calc(100dvh-7rem)] sm:py-14"
   >
     <div class="grid w-full items-center gap-12 lg:grid-cols-12 lg:gap-12">
-      <div class="sd-hero-copy-motion lg:col-span-6">
+      <div class="sd-hero-copy-motion lg:col-span-5">
         {#if data.kicker}
           <p
             class="sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
@@ -277,7 +277,7 @@
       </div>
 
       <div
-        class="sd-hero-media-stage relative mx-auto w-full max-w-[42rem] lg:col-span-6 lg:mx-0 lg:justify-self-end"
+        class="sd-hero-media-stage relative mx-auto w-full max-w-[46rem] lg:col-span-7 lg:mx-0 lg:justify-self-end"
       >
         <div
           class={cn(

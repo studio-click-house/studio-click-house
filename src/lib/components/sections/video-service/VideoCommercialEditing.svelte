@@ -132,8 +132,7 @@
             onplay={() => { isPlaying = true; }}
             onpause={() => { isPlaying = false; }}
           >
-            <source src="/videos/editing_video.mp4" type="video/mp4" />
-            <source src="/videos/editing-video-720p.webm" type="video/webm" />
+            <source src={data.sampleVideo.src} type="video/mp4" />
           </video>
 
           <!-- Bottom Controls -->

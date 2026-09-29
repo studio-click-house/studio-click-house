@@ -462,7 +462,7 @@ export const ghostMannequinPage: ServicePageData = {
       src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-printemps-zip-through-jacket-walnut-194-after.webp",
       alt: "Tailored zip jacket showing symmetrical sleeves and hollow neck joint",
       width: 1419,
-      height: 2000,
+      height: 1774,
       credit: "Studio Click House",
     },
     {

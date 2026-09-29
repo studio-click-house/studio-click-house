@@ -70,7 +70,7 @@
   class="relative w-full bg-brand-light pt-16 pb-6 lg:pt-24 lg:pb-8 text-center"
 >
   <div class="site-shell max-w-4xl mx-auto flex flex-col items-center">
-    <span class="manifesto-anim-item font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-green mb-8 block">
+    <span class="manifesto-anim-item font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-dark/50 mb-8 block">
       Our Philosophy
     </span>
 
