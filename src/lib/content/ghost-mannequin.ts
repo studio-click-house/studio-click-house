@@ -2,10 +2,10 @@ import type { ServicePageData } from "$lib/types/service-detail";
 
 const ghostMannequinMedia = {
   heroPrimary: {
-    src: "/images/ghost-mannequin/ghost-mannequin-camilla-silk-headscarf-marchesa-after.webp",
-    alt: "Finished ghost mannequin silk headscarf presentation with natural fold shaping",
-    width: 1333,
-    height: 1666,
+    src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-couture-ruffle-evening-gown-black-square.webp",
+    alt: "Black couture evening gown with sculptural ruffle detailing on a ghost mannequin",
+    width: 1600,
+    height: 2000,
   },
   heroTee: {
     src: "/images/ghost-mannequin/ghost-mannequin-antony-morato-winter-parka-brown-back-before.webp",

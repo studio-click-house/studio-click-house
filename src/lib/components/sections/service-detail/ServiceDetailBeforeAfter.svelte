@@ -101,14 +101,7 @@
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
             <figure
-              class={cn(
-                "sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20 sm:-translate-y-2",
-                data.textPosition === "left"
-                  ? "lg:order-1"
-                  : data.textPosition === "right"
-                    ? "lg:order-2"
-                    : "",
-              )}
+              class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20 sm:-translate-y-2"
             >
               <img
                 src={data.beforeSrc}
@@ -126,14 +119,7 @@
             </figure>
 
             <figure
-              class={cn(
-                "sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30 sm:translate-y-8",
-                data.textPosition === "left"
-                  ? "lg:order-2"
-                  : data.textPosition === "right"
-                    ? "lg:order-1"
-                    : "",
-              )}
+              class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30 sm:translate-y-8"
             >
               <img
                 src={data.afterSrc}
