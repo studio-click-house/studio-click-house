@@ -30,9 +30,9 @@
   }>();
 
   let isCustom = $derived(items !== faqs);
-  let sectionImage = $derived(images[0]);
-
   let activeIndex = $state(0);
+  let sectionImage = $derived(images[Math.max(activeIndex, 0) % images.length]);
+
   let section: HTMLElement;
   let answerContainers: HTMLElement[] = [];
   function handleFaqClick(index: number, isHover = false) {
