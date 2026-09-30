@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
   import { ArrowRight } from "lucide-svelte";
@@ -332,20 +333,20 @@
         </p>
 
         <div class="threed-hero-actions flex flex-wrap items-center gap-3.5 pt-1">
-          <a
+          <Button
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-all duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-brand-green"
+            size="lg" class="group bg-brand-dark px-7 text-brand-light hover:bg-brand-green hover:text-brand-dark"
           >
             <span>Start a 3D Project</span>
             <ArrowRight size={16} class="transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
+          </Button>
 
-          <a
+          <Button
             href="#product-modeling"
-            class="group inline-flex min-h-12 items-center gap-2.5 rounded-full border border-brand-dark/20 bg-white/70 px-6 text-sm font-semibold text-brand-dark transition-all duration-300 hover:border-brand-dark hover:bg-white focus-visible:outline-2 focus-visible:outline-brand-green"
+            variant="secondary" size="lg" class="bg-white/70 hover:border-brand-dark hover:bg-white"
           >
             <span>Explore 3D Services</span>
-          </a>
+          </Button>
         </div>
       </div>
 

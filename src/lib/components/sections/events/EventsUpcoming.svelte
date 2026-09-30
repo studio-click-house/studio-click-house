@@ -16,7 +16,7 @@
   <div class="site-shell">
     <div class="grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
       <figure
-        class="relative min-h-[22rem] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] sm:min-h-[30rem] lg:col-span-7"
+        class="relative min-h-[22rem] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] sm:min-h-[30rem] lg:col-span-7"
         data-event-media
       >
         <img

@@ -10,7 +10,7 @@
   import ServiceDetailFeatures from "$lib/components/sections/service-detail/ServiceDetailFeatures.svelte";
   import ServiceDetailProductTypes from "$lib/components/sections/service-detail/ServiceDetailProductTypes.svelte";
   import ServiceDetailTrust from "$lib/components/sections/service-detail/ServiceDetailTrust.svelte";
-  import ServiceDetailCta from "$lib/components/sections/service-detail/ServiceDetailCta.svelte";
+  import ServicesCta from "$lib/components/sections/ServicesCta.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
   import { siteConfig } from "$lib/config/site";
   import { servicePages } from "$lib/content/service-pages";
@@ -112,5 +112,5 @@
   <ServiceDetailProductTypes items={pageData.productTypes} />
   <ServiceDetailTrust />
   <FaqSection items={pageData.faqs} images={pageData.faqImages} />
-  <ServiceDetailCta data={pageData.cta} />
+  <ServicesCta data={pageData.cta} />
 </main>

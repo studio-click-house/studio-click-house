@@ -502,16 +502,8 @@
     color: var(--color-brand-green);
   }
 
-  /* ═══ Explore Link ═══ */
-  .ai-explore-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
-  }
-
   /* ═══ Responsive ═══ */
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     .ai-stages-grid {
       min-width: 100%;
       flex-direction: column;
@@ -533,7 +525,7 @@
     }
   }
 
-  @media (min-width: 992px) and (max-width: 1279px) {
+  @media (min-width: 1024px) and (max-width: 1279px) {
     .stage-column {
       max-width: 215px;
     }

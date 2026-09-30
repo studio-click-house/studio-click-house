@@ -6,6 +6,7 @@
   import Footer from "$lib/components/layout/Footer.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import FloatingSocialBar from "$lib/components/layout/FloatingSocialBar.svelte";
+  import ScrollControls from "$lib/components/layout/ScrollControls.svelte";
   import SitePreloader from "$lib/components/animations/SitePreloader.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import { globalSchemaGraph } from "$lib/config/global-schema";
@@ -84,6 +85,7 @@
 <SitePreloader />
 <Navbar />
 <FloatingSocialBar />
+<ScrollControls />
 <CursorOrb />
 {@render children()}
 <Footer />

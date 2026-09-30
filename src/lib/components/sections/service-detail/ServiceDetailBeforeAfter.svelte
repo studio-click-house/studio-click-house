@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { resolve } from "$app/paths";
-  import { ArrowDown, ArrowUpRight } from "lucide-svelte";
+  import ServiceActionPair from "$lib/components/common/ServiceActionPair.svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
   import { cn } from "$lib/utils";
@@ -106,7 +105,7 @@
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
             <figure
-              class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20 sm:-translate-y-2"
+              class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20 sm:-translate-y-2"
             >
               <img
                 src={data.beforeSrc}
@@ -125,7 +124,7 @@
             </figure>
 
             <figure
-              class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30 sm:translate-y-8"
+              class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30 sm:translate-y-8"
             >
               <img
                 src={data.afterSrc}
@@ -157,7 +156,7 @@
         >
           <h2
             id={headingId}
-            class="max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
+            class="max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]"
           >
             {data.heading}
           </h2>
@@ -178,26 +177,7 @@
             </ul>
           {/if}
 
-          <div class="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href={resolve("/contact")}
-              class="group inline-flex min-h-12 items-center gap-4 rounded-[0.55rem] bg-brand-dark px-6 font-mono text-[0.64rem] font-bold uppercase tracking-[0.12em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
-            >
-              Discuss your project
-              <ArrowUpRight
-                class="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </a>
-            <a
-              href="#service-detail-showcase"
-              class="group inline-flex min-h-12 items-center gap-2 rounded-[0.55rem] border border-brand-dark/18 px-4 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
-            >
-              View comparison
-              <ArrowDown
-                class="size-4 transition-transform duration-300 group-hover:translate-y-0.5"
-              />
-            </a>
-          </div>
+          <ServiceActionPair comparisonHref="#service-detail-showcase" />
         </div>
       </div>
     {:else}
@@ -227,7 +207,7 @@
         <div class="sd-ba-copy lg:order-2 lg:col-span-5 lg:pl-4">
           <h2
             id={headingId}
-            class="max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em]"
+            class="max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]"
           >
             {data.heading}
           </h2>
@@ -256,26 +236,7 @@
             </ul>
           {/if}
 
-          <div class="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href={resolve("/contact")}
-              class="group inline-flex min-h-12 items-center gap-4 rounded-[0.55rem] bg-brand-dark px-6 font-mono text-[0.64rem] font-bold uppercase tracking-[0.12em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
-            >
-              Discuss your project
-              <ArrowUpRight
-                class="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </a>
-            <a
-              href="#service-detail-showcase"
-              class="group inline-flex min-h-12 items-center gap-2 rounded-[0.55rem] border border-brand-dark/18 px-4 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
-            >
-              View comparison
-              <ArrowDown
-                class="size-4 transition-transform duration-300 group-hover:translate-y-0.5"
-              />
-            </a>
-          </div>
+          <ServiceActionPair comparisonHref="#service-detail-showcase" />
         </div>
       </div>
     {/if}

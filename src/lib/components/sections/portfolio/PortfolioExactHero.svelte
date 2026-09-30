@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
   import { ArrowDown } from "lucide-svelte";
@@ -129,18 +130,21 @@
 
     <!-- Quick In-Page Exploration Links -->
     <div class="hero-anim-item flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider w-full sm:w-auto px-4">
-      <a
+      <Button
         href="#portfolio-before-after"
-        class="w-full sm:w-auto text-center rounded-lg bg-brand-green px-6 py-3 text-white font-semibold transition-all hover:bg-brand-green/90 shadow-md hover:scale-105 active:scale-95"
+        size="lg"
+        class="w-full sm:w-auto"
       >
         Inspect Raw vs Final
-      </a>
-      <a
+      </Button>
+      <Button
         href="#portfolio-mosaic-gallery"
-        class="w-full sm:w-auto text-center rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-brand-light transition-all hover:bg-white/15 hover:border-white/40"
+        variant="secondary"
+        size="lg"
+        class="w-full border-white/20 bg-white/5 text-brand-light hover:border-white/40 hover:bg-white/15 hover:text-brand-light sm:w-auto"
       >
         View Archive
-      </a>
+      </Button>
     </div>
 
     <!-- Bottom Scroll Cue -->

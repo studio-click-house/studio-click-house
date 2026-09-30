@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
@@ -127,20 +128,23 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-        <a
+        <Button
           href={resolve('/contact')}
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-brand-green px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider text-white shadow-lg hover:bg-brand-green/90 transition-all hover:scale-105 active:scale-95 text-center"
+          size="lg"
+          class="w-full font-mono text-xs uppercase tracking-wider sm:w-auto sm:text-sm"
         >
           <span>{$_('portfolio.stats.ctaButton') || 'Request Free Test Retouch'}</span>
           <ArrowUpRight class="size-4 shrink-0" />
-        </a>
+        </Button>
 
-        <a
+        <Button
           href={resolve('/services')}
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-brand-dark/20 bg-white px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider text-brand-dark hover:border-brand-dark transition-all hover:bg-brand-dark/5 text-center"
+          variant="secondary"
+          size="lg"
+          class="w-full bg-white font-mono text-xs uppercase tracking-wider hover:border-brand-dark hover:bg-brand-dark/5 sm:w-auto sm:text-sm"
         >
           <span>Explore Services</span>
-        </a>
+        </Button>
       </div>
     </div>
   </div>

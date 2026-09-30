@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { ArrowRight, ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { motion } from "$lib/animations/motion";
+  import type { ServiceDetailCtaData } from "$lib/types/service-detail";
   import { _ } from "svelte-i18n";
 
+  let { data }: { data?: ServiceDetailCtaData } = $props();
   let section = $state<HTMLElement>();
 
   onMount(() => {
@@ -21,14 +25,14 @@
         media.add("(prefers-reduced-motion: no-preference)", () => {
           gsap.from(".services-cta-reveal", {
             autoAlpha: 0,
-            y: 34,
-            duration: 0.85,
-            stagger: 0.09,
-            ease: "power3.out",
+            y: motion.reveal.y,
+            duration: motion.duration.reveal,
+            stagger: motion.reveal.stagger,
+            ease: motion.ease,
             clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 88%",
+              start: motion.reveal.start,
               toggleActions: "play none none none",
             },
           });
@@ -66,8 +70,8 @@
 
 <section
   bind:this={section}
-  id="services-cta"
-  aria-labelledby="services-cta-title"
+  id={data ? "service-detail-cta" : "services-cta"}
+  aria-labelledby={data ? "service-detail-cta-title" : "services-cta-title"}
   class="relative overflow-hidden bg-brand-light py-18 text-brand-dark sm:py-20 lg:py-24"
 >
   <div
@@ -83,10 +87,10 @@
     <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
       <div class="services-cta-reveal lg:col-span-8">
         <h2
-          id="services-cta-title"
-          class="max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"
+          id={data ? "service-detail-cta-title" : "services-cta-title"}
+          class={data ? "max-w-[18ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]" : "max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"}
         >
-          {$_('services.cta.heading') || 'Put the next image in motion.'}
+          {data?.heading ?? ($_('services.cta.heading') || 'Put the next image in motion.')}
         </h2>
       </div>
 
@@ -94,28 +98,31 @@
         <p
           class="max-w-[34ch] text-sm leading-[1.65] text-brand-dark/72 sm:text-base"
         >
-          {$_('services.cta.description') || 'Share the brief, sample files, and delivery window. Our production desk will map the right workflow and return a clear scope.'}
+          {data?.description ?? ($_('services.cta.description') || 'Share the brief, sample files, and delivery window. Our production desk will map the right workflow and return a clear scope.')}
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a
+          <Button
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-6 rounded-sm bg-brand-dark px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark"
+            size="lg"
+            class="group gap-6 bg-brand-dark text-brand-light hover:bg-brand-green hover:text-brand-dark"
           >
-            {$_('services.cta.startProject') || 'Start a project'}
+            {data ? ($_('serviceDetail.placeOrder') || 'Start a project') : ($_('services.cta.startProject') || 'Start a project')}
             <ArrowUpRight
               class="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
-          </a>
-          <a
+          </Button>
+          <Button
             href={resolve("/contact")}
-            class="group inline-flex min-h-12 items-center gap-3 rounded-sm border border-brand-dark/25 px-5 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+            variant="secondary"
+            size="lg"
+            class="group px-5"
           >
             {$_('services.cta.requestTest') || 'Request a test edit'}
             <ArrowRight
               class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             />
-          </a>
+          </Button>
         </div>
 
         <a
@@ -131,24 +138,16 @@
     <div
       class="services-cta-reveal mt-14 grid gap-8 rounded-[1.5rem] bg-brand-paper p-6 sm:grid-cols-3 sm:p-8 lg:mt-16"
     >
-      <div>
-        <h3 class="text-base font-semibold">{$_('services.cta.steps.0.title') || 'Send the brief'}</h3>
-        <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
-          {$_('services.cta.steps.0.description') || 'Share references, sample files, volume, and timing.'}
-        </p>
-      </div>
-      <div>
-        <h3 class="text-base font-semibold">{$_('services.cta.steps.1.title') || 'Review a test'}</h3>
-        <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
-          {$_('services.cta.steps.1.description') || 'Approve the finish and confirm the production scope.'}
-        </p>
-      </div>
-      <div>
-        <h3 class="text-base font-semibold">{$_('services.cta.steps.2.title') || 'Move to production'}</h3>
-        <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">
-          {$_('services.cta.steps.2.description') || 'Assets move through production and two-tier quality control.'}
-        </p>
-      </div>
+      {#each data?.steps ?? [
+        { title: $_('services.cta.steps.0.title') || 'Send the brief', description: $_('services.cta.steps.0.description') || 'Share references, sample files, volume, and timing.' },
+        { title: $_('services.cta.steps.1.title') || 'Review a test', description: $_('services.cta.steps.1.description') || 'Approve the finish and confirm the production scope.' },
+        { title: $_('services.cta.steps.2.title') || 'Move to production', description: $_('services.cta.steps.2.description') || 'Assets move through production and two-tier quality control.' },
+      ] as step (step.title)}
+        <div>
+          <h3 class="text-base font-semibold">{step.title}</h3>
+          <p class="mt-2 text-sm leading-[1.55] text-brand-dark/60">{step.description}</p>
+        </div>
+      {/each}
     </div>
   </div>
 </section>

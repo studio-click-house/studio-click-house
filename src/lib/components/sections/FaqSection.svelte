@@ -165,7 +165,7 @@
         <div class="pb-2">
           <h2
             id="faq-section-title"
-            class="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+            class="font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
           >
             {title || $_('home.faq.title')}
           </h2>
@@ -199,7 +199,7 @@
                 <!-- Circular Plus icon pill matching screenshot -->
                 <div
                   class="size-8 sm:size-9 shrink-0 rounded-full flex items-center justify-center border transition-all duration-300 {activeIndex === index
-                    ? 'border-brand-green bg-brand-green text-white rotate-45 shadow-xs'
+                    ? 'border-brand-green bg-brand-green text-brand-dark rotate-45 shadow-xs'
                     : 'border-brand-dark/15 bg-brand-dark/5 text-brand-dark/60 group-hover:border-brand-green/40 group-hover:text-brand-green group-hover:bg-brand-green/10'}"
                   aria-hidden="true"
                 >

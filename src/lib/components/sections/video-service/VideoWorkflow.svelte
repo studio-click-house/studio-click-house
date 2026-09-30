@@ -64,7 +64,7 @@
   <div class="site-shell relative z-10">
     <!-- Header Block -->
     <div class="workflow-header max-w-3xl space-y-4">
-      <h2 class="font-display text-[clamp(1.8rem,2.8vw,2.6rem)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark">
+      <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark">
         How we work together.
       </h2>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { X } from "lucide-svelte";
   import { tick } from "svelte";
@@ -533,7 +534,7 @@
         <button
           type="button"
           onclick={() => openImage(item)}
-          class="group relative overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center"
+          class="group relative overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center"
           aria-label="View {item.title}"
         >
           <img
@@ -560,13 +561,14 @@
 
     {#if displayedItems.length < filteredItems.length}
       <div class="mt-14 flex flex-col items-center justify-center text-center">
-        <button
+        <Button
           type="button"
           onclick={loadMore}
-          class="rounded-lg bg-brand-dark px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-md transition-all hover:bg-brand-green hover:text-brand-dark"
+          size="lg"
+          class="bg-brand-dark px-8 font-mono text-xs uppercase tracking-wider text-brand-light hover:bg-brand-green hover:text-brand-dark"
         >
           Load More Images ({filteredItems.length - displayedItems.length} remaining)
-        </button>
+        </Button>
       </div>
     {/if}
   </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
@@ -73,7 +74,7 @@
   id="closing-cta"
   aria-label="Closing Call to Action"
   bind:this={sectionRef}
-  class="section-space relative overflow-hidden border-t border-brand-dark/20 bg-brand-paper py-16 sm:py-24 md:py-32"
+  class="relative overflow-hidden border-t border-brand-dark/20 bg-brand-paper py-16 sm:py-24 md:py-32"
 >
   <div
     class="closing-focus-ring pointer-events-none absolute -right-[18rem] -top-[18rem] aspect-square w-[46rem] rounded-full border border-brand-dark/12"
@@ -108,13 +109,14 @@
         <div
           class="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
         >
-          <a
+          <Button
             href={resolve(closingCta.primaryCtaHref)}
-            class="inline-flex min-h-12 items-center justify-center gap-3 rounded-[0.55rem] bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+            size="lg"
+            class="bg-brand-dark px-7 text-brand-light hover:bg-brand-green hover:text-brand-dark"
           >
             <span>{$_('about.closingCta.primaryCtaLabel') || closingCta.primaryCtaLabel}</span>
             <ArrowRight class="w-5 h-5" />
-          </a>
+          </Button>
 
           <a
             href={resolve(closingCta.secondaryCtaHref)}

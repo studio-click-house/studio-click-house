@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { scrollToTarget } from "$lib/animations/lenis";
@@ -122,7 +123,7 @@
       <!-- Left Column: Editorial Copy & Studio Statement -->
       <div class="lg:col-span-5">
         <span
-          class="hero-editorial-item font-mono text-xs uppercase tracking-[0.22em] text-brand-green font-medium mb-4 block"
+          class="hero-editorial-item font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-4 block"
         >
           Studio Collective &middot; Dhaka, Bangladesh
         </span>
@@ -146,19 +147,19 @@
 
         <!-- Clean Action Buttons (Matches EventsHero & PricingHero) -->
         <div class="hero-editorial-item mt-8 flex flex-wrap items-center gap-3.5">
-          <a
+          <Button
             href="#about-studio-video"
             onclick={handleScrollToVideo}
-            class="rounded-lg bg-brand-green px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-brand-dark shadow-xs transition-all hover:bg-brand-dark hover:text-white cursor-pointer"
+            size="lg" class="font-mono text-xs uppercase tracking-wider"
           >
             Watch Studio Film
-          </a>
-          <a
+          </Button>
+          <Button
             href="#team-collective"
-            class="rounded-lg border border-brand-dark/20 bg-white/80 px-6 py-3 font-mono text-xs uppercase tracking-wider text-brand-dark transition-all hover:border-brand-dark hover:bg-white"
+            variant="secondary" size="lg" class="bg-white/80 font-mono text-xs uppercase tracking-wider hover:bg-white"
           >
             Meet The Collective
-          </a>
+          </Button>
         </div>
 
         <!-- Integrated Stat Numbers (Matches PricingHero) -->
@@ -191,9 +192,9 @@
       >
         <!-- Primary Master Frame: Full Collective Celebration -->
         <figure
-          class="hero-photo-primary absolute right-0 top-0 w-[88%] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-2 shadow-xl"
+          class="hero-photo-primary absolute right-0 top-0 w-[88%] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-2 shadow-xl"
         >
-          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem] bg-brand-dark/5">
+          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[var(--radius-card-sm)] sm:rounded-[var(--radius-card)] bg-brand-dark/5">
             <img
               src="/images/about/team/studio-click-house-team-01.jpg"
               alt="Studio Click House team collective"

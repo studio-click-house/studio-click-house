@@ -248,7 +248,7 @@
           <a
             href={resolve("/contact")}
             class={cn(
-              "group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green",
+              "group inline-flex min-h-12 items-center gap-3 rounded-[var(--radius-control)] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green",
               isLight
                 ? "hover:bg-brand-dark hover:text-white"
                 : "hover:bg-brand-light",
@@ -262,7 +262,7 @@
           <a
             href={resolve("/pricing")}
             class={cn(
-              "group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] px-5 text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green",
+              "group inline-flex min-h-12 items-center gap-3 rounded-[var(--radius-control)] px-5 text-sm font-semibold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green",
               isLight
                 ? "border border-brand-dark/20 bg-white/70 text-brand-dark hover:border-brand-green hover:text-brand-green hover:bg-white"
                 : "border border-brand-light/22 text-brand-light hover:border-brand-green hover:text-brand-green",

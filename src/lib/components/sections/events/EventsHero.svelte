@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import type { CompanyEvent } from "$lib/types/events";
 
   interface Props {
@@ -21,7 +22,7 @@
     <div class="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
       <!-- Editorial Copy Column -->
       <div class="lg:col-span-5" data-events-hero-copy>
-        <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green font-medium mb-4 block">
+        <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-4 block">
           Studio Archive · Company Events & Tours
         </span>
 
@@ -39,18 +40,18 @@
 
         <!-- Clean Action Buttons (No AI pills) -->
         <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a
+          <Button
             href="#event-archive"
-            class="rounded-lg bg-brand-green px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-brand-dark shadow-sm transition-all hover:bg-brand-dark hover:text-white"
+            size="lg" class="font-mono text-xs uppercase tracking-wider"
           >
             Explore Tours
-          </a>
-          <a
+          </Button>
+          <Button
             href="#events-gallery"
-            class="rounded-lg border border-brand-dark/20 bg-white/80 px-6 py-3 font-mono text-xs uppercase tracking-wider text-brand-dark transition-all hover:border-brand-dark hover:bg-white"
+            variant="secondary" size="lg" class="bg-white/80 font-mono text-xs uppercase tracking-wider hover:bg-white"
           >
             Browse All Photos
-          </a>
+          </Button>
         </div>
       </div>
 
@@ -61,10 +62,10 @@
       >
         <!-- Primary Master Frame -->
         <figure
-          class="hero-primary absolute right-0 top-0 w-[86%] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-2 shadow-xl"
+          class="hero-primary absolute right-0 top-0 w-[86%] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-2 shadow-xl"
           data-events-hero-primary
         >
-          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem]">
+          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[var(--radius-card-sm)] sm:rounded-[var(--radius-card)]">
             <img
               src={nepalTour?.image || upcoming.image}
               alt={nepalTour?.imageAlt || upcoming.imageAlt}

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
-  import { ArrowLeft, ArrowRight } from "lucide-svelte";
+  import CarouselArrow from "$lib/components/common/CarouselArrow.svelte";
   import { _ } from "svelte-i18n";
 
   let { leadership } = $props<{ leadership: AboutPageData["leadership"] }>();
@@ -186,14 +186,14 @@
   id="leadership-team"
   aria-label="Leadership Team"
   bind:this={sectionRef}
-  class="section-space relative bg-brand-light py-20 md:py-32"
+  class="relative bg-brand-light py-20 md:py-32"
 >
   <div class="site-shell">
     <div class="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
       <div>
         {#if leadership.eyebrow}
           <span
-            class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-green"
+            class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-green-ink"
           >
             {$_('about.leadership.eyebrow') || leadership.eyebrow}
           </span>
@@ -206,22 +206,8 @@
       </div>
 
       <div class="leadership-header-reveal flex items-center gap-2 self-end sm:self-auto">
-        <button
-          type="button"
-          onclick={slidePrev}
-          aria-label="Previous team member"
-          class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-dark/20 text-brand-dark transition-all duration-200 hover:border-brand-green hover:bg-brand-green hover:text-white active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
-        >
-          <ArrowLeft class="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onclick={slideNext}
-          aria-label="Next team member"
-          class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-dark/20 text-brand-dark transition-all duration-200 hover:border-brand-green hover:bg-brand-green hover:text-white active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
-        >
-          <ArrowRight class="h-4 w-4" />
-        </button>
+        <CarouselArrow direction="previous" label="Previous team member" onclick={slidePrev} />
+        <CarouselArrow direction="next" label="Next team member" onclick={slideNext} />
       </div>
     </div>
 
@@ -233,7 +219,7 @@
         <div class="flex flex-col lg:col-span-4">
           <article class="leader-card group relative flex flex-1 flex-col w-full max-w-[360px]">
             <div
-              class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-paper"
+              class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-paper"
             >
               <img
                 src={mdCard.media.src}
@@ -243,7 +229,6 @@
                 loading="lazy"
                 decoding="async"
                 draggable="false"
-                style="user-select: none; -webkit-user-drag: none; pointer-events: none;"
                 class="h-full w-full scale-[1.12] object-cover transition-transform duration-700 group-hover:scale-[1.16] pointer-events-none select-none"
               />
             </div>
@@ -294,15 +279,14 @@
           onpointercancel={handlePointerUp}
           onmouseenter={stopAutoplay}
           onmouseleave={startAutoplay}
-          class="flex gap-6 overflow-x-auto scroll-smooth pb-4 snap-x snap-proximity select-none cursor-grab active:cursor-grabbing touch-pan-y [&::-webkit-scrollbar]:hidden"
-          style="scrollbar-width: none; -ms-overflow-style: none;"
+          class="scrollbar-hidden flex gap-6 overflow-x-auto scroll-smooth pb-4 snap-x snap-proximity select-none cursor-grab active:cursor-grabbing touch-pan-y"
         >
           {#each slideMembers as member, index (member.id)}
             <article
               class="leader-card group relative w-[85%] shrink-0 snap-start sm:w-[320px] lg:w-[360px] flex flex-col"
             >
               <div
-                class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-paper"
+                class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-paper"
               >
                 <img
                   src={member.media.src}
@@ -312,7 +296,6 @@
                   loading="lazy"
                   decoding="async"
                   draggable="false"
-                  style="user-select: none; -webkit-user-drag: none; pointer-events: none;"
                   class="h-full w-full scale-[1.12] object-cover transition-transform duration-700 group-hover:scale-[1.16] pointer-events-none select-none"
                 />
               </div>

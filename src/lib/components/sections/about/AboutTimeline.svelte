@@ -98,7 +98,7 @@
   id="our-journey"
   aria-label="Our Journey Timeline"
   bind:this={sectionRef}
-  class="section-space relative overflow-hidden border-y border-brand-dark/15 bg-brand-light py-24 md:py-36"
+  class="relative overflow-hidden border-y border-brand-dark/15 bg-brand-light py-24 md:py-36"
 >
   <div class="site-shell">
     <!-- Header -->
@@ -148,7 +148,7 @@
                 : 'md:order-2 md:pl-12 md:text-left'}"
             >
               <div
-                class="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-green"
+                class="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-green-ink"
               >
                 {milestone.year} · {$_(`about.journey.milestones.${index}.subtitle`) || milestone.subtitle}
               </div>
@@ -179,7 +179,7 @@
             >
               {#if milestone.media}
                 <div
-                  class="group relative aspect-[16/10] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-paper"
+                  class="group relative aspect-[16/10] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-paper"
                 >
                   <img
                     src={milestone.media.src}

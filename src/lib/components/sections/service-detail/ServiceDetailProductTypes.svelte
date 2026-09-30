@@ -138,7 +138,7 @@
         </span>
         <h2
           id="built-for-every-product-type-title"
-          class="mt-3 max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="mt-3 max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
         >
           {heading}
         </h2>
@@ -161,7 +161,7 @@
         <article class="sd-pt-item group flex flex-col">
           <!-- Image Stage matching Hero / Before-After rounded radius and border -->
           <div
-            class="relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm transition-all duration-500 ease-out group-hover:border-brand-dark/25 group-hover:shadow-md"
+            class="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-sm transition-all duration-500 ease-out group-hover:border-brand-dark/25 group-hover:shadow-md"
           >
             <img
               src={item.src}

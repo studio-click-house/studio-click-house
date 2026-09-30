@@ -1,7 +1,7 @@
 <script lang="ts">
+  import ServiceBookingLink from "$lib/components/common/ServiceBookingLink.svelte";
   import { onMount } from "svelte";
-  import { resolve } from "$app/paths";
-  import { Check, ArrowRight } from "lucide-svelte";
+  import { Check } from "lucide-svelte";
   import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
   import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
@@ -312,7 +312,7 @@
         </div>
 
         <h2
-          class="font-display text-[clamp(1.8rem,2.8vw,2.6rem)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5"
+          class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5"
         >
           {data.heading}
         </h2>
@@ -351,13 +351,7 @@
         </div>
 
         <div class="pt-2">
-          <a
-            href={resolve("/contact")}
-            class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-brand-green font-bold hover:text-brand-dark transition-colors"
-          >
-            <span>Book 3D Product Modeling</span>
-            <ArrowRight size={14} />
-          </a>
+          <ServiceBookingLink label="Book 3D Product Modeling" />
         </div>
       </div>
 

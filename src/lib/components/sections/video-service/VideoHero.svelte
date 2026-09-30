@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
-  import { Play, Pause, Volume2, VolumeX, ArrowRight } from "lucide-svelte";
+  import { ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import VideoControls from "$lib/components/common/VideoControls.svelte";
   import type { VideoHeroData } from "$lib/content/video-editing";
 
   let { data }: { data: VideoHeroData } = $props();
@@ -129,49 +131,25 @@
       </p>
 
       <div class="video-hero-actions flex flex-wrap items-center gap-3.5 pt-1">
-        <a
+        <Button
           href={resolve("/contact")}
-          class="group inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-brand-light"
+          size="lg" class="group px-7 hover:bg-brand-light hover:text-brand-dark"
         >
           <span>Start a Video Project</span>
           <ArrowRight size={16} class="transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+        </Button>
 
-        <a
+        <Button
           href="#commercial-editing"
-          class="group inline-flex min-h-12 items-center gap-2.5 rounded-full border border-brand-light/50 bg-brand-dark/20 px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:border-brand-light hover:bg-brand-light/10 focus-visible:outline-2 focus-visible:outline-brand-green"
+          variant="secondary" size="lg" class="border-brand-light/50 bg-brand-dark/20 text-brand-light hover:border-brand-light hover:bg-brand-light/10 hover:text-brand-light"
         >
           <span>View Services</span>
-        </a>
+        </Button>
       </div>
     </div>
   </div>
 
-  <div class="absolute bottom-5 right-5 z-20 flex items-center gap-3 sm:bottom-8 sm:right-8">
-    <button
-      type="button"
-      onclick={togglePlay}
-      aria-label={isPlaying ? "Pause video" : "Play video"}
-      class="flex size-10 items-center justify-center rounded-full border border-brand-light/35 bg-brand-dark/35 text-brand-light backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-brand-light"
-    >
-      {#if isPlaying}
-        <Pause size={15} />
-      {:else}
-        <Play size={15} class="translate-x-0.5" />
-      {/if}
-    </button>
-
-    <button
-      type="button"
-      onclick={toggleMute}
-      aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-      class="flex size-10 items-center justify-center rounded-full border border-brand-light/35 bg-brand-dark/35 text-brand-light backdrop-blur-sm transition-colors hover:bg-brand-light/20 focus-visible:outline-2 focus-visible:outline-brand-light"
-    >
-      {#if isMuted}
-        <VolumeX size={15} />
-      {:else}
-        <Volume2 size={15} />
-      {/if}
-    </button>
+  <div class="absolute bottom-5 right-5 z-20 sm:bottom-8 sm:right-8">
+    <VideoControls {isPlaying} {isMuted} onTogglePlay={togglePlay} onToggleMute={toggleMute} tone="hero" />
   </div>
 </section>

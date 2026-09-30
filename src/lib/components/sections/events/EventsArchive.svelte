@@ -1,10 +1,6 @@
 <script lang="ts">
   import type { CompanyEvent } from "$lib/types/events";
-  import {
-    X,
-    ChevronLeft,
-    ChevronRight,
-  } from "lucide-svelte";
+  import PhotoLightbox from "$lib/components/common/PhotoLightbox.svelte";
 
   interface Props {
     events: CompanyEvent[];
@@ -20,35 +16,14 @@
     if (!event.gallery || event.gallery.length === 0) return;
     activeTour = event;
     activePhotoIndex = startIndex;
-    document.body.style.overflow = "hidden";
   }
 
   function closeTourGallery() {
     activeTour = null;
     activePhotoIndex = 0;
-    document.body.style.overflow = "";
   }
 
-  function nextPhoto() {
-    if (!activeTour?.gallery?.length) return;
-    activePhotoIndex = (activePhotoIndex + 1) % activeTour.gallery.length;
-  }
-
-  function prevPhoto() {
-    if (!activeTour?.gallery?.length) return;
-    activePhotoIndex =
-      (activePhotoIndex - 1 + activeTour.gallery.length) % activeTour.gallery.length;
-  }
-
-  function handleKeydown(e: KeyboardEvent) {
-    if (!activeTour) return;
-    if (e.key === "Escape") closeTourGallery();
-    if (e.key === "ArrowRight") nextPhoto();
-    if (e.key === "ArrowLeft") prevPhoto();
-  }
 </script>
-
-<svelte:window onkeydown={handleKeydown} />
 
 <section
   id="event-archive"
@@ -57,7 +32,7 @@
   <div class="site-shell">
     <!-- Editorial Header with Index Metadata -->
     <div class="pb-2">
-      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green font-medium mb-4 block">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-4 block">
         Expeditions & Company Tours · {events.length} Chapters
       </span>
 
@@ -100,10 +75,10 @@
             <button
               type="button"
               onclick={() => openTourGallery(event, 0)}
-              class="group relative block aspect-[16/11] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-2 text-left shadow-xl transition-all duration-500 hover:shadow-2xl sm:aspect-[16/10] cursor-pointer"
+              class="group relative block aspect-[16/11] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-2 text-left shadow-xl transition-all duration-500 hover:shadow-2xl sm:aspect-[16/10] cursor-pointer"
               aria-label={`Open photo gallery for ${event.title}`}
             >
-              <div class="relative size-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem]">
+              <div class="relative size-full overflow-hidden rounded-[var(--radius-card-sm)] sm:rounded-[var(--radius-card)]">
                 <img
                   src={event.image}
                   alt={event.imageAlt}
@@ -154,7 +129,7 @@
             data-event-copy
           >
             <div class="flex items-center gap-3 font-mono text-xs text-brand-dark/60">
-              <span class="font-bold text-brand-green">Chapter {chapterNum}</span>
+              <span class="font-bold text-brand-green-ink">Chapter {chapterNum}</span>
               <span>·</span>
               <span>{event.date}</span>
             </div>
@@ -238,103 +213,6 @@
   </div>
 </section>
 
-<!-- Luxury Darkroom Exhibition Lightbox Modal -->
-{#if activeTour && activeTour.gallery && activeTour.gallery[activePhotoIndex]}
-  {@const currentPhoto = activeTour.gallery[activePhotoIndex]}
-  {@const totalCount = activeTour.gallery.length}
-  <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-[#0d0d0c]/98 p-4 backdrop-blur-2xl animate-in fade-in duration-200 cursor-zoom-out"
-    role="dialog"
-    tabindex="-1"
-    aria-modal="true"
-    aria-label={`${activeTour.title} exhibition view`}
-    onclick={(e) => { if (e.target === e.currentTarget) closeTourGallery(); }}
-    onkeydown={(e) => { if (e.key === 'Escape') closeTourGallery(); }}
-  >
-    <!-- Top Bar with Chapter Metadata & Close -->
-    <div class="absolute inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-4">
-      <div class="flex items-center gap-3 font-mono text-xs text-white">
-        <span class="rounded-full bg-brand-green px-2.5 py-0.5 font-bold uppercase tracking-wider text-brand-dark">
-          {activeTour.title}
-        </span>
-        <span class="text-white/50">
-          Still {activePhotoIndex + 1} of {totalCount}
-        </span>
-      </div>
-
-      <button
-        type="button"
-        onclick={closeTourGallery}
-        aria-label="Close exhibition modal"
-        class="flex size-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-all hover:scale-110 hover:bg-brand-green hover:text-brand-dark"
-      >
-        <X class="size-5" />
-      </button>
-    </div>
-
-    <!-- Prev & Next Arrows -->
-    <button
-      type="button"
-      onclick={prevPhoto}
-      aria-label="Previous image"
-      class="absolute left-4 top-1/2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-all hover:scale-110 hover:bg-brand-green hover:text-brand-dark sm:left-8"
-    >
-      <ChevronLeft class="size-6" />
-    </button>
-
-    <button
-      type="button"
-      onclick={nextPhoto}
-      aria-label="Next image"
-      class="absolute right-4 top-1/2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-all hover:scale-110 hover:bg-brand-green hover:text-brand-dark sm:right-8"
-    >
-      <ChevronRight class="size-6" />
-    </button>
-
-    <!-- Center Stage: Exhibition Stills -->
-    <div class="relative flex max-h-[85vh] w-full max-w-5xl flex-col items-center justify-center pt-8">
-      <div class="relative max-h-[64vh] max-w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-white/10 shadow-2xl">
-        <img
-          src={currentPhoto.src}
-          alt={currentPhoto.alt}
-          loading="eager"
-          class="max-h-[64vh] max-w-full object-contain"
-        />
-      </div>
-
-      <!-- Caption & Metadata -->
-      <div class="mt-4 max-w-xl text-center">
-        {#if currentPhoto.caption}
-          <p class="font-display text-lg font-normal text-white sm:text-xl">
-            {currentPhoto.caption}
-          </p>
-        {/if}
-        <p class="mt-1 font-mono text-xs text-white/50">
-          {currentPhoto.alt}
-        </p>
-      </div>
-
-      <!-- Bottom Filmstrip Scrubber Strip -->
-      <div class="mt-5 hidden sm:flex max-w-2xl gap-2 overflow-x-auto p-1 scrollbar-thin">
-        {#each activeTour.gallery as thumb, tIdx (thumb.id)}
-          <button
-            type="button"
-            onclick={() => (activePhotoIndex = tIdx)}
-            aria-label={`Jump to still ${tIdx + 1}`}
-            class="size-12 shrink-0 overflow-hidden rounded-lg border-2 transition-all {tIdx === activePhotoIndex
-              ? 'border-brand-green scale-105 shadow-lg'
-              : 'border-white/20 opacity-40 hover:opacity-100'}"
-          >
-            <img
-              src={thumb.src}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              class="size-full object-cover"
-            />
-          </button>
-        {/each}
-      </div>
-    </div>
-  </div>
+{#if activeTour?.gallery?.[activePhotoIndex]}
+  <PhotoLightbox photos={activeTour.gallery} selectedIndex={activePhotoIndex} title={activeTour.title} countLabel="Still" onSelect={(index) => (activePhotoIndex = index)} onClose={closeTourGallery} />
 {/if}

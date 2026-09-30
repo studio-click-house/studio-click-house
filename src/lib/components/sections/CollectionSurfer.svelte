@@ -265,7 +265,7 @@
             <!-- Title Overlay on Hover -->
             <div class="absolute bottom-5 left-5 z-20 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out">
               <span class="font-mono text-[10px] text-white/50 block tracking-widest">PRODUCT CODE</span>
-              <span class="font-heading font-bold text-sm tracking-tight text-white uppercase">{item.title}</span>
+              <span class="font-sans font-bold text-sm tracking-tight text-white uppercase">{item.title}</span>
             </div>
           </div>
         {/each}

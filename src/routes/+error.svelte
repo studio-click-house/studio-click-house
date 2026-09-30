@@ -55,14 +55,14 @@
     <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
       <a
         href={resolve("/")}
-        class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
+        class="group inline-flex min-h-12 items-center gap-3 rounded-[var(--radius-control)] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-brand-green"
       >
         <ArrowLeft class="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
         {$_('error.backHome') || 'Return to Studio'}
       </a>
       <a
         href={resolve("/services")}
-        class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-brand-light/20 px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
+        class="group inline-flex min-h-12 items-center gap-3 rounded-[var(--radius-control)] border border-brand-light/20 px-6 text-sm font-semibold text-brand-light transition-colors duration-300 hover:border-brand-green hover:text-brand-green"
       >
         {$_('error.exploreServices') || 'Explore Services'}
         <ArrowUpRight class="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

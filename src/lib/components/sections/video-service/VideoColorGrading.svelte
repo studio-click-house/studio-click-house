@@ -1,7 +1,7 @@
 <script lang="ts">
+  import ServiceBookingLink from "$lib/components/common/ServiceBookingLink.svelte";
   import { onMount } from "svelte";
-  import { resolve } from "$app/paths";
-  import { Check, ArrowRight } from "lucide-svelte";
+  import { Check } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { VideoColorGradingData } from "$lib/content/video-editing";
 
@@ -161,7 +161,7 @@
 
       <!-- Right Column: Service Description & Standards -->
       <div class="grading-reveal space-y-6 lg:col-span-5">
-        <h2 class="font-display text-[clamp(1.8rem,2.8vw,2.6rem)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
+        <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
           {data.heading}
         </h2>
 
@@ -189,13 +189,7 @@
         </div>
 
         <div class="pt-2">
-          <a
-            href={resolve("/contact")}
-            class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-brand-green font-bold hover:text-brand-dark transition-colors"
-          >
-            <span>Book Color Grading</span>
-            <ArrowRight size={14} />
-          </a>
+          <ServiceBookingLink label="Book Color Grading" />
         </div>
       </div>
     </div>

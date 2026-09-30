@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { motion } from "$lib/animations/motion";
   import { Check, ArrowRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { _ } from "svelte-i18n";
@@ -130,18 +131,20 @@
       const { gsap } = runtime;
 
       context = gsap.context(() => {
-        gsap.from(".pricing-container-reveal", {
+        const media = gsap.matchMedia();
+        media.add("(prefers-reduced-motion: no-preference)", () => gsap.from(".pricing-container-reveal", {
           opacity: 0,
-          y: 28,
-          duration: 0.65,
-          ease: "power2.out",
+          y: motion.reveal.y,
+          duration: motion.duration.reveal,
+          ease: motion.ease,
           scrollTrigger: {
             trigger: "#pricing-cards-section",
-            start: "top 90%",
+            start: motion.reveal.start,
             once: true,
           },
           clearProps: "all",
-        });
+        }));
+        return () => media.revert();
       });
     });
 
@@ -189,7 +192,7 @@
                 {#each plan.services as svc, svcIdx (`${svcIdx}-${svc.name}`)}
                   <li class="flex items-center justify-between gap-2 py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
                     <span class="font-medium text-left pr-1 min-w-0 break-words leading-snug">{$_(`pricing.packages.plans.${planIdx}.services.${svcIdx}.name`) || svc.name}</span>
-                    <span class="font-mono font-bold text-brand-green shrink-0">{svc.price}</span>
+                    <span class="font-mono font-bold text-brand-green-ink shrink-0">{svc.price}</span>
                   </li>
                 {/each}
               </ul>
@@ -213,9 +216,9 @@
           <!-- Button -->
           <a
             href={resolve(plan.buttonHref as "/contact")}
-            class="min-h-[44px] w-full py-3 px-4 rounded-[0.55rem] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border cursor-pointer {
+            class="min-h-[44px] w-full py-3 px-4 rounded-[var(--radius-control)] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border cursor-pointer {
               activePlanId === plan.id
-                ? 'bg-brand-green text-brand-light border-brand-green shadow-xs'
+                ? 'bg-brand-green text-brand-dark border-brand-green shadow-xs'
                 : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark hover:bg-brand-dark/10'
             }"
           >

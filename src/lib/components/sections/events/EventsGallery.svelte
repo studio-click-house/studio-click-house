@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import type { EventGalleryPhoto, EventCategory } from "$lib/types/events";
-  import { X, ChevronLeft, ChevronRight, Expand } from "lucide-svelte";
+  import { Expand } from "lucide-svelte";
+  import PhotoLightbox from "$lib/components/common/PhotoLightbox.svelte";
 
   interface Props {
     photos: EventGalleryPhoto[];
@@ -48,34 +50,13 @@
 
   function openLightbox(index: number) {
     selectedPhotoIndex = index;
-    document.body.style.overflow = "hidden";
   }
 
   function closeLightbox() {
     selectedPhotoIndex = null;
-    document.body.style.overflow = "";
   }
 
-  function nextPhoto() {
-    if (selectedPhotoIndex === null) return;
-    selectedPhotoIndex = (selectedPhotoIndex + 1) % filteredPhotos.length;
-  }
-
-  function prevPhoto() {
-    if (selectedPhotoIndex === null) return;
-    selectedPhotoIndex =
-      (selectedPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
-  }
-
-  function handleKeydown(e: KeyboardEvent) {
-    if (selectedPhotoIndex === null) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") nextPhoto();
-    if (e.key === "ArrowLeft") prevPhoto();
-  }
 </script>
-
-<svelte:window onkeydown={handleKeydown} />
 
 <section
   id="events-gallery"
@@ -84,7 +65,7 @@
   <div class="site-shell relative z-10">
     <!-- Clean Editorial Header (No AI pills, No robot icons) -->
     <div class="pb-2">
-      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green font-medium mb-3 block">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-3 block">
         Visual Archive · All Photographs
       </span>
 
@@ -132,9 +113,9 @@
           type="button"
           onclick={() => openLightbox(index)}
           aria-label={`Open photo ${photo.caption || photo.alt}`}
-          class="group relative block aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-1.5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+          class="group relative block aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-1.5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
         >
-          <div class="relative size-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem]">
+          <div class="relative size-full overflow-hidden rounded-[var(--radius-card-sm)] sm:rounded-[var(--radius-card)]">
             <img
               src={photo.src}
               alt={photo.alt}
@@ -178,113 +159,19 @@
     <!-- Load More Section: Initial 12 photos loaded, then load next batch -->
     {#if visibleLimit < filteredPhotos.length}
       <div class="mt-14 flex flex-col items-center justify-center text-center">
-        <button
+        <Button
           type="button"
           onclick={loadMore}
-          class="rounded-lg bg-brand-dark px-8 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-md transition-all hover:bg-brand-green hover:text-brand-dark"
+          size="lg"
+          class="bg-brand-dark px-8 font-mono text-xs uppercase tracking-wider text-brand-light hover:bg-brand-green hover:text-brand-dark"
         >
           Load More Photos ({filteredPhotos.length - displayedPhotos.length} remaining)
-        </button>
+        </Button>
       </div>
     {/if}
   </div>
 </section>
 
-<!-- Full-Screen Lightbox Modal -->
 {#if selectedPhotoIndex !== null && filteredPhotos[selectedPhotoIndex]}
-  {@const current = filteredPhotos[selectedPhotoIndex]}
-  <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-[#0d0d0c]/98 p-4 backdrop-blur-2xl animate-in fade-in duration-200 cursor-zoom-out"
-    role="dialog"
-    tabindex="-1"
-    aria-modal="true"
-    aria-label="Photo viewer"
-    onclick={(e) => { if (e.target === e.currentTarget) closeLightbox(); }}
-    onkeydown={(e) => { if (e.key === 'Escape') closeLightbox(); }}
-  >
-    <!-- Top Bar -->
-    <div class="absolute inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-4 text-white">
-      <div class="flex items-center gap-3 font-mono text-xs">
-        <span class="rounded bg-brand-green px-2.5 py-0.5 font-bold uppercase tracking-wider text-brand-dark">
-          {current.categoryLabel}
-        </span>
-        <span class="text-white/50">
-          Photo {selectedPhotoIndex + 1} of {filteredPhotos.length}
-        </span>
-      </div>
-
-      <button
-        type="button"
-        onclick={closeLightbox}
-        aria-label="Close photo viewer"
-        class="flex size-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-brand-green hover:text-brand-dark"
-      >
-        <X class="size-5" />
-      </button>
-    </div>
-
-    <!-- Prev & Next -->
-    <button
-      type="button"
-      onclick={prevPhoto}
-      aria-label="Previous photograph"
-      class="absolute left-4 top-1/2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-brand-green hover:text-brand-dark sm:left-8"
-    >
-      <ChevronLeft class="size-6" />
-    </button>
-
-    <button
-      type="button"
-      onclick={nextPhoto}
-      aria-label="Next photograph"
-      class="absolute right-4 top-1/2 z-50 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-brand-green hover:text-brand-dark sm:right-8"
-    >
-      <ChevronRight class="size-6" />
-    </button>
-
-    <!-- Main Lightbox Photo -->
-    <div class="relative flex max-h-[85vh] w-full max-w-5xl flex-col items-center justify-center pt-8">
-      <div class="relative max-h-[64vh] max-w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-white/10 shadow-2xl">
-        <img
-          src={current.src}
-          alt={current.alt}
-          loading="eager"
-          class="max-h-[64vh] max-w-full object-contain"
-        />
-      </div>
-
-      <div class="mt-4 max-w-xl text-center">
-        {#if current.caption}
-          <p class="font-display text-lg font-normal text-white sm:text-xl">
-            {current.caption}
-          </p>
-        {/if}
-        <p class="mt-1 font-mono text-xs text-white/50">
-          {current.alt}
-        </p>
-      </div>
-
-      <!-- Scrubber Filmstrip -->
-      <div class="mt-5 hidden sm:flex max-w-2xl gap-2 overflow-x-auto p-1 scrollbar-thin">
-        {#each filteredPhotos as thumb, tIdx (thumb.id)}
-          <button
-            type="button"
-            onclick={() => (selectedPhotoIndex = tIdx)}
-            aria-label={`Jump to photo ${tIdx + 1}`}
-            class="size-12 shrink-0 overflow-hidden rounded-lg border-2 transition-all {tIdx === selectedPhotoIndex
-              ? 'border-brand-green scale-105 shadow-lg'
-              : 'border-white/20 opacity-40 hover:opacity-100'}"
-          >
-            <img
-              src={thumb.src}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              class="size-full object-cover"
-            />
-          </button>
-        {/each}
-      </div>
-    </div>
-  </div>
+  <PhotoLightbox photos={filteredPhotos} selectedIndex={selectedPhotoIndex} title={filteredPhotos[selectedPhotoIndex].categoryLabel} onSelect={(index) => (selectedPhotoIndex = index)} onClose={closeLightbox} />
 {/if}

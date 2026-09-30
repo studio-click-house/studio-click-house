@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { motion } from "$lib/animations/motion";
 
   export interface TrustItem {
     title: string;
@@ -69,27 +70,27 @@
         media.add("(prefers-reduced-motion: no-preference)", () => {
           gsap.from(".sd-trust-left", {
             autoAlpha: 0,
-            y: 24,
-            duration: 0.42,
-            ease: "power3.out",
+            y: motion.reveal.y,
+            duration: motion.duration.reveal,
+            ease: motion.ease,
             clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 95%",
+              start: motion.reveal.start,
               once: true,
             },
           });
 
           gsap.from(".sd-trust-cell", {
             autoAlpha: 0,
-            y: 20,
-            duration: 0.4,
-            stagger: 0.035,
-            ease: "power3.out",
+            y: motion.reveal.y,
+            duration: motion.duration.reveal,
+            stagger: motion.reveal.stagger,
+            ease: motion.ease,
             clearProps: "all",
             scrollTrigger: {
               trigger: ".sd-trust-grid",
-              start: "top 95%",
+              start: motion.reveal.start,
               once: true,
             },
           });
@@ -124,7 +125,7 @@
 
         <h2
           id="why-studio-click-house-title"
-          class="mt-3 max-w-[20ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="mt-3 max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
         >
           {heading}
           <span class="block text-brand-dark">{headingAccent}</span>

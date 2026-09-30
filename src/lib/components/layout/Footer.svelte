@@ -158,7 +158,7 @@
 
         <!-- Direct Email -->
         <div>
-          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-1">
+          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78 block mb-1">
             {$_('footer.emailUs') || 'Email Us'}
           </span>
           <a
@@ -270,23 +270,23 @@
       <!-- Right Column: OUR LOCATIONS (4 Country Cards + Navigation) -->
       <div class="lg:col-span-7 space-y-4">
         <div class="flex flex-col items-start gap-2 pb-1 sm:flex-row sm:items-center sm:justify-between">
-          <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45">
+          <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78">
             {$_('footer.locationsTitle') || 'Our Locations'}
           </p>
-          <span class="font-mono text-[0.65rem] text-brand-dark/50 font-semibold">{$_('footer.productionTag') || '24/7 Global Production'}</span>
+          <span class="font-mono text-[0.65rem] text-brand-dark/78 font-semibold">{$_('footer.productionTag') || '24/7 Global Production'}</span>
         </div>
 
         <!-- Headquarters Card (Bangladesh / Dhaka) -->
         <div class="relative overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white p-5 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm">
           <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <span class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-1">
+              <span class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78 block mb-1">
                 {$_('footer.headquarters') || 'Headquarters'}
               </span>
               <h3 class="flex flex-wrap items-baseline gap-2.5 font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
-                DHAKA <span class="font-sans text-xs font-medium text-brand-dark/50">Bangladesh</span>
+                DHAKA <span class="font-sans text-xs font-medium text-brand-dark/78">Bangladesh</span>
               </h3>
-              <p class="mt-1 text-[0.76rem] text-brand-dark/60 font-sans max-w-sm">
+              <p class="mt-1 text-[0.76rem] text-brand-dark/78 font-sans max-w-sm">
                 Level 1, West Boxnagar, Demra, Dhaka-1361
               </p>
             </div>
@@ -312,13 +312,13 @@
           <!-- United Kingdom / London -->
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
-              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45 block mb-0.5">
+              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78 block mb-0.5">
                 {$_('footer.europeHub') || 'Europe Hub'}
               </span>
               <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
-                LONDON <span class="font-sans text-[0.68rem] font-normal text-brand-dark/50">UK</span>
+                LONDON <span class="font-sans text-[0.68rem] font-normal text-brand-dark/78">UK</span>
               </h4>
-              <p class="text-[0.7rem] text-brand-dark/50 font-sans mt-0.5">London, UK</p>
+              <p class="text-[0.7rem] text-brand-dark/78 font-sans mt-0.5">London, UK</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-brand-dark/6">
               <a href="tel:+443330047739" class="font-mono text-[0.7rem] font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
@@ -330,13 +330,13 @@
           <!-- Sweden / Stockholm -->
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
-              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45 block mb-0.5">
+              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78 block mb-0.5">
                 {$_('footer.nordicHub') || 'Nordic Hub'}
               </span>
               <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
-                SWEDEN <span class="font-sans text-[0.68rem] font-normal text-brand-dark/50">Stockholm</span>
+                SWEDEN <span class="font-sans text-[0.68rem] font-normal text-brand-dark/78">Stockholm</span>
               </h4>
-              <p class="text-[0.7rem] text-brand-dark/50 font-sans mt-0.5">Stockholm, Sweden</p>
+              <p class="text-[0.7rem] text-brand-dark/78 font-sans mt-0.5">Stockholm, Sweden</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-brand-dark/6">
               <a href="tel:+46855924212" class="font-mono text-[0.7rem] font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
@@ -348,13 +348,13 @@
           <!-- Australia / Sydney -->
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
-              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45 block mb-0.5">
+              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78 block mb-0.5">
                 {$_('footer.americasApac') || 'Americas & APAC'}
               </span>
               <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
-                AUSTRALIA <span class="font-sans text-[0.68rem] font-normal text-brand-dark/50">Sydney</span>
+                AUSTRALIA <span class="font-sans text-[0.68rem] font-normal text-brand-dark/78">Sydney</span>
               </h4>
-              <p class="text-[0.7rem] text-brand-dark/50 font-sans mt-0.5">Sydney, Australia</p>
+              <p class="text-[0.7rem] text-brand-dark/78 font-sans mt-0.5">Sydney, Australia</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-brand-dark/6">
               <a href="tel:+61483963759" class="font-mono text-[0.7rem] font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
@@ -368,7 +368,7 @@
         <div class="grid grid-cols-1 gap-8 pt-4 sm:grid-cols-3 sm:gap-5">
           <!-- Company -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
+            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78">
               {$_('footer.company') || 'Company'}
             </p>
             <ul class="space-y-1.5 text-[0.82rem]">
@@ -392,7 +392,7 @@
 
           <!-- Services -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
+            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78">
               {$_('footer.services') || 'Services'}
             </p>
             <ul class="space-y-1.5 text-[0.82rem]">
@@ -410,7 +410,7 @@
           </div>
 
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
+            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78">
               Community
             </p>
             <a
@@ -431,7 +431,7 @@
     <div id="footer-affiliations" class="footer-reveal">
       <div class="overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white shadow-xs">
         <div class="flex items-center justify-between px-5 pt-4 pb-1">
-          <p class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45">
+          <p class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78">
             {$_('footer.accreditations') || 'Accredited & Member Of'}
           </p>
         </div>
@@ -452,7 +452,7 @@
                 title={item.fullName}
                 class="h-7 w-auto object-contain transition-all duration-300 [filter:grayscale(100%)_brightness(0)_opacity(60%)] group-hover:opacity-100 group-hover:[filter:grayscale(0%)_brightness(1)_opacity(100%)] md:h-8"
               />
-              <span class="text-center font-mono text-[0.48rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/45">
+              <span class="text-center font-mono text-[0.48rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/78">
                 {item.caption}
               </span>
             </div>
@@ -463,7 +463,7 @@
 
     <!-- Bottom Legal Bar -->
     <div
-      class="footer-reveal flex flex-col gap-3 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/50 sm:flex-row sm:items-center sm:justify-between"
+      class="footer-reveal flex flex-col gap-3 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/78 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>
         &copy; {new Date().getFullYear()} {$_('footer.allRightsReserved') || 'Studio Click House Limited. All rights reserved.'}

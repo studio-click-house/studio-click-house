@@ -667,7 +667,7 @@
         <div class="mt-8">
           <a
             href={resolve("/portfolio")}
-            class="group inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-transparent px-5 py-2.5 font-sans text-xs font-semibold text-brand-dark transition-all duration-300 hover:border-brand-dark/30 hover:bg-brand-dark/5"
+            class="group inline-flex items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/15 bg-transparent px-5 py-2.5 font-sans text-xs font-semibold text-brand-dark transition-all duration-300 hover:border-brand-dark/30 hover:bg-brand-dark/5"
           >
             <span>{$_('home.aboutOrbit.explore')}</span>
             <ArrowUpRight
@@ -1033,7 +1033,7 @@
     justify-content: space-between;
     margin-top: 0.75rem;
     border: 1px solid var(--color-brand-dark);
-    border-radius: 0.55rem;
+    border-radius: var(--radius-control);
     padding-inline: 1rem;
     background: var(--color-brand-dark);
     color: var(--color-brand-light);
@@ -1075,7 +1075,7 @@
   }
 
   .workflow-link:focus-visible {
-    border-radius: 0.55rem;
+    border-radius: var(--radius-control);
     outline: 3px solid var(--color-brand-green);
     outline-offset: 3px;
   }

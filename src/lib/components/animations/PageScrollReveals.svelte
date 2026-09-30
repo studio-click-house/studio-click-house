@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { motion } from "$lib/animations/motion";
 
   onMount(() => {
     const root = document.querySelector<HTMLElement>("#main-content");
@@ -69,8 +70,6 @@
             root.querySelectorAll<HTMLElement>(":scope > section"),
           ).filter((section) => !excludedSections.has(section.id));
 
-          const pageHeight = document.documentElement.scrollHeight;
-
           for (let sIdx = 0; sIdx < sections.length; sIdx++) {
             const section = sections[sIdx];
             const sectionTop = section.getBoundingClientRect().top;
@@ -85,19 +84,11 @@
 
             if (!copy.length && !visual.length) continue;
 
-            const sectionOffsetY = section.offsetTop;
-            const isLaterHalf = sectionOffsetY > pageHeight * 0.45;
-
-            const copyY = isLaterHalf ? 42 : 26;
-            const copyDuration = isLaterHalf ? 1.1 : 0.75;
-            const copyStagger = isLaterHalf ? 0.1 : 0.06;
-            const visualDuration = isLaterHalf ? 1.2 : 0.9;
-
             const timeline = gsap.timeline({
-              defaults: { ease: isLaterHalf ? "power2.out" : "power3.out" },
+              defaults: { ease: motion.ease },
               scrollTrigger: {
                 trigger: section,
-                start: "top 82%",
+                start: motion.reveal.start,
                 toggleActions: "play none none reverse",
               },
             });
@@ -105,9 +96,9 @@
             if (copy.length) {
               timeline.from(copy, {
                 autoAlpha: 0,
-                y: copyY,
-                duration: copyDuration,
-                stagger: copyStagger,
+                y: motion.reveal.y,
+                duration: motion.duration.reveal,
+                stagger: motion.reveal.stagger,
               });
             }
 
@@ -116,11 +107,11 @@
                 visual,
                 {
                   autoAlpha: 0,
-                  y: isLaterHalf ? 30 : 20,
+                  y: motion.reveal.y,
                   scale: 1.02,
                   clipPath: "inset(6% 0% 0% 0%)",
-                  duration: visualDuration,
-                  stagger: 0.1,
+                  duration: motion.duration.reveal,
+                  stagger: motion.reveal.stagger,
                 },
                 copy.length ? "-=0.55" : 0,
               );

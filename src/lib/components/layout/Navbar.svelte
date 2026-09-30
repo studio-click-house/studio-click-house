@@ -454,7 +454,7 @@
     {#if isMenuOpen}
       <div
         id="mobile-navigation-panel"
-        class="navigation-panel absolute inset-x-0 border border-brand-light/15 bg-[#141211] text-brand-light shadow-2xl shadow-black/80 lg:hidden"
+        class="navigation-panel absolute inset-x-0 border border-brand-light/15 bg-brand-dark text-brand-light shadow-2xl shadow-black/80 lg:hidden"
       >
         {#if mobileView === "routes"}
           <div

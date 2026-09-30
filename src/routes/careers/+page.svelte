@@ -43,7 +43,7 @@
     <section
       class="border-x border-brand-dark/10 px-5 pb-16 pt-12 sm:px-10 lg:px-16"
     >
-      <p class="eyebrow text-brand-green">{$_('careers.eyebrow') || 'Careers'}</p>
+      <p class="eyebrow text-brand-green-ink">{$_('careers.eyebrow') || 'Careers'}</p>
       <div class="mt-8 max-w-3xl border-b border-brand-dark/15 pb-12">
         <h1 class="display-title">{$_('careers.title') || 'Build beautiful work with us.'}</h1>
         <p

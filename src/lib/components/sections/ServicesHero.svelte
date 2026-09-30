@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
+
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
@@ -182,15 +184,16 @@
             {$_('services.hero.description') || servicesHero.description}
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-5">
-            <a
+            <Button
               href={resolve("/contact")}
-              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-6 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-dark hover:text-white focus-visible:outline-brand-green"
+              size="lg"
+              class="group"
             >
               {$_('services.hero.discussProject') || 'Discuss a project'}
               <ArrowUpRight
                 class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
-            </a>
+            </Button>
             <a
               href="#services-details"
               onclick={(e) => {

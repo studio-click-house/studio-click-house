@@ -5,18 +5,18 @@
   let partnersSection = $state<HTMLElement | null>(null);
 
   const partners = [
-    { name: "Zara", src: "/images/clients/zara_logo.png", category: "Global Fashion" },
-    { name: "Damas", src: "/images/clients/damas_logo.png", category: "Fine Jewelry" },
-    { name: "Oroton", src: "/images/clients/oroton_logo.png", category: "Luxury Leather" },
+    { name: "White Fox", src: "/images/clients/white_fox_logo.png", category: "Global Fashion" },
+    { name: "Carla Zampatti", src: "/images/clients/carla_zampatti_logo.png", category: "Haute Runway" },
+    { name: "Bec + Bridge", src: "/images/clients/bec_and_bridge_logo.png", category: "Designer Apparel" },
     {
-      name: "Manning Cartell",
-      src: "/images/clients/manning_cartell_logo.png",
-      category: "Haute Runway",
+      name: "Christopher Esber",
+      src: "/images/clients/christopher_esber_logo.png",
+      category: "Luxury Runway",
     },
-    { name: "Rip Curl", src: "/images/clients/rip_curl_logo.png", category: "Apparel & Action" },
-    { name: "Studio Mint", src: "/images/clients/studio_mint_logo.png", category: "Design Atelier" },
-    { name: "Swish", src: "/images/clients/swish_logo.png", category: "Fashion E-Com" },
-    { name: "Retush", src: "/images/clients/retush_logo.png", category: "Creative Agency" },
+    { name: "St. Agni", src: "/images/clients/st_agni_logo.png", category: "Minimalist Studio" },
+    { name: "Bondi Born", src: "/images/clients/bondi_born_logo.png", category: "Resort & Swim" },
+    { name: "Emma Lewisham", src: "/images/clients/emma_lewisham_logo.png", category: "Circular Skincare" },
+    { name: "Status Anxiety", src: "/images/clients/status_anxiety_logo.png", category: "Luxury Leather" },
   ];
 
   $effect(() => {
@@ -112,7 +112,7 @@
 
     <!-- Full-Width Luxury Partner Matrix with Responsive 1px Hairline Grid -->
     <div
-      class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-brand-dark/10 gap-[1px] shadow-sm overflow-hidden"
+      class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-brand-dark/10 gap-[1px] shadow-sm overflow-hidden"
     >
       {#each partners as partner (partner.src)}
         <div
@@ -126,7 +126,7 @@
             height="64"
             loading="lazy"
             decoding="async"
-            class="max-h-7 sm:max-h-8 lg:max-h-9 w-auto max-w-[95px] sm:max-w-[105px] object-contain opacity-70 sm:opacity-50 grayscale-0 sm:grayscale sm:group-hover:grayscale-0 sm:group-hover:opacity-100 group-hover:scale-105 sm:group-hover:scale-110 transition-all duration-300 relative z-10"
+            class="max-h-8 sm:max-h-9 lg:max-h-10 w-auto max-w-[78px] sm:max-w-[88px] lg:max-w-[98px] object-contain opacity-70 sm:opacity-50 grayscale-0 sm:grayscale sm:group-hover:grayscale-0 sm:group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 relative z-10"
           />
 
           <!-- Category tag that reveals smoothly on hover -->

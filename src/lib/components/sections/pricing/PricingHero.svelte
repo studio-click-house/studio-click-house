@@ -215,7 +215,7 @@
             <button
               type="button"
               onclick={activateCustomCalculator}
-              class="group inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brand-dark/20 bg-brand-dark/[0.04] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-dark transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] cursor-pointer"
+              class="group inline-flex min-h-[44px] items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/20 bg-brand-dark/[0.04] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-dark transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] cursor-pointer"
             >
               <SlidersHorizontal class="h-3.5 w-3.5" />
               <span>{$_('pricing.hero.buildCustom') || 'Build custom quote'}</span>
@@ -254,7 +254,7 @@
           {#each imageShowcases as item, cardIdx (item.title)}
             <div class="hero-img-anim w-full">
               <div
-                class="group relative flex min-h-[220px] sm:min-h-[330px] md:min-h-[390px] lg:min-h-[430px] xl:min-h-[470px] w-full flex-col overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-white shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.18)] hover:-translate-y-2 {item.offsetClass}"
+                class="group relative flex min-h-[220px] sm:min-h-[330px] md:min-h-[390px] lg:min-h-[430px] xl:min-h-[470px] w-full flex-col overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-white shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.18)] hover:-translate-y-2 {item.offsetClass}"
               >
                 <!-- Cross-fading Images List -->
                 {#each item.images as img, imgIdx (img.src)}

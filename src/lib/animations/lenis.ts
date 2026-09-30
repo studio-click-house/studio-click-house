@@ -1,4 +1,5 @@
 import { browser } from "$app/environment";
+import { registerScrollTrigger } from "$lib/animations/gsap";
 
 const scrollListeners = new Set<() => void>();
 
@@ -10,12 +11,12 @@ export function onLenisScroll(listener: () => void) {
 let activeLenis: { scrollTo: (target: string | HTMLElement | number, options?: Record<string, unknown>) => void } | null = null;
 
 export function scrollToTarget(
-  target: string | HTMLElement,
+  target: string | HTMLElement | number,
   options: { offset?: number; immediate?: boolean; duration?: number } = {},
 ) {
   if (!browser) return;
   const el = typeof target === "string" ? document.querySelector<HTMLElement>(target) : target;
-  if (!el) return;
+  if (el == null) return;
 
   if (activeLenis) {
     activeLenis.scrollTo(el, {
@@ -24,7 +25,11 @@ export function scrollToTarget(
       duration: options.duration ?? 1.1,
     });
   } else {
-    el.scrollIntoView({ behavior: options.immediate ? "auto" : "smooth" });
+    if (typeof el === "number") {
+      window.scrollTo({ top: el, behavior: options.immediate ? "auto" : "smooth" });
+    } else {
+      el.scrollIntoView({ behavior: options.immediate ? "auto" : "smooth" });
+    }
   }
 }
 
@@ -33,13 +38,13 @@ export async function createLenis() {
     return null;
   }
 
-  const [{ default: Lenis }, { gsap }, { ScrollTrigger }] = await Promise.all([
+  const [{ default: Lenis }, { gsap }, runtime] = await Promise.all([
     import("lenis"),
     import("gsap"),
-    import("gsap/ScrollTrigger"),
+    registerScrollTrigger(),
   ]);
-  gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.config({ ignoreMobileResize: true });
+  if (!runtime) return null;
+  const { ScrollTrigger } = runtime;
 
   const lenis = new Lenis({
     duration: 1.05,

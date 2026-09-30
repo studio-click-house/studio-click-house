@@ -1007,15 +1007,7 @@
     mask-size: 100% 100%;
   }
 
-  /* ═══ Explore Link ═══ */
-  .ai-explore-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
-  }
-
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     .video-pipeline-grid {
       flex-direction: column;
       align-items: center;

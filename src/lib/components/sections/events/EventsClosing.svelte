@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import { _ } from "svelte-i18n";
@@ -24,18 +25,21 @@
       </div>
       
       <div class="relative z-10 flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-        <a
+        <Button
           href={resolve("/about")}
-          class="inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-green px-5 font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-brand-dark transition-colors duration-300 hover:bg-white"
+          size="lg"
+          class="font-mono text-xs uppercase tracking-[0.14em] hover:bg-white"
         >
           {$_('events.closing.aboutStudio') || 'About the studio'} <ArrowUpRight size={15} />
-        </a>
-        <a
+        </Button>
+        <Button
           href={resolve("/portfolio")}
-          class="inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] border border-white/20 bg-white/5 px-5 font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-brand-light backdrop-blur-sm transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
+          variant="secondary"
+          size="lg"
+          class="border-white/20 bg-white/5 font-mono text-xs uppercase tracking-[0.14em] text-brand-light hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
         >
           {$_('events.closing.viewPortfolio') || 'View portfolio'} <ArrowUpRight size={15} />
-        </a>
+        </Button>
       </div>
     </div>
   </div>

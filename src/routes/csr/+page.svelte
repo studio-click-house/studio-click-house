@@ -60,7 +60,7 @@
     <div
       class="border-x border-brand-dark/10 px-5 pb-10 pt-12 sm:px-10 lg:px-16"
     >
-      <p class="eyebrow text-brand-green">{$_('csr.eyebrow') || 'Operating with Intent'}</p>
+      <p class="eyebrow text-brand-green-ink">{$_('csr.eyebrow') || 'Operating with Intent'}</p>
 
       <div class="mt-8 max-w-4xl border-b border-brand-dark/15 pb-12">
         <h1 class="display-title">{$_('csr.title') || 'Digital CSR'}</h1>
@@ -79,7 +79,7 @@
               class="border-b border-brand-dark/10 pb-10 last:border-0 last:pb-0"
             >
               <span
-                class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-brand-green"
+                class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-brand-green-ink"
               >
                 Pillar · {pillar.id.replace("-", " ")}
               </span>

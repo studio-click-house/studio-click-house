@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
@@ -253,15 +254,16 @@
         {$_('home.hero.subtitle') || 'Studio Click House shapes still and moving images for brands, studios, and production teams that care about the final frame.'}
       </p>
       <div class="mt-7 flex flex-wrap items-center gap-5">
-        <a
+        <Button
           href={resolve("/contact")}
-          class="group inline-flex items-center gap-3 rounded-sm bg-brand-green px-5 py-3.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-brand-light hover:text-brand-dark active:scale-[0.98]"
+          size="lg"
+          class="group px-5 font-mono text-[var(--text-micro)] uppercase tracking-[0.18em] hover:bg-brand-light hover:text-brand-dark"
           >{$_('home.hero.cta') || 'Start a project'}
           <ArrowUpRight
             size={15}
             strokeWidth={1.8}
             class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          /></a
+          /></Button
         >
         <a
           href={resolve("/#horizontal-projects-showcase")}

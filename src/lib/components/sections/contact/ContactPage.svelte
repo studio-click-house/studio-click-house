@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import {
     ArrowDown,
@@ -213,27 +214,30 @@
           <div
             class="contact-hero-reveal mt-7 sm:mt-8 flex flex-wrap items-center gap-4 sm:gap-5"
           >
-            <a
+            <Button
               href="#project-brief"
               onclick={(e) => {
                 e.preventDefault();
                 handleScrollTo("#project-brief");
               }}
-              class="group inline-flex min-h-12 items-center gap-3 rounded-[0.55rem] bg-brand-dark px-6 font-mono text-[0.65rem] font-bold uppercase tracking-[0.13em] text-brand-light transition-colors duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+              size="lg"
+              class="group bg-brand-dark font-mono text-xs uppercase tracking-[0.13em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
             >
               {$_('contact.hero.sendBrief') || 'Send a brief'}
               <ArrowDown size={15} />
-            </a>
-            <a
+            </Button>
+            <Button
               href={`mailto:${siteConfig.contact.email}`}
-              class="group inline-flex min-h-12 items-center gap-2 rounded-[0.55rem] border border-brand-dark/22 px-4 text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+              variant="secondary"
+              size="lg"
+              class="group px-4"
             >
               {siteConfig.contact.email}
               <ArrowUpRight
                 size={15}
                 class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
-            </a>
+            </Button>
           </div>
         </div>
 
@@ -482,19 +486,19 @@
                 <p>{$_('contact.form.responseTime') || 'We usually respond within 1–2 hours.'}</p>
               {/if}
             </div>
-            <button type="submit" class="brief-submit group">
+            <Button type="submit" size="lg" class="group font-mono text-xs uppercase tracking-[0.11em] sm:min-h-13">
               Open email draft
               <ArrowUpRight
                 size={16}
                 class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
-            </button>
+            </Button>
           </div>
         </form>
 
         <aside class="lg:col-span-4">
           <div
-            class="overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/14 bg-brand-light"
+            class="overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/14 bg-brand-light"
           >
             <figure>
               <img
@@ -540,7 +544,7 @@
                   <button
                     type="button"
                     onclick={copyStudioEmail}
-                    class="inline-flex items-center gap-1.5 rounded-[0.55rem] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green cursor-pointer"
+                    class="inline-flex items-center gap-1.5 rounded-[var(--radius-control)] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green cursor-pointer"
                     aria-live="polite"
                   >
                     {#if emailCopied}
@@ -797,7 +801,7 @@
   }
 
   .brief-service-card {
-    border-radius: 0.55rem;
+    border-radius: var(--radius-control);
     background: var(--color-brand-paper);
     color: var(--color-brand-dark);
     font-family: var(--font-mono);
@@ -833,10 +837,6 @@
   }
 
   .brief-service-card:active,
-  .brief-submit:active {
-    transform: scale(0.98);
-  }
-
   .brief-note {
     display: block;
     border: 1px solid
@@ -866,34 +866,6 @@
 
   .brief-note-input::placeholder {
     color: color-mix(in srgb, var(--color-brand-dark) 54%, transparent);
-  }
-
-  .brief-submit {
-    display: inline-flex;
-    min-height: 3.25rem;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    border-radius: 0.55rem;
-    background: var(--color-brand-green);
-    padding-inline: 1.35rem;
-    color: var(--color-brand-dark);
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition:
-      background-color 220ms ease,
-      color 220ms ease,
-      transform 180ms ease;
-  }
-
-  .brief-submit:hover {
-    background: var(--color-brand-dark);
-    color: var(--color-brand-light);
   }
 
   .office-channel-dark {
@@ -986,9 +958,6 @@
   }
 
   @media (max-width: 639px) {
-    .brief-submit {
-      width: 100%;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {

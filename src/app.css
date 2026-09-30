@@ -58,12 +58,53 @@
 
 @theme {
   --color-brand-green: #7ea641;
+  --color-brand-green-ink: #486520;
   --color-brand-dark: #20211f;
-  --color-brand-light: #f7f7f2;
+  --color-brand-light: #f8f8f6;
   --color-brand-paper: #eeeee7;
   --color-brand-mist: #d9ddd6;
   --color-brand-coral: #d45d43;
   --color-brand-acid: #c9ff5a;
+  --color-background: var(--color-brand-light);
+  --color-surface: #fff;
+  --color-surface-muted: var(--color-brand-paper);
+  --color-foreground: var(--color-brand-dark);
+  --color-text: var(--color-brand-dark);
+  --color-muted-foreground: color-mix(in srgb, var(--color-brand-dark) 75%, var(--color-brand-light));
+  --color-text-muted: var(--color-muted-foreground);
+  --color-muted: var(--color-brand-paper);
+  --color-input: var(--color-brand-mist);
+  --color-primary: var(--color-brand-green);
+  --color-primary-foreground: var(--color-brand-dark);
+  --color-secondary: var(--color-brand-dark);
+  --color-secondary-foreground: var(--color-brand-light);
+  --color-accent: var(--color-brand-acid);
+  --color-border: color-mix(in srgb, var(--color-brand-dark) 15%, transparent);
+  --color-ring: var(--color-brand-green);
+  --color-error: #9b3524;
+  --color-success: #375c16;
+  --color-destructive: var(--color-error);
+  --radius-control: 0.375rem;
+  --radius-card: 1.5rem;
+  --radius-media: 2rem;
+  --radius-card-sm: 1.35rem;
+  --radius-media-sm: 1.75rem;
+  --radius-md: var(--radius-control);
+  --space-section: clamp(6rem, 9vw, 9.5rem);
+  --space-section-lg: clamp(7rem, 11vw, 12rem);
+  --text-display: clamp(3rem, 7vw, 7.5rem);
+  --text-section: clamp(2.2rem, 3.4vw, 3.5rem);
+  --text-feature-heading: clamp(1.8rem, 2.8vw, 2.6rem);
+  --text-body: 1rem;
+  --text-body-small: 0.875rem;
+  --text-label: 0.75rem;
+  --text-micro: 0.6875rem;
+  --shadow-card: 0 1rem 2.5rem -1rem rgb(51 46 45 / 0.14);
+  --shadow-overlay: 0 1.25rem 3rem -0.75rem rgb(0 0 0 / 0.35);
+  --z-navigation: 50;
+  --z-overlay: 60;
+  --z-cursor: 110;
+  --z-preloader: 200;
   --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
   --font-display: "DM Serif Display", ui-serif, Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -121,7 +162,7 @@
 
   ::selection {
     background: var(--color-brand-green);
-    color: var(--color-brand-light);
+    color: var(--color-brand-dark);
   }
 
   a,
@@ -149,12 +190,6 @@
 }
 
 @layer components {
-  #site-footer [class*="text-brand-dark/45"],
-  #site-footer [class*="text-brand-dark/50"],
-  #site-footer [class*="text-brand-dark/60"] {
-    color: color-mix(in srgb, var(--color-brand-dark) 78%, transparent);
-  }
-
   .site-shell {
     width: min(100% - 2rem, 90rem);
     min-width: 0;
@@ -162,13 +197,13 @@
   }
 
   .section-space {
-    padding-block: clamp(6rem, 9vw, 9.5rem);
+    padding-block: var(--space-section);
   }
 
 
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: var(--text-micro);
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -176,7 +211,7 @@
   }
 
   .section-space-lg {
-    padding-block: clamp(7rem, 11vw, 12rem);
+    padding-block: var(--space-section-lg);
   }
 
   .editorial-divider {
@@ -190,7 +225,7 @@
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.035em;
-    font-size: clamp(3rem, 7vw, 7.5rem);
+    font-size: var(--text-display);
     line-height: 0.91;
   }
 
@@ -207,6 +242,22 @@
 
   .text-link:hover {
     gap: 0.75rem;
+  }
+
+  .ai-explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
   }
 }
 

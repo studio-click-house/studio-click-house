@@ -120,7 +120,7 @@
 >
   <!-- Main Social Links Island -->
   <div
-    class="flex flex-col items-center gap-1.5 rounded-l-2xl rounded-r-none border-y border-l border-r-0 border-white/15 bg-[#181615]/95 pl-2 pr-1.5 py-2.5 backdrop-blur-xl shadow-2xl transition-all duration-300 ring-1 ring-white/5"
+    class="flex flex-col items-center gap-1.5 rounded-l-2xl rounded-r-none border-y border-l border-r-0 border-white/15 bg-brand-dark/95 pl-2 pr-1.5 py-2.5 backdrop-blur-xl shadow-2xl transition-all duration-300 ring-1 ring-white/5"
   >
     {#each socialItems as item (item.id)}
       <div class="relative group flex items-center">
@@ -137,7 +137,7 @@
         <!-- Minimal Tooltip -->
         <span
           role="tooltip"
-          class="pointer-events-none absolute right-full mr-2.5 whitespace-nowrap rounded-md border border-white/15 bg-[#181615] px-2.5 py-1 font-mono text-[0.65rem] text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:opacity-100 group-hover:-translate-x-0.5"
+          class="pointer-events-none absolute right-full mr-2.5 whitespace-nowrap rounded-md border border-white/15 bg-brand-dark px-2.5 py-1 font-mono text-[0.65rem] text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:opacity-100 group-hover:-translate-x-0.5"
         >
           {item.label}
         </span>
@@ -147,7 +147,7 @@
 
   <!-- Separate Audio Brief Island (placed close below with a little gap) -->
   <div
-    class="flex items-center rounded-l-2xl rounded-r-none border-y border-l border-r-0 border-white/15 bg-[#181615]/95 pl-2 pr-1.5 py-2 backdrop-blur-xl shadow-2xl transition-all duration-300 ring-1 ring-white/5"
+    class="flex items-center rounded-l-2xl rounded-r-none border-y border-l border-r-0 border-white/15 bg-brand-dark/95 pl-2 pr-1.5 py-2 backdrop-blur-xl shadow-2xl transition-all duration-300 ring-1 ring-white/5"
   >
     <div class="relative group flex items-center">
       <button
@@ -174,7 +174,7 @@
       <!-- Minimal Tooltip -->
       <span
         role="tooltip"
-        class="pointer-events-none absolute right-full mr-2.5 whitespace-nowrap rounded-md border border-white/15 bg-[#181615] px-2.5 py-1 font-mono text-[0.65rem] text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:opacity-100 group-hover:-translate-x-0.5"
+        class="pointer-events-none absolute right-full mr-2.5 whitespace-nowrap rounded-md border border-white/15 bg-brand-dark px-2.5 py-1 font-mono text-[0.65rem] text-white opacity-0 shadow-xl backdrop-blur-md transition-all duration-150 group-hover:opacity-100 group-hover:-translate-x-0.5"
       >
         {isPlaying ? ($_('social.pauseBrief') || 'Pause Brief') : ($_('social.playBrief') || 'Play Brief')}
       </span>

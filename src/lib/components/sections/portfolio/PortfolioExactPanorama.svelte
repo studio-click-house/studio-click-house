@@ -91,7 +91,7 @@
 >
   <div class="site-shell relative z-10">
     <div
-      class="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[24/9] max-h-[580px] rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 shadow-2xl overflow-hidden bg-brand-dark"
+      class="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[24/9] max-h-[580px] rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 shadow-2xl overflow-hidden bg-brand-dark"
     >
       <img
         src="/images/services/ai-retouch/jewelry-retouching.jpg"

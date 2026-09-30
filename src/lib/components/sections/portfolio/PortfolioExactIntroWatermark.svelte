@@ -91,7 +91,7 @@
     </div>
 
     <!-- Editorial Craftsmanship Proof Banner (Replaces tacky text-masked word with tactile craftsmanship showcase) -->
-    <div class="intro-fade-item relative rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-6 sm:p-8 lg:p-10 shadow-sm overflow-hidden">
+    <div class="intro-fade-item relative rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-6 sm:p-8 lg:p-10 shadow-sm overflow-hidden">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 divide-y md:divide-y-0 md:divide-x divide-brand-dark/10">
         <!-- Quality Pillar 1 -->
         <div class="flex flex-col gap-3 pt-4 md:pt-0 md:pr-6">

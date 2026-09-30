@@ -122,7 +122,7 @@
       </span>
       <h2
         id="service-detail-intro-title"
-        class="mx-auto mt-3 max-w-[22ch] font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+        class="mx-auto mt-3 max-w-[22ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
       >
         {data.heading}
       </h2>

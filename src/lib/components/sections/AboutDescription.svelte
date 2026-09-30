@@ -4,6 +4,7 @@
   import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
+  import { Button } from "$lib/components/ui/button";
 
   let section: HTMLElement;
   let copyBlock: HTMLElement;
@@ -129,21 +130,24 @@
 
         <!-- Action CTAs -->
         <div class="desc-story-item about-actions">
-          <a
+          <Button
             href={resolve("/about")}
-            class="about-action about-action-primary"
+            size="lg"
+            class="min-w-42 justify-between bg-brand-dark text-brand-light hover:bg-brand-green hover:text-brand-dark"
           >
             <span>{$_('home.aboutDescription.aboutStudio') || 'About the studio'}</span>
             <ArrowUpRight size={15} strokeWidth={1.7} />
-          </a>
+          </Button>
 
-          <a
+          <Button
             href={resolve("/contact")}
-            class="about-action about-action-secondary"
+            variant="secondary"
+            size="lg"
+            class="min-w-42 justify-between"
           >
             <span>{$_('home.aboutDescription.freeTrial') || 'Start Free Trial'}</span>
             <ArrowUpRight size={15} strokeWidth={1.7} />
-          </a>
+          </Button>
         </div>
       </div>
 
@@ -314,66 +318,6 @@
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 2rem;
-  }
-
-  .about-action {
-    display: inline-flex;
-    min-height: 3rem;
-    min-width: 10.5rem;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-inline: 1rem;
-    border: 1px solid var(--color-brand-dark);
-    border-radius: 0.55rem;
-    font-family: var(--font-sans);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.045em;
-    text-transform: uppercase;
-    transition:
-      color 280ms ease,
-      background 280ms ease,
-      border-color 280ms ease,
-      transform 280ms ease;
-  }
-
-  .about-action :global(svg) {
-    transition: transform 280ms ease;
-  }
-
-  .about-action:hover :global(svg) {
-    transform: translate(0.15rem, -0.15rem);
-  }
-
-  .about-action:active {
-    transform: scale(0.98);
-  }
-
-  .about-action:focus-visible {
-    outline: 3px solid var(--color-brand-green);
-    outline-offset: 3px;
-  }
-
-  .about-action-primary {
-    background: var(--color-brand-dark);
-    color: var(--color-brand-light);
-  }
-
-  .about-action-primary:hover {
-    border-color: var(--color-brand-green);
-    background: var(--color-brand-green);
-    color: var(--color-brand-dark);
-  }
-
-  .about-action-secondary {
-    background: color-mix(in srgb, var(--color-brand-paper) 72%, transparent);
-    color: var(--color-brand-dark);
-  }
-
-  .about-action-secondary:hover {
-    border-color: var(--color-brand-green);
-    background: var(--color-brand-green);
   }
 
   @media (prefers-reduced-motion: reduce) {

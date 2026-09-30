@@ -1,8 +1,9 @@
 <script lang="ts">
+  import ServiceBookingLink from "$lib/components/common/ServiceBookingLink.svelte";
   import { onMount } from "svelte";
-  import { resolve } from "$app/paths";
-  import { Play, Pause, Volume2, VolumeX, Check, ArrowRight } from "lucide-svelte";
+  import { Check } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import VideoControls from "$lib/components/common/VideoControls.svelte";
   import type { VideoCommercialData } from "$lib/content/video-editing";
 
   let { data }: { data: VideoCommercialData } = $props();
@@ -75,7 +76,7 @@
     <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Service Details & Deliverables -->
       <div class="commercial-reveal space-y-6 lg:col-span-5">
-        <h2 class="font-display text-[clamp(1.8rem,2.8vw,2.6rem)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
+        <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
           {data.heading}
         </h2>
 
@@ -103,13 +104,7 @@
         </div>
 
         <div class="pt-2">
-          <a
-            href={resolve("/contact")}
-            class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-brand-green font-bold hover:text-brand-dark transition-colors"
-          >
-            <span>Book Commercial Editing</span>
-            <ArrowRight size={14} />
-          </a>
+          <ServiceBookingLink label="Book Commercial Editing" />
         </div>
       </div>
 
@@ -138,33 +133,7 @@
 
           <!-- Bottom Controls -->
           <div class="absolute inset-x-0 bottom-0 flex items-center justify-between p-5 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
-            <div class="flex items-center gap-3">
-              <button
-                type="button"
-                onclick={togglePlay}
-                aria-label={isPlaying ? "Pause commercial sample" : "Play commercial sample"}
-                class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white transition-all duration-200 hover:bg-brand-green hover:text-brand-dark cursor-pointer"
-              >
-                {#if isPlaying}
-                  <Pause size={15} />
-                {:else}
-                  <Play size={15} class="translate-x-0.5" />
-                {/if}
-              </button>
-
-              <button
-                type="button"
-                onclick={toggleMute}
-                aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-                class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white transition-all duration-200 hover:bg-white/30 cursor-pointer"
-              >
-                {#if isMuted}
-                  <VolumeX size={15} />
-                {:else}
-                  <Volume2 size={15} />
-                {/if}
-              </button>
-            </div>
+            <VideoControls {isPlaying} {isMuted} onTogglePlay={togglePlay} onToggleMute={toggleMute} playLabel="commercial sample" />
           </div>
         </div>
       </div>

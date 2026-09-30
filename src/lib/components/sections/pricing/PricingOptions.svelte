@@ -39,7 +39,7 @@
       </div>
 
       <div
-        class="flex w-full sm:w-fit rounded-[0.55rem] border border-brand-dark/20 bg-brand-paper p-1 lg:col-span-4 lg:justify-self-end"
+        class="flex w-full sm:w-fit rounded-[var(--radius-control)] border border-brand-dark/20 bg-brand-paper p-1 lg:col-span-4 lg:justify-self-end"
         role="tablist"
         aria-label="Pricing options"
       >
