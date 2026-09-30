@@ -5,7 +5,6 @@
   import { resolveServiceHref } from "$lib/content/service-pages";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { previewMedia } from "$lib/content/media";
   import { services } from "$lib/content/home";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
   import ShowcaseProduct3DViewer from "$lib/components/common/ShowcaseProduct3DViewer.svelte";

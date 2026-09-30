@@ -406,7 +406,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (ctx) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = ctx.conditions!;
+            const { isDesktop, isMobile, reduceMotion } = ctx.conditions!;
             const header = root.querySelector(".mosaic-header-group");
             const tiles = root.querySelectorAll(".mosaic-item");
 

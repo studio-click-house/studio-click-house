@@ -162,7 +162,7 @@
 
           {#if data.bullets && data.bullets.length > 0}
             <ul class="mt-6 space-y-2.5">
-              {#each data.bullets as bullet}
+              {#each data.bullets as bullet (bullet)}
                 <li class="flex items-center gap-2.5 text-sm text-brand-dark/75">
                   <span class="size-1.5 shrink-0 rounded-full bg-brand-green"></span>
                   <span>{bullet}</span>
@@ -239,7 +239,7 @@
 
           {#if data.bullets && data.bullets.length > 0}
             <ul class="mt-6 space-y-2.5">
-              {#each data.bullets as bullet}
+              {#each data.bullets as bullet (bullet)}
                 <li class="flex items-center gap-2.5 text-sm text-brand-dark/75">
                   <span class="size-1.5 shrink-0 rounded-full bg-brand-green"></span>
                   <span>{bullet}</span>

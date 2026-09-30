@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { EventGalleryPhoto, EventCategory } from "$lib/types/events";
   import { X, ChevronLeft, ChevronRight, Expand } from "lucide-svelte";
-  import { _ } from "svelte-i18n";
 
   interface Props {
     photos: EventGalleryPhoto[];

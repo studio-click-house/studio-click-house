@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { ArrowUpRight, Sparkles } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
 
   let sectionElement = $state<HTMLElement>();
@@ -96,7 +95,7 @@
 
     <!-- 3D Showcase Grid (Large Editorial Cards) -->
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-      {#each showcases as item}
+      {#each showcases as item (item.title)}
         <div
           class="gallery-card group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-brand-dark/10 bg-white transition-all duration-300 hover:border-brand-green {item.span}"
         >
@@ -128,7 +127,7 @@
 
             <!-- Tags -->
             <div class="flex flex-wrap items-center gap-2 pt-2">
-              {#each item.tags as tag}
+              {#each item.tags as tag (tag)}
                 <span class="rounded-full bg-brand-dark/5 px-3 py-1 text-xs font-semibold text-brand-dark/70">
                   {tag}
                 </span>

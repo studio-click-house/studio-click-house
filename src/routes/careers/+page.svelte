@@ -19,7 +19,7 @@
     url: `${siteConfig.url}/careers`,
     name: `Careers & Opportunities | ${siteConfig.name}`,
     description:
-      "Explore career opportunities and join the production team at Studio Click House. Learn about openings for image retouchers, CGI artists, and editors.",
+      "Learn about Studio Click House careers and how to contact the team about future opportunities.",
     provider: {
       "@type": "Organization",
       name: siteConfig.name,
@@ -30,8 +30,9 @@
 
 <PageMeta
   title="Careers & Opportunities | Studio Click House"
-  description="Explore career opportunities and join the production team at Studio Click House. Learn about openings for image retouchers, CGI artists, and editors."
+  description="Learn about Studio Click House careers and how to contact the team about future opportunities."
   canonicalPath="/careers"
+  noindex
 />
 
 <JsonLd data={careersSchema} />

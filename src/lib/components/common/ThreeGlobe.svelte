@@ -3,10 +3,6 @@
   import type * as THREE from "three";
   import type { ClientLocationMarker } from "$lib/types/content";
 
-  interface Props {
-    locations: ClientLocationMarker[];
-  }
-
   interface WorldMapData {
     features: Array<{
       type: "Feature";
@@ -28,22 +24,6 @@
     color: string;
     stroke: number;
     dashOffset: number;
-  }
-
-  interface GlobePoint {
-    lat: number;
-    lng: number;
-    color: string;
-    radius?: number;
-  }
-
-  interface GlobeRing {
-    lat: number;
-    lng: number;
-    color: string;
-    maxR?: number;
-    propagationSpeed?: number;
-    repeatPeriod?: number;
   }
 
   interface ActiveLabel {
@@ -82,17 +62,13 @@
   const DHAKA_LNG = 90.356;
 
   // Home view: focused directly on Bangladesh Studio Hub (Dhaka)
-  const HOME_LAT = DHAKA_LAT;
-  const HOME_LNG = DHAKA_LNG;
   const INITIAL_ROTATION_X = DHAKA_LAT * (Math.PI / 180); // ~0.413 rad: centers Dhaka vertically
   const INITIAL_ROTATION_Y = -DHAKA_LNG * (Math.PI / 180); // ~-1.577 rad: centers Dhaka horizontally facing camera
   const RETURN_DELAY = 2600;
   const HIGHLIGHT_GREEN = "#7ea641"; // Authentic Studio Brand Green (matching 'Start a Project' button)
   const ROUTE_COLORS = ["#7ea641", "#78a03c", "#84ad46", "#7ea641"];
   const GLOBE_COLOR = "#f8f8f6"; // White / Brand Light globe surface
-  const ATMOSPHERE_COLOR = "#7ea641"; // Radiant studio brand green outside atmosphere glow
   const POLYGON_COLOR = "#121110"; // Deep, crisp, high-contrast black dots
-  const ARC_TIME = 1500;
   const ARC_LENGTH = 0.46;
 
   interface StudioRoute {
@@ -245,7 +221,6 @@
     };
   });
 
-  let { locations }: Props = $props();
 
   let containerElement: HTMLDivElement;
   let canvasElement: HTMLCanvasElement;
@@ -414,13 +389,11 @@
       });
       const mapRequestController = new AbortController();
       const arcs = createArcData();
-      let ringCycle = 0;
       let width = 600;
       let height = 540;
       let isRendering = false;
       let isInViewport = false;
       let lastFrameTime = 0;
-      let labelFrame = 0;
 
       camera.position.z = 296;
       renderer.setClearColor(0x000000, 0);
@@ -702,8 +675,6 @@
       const labelNormal = new THREE.Vector3();
 
       // Reusable vectors for 3D flight coordinate projection and line sampling
-      const startVec = new THREE.Vector3();
-      const endVec = new THREE.Vector3();
       const flightPos = new THREE.Vector3();
       const samplePos = new THREE.Vector3();
       const sampleNormal = new THREE.Vector3();
@@ -956,7 +927,6 @@
               rt && (rt.state === "inbound" || rt.state === "outbound");
 
             // Moving file token calculation
-            let fileVisible = false;
             let fx = 0;
             let fy = 0;
 
@@ -983,7 +953,6 @@
                 flightPos.project(camera);
                 fx = (flightPos.x * 0.5 + 0.5) * width;
                 fy = (-(flightPos.y * 0.5) + 0.5) * height;
-                fileVisible = true;
 
                 files.push({
                   id: rt.flightId,

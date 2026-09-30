@@ -24,7 +24,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (context) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } =
+            const { isDesktop, isMobile, reduceMotion } =
               context.conditions!;
             const cards = root.querySelectorAll(".collage-item");
 

@@ -25,7 +25,6 @@
     availableChannel: {
       "@type": "ServiceChannel",
       serviceUrl: `${siteConfig.url}/contact`,
-      serviceSmsNumber: siteConfig.contact.phone,
     },
     provider: {
       "@type": "Organization",

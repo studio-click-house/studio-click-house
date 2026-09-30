@@ -7,20 +7,31 @@
   let heroVideo = $state<HTMLVideoElement | null>(null);
 
   $effect(() => {
-    if (heroVideo) {
+    if (heroVideo && heroSection) {
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let isVisible = false;
       heroVideo.muted = true;
       heroVideo.defaultMuted = true;
       const syncPlayback = () => {
-        if (reducedMotion.matches) {
+        if (reducedMotion.matches || document.hidden || !isVisible) {
           heroVideo?.pause();
         } else {
           void heroVideo?.play().catch(() => {});
         }
       };
-      syncPlayback();
+      const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        syncPlayback();
+      });
+      observer.observe(heroSection);
       reducedMotion.addEventListener("change", syncPlayback);
-      return () => reducedMotion.removeEventListener("change", syncPlayback);
+      document.addEventListener("visibilitychange", syncPlayback);
+      return () => {
+        observer.disconnect();
+        reducedMotion.removeEventListener("change", syncPlayback);
+        document.removeEventListener("visibilitychange", syncPlayback);
+        heroVideo?.pause();
+      };
     }
   });
 
@@ -43,7 +54,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (context) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = context.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = context.conditions!;
             if (reduceMotion) {
               gsap.set(".hero-anim-item", { autoAlpha: 1, y: 0 });
               return;
@@ -87,7 +98,7 @@
     loop
     muted
     playsinline
-    preload="metadata"
+    preload="none"
     class="absolute inset-0 h-full w-full object-cover object-center scale-105 opacity-60"
     aria-label="Studio Click House high-fashion post-production studio showcase"
   >

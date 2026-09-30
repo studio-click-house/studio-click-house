@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { resolve } from "$app/paths";
   import { ArrowRight } from "lucide-svelte";
   import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -332,7 +333,7 @@
 
         <div class="threed-hero-actions flex flex-wrap items-center gap-3.5 pt-1">
           <a
-            href="/contact"
+            href={resolve("/contact")}
             class="group inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-dark px-7 text-sm font-semibold text-brand-light transition-all duration-300 hover:bg-brand-green hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-brand-green"
           >
             <span>Start a 3D Project</span>

@@ -99,7 +99,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (context) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = context.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = context.conditions!;
             if (reduceMotion) {
               gsap.set(".matrix-anim-target", { autoAlpha: 1, y: 0 });
               return;

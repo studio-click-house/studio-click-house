@@ -39,7 +39,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (ctx) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = ctx.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = ctx.conditions!;
             const header = root.querySelector(".partners-header");
             const tiles = root.querySelectorAll(".partner-tile");
 

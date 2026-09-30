@@ -3,7 +3,6 @@
   import { Pause, Play, Volume2, VolumeX } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { loadYouTubeApi, type YouTubePlayer } from "$lib/utils/youtube";
-  import { _ } from "svelte-i18n";
 
   const STUDIO_VIDEO_ID = "9_M5BgsK7MI";
   const YT_STATE_PLAYING = 1;

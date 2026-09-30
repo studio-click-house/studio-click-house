@@ -4,11 +4,9 @@
   import { ArrowDown, ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceShowcaseData } from "$lib/types/service-detail";
-  import { cn } from "$lib/utils";
 
   let { data } = $props<{ data: ServiceShowcaseData }>();
   let section = $state<HTMLElement>();
-  const isLight = $derived(data.theme === "light");
 
   onMount(() => {
     let active = true;
@@ -171,7 +169,7 @@
 
         {#if data.bullets && data.bullets.length > 0}
           <ul class="mt-6 space-y-2.5">
-            {#each data.bullets as bullet}
+            {#each data.bullets as bullet (bullet)}
               <li class="flex items-center gap-2.5 text-sm text-brand-dark/75">
                 <span class="size-1.5 shrink-0 rounded-full bg-brand-green"></span>
                 <span>{bullet}</span>

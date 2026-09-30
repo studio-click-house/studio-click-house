@@ -82,7 +82,7 @@
   }
 
   $effect(() => {
-    page.url.pathname;
+    if (!page.url.pathname) return;
     if (megaMenuCloseTimeout) {
       clearTimeout(megaMenuCloseTimeout);
       megaMenuCloseTimeout = undefined;

@@ -55,7 +55,7 @@
     <link rel="canonical" href={canonical} />
   {/if}
   {#if noindex}
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="noindex" />
   {/if}
 
   <!-- Open Graph -->

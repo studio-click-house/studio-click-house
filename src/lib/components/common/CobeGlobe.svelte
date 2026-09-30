@@ -1,13 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import createGlobe from "cobe";
-  import type { ClientLocationMarker } from "$lib/types/content";
-
-  interface Props {
-    locations: ClientLocationMarker[];
-  }
-
-  let { locations }: Props = $props();
 
   let containerElement: HTMLDivElement;
   let stageElement: HTMLDivElement;
@@ -170,16 +163,6 @@
     visible: boolean;
     scale: number;
     opacity: number;
-  }
-
-  // Active flight transfer in memory
-  interface ActiveFlight {
-    id: string;
-    route: StudioRoute;
-    direction: "inbound" | "outbound";
-    progress: number; // 0.0 to 1.0
-    currentFrame: number;
-    totalFrames: number;
   }
 
   // Country Label Projection
@@ -1134,4 +1117,3 @@
     white-space: nowrap;
   }
 </style>
-

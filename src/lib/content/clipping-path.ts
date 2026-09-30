@@ -1,4 +1,3 @@
-import type { PreviewMedia } from "$lib/types/content";
 import type { ServicePageData } from "$lib/types/service-detail";
 
 const clippingPathMedia = {

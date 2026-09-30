@@ -90,7 +90,7 @@ SCHL accepts RAW files including CR2, NEF, ARW, and DNG, as well as PSD, PSB, TI
 
 ### Volume and quality control
 
-Published production capacity includes 2,000+ image edits per day and 3,000+ garments per week. Capacity depends on complexity, references, and deadline. Each delivery passes an artist review and a senior quality-control review covering masks and paths, retouching, color consistency, file naming, and export settings.
+Published production capacity includes 2,000+ image edits per day. Capacity depends on complexity, references, and deadline. Each delivery passes an artist review and a senior quality-control review covering masks and paths, retouching, color consistency, file naming, and export settings.
 
 ### 2. Video Post-Production Services
 
@@ -108,7 +108,7 @@ Published production capacity includes 2,000+ image edits per day and 3,000+ gar
 
 ## Production Workflow
 
-1. **Upload**: Client uploads raw files via secure file transfer or cloud link
+1. **Share files**: Client and studio agree on a file transfer method for the source files
 2. **Brief**: Project brief and style guide review with the production team
 3. **Production**: Images/video processed by specialist editors and retouchers
 4. **Quality Assurance**: Multi-stage QA review before delivery
@@ -116,7 +116,7 @@ Published production capacity includes 2,000+ image edits per day and 3,000+ gar
 
 ## Response Time
 
-- Initial response: Within 15 minutes during business hours
+- Initial response: We usually respond within 1–2 hours.
 - Turnaround: Depends on project scope; rush delivery available
 
 ---

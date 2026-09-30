@@ -1,17 +1,10 @@
 <script lang="ts">
-  import type { CompanyEvent, EventGalleryPhoto } from "$lib/types/events";
+  import type { CompanyEvent } from "$lib/types/events";
   import {
-    Images,
     X,
     ChevronLeft,
     ChevronRight,
-    ArrowUpRight,
-    Expand,
-    MapPin,
-    Calendar,
-    Sparkles,
   } from "lucide-svelte";
-  import { _ } from "svelte-i18n";
 
   interface Props {
     events: CompanyEvent[];

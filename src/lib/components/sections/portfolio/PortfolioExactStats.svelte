@@ -33,7 +33,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (ctx) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = ctx.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = ctx.conditions!;
             const metricItems = root.querySelectorAll(".metric-anim-item");
             const ctaCard = root.querySelector(".cta-anim-card");
 

@@ -22,7 +22,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (context) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = context.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = context.conditions!;
             const img = panoramaSection?.querySelector(".panorama-frame-img");
             const caption = panoramaSection?.querySelector(".panorama-caption");
 

@@ -49,9 +49,9 @@
   function onPointerUp(e: PointerEvent) {
     if (!isDragging || !trackRef) return;
     isDragging = false;
-    try {
+    if (trackRef.hasPointerCapture(e.pointerId)) {
       trackRef.releasePointerCapture(e.pointerId);
-    } catch {}
+    }
   }
 
   onMount(() => {

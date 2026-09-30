@@ -24,7 +24,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (ctx) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = ctx.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = ctx.conditions!;
             const items = root.querySelectorAll(".manifesto-anim-item");
 
             if (reduceMotion) {

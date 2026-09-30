@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { resolve } from "$app/paths";
   import { Play, Pause, Volume2, VolumeX, Check, ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { VideoAiGenerationData } from "$lib/content/video-editing";
@@ -141,7 +142,7 @@
 
         <!-- Features List -->
         <div class="space-y-3 pt-2">
-          {#each data.features as item}
+          {#each data.features as item (item.title)}
             <div class="flex items-start gap-3">
               <div class="flex size-5 items-center justify-center rounded-full bg-brand-green/20 text-brand-green shrink-0 mt-0.5">
                 <Check size={12} strokeWidth={2.5} />
@@ -160,7 +161,7 @@
 
         <div class="pt-2">
           <a
-            href="/contact"
+            href={resolve("/contact")}
             class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-brand-green font-bold hover:text-brand-dark transition-colors"
           >
             <span>Commission AI Video</span>

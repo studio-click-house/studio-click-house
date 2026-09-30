@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { resolve } from "$app/paths";
   import { Play, Pause, Volume2, VolumeX, ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { VideoHeroData } from "$lib/content/video-editing";
@@ -129,7 +130,7 @@
 
       <div class="video-hero-actions flex flex-wrap items-center gap-3.5 pt-1">
         <a
-          href="/contact"
+          href={resolve("/contact")}
           class="group inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-green px-7 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:bg-brand-light focus-visible:outline-2 focus-visible:outline-brand-light"
         >
           <span>Start a Video Project</span>

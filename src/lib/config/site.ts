@@ -22,7 +22,6 @@ export const siteConfig = {
     location: "Level 1, West Boxnagar, Demra, Dhaka-1361",
     country: "Bangladesh",
     timezone: "UTC+6",
-    responseTime: "Within 15 minutes",
     offices: [
       {
         id: "bangladesh",

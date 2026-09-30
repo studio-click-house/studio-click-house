@@ -83,7 +83,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (context) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = context.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = context.conditions!;
             if (reduceMotion) {
               gsap.set(".process-fade-item", { autoAlpha: 1, y: 0 });
               return;

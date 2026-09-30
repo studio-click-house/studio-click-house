@@ -75,7 +75,7 @@
 
     <!-- 4-Step Process Grid (Rounded Cards with Green Border Hover) -->
     <div class="workflow-grid mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {#each steps as item}
+      {#each steps as item (item.step)}
         <div class="workflow-card flex flex-col justify-between rounded-[2rem] border border-brand-dark/10 bg-white p-7 sm:p-8 transition-colors duration-300 hover:border-brand-green">
           <div class="space-y-4">
             <div class="flex items-center justify-between">

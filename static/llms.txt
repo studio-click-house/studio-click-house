@@ -12,7 +12,6 @@
 - [Contact](https://studioclickhouse.com/contact)
 - [Events](https://studioclickhouse.com/events)
 - [CSR](https://studioclickhouse.com/csr)
-- [Careers](https://studioclickhouse.com/careers)
 
 ## Service Categories
 
@@ -27,11 +26,13 @@
 - [AI Photo Retouch](https://studioclickhouse.com/services/ai-retouch)
 
 ### Video Post-Production
+- [Video Editing and Color Grading](https://studioclickhouse.com/services/video-editing)
 - Commercial Editing
 - Color Grading
 - Social Media Cutdowns
 
 ### 3D & CGI
+- [3D Modeling and CGI](https://studioclickhouse.com/services/3d-modeling)
 - 3D Product Modeling
 - Texturing & Shading
 - CGI Rendering
@@ -47,11 +48,6 @@
 
 ## Production facts
 
-- Standard image turnaround is typically 12–24 hours when the brief and volume allow; rush delivery is agreed per project.
-- Accepted source files include RAW files such as CR2, NEF, ARW, and DNG, plus PSD, PSB, TIFF, JPEG, and PNG where appropriate.
-- The studio supports individual jobs and high-volume catalog batches, with published examples of 2,000+ image edits per day and 3,000+ garments processed weekly.
-- Each delivery passes artist review and senior quality control for edges, retouching, color, naming, and export settings.
-- Clients can request a free trial edit using sample images before starting a full batch.
 - Start a project through info@studioclickhouse.com, WhatsApp, or the contact page.
 
 ## Detailed Documentation

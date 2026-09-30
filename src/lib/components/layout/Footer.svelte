@@ -36,14 +36,6 @@
     { label: "Contact", href: "/contact" },
   ];
 
-  const policyLinks = [
-    { label: "CSR & Community", href: "/csr" },
-    { label: "Data Security & NDA", href: "/privacy" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Refund Policy", href: "/terms" },
-  ] as const;
-
   const affiliations = [
     {
       name: "BACCO",
@@ -173,27 +165,6 @@
           >
             {siteConfig.contact.email}
           </a>
-        </div>
-
-        <!-- Newsletter Subscription -->
-        <div class="max-w-md pt-2">
-          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 block mb-2">
-            {$_('footer.newsletterTitle') || 'Join our newsletter'}
-          </span>
-          <form class="flex w-full items-center">
-            <input
-              type="email"
-              placeholder={$_('footer.newsletterPlaceholder') || 'Enter your email'}
-              required
-              class="w-full rounded-l-md border border-r-0 border-brand-dark/15 bg-white px-3 py-2 text-[0.8rem] text-brand-dark placeholder:text-brand-dark/40 focus:border-brand-green focus:outline-none focus:ring-1 focus:ring-brand-green"
-            />
-            <button
-              type="submit"
-              class="rounded-r-md bg-brand-dark px-4 py-2 text-[0.8rem] font-semibold text-white transition-colors hover:bg-brand-green whitespace-nowrap border border-brand-dark hover:border-brand-green"
-            >
-              {$_('footer.newsletterButton') || 'Subscribe'}
-            </button>
-          </form>
         </div>
 
         <!-- Original Studio Social Media Tiles -->
@@ -436,24 +407,18 @@
             </ul>
           </div>
 
-          <!-- Policy -->
           <div class="space-y-2.5">
             <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/45">
-              {$_('footer.policy') || 'Policy'}
+              Community
             </p>
-            <ul class="space-y-1.5 text-[0.82rem]">
-              {#each policyLinks as link, idx (link.label)}
-                <li>
-                  <a
-                    href={resolve(link.href)}
-                    class="text-brand-dark/70 hover:text-brand-green transition-colors"
-                  >
-                    {$_(`footer.policyLinks.${idx}`) || link.label}
-                  </a>
-                </li>
-              {/each}
-            </ul>
+            <a
+              href={resolve("/csr")}
+              class="text-[0.82rem] text-brand-dark/70 hover:text-brand-green transition-colors"
+            >
+              CSR &amp; Community
+            </a>
           </div>
+
         </div>
       </div>
     </div>
@@ -503,15 +468,7 @@
       </p>
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
         <a
-          href={resolve("/privacy")}
-          class="hover:text-brand-dark transition-colors">{$_('footer.privacy') || 'Privacy'}</a
-        >
-        <a
-          href={resolve("/terms")}
-          class="hover:text-brand-dark transition-colors">{$_('footer.terms') || 'Terms'}</a
-        >
-        <a
-          href="#top"
+          href="#site-header"
           onclick={scrollToTop}
           class="group flex items-center gap-1.5 text-brand-dark hover:text-brand-green transition-colors font-bold"
         >

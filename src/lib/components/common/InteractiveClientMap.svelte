@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { clientLocations } from "$lib/content/home";
   import type { AboutPageData } from "$lib/types/about";
   import { _ } from "svelte-i18n";
   import { resolve } from "$app/paths";
@@ -148,7 +147,7 @@
       >
         <div class="globe-ambient" aria-hidden="true"></div>
         {#if ThreeGlobe}
-          <ThreeGlobe locations={clientLocations} />
+          <ThreeGlobe />
         {/if}
       </div>
     </div>

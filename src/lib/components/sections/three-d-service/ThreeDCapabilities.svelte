@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Check, ArrowRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
 
   let sectionElement = $state<HTMLElement>();
@@ -100,7 +99,7 @@
 
     <!-- 4 Capabilities Grid (Rounded Cards with Green Border Hover) -->
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {#each capabilities as item}
+      {#each capabilities as item (item.number)}
         <div class="capability-card flex flex-col justify-between rounded-[2rem] border border-brand-dark/10 bg-white p-7 sm:p-8 transition-colors duration-300 hover:border-brand-green">
           <div class="space-y-5">
             <span class="font-mono text-xl font-bold text-brand-green">
@@ -118,7 +117,7 @@
 
             <!-- Deliverable bullets -->
             <div class="space-y-2 pt-2 border-t border-brand-dark/6">
-              {#each item.deliverables as d}
+              {#each item.deliverables as d (d)}
                 <div class="flex items-center gap-2">
                   <div class="size-1 rounded-full bg-brand-green shrink-0"></div>
                   <span class="font-sans text-xs text-brand-dark/80 font-medium">{d}</span>

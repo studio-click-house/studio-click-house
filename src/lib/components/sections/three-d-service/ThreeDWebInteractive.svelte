@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Check, ArrowRight, Eye, Smartphone, Zap } from "lucide-svelte";
+  import { ArrowRight, Eye, Smartphone, Zap } from "lucide-svelte";
+  import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
 
   let sectionElement = $state<HTMLElement>();
@@ -106,7 +107,7 @@
 
         <div class="pt-2">
           <a
-            href="/contact"
+            href={resolve("/contact")}
             class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-brand-green font-bold hover:text-brand-dark transition-colors"
           >
             <span>Commission Web 3D</span>

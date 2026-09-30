@@ -29,6 +29,9 @@ const errorPage = read("src/routes/+error.svelte");
 assert(errorPage.includes("noindex"), "Error responses must be noindex");
 assert(!errorPage.includes('canonicalPath="/404"'), "Error responses must not canonicalize to /404");
 assert(read("src/routes/login/+page.svelte").includes("noindex"), "Login must be noindex");
+const contactPage = read("src/lib/components/sections/contact/ContactPage.svelte");
+assert(contactPage.includes("mailto:${siteConfig.contact.email}?subject="), "Contact form must prepare an addressed email");
+assert(!contactPage.includes("We received your project details"), "Contact form must not claim an unsent inquiry was received");
 
 const mainContentFiles = [
   "src/routes/about/+page.svelte",
@@ -111,8 +114,8 @@ assert(preloader.includes('(min-width: 64rem)'), "The preloader must be limited 
 assert(preloader.includes("schl-logo-360.webp"), "The preloader must use its display-sized optimized logo");
 assert(/\.preloader-logo-complete\s*\{[^}]*opacity:\s*0\.08;/s.test(preloader), "The preloader must expose immediate first-paint content");
 assert(preloader.indexOf('classList.add("preloader-measure-target")') < preloader.indexOf("const sourceRect"), "Preloader layout reads must be batched after its measurement class write");
-assert(/isCompactViewport\s*\?\s*900\s*:\s*1500/.test(preloader), "Compact viewports must not retain the full desktop preloader delay");
-assert(preloader.includes("isCompactViewport ? 0.9 : 1.46"), "Compact preloader formation must finish sooner on slower devices");
+assert(preloader.includes("minimumDisplayDuration = 0"), "Preloader must not impose an extra display delay");
+assert(preloader.includes("isCompactViewport ? 0.4 : 0.55"), "Desktop preloader formation must stay brief");
 
 assert(!clientMap.includes("globeFallbackTimer"), "The Three.js globe must load only near its viewport, never from an unconditional startup timer");
 
@@ -120,11 +123,12 @@ const floatingSocialBar = read("src/lib/components/layout/FloatingSocialBar.svel
 assert(!floatingSocialBar.includes('preload = "auto"'), "The audio brief must not preload before explicit playback");
 assert(!floatingSocialBar.includes("tryAutoplay"), "The audio brief must not trigger a page-load network request through autoplay");
 
-const productionProcess = read("src/lib/components/sections/ProductionProcess.svelte");
+const studioDressColorways = read("src/lib/content/media.ts");
 for (const colorway of ["emerald", "cobalt", "plum"]) {
-  assert(productionProcess.includes(`dress-color-${colorway}.webp`), `${colorway} colorway must use its optimized WebP asset`);
-  assert(!productionProcess.includes(`dress-color-${colorway}.png`), `${colorway} colorway must not use its multi-megabyte PNG asset`);
+  assert(studioDressColorways.includes(`dress-color-${colorway}.webp`), `${colorway} colorway must use its optimized WebP asset`);
+  assert(!studioDressColorways.includes(`dress-color-${colorway}.png`), `${colorway} colorway must not use its multi-megabyte PNG asset`);
 }
+assert(read("src/lib/components/sections/StudioIntroduction.svelte").includes("studioDressColorways"), "Studio introduction must use the optimized colorway assets");
 
 const optimizedHomeImages = [
   "static/images/about/video-pipeline/stage-1-raw-synthesis.webp",
@@ -155,7 +159,8 @@ assert(/cgiProductShowcaseV2:\s*\{[^}]*width:\s*1200,[^}]*height:\s*675,/s.test(
 assert(statSync(join(root, "static/images/portfolio/3d-cgi-showcase-v2.webp")).size < 100_000, "The 3D showcase WebP must stay below 100 KB");
 
 const homeContent = read("src/lib/content/home.ts");
-assert(/poster:\s*"https:\/\/images\.pexels\.com\/photos\/37848029\/[^"]+w=960"/.test(homeContent), "The video showcase must use a display-sized poster URL");
+assert(homeContent.includes('poster: "/images/work-fields/studio-production-poster.jpg"'), "The video showcase must use its local poster");
+assert(existsSync(join(root, "static/images/work-fields/studio-production-poster.jpg")), "The video showcase poster must exist");
 
 const aiAbout = read("src/lib/components/sections/AiAboutSection.svelte");
 assert((aiAbout.match(/-320\.webp 320w/g) ?? []).length === 4, "AI workflow cards must provide 320px responsive candidates");

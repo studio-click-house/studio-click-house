@@ -57,7 +57,7 @@
             reduceMotion: "(prefers-reduced-motion: reduce)",
           },
           (ctx) => {
-            const { isDesktop, isTablet, isMobile, reduceMotion } = ctx.conditions!;
+            const { isDesktop, isTablet, reduceMotion } = ctx.conditions!;
             const elements = root.querySelectorAll(".showreel-anim-target");
 
             if (reduceMotion) {

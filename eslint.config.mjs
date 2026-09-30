@@ -24,12 +24,19 @@ export default [
     },
   },
   {
+    files: ["**/*.cjs"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
+  {
     ignores: [
       ".agents/**",
       ".codex/**",
       ".svelte-kit/**",
       "build/**",
       "node_modules/**",
+      "static/draco/**",
     ],
   },
 ];

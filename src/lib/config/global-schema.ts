@@ -22,8 +22,8 @@ export const globalSchemaGraph = {
       logo: {
         "@type": "ImageObject",
         url: `${siteConfig.url}/images/brand/schl-logo.png`,
-        width: 600,
-        height: 300,
+        width: 715,
+        height: 377,
       },
       image: `${siteConfig.url}/images/brand/schl-logo.png`,
       description: siteConfig.description,

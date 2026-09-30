@@ -37,7 +37,6 @@
           availableChannel: {
             "@type": "ServiceChannel",
             serviceUrl: `${siteConfig.url}/contact`,
-            serviceSmsNumber: siteConfig.contact.phone,
           },
           provider: {
             "@type": "Organization",
@@ -97,7 +96,7 @@
   <ServiceDetailIntro data={pageData.intro} />
   <ServiceDetailBeforeAfter data={pageData.beforeAfter} />
   <ServiceDetailShowcase data={pageData.showcase} />
-  {#each pageData.additionalBeforeAfter ?? [] as comparison}
+  {#each pageData.additionalBeforeAfter ?? [] as comparison (comparison.heading)}
     <ServiceDetailBeforeAfter
       data={comparison}
       sectionId={comparison.sectionId}

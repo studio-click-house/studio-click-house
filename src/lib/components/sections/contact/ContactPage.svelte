@@ -30,7 +30,6 @@
   let selectedService = $state<(typeof contactServices)[number]>(
     contactServices[0],
   );
-  let formStatus = $state("");
   let briefPrepared = $state(false);
   let emailCopied = $state(false);
   let selectedServiceDetail = $derived(
@@ -57,8 +56,24 @@
     const form = event.currentTarget;
     if (!(form instanceof HTMLFormElement) || !form.reportValidity()) return;
 
+    const fields = new FormData(form);
+    const name = String(fields.get("name") ?? "").trim();
+    const email = String(fields.get("email") ?? "").trim();
+    const phone = String(fields.get("phone") ?? "").trim();
+    const company = String(fields.get("company") ?? "").trim();
+    const message = String(fields.get("message") ?? "").trim();
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone || "Not provided"}`,
+      `Company: ${company || "Not provided"}`,
+      `Service: ${selectedService}`,
+      "",
+      message,
+    ].join("\n");
+
     briefPrepared = true;
-    formStatus = "We received your project details, we will reply shortly.";
+    window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(`Project inquiry from ${name}`)}&body=${encodeURIComponent(body)}`;
   }
 
   function handleScrollTo(target: string, offset = -60) {
@@ -461,14 +476,14 @@
               {#if briefPrepared}
                 <p class="flex items-start gap-2 text-brand-dark/76 font-medium">
                   <Check size={14} class="mt-0.5 shrink-0 text-brand-green" />
-                  {formStatus}
+                  If your email app opened, send the prepared draft. Nothing has been submitted yet.
                 </p>
               {:else}
                 <p>{$_('contact.form.responseTime') || 'We usually respond within 1–2 hours.'}</p>
               {/if}
             </div>
             <button type="submit" class="brief-submit group">
-              {$_('contact.form.submit') || 'Submit details'}
+              Open email draft
               <ArrowUpRight
                 size={16}
                 class="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

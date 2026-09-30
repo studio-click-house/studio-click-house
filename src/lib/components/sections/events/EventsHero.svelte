@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { CompanyEvent } from "$lib/types/events";
-  import { _ } from "svelte-i18n";
 
   interface Props {
     upcoming: CompanyEvent;
