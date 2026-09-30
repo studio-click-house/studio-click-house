@@ -61,10 +61,10 @@
       >
         <!-- Primary Master Frame -->
         <figure
-          class="hero-primary absolute right-0 top-0 w-[86%] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white p-2 shadow-xl"
+          class="hero-primary absolute right-0 top-0 w-[86%] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-2 shadow-xl"
           data-events-hero-primary
         >
-          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-xl">
+          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem]">
             <img
               src={nepalTour?.image || upcoming.image}
               alt={nepalTour?.imageAlt || upcoming.imageAlt}
@@ -80,10 +80,10 @@
         <!-- Secondary Photo Still -->
         {#if mawaTour}
           <figure
-            class="hero-secondary absolute bottom-[8%] left-0 w-[42%] -rotate-2 overflow-hidden rounded-xl border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
+            class="hero-secondary absolute bottom-[8%] left-0 w-[42%] -rotate-2 overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
             data-events-hero-card
           >
-            <div class="aspect-[4/3] w-full overflow-hidden rounded-lg">
+            <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem]">
               <img
                 src={mawaTour.image}
                 alt={mawaTour.imageAlt}
@@ -101,10 +101,10 @@
         <!-- Tertiary Photo Still -->
         {#if footballTour}
           <figure
-            class="hero-tertiary absolute -bottom-1 right-[10%] w-[38%] rotate-2 overflow-hidden rounded-xl border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
+            class="hero-tertiary absolute -bottom-1 right-[10%] w-[38%] rotate-2 overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
             data-events-hero-card
           >
-            <div class="aspect-[4/3] w-full overflow-hidden rounded-lg">
+            <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem]">
               <img
                 src={footballTour.image}
                 alt={footballTour.imageAlt}

@@ -84,7 +84,7 @@
 >
   <div class="grid lg:min-h-[42rem] lg:grid-cols-2">
     <div
-      class="relative m-4 min-h-[22rem] overflow-hidden rounded-2xl lg:order-2 lg:my-6 lg:mr-6 lg:ml-0 lg:min-h-0"
+      class="relative m-4 min-h-[22rem] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] lg:order-2 lg:my-6 lg:mr-6 lg:ml-0 lg:min-h-0"
     >
       <img
         src={careers.bgMedia.src}

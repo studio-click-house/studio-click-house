@@ -191,9 +191,9 @@
       >
         <!-- Primary Master Frame: Full Collective Celebration -->
         <figure
-          class="hero-photo-primary absolute right-0 top-0 w-[88%] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white p-2 shadow-xl"
+          class="hero-photo-primary absolute right-0 top-0 w-[88%] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-2 shadow-xl"
         >
-          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-brand-dark/5">
+          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem] bg-brand-dark/5">
             <img
               src="/images/about/team/studio-click-house-team-01.jpg"
               alt="Studio Click House team collective"
@@ -207,9 +207,9 @@
 
         <!-- Secondary Photo Still: Production Floor & Workstations -->
         <figure
-          class="hero-photo-card absolute bottom-[8%] left-0 w-[46%] -rotate-2 overflow-hidden rounded-xl border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
+          class="hero-photo-card absolute bottom-[8%] left-0 w-[46%] -rotate-2 overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
         >
-          <div class="aspect-[4/3] w-full overflow-hidden rounded-lg bg-brand-dark/5">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem] bg-brand-dark/5">
             <img
               src="/images/about/team/studio-click-house-team-02.jpg"
               alt="Studio Click House production floor workstations"
@@ -225,9 +225,9 @@
 
         <!-- Tertiary Photo Still: Color Grading Suite -->
         <figure
-          class="hero-photo-card absolute -bottom-2 right-[8%] w-[40%] rotate-2 overflow-hidden rounded-xl border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
+          class="hero-photo-card absolute -bottom-2 right-[8%] w-[40%] rotate-2 overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
         >
-          <div class="aspect-[4/3] w-full overflow-hidden rounded-lg bg-brand-dark/5">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem] bg-brand-dark/5">
             <img
               src="/images/about/team/studio-click-house-team-03.jpg"
               alt="Studio Click House color grading suite"

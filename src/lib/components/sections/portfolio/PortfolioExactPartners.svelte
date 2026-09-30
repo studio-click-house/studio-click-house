@@ -112,7 +112,7 @@
 
     <!-- Full-Width Luxury Partner Matrix with Responsive 1px Hairline Grid -->
     <div
-      class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 rounded-2xl border border-brand-dark/10 bg-brand-dark/10 gap-[1px] shadow-sm overflow-hidden"
+      class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-brand-dark/10 gap-[1px] shadow-sm overflow-hidden"
     >
       {#each partners as partner (partner.src)}
         <div

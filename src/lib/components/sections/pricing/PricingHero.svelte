@@ -254,7 +254,7 @@
           {#each imageShowcases as item, cardIdx (item.title)}
             <div class="hero-img-anim w-full">
               <div
-                class="group relative flex min-h-[220px] sm:min-h-[330px] md:min-h-[390px] lg:min-h-[430px] xl:min-h-[470px] w-full flex-col overflow-hidden rounded-2xl sm:rounded-[1.5rem] bg-white shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.18)] hover:-translate-y-2 {item.offsetClass}"
+                class="group relative flex min-h-[220px] sm:min-h-[330px] md:min-h-[390px] lg:min-h-[430px] xl:min-h-[470px] w-full flex-col overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-white shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.18)] hover:-translate-y-2 {item.offsetClass}"
               >
                 <!-- Cross-fading Images List -->
                 {#each item.images as img, imgIdx (img.src)}

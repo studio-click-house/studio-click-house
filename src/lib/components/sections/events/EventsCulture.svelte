@@ -35,7 +35,7 @@
         <article
           id={`activity-${activity.id}`}
           class:activity-lead={index === 0}
-          class="activity-card group relative min-h-[22rem] overflow-hidden rounded-xl bg-brand-dark"
+          class="activity-card group relative min-h-[22rem] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-dark"
           data-event-culture-card
         >
           <img

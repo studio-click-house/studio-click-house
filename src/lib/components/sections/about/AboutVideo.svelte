@@ -165,7 +165,7 @@
   <div class="site-shell">
     <div
       bind:this={bannerRef}
-      class="relative aspect-[16/10] sm:aspect-[2.35/1] w-full overflow-hidden rounded-2xl bg-brand-dark shadow-2xl"
+      class="relative aspect-[16/10] sm:aspect-[2.35/1] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-dark shadow-2xl"
     >
       <div
         class="pointer-events-none absolute left-1/2 top-1/2 h-[130%] w-[118%] -translate-x-1/2 -translate-y-1/2 scale-[1.06]"

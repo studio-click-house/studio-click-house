@@ -100,10 +100,10 @@
             <button
               type="button"
               onclick={() => openTourGallery(event, 0)}
-              class="group relative block aspect-[16/11] w-full overflow-hidden rounded-2xl border border-brand-dark/10 bg-white p-2 text-left shadow-xl transition-all duration-500 hover:shadow-2xl sm:aspect-[16/10] cursor-pointer"
+              class="group relative block aspect-[16/11] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-2 text-left shadow-xl transition-all duration-500 hover:shadow-2xl sm:aspect-[16/10] cursor-pointer"
               aria-label={`Open photo gallery for ${event.title}`}
             >
-              <div class="relative size-full overflow-hidden rounded-xl">
+              <div class="relative size-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem]">
                 <img
                   src={event.image}
                   alt={event.imageAlt}
@@ -131,10 +131,10 @@
               <button
                 type="button"
                 onclick={() => openTourGallery(event, 1)}
-                class="group/offset absolute -bottom-6 -right-3 hidden sm:block w-[38%] overflow-hidden rounded-xl border border-brand-dark/12 bg-white p-1.5 shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 cursor-pointer {index % 2 === 1 ? '-rotate-2 -left-3 right-auto' : 'rotate-2'}"
+                class="group/offset absolute -bottom-6 -right-3 hidden sm:block w-[38%] overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-1.5 shadow-2xl transition-all duration-500 hover:scale-105 hover:z-30 cursor-pointer {index % 2 === 1 ? '-rotate-2 -left-3 right-auto' : 'rotate-2'}"
                 aria-label="Enlarge preview snapshot"
               >
-                <div class="aspect-[4/3] w-full overflow-hidden rounded-lg">
+                <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem]">
                   <img
                     src={gallery[1].src}
                     alt={gallery[1].alt}
@@ -293,7 +293,7 @@
 
     <!-- Center Stage: Exhibition Stills -->
     <div class="relative flex max-h-[85vh] w-full max-w-5xl flex-col items-center justify-center pt-8">
-      <div class="relative max-h-[64vh] max-w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+      <div class="relative max-h-[64vh] max-w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-white/10 shadow-2xl">
         <img
           src={currentPhoto.src}
           alt={currentPhoto.alt}

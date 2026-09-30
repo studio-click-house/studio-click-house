@@ -533,7 +533,7 @@
         <button
           type="button"
           onclick={() => openImage(item)}
-          class="group relative overflow-hidden rounded-2xl border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center"
+          class="group relative overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center"
           aria-label="View {item.title}"
         >
           <img
@@ -590,7 +590,7 @@
     ></button>
 
     <div
-      class="relative z-10 flex max-h-[92vh] max-w-5xl w-full flex-col items-center overflow-hidden rounded-3xl bg-brand-dark border border-white/15 shadow-2xl"
+      class="relative z-10 flex max-h-[92vh] max-w-5xl w-full flex-col items-center overflow-hidden rounded-[2rem] bg-brand-dark border border-white/15 shadow-2xl"
     >
       <button
         bind:this={closeButton}
@@ -606,7 +606,7 @@
         <img
           src={selectedImage.src}
           alt={selectedImage.alt}
-          class="h-full w-full object-contain max-h-[72vh] rounded-xl border border-white/10"
+          class="h-full w-full object-contain max-h-[72vh] rounded-[1.5rem] border border-white/10"
         />
       </div>
 

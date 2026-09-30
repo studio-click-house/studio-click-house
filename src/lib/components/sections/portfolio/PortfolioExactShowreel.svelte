@@ -117,7 +117,7 @@
     </div>
 
     <!-- Video Showcase Container -->
-    <div class="showreel-anim-target relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl md:rounded-3xl overflow-hidden border border-brand-dark/10 bg-brand-dark shadow-2xl group">
+    <div class="showreel-anim-target relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden border border-brand-dark/10 bg-brand-dark shadow-2xl group">
       <video
         bind:this={showreelVideo}
         poster="/images/work-fields/studio-production-poster.jpg"

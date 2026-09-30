@@ -494,7 +494,7 @@
 
         <aside class="lg:col-span-4">
           <div
-            class="overflow-hidden rounded-[1rem] border border-brand-dark/14 bg-brand-light"
+            class="overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/14 bg-brand-light"
           >
             <figure>
               <img

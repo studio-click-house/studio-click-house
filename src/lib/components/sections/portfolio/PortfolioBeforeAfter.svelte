@@ -149,7 +149,7 @@
         <div class="relative w-[280px] sm:w-[360px] lg:w-[380px] xl:w-[420px] max-w-[calc(100vw-3rem)] aspect-[4/5] flex items-center justify-center">
           <!-- One frame keeps every process stage the same size. -->
           <div
-            class="relative w-full h-full rounded-2xl overflow-hidden bg-white shadow-lg border border-brand-dark/10 z-10 select-none"
+            class="relative w-full h-full rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden bg-white shadow-lg border border-brand-dark/10 z-10 select-none"
           >
             <!-- Images Layer with crossfade -->
             {#each stages as stage, idx (stage.step)}

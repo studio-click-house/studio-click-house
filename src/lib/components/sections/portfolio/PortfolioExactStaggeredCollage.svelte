@@ -96,7 +96,7 @@
       <div class="md:col-span-6 flex flex-col gap-8">
         <!-- Top Left: Large Editorial Campaign Showcase -->
         <div
-          class="collage-item group overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
+          class="collage-item group overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm"
         >
           <div class="aspect-[4/3] w-full overflow-hidden bg-brand-dark/5">
             <img
@@ -138,7 +138,7 @@
           </div>
 
           <div
-            class="collage-item group aspect-square overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm flex items-center justify-center p-3 sm:p-4"
+            class="collage-item group aspect-square overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm flex items-center justify-center p-3 sm:p-4"
           >
             <img
               src="/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-front-after.webp"
@@ -180,7 +180,7 @@
           class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center"
         >
           <div
-            class="collage-item group aspect-[3/4] overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
+            class="collage-item group aspect-[3/4] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm"
           >
             <img
               src="/images/services/model-beauty/model-female-headshot-white-blouse-0997-after.webp"
@@ -208,7 +208,7 @@
 
         <!-- Bottom Right Feature Card (Footwear Vector Isolation) -->
         <div
-          class="collage-item group overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm"
+          class="collage-item group overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white shadow-sm"
         >
           <div
             class="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-white flex items-center justify-center p-4 sm:p-8"

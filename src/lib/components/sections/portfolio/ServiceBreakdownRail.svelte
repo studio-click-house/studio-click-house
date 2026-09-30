@@ -461,7 +461,7 @@
   .breakdown-fallback-stage figure {
     aspect-ratio: 3 / 4;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: clamp(1.75rem, 2vw, 2rem);
   }
 
   .breakdown-fallback-stage img {
@@ -491,7 +491,7 @@
     max-height: calc(var(--breakdown-height, 44rem) - 5rem);
     aspect-ratio: 3 / 4;
     overflow: hidden;
-    border-radius: clamp(1rem, 1.6vw, 1.5rem);
+    border-radius: clamp(1.75rem, 2vw, 2rem);
     background: var(--color-brand-paper);
   }
 

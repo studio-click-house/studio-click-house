@@ -180,7 +180,7 @@
         class="people-contact-frame group relative md:col-span-7 lg:col-span-6"
       >
         <div
-          class="relative aspect-[5/4] overflow-hidden rounded-2xl bg-brand-light"
+          class="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-light"
         >
           <img
             src={people.heroCollectiveMedia.src}
@@ -223,7 +223,7 @@
               : ''}"
           >
             <div
-              class="relative aspect-[4/3] overflow-hidden rounded-xl bg-brand-light"
+              class="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-light"
             >
               <img
                 src={moment.media.src}
@@ -309,7 +309,7 @@
               class="people-snapshot-card group relative w-[280px] shrink-0 snap-start sm:w-[320px] lg:w-[350px] flex flex-col"
             >
               <div
-                class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-brand-light"
+                class="relative aspect-[3/4] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-light"
               >
                 <img
                   src={snapshot.media.src}

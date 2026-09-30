@@ -178,10 +178,10 @@
       id="discipline-panel-{activeTab}"
       role="tabpanel"
       aria-labelledby="discipline-tab-{activeTab}"
-      class="matrix-anim-target grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-2xl md:rounded-3xl border border-brand-dark/10 bg-white p-6 sm:p-8 lg:p-12 shadow-sm"
+      class="matrix-anim-target grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-6 sm:p-8 lg:p-12 shadow-sm"
     >
       <!-- Visual Column (Clean, Perfectly Fitted Preview Frame) -->
-      <div class="lg:col-span-6 relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-square xl:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden {current.bg || 'bg-white'} border border-brand-dark/10 flex items-center justify-center {current.fit === 'cover' ? 'p-0' : 'p-6 sm:p-10'} shadow-2xs">
+      <div class="lg:col-span-6 relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-square xl:aspect-[4/3] rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden {current.bg || 'bg-white'} border border-brand-dark/10 flex items-center justify-center {current.fit === 'cover' ? 'p-0' : 'p-6 sm:p-10'} shadow-2xs">
         <img
           src={current.image}
           alt="{current.label} deliverable preview"

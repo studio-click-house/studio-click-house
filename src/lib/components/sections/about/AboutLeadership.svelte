@@ -233,7 +233,7 @@
         <div class="flex flex-col lg:col-span-4">
           <article class="leader-card group relative flex flex-1 flex-col w-full max-w-[360px]">
             <div
-              class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-brand-paper"
+              class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-paper"
             >
               <img
                 src={mdCard.media.src}
@@ -302,7 +302,7 @@
               class="leader-card group relative w-[85%] shrink-0 snap-start sm:w-[320px] lg:w-[360px] flex flex-col"
             >
               <div
-                class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-brand-paper"
+                class="leader-media relative aspect-[4/5] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-paper"
               >
                 <img
                   src={member.media.src}

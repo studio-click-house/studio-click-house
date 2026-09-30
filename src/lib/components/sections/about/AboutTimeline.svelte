@@ -179,7 +179,7 @@
             >
               {#if milestone.media}
                 <div
-                  class="group relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-brand-paper"
+                  class="group relative aspect-[16/10] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] bg-brand-paper"
                 >
                   <img
                     src={milestone.media.src}

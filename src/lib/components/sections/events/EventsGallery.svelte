@@ -132,9 +132,9 @@
           type="button"
           onclick={() => openLightbox(index)}
           aria-label={`Open photo ${photo.caption || photo.alt}`}
-          class="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl border border-brand-dark/10 bg-white p-1.5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+          class="group relative block aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-brand-dark/10 bg-white p-1.5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
         >
-          <div class="relative size-full overflow-hidden rounded-xl">
+          <div class="relative size-full overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem]">
             <img
               src={photo.src}
               alt={photo.alt}
@@ -244,7 +244,7 @@
 
     <!-- Main Lightbox Photo -->
     <div class="relative flex max-h-[85vh] w-full max-w-5xl flex-col items-center justify-center pt-8">
-      <div class="relative max-h-[64vh] max-w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+      <div class="relative max-h-[64vh] max-w-full overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-white/10 shadow-2xl">
         <img
           src={current.src}
           alt={current.alt}
