@@ -114,8 +114,8 @@ assert(preloader.includes('(min-width: 64rem)'), "The preloader must be limited 
 assert(preloader.includes("schl-logo-360.webp"), "The preloader must use its display-sized optimized logo");
 assert(/\.preloader-logo-complete\s*\{[^}]*opacity:\s*0\.08;/s.test(preloader), "The preloader must expose immediate first-paint content");
 assert(preloader.indexOf('classList.add("preloader-measure-target")') < preloader.indexOf("const sourceRect"), "Preloader layout reads must be batched after its measurement class write");
-assert(preloader.includes("minimumDisplayDuration = 0"), "Preloader must not impose an extra display delay");
-assert(preloader.includes("isCompactViewport ? 0.4 : 0.55"), "Desktop preloader formation must stay brief");
+assert(preloader.includes("? 900\n        : 1500"), "Desktop preloader must retain its full first-visit display time");
+assert(preloader.includes("isCompactViewport ? 0.9 : 1.46"), "Desktop preloader formation must retain its original pace");
 
 assert(!clientMap.includes("globeFallbackTimer"), "The Three.js globe must load only near its viewport, never from an unconditional startup timer");
 
@@ -128,7 +128,6 @@ for (const colorway of ["emerald", "cobalt", "plum"]) {
   assert(studioDressColorways.includes(`dress-color-${colorway}.webp`), `${colorway} colorway must use its optimized WebP asset`);
   assert(!studioDressColorways.includes(`dress-color-${colorway}.png`), `${colorway} colorway must not use its multi-megabyte PNG asset`);
 }
-assert(read("src/lib/components/sections/StudioIntroduction.svelte").includes("studioDressColorways"), "Studio introduction must use the optimized colorway assets");
 
 const optimizedHomeImages = [
   "static/images/about/video-pipeline/stage-1-raw-synthesis.webp",

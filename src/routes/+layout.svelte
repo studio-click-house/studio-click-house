@@ -24,13 +24,12 @@
   });
 
   afterNavigate((navigation) => {
-    // Force scroll to top on page change, unless navigating to a hash link
+    // Run after SvelteKit and browser history have applied their scroll state.
     if (!navigation.to?.url.hash) {
-      if (lenisRuntime?.lenis) {
-        lenisRuntime.lenis.scrollTo(0, { immediate: true });
-      } else {
+      requestAnimationFrame(() => {
+        lenisRuntime?.lenis.scrollTo(0, { immediate: true });
         window.scrollTo(0, 0);
-      }
+      });
     }
 
     setTimeout(() => {

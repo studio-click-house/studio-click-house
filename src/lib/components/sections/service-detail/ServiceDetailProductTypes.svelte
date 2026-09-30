@@ -83,12 +83,12 @@
           gsap.from(".sd-pt-header", {
             autoAlpha: 0,
             y: 22,
-            duration: 0.72,
+            duration: 0.42,
             ease: "power3.out",
             clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 88%",
+              start: "top 95%",
               once: true,
             },
           });
@@ -96,13 +96,13 @@
           gsap.from(".sd-pt-item", {
             autoAlpha: 0,
             y: 24,
-            duration: 0.7,
-            stagger: 0.08,
+            duration: 0.4,
+            stagger: 0.04,
             ease: "power3.out",
             clearProps: "all",
             scrollTrigger: {
               trigger: ".sd-pt-grid",
-              start: "top 88%",
+              start: "top 95%",
               once: true,
             },
           });

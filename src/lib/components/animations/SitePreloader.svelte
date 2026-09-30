@@ -44,7 +44,11 @@
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const isCompactViewport = window.innerWidth < 640;
-    const minimumDisplayDuration = 0;
+    const minimumDisplayDuration = reduceMotion
+      ? 180
+      : isCompactViewport
+        ? 900
+        : 1500;
     let formationTimeline: { kill: () => void } | undefined;
     let landingTimeline: { kill: () => void } | undefined;
     let hideTimer: ReturnType<typeof setTimeout> | undefined;
@@ -176,7 +180,7 @@
             landing,
             {
               progress: 1,
-              duration: isCompactViewport ? 0.25 : 0.35,
+              duration: isCompactViewport ? 0.52 : 0.82,
               ease: "none",
               onUpdate: renderLandingParticles,
             },
@@ -186,7 +190,7 @@
             backdrop,
             {
               autoAlpha: 0,
-              duration: isCompactViewport ? 0.22 : 0.32,
+              duration: isCompactViewport ? 0.48 : 0.76,
               ease: "power2.inOut",
             },
             0.04,
@@ -451,7 +455,7 @@
           .timeline({ onComplete: completeFormation })
           .to(formation, {
             progress: 1,
-            duration: isCompactViewport ? 0.4 : 0.55,
+            duration: isCompactViewport ? 0.9 : 1.46,
             ease: "none",
             onUpdate: renderParticles,
           })

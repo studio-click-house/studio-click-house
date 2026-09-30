@@ -94,7 +94,10 @@
 <main id="main-content" class="relative min-h-screen bg-brand-light">
   <ServiceDetailHero data={pageData.hero} />
   <ServiceDetailIntro data={pageData.intro} />
-  <ServiceDetailBeforeAfter data={pageData.beforeAfter} />
+  <ServiceDetailBeforeAfter
+    data={pageData.beforeAfter}
+    imageLoading="eager"
+  />
   <ServiceDetailShowcase data={pageData.showcase} />
   {#each pageData.additionalBeforeAfter ?? [] as comparison (comparison.heading)}
     <ServiceDetailBeforeAfter

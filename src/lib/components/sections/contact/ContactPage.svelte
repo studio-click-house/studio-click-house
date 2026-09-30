@@ -266,7 +266,7 @@
                   alt={contactHeroImages[2].alt}
                   width={1024}
                   height={1024}
-                  loading="lazy"
+                  loading="eager"
                   aspectClass="aspect-square w-full"
                 />
               </div>

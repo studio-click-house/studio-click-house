@@ -25,13 +25,13 @@
           gsap.from(".sd-cta-reveal", {
             autoAlpha: 0,
             y: 34,
-            duration: 0.85,
-            stagger: 0.09,
+            duration: 0.45,
+            stagger: 0.04,
             ease: "power3.out",
             clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 88%",
+              start: "top 95%",
               toggleActions: "play none none none",
             },
           });

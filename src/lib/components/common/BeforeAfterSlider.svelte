@@ -21,6 +21,7 @@
     backRightWidth?: number;
     backRightHeight?: number;
     mediaFit?: "cover" | "contain";
+    imageLoading?: "eager" | "lazy";
     showLabels?: boolean;
   }
 
@@ -44,6 +45,7 @@
     backRightWidth = width,
     backRightHeight = height,
     mediaFit = "cover",
+    imageLoading = "lazy",
   }: Props = $props();
 
   let sliderPosition = $state(52);
@@ -261,7 +263,8 @@
         alt={beforeAlt}
         width={beforeWidth}
         height={beforeHeight}
-        loading="lazy"
+        loading={imageLoading}
+        fetchpriority={imageLoading === "eager" ? "low" : undefined}
         class="{comparisonMediaClass} {beforeSrc === afterSrc
           ? '[filter:saturate(0.5)_contrast(0.9)_brightness(0.92)]'
           : ''}"
@@ -277,7 +280,8 @@
         alt={afterAlt}
         {width}
         {height}
-        loading="lazy"
+        loading={imageLoading}
+        fetchpriority={imageLoading === "eager" ? "low" : undefined}
         class={comparisonMediaClass}
       />
     </figure>

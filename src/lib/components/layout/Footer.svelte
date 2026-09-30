@@ -142,6 +142,8 @@
               alt="Studio Click House"
               width="190"
               height="95"
+              loading="lazy"
+              decoding="async"
               class="h-9 w-auto"
             />
           </div>

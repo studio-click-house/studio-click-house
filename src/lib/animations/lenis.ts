@@ -9,10 +9,6 @@ export function onLenisScroll(listener: () => void) {
 
 let activeLenis: { scrollTo: (target: string | HTMLElement | number, options?: Record<string, unknown>) => void } | null = null;
 
-export function getLenis() {
-  return activeLenis;
-}
-
 export function scrollToTarget(
   target: string | HTMLElement,
   options: { offset?: number; immediate?: boolean; duration?: number } = {},

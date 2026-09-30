@@ -248,6 +248,7 @@
         <img
           src={current.src}
           alt={current.alt}
+          loading="eager"
           class="max-h-[64vh] max-w-full object-contain"
         />
       </div>
@@ -277,6 +278,8 @@
             <img
               src={thumb.src}
               alt=""
+              loading="lazy"
+              decoding="async"
               class="size-full object-cover"
             />
           </button>

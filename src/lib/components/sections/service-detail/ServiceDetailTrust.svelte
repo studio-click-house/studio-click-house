@@ -70,12 +70,12 @@
           gsap.from(".sd-trust-left", {
             autoAlpha: 0,
             y: 24,
-            duration: 0.72,
+            duration: 0.42,
             ease: "power3.out",
             clearProps: "all",
             scrollTrigger: {
               trigger: section,
-              start: "top 88%",
+              start: "top 95%",
               once: true,
             },
           });
@@ -83,13 +83,13 @@
           gsap.from(".sd-trust-cell", {
             autoAlpha: 0,
             y: 20,
-            duration: 0.68,
-            stagger: 0.06,
+            duration: 0.4,
+            stagger: 0.035,
             ease: "power3.out",
             clearProps: "all",
             scrollTrigger: {
               trigger: ".sd-trust-grid",
-              start: "top 88%",
+              start: "top 95%",
               once: true,
             },
           });

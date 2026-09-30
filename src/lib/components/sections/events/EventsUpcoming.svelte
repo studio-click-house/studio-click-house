@@ -24,6 +24,8 @@
           alt={event.imageAlt}
           width="1600"
           height="1040"
+          loading="lazy"
+          decoding="async"
           class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out hover:scale-105"
         />
       </figure>

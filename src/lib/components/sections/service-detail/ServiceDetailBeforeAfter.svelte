@@ -10,7 +10,12 @@
   let {
     data,
     sectionId = "service-detail-before-after",
-  } = $props<{ data: ServiceBeforeAfterData; sectionId?: string }>();
+    imageLoading = "lazy",
+  } = $props<{
+    data: ServiceBeforeAfterData;
+    sectionId?: string;
+    imageLoading?: "eager" | "lazy";
+  }>();
   const headingId = $derived(`${sectionId}-title`);
   let section = $state<HTMLElement>();
 
@@ -31,7 +36,7 @@
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
-                start: "top 88%",
+                start: "top 95%",
                 once: true,
               },
               defaults: { ease: "power3.out" },
@@ -39,7 +44,7 @@
             .from(".sd-ba-copy", {
               autoAlpha: 0,
               y: 22,
-              duration: 0.78,
+              duration: 0.42,
               clearProps: "all",
             })
             .from(
@@ -47,7 +52,7 @@
               {
                 autoAlpha: 0,
                 y: 36,
-                duration: 0.85,
+                duration: 0.48,
                 clearProps: "all",
               },
               "-=0.48",
@@ -108,7 +113,8 @@
                 alt={data.beforeAlt}
                 width={data.width}
                 height={data.height}
-                loading="lazy"
+                loading={imageLoading}
+                fetchpriority={imageLoading === "eager" ? "low" : undefined}
                 class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
               <span
@@ -126,7 +132,8 @@
                 alt={data.afterAlt}
                 width={data.width}
                 height={data.height}
-                loading="lazy"
+                loading={imageLoading}
+                fetchpriority={imageLoading === "eager" ? "low" : undefined}
                 class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
               <span
@@ -209,6 +216,7 @@
               beforeLabel={data.beforeLabel}
               afterLabel={data.afterLabel}
               showLabels={data.showLabels}
+              imageLoading={imageLoading}
               mediaFit="contain"
               ariaLabel="Compare before and after service results"
             />

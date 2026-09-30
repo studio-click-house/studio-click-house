@@ -138,6 +138,8 @@
                   <img
                     src={gallery[1].src}
                     alt={gallery[1].alt}
+                    loading="lazy"
+                    decoding="async"
                     class="size-full object-cover transition-transform duration-500 group-hover/offset:scale-105"
                   />
                 </div>
@@ -295,6 +297,7 @@
         <img
           src={currentPhoto.src}
           alt={currentPhoto.alt}
+          loading="eager"
           class="max-h-[64vh] max-w-full object-contain"
         />
       </div>
@@ -325,6 +328,8 @@
             <img
               src={thumb.src}
               alt=""
+              loading="lazy"
+              decoding="async"
               class="size-full object-cover"
             />
           </button>

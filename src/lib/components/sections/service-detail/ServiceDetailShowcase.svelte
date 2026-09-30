@@ -25,7 +25,7 @@
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
-                start: "top 88%",
+                start: "top 95%",
                 once: true,
               },
               defaults: { ease: "expo.out" },
@@ -33,7 +33,7 @@
             .from(".sd-proof-copy", {
               autoAlpha: 0,
               y: 22,
-              duration: 0.82,
+              duration: 0.42,
               clearProps: "all",
             })
             .from(
@@ -42,8 +42,8 @@
                 autoAlpha: 0,
                 y: 38,
                 scale: 0.965,
-                duration: 0.9,
-                stagger: 0.1,
+                duration: 0.48,
+                stagger: 0.04,
                 clearProps: "all",
               },
               "-=0.5",
@@ -54,8 +54,8 @@
               ".sd-proof-metric-reveal",
               {
                 yPercent: 110,
-                duration: 0.72,
-                stagger: 0.08,
+                duration: 0.4,
+                stagger: 0.04,
                 clearProps: "all",
               },
               "-=0.62",

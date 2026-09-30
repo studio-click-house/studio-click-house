@@ -50,7 +50,7 @@
             .timeline({
               scrollTrigger: {
                 trigger: currentSection,
-                start: "top 88%",
+                start: "top 95%",
                 once: true,
               },
               defaults: { ease: "power3.out" },
@@ -58,7 +58,7 @@
             .from(".sd-intro-header", {
               autoAlpha: 0,
               y: 22,
-              duration: 0.72,
+              duration: 0.42,
               clearProps: "all",
             })
             .from(
@@ -66,8 +66,8 @@
               {
                 autoAlpha: 0,
                 x: -20,
-                duration: 0.7,
-                stagger: 0.12,
+                duration: 0.4,
+                stagger: 0.05,
                 clearProps: "all",
               },
               "-=0.4",
@@ -77,7 +77,7 @@
               {
                 autoAlpha: 0,
                 scale: 0.97,
-                duration: 0.75,
+                duration: 0.42,
                 clearProps: "all",
               },
               "-=0.5",
@@ -87,8 +87,8 @@
               {
                 autoAlpha: 0,
                 x: 20,
-                duration: 0.7,
-                stagger: 0.12,
+                duration: 0.4,
+                stagger: 0.05,
                 clearProps: "all",
               },
               "-=0.6",

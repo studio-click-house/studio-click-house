@@ -11,6 +11,7 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       external: ["node:dns/promises"],
       output: {
