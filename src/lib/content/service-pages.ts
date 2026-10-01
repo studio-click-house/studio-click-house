@@ -49,11 +49,8 @@ export function resolveServiceHref(slug: string): ResolvedPathname {
   if (videoServiceSlugs.has(slug)) {
     return `/services/video-editing#${slug}` as ResolvedPathname;
   }
-  if (slug === "3d-modeling") {
+  if (slug === "3d-modeling" || threeDimensionalServiceSlugs.has(slug)) {
     return resolve("/services/3d-modeling");
-  }
-  if (threeDimensionalServiceSlugs.has(slug)) {
-    return `/services/3d-modeling#${slug}` as ResolvedPathname;
   }
   return resolve("/services#photo-editing");
 }

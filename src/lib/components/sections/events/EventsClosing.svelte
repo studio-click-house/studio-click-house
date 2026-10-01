@@ -17,6 +17,9 @@
       <div class="pointer-events-none absolute -right-1/4 -bottom-1/4 h-full w-3/4 rounded-full bg-brand-green/15 blur-[100px] transition-opacity duration-700"></div>
       
       <div class="relative z-10 lg:col-span-7">
+        <p class="eyebrow mb-3 text-brand-light/60">
+          {$_("sectionLabels.culture")}
+        </p>
         <h2
           class="max-w-[13ch] font-display text-[clamp(2.5rem,4.5vw,4.8rem)] leading-[0.94] tracking-[-0.04em]"
         >

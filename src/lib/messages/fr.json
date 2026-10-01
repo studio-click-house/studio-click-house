@@ -1,4 +1,36 @@
 {
+  "sectionLabels": {
+    "studio": "Post-production visuelle",
+    "about": "Notre studio",
+    "aiWorkflow": "Production d’images avec l’IA",
+    "clients": "Clients sélectionnés",
+    "aiVideo": "Post-production image et vidéo",
+    "photoToVideo": "De la photo au mouvement",
+    "faq": "Questions et réponses",
+    "project": "Votre prochain projet",
+    "quality": "Standards de production",
+    "people": "Notre équipe",
+    "journey": "Notre parcours",
+    "careers": "Carrières au studio",
+    "culture": "Culture du studio",
+    "upcoming": "À venir",
+    "pricing": "Tarifs de production",
+    "assurances": "Services inclus",
+    "comparison": "Avant et après",
+    "showcase": "Travaux sélectionnés",
+    "video": "Post-production vidéo",
+    "commercial": "Montage publicitaire",
+    "grading": "Étalonnage",
+    "social": "Vidéo pour les réseaux sociaux",
+    "generation": "Génération vidéo avec l’IA",
+    "workflow": "Processus de production",
+    "delivery": "Standards de livraison",
+    "threeD": "Production 3D et CGI",
+    "contact": "Contactez le studio",
+    "brief": "Brief du projet",
+    "offices": "Implantations du studio",
+    "divisions": "Domaines de service"
+  },
   "nav": {
     "login": "Connexion",
     "free_trial": "Essai gratuit",
@@ -195,6 +227,11 @@
       }
     ],
     "showcaseProjects": {
+      "ai-image-workflow": {
+        "title": "Retouche photo par IA",
+        "description": "Production et finition d'images de mode assistées par IA, avec une vérification attentive des textures et des détails produit.",
+        "category": "Workflow image IA"
+      },
       "photo-editing": {
         "title": "Retouche photo",
         "description": "Retouche, correction colorimétrique, détourage et finition propre pour des images de campagne et e-commerce soignées.",
@@ -212,11 +249,19 @@
       }
     },
     "hero": {
-      "title1": "Chaque image,",
-      "title2": "sublimée",
-      "title3": "avec précision.",
-      "subtitle": "Studio Click House façonne images fixes et animées pour les marques, studios et équipes de production exigeant une finition parfaite.",
-      "cta": "Démarrer un projet",
+      "badge": "Studio Click House · Post-Production Visuelle",
+      "title1": "Post-production visuelle",
+      "title2": "Pensée pour l'échelle",
+      "targetAudience": "E-Commerce · Marques · Équipes créatives",
+      "subtitle": "Retouche d'images à fort volume, modélisation CGI et post-production vidéo pour les marques et équipes créatives du monde entier.",
+      "bookMeeting": "Prendre rendez-vous",
+      "startTrial": "Essai gratuit",
+      "capacityLabel": "Capacité",
+      "capacityNumber": "150+",
+      "capacityRole": "Spécialistes en interne",
+      "capacitySub": "Production 24/7 · 2 000+ retouches par jour",
+      "identityLabel": "Notre identité",
+      "identityDesc": "Depuis 2015, nous soutenons les équipes créatives en coulisses avec une capacité de post-production dédiée.",
       "explore": "Découvrir les services",
       "scroll": "Faire défiler"
     },
@@ -262,8 +307,8 @@
       "title1": "Post-production vidéo",
       "title2": "IA professionnelle.",
       "copy1": "Accélérez votre production vidéo grâce à l'IA générative. De la génération de plans sur modèle avec Kling, Flow et Veo à l'upscaling vidéo 4K–8K et aux finitions cinématographiques, nous livrons des vidéos prêtes pour la diffusion mondiale.",
-      "copy2": "Post-production vidéo par IA avec supervision artisanale à chaque image.",
-      "copy3": "Chaque séquence est finalisée par des monteurs et étalonneurs experts pour une fidélité cinématographique optimale.",
+      "copy2": "De la photo à la vidéo avec l’IA",
+      "copy3": "Nous donnons du mouvement à vos images fixes. Nos monteurs et étalonneurs affinent chaque image pour obtenir un mouvement naturel, une couleur cinématographique et un rendu cohérent.",
       "capabilities": [
         "Génération texte-vidéo",
         "Upscaling IA 4K–8K",
@@ -272,19 +317,12 @@
       ],
       "stages": {
         "stage1": {
-          "tag": "RAW 1080p · BROUILLON",
-          "title": "Synthèse Générative",
-          "description": "Création de plans à partir de texte avec la vélocité de l'IA."
-        },
-        "stage2": {
-          "tag": "4K UHD · 60 FPS",
-          "title": "Upscaling Temporel",
-          "description": "Vecteurs de flux optique pour une cohérence 4K irréprochable."
+          "title": "Photo source",
+          "description": "Nous créons une séquence animée à partir de votre image et de votre brief."
         },
         "stage3": {
-          "tag": "ACEScg · MASTER QC",
-          "title": "Finitions Artisanales",
-          "description": "Étalonnage précis image par image, montage et contrôle qualité."
+          "title": "Vidéo générée",
+          "description": "Nos monteurs et étalonneurs peaufinent le mouvement, la couleur et les détails image par image."
         }
       },
       "explore": "Découvrir le montage & la post-production vidéo"
@@ -357,7 +395,7 @@
     "showcaseIntro": {
       "title1": "Nos",
       "title2": "services",
-      "description": "Un partenaire unique pour des images fixes impeccables, des vidéos percutantes et des visuels 3D photoréalistes."
+      "description": "Un partenaire unique pour des images assistées par IA, des photos soignées, des vidéos maîtrisées et des visuels 3D crédibles."
     },
     "aboutOrbit": {
       "eyebrow": "Notre système de production",
@@ -831,6 +869,7 @@
       "discussProject": "Échanger sur un projet",
       "viewCapabilities": "Découvrir nos expertises",
       "disciplines": [
+        "Retouche photo par IA",
         "Retouche photo",
         "Post-production vidéo",
         "3D & CGI"
@@ -840,6 +879,10 @@
       "heading": "Services de production",
       "planWorkflow": "Planifier ce flux de travail",
       "divisions": [
+        {
+          "title": "L’imagerie IA, guidée avec intention.",
+          "description": "Des visuels mode et produit assistés par l’IA, affinés selon votre direction artistique, vos références et vos besoins de production."
+        },
         {
           "title": "Chaque pixel, magnifié.",
           "description": "Retouche et sublimation d'images à fort volume avec toute la finesse requise pour la mode, la joaillerie, le produit et les campagnes.",

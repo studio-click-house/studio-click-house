@@ -118,7 +118,7 @@
       <!-- Left Side: Editorial Headline & Copy -->
       <div class="sd-trust-left lg:sticky lg:top-28 lg:col-span-5 lg:pr-6">
         <p
-          class="font-display text-lg font-bold tracking-tight text-brand-dark/70 sm:text-xl"
+          class="eyebrow text-brand-dark/50"
         >
           {preheading}
         </p>

@@ -149,6 +149,9 @@
 >
   <div class="service-shell site-shell">
     <header class="service-header">
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.divisions")}
+      </p>
       <h2 id="studio-services-title" class="service-title font-display">
         {$_('nav.services') || 'Our services'}
       </h2>

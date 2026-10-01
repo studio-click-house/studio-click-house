@@ -5,6 +5,7 @@
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import { siteConfig } from "$lib/config/site";
   import { buildBreadcrumbSchema } from "$lib/utils/breadcrumbs";
+  import { stripTitlePunctuation } from "$lib/utils";
   import { _ } from "svelte-i18n";
 
   const breadcrumbData = buildBreadcrumbSchema([
@@ -60,14 +61,21 @@
     <div
       class="border-x border-brand-dark/10 px-5 pb-10 pt-12 sm:px-10 lg:px-16"
     >
-      <p class="eyebrow text-brand-green-ink">{$_('csr.eyebrow') || 'Operating with Intent'}</p>
+      <p class="eyebrow text-brand-dark/50">
+        {$_("csr.eyebrow") || "Operating with Intent"}
+      </p>
 
       <div class="mt-8 max-w-4xl border-b border-brand-dark/15 pb-12">
-        <h1 class="display-title">{$_('csr.title') || 'Digital CSR'}</h1>
+        <h1
+          class="hero-display-title text-[clamp(2.75rem,6vw,6rem)] leading-[0.9] tracking-[-0.06em]"
+        >
+          {stripTitlePunctuation($_("csr.title") || "Digital CSR")}
+        </h1>
         <p
           class="mt-8 max-w-xl text-base leading-relaxed text-brand-dark/65 sm:text-lg"
         >
-          {$_('csr.description') || 'We believe post-production should respect the human hands behind the screens and the environments powering our digital pipelines.'}
+          {$_("csr.description") ||
+            "We believe post-production should respect the human hands behind the screens and the environments powering our digital pipelines."}
         </p>
       </div>
 
@@ -79,7 +87,7 @@
               class="border-b border-brand-dark/10 pb-10 last:border-0 last:pb-0"
             >
               <span
-                class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-brand-green-ink"
+                class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-brand-dark/50"
               >
                 Pillar · {pillar.id.replace("-", " ")}
               </span>
@@ -105,16 +113,18 @@
             <h3
               class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand-dark"
             >
-              {$_('csr.sidebar.partnerTitle') || 'Partnering on Impact'}
+              {$_("csr.sidebar.partnerTitle") || "Partnering on Impact"}
             </h3>
             <p class="mt-4 text-xs leading-relaxed text-brand-dark/65">
-              {$_('csr.sidebar.partnerDesc') || 'Are you a registered non-profit, cultural archive, or public arts group in need of specialized post-production, color, or archiving services?'}
+              {$_("csr.sidebar.partnerDesc") ||
+                "Are you a registered non-profit, cultural archive, or public arts group in need of specialized post-production, color, or archiving services?"}
             </p>
             <a
               href={resolve("/contact")}
               class="text-link mt-6 text-brand-dark"
             >
-              {$_('csr.sidebar.pitchProject') || 'Pitch your project'} <ArrowUpRight size={14} />
+              {$_("csr.sidebar.pitchProject") || "Pitch your project"}
+              <ArrowUpRight size={14} />
             </a>
           </div>
 
@@ -122,10 +132,11 @@
             <h3
               class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand-dark"
             >
-              {$_('csr.sidebar.commitTitle') || 'Our Commitment'}
+              {$_("csr.sidebar.commitTitle") || "Our Commitment"}
             </h3>
             <p class="mt-4 text-xs leading-relaxed text-brand-dark/65">
-              {$_('csr.sidebar.commitDesc') || 'By choosing Studio Click House, you support a digital supply chain that prioritizes workers and utilizes energy-conscious cloud delivery nodes.'}
+              {$_("csr.sidebar.commitDesc") ||
+                "By choosing Studio Click House, you support a digital supply chain that prioritizes workers and utilizes energy-conscious cloud delivery nodes."}
             </p>
           </div>
         </div>

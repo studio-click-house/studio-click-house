@@ -19,6 +19,9 @@
 >
   <div class="site-shell relative z-10 mb-10 text-center">
     <div>
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.clients")}
+      </p>
       <h2
         id="creative-marquee-title"
         class="font-display text-[clamp(2.6rem,5vw,4.75rem)] leading-[0.9] tracking-[-0.045em]"

@@ -102,6 +102,7 @@ export interface ShowcaseProjectItem {
   category: string;
   title: string;
   description: string;
+  capabilities: string[];
   bgColor: string;
   media: ShowcaseProjectMedia;
   href: RouteId;

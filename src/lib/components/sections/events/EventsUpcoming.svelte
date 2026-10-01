@@ -34,6 +34,9 @@
         class="flex flex-col justify-between lg:col-span-5"
       >
         <div class="space-y-4 sm:space-y-5" data-event-copy>
+          <p class="eyebrow mb-3 text-brand-dark/50">
+            {$_("sectionLabels.upcoming")}
+          </p>
           <h2
             class="max-w-[13ch] font-display text-[clamp(2.4rem,4.2vw,4.6rem)] leading-[0.94] tracking-[-0.035em]"
           >

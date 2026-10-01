@@ -86,6 +86,9 @@
   <div class="site-shell relative z-10">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-end">
       <div class="services-cta-reveal lg:col-span-8">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.project")}
+        </p>
         <h2
           id={data ? "service-detail-cta-title" : "services-cta-title"}
           class={data ? "max-w-[18ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]" : "max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"}

@@ -233,6 +233,7 @@
   }
 
   .trail-kicker {
+    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
     display: flex;
     align-items: center;
     gap: 0.7rem;

@@ -73,7 +73,8 @@
     media: {
       kind: "video",
       src: "/videos/work-fields-studio-production.mp4",
-      poster: "/images/services/model-beauty/model-cue-fashion-editorial-studio-0029.webp",
+      poster:
+        "/images/services/model-beauty/model-cue-fashion-editorial-studio-0029.webp",
       alt: "Photographer producing commercial product imagery in a studio",
       width: 1920,
       height: 1080,
@@ -111,13 +112,7 @@
             category: finalShowcaseProject.category,
             description: finalShowcaseProject.description,
             tags: ["3D", "CGI"],
-            media: {
-              ...finalShowcaseProject.media,
-              src: "/images/about/orbit/ai-3d-cgi.jpg",
-              alt: "3D CGI fragrance bottle render for commercial product visualization",
-              width: 1122,
-              height: 1402,
-            },
+            media: finalShowcaseProject.media,
           },
           ...workFieldGalleryItems,
         ]
@@ -307,7 +302,8 @@
             const workFieldProgressInterval =
               (lastWorkFieldProgressTime - firstWorkFieldProgressTime) /
               Math.max(1, workFieldGalleryItems.length - 1);
-            const initialPanelPositions = [0.50, 0.83, 0.93];
+            const projectTransitionDuration = 0.82;
+            const initialPanelPositions = [0.5, 0.83, 0.93];
             const initialBodyOffsets = [0.34, 0.52, 0.62];
 
             ScrollTrigger.getById("horizontal-projects-entry")?.kill(true);
@@ -326,7 +322,7 @@
                 force3D: true,
               });
               gsap.set(images[index], {
-                scale: 1.12,
+                scale: 1,
                 transformOrigin: "center center",
                 force3D: true,
               });
@@ -374,7 +370,7 @@
             });
             gsap.set(workFieldsMediaExitWash, { autoAlpha: 0 });
             gsap.set(handoffDetails, {
-              top: "70%",
+              top: "0%",
               y: 0,
               autoAlpha: 1,
               force3D: true,
@@ -416,7 +412,7 @@
                 trigger: localSection,
                 start: "top top+=70",
                 end: () =>
-                  `+=${stageHeight() * (3.9 + workFieldTrackSteps * workFieldCardRatio)}`,
+                  `+=${stageHeight() * (3.9 + Math.max(0, panels.length - 3) * projectTransitionDuration + workFieldTrackSteps * workFieldCardRatio)}`,
                 pin: localStage,
                 pinSpacing: true,
                 scrub: true,
@@ -429,180 +425,113 @@
               .to(intro, { xPercent: -100 }, 0)
               .to(panels[0], { x: 0 }, 0)
               .to(panels[1], { x: () => viewportWidth() * 0.666 }, 0)
-              .to(panels[2], { x: () => viewportWidth() * 0.89 }, 0)
-              .to(bodies[0], { y: 0, duration: 0.64, ease: "power2.out" }, 0.2)
+              .to(panels[2], { x: () => viewportWidth() * 0.89 }, 0);
+
+            const revealProject = (
+              index: number,
+              position: number | string,
+              isFirstProject = false,
+            ) => {
+              const offset = (first: number, next: number) => {
+                const value = isFirstProject ? first : next;
+                return typeof position === "number"
+                  ? position + value
+                  : String(position) + "+=" + value;
+              };
+
+              timeline
+                .to(
+                  bodies[index],
+                  { y: 0, duration: 0.64, ease: "power2.out" },
+                  offset(0.2, 0.06),
+                )
+                .to(
+                  mediaReveals[index],
+                  { scaleY: 1, duration: 0.62, ease: "power2.out" },
+                  offset(0.22, 0.08),
+                )
+                .to(
+                  mediaContents[index],
+                  { scaleY: 1, duration: 0.62, ease: "power2.out" },
+                  offset(0.22, 0.08),
+                )
+                .to(
+                  images[index],
+                  { scale: 1, duration: 0.72, ease: "power2.out" },
+                  offset(0.22, 0.08),
+                )
+                .to(
+                  revealLines[index],
+                  {
+                    yPercent: 0,
+                    autoAlpha: 1,
+                    stagger: 0.02,
+                    duration: 0.3,
+                    ease: "power3.out",
+                  },
+                  offset(0.42, 0.28),
+                )
+                .to(
+                  projectLinks[index],
+                  {
+                    scale: 1,
+                    autoAlpha: 1,
+                    duration: 0.2,
+                    ease: "back.out(1.5)",
+                  },
+                  offset(0.2, 0.16),
+                );
+            };
+
+            revealProject(0, 0, true);
+
+            let previousProjectLabel = "firstProject";
+            timeline.addLabel(previousProjectLabel, 0);
+
+            for (let index = 1; index < panels.length; index += 1) {
+              const projectLabel = "project" + (index + 1);
+              const transitionDelay =
+                index === 1 ? 0.92 : projectTransitionDuration;
+
+              timeline
+                .addLabel(
+                  projectLabel,
+                  previousProjectLabel + "+=" + transitionDelay,
+                )
+                .to(
+                  projectLinks[index - 1],
+                  { scale: 0, autoAlpha: 0, duration: 0.15 },
+                  projectLabel + "+=0.5",
+                )
+                .to(
+                  panels[index - 1],
+                  { x: () => viewportWidth() * -0.666 },
+                  projectLabel,
+                )
+                .to(panels[index], { x: 0 }, projectLabel);
+
+              if (panels[index + 1]) {
+                timeline.to(
+                  panels[index + 1],
+                  { x: () => viewportWidth() * 0.666 },
+                  projectLabel,
+                );
+              }
+
+              revealProject(index, projectLabel);
+              previousProjectLabel = projectLabel;
+            }
+
+            const lastProjectIndex = panels.length - 1;
+
+            timeline
+              .addLabel("workFields", previousProjectLabel + "+=1.05")
               .to(
-                mediaReveals[0],
-                { scaleY: 1, duration: 0.62, ease: "power2.out" },
-                0.22,
-              )
-              .to(
-                mediaContents[0],
-                { scaleY: 1, duration: 0.62, ease: "power2.out" },
-                0.22,
-              )
-              .to(
-                images[0],
-                { scale: 1.02, duration: 0.72, ease: "power2.out" },
-                0.22,
-              )
-              .to(
-                revealLines[0],
-                {
-                  yPercent: 0,
-                  autoAlpha: 1,
-                  stagger: 0.02,
-                  duration: 0.3,
-                  ease: "power3.out",
-                },
-                0.42,
-              )
-              .to(
-                projectLinks[0],
-                {
-                  scale: 1,
-                  autoAlpha: 1,
-                  duration: 0.2,
-                  ease: "back.out(1.5)",
-                },
-                0.2,
-              )
-              .addLabel("secondProject", 0.92)
-              .to(
-                projectLinks[0],
-                {
-                  scale: 0,
-                  autoAlpha: 0,
-                  duration: 0.15,
-                },
-                "secondProject+=0.5",
-              )
-              .to(
-                panels[0],
-                { x: () => viewportWidth() * -0.666 },
-                "secondProject",
-              )
-              .to(panels[1], { x: 0 }, "secondProject")
-              .to(
-                panels[2],
-                { x: () => viewportWidth() * 0.666 },
-                "secondProject",
-              )
-              .to(
-                bodies[1],
-                { y: 0, duration: 0.64, ease: "power2.out" },
-                "secondProject+=0.06",
-              )
-              .to(
-                mediaReveals[1],
-                { scaleY: 1, duration: 0.62, ease: "power2.out" },
-                "secondProject+=0.08",
-              )
-              .to(
-                mediaContents[1],
-                { scaleY: 1, duration: 0.62, ease: "power2.out" },
-                "secondProject+=0.08",
-              )
-              .to(
-                images[1],
-                { scale: 1.02, duration: 0.72, ease: "power2.out" },
-                "secondProject+=0.08",
-              )
-              .to(
-                revealLines[1],
-                {
-                  yPercent: 0,
-                  autoAlpha: 1,
-                  stagger: 0.02,
-                  duration: 0.3,
-                  ease: "power3.out",
-                },
-                "secondProject+=0.28",
-              )
-              .to(
-                projectLinks[1],
-                {
-                  scale: 1,
-                  autoAlpha: 1,
-                  duration: 0.2,
-                  ease: "back.out(1.5)",
-                },
-                "secondProject+=0.16",
-              )
-              .addLabel("thirdProject", "secondProject+=0.82")
-              .to(
-                projectLinks[1],
-                {
-                  scale: 0,
-                  autoAlpha: 0,
-                  duration: 0.15,
-                },
-                "thirdProject+=0.5",
-              )
-              .to(
-                panels[1],
-                { x: () => viewportWidth() * -0.666 },
-                "thirdProject",
-              )
-              .to(panels[2], { x: 0 }, "thirdProject")
-              .to(
-                bodies[2],
-                { y: 0, duration: 0.64, ease: "power2.out" },
-                "thirdProject+=0.06",
-              )
-              .to(
-                mediaReveals[2],
-                { scaleY: 1, duration: 0.62, ease: "power2.out" },
-                "thirdProject+=0.08",
-              )
-              .to(
-                mediaContents[2],
-                { scaleY: 1, duration: 0.62, ease: "power2.out" },
-                "thirdProject+=0.08",
-              )
-              .to(
-                images[2],
-                { scale: 1.02, duration: 0.72, ease: "power2.out" },
-                "thirdProject+=0.08",
-              )
-              .to(
-                revealLines[2],
-                {
-                  yPercent: 0,
-                  autoAlpha: 1,
-                  stagger: 0.02,
-                  duration: 0.3,
-                  ease: "power3.out",
-                },
-                "thirdProject+=0.28",
-              )
-              .to(
-                projectLinks[2],
-                {
-                  scale: 1,
-                  autoAlpha: 1,
-                  duration: 0.2,
-                  ease: "back.out(1.5)",
-                },
-                "thirdProject+=0.16",
-              )
-              .addLabel("workFields", "thirdProject+=1.05")
-              .to(
-                projectLinks[2],
-                {
-                  scale: 0,
-                  autoAlpha: 0,
-                  duration: 0.15,
-                },
+                projectLinks[lastProjectIndex],
+                { scale: 0, autoAlpha: 0, duration: 0.15 },
                 "workFields",
               )
-              .set(
-                panels[2],
-                {
-                  autoAlpha: 0,
-                },
-                "workFields",
-              )
+              .set(panels[lastProjectIndex], { autoAlpha: 0 }, "workFields")
               .set(
                 localWorkFieldsStage,
                 {
@@ -794,27 +723,32 @@
       </div>
 
       <div class="relative z-10 flex flex-col items-center text-center">
+        <p class="eyebrow mb-3 text-brand-light/60">
+          {$_("sectionLabels.divisions")}
+        </p>
         <h3
           class="font-display text-[clamp(3.6rem,6.8vw,7.75rem)] font-medium uppercase leading-[0.82] tracking-[-0.065em] text-brand-light"
         >
-          {$_('home.showcaseIntro.title1') || 'Our'}<br />{$_('home.showcaseIntro.title2') || 'services'}
+          {$_("home.showcaseIntro.title1") || "Our"}<br />{$_(
+            "home.showcaseIntro.title2",
+          ) || "services"}
         </h3>
         <p
           class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[36rem] text-center text-[clamp(0.85rem,1.05vw,1.05rem)] leading-[1.4] text-brand-light/85"
         >
-          {$_('home.showcaseIntro.description') || 'One production partner for polished stills, considered motion, and believable 3D imagery—built around the needs of each project.'}
+          {$_("home.showcaseIntro.description") ||
+            "One production partner for polished stills, considered motion, and believable 3D imagery—built around the needs of each project."}
         </p>
       </div>
     </article>
 
     {#each showcaseProjects as project (project.id)}
       <article
-        class="project-panel absolute inset-y-0 left-0 w-[66.6vw] overflow-hidden border-l border-brand-dark/15"
-        style:background-color={project.bgColor}
+        class="project-panel absolute inset-y-0 left-0 w-[66.6vw] overflow-hidden border-l border-brand-dark/15 bg-brand-dark"
         aria-labelledby="project-title-{project.id}"
       >
         <div class="project-body relative z-[1] h-full w-full">
-          <div class="project-media relative h-[70%] overflow-hidden">
+          <div class="project-media absolute inset-0 overflow-hidden">
             <div
               class="project-media-reveal absolute inset-0 origin-top overflow-hidden"
             >
@@ -850,63 +784,73 @@
                       "center"}
                   />
                 {/if}
-
-
               </div>
             </div>
           </div>
 
           <div
-            class="project-details relative flex h-[30%] flex-col px-[clamp(1.25rem,2.4vw,2.75rem)] py-[clamp(0.75rem,1.5vh,1.1rem)] text-brand-dark"
+            class="project-details absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-brand-dark/95 via-brand-dark/35 to-transparent px-[clamp(1.25rem,3vw,3rem)] pb-[clamp(1.5rem,3vw,3rem)] pt-24 text-brand-light"
           >
-            <div
-              class="grid grid-cols-[auto_1fr_1.35fr] items-start gap-[clamp(1rem,3vw,4rem)] border-b border-brand-dark/20 pb-4"
-            >
+            <div class="mb-4 flex items-center gap-4">
               <span
-                class="detail-reveal rounded-full border border-brand-dark/50 px-3 py-1 font-mono text-[0.58rem] font-bold"
+                class="detail-reveal rounded-full border border-brand-light/60 px-3 py-1 font-mono text-[0.65rem] font-bold"
+                ><span class="detail-reveal-inner block">{project.year}</span
+                ></span
               >
-                <span class="detail-reveal-inner block">{project.year}</span>
-              </span>
               <p
-                class="detail-reveal font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
-              >
-                <span class="detail-reveal-inner block">{$_(`home.showcaseProjects.${project.id}.category`) || project.category}</span
-                >
-              </p>
-              <p
-                class="detail-reveal max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
+                class="detail-reveal font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-brand-light/60"
               >
                 <span class="detail-reveal-inner block"
-                  >{$_(`home.showcaseProjects.${project.id}.description`) || project.description}</span
+                  >{$_(`home.showcaseProjects.${project.id}.category`) ||
+                    project.category}</span
                 >
               </p>
             </div>
-
-            <div
-              class="flex flex-1 items-center justify-center px-6 text-center"
+            <h3
+              id="project-title-{project.id}"
+              class="detail-reveal max-w-[12ch] pb-1 font-display text-[clamp(2.8rem,6.4vw,6rem)] font-bold uppercase leading-[0.84] tracking-[-0.06em]"
             >
-              <a
-                href={resolve(project.href as "/services")}
-                class="group text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-dark"
-                aria-label="Explore {project.title} services"
+              <span class="detail-reveal-inner block"
+                >{$_(`home.showcaseProjects.${project.id}.title`) ||
+                  project.title}</span
               >
-                <h3
-                  id="project-title-{project.id}"
-                  class="detail-reveal pb-[0.16em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.95] tracking-[-0.06em]"
+            </h3>
+            <p
+              class="detail-reveal mt-4 max-w-[48ch] text-[clamp(0.95rem,1.35vw,1.25rem)] font-semibold italic leading-[1.3] text-brand-light/90"
+            >
+              <span class="detail-reveal-inner block"
+                >{$_(`home.showcaseProjects.${project.id}.description`) ||
+                  project.description}</span
+              >
+            </p>
+            <ul
+              class="mt-5 flex flex-wrap gap-x-5 gap-y-2"
+              aria-label="Service capabilities"
+            >
+              {#each project.capabilities as capability}
+                <li
+                  class="detail-reveal inline-flex items-center gap-2 font-mono text-[0.58rem] font-bold uppercase tracking-[0.12em] text-brand-light/80"
                 >
-                  <span class="detail-reveal-inner block align-middle">
-                    {$_(`home.showcaseProjects.${project.id}.title`) || project.title}
-                    <span
-                      class="project-link inline-flex align-middle ml-[0.15em]"
-                    >
-                      <ArrowUpRight
-                        class="h-[0.58em] w-[0.58em] transition-transform duration-300 group-hover:translate-x-[0.08em] group-hover:-translate-y-[0.08em]"
-                      />
-                    </span>
-                  </span>
-                </h3>
-              </a>
-            </div>
+                  <span
+                    class="detail-reveal-inner inline-flex items-center gap-2"
+                    ><span
+                      class="size-2 rounded-full bg-brand-green"
+                      aria-hidden="true"
+                    ></span>{capability}</span
+                  >
+                </li>
+              {/each}
+            </ul>
+            <a
+              href={resolve(project.href as "/services")}
+              class="group project-link mt-6 inline-flex w-fit items-center gap-3 border-b-2 border-brand-green pb-2 font-mono text-xs font-bold uppercase tracking-[0.14em] text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+              aria-label="View capabilities for {project.title}"
+            >
+              {$_("services.hero.viewCapabilities") || "View capabilities"}
+              <ArrowUpRight
+                class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </a>
           </div>
         </div>
       </article>
@@ -924,7 +868,7 @@
 
       <div class="work-fields-desktop relative h-full w-full">
         <div
-          class="work-fields-media-viewport absolute inset-y-0 left-0 h-full w-[66.6%] overflow-hidden bg-brand-light"
+          class="work-fields-media-viewport absolute inset-y-0 left-0 h-full w-[66.6%] overflow-hidden bg-brand-dark"
         >
           <div class="work-fields-media-content h-full w-full">
             <div class="work-fields-media-track h-full">
@@ -935,7 +879,7 @@
                 >
                   {#if index === 0 && finalShowcaseProject && item.media.kind === "image"}
                     <div
-                      class="work-field-handoff-media relative h-[70%] overflow-hidden"
+                      class="work-field-handoff-media relative h-full overflow-hidden bg-brand-dark"
                     >
                       <img
                         src={item.media.src}
@@ -946,50 +890,70 @@
                         height={item.media.height}
                         loading="lazy"
                         class="work-field-image h-full w-full object-cover object-center"
+                        style:object-position={item.media.objectPosition ||
+                          "center"}
                       />
-                      <div class="work-field-handoff-counter hidden" aria-hidden="true"></div>
+                      <div
+                        class="work-field-handoff-counter hidden"
+                        aria-hidden="true"
+                      ></div>
                     </div>
 
                     <div
-                      class="work-field-handoff-details absolute inset-x-0 bottom-0 top-[70%] z-[2] flex flex-col overflow-hidden px-[clamp(1.25rem,2.4vw,2.75rem)] py-[clamp(0.75rem,1.5vh,1.1rem)] text-brand-dark"
-                      style:background-color={finalShowcaseProject.bgColor}
+                      class="work-field-handoff-details absolute inset-0 z-[2] flex flex-col justify-end overflow-hidden bg-gradient-to-t from-brand-dark/95 via-brand-dark/35 to-transparent px-[clamp(1.25rem,3vw,3rem)] pb-[clamp(1.5rem,3vw,3rem)] pt-24 text-brand-light"
                     >
-                      <div
-                        class="grid grid-cols-[auto_1fr_1.35fr] items-start gap-[clamp(1rem,3vw,4rem)] border-b border-brand-dark/20 pb-4"
-                      >
+                      <div class="mb-4 flex items-center gap-4">
                         <span
-                          class="rounded-full border border-brand-dark/50 px-3 py-1 font-mono text-[0.58rem] font-bold"
+                          class="rounded-full border border-brand-light/60 px-3 py-1 font-mono text-[0.65rem] font-bold"
                         >
                           {finalShowcaseProject.year}
                         </span>
                         <p
-                          class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.13em]"
+                          class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em]"
                         >
-                          {$_(`home.showcaseProjects.${finalShowcaseProject.id}.category`) || finalShowcaseProject.category}
-                        </p>
-                        <p
-                          class="max-w-[34ch] text-[clamp(0.72rem,0.85vw,0.9rem)] leading-[1.35]"
-                        >
-                          {$_(`home.showcaseProjects.${finalShowcaseProject.id}.description`) || finalShowcaseProject.description}
+                          {$_(
+                            `home.showcaseProjects.${finalShowcaseProject.id}.category`,
+                          ) || finalShowcaseProject.category}
                         </p>
                       </div>
 
-                      <div
-                        class="flex flex-1 items-center justify-center px-6 text-center"
+                      <h3
+                        class="max-w-[12ch] pb-1 font-display text-[clamp(2.8rem,6.4vw,6rem)] font-bold uppercase leading-[0.84] tracking-[-0.06em]"
                       >
-                        <h3
-                          class="pb-[0.16em] font-display text-[clamp(2.6rem,5vw,5.75rem)] font-medium leading-[0.95] tracking-[-0.06em]"
-                        >
-                          {$_(`home.showcaseProjects.${finalShowcaseProject.id}.title`) || finalShowcaseProject.title}
-                          <span
-                            class="inline-flex align-middle ml-[0.15em] text-brand-dark"
+                        {$_(
+                          `home.showcaseProjects.${finalShowcaseProject.id}.title`,
+                        ) || finalShowcaseProject.title}
+                      </h3>
+                      <p
+                        class="mt-4 max-w-[48ch] text-[clamp(0.95rem,1.35vw,1.25rem)] font-semibold italic leading-[1.3] text-brand-light/90"
+                      >
+                        {$_(
+                          `home.showcaseProjects.${finalShowcaseProject.id}.description`,
+                        ) || finalShowcaseProject.description}
+                      </p>
+                      <ul
+                        class="mt-5 flex flex-wrap gap-x-5 gap-y-2"
+                        aria-label="Service capabilities"
+                      >
+                        {#each finalShowcaseProject.capabilities as capability}
+                          <li
+                            class="inline-flex items-center gap-2 font-mono text-[0.58rem] font-bold uppercase tracking-[0.12em] text-brand-light/80"
                           >
-                            <ArrowUpRight
-                              class="h-[0.58em] w-[0.58em]"
-                            />
-                          </span>
-                        </h3>
-                      </div>
+                            <span
+                              class="size-2 rounded-full bg-brand-green"
+                              aria-hidden="true"
+                            ></span>{capability}
+                          </li>
+                        {/each}
+                      </ul>
+                      <a
+                        href={resolve(finalShowcaseProject.href as "/services")}
+                        class="mt-6 inline-flex w-fit items-center gap-3 border-b-2 border-brand-green pb-2 font-mono text-xs font-bold uppercase tracking-[0.14em] text-brand-light"
+                      >
+                        {$_("services.hero.viewCapabilities") ||
+                          "View capabilities"}
+                        <ArrowUpRight class="h-4 w-4" />
+                      </a>
                     </div>
                   {:else}
                     <div class="work-field-image-shell h-full w-full">
@@ -1016,7 +980,8 @@
                           height={item.media.height}
                           loading="lazy"
                           class="work-field-image h-full w-full object-cover"
-                          class:work-field-shadow-image={item.id === "shadow-study"}
+                          class:work-field-shadow-image={item.id ===
+                            "shadow-study"}
                         />
                       {/if}
                     </div>
@@ -1033,7 +998,8 @@
                         <p
                           class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.14em]"
                         >
-                          {$_(`home.workGalleryItems.${item.id}.category`) || item.category}
+                          {$_(`home.workGalleryItems.${item.id}.category`) ||
+                            item.category}
                         </p>
                         <span
                           class="rounded-full border border-brand-light/80 px-3 py-1 font-mono text-[0.54rem] font-bold"
@@ -1046,7 +1012,8 @@
                       <h3
                         class="work-field-hover-detail absolute bottom-[clamp(1rem,2vw,1.5rem)] left-[clamp(1rem,2vw,1.5rem)] max-w-[70%] font-display text-[clamp(1.3rem,1.8vw,2rem)] leading-[0.95] tracking-[-0.035em]"
                       >
-                        {$_(`home.workGalleryItems.${item.id}.title`) || item.title}
+                        {$_(`home.workGalleryItems.${item.id}.title`) ||
+                          item.title}
                       </h3>
                       <a
                         href={resolve("/services")}
@@ -1080,7 +1047,7 @@
             >
               <div class="w-full max-w-[48rem]">
                 <p
-                  class="work-fields-intro-inner mb-5 font-mono text-[0.58rem] font-bold uppercase tracking-[0.18em] text-brand-green"
+                  class="work-fields-intro-inner mb-5 font-mono text-[0.58rem] font-bold uppercase tracking-[0.18em] text-brand-dark/50"
                 >
                   Image and video post-production
                 </p>
@@ -1192,7 +1159,8 @@
                 <p
                   class="mt-4 max-w-sm text-sm leading-relaxed text-brand-light/80"
                 >
-                  {$_(`home.workGalleryItems.${item.id}.description`) || item.description}
+                  {$_(`home.workGalleryItems.${item.id}.description`) ||
+                    item.description}
                 </p>
               </div>
             </div>
@@ -1418,10 +1386,6 @@
 
     .project-body {
       transform: none !important;
-    }
-
-    .project-media {
-      height: 52dvh;
     }
 
     .project-details {

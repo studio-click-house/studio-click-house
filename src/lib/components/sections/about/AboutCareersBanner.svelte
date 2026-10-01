@@ -116,6 +116,9 @@
 
     <div class="careers-banner-content flex items-center lg:order-1">
       <div class="w-full px-5 py-20 sm:px-10 md:py-28 lg:px-[max(3rem,8vw)]">
+        <p class="eyebrow mb-3 text-brand-light/60">
+          {$_("sectionLabels.careers")}
+        </p>
         <h2
           class="max-w-[10ch] font-display text-[clamp(2.5rem,5.5vw,6.5rem)] leading-[0.88] tracking-[-0.045em] text-white"
         >

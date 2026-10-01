@@ -128,8 +128,11 @@
 <footer
   bind:this={footerElement}
   id="site-footer"
-  class="relative overflow-hidden bg-brand-light text-brand-dark pt-16 pb-8"
+  class="relative overflow-hidden bg-brand-light text-brand-dark pt-24 pb-12 sm:pt-28 sm:pb-14 lg:pt-32 lg:pb-16"
 >
+  <!-- Ambient Section Transition Connector (matching client/services scroll pattern) -->
+  <div class="footer-glow-connector" aria-hidden="true"></div>
+
   <div class="site-shell relative z-10">
     <!-- Main Top Grid -->
     <div class="footer-reveal grid gap-10 lg:grid-cols-12 lg:gap-12 pb-8">
@@ -484,3 +487,18 @@
     </div>
   </div>
 </footer>
+
+<style>
+  /* Ambient Section Transition Connector (matching client/services scroll pattern) */
+  .footer-glow-connector {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 82% 100% at 50% 0%,
+      color-mix(in srgb, var(--color-brand-green) 24%, transparent),
+      transparent 75%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>

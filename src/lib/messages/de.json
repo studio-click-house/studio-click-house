@@ -1,4 +1,36 @@
 {
+  "sectionLabels": {
+    "studio": "Visuelle Postproduktion",
+    "about": "Unser Studio",
+    "aiWorkflow": "KI-Bildproduktion",
+    "clients": "Ausgewählte Kunden",
+    "aiVideo": "Bild- und Videopostproduktion",
+    "photoToVideo": "Vom Foto zur Bewegung",
+    "faq": "Fragen und Antworten",
+    "project": "Ihr nächstes Projekt",
+    "quality": "Produktionsstandards",
+    "people": "Unser Team",
+    "journey": "Unsere Geschichte",
+    "careers": "Karriere im Studio",
+    "culture": "Studiokultur",
+    "upcoming": "Demnächst",
+    "pricing": "Produktionspreise",
+    "assurances": "Enthaltene Leistungen",
+    "comparison": "Vorher und nachher",
+    "showcase": "Ausgewählte Arbeiten",
+    "video": "Videopostproduktion",
+    "commercial": "Werbevideoschnitt",
+    "grading": "Farbkorrektur",
+    "social": "Social-Media-Videos",
+    "generation": "KI-Videogenerierung",
+    "workflow": "Produktionsablauf",
+    "delivery": "Lieferstandards",
+    "threeD": "3D- und CGI-Produktion",
+    "contact": "Studio kontaktieren",
+    "brief": "Projektbriefing",
+    "offices": "Studiostandorte",
+    "divisions": "Leistungsbereiche"
+  },
   "nav": {
     "login": "Anmelden",
     "free_trial": "Kostenlos testen",
@@ -195,6 +227,11 @@
       }
     ],
     "showcaseProjects": {
+      "ai-image-workflow": {
+        "title": "KI-Fotobearbeitung",
+        "description": "KI-gestützte Modebildproduktion und Veredelung mit sorgfältiger Prüfung von Stoffstruktur und Produktdetails.",
+        "category": "KI-Bildworkflow"
+      },
       "photo-editing": {
         "title": "Fotobearbeitung",
         "description": "Retusche, Farbkorrektur, Freistellung und sauberes Finish für polierte Kampagnen- und E-Commerce-Bilder.",
@@ -262,8 +299,8 @@
       "title1": "Professionelle",
       "title2": "KI-Videopostproduktion.",
       "copy1": "Beschleunigen Sie Ihre Motion-Pipeline mit generativer KI. Von modelbasierten Aufnahmen mit Kling, Flow und Veo bis hin zu 4K–8K KI-Motion-Upscaling und cineastischem Finishing liefern wir sendefähige Videos für globale Kampagnen.",
-      "copy2": "KI-Videopostproduktion mit handwerklicher Präzision in jedem Frame.",
-      "copy3": "Jede Sequenz wird von erfahrenen Cuttern und Coloristen für filmische Perfektion und zeitliche Konsistenz veredelt.",
+      "copy2": "KI-Umwandlung von Fotos in Videos",
+      "copy3": "Wir machen aus Standbildern bewegte Sequenzen. Erfahrene Cutter und Coloristen prüfen jedes Bild auf natürliche Bewegung, filmische Farben und einen stimmigen Ablauf.",
       "capabilities": [
         "Text-zu-Video-Generierung",
         "KI Motion Upscaling 4K–8K",
@@ -272,19 +309,12 @@
       ],
       "stages": {
         "stage1": {
-          "tag": "RAW 1080p · ENTWURF",
-          "title": "Generative Synthese",
-          "description": "Text-zu-Sequenz-Synthese mit generativer Modellgeschwindigkeit."
-        },
-        "stage2": {
-          "tag": "4K UHD · 60 FPS",
-          "title": "Temporales Upscaling",
-          "description": "Optical-Flow-Bewegungsvektoren für makellose 4K-Konsistenz."
+          "title": "Ausgangsfoto",
+          "description": "Wir entwickeln aus Ihrem Standbild und Briefing eine bewegte Sequenz."
         },
         "stage3": {
-          "tag": "ACEScg · MASTER QC",
-          "title": "Meisterhaftes Finishing",
-          "description": "Frame-genaue Farbbalance, Timeline-Schnitt und Endkontrolle."
+          "title": "Generiertes Video",
+          "description": "Unsere Cutter und Coloristen verfeinern Bewegung, Farbe und Details Bild für Bild."
         }
       },
       "explore": "Video-Editing & Postproduktion entdecken"
@@ -357,7 +387,7 @@
     "showcaseIntro": {
       "title1": "Unsere",
       "title2": "Leistungen",
-      "description": "Ein zentraler Produktionspartner für makellose Standbilder, anspruchsvolle Bewegtbilder und glaubwürdige 3D-Visualisierungen."
+      "description": "Ein Produktionspartner für KI-gestützte Bilder, sorgfältig bearbeitete Fotos, Bewegtbild und glaubwürdige 3D-Visualisierungen."
     },
     "aboutOrbit": {
       "eyebrow": "Unser Produktionssystem",
@@ -831,6 +861,7 @@
       "discussProject": "Projekt besprechen",
       "viewCapabilities": "Leistungen ansehen",
       "disciplines": [
+        "KI-Fotobearbeitung",
         "Bildbearbeitung",
         "Videoschnitt",
         "3D & CGI"
@@ -840,6 +871,10 @@
       "heading": "Produktionsleistungen",
       "planWorkflow": "Diesen Workflow planen",
       "divisions": [
+        {
+          "title": "KI-Bildwelten mit klarer Art Direction.",
+          "description": "KI-gestützte Mode- und Produktbilder, abgestimmt auf Ihre Art Direction, Referenzen und Produktionsanforderungen."
+        },
         {
           "title": "Jeder Pixel, vollendet.",
           "description": "Bildveredelung in großem Maßstab mit der nötigen Sorgfalt für Fashion-, Schmuck-, Produkt- und Kampagnenprojekte."

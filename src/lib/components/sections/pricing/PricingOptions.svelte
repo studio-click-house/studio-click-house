@@ -25,6 +25,9 @@
   <div class="site-shell">
     <header class="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
       <div class="max-w-3xl lg:col-span-8">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.pricing")}
+        </p>
         <h2
           id="pricing-options-title"
           class="font-display text-[clamp(2.35rem,5.2vw,4.5rem)] leading-[0.94] tracking-[-0.04em] text-brand-dark"

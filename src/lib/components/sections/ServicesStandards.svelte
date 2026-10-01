@@ -99,6 +99,9 @@
       <div class="lg:col-span-5">
         <header>
           <div class="standards-reveal">
+            <p class="eyebrow mb-3 text-brand-dark/50">
+              {$_("sectionLabels.quality")}
+            </p>
             <h2
               id="services-standards-title"
               class="max-w-[12ch] font-display text-[clamp(2.6rem,3.6vw,4rem)] leading-[0.92] tracking-[-0.04em]"

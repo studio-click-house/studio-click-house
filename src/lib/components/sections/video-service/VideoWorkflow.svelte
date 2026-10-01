@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { VideoWorkflowStep } from "$lib/content/video-editing";
@@ -64,6 +65,9 @@
   <div class="site-shell relative z-10">
     <!-- Header Block -->
     <div class="workflow-header max-w-3xl space-y-4">
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.workflow")}
+      </p>
       <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark">
         How we work together.
       </h2>

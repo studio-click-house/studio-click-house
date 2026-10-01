@@ -37,6 +37,9 @@
   <div class="site-shell">
     <div class="grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-16">
       <div class="lg:col-span-5">
+        <p class="eyebrow mb-3 text-brand-light/60">
+          {$_("sectionLabels.assurances")}
+        </p>
         <h2
           id="pricing-assurances-title"
           class="max-w-[10ch] font-display text-[clamp(2.35rem,5.2vw,4.5rem)] leading-[0.94] tracking-[-0.04em]"

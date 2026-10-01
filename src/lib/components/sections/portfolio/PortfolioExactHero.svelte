@@ -3,13 +3,16 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
   import { ArrowDown } from "lucide-svelte";
+  import { stripTitlePunctuation } from "$lib/utils";
 
   let heroSection = $state<HTMLElement | null>(null);
   let heroVideo = $state<HTMLVideoElement | null>(null);
 
   $effect(() => {
     if (heroVideo && heroSection) {
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
       let isVisible = false;
       heroVideo.muted = true;
       heroVideo.defaultMuted = true;
@@ -73,7 +76,7 @@
               ease: isDesktop ? "power3.out" : "power2.out",
               clearProps: "transform,opacity",
             });
-          }
+          },
         );
         return () => media.revert();
       }, heroSection);
@@ -103,38 +106,46 @@
     class="absolute inset-0 h-full w-full object-cover object-center scale-105 opacity-60"
     aria-label="Studio Click House high-fashion post-production studio showcase"
   >
-    <source
-      src="/videos/work-fields-studio-production.mp4"
-      type="video/mp4"
-    />
+    <source src="/videos/work-fields-studio-production.mp4" type="video/mp4" />
   </video>
 
   <div class="absolute inset-0 bg-brand-dark/70"></div>
 
-  <div class="site-shell relative z-10 flex flex-col items-center text-center text-brand-light max-w-5xl mx-auto">
+  <div
+    class="site-shell relative z-10 flex flex-col items-center text-center text-brand-light max-w-5xl mx-auto"
+  >
     <!-- Studio Eyebrow (Clean Editorial Typography, No AI Pill) -->
-    <span class="hero-anim-item font-mono text-xs uppercase tracking-[0.25em] text-brand-light/70 mb-6 block font-medium">
-      {$_('portfolio.hero.badge') || 'Portfolio · Selected Work · 2015–2026'}
+    <span
+      class="hero-anim-item mb-8 block font-mono text-xs font-medium uppercase tracking-[0.25em] text-brand-light/70"
+    >
+      {$_("portfolio.hero.badge") || "Portfolio · Selected Work · 2015–2026"}
     </span>
 
     <!-- Editorial Display Headline -->
-    <h1 class="hero-anim-item font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-normal leading-[0.96] sm:leading-[0.92] tracking-tight text-brand-light mb-6">
-      <span>{$_('portfolio.hero.title') || 'Visual Craft'}</span>,
-      <span class="italic font-light text-brand-green">Made Tangible.</span>
+    <h1
+      class="hero-anim-item hero-display-title mb-6 max-w-5xl text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] tracking-[-0.055em] text-brand-light"
+    >
+      <span class="block"
+        >{stripTitlePunctuation(
+          $_("portfolio.hero.title") || "Visual Craft",
+        )}</span
+      >
+      <span class="hero-display-outline block">Made Tangible</span>
     </h1>
 
     <!-- Subtitle with Studio Positioning -->
-    <p class="hero-anim-item max-w-2xl text-base sm:text-lg md:text-xl text-brand-light/80 font-normal leading-relaxed mb-10 px-2">
-      {$_('portfolio.hero.subtitle') || 'High-end post-production, editorial finishing & CGI archive for global fashion houses and commercial brands.'}
+    <p
+      class="hero-anim-item max-w-2xl text-base sm:text-lg md:text-xl text-brand-light/80 font-normal leading-relaxed mb-10 px-2"
+    >
+      {$_("portfolio.hero.subtitle") ||
+        "High-end post-production, editorial finishing & CGI archive for global fashion houses and commercial brands."}
     </p>
 
     <!-- Quick In-Page Exploration Links -->
-    <div class="hero-anim-item flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider w-full sm:w-auto px-4">
-      <Button
-        href="#portfolio-before-after"
-        size="lg"
-        class="w-full sm:w-auto"
-      >
+    <div
+      class="hero-anim-item flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider w-full sm:w-auto px-4"
+    >
+      <Button href="#portfolio-before-after" size="lg" class="w-full sm:w-auto">
         Inspect Raw vs Final
       </Button>
       <Button
@@ -148,7 +159,9 @@
     </div>
 
     <!-- Bottom Scroll Cue -->
-    <div class="hero-anim-item mt-14 sm:mt-16 flex flex-col items-center gap-2 text-brand-light/50 font-mono text-[10px] tracking-widest uppercase">
+    <div
+      class="hero-anim-item mt-14 sm:mt-16 flex flex-col items-center gap-2 text-brand-light/50 font-mono text-[10px] tracking-widest uppercase"
+    >
       <span>Scroll to Explore</span>
       <ArrowDown class="size-3.5 animate-bounce text-brand-green" />
     </div>

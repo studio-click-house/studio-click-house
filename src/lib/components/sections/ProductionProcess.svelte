@@ -535,7 +535,7 @@
         <span class="process-watermark-num" aria-hidden="true">
           {String(activeIndex + 1).padStart(2, "0")}
         </span>
-        <p class="process-timing">{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</p>
+        <p class="process-timing eyebrow">{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</p>
         <h2 id="production-process-title">
           {$_(`home.processSteps.${activeIndex}.title`) || processSteps[activeIndex].title}
         </h2>
@@ -721,9 +721,7 @@
 
   .process-timing {
     position: relative;
-    font-size: 0.82rem;
-    color: color-mix(in srgb, var(--color-brand-dark) 82%, transparent);
-    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
   }
 
   .process-intro h2 {

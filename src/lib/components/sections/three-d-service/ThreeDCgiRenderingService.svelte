@@ -315,7 +315,7 @@
       <!-- Right Column: Service Details & Deliverables -->
       <div class="cgi-reveal order-1 lg:order-2 space-y-6 lg:col-span-5">
         <div
-          class="font-mono text-xs uppercase tracking-wider text-brand-green font-bold"
+          class="font-mono text-xs uppercase tracking-wider text-brand-dark/50 font-bold"
         >
           02 / CGI Rendering
         </div>

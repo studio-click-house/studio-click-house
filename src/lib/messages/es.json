@@ -1,4 +1,36 @@
 {
+  "sectionLabels": {
+    "studio": "Posproducción visual",
+    "about": "Nuestro estudio",
+    "aiWorkflow": "Producción de imágenes con IA",
+    "clients": "Clientes seleccionados",
+    "aiVideo": "Posproducción de imagen y video",
+    "photoToVideo": "De foto a movimiento",
+    "faq": "Preguntas y respuestas",
+    "project": "Tu próximo proyecto",
+    "quality": "Estándares de producción",
+    "people": "Nuestro equipo",
+    "journey": "Nuestra trayectoria",
+    "careers": "Trabaja con nosotros",
+    "culture": "Cultura del estudio",
+    "upcoming": "Próximamente",
+    "pricing": "Precios de producción",
+    "assurances": "Servicios incluidos",
+    "comparison": "Antes y después",
+    "showcase": "Trabajos seleccionados",
+    "video": "Posproducción de video",
+    "commercial": "Edición comercial",
+    "grading": "Etalonaje de color",
+    "social": "Video para redes sociales",
+    "generation": "Generación de video con IA",
+    "workflow": "Flujo de producción",
+    "delivery": "Estándares de entrega",
+    "threeD": "Producción 3D y CGI",
+    "contact": "Contacta con el estudio",
+    "brief": "Brief del proyecto",
+    "offices": "Ubicaciones del estudio",
+    "divisions": "Áreas de servicio"
+  },
   "nav": {
     "login": "Acceso",
     "free_trial": "Prueba gratis",
@@ -195,6 +227,11 @@
       }
     ],
     "showcaseProjects": {
+      "ai-image-workflow": {
+        "title": "Edición de fotos con IA",
+        "description": "Producción y acabado de imágenes de moda con asistencia de IA, revisando cuidadosamente las texturas y los detalles del producto.",
+        "category": "Flujo de trabajo de imagen con IA"
+      },
       "photo-editing": {
         "title": "Edición de fotos",
         "description": "Retoque, corrección de color, recortes y acabados limpios para imágenes pulidas de campañas y comercio electrónico.",
@@ -262,8 +299,8 @@
       "title1": "Posproducción de video",
       "title2": "con IA profesional.",
       "copy1": "Acelere su flujo de producción de movimiento con IA generativa. Desde tomas creadas sobre modelos con Kling, Flow y Veo hasta escalado con IA 4K–8K y acabados cinematográficos, entregamos video de máxima calidad para campañas globales.",
-      "copy2": "Posproducción de video con IA y supervisión artesanal en cada fotograma.",
-      "copy3": "Cada secuencia es finalizada por editores y coloristas expertos para una fidelidad cinematográfica impecable.",
+      "copy2": "De foto a video con IA",
+      "copy3": "Damos movimiento a imágenes fijas. Nuestros editores y coloristas revisan cada fotograma para lograr un movimiento natural, color cinematográfico y un resultado coherente.",
       "capabilities": [
         "Generación de texto a video",
         "Escalado con IA 4K–8K",
@@ -272,19 +309,12 @@
       ],
       "stages": {
         "stage1": {
-          "tag": "RAW 1080p · BORRADOR",
-          "title": "Síntesis Generativa",
-          "description": "Creación de tomas a partir de texto con velocidad de modelo generativo."
-        },
-        "stage2": {
-          "tag": "4K UHD · 60 FPS",
-          "title": "Escalado Temporal",
-          "description": "Vectores de flujo óptico para una consistencia 4K impecable."
+          "title": "Foto de origen",
+          "description": "Creamos una secuencia en movimiento a partir de tu imagen y tus indicaciones."
         },
         "stage3": {
-          "tag": "ACEScg · MASTER QC",
-          "title": "Acabado Artesanal",
-          "description": "Etalonaje preciso cuadro a cuadro, montaje y control de calidad."
+          "title": "Video generado",
+          "description": "Nuestros editores y coloristas afinan movimiento, color y detalle fotograma a fotograma."
         }
       },
       "explore": "Explorar edición de video y posproducción"
@@ -357,7 +387,7 @@
     "showcaseIntro": {
       "title1": "Nuestros",
       "title2": "servicios",
-      "description": "Un único socio de producción para imágenes fijas pulidas, video cinematográfico y renderizado 3D fotorrealista."
+      "description": "Un socio de producción para imágenes asistidas por IA, fotografías pulidas, video cuidado e imágenes 3D creíbles."
     },
     "aboutOrbit": {
       "eyebrow": "Nuestro sistema de producción",
@@ -831,6 +861,7 @@
       "discussProject": "Hablar de un proyecto",
       "viewCapabilities": "Ver capacidades",
       "disciplines": [
+        "Edición fotográfica con IA",
         "Retoque fotográfico",
         "Posproducción de video",
         "3D y CGI"
@@ -840,6 +871,10 @@
       "heading": "Servicios de producción",
       "planWorkflow": "Planificar este flujo",
       "divisions": [
+        {
+          "title": "Imágenes con IA, guiadas con intención.",
+          "description": "Imágenes de moda y producto asistidas por IA, refinadas según la dirección artística, las referencias y las necesidades de producción."
+        },
         {
           "title": "Cada píxel, perfeccionado.",
           "description": "Retoque de imágenes a gran escala con la precisión y sutileza que demandan la moda, joyería, producto y campañas."

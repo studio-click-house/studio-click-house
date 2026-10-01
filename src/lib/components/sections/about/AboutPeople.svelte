@@ -163,11 +163,16 @@
     <div
       class="mb-12 grid gap-7 pt-5 lg:grid-cols-12 lg:items-end md:mb-16"
     >
-      <h2
-        class="people-header-reveal max-w-[11ch] font-display text-[clamp(2.5rem,5vw,6rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark lg:col-span-8"
-      >
-        {$_('about.people.heading') || people.heading}
-      </h2>
+      <div class="lg:col-span-8">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.people")}
+        </p>
+        <h2
+          class="people-header-reveal max-w-[11ch] font-display text-[clamp(2.5rem,5vw,6rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark"
+        >
+          {$_('about.people.heading') || people.heading}
+        </h2>
+      </div>
       <p
         class="people-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
       >
@@ -262,7 +267,7 @@
         <div class="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <span
-              class="people-header-reveal mb-2 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-green-ink"
+              class="people-header-reveal mb-2 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-dark/50"
             >
               {people.snapshotsEyebrow || 'Studio Culture & Craft'}
             </span>

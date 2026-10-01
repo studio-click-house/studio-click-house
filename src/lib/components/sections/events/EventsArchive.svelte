@@ -32,7 +32,7 @@
   <div class="site-shell">
     <!-- Editorial Header with Index Metadata -->
     <div class="pb-2">
-      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-4 block">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-4 block">
         Expeditions & Company Tours · {events.length} Chapters
       </span>
 

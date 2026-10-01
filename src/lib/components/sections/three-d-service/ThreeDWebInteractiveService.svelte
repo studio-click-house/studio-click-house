@@ -293,7 +293,7 @@
     <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Service Details & Deliverables -->
       <div class="turntable-reveal space-y-6 lg:col-span-5">
-        <div class="font-mono text-xs uppercase tracking-wider text-brand-green font-bold">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-dark/50 font-bold">
           03 / E-Commerce 3D
         </div>
 

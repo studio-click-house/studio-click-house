@@ -92,6 +92,9 @@
       class="grid gap-8 sm:gap-10 border-b border-brand-dark/25 pb-10 sm:pb-12 lg:grid-cols-12 lg:items-end lg:gap-12 md:pb-16"
     >
       <div class="closing-cta-reveal lg:col-span-8">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.project")}
+        </p>
         <h2
           class="max-w-5xl font-display text-[clamp(2.5rem,5.5vw,6.5rem)] leading-[0.9] tracking-[-0.04em] text-brand-dark"
         >

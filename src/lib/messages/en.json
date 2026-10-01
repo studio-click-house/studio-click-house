@@ -1,4 +1,36 @@
 {
+  "sectionLabels": {
+    "studio": "Visual post-production",
+    "about": "Our studio",
+    "aiWorkflow": "AI image production",
+    "clients": "Selected clients",
+    "aiVideo": "Image and video post-production",
+    "photoToVideo": "From photo to motion",
+    "faq": "Questions and answers",
+    "project": "Your next project",
+    "quality": "Production standards",
+    "people": "Our people",
+    "journey": "Our journey",
+    "careers": "Studio careers",
+    "culture": "Studio culture",
+    "upcoming": "Coming up",
+    "pricing": "Production pricing",
+    "assurances": "Included services",
+    "comparison": "Before and after",
+    "showcase": "Selected work",
+    "video": "Video post-production",
+    "commercial": "Commercial editing",
+    "grading": "Color grading",
+    "social": "Social video",
+    "generation": "AI video generation",
+    "workflow": "Production workflow",
+    "delivery": "Delivery standards",
+    "threeD": "3D and CGI production",
+    "contact": "Contact the studio",
+    "brief": "Project brief",
+    "offices": "Studio locations",
+    "divisions": "Service disciplines"
+  },
   "nav": {
     "login": "Login",
     "free_trial": "Free trial",
@@ -195,6 +227,11 @@
       }
     ],
     "showcaseProjects": {
+      "ai-image-workflow": {
+        "title": "AI photo editing",
+        "description": "AI-assisted fashion image production and finishing, with careful review of fabric texture and product detail.",
+        "category": "AI image workflow"
+      },
       "photo-editing": {
         "title": "Photo editing",
         "description": "Retouching, color correction, clipping, and clean finishing for polished campaign and e-commerce imagery.",
@@ -212,11 +249,19 @@
       }
     },
     "hero": {
-      "title1": "Every image,",
-      "title2": "finished",
-      "title3": "with intent.",
-      "subtitle": "Studio Click House shapes still and moving images for brands, studios, and production teams that care about the final frame.",
-      "cta": "Start a project",
+      "badge": "Studio Click House · Visual Post-Production",
+      "title1": "Visual Post-Production",
+      "title2": "Built to Scale",
+      "targetAudience": "For E-Commerce · Brands · Creative Teams",
+      "subtitle": "High-volume retouching, CGI modeling, and video post-production for brands and creative teams worldwide.",
+      "bookMeeting": "Book a meeting",
+      "startTrial": "Start free trial",
+      "capacityLabel": "Capacity",
+      "capacityNumber": "150+",
+      "capacityRole": "In-house specialists",
+      "capacitySub": "24/7 Production · 2,000+ Daily Output",
+      "identityLabel": "Our Identity",
+      "identityDesc": "Since 2015 supporting creative teams behind the scenes with dedicated post-production capacity.",
       "explore": "Explore services",
       "scroll": "Scroll"
     },
@@ -237,12 +282,33 @@
       "paragraph2": "We handle editorial retouching, product image editing, video color grading, and photorealistic 3D CGI. Our Dhaka production team works across shifts to keep large batches moving while senior artists review the finish.",
       "quote": "Every pixel, shadow, and color gradient is shaped to reflect your brand's unique visual signature.",
       "stats": [
-        { "value": "150+", "label": "Senior Specialists", "sub": "In-house retouchers & 3D artists" },
-        { "value": "24/7", "label": "Global Production", "sub": "Overnight worldwide turnaround" },
-        { "value": "99.8%", "label": "QC Accuracy", "sub": "Three-tier quality inspection" },
-        { "value": "20+", "label": "Countries Served", "sub": "Trusted by global brands & agencies" }
+        {
+          "value": "150+",
+          "label": "Senior Specialists",
+          "sub": "In-house retouchers & 3D artists"
+        },
+        {
+          "value": "24/7",
+          "label": "Global Production",
+          "sub": "Overnight worldwide turnaround"
+        },
+        {
+          "value": "99.8%",
+          "label": "QC Accuracy",
+          "sub": "Three-tier quality inspection"
+        },
+        {
+          "value": "20+",
+          "label": "Countries Served",
+          "sub": "Trusted by global brands & agencies"
+        }
       ],
-      "atelierTags": ["ATELIER 01", "CONTINUOUS", "3-TIER QC", "WORLDWIDE"],
+      "atelierTags": [
+        "ATELIER 01",
+        "CONTINUOUS",
+        "3-TIER QC",
+        "WORLDWIDE"
+      ],
       "aboutStudio": "About the studio",
       "freeTrial": "Start Free Trial"
     },
@@ -262,8 +328,8 @@
       "title1": "Professional",
       "title2": "AI video post-production.",
       "copy1": "Accelerate your motion pipeline with generative AI. From model-generated shots with Kling, Flow, and Veo to AI motion upscaling and cinematic finishing, we deliver broadcast-ready video tuned for global campaigns.",
-      "copy2": "AI video post-production with artisan oversight at every frame.",
-      "copy3": "Every sequence is finished by senior editors and colorists for cinematic fidelity and temporal consistency.",
+      "copy2": "AI photo-to-video generation",
+      "copy3": "We turn still images into motion. Senior editors and colorists refine every frame for natural movement, cinematic color, and consistency.",
       "capabilities": [
         "Text-to-Video Generation",
         "AI Motion Upscaling 4K–8K",
@@ -272,19 +338,12 @@
       ],
       "stages": {
         "stage1": {
-          "tag": "RAW 1080p · DRAFT",
-          "title": "Generative Synthesis",
-          "description": "Prompt-to-shot synthesis with generative model velocity."
-        },
-        "stage2": {
-          "tag": "4K UHD · 60 FPS",
-          "title": "Temporal Upscaling",
-          "description": "Optical flow motion vectors for pristine 4K consistency."
+          "title": "Source photo",
+          "description": "We create a moving sequence from your still image and creative direction."
         },
         "stage3": {
-          "tag": "ACEScg · MASTER QC",
-          "title": "Artisan Finishing",
-          "description": "Frame-by-frame color balance, timeline cutdowns, and QC."
+          "title": "Generated video",
+          "description": "Senior editors and colorists refine movement, color, and detail frame by frame."
         }
       },
       "explore": "Explore video editing & post-production"
@@ -357,7 +416,7 @@
     "showcaseIntro": {
       "title1": "Our",
       "title2": "services",
-      "description": "One production partner for polished stills, considered motion, and believable 3D imagery—built around the needs of each project."
+      "description": "One production partner for AI-assisted imagery, polished stills, considered motion, and believable 3D—built around each project."
     },
     "aboutOrbit": {
       "eyebrow": "Our Production System",
@@ -526,9 +585,15 @@
       "tag": "Inside the studio",
       "ctaLabel": "View Open Positions",
       "stats": [
-        { "label": "Artists" },
-        { "label": "Operations" },
-        { "label": "Studio HQ" }
+        {
+          "label": "Artists"
+        },
+        {
+          "label": "Operations"
+        },
+        {
+          "label": "Studio HQ"
+        }
       ]
     },
     "leadership": {
@@ -643,14 +708,26 @@
       "viewPackages": "View packages",
       "buildCustom": "Build custom quote",
       "stats": [
-        { "label": "Turnaround SLA" },
-        { "label": "Volume tiering" },
-        { "label": "QC pass rate" }
+        {
+          "label": "Turnaround SLA"
+        },
+        {
+          "label": "Volume tiering"
+        },
+        {
+          "label": "QC pass rate"
+        }
       ],
       "showcases": [
-        { "title": "Editorial Retouching" },
-        { "title": "3D Product CGI" },
-        { "title": "Color & Finishing" }
+        {
+          "title": "Editorial Retouching"
+        },
+        {
+          "title": "3D Product CGI"
+        },
+        {
+          "title": "Color & Finishing"
+        }
       ]
     },
     "options": {
@@ -674,52 +751,108 @@
           "name": "Cut-Outs Service",
           "description": "Pixel-perfect hand-drawn vector paths and soft edge masking.",
           "services": [
-            { "name": "Clipping Path" },
-            { "name": "Image Masking" },
-            { "name": "Object Remove" },
-            { "name": "Shadow Making" },
-            { "name": "360 Image" },
-            { "name": "E-commerce Image" },
-            { "name": "Neck Join/Ghost Mannequin" }
+            {
+              "name": "Clipping Path"
+            },
+            {
+              "name": "Image Masking"
+            },
+            {
+              "name": "Object Remove"
+            },
+            {
+              "name": "Shadow Making"
+            },
+            {
+              "name": "360 Image"
+            },
+            {
+              "name": "E-commerce Image"
+            },
+            {
+              "name": "Neck Join/Ghost Mannequin"
+            }
           ]
         },
         {
           "name": "Enhancement",
           "description": "Creative retouching, color correction, and restoration.",
           "services": [
-            { "name": "Image Retouch" },
-            { "name": "Creative Retouch" },
-            { "name": "High-end Retouch" },
-            { "name": "Image Manipulation" },
-            { "name": "Color Correction" },
-            { "name": "Color Change" },
-            { "name": "Pattern Change" },
-            { "name": "Real Estate Photo" },
-            { "name": "Old Photo Restoration" }
+            {
+              "name": "Image Retouch"
+            },
+            {
+              "name": "Creative Retouch"
+            },
+            {
+              "name": "High-end Retouch"
+            },
+            {
+              "name": "Image Manipulation"
+            },
+            {
+              "name": "Color Correction"
+            },
+            {
+              "name": "Color Change"
+            },
+            {
+              "name": "Pattern Change"
+            },
+            {
+              "name": "Real Estate Photo"
+            },
+            {
+              "name": "Old Photo Restoration"
+            }
           ]
         },
         {
           "name": "Vector Illustration & Conversion",
           "description": "Raster-to-vector tracing, plans, logo designs, and custom artwork.",
           "services": [
-            { "name": "Raster to Vector" },
-            { "name": "Plan Drawing" },
-            { "name": "Logo Design" },
-            { "name": "Drawing of product" },
-            { "name": "Advertising Design" },
-            { "name": "Illustration" }
+            {
+              "name": "Raster to Vector"
+            },
+            {
+              "name": "Plan Drawing"
+            },
+            {
+              "name": "Logo Design"
+            },
+            {
+              "name": "Drawing of product"
+            },
+            {
+              "name": "Advertising Design"
+            },
+            {
+              "name": "Illustration"
+            }
           ]
         },
         {
           "name": "AI Services",
           "description": "Generative AI background synthesis, relighting, and model generation.",
           "services": [
-            { "name": "AI Background Synthesis" },
-            { "name": "AI Product Relighting" },
-            { "name": "AI Model Generation" },
-            { "name": "AI Face Swap & Match" },
-            { "name": "AI Resolution Upscale" },
-            { "name": "AI Pattern Synthesis" }
+            {
+              "name": "AI Background Synthesis"
+            },
+            {
+              "name": "AI Product Relighting"
+            },
+            {
+              "name": "AI Model Generation"
+            },
+            {
+              "name": "AI Face Swap & Match"
+            },
+            {
+              "name": "AI Resolution Upscale"
+            },
+            {
+              "name": "AI Pattern Synthesis"
+            }
           ]
         }
       ]
@@ -774,9 +907,15 @@
       ],
       "deliveryPriority": "Delivery Priority",
       "turnaround": [
-        { "label": "Standard (24h)" },
-        { "label": "Express (12h)" },
-        { "label": "Urgent (6h)" }
+        {
+          "label": "Standard (24h)"
+        },
+        {
+          "label": "Express (12h)"
+        },
+        {
+          "label": "Urgent (6h)"
+        }
       ],
       "realTimeCalculation": "Real-Time Calculation",
       "investmentSummary": "Investment Summary",
@@ -831,6 +970,7 @@
       "discussProject": "Discuss a project",
       "viewCapabilities": "View capabilities",
       "disciplines": [
+        "AI photo editing",
         "Image editing",
         "Video post",
         "3D & CGI"
@@ -840,6 +980,10 @@
       "heading": "Production services",
       "planWorkflow": "Plan this workflow",
       "divisions": [
+        {
+          "title": "AI imagery, directed with intent.",
+          "description": "AI-assisted fashion and product imagery, refined to fit your art direction, references, and production needs."
+        },
         {
           "title": "Every pixel, resolved.",
           "description": "High-volume image finishing with the restraint required for fashion, jewelry, product, and campaign work."
@@ -970,149 +1114,6 @@
   },
   "portfolio": {
     "hero": {
-      "title": "Archive",
-      "subtitle": "High-end post-production and creative finishing"
-    },
-    "intro": {
-      "heading": "The High-End Post-Production Standard 2026",
-      "p1": "Studio Click House has more than a decade of experience in fashion retouching, hand-drawn clipping paths, ghost mannequin compositing, and color grading for commercial image sets.",
-      "p2": "Artists work in non-destructive PSD and TIFF workflows, using frequency separation, precise pen paths, and agreed color profiles for print and screen."
-    },
-    "collage": {
-      "colorMastery": "Color Mastery",
-      "pantonePrecision": "Pantone Precision",
-      "pantoneDesc": "Garment recoloring and skin-tone matching prepared for high-end print lookbooks.",
-      "selectedCampaign": "Selected Campaign",
-      "hauteCouture": "Haute Couture Retouch",
-      "hauteCoutureDesc": "High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines.",
-      "macroDetail": "Macro Detail",
-      "microContouring": "Micro Contouring",
-      "microContouringDesc": "Non-destructive frequency separation preserving pore fidelity and natural skin luminescence.",
-      "apparelVolume": "Apparel Volume",
-      "hollowJoint": "3D Hollow Joint Tailoring",
-      "footwearIsolation": "Footwear Vector Isolation",
-      "archiveBadge": "2026 Archive",
-      "performingCraft": "Performing Craft"
-    },
-    "matrix": {
-      "eyebrow": "PROCESS SPECIFICATIONS",
-      "headingPart1": "How we enforce",
-      "headingPart2": "precision",
-      "headingPart3": "at scale.",
-      "enterMosaic": "Enter Mosaic Gallery",
-      "services": [
-        {
-          "label": "Editorial Retouch",
-          "desc": "High-end fashion retouching, beauty cleaning, and fabric sculpting for global lookbooks and editorial campaigns.",
-          "deliverables": [
-            "Campaign & High-End Fashion",
-            "Commercial & Catalog Cleaning",
-            "Anatomical & Fabric Sculpting",
-            "High-End Beauty & Portraiture"
-          ]
-        },
-        {
-          "label": "Vector Clipping",
-          "desc": "Hand-drawn clipping paths and multipath masks for clean background isolation and recoloring.",
-          "deliverables": [
-            "Single Path Vector Clipping",
-            "Multi-Path Layering & Masking",
-            "Background Erasure & PNGs",
-            "Contact Shadows & Reflections"
-          ]
-        },
-        {
-          "label": "Color & Swatches",
-          "desc": "Correcting and shifting product colors so every SKU matches the approved reference and the wider image set.",
-          "deliverables": [
-            "Swatch & Color Target Matching",
-            "Cross-SKU Color Consistency",
-            "Product Color Changing",
-            "Metallic & Sheen Enhancement"
-          ]
-        },
-        {
-          "label": "Special Scopes",
-          "desc": "Ghost mannequin compositing, collar construction, jewelry cleanup, and custom 3D CGI for specialist product work.",
-          "deliverables": [
-            "Ghost Mannequin / Invisible",
-            "Collar & Neck Joint Insertion",
-            "Pattern Alignment & Stitching",
-            "Macro Jewelry & Watch Polish"
-          ]
-        }
-      ]
-    },
-    "mosaic": {
-      "closeModal": "Close preview",
-      "items": [
-        { "title": "Model Beauty Profile", "category": "Skin Retouching" },
-        { "title": "Jewelry Styling Detail", "category": "Fine Jewelry" },
-        { "title": "Accessory Grading", "category": "Color Correction" },
-        { "title": "Glassware Isolation", "category": "Clipping Path" },
-        { "title": "Beauty Production", "category": "Editorial Retouch" },
-        { "title": "Fashion Color Story", "category": "Couture Campaign" },
-        { "title": "CGI Product Finish", "category": "3D & CGI" }
-      ]
-    },
-    "manifesto": {
-      "quote": "“The role of a creative leader is not to have all the ideas; it’s to create a culture where everyone can have ideas and feel that they’re valued.”"
-    },
-    "partners": {
-      "title": "Sponsors & Clients"
-    },
-    "stats": {
-      "eyebrow": "Studio at a Glance",
-      "craft": "Craft",
-      "color": "Color",
-      "detail": "Detail",
-      "finish": "Finish"
-    }
-  },
-  "serviceDetail": {
-    "kicker": "Image post-production service",
-    "placeOrder": "Place an order",
-    "getPriceIdea": "Get price idea",
-    "exploreFullPortfolio": "Explore Full Portfolio",
-    "compareAria": "Compare before and after service results"
-  },
-  "login": {
-    "badge": "Secure Access",
-    "title": "Studio Workspace",
-    "subtitle": "Enter credentials to view assets",
-    "emailLabel": "Email address",
-    "passwordLabel": "Password",
-    "forgot": "Forgot?",
-    "signInButton": "Sign In to Hub",
-    "backHome": "Back home",
-    "errorFill": "Please fill in all fields.",
-    "success": "Successfully authenticated. Redirecting to workspace..."
-  },
-  "blog": {
-    "title": "Studio journal",
-    "eyebrow": "Journal",
-    "description": "Articles about image craft, production thinking, and studio practice will be published here when original editorial content is ready."
-  },
-  "slider": {
-    "before": "Before",
-    "after": "After",
-    "ariaLabel": "Compare before and after images"
-  },
-  "social": {
-    "playBrief": "Play Brief",
-    "pauseBrief": "Pause Brief"
-  },
-  "error": {
-    "statusBadge": "Error",
-    "title404": "Page Not Found",
-    "desc404": "The visual or page you are looking for has been moved, renamed, or does not exist.",
-    "title500": "Unexpected Error",
-    "desc500": "An unexpected issue occurred while loading this page. Please try again later.",
-    "backHome": "Return to Studio",
-    "exploreServices": "Explore Services"
-  },
-  "portfolio": {
-    "hero": {
       "title": "Visual Craft",
       "subtitle": "High-end post-production, editorial finishing & CGI archive",
       "badge": "Portfolio · 2015–2026"
@@ -1218,6 +1219,48 @@
       "ctaDesc": "Send us a test image or video clip. Experience our overnight turnaround, pixel precision, and dedicated project management firsthand.",
       "ctaButton": "Request Free Test Retouch"
     }
+  },
+  "serviceDetail": {
+    "kicker": "Image post-production service",
+    "placeOrder": "Place an order",
+    "getPriceIdea": "Get price idea",
+    "exploreFullPortfolio": "Explore Full Portfolio",
+    "compareAria": "Compare before and after service results"
+  },
+  "login": {
+    "badge": "Secure Access",
+    "title": "Studio Workspace",
+    "subtitle": "Enter credentials to view assets",
+    "emailLabel": "Email address",
+    "passwordLabel": "Password",
+    "forgot": "Forgot?",
+    "signInButton": "Sign In to Hub",
+    "backHome": "Back home",
+    "errorFill": "Please fill in all fields.",
+    "success": "Successfully authenticated. Redirecting to workspace..."
+  },
+  "blog": {
+    "title": "Studio journal",
+    "eyebrow": "Journal",
+    "description": "Articles about image craft, production thinking, and studio practice will be published here when original editorial content is ready."
+  },
+  "slider": {
+    "before": "Before",
+    "after": "After",
+    "ariaLabel": "Compare before and after images"
+  },
+  "social": {
+    "playBrief": "Play Brief",
+    "pauseBrief": "Pause Brief"
+  },
+  "error": {
+    "statusBadge": "Error",
+    "title404": "Page Not Found",
+    "desc404": "The visual or page you are looking for has been moved, renamed, or does not exist.",
+    "title500": "Unexpected Error",
+    "desc500": "An unexpected issue occurred while loading this page. Please try again later.",
+    "backHome": "Return to Studio",
+    "exploreServices": "Explore Services"
   },
   "languages": {
     "en": "English",

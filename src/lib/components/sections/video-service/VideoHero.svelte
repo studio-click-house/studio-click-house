@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { resolve } from "$app/paths";
   import { ArrowRight } from "lucide-svelte";
+  import { stripTitlePunctuation } from "$lib/utils";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import VideoControls from "$lib/components/common/VideoControls.svelte";
   import type { VideoHeroData } from "$lib/content/video-editing";
@@ -84,6 +86,7 @@
     };
   });
 </script>
+
 <section
   bind:this={heroSection}
   id="video-hero"
@@ -99,8 +102,12 @@
     preload="metadata"
     aria-hidden="true"
     class="absolute inset-0 size-full object-cover"
-    onplay={() => { isPlaying = true; }}
-    onpause={() => { isPlaying = false; }}
+    onplay={() => {
+      isPlaying = true;
+    }}
+    onpause={() => {
+      isPlaying = false;
+    }}
   >
     <source src={data.videoSrc} type="video/mp4" />
   </video>
@@ -116,32 +123,43 @@
 
   <div class="site-shell relative z-10 flex items-center py-12 sm:py-16">
     <div class="w-full max-w-3xl space-y-7">
+      <p class="eyebrow mb-3 text-brand-light/60">
+        {$_("sectionLabels.video")}
+      </p>
       <h1
         id="video-hero-title"
-        class="video-hero-title max-w-[12ch] font-display text-[clamp(3rem,6.5vw,6.2rem)] font-bold leading-[0.91] tracking-[-0.045em] text-brand-light"
+        class="video-hero-title hero-display-title max-w-[12ch] font-display text-[clamp(3rem,6.5vw,6.2rem)] leading-[0.91] tracking-[-0.045em] text-brand-light"
       >
-        <span class="block">{data.title}</span>
-        <span class="mt-2 block font-light italic text-brand-green sm:mt-3">
-          {data.titleAccent}
+        <span class="block">{stripTitlePunctuation(data.title)}</span>
+        <span class="hero-display-outline mt-2 block sm:mt-3">
+          {stripTitlePunctuation(data.titleAccent)}
         </span>
       </h1>
 
-      <p class="video-hero-lead max-w-[46ch] text-base leading-relaxed text-brand-light/85 sm:text-lg">
+      <p
+        class="video-hero-lead max-w-[46ch] text-base leading-relaxed text-brand-light/85 sm:text-lg"
+      >
         {data.description}
       </p>
 
       <div class="video-hero-actions flex flex-wrap items-center gap-3.5 pt-1">
         <Button
           href={resolve("/contact")}
-          size="lg" class="group px-7 hover:bg-brand-light hover:text-brand-dark"
+          size="lg"
+          class="group px-7 hover:bg-brand-light hover:text-brand-dark"
         >
           <span>Start a Video Project</span>
-          <ArrowRight size={16} class="transition-transform duration-300 group-hover:translate-x-1" />
+          <ArrowRight
+            size={16}
+            class="transition-transform duration-300 group-hover:translate-x-1"
+          />
         </Button>
 
         <Button
           href="#commercial-editing"
-          variant="secondary" size="lg" class="border-brand-light/50 bg-brand-dark/20 text-brand-light hover:border-brand-light hover:bg-brand-light/10 hover:text-brand-light"
+          variant="secondary"
+          size="lg"
+          class="border-brand-light/50 bg-brand-dark/20 text-brand-light hover:border-brand-light hover:bg-brand-light/10 hover:text-brand-light"
         >
           <span>View Services</span>
         </Button>
@@ -150,6 +168,12 @@
   </div>
 
   <div class="absolute bottom-5 right-5 z-20 sm:bottom-8 sm:right-8">
-    <VideoControls {isPlaying} {isMuted} onTogglePlay={togglePlay} onToggleMute={toggleMute} tone="hero" />
+    <VideoControls
+      {isPlaying}
+      {isMuted}
+      onTogglePlay={togglePlay}
+      onToggleMute={toggleMute}
+      tone="hero"
+    />
   </div>
 </section>

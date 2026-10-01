@@ -4,14 +4,14 @@
   import { ArrowRight, ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { ServiceDetailHeroData } from "$lib/types/service-detail";
-  import { cn } from "$lib/utils";
+  import { cn, stripTitlePunctuation } from "$lib/utils";
   import { _ } from "svelte-i18n";
 
   let { data } = $props<{ data: ServiceDetailHeroData }>();
   let heroSection = $state<HTMLElement>();
   const isLight = $derived(data.theme === "light");
   const titleWidthClass = $derived(
-    data.titleWidth === "wide" ? "max-w-[11ch]" : "max-w-[9ch]",
+    data.titleWidth === "wide" ? "max-w-[14ch]" : "max-w-[12ch]",
   );
   const isFourFive = $derived(data.aspectRatio === "4/5");
 
@@ -39,16 +39,17 @@
             });
           }
 
-          heroTl.from(
-            ".sd-hero-title-line",
-            {
-              yPercent: 112,
-              duration: 0.95,
-              stagger: 0.08,
-              clearProps: "all",
-            },
-            currentHero.querySelector(".sd-hero-kicker") ? "-=0.35" : 0,
-          )
+          heroTl
+            .from(
+              ".sd-hero-title-line",
+              {
+                yPercent: 112,
+                duration: 0.95,
+                stagger: 0.08,
+                clearProps: "all",
+              },
+              currentHero.querySelector(".sd-hero-kicker") ? "-=0.35" : 0,
+            )
             .from(
               ".sd-hero-copy-reveal",
               {
@@ -205,16 +206,28 @@
       <div class="sd-hero-copy-motion lg:col-span-5">
         {#if data.kicker}
           <p
-            class="sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
+            class={cn(
+              "sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em]",
+              isLight ? "text-brand-dark/50" : "text-brand-light/55",
+            )}
           >
-            {data.kicker}
+            {stripTitlePunctuation(data.kicker)}
+          </p>
+        {:else}
+          <p
+            class={cn(
+              "sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em]",
+              isLight ? "text-brand-dark/50" : "text-brand-light/55",
+            )}
+          >
+            Photo post-production
           </p>
         {/if}
         <h1
           id="service-detail-hero-title"
           class={cn(
-            data.kicker ? "mt-5" : "",
-            "font-display text-[clamp(4rem,7vw,7.8rem)] leading-[0.84] tracking-[-0.055em]",
+            "mt-5",
+            "hero-display-title font-display text-[clamp(3.5rem,5.8vw,5.5rem)] leading-[0.84] tracking-[-0.055em]",
             titleWidthClass,
           )}
         >
@@ -225,19 +238,19 @@
                 isLight ? "text-brand-dark" : "text-brand-light",
               )}
             >
-              {data.title}
+              {stripTitlePunctuation(data.title)}
             </span>
           </span>
           <span class="block overflow-hidden pb-[0.08em]">
-            <span class="sd-hero-title-line block text-brand-green">
-              {data.titleAccent}
+            <span class="sd-hero-title-line hero-display-outline block">
+              {stripTitlePunctuation(data.titleAccent)}
             </span>
           </span>
         </h1>
 
         <p
           class={cn(
-            "sd-hero-copy-reveal mt-7 max-w-[44ch] text-base leading-7 sm:text-lg",
+            "sd-hero-copy-reveal mt-7 max-w-[44ch] text-lg leading-8 sm:text-xl",
             isLight ? "text-brand-dark/70" : "text-brand-light/66",
           )}
         >
@@ -289,9 +302,7 @@
         <div
           class={cn(
             "relative grid items-center gap-3 sm:gap-4",
-            isFourFive
-              ? "grid-cols-[2.05fr_1fr]"
-              : "grid-cols-[1.12fr_0.88fr]",
+            isFourFive ? "grid-cols-[2.05fr_1fr]" : "grid-cols-[1.12fr_0.88fr]",
           )}
         >
           <figure
@@ -299,7 +310,9 @@
               "sd-hero-media-card sd-hero-media-primary relative overflow-hidden rounded-[2rem] transition-all duration-300",
               isFourFive
                 ? "aspect-[4/5] p-0"
-                : (data.mediaFit === "cover" ? "aspect-[3/3.85] p-0" : "aspect-[3/3.85] p-3 sm:p-5"),
+                : data.mediaFit === "cover"
+                  ? "aspect-[3/3.85] p-0"
+                  : "aspect-[3/3.85] p-3 sm:p-5",
               isLight
                 ? "border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6"
                 : "border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45",
@@ -312,7 +325,9 @@
               height={data.media.height}
               class={cn(
                 "size-full",
-                isFourFive || data.mediaFit === "cover" ? "object-cover" : "object-contain",
+                isFourFive || data.mediaFit === "cover"
+                  ? "object-cover"
+                  : "object-contain",
               )}
             />
           </figure>
@@ -329,9 +344,9 @@
                   "sd-hero-media-card sd-hero-media-support relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] transition-all duration-300",
                   isFourFive
                     ? "aspect-[4/5] p-0"
-                    : (item.width > item.height
-                        ? "aspect-[4/3] p-0"
-                        : "aspect-[4/3.15] p-2.5 sm:p-3.5"),
+                    : item.width > item.height
+                      ? "aspect-[4/3] p-0"
+                      : "aspect-[4/3.15] p-2.5 sm:p-3.5",
                   isLight
                     ? "border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/5"
                     : "border border-brand-light/10 bg-brand-light/5 shadow-xl shadow-brand-dark/35",

@@ -163,6 +163,9 @@
       <div class="faq-reveal-left lg:col-span-7 space-y-6">
         <!-- Header -->
         <div class="pb-2">
+          <p class="eyebrow mb-3 text-brand-dark/50">
+            {$_("sectionLabels.faq")}
+          </p>
           <h2
             id="faq-section-title"
             class="font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"

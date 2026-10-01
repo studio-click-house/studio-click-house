@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { onMount } from "svelte";
   import ServiceActionPair from "$lib/components/common/ServiceActionPair.svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
@@ -154,6 +155,9 @@
                 : "",
           )}
         >
+          <p class="eyebrow mb-3 text-brand-dark/50">
+            {$_("sectionLabels.comparison")}
+          </p>
           <h2
             id={headingId}
             class="max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]"
@@ -205,6 +209,9 @@
 
         <!-- Right: Text & Details (Columns 8-12) -->
         <div class="sd-ba-copy lg:order-2 lg:col-span-5 lg:pl-4">
+          <p class="eyebrow mb-3 text-brand-dark/50">
+            {$_("sectionLabels.comparison")}
+          </p>
           <h2
             id={headingId}
             class="max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]"

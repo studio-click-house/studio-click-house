@@ -15,6 +15,9 @@
 >
   <div class="site-shell">
     <div class="max-w-3xl" data-event-copy>
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.culture")}
+      </p>
       <h2
         class="max-w-[15ch] font-display text-[clamp(2.7rem,4.6vw,5rem)] leading-[0.94] tracking-[-0.04em]"
       >

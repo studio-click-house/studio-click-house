@@ -65,7 +65,7 @@
   <div class="site-shell relative z-10">
     <!-- Clean Editorial Header (No AI pills, No robot icons) -->
     <div class="pb-2">
-      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-3 block">
+      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-3 block">
         Visual Archive · All Photographs
       </span>
 

@@ -5,3 +5,7 @@ export type { WithElementRef, WithoutChild, WithoutChildren } from "bits-ui";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function stripTitlePunctuation(title: string) {
+  return title.trimEnd().replace(/[.,]+$/, "");
+}

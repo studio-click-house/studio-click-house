@@ -103,6 +103,9 @@
       <div bind:this={copyBlock} class="lg:col-span-7">
         
         <!-- Display Headline with Mixed Editorial Typography -->
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.about")}
+        </p>
         <h2
           id="about-description-title"
           class="font-display text-[clamp(2.5rem,4.4vw,4.8rem)] leading-[0.92] tracking-[-0.04em]"

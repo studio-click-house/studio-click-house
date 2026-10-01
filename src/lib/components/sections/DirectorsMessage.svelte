@@ -65,7 +65,7 @@
 >
   <div class="site-shell grid gap-14 lg:grid-cols-12">
     <div class="lg:col-span-4">
-      <p class="director-header-reveal eyebrow text-brand-green font-semibold">
+      <p class="director-header-reveal eyebrow text-brand-light/60 font-semibold">
         {$_('about.directorsMessage.eyebrow') || 'From the Creative Director'}
       </p>
       <h2

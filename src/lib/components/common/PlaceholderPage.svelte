@@ -2,9 +2,16 @@
   import { ArrowLeft, ArrowUpRight } from "lucide-svelte";
   import { resolve } from "$app/paths";
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
+  import { stripTitlePunctuation } from "$lib/utils";
   import { _ } from "svelte-i18n";
 
-  let { title, eyebrow, description, canonicalPath, noindex = false } = $props<{
+  let {
+    title,
+    eyebrow,
+    description,
+    canonicalPath,
+    noindex = false,
+  } = $props<{
     title: string;
     eyebrow: string;
     description: string;
@@ -12,7 +19,9 @@
     noindex?: boolean;
   }>();
 
-  let pageKey = $derived(canonicalPath.replaceAll("/", "").replace(/^-|-$/g, ""));
+  let pageKey = $derived(
+    canonicalPath.replaceAll("/", "").replace(/^-|-$/g, ""),
+  );
 </script>
 
 <PageMeta
@@ -22,16 +31,19 @@
   {noindex}
 />
 
-<main
-  id="main-content"
-  class="min-h-[100dvh] bg-brand-paper pt-32"
->
+<main id="main-content" class="min-h-[100dvh] bg-brand-paper pt-32">
   <header
     class="site-shell grid min-h-[70dvh] content-between gap-16 border-x border-brand-dark/10 px-5 pb-10 pt-12 sm:px-10 lg:px-16"
   >
-    <p class="eyebrow text-brand-green">{$_(`${pageKey}.eyebrow`) || eyebrow}</p>
+    <p class="eyebrow text-brand-dark/50">
+      {$_(`${pageKey}.eyebrow`) || eyebrow}
+    </p>
     <div>
-      <h1 class="display-title max-w-6xl">{$_(`${pageKey}.title`) || title}</h1>
+      <h1
+        class="hero-display-title text-[clamp(2.5rem,6vw,6rem)] leading-[0.9] tracking-[-0.06em] max-w-6xl"
+      >
+        {stripTitlePunctuation($_(`${pageKey}.title`) || title)}
+      </h1>
       <p
         class="mt-8 max-w-xl text-base leading-relaxed text-brand-dark/65 sm:text-lg"
       >
@@ -40,10 +52,11 @@
     </div>
     <div class="flex flex-wrap gap-7">
       <a href={resolve("/")} class="text-link"
-        ><ArrowLeft size={16} /> {$_('placeholder.backHome') || 'Back home'}</a
+        ><ArrowLeft size={16} /> {$_("placeholder.backHome") || "Back home"}</a
       >
       <a href={resolve("/contact")} class="text-link"
-        >{$_('placeholder.discussProject') || 'Discuss a project'} <ArrowUpRight size={16} /></a
+        >{$_("placeholder.discussProject") || "Discuss a project"}
+        <ArrowUpRight size={16} /></a
       >
     </div>
   </header>

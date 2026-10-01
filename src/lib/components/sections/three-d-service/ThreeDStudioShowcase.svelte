@@ -1,67 +1,88 @@
 <script lang="ts">
-  import ServiceBookingLink from "$lib/components/common/ServiceBookingLink.svelte";
+  import { _ } from "svelte-i18n";
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
-  import { Check } from "lucide-svelte";
+  import { resolve } from "$app/paths";
+  import { ArrowRight } from "lucide-svelte";
   import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-  import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import type { ThreeDModelingSectionData } from "$lib/content/three-d-modeling";
+  import type { ThreeDHeroData } from "$lib/content/three-d-modeling";
 
-  let { data }: { data: ThreeDModelingSectionData } = $props();
+  let { data }: { data: ThreeDHeroData } = $props();
 
-  let sectionElement = $state<HTMLElement>();
+  let showcaseSection = $state<HTMLElement>();
   let canvasContainer = $state<HTMLDivElement>();
 
   onMount(() => {
-    let ctx: { revert: () => void } | undefined;
     let active = true;
+    let ctx: { revert: () => void } | undefined;
 
+    // Entrance timeline
     registerScrollTrigger().then((runtime) => {
-      const currentSection = sectionElement;
-      if (!active || !runtime || !currentSection) return;
+      const currentShowcase = showcaseSection;
+      if (!active || !runtime || !currentShowcase) return;
       const { gsap } = runtime;
 
       ctx = gsap.context(() => {
         const mm = gsap.matchMedia();
         mm.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.from(".modeling-reveal", {
-            y: 28,
-            autoAlpha: 0,
-            duration: 0.75,
-            stagger: 0.1,
-            ease: "power3.out",
-            clearProps: "all",
+          const tl = gsap.timeline({
             scrollTrigger: {
-              trigger: currentSection,
-              start: "top 85%",
+              trigger: currentShowcase,
+              start: "top 80%",
               toggleActions: "play none none none",
-              once: true,
             },
+            defaults: { ease: "power3.out" },
           });
+
+          tl.from(".threed-showcase-title", {
+            autoAlpha: 0,
+            y: 18,
+            duration: 0.85,
+            clearProps: "all",
+          }, 0.1)
+            .from(".threed-showcase-lead", {
+              autoAlpha: 0,
+              y: 18,
+              duration: 0.75,
+              clearProps: "all",
+            }, "-=0.55")
+            .from(".threed-showcase-actions", {
+              autoAlpha: 0,
+              y: 18,
+              duration: 0.65,
+              clearProps: "all",
+            }, "-=0.5")
+            .from(".threed-showcase-stage", {
+              autoAlpha: 0,
+              y: 28,
+              duration: 0.85,
+              clearProps: "all",
+            }, "-=0.5");
         });
-      }, currentSection);
+      }, currentShowcase);
     });
 
-    // Three.js 3D Turntable: Titanium Smartphone (Precision 3D Product Modeling & Quad Topology)
+    // Three.js 3D Turntable: Real Photorealistic Commercial Product Model
     let animationFrameId: number;
     let cleanupThree: (() => void) | undefined;
 
     if (canvasContainer) {
       const container = canvasContainer;
       const width = container.clientWidth;
-      const height = container.clientHeight || 500;
+      const height = container.clientHeight || 520;
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
-      const baseDistance = 4.8;
+      const baseDistance = 4.2;
       function getResponsiveDistance(aspect: number): number {
-        if (aspect < 1.25) {
-          return baseDistance * (1.25 / Math.max(0.65, aspect));
+        if (aspect < 1.15) {
+          return baseDistance * (1.15 / Math.max(0.65, aspect));
         }
         return baseDistance;
       }
-      camera.position.set(0, 0.12, getResponsiveDistance(width / height));
+      camera.position.set(0, 0.2, getResponsiveDistance(width / height));
       camera.lookAt(0, 0, 0);
 
       const renderer = new THREE.WebGLRenderer({
@@ -72,13 +93,13 @@
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.35;
+      renderer.toneMappingExposure = 1.25;
       container.appendChild(renderer.domElement);
 
       const modelGroup = new THREE.Group();
       scene.add(modelGroup);
 
-      // Floor Contact Shadow Plane
+      // Floor Contact Shadow Plane (Soft falloff, completely within frustum)
       const shadowCanvas = document.createElement("canvas");
       shadowCanvas.width = 512;
       shadowCanvas.height = 512;
@@ -97,7 +118,7 @@
       shadowTexture.wrapS = THREE.ClampToEdgeWrapping;
       shadowTexture.wrapT = THREE.ClampToEdgeWrapping;
 
-      const shadowGeo = new THREE.PlaneGeometry(2.0, 1.6);
+      const shadowGeo = new THREE.PlaneGeometry(2.4, 2.0);
       const shadowMat = new THREE.MeshBasicMaterial({
         map: shadowTexture,
         transparent: true,
@@ -106,74 +127,62 @@
       });
       const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
       shadowMesh.rotation.x = -Math.PI / 2;
-      shadowMesh.position.y = -1.06;
+      shadowMesh.position.y = -0.7;
       scene.add(shadowMesh);
 
-      // Studio Lighting for Brushed Titanium Metal & Camera Optics
-      const keyLight = new THREE.DirectionalLight(0xfffaed, 3.2);
+      // Studio Lighting
+      const keyLight = new THREE.DirectionalLight(0xfffaed, 2.6);
       keyLight.position.set(4, 5, 4);
       scene.add(keyLight);
 
-      const rimLight = new THREE.DirectionalLight(0xffffff, 3.6);
+      const rimLight = new THREE.DirectionalLight(0xffffff, 3.2);
       rimLight.position.set(-3, 6, -3);
       scene.add(rimLight);
 
-      const fillLight = new THREE.DirectionalLight(0xedf4ff, 1.8);
-      fillLight.position.set(-4, -1, 3);
+      const fillLight = new THREE.DirectionalLight(0xeef4ff, 1.4);
+      fillLight.position.set(3, 1, 3);
       scene.add(fillLight);
 
-      const topLight = new THREE.DirectionalLight(0xffffff, 2.0);
-      topLight.position.set(0, 6, 1);
-      scene.add(topLight);
-
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.1);
       scene.add(ambientLight);
 
-      // Load Real 3D Model: Titanium Smartphone (01 / 3D Product Modeling)
+      // Load Real 3D Product Model
       let loadedModel: THREE.Group | undefined;
-      let dracoLoader: DRACOLoader | undefined;
-      dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath("/draco/gltf/");
       const loader = new GLTFLoader();
-      loader.setDRACOLoader(dracoLoader);
-
       loader.load(
-        "/models/iphone15pro.glb",
+        "/models/MaterialsVariantsShoe.glb",
         (gltf) => {
           if (!active) return;
           loadedModel = gltf.scene;
 
-          loadedModel.updateWorldMatrix(true, true);
+          // Compute bounding box to normalize scale and center perfectly
           const box = new THREE.Box3().setFromObject(loadedModel);
           const size = box.getSize(new THREE.Vector3());
           const center = box.getCenter(new THREE.Vector3());
 
-          // Center geometric pivot
-          loadedModel.position.x = -center.x;
-          loadedModel.position.y = -center.y;
-          loadedModel.position.z = -center.z;
+          loadedModel.position.x -= center.x;
+          loadedModel.position.y -= center.y;
+          loadedModel.position.z -= center.z;
 
-          // Balanced fill ratio (~72% of viewport) with safe breathing room at top and bottom
-          const radiusXZ = Math.sqrt((size.x / 2) ** 2 + (size.z / 2) ** 2);
-          const effectiveDimension = Math.max(radiusXZ * 2, size.y);
-          const scale = 2.45 / effectiveDimension;
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scale = 2.15 / maxDim;
           loadedModel.scale.setScalar(scale);
 
           modelGroup.add(loadedModel);
         },
         undefined,
         (error) => {
-          console.error("Failed to load iphone15pro.glb:", error);
+          console.error("Failed to load MaterialsVariantsShoe.glb:", error);
         }
       );
 
-      // Initial aesthetic beauty angle (three-quarters perspective highlighting screen & titanium rail)
+      // Smooth Round Move / Turntable Drag Interaction
       let isDragging = false;
       let previousMousePosition = { x: 0, y: 0 };
-      let targetRotationY = -0.45;
-      let targetRotationX = 0.12;
-      let currentRotationY = -0.45;
-      let currentRotationX = 0.12;
+      let targetRotationY = 0.5;
+      let targetRotationX = 0.05;
+      let currentRotationY = 0.5;
+      let currentRotationX = 0.05;
       let autoRotate = true;
 
       function onPointerDown(e: MouseEvent | TouchEvent) {
@@ -194,7 +203,8 @@
 
         targetRotationY += deltaX * 0.008;
         targetRotationX += deltaY * 0.004;
-        targetRotationX = Math.max(-0.25, Math.min(0.28, targetRotationX));
+
+        targetRotationX = Math.max(-0.25, Math.min(0.35, targetRotationX));
 
         previousMousePosition = { x: clientX, y: clientY };
       }
@@ -218,7 +228,7 @@
       function updateSize() {
         if (!container || !renderer || !camera) return;
         const w = container.clientWidth;
-        const h = container.clientHeight || 460;
+        const h = container.clientHeight || 520;
         camera.aspect = w / h;
         camera.position.z = getResponsiveDistance(camera.aspect);
         camera.updateProjectionMatrix();
@@ -231,11 +241,12 @@
       }
       window.addEventListener("resize", updateSize);
 
+      // Animation Loop: Simple smooth round movement
       function animate() {
         animationFrameId = requestAnimationFrame(animate);
 
         if (autoRotate && !isDragging) {
-          targetRotationY += 0.005;
+          targetRotationY += 0.0065;
         }
 
         currentRotationY += (targetRotationY - currentRotationY) * 0.08;
@@ -244,8 +255,9 @@
         modelGroup.rotation.y = currentRotationY;
         modelGroup.rotation.x = currentRotationX;
 
+        // Gentle subtle bob
         const time = Date.now() * 0.0016;
-        modelGroup.position.y = Math.sin(time) * 0.015;
+        modelGroup.position.y = Math.sin(time) * 0.02;
 
         renderer.render(scene, camera);
       }
@@ -265,7 +277,6 @@
         shadowGeo.dispose();
         shadowMat.dispose();
         shadowTexture.dispose();
-        dracoLoader?.dispose();
 
         if (loadedModel) {
           loadedModel.traverse((child) => {
@@ -296,72 +307,67 @@
 </script>
 
 <section
-  bind:this={sectionElement}
-  id={data.id || "3d-product-modeling"}
-  class="relative isolate scroll-mt-24 overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-28"
+  bind:this={showcaseSection}
+  id="threed-studio-showcase"
+  aria-labelledby="threed-showcase-title"
+  class="relative isolate overflow-hidden bg-brand-light text-brand-dark transition-colors duration-300 py-16 sm:py-24"
 >
-  <div id="product-modeling" class="absolute -top-24 pointer-events-none"></div>
-  <div class="site-shell relative z-10">
-    <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
-      <!-- Left Column: Service Details & Deliverables -->
-      <div class="modeling-reveal space-y-6 lg:col-span-5">
-        <div
-          class="font-mono text-xs uppercase tracking-wider text-brand-dark/50 font-bold"
-        >
-          01 / 3D Product Modeling
-        </div>
+  <!-- Ambient Backdrop Glow -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(ellipse_62%_56%_at_24%_42%,rgba(126,166,65,0.08),transparent_58%)]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -right-[10rem] top-[8%] size-[38rem] rounded-full bg-brand-green/10 opacity-70 blur-[120px]"
+    aria-hidden="true"
+  ></div>
 
+  <div class="site-shell relative z-10 flex items-center py-6 sm:py-10">
+    <div class="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-14">
+      <!-- Left Column: Copy & Actions (lg:col-span-5) -->
+      <div class="space-y-6 lg:col-span-5">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.threeD")}
+        </p>
         <h2
-          class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5"
+          id="threed-showcase-title"
+          class="threed-showcase-title font-display text-[clamp(2.2rem,3.8vw,4rem)] leading-[0.98] tracking-[-0.038em] font-bold text-brand-dark pb-1"
         >
-          {data.heading}
+          <span class="block">{data.title}</span>
+          <span class="block text-brand-green font-light italic mt-1.5 sm:mt-2">
+            {data.titleAccent}
+          </span>
         </h2>
 
-        <p
-          class="text-base leading-relaxed text-brand-dark/75 sm:text-lg sm:leading-relaxed"
-        >
-          {data.leadParagraph}
+        <p class="threed-showcase-lead max-w-[46ch] text-base leading-relaxed text-brand-dark/75 sm:text-lg sm:leading-relaxed">
+          {data.description}
         </p>
 
-        <p class="text-sm text-brand-dark/70 leading-relaxed">
-          {data.bodyParagraph}
-        </p>
+        <div class="threed-showcase-actions flex flex-wrap items-center gap-3.5 pt-1">
+          <Button
+            href={resolve("/contact")}
+            size="lg"
+            class="group bg-brand-dark px-7 text-brand-light hover:bg-brand-green hover:text-brand-dark"
+          >
+            <span>Start a 3D Project</span>
+            <ArrowRight size={16} class="transition-transform duration-300 group-hover:translate-x-1" />
+          </Button>
 
-        <!-- Capabilities List -->
-        <div class="space-y-3 pt-2">
-          {#each data.capabilities as item (item.title)}
-            <div class="flex items-start gap-3">
-              <div
-                class="flex size-5 items-center justify-center rounded-full bg-brand-green/20 text-brand-green shrink-0 mt-0.5"
-              >
-                <Check size={12} strokeWidth={2.5} />
-              </div>
-              <div>
-                <h3 class="font-sans text-sm font-semibold text-brand-dark">
-                  {item.title}
-                </h3>
-                <p
-                  class="text-xs sm:text-sm text-brand-dark/70 leading-relaxed"
-                >
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          {/each}
-        </div>
-
-        <div class="pt-2">
-          <ServiceBookingLink label="Book 3D Product Modeling" />
+          <Button
+            href="#product-modeling"
+            variant="secondary"
+            size="lg"
+            class="bg-white/70 hover:border-brand-dark hover:bg-white"
+          >
+            <span>Explore 3D Services</span>
+          </Button>
         </div>
       </div>
 
-      <!-- Right Column: Direct 3D Product Turntable (Titanium Smartphone - CAD Precision & Clean Geometry) -->
-      <div
-        class="modeling-reveal lg:col-span-7 flex items-center justify-center"
-      >
-        <div
-          class="relative w-full max-w-[740px] aspect-[16/11] sm:aspect-[4/3] min-h-[440px] sm:min-h-[540px] select-none flex items-center justify-center"
-        >
+      <!-- Right Column: Direct 3D Product Turntable -->
+      <div class="threed-showcase-stage lg:col-span-7">
+        <div class="relative w-full aspect-square sm:aspect-[16/11] lg:aspect-[4/3] min-h-[320px] sm:min-h-[460px] lg:min-h-[540px] overflow-visible select-none">
+          <!-- Real-Time Interactive Three.js Canvas -->
           <div
             bind:this={canvasContainer}
             class="size-full cursor-grab active:cursor-grabbing touch-pan-y"

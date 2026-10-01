@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import ServiceBookingLink from "$lib/components/common/ServiceBookingLink.svelte";
   import { onMount } from "svelte";
   import { Check } from "lucide-svelte";
@@ -76,6 +77,9 @@
     <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Service Details & Deliverables -->
       <div class="commercial-reveal space-y-6 lg:col-span-5">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.commercial")}
+        </p>
         <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
           {data.heading}
         </h2>

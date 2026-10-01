@@ -3,12 +3,8 @@
   import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
   import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-  import { RotateCcw } from "lucide-svelte";
 
-  let {
-    modelPath = "/models/iphone15pro.glb",
-    className = "",
-  } = $props<{
+  let { modelPath = "/models/iphone15pro.glb", className = "" } = $props<{
     modelPath?: string;
     className?: string;
   }>();
@@ -142,7 +138,7 @@
         undefined,
         (error) => {
           console.error(`Failed to load 3D model from ${modelPath}:`, error);
-        }
+        },
       );
 
       // Interactive Drag & Turntable Rotation
@@ -278,12 +274,4 @@
     class="size-full cursor-grab active:cursor-grabbing touch-pan-y"
     title="Drag to inspect in 3D"
   ></div>
-
-  <!-- Interactive 360 pill hint badge -->
-  <div
-    class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-brand-dark/15 bg-brand-light/90 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-brand-dark/70 backdrop-blur-sm shadow-sm flex items-center gap-1.5"
-  >
-    <RotateCcw size={11} strokeWidth={2.5} class="text-brand-green animate-spin-slow" />
-    <span>360° Drag to inspect</span>
-  </div>
 </figure>

@@ -2,6 +2,7 @@
   import PageMeta from "$lib/components/seo/PageMeta.svelte";
   import JsonLd from "$lib/components/seo/JsonLd.svelte";
   import ThreeDHero from "$lib/components/sections/three-d-service/ThreeDHero.svelte";
+  import ThreeDStudioShowcase from "$lib/components/sections/three-d-service/ThreeDStudioShowcase.svelte";
   import ThreeDProductModelingService from "$lib/components/sections/three-d-service/ThreeDProductModelingService.svelte";
   import ThreeDCgiRenderingService from "$lib/components/sections/three-d-service/ThreeDCgiRenderingService.svelte";
   import ThreeDWebInteractiveService from "$lib/components/sections/three-d-service/ThreeDWebInteractiveService.svelte";
@@ -63,10 +64,13 @@
 <JsonLd data={breadcrumbData} />
 
 <main id="main-content" class="relative min-h-screen bg-brand-light text-brand-dark">
-  <!-- 1. Hero: Clean White Studio Stage 3D Showcase with Smooth Drag Rotation -->
+  <!-- 1. Hero: Immersive 3D Web Embed Gallery Showcase -->
   <ThreeDHero data={threeDModelingPageData.hero} />
 
-  <!-- 2. Service Topic 01: 3D Product Modeling & Quad Topology -->
+  <!-- 2. Studio Stage: Real 3D Product Turntable with Drag Rotation -->
+  <ThreeDStudioShowcase data={threeDModelingPageData.hero} />
+
+  <!-- 3. Service Topic 01: 3D Product Modeling & Quad Topology -->
   <ThreeDProductModelingService data={threeDModelingPageData.modeling} />
 
   <!-- 3. Service Topic 02: Photorealistic CGI Renders & Studio Lighting -->

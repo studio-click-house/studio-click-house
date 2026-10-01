@@ -2,6 +2,7 @@
   /* eslint-disable svelte/no-navigation-without-resolve -- resolveServiceHref returns a resolved pathname. */
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
+  import { resolve } from "$app/paths";
   import {
     Camera,
     Video,
@@ -43,6 +44,7 @@
       label: "Photo Editing",
       description: "Precision Photoshop & retouching at scale",
       icon: Camera,
+      href: resolve("/services"),
     },
     {
       id: "Video Editing" as const,
@@ -50,6 +52,7 @@
       label: "Video Editing",
       description: "Cinematic cuts, grading & social reels",
       icon: Video,
+      href: resolve("/services/video-editing"),
     },
     {
       id: "3D Modeling" as const,
@@ -57,6 +60,7 @@
       label: "3D Product Modeling",
       description: "CGI rendering, shading & design",
       icon: Layers,
+      href: resolve("/services/3d-modeling"),
     },
   ];
 
@@ -191,17 +195,11 @@
       </p>
       <div class="flex flex-col gap-3">
         {#each categories as category (category.id)}
-          <div
-            role="button"
-            tabindex="0"
+          <a
+            href={category.href}
             data-active={activeCategory === category.id}
             onmouseenter={() => handleCategoryHover(category.id)}
-            onclick={() => handleCategoryHover(category.id)}
-            onkeydown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                handleCategoryHover(category.id);
-              }
-            }}
+            onclick={onClose}
             class="group border border-brand-light/5 rounded-xl p-3.5 flex items-center justify-between transition-all duration-300 ease-out cursor-pointer outline-none hover:bg-brand-light/5 hover:border-brand-green/20 data-[active=true]:bg-brand-light/5 data-[active=true]:border-brand-green/60 data-[active=true]:shadow-[0_0_15px_rgba(126,166,65,0.15)] focus-visible:ring-1 focus-visible:ring-brand-green"
           >
             <div class="flex items-center gap-3">
@@ -232,7 +230,7 @@
               size={13}
               class="text-brand-light/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-brand-green group-data-[active=true]:text-brand-green"
             />
-          </div>
+          </a>
         {/each}
       </div>
     </div>

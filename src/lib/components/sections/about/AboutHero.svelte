@@ -5,6 +5,7 @@
   import { scrollToTarget } from "$lib/animations/lenis";
   import type { AboutPageData, AboutStat } from "$lib/types/about";
   import { _ } from "svelte-i18n";
+  import { stripTitlePunctuation } from "$lib/utils";
 
   let { hero } = $props<{ hero: AboutPageData["hero"] }>();
 
@@ -123,40 +124,49 @@
       <!-- Left Column: Editorial Copy & Studio Statement -->
       <div class="lg:col-span-5">
         <span
-          class="hero-editorial-item font-mono text-xs uppercase tracking-[0.22em] text-brand-green-ink font-medium mb-4 block"
+          class="hero-editorial-item font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-4 block"
         >
           Studio Collective &middot; Dhaka, Bangladesh
         </span>
 
         <h1
-          class="hero-editorial-item font-display text-[clamp(2.75rem,5.2vw,5.5rem)] font-normal leading-[0.92] tracking-tight text-brand-dark"
+          class="hero-editorial-item hero-display-title font-display text-[clamp(2.75rem,5.2vw,5.5rem)] leading-[0.92] tracking-tight text-brand-dark"
         >
-          <span class="block italic text-brand-dark/60 font-normal">
-            {$_('about.hero.headingLine1') || hero.headingLine1}
+          <span class="block">
+            {stripTitlePunctuation(
+              $_("about.hero.headingLine1") || hero.headingLine1,
+            )}
           </span>
-          <span>
-            {$_('about.hero.headingLine2') || hero.headingLine2}.
+          <span class="hero-display-outline block">
+            {stripTitlePunctuation(
+              $_("about.hero.headingLine2") || hero.headingLine2,
+            )}
           </span>
         </h1>
 
         <p
           class="hero-editorial-item mt-6 max-w-md text-base leading-relaxed text-brand-dark/75 sm:text-lg"
         >
-          {$_('about.hero.positioning') || hero.positioning}
+          {$_("about.hero.positioning") || hero.positioning}
         </p>
 
         <!-- Clean Action Buttons (Matches EventsHero & PricingHero) -->
-        <div class="hero-editorial-item mt-8 flex flex-wrap items-center gap-3.5">
+        <div
+          class="hero-editorial-item mt-8 flex flex-wrap items-center gap-3.5"
+        >
           <Button
             href="#about-studio-video"
             onclick={handleScrollToVideo}
-            size="lg" class="font-mono text-xs uppercase tracking-wider"
+            size="lg"
+            class="font-mono text-xs uppercase tracking-wider"
           >
             Watch Studio Film
           </Button>
           <Button
             href="#team-collective"
-            variant="secondary" size="lg" class="bg-white/80 font-mono text-xs uppercase tracking-wider hover:bg-white"
+            variant="secondary"
+            size="lg"
+            class="bg-white/80 font-mono text-xs uppercase tracking-wider hover:bg-white"
           >
             Meet The Collective
           </Button>
@@ -194,7 +204,9 @@
         <figure
           class="hero-photo-primary absolute right-0 top-0 w-[88%] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-2 shadow-xl"
         >
-          <div class="relative aspect-[16/11] w-full overflow-hidden rounded-[var(--radius-card-sm)] sm:rounded-[var(--radius-card)] bg-brand-dark/5">
+          <div
+            class="relative aspect-[16/11] w-full overflow-hidden rounded-[var(--radius-card-sm)] sm:rounded-[var(--radius-card)] bg-brand-dark/5"
+          >
             <img
               src="/images/about/team/studio-click-house-team-01.jpg"
               alt="Studio Click House team collective"
@@ -210,7 +222,9 @@
         <figure
           class="hero-photo-card absolute bottom-[8%] left-0 w-[46%] -rotate-2 overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
         >
-          <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem] bg-brand-dark/5">
+          <div
+            class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem] bg-brand-dark/5"
+          >
             <img
               src="/images/about/team/studio-click-house-team-02.jpg"
               alt="Studio Click House production floor workstations"
@@ -219,7 +233,9 @@
               class="size-full object-cover"
             />
           </div>
-          <p class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider">
+          <p
+            class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider"
+          >
             Dhaka Production Floor
           </p>
         </figure>
@@ -228,7 +244,9 @@
         <figure
           class="hero-photo-card absolute -bottom-2 right-[8%] w-[40%] rotate-2 overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] border border-brand-dark/12 bg-white p-2 shadow-2xl transition-transform duration-500 hover:rotate-0 hover:scale-105 z-20"
         >
-          <div class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem] bg-brand-dark/5">
+          <div
+            class="aspect-[4/3] w-full overflow-hidden rounded-[1.2rem] sm:rounded-[1.4rem] bg-brand-dark/5"
+          >
             <img
               src="/images/about/team/studio-click-house-team-03.jpg"
               alt="Studio Click House color grading suite"
@@ -237,7 +255,9 @@
               class="size-full object-cover"
             />
           </div>
-          <p class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider">
+          <p
+            class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider"
+          >
             Color Grading Suite
           </p>
         </figure>

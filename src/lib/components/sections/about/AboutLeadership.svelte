@@ -193,7 +193,7 @@
       <div>
         {#if leadership.eyebrow}
           <span
-            class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-green-ink"
+            class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-dark/50"
           >
             {$_('about.leadership.eyebrow') || leadership.eyebrow}
           </span>

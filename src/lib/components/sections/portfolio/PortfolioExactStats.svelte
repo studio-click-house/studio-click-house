@@ -119,6 +119,9 @@
 
     <!-- Luxury Studio Conversion CTA (Closing Moment) -->
     <div class="cta-anim-card max-w-3xl flex flex-col items-center w-full px-2">
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.project")}
+      </p>
       <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1.08] tracking-tight mb-6">
         {$_('portfolio.stats.ctaHeading') || 'Ready to see what we can do for your brand?'}
       </h2>

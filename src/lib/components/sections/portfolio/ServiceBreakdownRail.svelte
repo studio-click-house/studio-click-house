@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { resolve } from "$app/paths";
   import { ArrowUpRight } from "lucide-svelte";
   import { onMount } from "svelte";
@@ -351,6 +352,9 @@
               class:pointer-events-none={index !== activeIndex}
               class="breakdown-copy-panel"
             >
+              <p class="eyebrow mb-3 text-brand-dark/50">
+                {$_("sectionLabels.workflow")}
+              </p>
               <h3 class="breakdown-title breakdown-title-mask">
                 <span class="breakdown-title-text">{stage.title}</span>
               </h3>
@@ -388,6 +392,9 @@
 
   <div class="breakdown-fallback site-shell">
     <div class="breakdown-fallback-heading">
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.workflow")}
+      </p>
       <h2 class="font-display text-5xl leading-[0.92] tracking-[-0.04em]">
         From camera file<br />
         <em class="text-brand-green">to final delivery.</em>

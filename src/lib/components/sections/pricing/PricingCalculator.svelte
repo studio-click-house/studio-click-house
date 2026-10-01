@@ -295,7 +295,7 @@
           >
             <div>
               <p
-                class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-green-ink"
+                class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-dark/50"
               >
                 {$_('pricing.calculator.realTimeCalculation') || 'Real-Time Calculation'}
               </p>

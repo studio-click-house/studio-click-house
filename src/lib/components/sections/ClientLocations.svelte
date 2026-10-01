@@ -7,10 +7,6 @@
   }>();
 </script>
 
-<section
-  id="client-locations"
-  aria-label="Client locations map"
-  class="overflow-hidden bg-brand-dark text-brand-light"
->
+<div id="client-locations" class="relative bg-brand-light text-brand-dark">
   <InteractiveClientMap {closingCta} />
-</section>
+</div>

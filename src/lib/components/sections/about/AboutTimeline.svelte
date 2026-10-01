@@ -103,11 +103,16 @@
   <div class="site-shell">
     <!-- Header -->
     <div class="mb-16 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-24">
-      <h2
-        class="journey-header-reveal font-display text-[clamp(2.5rem,5.5vw,7rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark lg:col-span-8"
-      >
-        {$_('about.journey.heading') || journey.heading}
-      </h2>
+      <div class="lg:col-span-8">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.journey")}
+        </p>
+        <h2
+          class="journey-header-reveal font-display text-[clamp(2.5rem,5.5vw,7rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark"
+        >
+          {$_('about.journey.heading') || journey.heading}
+        </h2>
+      </div>
       <p
         class="journey-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
       >

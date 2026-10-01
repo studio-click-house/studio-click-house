@@ -112,13 +112,19 @@
   aria-labelledby="global-production-heading"
   bind:this={sectionRoot}
   data-cursor-trail="off"
-  class="network-section relative min-h-[100dvh] overflow-hidden bg-brand-light px-4 text-brand-dark lg:py-0"
+  class="network-section relative overflow-hidden bg-brand-light px-4 text-brand-dark"
 >
-  <div class="site-shell relative z-10 mx-auto max-w-7xl lg:min-h-[100dvh]">
+  <!-- Ambient Section Transition Connector (matching client/services scroll pattern) -->
+  <div class="network-glow-connector" aria-hidden="true"></div>
+
+  <div class="site-shell relative z-10 mx-auto max-w-7xl">
     <div
-      class="grid items-center gap-5 lg:min-h-[100dvh] lg:grid-cols-12 lg:gap-6"
+      class="grid items-center gap-6 lg:grid-cols-12 lg:gap-8"
     >
       <div class="z-20 flex flex-col lg:col-span-4 lg:py-6">
+        <p class="eyebrow mb-3 text-brand-dark/50 network-copy-step">
+          {$_("sectionLabels.project")}
+        </p>
         <h2
           id="global-production-heading"
           class="network-copy-step max-w-xl font-display text-[clamp(3rem,5.5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em] text-brand-dark"
@@ -145,7 +151,6 @@
         bind:this={globeStage}
         class="globe-stage relative flex min-h-0 items-center justify-center py-6 sm:min-h-[36rem] sm:py-0 lg:col-span-8 lg:min-h-0 lg:translate-x-12 xl:translate-x-20"
       >
-        <div class="globe-ambient" aria-hidden="true"></div>
         {#if ThreeGlobe}
           <ThreeGlobe />
         {/if}
@@ -163,43 +168,30 @@
     content: none;
   }
 
+  /* Ambient Section Transition Connector (matching client/services scroll pattern) */
+  .network-glow-connector {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 82% 100% at 50% 100%,
+      color-mix(in srgb, var(--color-brand-green) 24%, transparent),
+      transparent 75%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
   .globe-stage {
     isolation: isolate;
     will-change: transform, opacity;
   }
 
-  .globe-ambient {
-    position: absolute;
-    z-index: 0;
-    width: min(98%, 46rem);
-    aspect-ratio: 1;
-    border-radius: 9999px;
-    background: radial-gradient(
-      circle,
-      rgba(126, 166, 65, 0.22) 0%,
-      rgba(126, 166, 65, 0.14) 32%,
-      rgba(126, 166, 65, 0.06) 52%,
-      rgba(126, 166, 65, 0.015) 68%,
-      rgba(126, 166, 65, 0) 82%
-    );
-    pointer-events: none;
-    filter: blur(42px);
-    will-change: transform, opacity;
-  }
-
   .network-section {
-    padding-block: clamp(4rem, 7vw, 7rem);
-  }
-
-  @media (min-width: 1024px) {
-    .network-section {
-      padding-block: 0;
-    }
+    padding-block: var(--space-section-lg, clamp(7rem, 11vw, 12rem));
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .globe-stage,
-    .globe-ambient {
+    .globe-stage {
       will-change: auto;
     }
   }

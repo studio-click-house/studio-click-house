@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { onMount } from "svelte";
   import ServiceActionPair from "$lib/components/common/ServiceActionPair.svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
@@ -153,6 +154,9 @@
   <div class="site-shell relative z-10">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-14">
       <div class="sd-proof-copy sd-proof-copy-motion lg:col-span-5 lg:pr-4">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.showcase")}
+        </p>
         <h2
           id="service-detail-showcase-title"
           class="max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]"

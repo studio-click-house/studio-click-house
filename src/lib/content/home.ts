@@ -477,12 +477,39 @@ export const clientLocations: ClientLocationMarker[] = [
 
 export const showcaseProjects: ShowcaseProjectItem[] = [
   {
-    id: "photo-editing",
+    id: "ai-image-workflow",
     year: "01",
+    category: "AI image workflow",
+    title: "AI photo editing",
+    description:
+      "AI-assisted fashion image production and finishing, with careful review of fabric texture and product detail.",
+    capabilities: ["AI image workflow", "Art direction", "Detail finishing"],
+    bgColor:
+      "color-mix(in srgb, var(--color-brand-dark) 8%, var(--color-brand-paper))",
+    media: {
+      kind: "image",
+      src: "/images/services/ai-retouching/ai-editorial-fashion.webp",
+      alt: "AI-assisted editorial fashion image, finished for natural fabric texture and product detail",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
+      objectPosition: "top",
+    },
+    href: "/services",
+  },
+  {
+    id: "photo-editing",
+    year: "02",
     category: "Image post-production",
     title: "Photo editing",
     description:
       "Retouching, color correction, clipping, and clean finishing for polished campaign and e-commerce imagery.",
+    capabilities: [
+      "Retouching",
+      "Color correction",
+      "Clipping path",
+      "Finishing",
+    ],
     bgColor:
       "color-mix(in srgb, var(--color-brand-coral) 32%, var(--color-brand-paper))",
     media: {
@@ -494,16 +521,17 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
   },
   {
     id: "video-editing",
-    year: "02",
+    year: "03",
     category: "Motion post-production",
     title: "Video editing",
     description:
       "Commercial edits, social cutdowns, retouching, and controlled color grading shaped for every viewing format.",
+    capabilities: ["Commercial edits", "Social cutdowns", "Color grading"],
     bgColor:
       "color-mix(in srgb, var(--color-brand-green) 38%, var(--color-brand-paper))",
     media: {
       kind: "video",
-      src: "/videos/editing-video-720p.webm",
+      src: "/images/services/video-editing/video-editing-timeline-playhead-scrubber-closeup.mp4",
       poster: "/images/work-fields/studio-production-poster.jpg",
       alt: "Studio video editing and post-production preview",
       width: 1280,
@@ -514,16 +542,25 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
   },
   {
     id: "3d-cgi",
-    year: "03",
+    year: "04",
     category: "Digital production",
     title: "3D & CGI",
     description:
       "Product modeling, material development, lighting, and photorealistic CGI rendering for commercial imagery.",
-    bgColor:
-      "color-mix(in srgb, var(--color-brand-dark) 17%, var(--color-brand-mist))",
+    capabilities: [
+      "Product modeling",
+      "Materials",
+      "Lighting",
+      "CGI rendering",
+    ],
+    bgColor: "var(--color-brand-light)",
     media: {
       kind: "image",
-      ...previewMedia.cgiProductShowcaseV2,
+      src: "/images/services/3d-cgi/graphical-fragrance-cgi.webp",
+      alt: "White-background 3D CGI fragrance bottle with cobalt and coral graphic details",
+      width: 1122,
+      height: 1402,
+      credit: "Studio Click House",
     },
     href: "/services",
   },

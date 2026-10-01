@@ -584,6 +584,9 @@
   >
     <!-- MOBILE HEADER (visible on mobile, hidden on desktop) -->
     <header class="w-full pb-6 mb-6 block md:hidden">
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.quality")}
+      </p>
       <h2
         class="font-display text-2xl font-light leading-tight tracking-[-0.03em] text-brand-dark mt-2"
       >
@@ -691,6 +694,9 @@
           bind:this={workflowHeaderRef}
           class="workflow-header mb-6 hidden md:block"
         >
+          <p class="eyebrow mb-3 text-brand-dark/50">
+            {$_("sectionLabels.quality")}
+          </p>
           <h2
             class="font-display text-[clamp(1.35rem,1.9vw,2.05rem)] font-light leading-[1.15] tracking-[-0.03em] text-brand-dark"
           >

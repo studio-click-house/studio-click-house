@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import ServiceBookingLink from "$lib/components/common/ServiceBookingLink.svelte";
   import { onMount } from "svelte";
   import { Check } from "lucide-svelte";
@@ -161,6 +162,9 @@
 
       <!-- Right Column: Service Description & Standards -->
       <div class="grading-reveal space-y-6 lg:col-span-5">
+        <p class="eyebrow mb-3 text-brand-dark/50">
+          {$_("sectionLabels.grading")}
+        </p>
         <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
           {data.heading}
         </h2>

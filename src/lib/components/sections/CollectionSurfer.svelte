@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { onMount } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { cn } from "$lib/utils";
@@ -207,6 +208,9 @@
 
     <!-- UI Overlays -->
     <div class="absolute top-[5vh] left-[5vw] z-50 pointer-events-none mix-blend-difference text-white">
+      <p class="eyebrow mb-3 text-brand-light/60">
+        {$_("sectionLabels.showcase")}
+      </p>
       <h2 class="font-bold text-[clamp(1.5rem,5vw,3.5rem)] leading-[0.9] tracking-tighter">
         HERITAGE FW25/26
       </h2>

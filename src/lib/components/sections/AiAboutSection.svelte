@@ -174,6 +174,9 @@
 
     <!-- ═══ Section Header (Centered) ═══ -->
     <div class="mb-10 sm:mb-14 text-center">
+      <p class="eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.aiWorkflow")}
+      </p>
       <h2
         id="ai-about-title"
         class="ai-head-reveal font-display text-[clamp(2.4rem,4.2vw,4.5rem)] leading-[0.92] tracking-[-0.038em]"

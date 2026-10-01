@@ -5,6 +5,7 @@
   import { ArrowRight, SlidersHorizontal } from "lucide-svelte";
   import { pricingPageData } from "$lib/content/pricing";
   import { _ } from "svelte-i18n";
+  import { stripTitlePunctuation } from "$lib/utils";
 
   let heroSection: HTMLElement;
 
@@ -120,8 +121,7 @@
             stagger: 0.07,
             ease: "power2.out",
             clearProps: "all",
-          })
-          .from(
+          }).from(
             ".hero-img-anim",
             {
               y: 24,
@@ -179,22 +179,29 @@
         <div class="max-w-xl">
           <!-- Eyebrow -->
           <div class="hero-anim-item eyebrow text-brand-dark/50">
-            {$_('pricing.hero.eyebrow') || pricingPageData.intro.eyebrow}
+            {$_("pricing.hero.eyebrow") || pricingPageData.intro.eyebrow}
           </div>
 
           <!-- Main Headline -->
           <h1
-            class="hero-anim-item mt-4 font-display text-[clamp(2.35rem,5vw,4.5rem)] font-bold leading-[0.94] tracking-[-0.04em] text-brand-dark"
+            class="hero-anim-item hero-display-title mt-4 font-display text-[clamp(2.35rem,5vw,4.5rem)] leading-[0.94] tracking-[-0.04em] text-brand-dark"
           >
-            {$_('pricing.hero.heading1') || 'Tailored production'}
-            <em class="font-normal text-brand-green not-italic">{$_('pricing.hero.heading2') || 'estimates.'}</em>
+            {stripTitlePunctuation(
+              $_("pricing.hero.heading1") || "Tailored production",
+            )}
+            <em class="hero-display-outline not-italic"
+              >{stripTitlePunctuation(
+                $_("pricing.hero.heading2") || "estimates.",
+              )}</em
+            >
           </h1>
 
           <!-- Description -->
           <p
             class="hero-anim-item mt-5 sm:mt-6 text-sm sm:text-base leading-relaxed text-brand-dark/70 sm:text-lg"
           >
-            {$_('pricing.hero.description') || pricingPageData.intro.description}
+            {$_("pricing.hero.description") ||
+              pricingPageData.intro.description}
           </p>
 
           <!-- Action Links -->
@@ -206,7 +213,7 @@
               onclick={activatePackages}
               class="group inline-flex min-h-[44px] items-center gap-2.5 text-sm font-semibold text-brand-dark transition-colors hover:text-brand-green cursor-pointer"
             >
-              <span>{$_('pricing.hero.viewPackages') || 'View packages'}</span>
+              <span>{$_("pricing.hero.viewPackages") || "View packages"}</span>
               <ArrowRight
                 class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
               />
@@ -218,7 +225,9 @@
               class="group inline-flex min-h-[44px] items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/20 bg-brand-dark/[0.04] px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-brand-dark transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark active:scale-[0.98] cursor-pointer"
             >
               <SlidersHorizontal class="h-3.5 w-3.5" />
-              <span>{$_('pricing.hero.buildCustom') || 'Build custom quote'}</span>
+              <span
+                >{$_("pricing.hero.buildCustom") || "Build custom quote"}</span
+              >
             </button>
           </div>
 
@@ -280,7 +289,8 @@
                   <div
                     class="font-display text-[0.58rem] sm:text-[0.68rem] font-bold leading-tight tracking-tight text-brand-dark truncate"
                   >
-                    {$_(`pricing.hero.showcases.${cardIdx}.title`) || item.title}
+                    {$_(`pricing.hero.showcases.${cardIdx}.title`) ||
+                      item.title}
                   </div>
                 </div>
               </div>
