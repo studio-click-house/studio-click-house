@@ -188,6 +188,16 @@
         "description": "La réflexion, la définition des bords et les détails des matériaux sont gérés sans aplatir l'objet.",
         "category": "Détails de bijoux"
       },
+      "commercial-video-editing": {
+        "title": "Le mouvement façonné pour les histoires de produits et de campagnes.",
+        "description": "Montage commercial, rythme, étalonnage et diffusion pour des campagnes vidéo de marque à fort impact.",
+        "category": "Montage vidéo commercial"
+      },
+      "fashion-lifestyle-video": {
+        "title": "Un rythme cinématographique qui sublime l'identité de marque.",
+        "description": "Reels mode éditoriaux haut de gamme, déclinaisons de campagne et étalonnage optimisé pour les écrans numériques.",
+        "category": "Motion mode éditoriale"
+      },
       "shadow-study": {
         "title": "Une image ancrée a encore besoin de respirer.",
         "description": "Les ombres directionnelles et l'espace négatif donnent du poids à un produit sans alourdir la composition.",
@@ -282,12 +292,33 @@
       "paragraph2": "Nous sommes spécialisés dans la retouche d'images éditoriales, l'étalonnage vidéo et le rendu 3D CGI photoréaliste. Grâce à un pipeline de production 24/7, nous garantissons une qualité irréprochable.",
       "quote": "Chaque pixel, ombre et nuance de couleur est façonné pour refléter la signature visuelle de votre marque.",
       "stats": [
-        { "value": "150+", "label": "Spécialistes seniors", "sub": "Retoucheurs & artistes 3D en interne" },
-        { "value": "24/7", "label": "Production globale", "sub": "Livraison continue 24h dans le monde entier" },
-        { "value": "99.8%", "label": "Précision QC", "sub": "Système de contrôle qualité en 3 étapes" },
-        { "value": "20+", "label": "Pays desservis", "sub": "Reconnu par les plus grandes marques de mode" }
+        {
+          "value": "150+",
+          "label": "Spécialistes seniors",
+          "sub": "Retoucheurs & artistes 3D en interne"
+        },
+        {
+          "value": "24/7",
+          "label": "Production globale",
+          "sub": "Livraison continue 24h dans le monde entier"
+        },
+        {
+          "value": "99.8%",
+          "label": "Précision QC",
+          "sub": "Système de contrôle qualité en 3 étapes"
+        },
+        {
+          "value": "20+",
+          "label": "Pays desservis",
+          "sub": "Reconnu par les plus grandes marques de mode"
+        }
       ],
-      "atelierTags": ["ATELIER 01", "CONTINU", "CONTRÔLE 3 ÉTAPES", "MONDIAL"],
+      "atelierTags": [
+        "ATELIER 01",
+        "CONTINU",
+        "CONTRÔLE 3 ÉTAPES",
+        "MONDIAL"
+      ],
       "aboutStudio": "À propos du studio",
       "freeTrial": "Essai gratuit"
     },
@@ -329,40 +360,46 @@
     },
     "processSteps": [
       {
-        "title": "Brief et réception des fichiers",
-        "navTitle": "Brief",
-        "timing": "Début de projet",
-        "description": "Nous analysons vos fichiers sources, références, volumes, formats de sortie et priorités avant le lancement de la production."
+        "title": "Prise de Contact & Découverte",
+        "navTitle": "01 · Contact",
+        "timing": "Consultation Créative Directe",
+        "description": "Consultation créative initiale pour cerner l'esthétique de votre marque, le style d'éclairage, les délais requis, les volumes et vos directives artistiques."
       },
       {
-        "title": "Calibrage des références",
-        "navTitle": "Référence",
-        "timing": "Avant production",
-        "description": "Une image test définit la finition validée pour que la colorimétrie, la texture et les détails soient limpides dès le départ."
+        "title": "Test de Retouche Gratuit",
+        "navTitle": "02 · Test Gratuit",
+        "timing": "Échantillon & Approbation",
+        "description": "Essai de retouche gratuit et calibré selon votre charte graphique, suivi de vos retours et validation avant production complète."
       },
       {
-        "title": "Attribution de l'équipe",
-        "navTitle": "Équipe",
-        "timing": "Configuration",
-        "description": "Le chef de projet confie chaque lot aux spécialistes dont l'expertise correspond précisément aux exigences visuelles."
+        "title": "Intégration Client & NDA",
+        "navTitle": "03 · Intégration",
+        "timing": "Références, NDA & Compte",
+        "description": "Intégration complète : fiches techniques, étalonnage des références visuelles, signature du NDA, tarifs dégressifs et attribution de votre équipe."
       },
       {
-        "title": "Retouche spécialisée",
-        "navTitle": "Retouche",
-        "timing": "Production active",
-        "description": "Nos retoucheurs travaillent d'après la référence approuvée en garantissant une homogénéité parfaite sur l'ensemble du lot."
+        "title": "Transmission des Fichiers",
+        "navTitle": "04 · Envoi Fichiers",
+        "timing": "Ingestion des Fichiers",
+        "description": "Envoi sécurisé des sources et instructions via Dropbox, Drive, WeTransfer, OneDrive ou FTP. Prise en charge immédiate de la production."
       },
       {
-        "title": "Contrôle qualité",
-        "navTitle": "Contrôle qualité",
-        "timing": "Avant livraison",
-        "description": "Une équipe dédiée vérifie minutieusement chaque détail, les spécifications techniques et la conformité avant toute livraison."
+        "title": "Production Haute Précision",
+        "navTitle": "05 · Production",
+        "timing": "Pôles Dédiés 24/7",
+        "description": "Lancement de la retouche avec pré-contrôle technique. Pôles spécialisés opérant 24/7 selon les protocoles et délais validés."
       },
       {
-        "title": "Livraison et retours",
-        "navTitle": "Livraison",
-        "timing": "Remise finale",
-        "description": "Vos fichiers finaux sont livrés parfaitement organisés et prêts à l'emploi, avec un suivi clair pour les dernières finitions."
+        "title": "Contrôle Qualité 5 Étapes",
+        "navTitle": "06 · Contrôle Qualité",
+        "timing": "Audit Technique & Artistique",
+        "description": "Inspection rigoureuse en 3 étapes : Fichiers Techniques → Conformité du Brief → Revue Maître Artiste à 100% de zoom."
+      },
+      {
+        "title": "Livraison, Retours & Facturation",
+        "navTitle": "07 · Livraison",
+        "timing": "Validation & Facturation Mensuelle",
+        "description": "Livraison des fichiers haute définition étalonnés via cloud sécurisé. Ajustements immédiats si besoin, avec facturation mensuelle claire."
       }
     ],
     "closingCta": {
@@ -398,47 +435,47 @@
       "description": "Un partenaire unique pour des images assistées par IA, des photos soignées, des vidéos maîtrisées et des visuels 3D crédibles."
     },
     "aboutOrbit": {
-      "eyebrow": "Notre système de production",
-      "heading": "La qualité n'est pas la dernière étape. C'est chaque étape.",
-      "headingPart1": "La qualité n'est pas la dernière étape.",
-      "headingPart2": "C'est chaque étape.",
-      "postProduction": "post-production",
-      "description": "De la production assistée par IA et de la retouche d'art au rendu 3D CGI complexe, notre studio allie technologies intelligentes et savoir-faire humain d'exception.",
+      "eyebrow": "Système de production IA",
+      "heading": "Des packshots isolés aux campagnes réelles.",
+      "headingPart1": "Des packshots isolés.",
+      "headingPart2": "Aux campagnes réelles.",
+      "postProduction": "compositing d'image",
+      "description": "Assemblez vos packshots e-commerce isolés en visuels de campagne portés par des mannequins photoréalistes avec éclairage de studio, drapé naturel et intégration parfaite d'accessoires.",
       "explore": "Découvrir nos créations",
       "steps": [
         {
-          "title": "Direction créative",
-          "description": "Chaque projet démarre avec des références claires, des spécifications techniques et des objectifs précis."
+          "title": "Habillage virtuel sur mannequin",
+          "description": "Compositing fluide de vêtements et accessoires individuels sur des mannequins IA photoréalistes avec posture naturelle et lumière de studio."
         },
         {
-          "title": "Artisanat d'experts",
-          "description": "Des retoucheurs et artistes 3D CGI seniors sélectionnés sur mesure pour votre projet."
+          "title": "Physique des tissus et drapé",
+          "description": "Modélisation précise des contours et synthèse réaliste des plis pour respecter le tombé et la texture authentiques."
         },
         {
-          "title": "Contrôle qualité",
-          "description": "Chaque fichier est audité : texture de peau, netteté des contours et cohérence lumineuse."
+          "title": "Harmonisation accessoires & lumière",
+          "description": "Montres, bijoux, maroquinerie et lunettes intégrés avec reflets physiques précis et ombres portées réalistes."
         },
         {
-          "title": "Livraison",
-          "description": "Fichiers haute résolution multi-formats prêts pour la diffusion, livrés dans les délais stricts."
+          "title": "Export studio commercial",
+          "description": "Livrables haute résolution pour l'e-commerce et l'éditorial avec fidélité absolue des teintes, sans coût de shooting et délais rapides."
         }
       ],
       "stats": [
         {
-          "value": "150+",
-          "label": "Spécialistes créatifs"
+          "value": "8 → 1",
+          "label": "Synthèse d'assets"
         },
         {
-          "value": "10+ ans",
-          "label": "D'expérience éprouvée"
+          "value": "4K UHD",
+          "label": "Prêt pour l'impression & web"
         },
         {
-          "value": "24/7",
-          "label": "Studio de production"
+          "value": "24h",
+          "label": "SLA de livraison"
         },
         {
-          "value": "99%",
-          "label": "Livraison à temps"
+          "value": "100%",
+          "label": "Fidélité des couleurs"
         }
       ],
       "startProject": "Démarrer un projet",
@@ -564,9 +601,15 @@
       "tag": "Au cœur du studio",
       "ctaLabel": "Voir les postes ouverts",
       "stats": [
-        { "label": "Artistes" },
-        { "label": "Opérations" },
-        { "label": "Siège studio" }
+        {
+          "label": "Artistes"
+        },
+        {
+          "label": "Opérations"
+        },
+        {
+          "label": "Siège studio"
+        }
       ]
     },
     "leadership": {
@@ -681,14 +724,26 @@
       "viewPackages": "Voir les forfaits",
       "buildCustom": "Créer un devis sur mesure",
       "stats": [
-        { "label": "Délai SLA" },
-        { "label": "Tarifs dégressifs" },
-        { "label": "Taux de validation QC" }
+        {
+          "label": "Délai SLA"
+        },
+        {
+          "label": "Tarifs dégressifs"
+        },
+        {
+          "label": "Taux de validation QC"
+        }
       ],
       "showcases": [
-        { "title": "Retouche éditoriale" },
-        { "title": "3D & CGI produit" },
-        { "title": "Étalonnage & finition" }
+        {
+          "title": "Retouche éditoriale"
+        },
+        {
+          "title": "3D & CGI produit"
+        },
+        {
+          "title": "Étalonnage & finition"
+        }
       ]
     },
     "options": {
@@ -712,52 +767,108 @@
           "name": "Service de Détourage",
           "description": "Tracés vectoriels précis à la main et détourage soigné des contours.",
           "services": [
-            { "name": "Tracé de détourage" },
-            { "name": "Masquage d'image" },
-            { "name": "Suppression d'objets" },
-            { "name": "Création d'ombres" },
-            { "name": "Image 360°" },
-            { "name": "Image E-commerce" },
-            { "name": "Mannequin fantôme / Ghost" }
+            {
+              "name": "Tracé de détourage"
+            },
+            {
+              "name": "Masquage d'image"
+            },
+            {
+              "name": "Suppression d'objets"
+            },
+            {
+              "name": "Création d'ombres"
+            },
+            {
+              "name": "Image 360°"
+            },
+            {
+              "name": "Image E-commerce"
+            },
+            {
+              "name": "Mannequin fantôme / Ghost"
+            }
           ]
         },
         {
           "name": "Sublimation Visuelle",
           "description": "Retouche créative, correction colorimétrique et restauration d'images.",
           "services": [
-            { "name": "Retouche d'image" },
-            { "name": "Retouche créative" },
-            { "name": "Retouche haut de gamme" },
-            { "name": "Manipulation d'image" },
-            { "name": "Correction des couleurs" },
-            { "name": "Changement de couleur" },
-            { "name": "Changement de motif" },
-            { "name": "Photo immobilière" },
-            { "name": "Restauration photo ancienne" }
+            {
+              "name": "Retouche d'image"
+            },
+            {
+              "name": "Retouche créative"
+            },
+            {
+              "name": "Retouche haut de gamme"
+            },
+            {
+              "name": "Manipulation d'image"
+            },
+            {
+              "name": "Correction des couleurs"
+            },
+            {
+              "name": "Changement de couleur"
+            },
+            {
+              "name": "Changement de motif"
+            },
+            {
+              "name": "Photo immobilière"
+            },
+            {
+              "name": "Restauration photo ancienne"
+            }
           ]
         },
         {
           "name": "Illustration Vectorielle & Conversion",
           "description": "Vectorisation raster-vers-vecteur, plans, logos et illustrations sur mesure.",
           "services": [
-            { "name": "Raster vers vecteur" },
-            { "name": "Dessin de plans" },
-            { "name": "Création de logos" },
-            { "name": "Dessin de produits" },
-            { "name": "Design publicitaire" },
-            { "name": "Illustration" }
+            {
+              "name": "Raster vers vecteur"
+            },
+            {
+              "name": "Dessin de plans"
+            },
+            {
+              "name": "Création de logos"
+            },
+            {
+              "name": "Dessin de produits"
+            },
+            {
+              "name": "Design publicitaire"
+            },
+            {
+              "name": "Illustration"
+            }
           ]
         },
         {
           "name": "Services d'IA",
           "description": "Génération d'arrière-plans IA, rééclairage et modélisation de mannequins.",
           "services": [
-            { "name": "Synthèse de décor IA" },
-            { "name": "Rééclairage produit IA" },
-            { "name": "Génération de mannequins IA" },
-            { "name": "Échange de visages IA" },
-            { "name": "Amélioration de résolution IA" },
-            { "name": "Synthèse de motifs IA" }
+            {
+              "name": "Synthèse de décor IA"
+            },
+            {
+              "name": "Rééclairage produit IA"
+            },
+            {
+              "name": "Génération de mannequins IA"
+            },
+            {
+              "name": "Échange de visages IA"
+            },
+            {
+              "name": "Amélioration de résolution IA"
+            },
+            {
+              "name": "Synthèse de motifs IA"
+            }
           ]
         }
       ]
@@ -812,9 +923,15 @@
       ],
       "deliveryPriority": "Délai de livraison",
       "turnaround": [
-        { "label": "Standard (24h)" },
-        { "label": "Express (12h)" },
-        { "label": "Urgent (6h)" }
+        {
+          "label": "Standard (24h)"
+        },
+        {
+          "label": "Express (12h)"
+        },
+        {
+          "label": "Urgent (6h)"
+        }
       ],
       "realTimeCalculation": "Calcul en temps réel",
       "investmentSummary": "Synthèse du devis",
@@ -1090,13 +1207,34 @@
     "mosaic": {
       "closeModal": "Fermer l'aperçu",
       "items": [
-        { "title": "Profil beauté modèle", "category": "Retouche de peau" },
-        { "title": "Détail de joaillerie", "category": "Haute Joaillerie" },
-        { "title": "Étalonnage accessoire", "category": "Correction couleur" },
-        { "title": "Isolation verrerie", "category": "Tracé de détourage" },
-        { "title": "Production beauté", "category": "Retouche éditoriale" },
-        { "title": "Harmonie chromatique mode", "category": "Campagne Couture" },
-        { "title": "Finition produit CGI", "category": "3D & CGI" }
+        {
+          "title": "Profil beauté modèle",
+          "category": "Retouche de peau"
+        },
+        {
+          "title": "Détail de joaillerie",
+          "category": "Haute Joaillerie"
+        },
+        {
+          "title": "Étalonnage accessoire",
+          "category": "Correction couleur"
+        },
+        {
+          "title": "Isolation verrerie",
+          "category": "Tracé de détourage"
+        },
+        {
+          "title": "Production beauté",
+          "category": "Retouche éditoriale"
+        },
+        {
+          "title": "Harmonie chromatique mode",
+          "category": "Campagne Couture"
+        },
+        {
+          "title": "Finition produit CGI",
+          "category": "3D & CGI"
+        }
       ]
     },
     "manifesto": {

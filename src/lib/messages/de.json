@@ -188,6 +188,16 @@
         "description": "Reflexion, Kantendefinition und Materialdetails werden gehandhabt, ohne das Objekt abzuflachen.",
         "category": "Schmuck-Details"
       },
+      "commercial-video-editing": {
+        "title": "Bewegung, geformt für Produkt- und Kampagnengeschichten.",
+        "description": "Kommerzieller Schnitt, Pacing, Farbkorrektur und Auslieferung für wirkungsvolle Markenvideos.",
+        "category": "Kommerzieller Videoschnitt"
+      },
+      "fashion-lifestyle-video": {
+        "title": "Kinoreifes Pacing, das Markenidentität stärkt.",
+        "description": "High-End-Fashion-Reels, Kampagnen-Cutdowns und Color-Grading, optimiert für digitale Bildschirme.",
+        "category": "Editorial Fashion-Motion"
+      },
       "shadow-study": {
         "title": "Ein geerdetes Bild braucht dennoch Raum zum Atmen.",
         "description": "Gerichtete Schatten und negativer Raum verleihen einem Produkt Gewicht, ohne die Komposition schwer wirken zu lassen.",
@@ -274,12 +284,33 @@
       "paragraph2": "Wir sind spezialisiert auf redaktionelle Bildretusche, Farbkorrektur für Videos und fotorealistisches 3D-CGI-Rendering. Mit sorgfältiger Handwerkskunst und einer 24/7-Produktionspipeline stellen wir sicher, dass jedes Bild höchsten Standards entspricht.",
       "quote": "Jeder Pixel, Schatten und Farbverlauf wird so gestaltet, dass er die einzigartige visuelle Identität Ihrer Marke widerspiegelt.",
       "stats": [
-        { "value": "150+", "label": "Senior-Spezialisten", "sub": "Inhouse-Retuscheure & 3D-Künstler" },
-        { "value": "24/7", "label": "Globale Produktion", "sub": "Kontinuierliche weltweite 24h-Lieferung" },
-        { "value": "99,8%", "label": "QC-Genauigkeit", "sub": "Dreistufiges Präzisions-Prüfsystem" },
-        { "value": "20+", "label": "Länder weltweit", "sub": "Vertraut von internationalen Modemarken" }
+        {
+          "value": "150+",
+          "label": "Senior-Spezialisten",
+          "sub": "Inhouse-Retuscheure & 3D-Künstler"
+        },
+        {
+          "value": "24/7",
+          "label": "Globale Produktion",
+          "sub": "Kontinuierliche weltweite 24h-Lieferung"
+        },
+        {
+          "value": "99,8%",
+          "label": "QC-Genauigkeit",
+          "sub": "Dreistufiges Präzisions-Prüfsystem"
+        },
+        {
+          "value": "20+",
+          "label": "Länder weltweit",
+          "sub": "Vertraut von internationalen Modemarken"
+        }
       ],
-      "atelierTags": ["ATELIER 01", "24/7 BETRIEB", "3-STUFEN QC", "WELTWEIT"],
+      "atelierTags": [
+        "ATELIER 01",
+        "24/7 BETRIEB",
+        "3-STUFEN QC",
+        "WELTWEIT"
+      ],
       "aboutStudio": "Über das Studio",
       "freeTrial": "Kostenlose Testversion"
     },
@@ -321,40 +352,46 @@
     },
     "processSteps": [
       {
-        "title": "Briefing und Dateiübernahme",
-        "navTitle": "Briefing",
-        "timing": "Projektstart",
-        "description": "Wir analysieren Ihre Quelldateien, Referenzen, Mengen, Ausgabeformate und Lieferprioritäten vor Produktionsbeginn."
+        "title": "Erstkontakt & Beratung",
+        "navTitle": "01 · Beratung",
+        "timing": "Kreative Erstberatung",
+        "description": "Erste kreative Abstimmung zu Markenästhetik, Lichtstil, Durchlaufzeiten, Volumenprognosen und spezifischen Richtlinien."
       },
       {
-        "title": "Referenzabgleich",
-        "navTitle": "Referenz",
-        "timing": "Vor Produktion",
-        "description": "Ein Musterbild definiert das finale Finishing, sodass Farbe, Textur, Beschnitt und Detailbehandlung von Anfang an feststehen."
+        "title": "Kostenlose Testretusche",
+        "navTitle": "02 · Testretusche",
+        "timing": "Kostenloses Muster & Freigabe",
+        "description": "Kostenlose Testbearbeitung nach Ihren ästhetischen Vorgaben mit Feedback-Schleife vor dem Start der Vollproduktion."
       },
       {
-        "title": "Team-Zuweisung",
-        "navTitle": "Team",
-        "timing": "Produktions-Setup",
-        "description": "Der Projektleiter teilt jeden Auftrag Spezialisten zu, deren Erfahrung exakt zum gewünschten visuellen Standard passt."
+        "title": "Onboarding & NDA",
+        "navTitle": "03 · Onboarding",
+        "timing": "Referenzen, NDA & Setup",
+        "description": "Vollständiges Kunden-Onboarding: Festlegung visueller Referenzen, NDA-Unterzeichnung, transparente Volumenpreise und fester Projektleiter."
       },
       {
-        "title": "Spezialisierte Bearbeitung",
-        "navTitle": "Bearbeitung",
-        "timing": "Laufende Produktion",
-        "description": "Unsere Bildbearbeiter arbeiten nach der genehmigten Referenz unter Wahrung einheitlicher Benennungen, Maße und Farben."
+        "title": "Dateiübergabe & Ingestion",
+        "navTitle": "04 · Übergabe",
+        "timing": "Batch-Dateitransfer",
+        "description": "Übermittlung der Quelldateien und Briefings via Dropbox, Drive, WeTransfer, OneDrive oder FTP mit sofortiger Eingangsbestätigung."
       },
       {
-        "title": "Qualitätskontrolle",
-        "navTitle": "Qualitätsprüfung",
-        "timing": "Vor Auslieferung",
-        "description": "Eine separate Prüfung kontrolliert Details, Konsistenz, technische Vorgaben und die vereinbarte Referenz vor dem Versand."
+        "title": "Hochpräzise Produktion",
+        "navTitle": "05 · Produktion",
+        "timing": "24/7 Dedizierte Teams",
+        "description": "Retusche-Produktion im 24/7-Schichtbetrieb nach verbindlichen Bearbeitungsrichtlinien und Farbstandards."
       },
       {
-        "title": "Lieferung und Feedback",
-        "navTitle": "Lieferung",
-        "timing": "Finale Übergabe",
-        "description": "Fertige Dateien treffen organisiert und einsatzbereit ein, mit einem klaren Feedback-Kanal für finale Anpassungen."
+        "title": "5-Stufen-Qualitätskontrolle",
+        "navTitle": "06 · 5-Stufen-QC",
+        "timing": "Technische & Künstlerische QC",
+        "description": "Jeder Batch durchläuft unsere 5-stufige Qualitätsprüfung: Dateintegrität, Briefing-Abgleich und 100%-Zoom-Detailprüfung."
+      },
+      {
+        "title": "Lieferung, Feedback & Abrechnung",
+        "navTitle": "07 · Lieferung",
+        "timing": "Freigabe & Monatsabrechnung",
+        "description": "Farbprofilierte finale Dateien über sichere Cloud-Kanäle mit sofortigen Korrekturen und konsolidierter Monatsabrechnung."
       }
     ],
     "closingCta": {
@@ -390,47 +427,47 @@
       "description": "Ein Produktionspartner für KI-gestützte Bilder, sorgfältig bearbeitete Fotos, Bewegtbild und glaubwürdige 3D-Visualisierungen."
     },
     "aboutOrbit": {
-      "eyebrow": "Unser Produktionssystem",
-      "heading": "Qualität ist nicht der letzte Schritt. Es ist jeder Schritt.",
-      "headingPart1": "Qualität ist nicht der letzte Schritt.",
-      "headingPart2": "Es ist jeder Schritt.",
-      "postProduction": "Postproduktion",
-      "description": "Von KI-gestützter Bildproduktion und feinstem Retusche-Handwerk bis hin zu komplexem 3D-CGI-Rendering verbindet unser Studio intelligente Workflows mit menschlicher Kunstfertigkeit.",
+      "eyebrow": "KI-Produktionssystem",
+      "heading": "Vom isolierten Packshot zur Kampagnen-Realität.",
+      "headingPart1": "Vom isolierten Packshot.",
+      "headingPart2": "Zur Kampagnen-Realität.",
+      "postProduction": "Bild-Compositing",
+      "description": "Kombinieren Sie isolierte E-Commerce-Packshots zu lebensechten On-Model-Kampagnenbildern mit fotorealistischer Beleuchtung, präzisem Stoffwurf und perfekter Accessoire-Integration.",
       "explore": "Arbeiten ansehen",
       "steps": [
         {
-          "title": "Kreative Ausrichtung",
-          "description": "Jedes Projekt beginnt mit klaren Referenzen, technischen Spezifikationen und kreativen Zielen."
+          "title": "Virtuelle Modellanpassung",
+          "description": "Nahtlose Montage einzelner Kleidungsstücke und Accessoires auf fotorealistische KI-Modelle mit authentischer Haltung und Studiolicht."
         },
         {
-          "title": "Spezialisierte Handwerkskunst",
-          "description": "Engagierte Bildretuscheure und 3D-CGI-Künstler, passgenau auf Ihre Projektanforderungen abgestimmt."
+          "title": "Stoff- & Drapier-Physik",
+          "description": "Intelligente Konturierung und realistische Faltenbildung bewahren Textilgewicht, Gewebe und natürliche Passformen."
         },
         {
-          "title": "Qualitätskontrolle",
-          "description": "Jede Datei wird auf makellose Hautstruktur, Kantenschärfe und Lichtkonsistenz geprüft."
+          "title": "Accessoire- & Lichtabgleich",
+          "description": "Uhren, Schmuck, Taschen und Brillen integriert mit millimetergenauen Reflexionen und Kontaktschatten."
         },
         {
-          "title": "Auslieferung",
-          "description": "Produktionsfertige, hochauflösende Multi-Channel-Assets, pünktlich geliefert mit striktem SLA."
+          "title": "Kommerzieller Studio-Export",
+          "description": "Hochauflösende E-Commerce- und Editorial-Assets mit exakter Farbtreue, ohne Shooting-Kosten und mit schneller Lieferung."
         }
       ],
       "stats": [
         {
-          "value": "150+",
-          "label": "Kreativ-Spezialisten"
+          "value": "8 → 1",
+          "label": "Asset-Synthese"
         },
         {
-          "value": "10+ Jahre",
-          "label": "Erprobte Erfahrung"
+          "value": "4K UHD",
+          "label": "High-Res Bereit"
         },
         {
-          "value": "24/7",
-          "label": "Produktionsstudio"
+          "value": "24h",
+          "label": "Liefer-SLA"
         },
         {
-          "value": "99%",
-          "label": "Pünktliche Lieferung"
+          "value": "100%",
+          "label": "Farbtreue"
         }
       ],
       "startProject": "Projekt starten",
@@ -556,9 +593,15 @@
       "tag": "Einblick ins Studio",
       "ctaLabel": "Offene Stellen ansehen",
       "stats": [
-        { "label": "Künstler" },
-        { "label": "Betrieb" },
-        { "label": "Studio-HQ" }
+        {
+          "label": "Künstler"
+        },
+        {
+          "label": "Betrieb"
+        },
+        {
+          "label": "Studio-HQ"
+        }
       ]
     },
     "leadership": {
@@ -673,14 +716,26 @@
       "viewPackages": "Pakete ansehen",
       "buildCustom": "Individuelles Angebot erstellen",
       "stats": [
-        { "label": "Lieferzeit-SLA" },
-        { "label": "Volumen-Staffelung" },
-        { "label": "QC-Bestehensrate" }
+        {
+          "label": "Lieferzeit-SLA"
+        },
+        {
+          "label": "Volumen-Staffelung"
+        },
+        {
+          "label": "QC-Bestehensrate"
+        }
       ],
       "showcases": [
-        { "title": "Editorielle Retusche" },
-        { "title": "3D Produkt-CGI" },
-        { "title": "Farbkorrektur & Finishing" }
+        {
+          "title": "Editorielle Retusche"
+        },
+        {
+          "title": "3D Produkt-CGI"
+        },
+        {
+          "title": "Farbkorrektur & Finishing"
+        }
       ]
     },
     "options": {
@@ -704,52 +759,108 @@
           "name": "Freistell-Service",
           "description": "Pixelgenaue handgezeichnete Vektorpfade und weiche Kantenmaskierung.",
           "services": [
-            { "name": "Beschneidungspfad" },
-            { "name": "Bildmaskierung" },
-            { "name": "Objektentfernung" },
-            { "name": "Schattenkreation" },
-            { "name": "360°-Produktbild" },
-            { "name": "E-Commerce-Bild" },
-            { "name": "Hohle Puppe / Ghost Mannequin" }
+            {
+              "name": "Beschneidungspfad"
+            },
+            {
+              "name": "Bildmaskierung"
+            },
+            {
+              "name": "Objektentfernung"
+            },
+            {
+              "name": "Schattenkreation"
+            },
+            {
+              "name": "360°-Produktbild"
+            },
+            {
+              "name": "E-Commerce-Bild"
+            },
+            {
+              "name": "Hohle Puppe / Ghost Mannequin"
+            }
           ]
         },
         {
           "name": "Bildveredelung",
           "description": "Kreative Retusche, Farbkorrektur und Bildrestauration.",
           "services": [
-            { "name": "Bildretusche" },
-            { "name": "Kreativretusche" },
-            { "name": "High-End-Retusche" },
-            { "name": "Bildmanipulation" },
-            { "name": "Farbkorrektur" },
-            { "name": "Farbwechsel" },
-            { "name": "Musterwechsel" },
-            { "name": "Immobilienfoto-Retusche" },
-            { "name": "Alte Fotos restaurieren" }
+            {
+              "name": "Bildretusche"
+            },
+            {
+              "name": "Kreativretusche"
+            },
+            {
+              "name": "High-End-Retusche"
+            },
+            {
+              "name": "Bildmanipulation"
+            },
+            {
+              "name": "Farbkorrektur"
+            },
+            {
+              "name": "Farbwechsel"
+            },
+            {
+              "name": "Musterwechsel"
+            },
+            {
+              "name": "Immobilienfoto-Retusche"
+            },
+            {
+              "name": "Alte Fotos restaurieren"
+            }
           ]
         },
         {
           "name": "Vektorillustration & Konvertierung",
           "description": "Raster-zu-Vektor-Vektorisierung, Grundrisse, Logodesign und Grafiken.",
           "services": [
-            { "name": "Raster zu Vektor" },
-            { "name": "Planzeichnung" },
-            { "name": "Logodesign" },
-            { "name": "Produktzeichnung" },
-            { "name": "Werbedesign" },
-            { "name": "Illustration" }
+            {
+              "name": "Raster zu Vektor"
+            },
+            {
+              "name": "Planzeichnung"
+            },
+            {
+              "name": "Logodesign"
+            },
+            {
+              "name": "Produktzeichnung"
+            },
+            {
+              "name": "Werbedesign"
+            },
+            {
+              "name": "Illustration"
+            }
           ]
         },
         {
           "name": "KI-Dienstleistungen",
           "description": "Generative KI-Hintergrundsynthese, Relighting und Modellerstellung.",
           "services": [
-            { "name": "KI-Hintergrundsynthese" },
-            { "name": "KI-Produktbeleuchtung" },
-            { "name": "KI-Modellgenerierung" },
-            { "name": "KI-Gesichtstausch & Anpassung" },
-            { "name": "KI-Auflösungshochskalierung" },
-            { "name": "KI-Mustersynthese" }
+            {
+              "name": "KI-Hintergrundsynthese"
+            },
+            {
+              "name": "KI-Produktbeleuchtung"
+            },
+            {
+              "name": "KI-Modellgenerierung"
+            },
+            {
+              "name": "KI-Gesichtstausch & Anpassung"
+            },
+            {
+              "name": "KI-Auflösungshochskalierung"
+            },
+            {
+              "name": "KI-Mustersynthese"
+            }
           ]
         }
       ]
@@ -804,9 +915,15 @@
       ],
       "deliveryPriority": "Lieferpriorität",
       "turnaround": [
-        { "label": "Standard (24h)" },
-        { "label": "Express (12h)" },
-        { "label": "Dringend (6h)" }
+        {
+          "label": "Standard (24h)"
+        },
+        {
+          "label": "Express (12h)"
+        },
+        {
+          "label": "Dringend (6h)"
+        }
       ],
       "realTimeCalculation": "Echtzeit-Kalkulation",
       "investmentSummary": "Investitionsübersicht",
@@ -1081,13 +1198,34 @@
     "mosaic": {
       "closeModal": "Vorschau schließen",
       "items": [
-        { "title": "Model Beauty-Profil", "category": "Haut-Retusche" },
-        { "title": "Schmuck-Styling-Detail", "category": "Feiner Schmuck" },
-        { "title": "Accessoire-Grading", "category": "Farbkorrektur" },
-        { "title": "Glaswaren-Freistellung", "category": "Freistellpfad" },
-        { "title": "Beauty-Produktion", "category": "Editorial-Retusche" },
-        { "title": "Fashion-Farbwelt", "category": "Couture-Kampagne" },
-        { "title": "CGI-Produkt-Finishing", "category": "3D & CGI" }
+        {
+          "title": "Model Beauty-Profil",
+          "category": "Haut-Retusche"
+        },
+        {
+          "title": "Schmuck-Styling-Detail",
+          "category": "Feiner Schmuck"
+        },
+        {
+          "title": "Accessoire-Grading",
+          "category": "Farbkorrektur"
+        },
+        {
+          "title": "Glaswaren-Freistellung",
+          "category": "Freistellpfad"
+        },
+        {
+          "title": "Beauty-Produktion",
+          "category": "Editorial-Retusche"
+        },
+        {
+          "title": "Fashion-Farbwelt",
+          "category": "Couture-Kampagne"
+        },
+        {
+          "title": "CGI-Produkt-Finishing",
+          "category": "3D & CGI"
+        }
       ]
     },
     "manifesto": {

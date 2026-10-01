@@ -91,7 +91,7 @@
         </p>
         <h2
           id={data ? "service-detail-cta-title" : "services-cta-title"}
-          class={data ? "max-w-[18ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]" : "max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"}
+          class={data ? "max-w-[18ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]" : "max-w-[13ch] font-display text-[clamp(2.4rem,5.8vw,6.5rem)] leading-[0.92] tracking-[-0.045em]"}
         >
           {data?.heading ?? ($_('services.cta.heading') || 'Put the next image in motion.')}
         </h2>

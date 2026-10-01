@@ -88,7 +88,7 @@ export type ShowcaseProjectMedia =
   | {
       kind: "video";
       src: string;
-      poster: string;
+      poster?: string;
       alt: string;
       width: number;
       height: number;

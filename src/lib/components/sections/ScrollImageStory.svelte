@@ -8,6 +8,12 @@
   let section: HTMLElement;
   let storyVideo: HTMLVideoElement;
   let stage3Video: HTMLVideoElement | undefined = $state();
+  let aiVideoTitleWords = $derived(
+    $_("home.scrollImage.title2").trim().split(/\s+/),
+  );
+  let photoToVideoTitleWords = $derived(
+    $_("home.scrollImage.copy2").trim().split(/\s+/),
+  );
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
@@ -18,13 +24,16 @@
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const syncVideoPlayback = () => {
+      if (!storyVideo) return;
       if (videoVisible && !reducedMotion.matches) {
         if (!videoPrepared) {
           videoPrepared = true;
           storyVideo.load();
         }
-        void storyVideo.play().catch(() => undefined);
-      } else {
+        if (storyVideo.paused) {
+          void storyVideo.play().catch(() => undefined);
+        }
+      } else if (!storyVideo.paused) {
         storyVideo.pause();
       }
     };
@@ -32,8 +41,10 @@
     const syncStage3Playback = () => {
       if (!stage3Video) return;
       if (stage3Visible && !reducedMotion.matches) {
-        void stage3Video.play().catch(() => undefined);
-      } else {
+        if (stage3Video.paused) {
+          void stage3Video.play().catch(() => undefined);
+        }
+      } else if (!stage3Video.paused) {
         stage3Video.pause();
       }
     };
@@ -196,7 +207,7 @@
         muted
         loop
         playsinline
-        preload="none"
+        preload="metadata"
         poster={`${base}/images/services/model-beauty/model-soleil-blue-resortwear-editorial-1293.webp`}
         class="story-image ai-visual-image absolute inset-x-0 top-[-12.5%] h-[125%] w-full object-cover"
         aria-hidden="true"
@@ -222,11 +233,17 @@
           <span class="ai-visual-title-line"
             ><span>{$_("home.scrollImage.title1")}</span></span
           >
-          <span class="ai-visual-title-line"
-            ><span class="italic text-brand-green"
-              >{$_("home.scrollImage.title2")}</span
-            ></span
-          >
+          <span class="ai-visual-title-line">
+            <span class="italic">
+              {#each aiVideoTitleWords as word, index (index)}
+                {#if index === aiVideoTitleWords.length - 1}
+                  <span class="text-brand-green">{word}</span>
+                {:else}
+                  {word}
+                {/if}{index < aiVideoTitleWords.length - 1 ? " " : ""}
+              {/each}
+            </span>
+          </span>
         </p>
         <p
           class="ai-visual-copy-step mt-6 max-w-lg text-sm leading-relaxed text-brand-light/80 sm:text-base font-sans"
@@ -246,9 +263,15 @@
         </p>
         <h2
           id="scroll-image-story-title"
-          class="ai-panel-copy-heading font-display text-3xl font-normal leading-[1.15] tracking-[-0.025em] text-brand-dark sm:text-4xl"
+          class="ai-panel-copy-heading font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
         >
-          {$_("home.scrollImage.copy2")}
+          {#each photoToVideoTitleWords as word, index (index)}
+            {#if index === photoToVideoTitleWords.length - 1}
+              <em class="font-normal text-brand-green">{word}</em>
+            {:else}
+              {word}
+            {/if}{index < photoToVideoTitleWords.length - 1 ? " " : ""}
+          {/each}
         </h2>
         <p
           class="ai-panel-support max-w-2xl text-sm leading-relaxed text-brand-dark/70 sm:text-base"
@@ -300,7 +323,7 @@
                 loop
                 playsinline
                 controls
-                preload="none"
+                preload="metadata"
                 poster={`${base}/images/about/video-pipeline/stage-3-master-grade.webp`}
                 class="video-stage-img"
                 aria-label={$_("home.scrollImage.stages.stage3.title")}

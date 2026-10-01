@@ -125,7 +125,7 @@
 
         <h2
           id="why-studio-click-house-title"
-          class="mt-3 max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="mt-3 max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
         >
           {heading}
           <span class="block text-brand-dark">{headingAccent}</span>

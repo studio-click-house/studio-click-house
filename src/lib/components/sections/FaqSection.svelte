@@ -168,7 +168,7 @@
           </p>
           <h2
             id="faq-section-title"
-            class="font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+            class="font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
           >
             {title || $_('home.faq.title')}
           </h2>

@@ -159,7 +159,7 @@
         </p>
         <h2
           id="service-detail-showcase-title"
-          class="max-w-[20ch] font-display text-[var(--text-section)] leading-[0.98] tracking-[-0.04em]"
+          class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]"
         >
           {data.heading}
         </h2>

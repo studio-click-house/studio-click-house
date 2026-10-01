@@ -283,11 +283,8 @@
     <div class="lg:col-span-7 xl:col-span-7 flex flex-col justify-end">
 
       <!-- Refined Editorial Title -->
-      <p class="eyebrow mb-3 text-brand-light/60">
-        {$_("sectionLabels.studio")}
-      </p>
       <h1
-        class="max-w-2xl font-sans font-bold tracking-tight text-white text-[clamp(1.85rem,3.4vw,3.25rem)] leading-[1.12] select-none"
+        class="max-w-3xl font-sans font-bold tracking-tight text-white text-[clamp(2.35rem,4.5vw,4.15rem)] leading-[1.08] select-none"
       >
         <span class="block overflow-hidden pb-0.5">
           <span class="hero-line block">

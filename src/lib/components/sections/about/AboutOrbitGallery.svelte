@@ -25,35 +25,35 @@
   const assurances = [
     {
       step: "01",
-      title: "Direction",
+      title: "Virtual on-model fitting",
       description:
-        "Every project starts with clear references, technical specifications and creative goals.",
+        "Seamlessly composite individual garments and accessories onto photorealistic AI models with authentic posture and studio lighting.",
       cardIndex: 3,
-      tag: "Direction & Framing",
+      tag: "On-Model Synthesis",
     },
     {
       step: "02",
-      title: "Specialist craft",
+      title: "Fabric & drape physics",
       description:
-        "Dedicated editors and 3D CGI artists matched to your project requirements.",
+        "Intelligent contour mapping and realistic crease synthesis preserve true garment weights, weaves, and natural silhouettes.",
       cardIndex: 1,
-      tag: "Specialist Craft",
+      tag: "Textile Simulation",
     },
     {
       step: "03",
-      title: "Quality control",
+      title: "Accessory & light matching",
       description:
-        "Every file reviewed for immaculate skin texture, edge accuracy, and lighting consistency.",
+        "Luxury watches, jewelry, bags, and eyewear integrated with millimeter precision, specular reflections, and contact shadows.",
       cardIndex: 6,
-      tag: "Macro Quality Review",
+      tag: "Specular & Shadow",
     },
     {
       step: "04",
-      title: "Delivery",
+      title: "Commercial studio export",
       description:
-        "Production-ready, multi-channel high-res assets delivered on time with strict SLA.",
+        "High-resolution e-commerce and editorial deliverables with strict color fidelity, zero shoot overhead, and rapid turnaround.",
       cardIndex: 0,
-      tag: "Multi-Format Export",
+      tag: "Commercial Master",
     },
   ] as const;
 
@@ -209,6 +209,13 @@
             });
           });
 
+          // Final campaign image reveals only when cards gather into stack
+          const finalCompositeEl = orbitStageRef?.querySelector<HTMLElement>(".final-composite-layer");
+          if (finalCompositeEl) {
+            const finalOpacity = activeCardIndex === 3 ? gsap.utils.clamp(0, 1, (stackProgress - 0.45) / 0.55) : 0;
+            gsap.set(finalCompositeEl, { opacity: finalOpacity });
+          }
+
           // Reactively manage pointer-events and hover states based on stackProgress
           const isStacked = stackProgress > 0.95;
           if (isStacked !== stackReady) {
@@ -250,6 +257,14 @@
 
         triggerCardSelect = (targetCardIndex: number) => {
           if (!stackReady) return;
+          const finalCompositeEl = orbitStageRef?.querySelector<HTMLElement>(".final-composite-layer");
+          if (finalCompositeEl) {
+            gsap.to(finalCompositeEl, {
+              opacity: targetCardIndex === 3 ? 1 : 0,
+              duration: 0.35,
+              ease: "power2.out",
+            });
+          }
           const { width } = getStageSize();
           const wheelCenterX = -Math.min(width * 0.27, 405);
           const stackBaseScale = gsap.utils.clamp(1.5, 1.85, 2000 / width);
@@ -632,17 +647,24 @@
                 class="h-full w-full object-cover rounded-[2rem] transition-transform duration-500 group-hover:scale-105"
               />
 
-              <!-- Sleek glass sheen overlay -->
-              <div
-                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-white/10 opacity-70 transition-opacity duration-300 group-hover:opacity-90"
-              ></div>
+              {#if index === 3}
+                <!-- Final On-Model Result: reveals only when cards gather into stack -->
+                <img
+                  src="/images/ai-retouching/composite-model-final.webp"
+                  alt="Final on-model campaign composite"
+                  width={1122}
+                  height={1402}
+                  class="final-composite-layer absolute inset-0 size-full object-cover rounded-[2rem] pointer-events-none"
+                  style="opacity: 0;"
+                />
+              {/if}
 
               <!-- Stage Badge on every Card -->
               <div
-                class="card-stage-pill pointer-events-none absolute top-2.5 left-2.5 z-30 inline-flex items-center rounded-lg border border-white/20 bg-brand-dark/45 px-2.5 py-1 text-brand-light backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25)] max-w-[calc(100%-1.25rem)] transition-all duration-300"
+                class="card-stage-pill pointer-events-none absolute bottom-3.5 left-3.5 z-30 inline-flex max-w-[calc(100%-1.75rem)] items-center rounded-full border border-white/20 bg-brand-dark/80 backdrop-blur-md px-3 py-1 text-brand-light shadow-[0_4px_16px_rgba(0,0,0,0.35)] transition-all duration-300"
               >
-                <span class="font-sans text-[0.68rem] font-medium tracking-tight text-white truncate">
-                  {$_(`home.aboutOrbit.cards.${card.id}.title`) || card.title}
+                <span class="truncate font-sans text-[0.58rem] font-semibold tracking-tight text-white sm:text-[0.62rem]">
+                  {isInteractive && activeCardIndex === 3 && index === 3 ? "On-Model Campaign Look" : ($_( `home.aboutOrbit.cards.${card.id}.title`) || card.title)}
                 </span>
               </div>
             </figure>
@@ -695,13 +717,13 @@
           class="workflow-header mb-6 hidden md:block"
         >
           <p class="eyebrow mb-3 text-brand-dark/50">
-            {$_("sectionLabels.quality")}
+            {$_('home.aboutOrbit.eyebrow') || "AI Production System"}
           </p>
           <h2
             class="font-display text-[clamp(1.35rem,1.9vw,2.05rem)] font-light leading-[1.15] tracking-[-0.03em] text-brand-dark"
           >
-            {$_('home.aboutOrbit.headingPart1') || "Quality isn't the last step."}
-            <em class="font-display italic font-normal text-brand-green">{$_('home.aboutOrbit.headingPart2') || "It's every step."}</em>
+            {$_('home.aboutOrbit.headingPart1') || "From isolated packshots."}
+            <em class="font-display italic font-normal text-brand-green">{$_('home.aboutOrbit.headingPart2') || "To campaign reality."}</em>
           </h2>
         </header>
 
@@ -771,41 +793,41 @@
           <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >{$_('home.aboutOrbit.stats.0.value') || '150+'}</span
+              >{$_('home.aboutOrbit.stats.0.value') || '8 → 1'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >{$_('home.aboutOrbit.stats.0.label') || 'Creative Specialists'}</span
+              >{$_('home.aboutOrbit.stats.0.label') || 'Asset Synthesis'}</span
             >
           </div>
           <div class="orbit-stat-fade-up">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >{$_('home.aboutOrbit.stats.1.value') || '10+ Years'}</span
+              >{$_('home.aboutOrbit.stats.1.value') || '4K UHD'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >{$_('home.aboutOrbit.stats.1.label') || 'Proven Experience'}</span
+              >{$_('home.aboutOrbit.stats.1.label') || 'Resolution Ready'}</span
             >
           </div>
           <div class="orbit-stat-fade-up">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
+              >{$_('home.aboutOrbit.stats.2.value') || '24h'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >{$_('home.aboutOrbit.stats.2.label') || 'Production Studio'}</span
+              >{$_('home.aboutOrbit.stats.2.label') || 'Turnaround SLA'}</span
             >
           </div>
           <div class="orbit-stat-fade-up">
             <span
               class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
-              >{$_('home.aboutOrbit.stats.3.value') || '99%'}</span
+              >{$_('home.aboutOrbit.stats.3.value') || '100%'}</span
             >
             <span
               class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
-              >{$_('home.aboutOrbit.stats.3.label') || 'On-Time Delivery'}</span
+              >{$_('home.aboutOrbit.stats.3.label') || 'Color Fidelity'}</span
             >
           </div>
         </div>
@@ -834,41 +856,41 @@
         <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >{$_('home.aboutOrbit.stats.0.value') || '150+'}</span
+            >{$_('home.aboutOrbit.stats.0.value') || '8 → 1'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >{$_('home.aboutOrbit.stats.0.label') || 'Creative Specialists'}</span
+            >{$_('home.aboutOrbit.stats.0.label') || 'Asset Synthesis'}</span
           >
         </div>
         <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >{$_('home.aboutOrbit.stats.1.value') || '10+ Years'}</span
+            >{$_('home.aboutOrbit.stats.1.value') || '4K UHD'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >{$_('home.aboutOrbit.stats.1.label') || 'Proven Experience'}</span
+            >{$_('home.aboutOrbit.stats.1.label') || 'Resolution Ready'}</span
           >
         </div>
         <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >{$_('home.aboutOrbit.stats.2.value') || '24/7'}</span
+            >{$_('home.aboutOrbit.stats.2.value') || '24h'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >{$_('home.aboutOrbit.stats.2.label') || 'Production Studio'}</span
+            >{$_('home.aboutOrbit.stats.2.label') || 'Turnaround SLA'}</span
           >
         </div>
         <div class="flex flex-col">
           <span
             class="block font-display text-2xl font-light leading-none text-brand-dark"
-            >{$_('home.aboutOrbit.stats.3.value') || '99%'}</span
+            >{$_('home.aboutOrbit.stats.3.value') || '100%'}</span
           >
           <span
             class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
-            >{$_('home.aboutOrbit.stats.3.label') || 'On-Time Delivery'}</span
+            >{$_('home.aboutOrbit.stats.3.label') || 'Color Fidelity'}</span
           >
         </div>
       </div>

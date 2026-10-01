@@ -302,36 +302,10 @@
         <div
           class={cn(
             "relative grid items-center gap-3 sm:gap-4",
-            isFourFive ? "grid-cols-[2.05fr_1fr]" : "grid-cols-[1.12fr_0.88fr]",
+            isFourFive ? "grid-cols-[1fr_2.05fr]" : "grid-cols-[0.88fr_1.12fr]",
           )}
         >
-          <figure
-            class={cn(
-              "sd-hero-media-card sd-hero-media-primary relative overflow-hidden rounded-[2rem] transition-all duration-300",
-              isFourFive
-                ? "aspect-[4/5] p-0"
-                : data.mediaFit === "cover"
-                  ? "aspect-[3/3.85] p-0"
-                  : "aspect-[3/3.85] p-3 sm:p-5",
-              isLight
-                ? "border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6"
-                : "border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45",
-            )}
-          >
-            <img
-              src={data.media.src}
-              alt={data.media.alt}
-              width={data.media.width}
-              height={data.media.height}
-              class={cn(
-                "size-full",
-                isFourFive || data.mediaFit === "cover"
-                  ? "object-cover"
-                  : "object-contain",
-              )}
-            />
-          </figure>
-
+          <!-- Left: 2 Small Supporting Images -->
           <div
             class={cn(
               "grid content-center gap-3 sm:gap-4",
@@ -367,6 +341,34 @@
               </figure>
             {/each}
           </div>
+
+          <!-- Right: Big Primary Image -->
+          <figure
+            class={cn(
+              "sd-hero-media-card sd-hero-media-primary relative overflow-hidden rounded-[2rem] transition-all duration-300",
+              isFourFive
+                ? "aspect-[4/5] p-0"
+                : data.mediaFit === "cover"
+                  ? "aspect-[3/3.85] p-0"
+                  : "aspect-[3/3.85] p-3 sm:p-5",
+              isLight
+                ? "border border-brand-dark/10 bg-white shadow-xl shadow-brand-dark/6"
+                : "border border-brand-light/10 bg-brand-light/5 shadow-2xl shadow-brand-dark/45",
+            )}
+          >
+            <img
+              src={data.media.src}
+              alt={data.media.alt}
+              width={data.media.width}
+              height={data.media.height}
+              class={cn(
+                "size-full",
+                isFourFive || data.mediaFit === "cover"
+                  ? "object-cover"
+                  : "object-contain",
+              )}
+            />
+          </figure>
         </div>
       </div>
     </div>

@@ -3,198 +3,220 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { PreviewMedia } from "$lib/types/content";
   import { _ } from "svelte-i18n";
+  import {
+    PhoneCall,
+    FileEdit,
+    ShieldCheck,
+    Upload,
+    PenTool,
+    CheckCircle2,
+    PackageCheck,
+  } from "lucide-svelte";
+
+  interface ProcessImage extends PreviewMedia {
+    stageLabel: string;
+    caption: string;
+  }
 
   function homeWorkImage(
     src: string,
     alt: string,
     width: number,
     height: number,
-  ): PreviewMedia {
-    return { src, alt, width, height, credit: "Studio Click House" };
+    stageLabel: string = "",
+    caption: string = "",
+  ): ProcessImage {
+    return {
+      src,
+      alt,
+      width,
+      height,
+      credit: "Studio Click House",
+      stageLabel,
+      caption,
+    };
   }
-
-  const originalDress = {
-    src: "/images/about/colorways/dress-color-original.jpg",
-    alt: "Original studio portrait before color finishing",
-    width: 1024,
-    height: 1536,
-  } as const;
 
   const processSteps = [
     {
-      title: "Brief and file intake",
-      navTitle: "Brief intake",
-      timing: "Project start",
+      title: "Client Outreach & Discovery",
+      navTitle: "01 · Outreach",
+      timing: "Initial Creative Consultation",
+      icon: PhoneCall,
       description:
-        "We review your source files, references, volume, output formats, and delivery priorities before production begins.",
-      images: [
-        homeWorkImage(
-          "/images/services/jewelry/jewelry-emerald-cut-diamond-solitaire-gold-ring-before.webp",
-          "Gold engagement ring before jewelry retouching",
-          1991,
-          2000,
-        ),
-        originalDress,
-        homeWorkImage(
-          "/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-before.webp",
-          "Editorial beauty portrait before retouching",
-          2000,
-          1500,
-        ),
+        "Direct consultation to review your brand visual identity, lighting preferences, monthly image volume, and required delivery timelines.",
+      sla: "Same-Day Response SLA",
+      specs: [
+        { label: "Response Window", value: "Within 2–4 Business Hours" },
+        { label: "Consultation", value: "Dedicated Creative Producer" },
+        { label: "Project Intake", value: "Brand Guide & Style Brief" },
+        { label: "Volume Scoping", value: "Flexible Monthly Batch Planning" },
       ],
+      image: homeWorkImage(
+        "/images/home/step-01-outreach.webp",
+        "Direct client creative consultation and project discovery",
+        1080,
+        1350,
+        "Consultation & Outreach",
+        "Direct style definition & discovery",
+      ),
     },
     {
-      title: "Reference alignment",
-      navTitle: "Reference",
-      timing: "Before production",
+      title: "Free Sample Test Edit",
+      navTitle: "02 · Test Edit",
+      timing: "Complimentary Sample Proof",
+      icon: FileEdit,
       description:
-        "A sample image defines the approved finish, so color, texture, crop, and detail treatment are clear from the start.",
-      images: [
-        homeWorkImage(
-          "/images/services/product-services/product-paw-osteocare-small-dogs-chews-packaging-before.webp",
-          "Pet supplement packaging before product retouching",
-          2000,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-after.webp",
-          "Ice-blue knit cardigan prepared as a clean apparel product image",
-          1333,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/jewelry/jewelry-jules-textured-gold-earrings-03-before.webp",
-          "Textured gold earrings before jewelry retouching",
-          1500,
-          2000,
-        ),
+        "Send 1–3 benchmark images. We produce a complimentary sample retouch to your exact guidelines so you can evaluate our craft before committing.",
+      sla: "12–24h Turnaround SLA",
+      specs: [
+        { label: "Evaluation Cost", value: "100% Free · No Obligation" },
+        { label: "Sample Scope", value: "1–3 High-Res RAW or TIFF Files" },
+        { label: "Deliverables", value: "Full-Res Proof & Layered PSD" },
+        { label: "Refinement", value: "Tailored Adjustments to Sign-Off" },
       ],
+      image: homeWorkImage(
+        "/images/home/step-02-test-edit.webp",
+        "Free sample test edit comparison proof",
+        1200,
+        1500,
+        "Test Edit Proof",
+        "Free sample quality sign-off",
+      ),
     },
     {
-      title: "Team assignment",
-      navTitle: "Team assignment",
-      timing: "Production setup",
+      title: "Client Onboarding & NDA",
+      navTitle: "03 · Onboarding",
+      timing: "Account Setup & Guidelines",
+      icon: ShieldCheck,
       description:
-        "The project manager routes each batch to specialists whose experience matches the service and visual standard required.",
-      images: [
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-silk-headscarf-marchesa-after.webp",
-          "Silk headscarf prepared as a clean apparel product image",
-          1333,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/product-services/product-gem-whole-body-cream-deodorant-pink-cream-after.webp",
-          "Pink cream deodorant product photographed for an e-commerce listing",
-          2000,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/model-beauty/model-cue-designer-fashion-editorial-0137.webp",
-          "Designer fashion editorial portrait prepared for a campaign",
-          1600,
-          2000,
-        ),
+        "We execute bilateral NDAs, document your locked visual benchmarks, agree on volume pricing, and provision your dedicated studio account manager.",
+      sla: "24h Account Setup SLA",
+      specs: [
+        { label: "Confidentiality", value: "Bilateral NDA Executed" },
+        { label: "Visual Standards", value: "Locked Style & Color Guide" },
+        { label: "Account Lead", value: "Dedicated Project Manager" },
+        { label: "Direct Channel", value: "Slack, Microsoft Teams or Email" },
       ],
+      image: homeWorkImage(
+        "/images/home/step-03-onboarding.webp",
+        "Studio onboarding and account setup desk",
+        1200,
+        1500,
+        "Onboarding & NDA",
+        "Locked benchmarks & manager setup",
+      ),
     },
     {
-      title: "Specialist editing",
-      navTitle: "Editing",
-      timing: "Active production",
+      title: "Project Handover & Transfer",
+      navTitle: "04 · Handover",
+      timing: "Secure Batch Ingestion",
+      icon: Upload,
       description:
-        "Editors work from the approved reference while preserving consistent naming, dimensions, color, and finishing across the batch.",
-      images: [
-        homeWorkImage(
-          "/images/services/model-beauty/beauty-skincare-facial-cream-retouch-0097-after.webp",
-          "Skincare beauty portrait after detailed retouching",
-          2000,
-          1500,
-        ),
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-4m-womens-structured-parka-4513-after.webp",
-          "Structured women's parka prepared for an apparel product listing",
-          1333,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-camilla-tri-bodysuit-bambino-front-after.webp",
-          "Patterned bodysuit prepared as a ghost mannequin product image",
-          1334,
-          2000,
-        ),
+        "Upload source shoots and batch briefs via Dropbox, Google Drive, WeTransfer, OneDrive, or private FTP. Our intake team confirms file integrity immediately.",
+      sla: "Immediate Ingest Confirmation",
+      specs: [
+        { label: "Transfer Desk", value: "Dropbox, Drive, WeTransfer & FTP" },
+        { label: "File Audit", value: "Checksum & Resolution Verification" },
+        { label: "Supported Formats", value: "RAW, TIFF, PSD, AI, PNG" },
+        { label: "Studio Capacity", value: "5,000+ Assets Daily Capacity" },
       ],
+      image: homeWorkImage(
+        "/images/home/step-04-handover.webp",
+        "Digital asset ingest and file verification desk",
+        1200,
+        1500,
+        "Asset Ingestion",
+        "Secure high-res batch transfer",
+      ),
     },
     {
-      title: "Quality review",
-      navTitle: "Quality review",
-      timing: "Before delivery",
+      title: "High-Precision Production",
+      navTitle: "05 · Production",
+      timing: "24/7 Dedicated Craft Suites",
+      icon: PenTool,
       description:
-        "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio.",
-      images: [
-        homeWorkImage(
-          "/images/services/jewelry/jewelry-celine-gold-sculptural-bangle-03-after.webp",
-          "Sculptural gold bangle after detailed jewelry retouching",
-          1500,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/model-beauty/beauty-high-fashion-orchid-headpiece-portrait-after.webp",
-          "High-fashion beauty portrait with an orchid headpiece after retouching",
-          2000,
-          1500,
-        ),
-        homeWorkImage(
-          "/images/services/bags-accessories/accessories-adele-black-leather-bag-02-after.webp",
-          "Black leather handbag after product retouching",
-          1500,
-          2000,
-        ),
+        "Certified retouchers work 24/7 across dedicated dual shifts on calibrated hardware, strictly following your approved batch briefs and color profiles.",
+      sla: "24/7 Production Coverage",
+      specs: [
+        { label: "Production Floor", value: "24/7 Dedicated Dual Shifts" },
+        { label: "Retouch Technique", value: "Sub-Pixel Pen Tool Masking" },
+        { label: "Hardware Displays", value: "Color-Calibrated EIZO Monitors" },
+        { label: "Artist Teams", value: "Specialized Discipline Retouchers" },
       ],
+      image: homeWorkImage(
+        "/images/home/step-05-production.webp",
+        "High-precision 24/7 retouching craft production suite",
+        1200,
+        1500,
+        "24/7 Production",
+        "Sub-pixel pen tool & color craft",
+      ),
     },
     {
-      title: "Delivery and feedback",
-      navTitle: "Delivery",
-      timing: "Final handoff",
+      title: "5-Step Quality Control",
+      navTitle: "06 · 5-Step QC",
+      timing: "Multi-Stage Quality Audit",
+      icon: CheckCircle2,
       description:
-        "Final files arrive organised and ready to use, with one clear feedback path for any consolidated finishing notes.",
-      images: [
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-4m-mens-tailored-coat-007-after.webp",
-          "Tailored men's coat prepared for final apparel delivery",
-          1333,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-back-after.webp",
-          "Brown winter parka back view prepared for final apparel delivery",
-          1333,
-          2000,
-        ),
-        homeWorkImage(
-          "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-after.webp",
-          "Blue knit cardigan prepared as a final e-commerce product image",
-          1420,
-          1775,
-        ),
+        "Every asset passes our 5-Step Quality Control: technical file audit, task brief confirmation, and senior artist inspection at 100% zoom for edge fidelity.",
+      sla: "Zero-Defect Quality Guarantee",
+      specs: [
+        { label: "Inspection Zoom", value: "100% Pixel-Level Review" },
+        { label: "Technical Checks", value: "Color Profiles, Bleed & Curves" },
+        { label: "Mask Precision", value: "Edge Cleanliness & Natural Grain" },
+        { label: "Sign-Off Approval", value: "Senior QC Lead & Master Retoucher" },
       ],
+      image: homeWorkImage(
+        "/images/home/step-06-qc.webp",
+        "5-step quality control audit at 100% zoom",
+        1200,
+        1500,
+        "5-Step Audit",
+        "100% zoom texture & color audit",
+      ),
+    },
+    {
+      title: "Delivery, Feedback & Billing",
+      navTitle: "07 · Delivery",
+      timing: "Master Handoff & Support",
+      icon: PackageCheck,
+      description:
+        "Color-profiled web and print masters are delivered via secure cloud channels. Any requested adjustments receive immediate priority, followed by consolidated monthly billing.",
+      sla: "Guaranteed On-Time Delivery",
+      specs: [
+        { label: "Master Release", value: "Web & Print Color-Profiled Files" },
+        { label: "Revision Policy", value: "Priority Same-Day Adjustments" },
+        { label: "Packaging", value: "Organized Multi-SKU Archives" },
+        { label: "Invoicing", value: "Consolidated Monthly Invoicing" },
+      ],
+      image: homeWorkImage(
+        "/images/home/step-07-delivery.webp",
+        "Final delivery handoff and packaging",
+        1200,
+        1500,
+        "Delivery & Release",
+        "Color-profiled master handoff",
+      ),
     },
   ] as const;
 
   const timelineMotion = { position: 0 };
 
   function createTimelinePath(position: number) {
-    const center = (position + 0.5) * 200;
-    const curveStart = center - 58;
-    const curveEnd = center + 58;
+    const stepWidth = 1200 / processSteps.length;
+    const center = (position + 0.5) * stepWidth;
+    const curveStart = center - 52;
+    const curveEnd = center + 52;
 
-    return `M-2400 42 H${curveStart} C${center - 30} 42 ${center - 28} 10 ${center} 10 C${center + 28} 10 ${center + 30} 42 ${curveEnd} 42 H1200`;
+    return `M-2400 42 H${curveStart} C${center - 28} 42 ${center - 26} 10 ${center} 10 C${center + 26} 10 ${center + 28} 42 ${curveEnd} 42 H1200`;
   }
 
-  let section: HTMLElement;
-  let stage: HTMLElement;
-  let content: HTMLElement;
-  let timelinePath: SVGPathElement;
-  let tabs: HTMLButtonElement[] = [];
+  let section = $state<HTMLElement>();
+  let stage = $state<HTMLElement>();
+  let content = $state<HTMLElement>();
+  let timelinePath = $state<SVGPathElement>();
+  let tabs = $state<HTMLButtonElement[]>([]);
   let activeIndex = $state(0);
   let indicatorIndex = $state(0);
   let animateTo: ((index: number) => void) | undefined;
@@ -205,9 +227,8 @@
 
   function showStep(index: number) {
     const nextIndex = (index + processSteps.length) % processSteps.length;
-    if (nextIndex === indicatorIndex) return;
-
     indicatorIndex = nextIndex;
+
     if (moveTimeline) moveTimeline(nextIndex);
     else {
       timelineMotion.position = nextIndex;
@@ -231,12 +252,13 @@
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
+
     const preloadObserver = new IntersectionObserver(
       (entries, observer) => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
 
         const imageSources = new Set(
-          processSteps.flatMap((step) => step.images.map((image) => image.src)),
+          processSteps.map((step) => step.image.src),
         );
         imageSources.forEach((src) => {
           const preloadImage = new window.Image();
@@ -246,10 +268,13 @@
       },
       { rootMargin: "600px 0px" },
     );
-    preloadObserver.observe(section);
+    if (section) preloadObserver.observe(section);
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !section || !stage || !content) return;
+
+      const sectionEl = section;
+      const contentEl = content;
 
       const { gsap } = runtime;
       killTimelineMotion = () => gsap.killTweensOf(timelineMotion);
@@ -261,110 +286,24 @@
         moveTimeline = (index: number) => {
           if (reduceMotion) {
             timelineMotion.position = index;
-            timelinePath.setAttribute("d", createTimelinePath(index));
+            timelinePath?.setAttribute("d", createTimelinePath(index));
             return;
           }
 
           gsap.killTweensOf(timelineMotion);
           gsap.to(timelineMotion, {
             position: index,
-            duration: 0.58,
+            duration: 0.52,
             ease: "power2.inOut",
             overwrite: true,
             onUpdate: () => {
-              timelinePath.setAttribute(
+              timelinePath?.setAttribute(
                 "d",
                 createTimelinePath(timelineMotion.position),
               );
             },
           });
         };
-
-        if (!reduceMotion) {
-          gsap
-            .timeline({
-              defaults: { ease: "none" },
-              scrollTrigger: {
-                trigger: section,
-                start: "top 92%",
-                end: "top 28%",
-                scrub: 0.82,
-              },
-            })
-            .from(".process-intro > *", {
-              y: 42,
-              autoAlpha: 1,
-              duration: 0.42,
-              stagger: 0.065,
-            })
-            .from(
-              ".process-images-left .process-image",
-              {
-                x: -72,
-                y: 44,
-                scale: 0.91,
-                autoAlpha: 1,
-                duration: 0.58,
-                stagger: 0.08,
-              },
-              0.04,
-            )
-            .from(
-              ".process-image-right",
-              {
-                x: 72,
-                y: 38,
-                scale: 0.92,
-                autoAlpha: 1,
-                duration: 0.58,
-              },
-              0.06,
-            )
-            .from(
-              ".process-tabs > button",
-              {
-                y: 26,
-                autoAlpha: 1,
-                duration: 0.34,
-                stagger: 0.045,
-              },
-              0.34,
-            );
-
-          gsap.fromTo(
-            ".process-orb-left",
-            { x: -54, y: -34, scale: 0.88 },
-            {
-              x: 34,
-              y: 58,
-              scale: 1.08,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.6,
-              },
-            },
-          );
-
-          gsap.fromTo(
-            ".process-orb-right",
-            { x: 48, y: 40, scale: 1.04 },
-            {
-              x: -38,
-              y: -52,
-              scale: 0.9,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 0.72,
-              },
-            },
-          );
-        }
 
         animateTo = (index: number) => {
           if (reduceMotion) {
@@ -376,107 +315,85 @@
           const currentTransition = transitionVersion;
           activeTransition?.kill();
 
-          const outgoingLeft = section.querySelectorAll(
-            ".process-images-left .process-image",
+          const outgoingCard = sectionEl.querySelector(".process-image-card");
+
+          const elementsToKill: (Element | null)[] = [outgoingCard, contentEl];
+          gsap.killTweensOf(elementsToKill.filter(Boolean));
+
+          const exitTimeline = gsap.timeline({
+            onComplete: async () => {
+              if (currentTransition !== transitionVersion) return;
+
+              activeIndex = index;
+              await tick();
+
+              const incomingCard = sectionEl.querySelector(".process-image-card");
+
+              const enterTimeline = gsap.timeline({
+                onComplete: () => {
+                  activeTransition = undefined;
+                },
+              });
+
+              enterTimeline.fromTo(
+                contentEl,
+                { x: -24, autoAlpha: 0 },
+                {
+                  x: 0,
+                  autoAlpha: 1,
+                  duration: 0.48,
+                  ease: "power3.out",
+                  clearProps: "transform,opacity,visibility",
+                },
+                0,
+              );
+
+              if (incomingCard) {
+                enterTimeline.fromTo(
+                  incomingCard,
+                  { x: 24, autoAlpha: 0 },
+                  {
+                    x: 0,
+                    autoAlpha: 1,
+                    duration: 0.52,
+                    ease: "power3.out",
+                    clearProps: "transform,opacity,visibility",
+                  },
+                  0.03,
+                );
+              }
+
+              activeTransition = enterTimeline;
+            },
+          });
+
+          exitTimeline.to(
+            contentEl,
+            {
+              x: -16,
+              autoAlpha: 0,
+              duration: 0.18,
+              ease: "power2.in",
+            },
+            0,
           );
-          const outgoingRight = section.querySelector(".process-image-right");
 
-          gsap.killTweensOf([outgoingLeft, outgoingRight, content]);
-          activeTransition = gsap
-            .timeline({
-              onComplete: async () => {
-                if (currentTransition !== transitionVersion) return;
-
-                activeIndex = index;
-                await tick();
-
-                const incomingLeft = section.querySelectorAll(
-                  ".process-images-left .process-image",
-                );
-                const incomingRight = section.querySelector(
-                  ".process-image-right",
-                );
-
-                activeTransition = gsap
-                  .timeline({
-                    onComplete: () => {
-                      activeTransition = undefined;
-                    },
-                  })
-                  .fromTo(
-                    incomingLeft,
-                    { x: -76, autoAlpha: 0 },
-                    {
-                      x: 0,
-                      autoAlpha: 1,
-                      duration: 0.68,
-                      stagger: 0.08,
-                      ease: "power3.out",
-                      clearProps: "transform,opacity,visibility",
-                    },
-                    0,
-                  )
-                  .fromTo(
-                    content,
-                    { y: 22, autoAlpha: 0 },
-                    {
-                      y: 0,
-                      autoAlpha: 1,
-                      duration: 0.58,
-                      ease: "power3.out",
-                      clearProps: "transform,opacity,visibility",
-                    },
-                    0.08,
-                  )
-                  .fromTo(
-                    incomingRight,
-                    { x: 76, y: 24, autoAlpha: 0 },
-                    {
-                      x: 0,
-                      y: 0,
-                      autoAlpha: 1,
-                      duration: 0.72,
-                      ease: "power3.out",
-                      clearProps: "transform,opacity,visibility",
-                    },
-                    0.04,
-                  );
-              },
-            })
-            .to(
-              outgoingLeft,
+          if (outgoingCard) {
+            exitTimeline.to(
+              outgoingCard,
               {
-                x: -48,
+                x: 18,
                 autoAlpha: 0,
-                duration: 0.28,
-                stagger: 0.035,
-                ease: "power2.in",
-              },
-              0,
-            )
-            .to(
-              content,
-              {
-                y: -14,
-                autoAlpha: 0,
-                duration: 0.24,
-                ease: "power2.in",
-              },
-              0,
-            )
-            .to(
-              outgoingRight,
-              {
-                x: 48,
-                y: -18,
-                autoAlpha: 0,
-                duration: 0.3,
+                duration: 0.2,
                 ease: "power2.in",
               },
               0,
             );
+          }
+
+          activeTransition = exitTimeline;
         };
-      }, section);
+      }, sectionEl);
     });
 
     return () => {
@@ -497,11 +414,8 @@
   id="production-process"
   bind:this={section}
   aria-labelledby="production-process-title"
-  class="process-section overflow-hidden bg-brand-light text-brand-dark section-space pt-6 sm:pt-10"
+  class="process-section overflow-hidden bg-brand-light text-brand-dark py-8 sm:py-10 md:py-12 lg:py-14 min-h-screen flex flex-col justify-center"
 >
-  <div class="process-orb process-orb-left" aria-hidden="true"></div>
-  <div class="process-orb process-orb-right" aria-hidden="true"></div>
-
   <div class="site-shell process-shell">
     <div
       bind:this={stage}
@@ -510,54 +424,67 @@
       role="tabpanel"
       aria-labelledby={`production-process-tab-${activeIndex}`}
     >
-      <div class="process-images process-images-left" aria-hidden="true">
-        <figure class="process-image process-image-left-back">
-          <img
-            src={processSteps[activeIndex].images[0].src}
-            alt=""
-            width={processSteps[activeIndex].images[0].width}
-            height={processSteps[activeIndex].images[0].height}
-            loading="lazy"
-          />
-        </figure>
-        <figure class="process-image process-image-left-front">
-          <img
-            src={processSteps[activeIndex].images[1].src}
-            alt=""
-            width={processSteps[activeIndex].images[1].width}
-            height={processSteps[activeIndex].images[1].height}
-            loading="lazy"
-          />
-        </figure>
+      <!-- Unified Left Side: Editorial Story & Stage Protocols Combined in One Cohesive Block -->
+      <div bind:this={content} class="process-editorial-block">
+        <div class="process-intro">
+          <span class="process-watermark-num" aria-hidden="true">
+            {String(activeIndex + 1).padStart(2, "0")}
+          </span>
+          <div class="process-timing eyebrow text-brand-dark/55 flex items-center gap-2">
+            <span>{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</span>
+            <span class="text-brand-dark/25">·</span>
+            <span class="font-mono text-[0.6875rem]">Phase 0{activeIndex + 1} / 07</span>
+          </div>
+          <h2 id="production-process-title">
+            {$_(`home.processSteps.${activeIndex}.title`) || processSteps[activeIndex].title}
+          </h2>
+          <p class="process-desc">
+            {$_(`home.processSteps.${activeIndex}.description`) || processSteps[activeIndex].description}
+          </p>
+        </div>
+
+        <!-- Integrated Stage Specifications Spec Grid (No green dot, no green text) -->
+        <div class="process-specs-integrated" aria-hidden="true">
+          <div class="specs-editorial-top">
+            <span class="specs-editorial-heading">Stage Specifications</span>
+            <span class="specs-sla-text">{processSteps[activeIndex].sla}</span>
+          </div>
+
+          <div class="specs-editorial-rows">
+            {#each processSteps[activeIndex].specs as item}
+              <div class="specs-editorial-row">
+                <span class="specs-editorial-label">{item.label}</span>
+                <span class="specs-editorial-value">{item.value}</span>
+              </div>
+            {/each}
+          </div>
+        </div>
       </div>
 
-      <div bind:this={content} class="process-intro">
-        <span class="process-watermark-num" aria-hidden="true">
-          {String(activeIndex + 1).padStart(2, "0")}
-        </span>
-        <p class="process-timing eyebrow">{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</p>
-        <h2 id="production-process-title">
-          {$_(`home.processSteps.${activeIndex}.title`) || processSteps[activeIndex].title}
-        </h2>
-        <p class="process-desc">{$_(`home.processSteps.${activeIndex}.description`) || processSteps[activeIndex].description}</p>
-      </div>
-
-      <figure class="process-image process-image-right" aria-hidden="true">
+      <!-- Right: Single 4:5 Aspect Ratio Image With Zero Border -->
+      <figure class="process-image-card" aria-hidden="true">
         <img
-          src={processSteps[activeIndex].images[2].src}
-          alt=""
-          width={processSteps[activeIndex].images[2].width}
-          height={processSteps[activeIndex].images[2].height}
+          src={processSteps[activeIndex].image.src}
+          alt={processSteps[activeIndex].image.alt}
+          width={processSteps[activeIndex].image.width}
+          height={processSteps[activeIndex].image.height}
           loading="lazy"
         />
+        {#if processSteps[activeIndex].image.caption}
+          <div class="process-image-caption">
+            {processSteps[activeIndex].image.caption}
+          </div>
+        {/if}
       </figure>
     </div>
 
+    <!-- Bottom Horizontal Timeline Tabs (Hover & Click Moves Step) -->
     <div class="process-navigation">
       <div
         class="process-tabs"
         role="tablist"
         aria-label="Production workflow stages"
+        style={`--step-count: ${processSteps.length};`}
       >
         <svg
           class="process-timeline-line"
@@ -569,6 +496,7 @@
         </svg>
 
         {#each processSteps as step, index (step.title)}
+          {@const StepIcon = step.icon}
           <button
             bind:this={tabs[index]}
             id={`production-process-tab-${index}`}
@@ -583,19 +511,91 @@
             onfocus={() => showStep(index)}
             onkeydown={(event) => handleTabKeydown(event, index)}
           >
-            <span>{$_(`home.processSteps.${index}.navTitle`) || step.navTitle}</span>
+            <div class="tab-label-group">
+              <StepIcon class="tab-step-icon" aria-hidden="true" />
+              <span>{$_(`home.processSteps.${index}.navTitle`) || step.navTitle}</span>
+            </div>
             <i aria-hidden="true"></i>
           </button>
         {/each}
 
         <div
           class="active-step-indicator"
-          style={`--active-step: ${indicatorIndex}`}
+          style={`--active-step: ${indicatorIndex}; --step-count: ${processSteps.length};`}
           aria-hidden="true"
         >
           <i></i>
           <b>{String(indicatorIndex + 1).padStart(2, "0")}</b>
         </div>
+      </div>
+    </div>
+
+    <!-- Workflow Intake & Formats Bar (Divider Removed) -->
+    <div
+      class="mt-3 sm:mt-4 flex flex-col md:flex-row items-center justify-between gap-2.5 text-xs text-brand-dark/70 pt-1"
+    >
+      <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+        <span
+          class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-brand-dark/50 mr-1"
+        >
+          Sharing Platforms:
+        </span>
+        <span
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          >Dropbox</span
+        >
+        <span
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          >Google Drive</span
+        >
+        <span
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          >WeTransfer</span
+        >
+        <span
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          >OneDrive</span
+        >
+        <span
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          >Private FTP</span
+        >
+      </div>
+
+      <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+        <span
+          class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-brand-dark/50 mr-1"
+        >
+          Supported Formats:
+        </span>
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-bold text-brand-dark"
+          >RAW</span
+        >
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          >PSD</span
+        >
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          >TIFF</span
+        >
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          >PNG</span
+        >
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          >JPG</span
+        >
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          >AI</span
+        >
+        <span
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          >PDF</span
+        >
       </div>
     </div>
   </div>
@@ -611,108 +611,36 @@
     z-index: 1;
   }
 
-  .process-orb {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .process-orb-left {
-    top: 8%;
-    left: -14rem;
-    width: 34rem;
-    height: 34rem;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-brand-green) 9%, transparent),
-      transparent 70%
-    );
-  }
-
-  .process-orb-right {
-    right: -16rem;
-    bottom: -18rem;
-    width: 40rem;
-    height: 40rem;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--color-brand-green) 7%, transparent),
-      transparent 70%
-    );
-  }
-
   .process-stage {
     display: grid;
-    min-height: clamp(29rem, 42vw, 36rem);
-    grid-template-areas:
-      "left"
-      "copy"
-      "right";
+    grid-template-columns: 1fr;
     gap: 2rem;
     align-items: center;
+    margin-bottom: clamp(1.5rem, 2.8vh, 2.5rem);
   }
 
-  .process-images-left {
+  .process-editorial-block {
     position: relative;
-    grid-area: left;
-    min-height: 17rem;
-  }
-
-  .process-image {
-    position: relative;
-    overflow: hidden;
-    border-radius: 2rem;
-    background: var(--color-brand-mist);
-    box-shadow: 0 1.25rem 3rem -0.75rem color-mix(in srgb, var(--color-brand-dark) 14%, transparent);
-    will-change: transform, opacity;
-  }
-
-
-  .process-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .process-image:hover img {
-    transform: scale(1.045);
-  }
-
-  .process-image-left-back {
-    position: absolute;
-    top: 0;
-    right: 8%;
-    width: 58%;
-    height: 11rem;
-  }
-
-  .process-image-left-front {
-    position: absolute;
-    bottom: 0;
-    left: 6%;
-    width: 62%;
-    height: 13rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 40rem;
+    text-align: left;
   }
 
   .process-intro {
     position: relative;
-    grid-area: copy;
-    max-width: 38rem;
-    margin-inline: auto;
-    text-align: center;
   }
 
   .process-watermark-num {
     position: absolute;
-    top: 32%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: -1.75rem;
+    left: -0.5rem;
     font-family: var(--font-display);
-    font-size: clamp(8rem, 16vw, 15rem);
+    font-size: clamp(6.5rem, 10vw, 9.5rem);
     font-weight: 400;
     line-height: 1;
-    color: color-mix(in srgb, var(--color-brand-dark) 4%, transparent);
+    color: color-mix(in srgb, var(--color-brand-dark) 8.5%, transparent);
     user-select: none;
     pointer-events: none;
     z-index: -1;
@@ -721,36 +649,166 @@
 
   .process-timing {
     position: relative;
-    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
   }
 
   .process-intro h2 {
     position: relative;
-    max-width: 17ch;
-    margin: 1rem auto 0;
+    max-width: 18ch;
+    margin: 0.6rem 0 0;
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 3.8vw, 3.8rem);
+    font-size: clamp(2.15rem, 3.2vw, 3.1rem);
     font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     color: var(--color-brand-dark);
   }
 
   .process-desc {
     position: relative;
-    max-width: 35rem;
-    margin: 1.25rem auto 0;
-    font-size: 0.88rem;
-    line-height: 1.68;
-    color: color-mix(in srgb, var(--color-brand-dark) 82%, transparent);
+    max-width: 36rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.975rem;
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--color-brand-dark) 80%, transparent);
   }
 
+  /* Integrated Stage Protocols (Clean Luxury Specs) */
+  .process-specs-integrated {
+    position: relative;
+    padding-top: 1.15rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+    max-width: 36rem;
+  }
 
-  .process-image-right {
-    grid-area: right;
-    width: min(72vw, 18rem);
-    height: 20rem;
-    justify-self: center;
+  .specs-editorial-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.65rem;
+  }
+
+  .specs-editorial-heading {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-brand-dark) 55%, transparent);
+  }
+
+  .specs-sla-text {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
+  }
+
+  .specs-editorial-rows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem 1.6rem;
+  }
+
+  .specs-editorial-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-brand-dark) 7%, transparent);
+  }
+
+  .specs-editorial-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
+  }
+
+  .specs-editorial-value {
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--color-brand-dark);
+    line-height: 1.35;
+  }
+
+  /* Right 4:5 Single Image Card */
+  .process-image-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    border: none !important;
+    outline: none !important;
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    max-width: clamp(17.5rem, 23vw, 23.5rem);
+    max-height: clamp(22rem, 43vh, 29rem);
+    justify-self: end;
+    background: var(--color-brand-mist);
+    box-shadow: none !important;
+    will-change: transform, opacity;
+  }
+
+  .process-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none !important;
+    outline: none !important;
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .process-image-card:hover img {
+    transform: scale(1.035);
+  }
+
+  .process-image-caption {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .process-image-card:hover .process-image-caption {
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    .process-stage {
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      max-width: 75rem;
+      margin-inline: auto;
+      margin-bottom: clamp(1.5rem, 2.8vh, 2.5rem);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .process-stage {
+      margin-bottom: 2.5rem;
+    }
+
+    .process-editorial-block {
+      max-width: 100%;
+    }
+
+    .specs-editorial-rows {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .process-image-card {
+      max-width: 20rem;
+      justify-self: center;
+      border-radius: 1.25rem;
+    }
   }
 
   .process-navigation {
@@ -759,7 +817,7 @@
     margin-left: calc(50% - 50vw);
     overflow-x: auto;
     background: var(--color-brand-light);
-    padding: 1.25rem 0 0.5rem;
+    padding: 0.5rem 0 0.25rem;
     scrollbar-width: none;
   }
 
@@ -771,18 +829,18 @@
     position: relative;
     display: grid;
     width: calc(100% - 2rem);
-    max-width: 90rem;
-    min-width: 58rem;
+    max-width: 92rem;
+    min-width: 64rem;
     margin-inline: auto;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--step-count, 7), minmax(0, 1fr));
   }
 
   .process-tabs button {
     position: relative;
     z-index: 1;
-    min-height: 7.8rem;
-    padding-inline: 0.5rem;
-    color: color-mix(in srgb, var(--color-brand-dark) 82%, transparent);
+    min-height: 8.2rem;
+    padding-inline: 0.35rem;
+    color: color-mix(in srgb, var(--color-brand-dark) 75%, transparent);
     text-align: center;
     transition: color 240ms ease;
     cursor: pointer;
@@ -793,18 +851,40 @@
     color: var(--color-brand-dark);
   }
 
-  .process-tabs button > span {
+  .tab-label-group {
     position: absolute;
-    top: 0.2rem;
-    right: 0.35rem;
-    left: 0.35rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    line-height: 1.25;
+    top: 0.15rem;
+    right: 0.25rem;
+    left: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
   }
 
-  .process-tabs button.active > span {
+  :global(.tab-step-icon) {
+    width: 1.15rem;
+    height: 1.15rem;
+    opacity: 0.65;
+    transition:
+      opacity 240ms ease,
+      transform 240ms ease;
+  }
+
+  .process-tabs button:hover :global(.tab-step-icon),
+  .process-tabs button.active :global(.tab-step-icon) {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  .tab-label-group > span {
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+
+  .process-tabs button.active .tab-label-group > span {
     font-weight: 600;
   }
 
@@ -854,8 +934,8 @@
     bottom: 0;
     left: 0;
     z-index: 3;
-    width: calc(100% / 6);
-    height: 7.8rem;
+    width: calc(100% / var(--step-count, 7));
+    height: 8.2rem;
     transform: translateX(calc(var(--active-step) * 100%));
     pointer-events: none;
     transition: transform 580ms cubic-bezier(0.65, 0, 0.35, 1);
@@ -900,62 +980,16 @@
     outline-offset: 0.25rem;
   }
 
-  @media (min-width: 768px) {
-    .process-stage {
-      grid-template-areas: "left copy right";
-      grid-template-columns: minmax(15rem, 0.78fr) minmax(26rem, 1.2fr) minmax(
-          15rem,
-          0.78fr
-        );
-      gap: clamp(2rem, 5vw, 6rem);
-    }
-
-    .process-images-left {
-      min-height: 25rem;
-    }
-
-    .process-image-left-back {
-      right: 0;
-      width: 68%;
-      height: 12.5rem;
-    }
-
-    .process-image-left-front {
-      left: 0;
-      width: 72%;
-      height: 17rem;
-    }
-
-    .process-image-right {
-      width: 78%;
-      max-width: 19rem;
-      height: 22rem;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .process-stage {
-      min-height: auto;
-    }
-
-    .process-intro {
-      order: -1;
-    }
-
-    .process-image-right {
-      display: none;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .process-stage,
-    .process-image,
+    .process-editorial-block,
+    .process-image-card,
     .process-tabs > * {
       transform: none !important;
       opacity: 1 !important;
     }
 
-    .process-image img,
+    .process-image-card img,
     .process-tabs button,
     .process-tabs button > i,
     .active-step-indicator {

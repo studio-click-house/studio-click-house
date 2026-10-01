@@ -188,6 +188,16 @@
         "description": "Reflection, edge definition, and material detail are handled without flattening the object.",
         "category": "Jewelry detail"
       },
+      "commercial-video-editing": {
+        "title": "Movement shaped for product and campaign stories.",
+        "description": "Commercial editing, pacing, color, and delivery for high-impact branded video campaigns.",
+        "category": "Commercial video editing"
+      },
+      "fashion-lifestyle-video": {
+        "title": "Cinematic pacing that elevates brand identity.",
+        "description": "High-end fashion editorial reels, lifestyle campaign cutdowns, and color grading tuned for digital screens.",
+        "category": "Editorial fashion motion"
+      },
       "shadow-study": {
         "title": "A grounded image still needs room to breathe.",
         "description": "Directional shadow and negative space give a product weight without making the composition feel heavy.",
@@ -350,40 +360,46 @@
     },
     "processSteps": [
       {
-        "title": "Brief and file intake",
-        "navTitle": "Brief intake",
-        "timing": "Project start",
-        "description": "We review your source files, references, volume, output formats, and delivery priorities before production begins."
+        "title": "Client Outreach & Discovery",
+        "navTitle": "01 · Outreach",
+        "timing": "Direct Creative Consultation",
+        "description": "Initial creative consultation to understand your brand aesthetics, lighting style, turnaround requirements, batch volume projections, and project guidelines."
       },
       {
-        "title": "Reference alignment",
-        "navTitle": "Reference",
-        "timing": "Before production",
-        "description": "A sample image defines the approved finish, so color, texture, crop, and detail treatment are clear from the start."
+        "title": "Free Sample Test Edit",
+        "navTitle": "02 · Test Edit",
+        "timing": "Complimentary Sample & Approval",
+        "description": "Complimentary sample test edit calibrated to your aesthetic requirements. We incorporate client feedback and secure sample sign-off before entering full-scale production."
       },
       {
-        "title": "Team assignment",
-        "navTitle": "Team assignment",
-        "timing": "Production setup",
-        "description": "The project manager routes each batch to specialists whose experience matches the service and visual standard required."
+        "title": "Client Onboarding & NDA",
+        "navTitle": "03 · Onboarding",
+        "timing": "Benchmarks, NDA & Setup",
+        "description": "Full client onboarding: establishing visual benchmark references, mutual NDA execution, transparent volume pricing, and dedicated studio account manager setup."
       },
       {
-        "title": "Specialist editing",
-        "navTitle": "Editing",
-        "timing": "Active production",
-        "description": "Editors work from the approved reference while preserving consistent naming, dimensions, color, and finishing across the batch."
+        "title": "Project Handover & Transfer",
+        "navTitle": "04 · Handover",
+        "timing": "Batch File Ingestion",
+        "description": "Client sends source images and specific briefs via Dropbox, Google Drive, WeTransfer, OneDrive, or FTP. Our intake team acknowledges reception and begins batch processing immediately."
       },
       {
-        "title": "Quality review",
-        "navTitle": "Quality review",
-        "timing": "Before delivery",
-        "description": "A separate review checks detail, consistency, technical specifications, and the agreed reference before files leave the studio."
+        "title": "High-Precision Production",
+        "navTitle": "05 · Production",
+        "timing": "24/7 Dedicated Craft Suites",
+        "description": "Retouching production starts with initial technical QC. Specialized teams work 24/7 in dedicated suites adhering strictly to agreed batch instructions and color standards."
       },
       {
-        "title": "Delivery and feedback",
-        "navTitle": "Delivery",
-        "timing": "Final handoff",
-        "description": "Final files arrive organised and ready to use, with one clear feedback path for any consolidated finishing notes."
+        "title": "5-Step Quality Control",
+        "navTitle": "06 · 5-Step QC",
+        "timing": "Technical, Task & Artist QC",
+        "description": "Every batch passes our 5-Step Quality Control audit: technical file integrity, task spec confirmation, and senior artist review at 100% zoom for edge precision and color fidelity."
+      },
+      {
+        "title": "Delivery, Feedback & Billing",
+        "navTitle": "07 · Delivery",
+        "timing": "Handoff, Review & Monthly Billing",
+        "description": "Final color-profiled files delivered via secure cloud channels. Client reviews deliverables, corrections are completed immediately if required, with consolidated monthly billing."
       }
     ],
     "closingCta": {
@@ -419,74 +435,74 @@
       "description": "One production partner for AI-assisted imagery, polished stills, considered motion, and believable 3D—built around each project."
     },
     "aboutOrbit": {
-      "eyebrow": "Our Production System",
-      "heading": "Quality isn't the last step. It's every step.",
-      "headingPart1": "Quality isn't the last step.",
-      "headingPart2": "It's every step.",
-      "postProduction": "post-production",
-      "description": "From AI-assisted image production and precision retouching to complex 3D CGI rendering, our Dhaka studio combines intelligent workflows with human craft to create polished campaign assets.",
+      "eyebrow": "AI Production System",
+      "heading": "From isolated packshots to campaign reality.",
+      "headingPart1": "From isolated packshots.",
+      "headingPart2": "To campaign reality.",
+      "postProduction": "image compositing",
+      "description": "Combine multi-product e-commerce packshots into lifelike on-model campaign imagery with photorealistic lighting, natural fabric draping, and flawless accessory integration.",
       "explore": "Explore Work",
       "steps": [
         {
-          "title": "Direction",
-          "description": "Every project starts with clear references, technical specifications and creative goals."
+          "title": "Virtual on-model fitting",
+          "description": "Seamlessly composite individual garments and accessories onto photorealistic AI models with authentic posture and studio lighting."
         },
         {
-          "title": "Specialist craft",
-          "description": "Dedicated editors and 3D CGI artists matched to your project requirements."
+          "title": "Fabric & drape physics",
+          "description": "Intelligent contour mapping and realistic crease synthesis preserve true garment weights, weaves, and natural silhouettes."
         },
         {
-          "title": "Quality control",
-          "description": "Every file reviewed for immaculate skin texture, edge accuracy, and lighting consistency."
+          "title": "Accessory & light matching",
+          "description": "Luxury watches, jewelry, bags, and eyewear integrated with millimeter precision, specular reflections, and contact shadows."
         },
         {
-          "title": "Delivery",
-          "description": "Production-ready, multi-channel high-res assets delivered on time with strict SLA."
+          "title": "Commercial studio export",
+          "description": "High-resolution e-commerce and editorial deliverables with strict color fidelity, zero shoot overhead, and rapid turnaround."
         }
       ],
       "stats": [
         {
-          "value": "150+",
-          "label": "Creative Specialists"
+          "value": "8 → 1",
+          "label": "Asset Synthesis"
         },
         {
-          "value": "10+ Years",
-          "label": "Proven Experience"
+          "value": "4K UHD",
+          "label": "Resolution Ready"
         },
         {
-          "value": "24/7",
-          "label": "Production Studio"
+          "value": "24h",
+          "label": "Turnaround SLA"
         },
         {
-          "value": "99%",
-          "label": "On-Time Delivery"
+          "value": "100%",
+          "label": "Color Fidelity"
         }
       ],
       "startProject": "Start a project",
       "cards": {
         "orbit-1": {
-          "title": "AI Fashion Retouching"
+          "title": "Tailored Ivory Blazer"
         },
         "orbit-2": {
-          "title": "AI Product Compositing"
+          "title": "Ribbed Scoop Tank"
         },
         "orbit-3": {
-          "title": "Generative 3D CGI"
+          "title": "Pleated Wide-Leg Trousers"
         },
         "orbit-4": {
-          "title": "Intelligent Color Grading"
+          "title": "Cognac Leather Handbag"
         },
         "orbit-5": {
-          "title": "AI e-Commerce Masking"
+          "title": "Pointed Ivory Pumps"
         },
         "orbit-6": {
-          "title": "AI Jewelry Retouching"
+          "title": "Gold Hoop Earrings"
         },
         "orbit-7": {
-          "title": "AI Beauty Retouching"
+          "title": "Classic Gold Watch"
         },
         "orbit-8": {
-          "title": "AI Video Editing"
+          "title": "Designer Sunglasses"
         }
       }
     },

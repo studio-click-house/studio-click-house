@@ -7,7 +7,6 @@
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { services } from "$lib/content/home";
   import BeforeAfterSlider from "$lib/components/common/BeforeAfterSlider.svelte";
-  import ShowcaseProduct3DViewer from "$lib/components/common/ShowcaseProduct3DViewer.svelte";
   import { _ } from "svelte-i18n";
 
   type DivisionMedia =
@@ -33,11 +32,7 @@
         alt: string;
         width: number;
         height: number;
-      }
-    | {
-        kind: "3d";
-        modelPath?: string;
-      };
+    };
   const divisions: Array<{
     id: string;
     title: string;
@@ -111,8 +106,11 @@
         (service) => service.category === "3D Modeling",
       ),
       media: {
-        kind: "3d",
-        modelPath: "/models/SheenChair.glb",
+        kind: "image",
+        src: "/images/3d-modeling/Wireframe%20Clay%20Sneaker%20Render.png",
+        alt: "Wireframe clay render of a sneaker",
+        width: 1122,
+        height: 1402,
       },
     },
   ];
@@ -322,8 +320,6 @@
               beforeHeight={division.media.height}
               ariaLabel="Compare the original storage rack photo with its cleaned product cutout"
             />
-          {:else if division.media.kind === "3d"}
-            <ShowcaseProduct3DViewer modelPath={division.media.modelPath} />
           {:else if division.media.kind === "video"}
             <figure
               class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"

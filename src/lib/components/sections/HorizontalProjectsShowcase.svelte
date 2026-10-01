@@ -68,28 +68,45 @@
     category: "Commercial video editing",
     title: "Movement shaped for product and campaign stories.",
     description:
-      "A temporary studio-production reel representing commercial editing, pacing, color, and delivery for branded video.",
+      "Commercial editing, pacing, color, and delivery for high-impact branded video campaigns.",
     tags: ["Video", "Editing"],
     media: {
       kind: "video",
-      src: "/videos/work-fields-studio-production.mp4",
-      poster:
-        "/images/services/model-beauty/model-cue-fashion-editorial-studio-0029.webp",
-      alt: "Photographer producing commercial product imagery in a studio",
+      src: "/images/video-editing/Fashion_e-commerce_film_production_1080p_20261001185052.mp4",
+      alt: "Fashion e-commerce film production and commercial editing",
       width: 1920,
       height: 1080,
-      credit: "Temporary demo footage via Mixkit",
+      credit: "Studio Click House",
+    },
+  };
+  const workFieldLifestyleVideoItem: WorkFieldSectionItem = {
+    id: "fashion-lifestyle-video",
+    category: "Editorial fashion motion",
+    title: "Cinematic pacing that elevates brand identity.",
+    description:
+      "High-end fashion editorial reels, lifestyle campaign cutdowns, and color grading tuned for digital screens.",
+    tags: ["Fashion", "Motion"],
+    media: {
+      kind: "video",
+      src: "/images/video-editing/Fashion_model_in_sunlight_20261001165857.mp4",
+      alt: "Fashion lifestyle editorial video reel in natural sunlight",
+      width: 1920,
+      height: 1080,
+      credit: "Studio Click House",
     },
   };
   const workFieldGalleryItems = [
-    ...workGalleryItems.slice(0, 2).map(withImageKind),
     workFieldDemoItem,
+    withImageKind(workGalleryItems[0]),
+    withImageKind(workGalleryItems[1]),
+    workFieldLifestyleVideoItem,
     ...workGalleryItems.slice(2).map(withImageKind),
   ];
   const workFieldServiceLabels: Record<string, string> = {
     "product-finishing": "Product retouching",
     "beauty-detail": "Beauty retouching",
     "commercial-video-editing": "Commercial video editing",
+    "fashion-lifestyle-video": "Fashion video editing",
     "fashion-color": "Fashion color correction",
     "jewelry-detail": "Jewelry retouching",
     "shadow-study": "Product image composition",
@@ -98,6 +115,7 @@
     "product-finishing": "ecommerce-retouching",
     "beauty-detail": "editorial-retouching",
     "commercial-video-editing": "commercial-editing",
+    "fashion-lifestyle-video": "commercial-editing",
     "fashion-color": "color-correction",
     "jewelry-detail": "jewelry-retouching",
     "shadow-study": "ecommerce-retouching",
@@ -129,70 +147,232 @@
     const stageVideos = Array.from(
       stage?.querySelectorAll<HTMLVideoElement>("video") ?? [],
     );
-    let isSectionNearViewport = false;
-    let videoStartTimers: number[] = [];
+
+    // Ensure every video cues its true first frame so that the native video frame is visible as thumbnail
+    stageVideos.forEach((v) => {
+      const cueFirstFrame = () => {
+        if (v.currentTime === 0) {
+          v.currentTime = 0.001;
+        }
+      };
+      if (v.readyState >= 1) {
+        cueFirstFrame();
+      } else {
+        v.addEventListener("loadedmetadata", cueFirstFrame, { once: true });
+      }
+    });
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
+    let isSectionNearViewport = false;
+    let hoveredVideo: HTMLVideoElement | null = null;
+    let currentPlayingVideo: HTMLVideoElement | null = null;
+    let isRafScheduled = false;
 
-    const clearVideoStartTimers = () => {
-      videoStartTimers.forEach((timerId) => window.clearTimeout(timerId));
-      videoStartTimers = [];
+    // Track in-flight play promises to strictly prevent DOMException AbortError
+    // when pause() is requested before play() fulfills
+    const playPromises = new WeakMap<HTMLVideoElement, Promise<void>>();
+
+    const safePlay = (video: HTMLVideoElement) => {
+      if (!video.paused || playPromises.has(video)) return;
+      try {
+        const promise = video.play();
+        if (promise !== undefined) {
+          playPromises.set(video, promise);
+          promise
+            .catch(() => {})
+            .finally(() => {
+              playPromises.delete(video);
+              // If target changed while awaiting play, safely pause now
+              if (currentPlayingVideo !== video && !video.paused) {
+                video.pause();
+              }
+            });
+        }
+      } catch {
+        // Safe catch for environment restrictions
+      }
     };
 
-    const pauseStageVideos = () => {
-      clearVideoStartTimers();
-      stageVideos.forEach((video) => video.pause());
+    const safePause = (video: HTMLVideoElement) => {
+      if (video.paused) return;
+      const pending = playPromises.get(video);
+      if (pending) {
+        pending
+          .then(() => {
+            if (currentPlayingVideo !== video && !video.paused) {
+              video.pause();
+            }
+          })
+          .catch(() => {});
+      } else {
+        video.pause();
+      }
     };
 
-    const playVisibleStageVideos = () => {
-      clearVideoStartTimers();
-      const visibleStageVideos = stageVideos.filter(
-        (video) => video.offsetParent !== null,
-      );
-
-      visibleStageVideos.forEach((video, index) => {
-        const timerId = window.setTimeout(() => {
-          if (
-            isSectionNearViewport &&
-            !prefersReducedMotion.matches &&
-            video.offsetParent !== null
-          ) {
-            void video.play().catch(() => {});
-          }
-        }, index * 180);
-        videoStartTimers.push(timerId);
+    const pauseAllStageVideos = () => {
+      currentPlayingVideo = null;
+      stageVideos.forEach((video) => {
+        safePause(video);
       });
+    };
+
+    const isVideoVisibleOnScreen = (video: HTMLVideoElement): boolean => {
+      if (!video.isConnected) return false;
+      const rect = video.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return false;
+      // Must be vertically in viewport
+      if (rect.bottom < 40 || rect.top > window.innerHeight - 40) return false;
+      // Must be horizontally in viewport
+      if (rect.right < 40 || rect.left > window.innerWidth - 40) return false;
+      // Must overlap horizontally with at least 15% of viewport width
+      const overlapWidth =
+        Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
+      return overlapWidth > window.innerWidth * 0.15;
+    };
+
+    const getDistanceFromCenter = (video: HTMLVideoElement): number => {
+      const rect = video.getBoundingClientRect();
+      const videoCenterX = (rect.left + rect.right) * 0.5;
+      const vpCenterX = window.innerWidth * 0.5;
+      return Math.abs(videoCenterX - vpCenterX);
+    };
+
+    const getFocusedVideo = (): HTMLVideoElement | null => {
+      const visibleVideos = stageVideos.filter(isVideoVisibleOnScreen);
+      if (visibleVideos.length === 0) return null;
+
+      // Hysteresis deadband: if a video is already playing and remains visible,
+      // require the candidate to be at least 120px closer to the center before switching.
+      // This completely prevents rapid jitter, audio/video decoder stalls, and freezing during scroll.
+      if (currentPlayingVideo && isVideoVisibleOnScreen(currentPlayingVideo)) {
+        const currentDist = getDistanceFromCenter(currentPlayingVideo);
+        let bestAlternate: HTMLVideoElement | null = null;
+        let minAlternateDist = currentDist;
+
+        for (const v of visibleVideos) {
+          if (v === currentPlayingVideo) continue;
+          const d = getDistanceFromCenter(v);
+          if (d < minAlternateDist) {
+            minAlternateDist = d;
+            bestAlternate = v;
+          }
+        }
+
+        if (bestAlternate && currentDist - minAlternateDist > 120) {
+          return bestAlternate;
+        }
+
+        return currentPlayingVideo;
+      }
+
+      // Initial or fallback selection: pick the video closest to viewport center
+      let bestVideo: HTMLVideoElement | null = null;
+      let minDistance = Infinity;
+
+      for (const v of visibleVideos) {
+        const d = getDistanceFromCenter(v);
+        if (d < minDistance) {
+          minDistance = d;
+          bestVideo = v;
+        }
+      }
+
+      return bestVideo;
+    };
+
+    const updateFocusedVideo = () => {
+      isRafScheduled = false;
+      if (!active || prefersReducedMotion.matches || !isSectionNearViewport) {
+        pauseAllStageVideos();
+        return;
+      }
+
+      // If user is hovering over any card with a video, play that video exclusively
+      const targetVideo = hoveredVideo ?? getFocusedVideo();
+      currentPlayingVideo = targetVideo;
+
+      stageVideos.forEach((video) => {
+        if (video === targetVideo) {
+          safePlay(video);
+        } else {
+          safePause(video);
+        }
+      });
+    };
+
+    const scheduleUpdateFocusedVideo = () => {
+      if (!isRafScheduled) {
+        isRafScheduled = true;
+        requestAnimationFrame(updateFocusedVideo);
+      }
     };
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
-        pauseStageVideos();
+        pauseAllStageVideos();
       } else if (isSectionNearViewport) {
-        playVisibleStageVideos();
+        scheduleUpdateFocusedVideo();
       }
     };
     prefersReducedMotion.addEventListener("change", handleMotionChange);
 
+    // Attach hover listeners to each card container so hovering plays its video
+    const hoverCleanupFns: Array<() => void> = [];
+    stageVideos.forEach((video) => {
+      const card =
+        video.closest<HTMLElement>(
+          ".project-panel, .showcase-intro, .work-field-slide, .work-card",
+        ) ?? video;
+
+      const onEnter = () => {
+        hoveredVideo = video;
+        scheduleUpdateFocusedVideo();
+      };
+
+      const onLeave = (e: MouseEvent) => {
+        if (card.contains(e.relatedTarget as Node)) return;
+        if (hoveredVideo === video) {
+          hoveredVideo = null;
+        }
+        scheduleUpdateFocusedVideo();
+      };
+
+      card.addEventListener("mouseenter", onEnter);
+      card.addEventListener("mouseleave", onLeave);
+
+      hoverCleanupFns.push(() => {
+        card.removeEventListener("mouseenter", onEnter);
+        card.removeEventListener("mouseleave", onLeave);
+      });
+    });
+
+    window.addEventListener("scroll", scheduleUpdateFocusedVideo, {
+      passive: true,
+    });
+    window.addEventListener("resize", scheduleUpdateFocusedVideo, {
+      passive: true,
+    });
+
     if (prefersReducedMotion.matches) {
-      pauseStageVideos();
+      pauseAllStageVideos();
     } else if ("IntersectionObserver" in window && section) {
       videoObserver = new IntersectionObserver(
         ([entry]) => {
           isSectionNearViewport = Boolean(entry?.isIntersecting);
           if (isSectionNearViewport && !prefersReducedMotion.matches) {
-            playVisibleStageVideos();
+            scheduleUpdateFocusedVideo();
           } else {
-            pauseStageVideos();
+            pauseAllStageVideos();
           }
         },
-        { rootMargin: "800px 0px", threshold: 0.01 },
+        { rootMargin: "300px 0px", threshold: 0.01 },
       );
       videoObserver.observe(section);
     } else {
       isSectionNearViewport = true;
-      playVisibleStageVideos();
+      scheduleUpdateFocusedVideo();
     }
 
     registerScrollTrigger().then((runtime) => {
@@ -418,6 +598,7 @@
                 scrub: true,
                 refreshPriority: 100,
                 invalidateOnRefresh: true,
+                onUpdate: scheduleUpdateFocusedVideo,
               },
             });
 
@@ -681,7 +862,10 @@
 
     return () => {
       active = false;
-      pauseStageVideos();
+      pauseAllStageVideos();
+      hoverCleanupFns.forEach((fn) => fn());
+      window.removeEventListener("scroll", scheduleUpdateFocusedVideo);
+      window.removeEventListener("resize", scheduleUpdateFocusedVideo);
       prefersReducedMotion.removeEventListener("change", handleMotionChange);
       videoObserver?.disconnect();
       context?.revert();
@@ -704,17 +888,17 @@
     <article
       class="showcase-intro absolute inset-y-0 left-0 z-[1] flex w-[50%] flex-col items-center justify-center border-r border-brand-dark/15 bg-brand-light px-[clamp(1.5rem,3vw,3.5rem)] py-[clamp(2rem,5vh,3.5rem)] text-center text-brand-light overflow-hidden"
     >
-      <!-- Background Image with dark overlay for rich contrast -->
+      <!-- Background Video with dark overlay for rich contrast -->
       <div class="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="/images/home/showcase-intro.webp"
-          alt="Photographer capturing a fashion model on a studio set"
-          width="1200"
-          height="675"
-          loading="lazy"
-          decoding="async"
+        <video
+          src="/images/video-editing/Fashion_editorial_montage_creation_1080p_20261001180512.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
           class="h-full w-full object-cover object-center"
-        />
+        ></video>
         <!-- Dark gradient overlay to pop the white text -->
         <div
           class="absolute inset-0 bg-brand-dark/50 z-10"
@@ -764,7 +948,7 @@
                     muted
                     loop
                     playsinline
-                    preload="none"
+                    preload="metadata"
                     aria-label={project.media.alt}
                     class="project-image h-full w-full object-cover"
                     style:object-position={project.media.objectPosition ||
@@ -966,7 +1150,7 @@
                           muted
                           loop
                           playsinline
-                          preload="none"
+                          preload="metadata"
                           aria-label={item.media.alt}
                           class="work-field-image h-full w-full object-cover"
                         ></video>
@@ -1129,7 +1313,7 @@
                 muted
                 loop
                 playsinline
-                preload="none"
+                preload="metadata"
                 aria-label={item.media.alt}
                 class="work-card-image h-full w-full object-cover"
               ></video>

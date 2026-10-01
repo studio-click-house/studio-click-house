@@ -179,7 +179,7 @@
       </p>
       <h2
         id="ai-about-title"
-        class="ai-head-reveal font-display text-[clamp(2.4rem,4.2vw,4.5rem)] leading-[0.92] tracking-[-0.038em]"
+        class="ai-head-reveal font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]"
       >
         {$_('home.aiWorkflow.title1') || 'E-Commerce AI'} <em class="font-display italic font-normal text-brand-green">{$_('home.aiWorkflow.title2') || 'Workflow.'}</em>
       </h2>
