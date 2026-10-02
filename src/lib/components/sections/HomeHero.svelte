@@ -494,9 +494,7 @@
 </section>
 
 <style>
-  .hero-poster {
-    background: var(--color-brand-dark);
-  }
+
 
   .hero-video {
     opacity: 0;
