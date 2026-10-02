@@ -87,7 +87,7 @@
   id="portfolio-staggered-collage"
   bind:this={collageSection}
   aria-label="Editorial Showcase Collage"
-  class="relative w-full bg-brand-light py-20 lg:py-28 overflow-hidden"
+  class="relative w-full bg-brand-light py-12 sm:py-14 lg:py-16 overflow-hidden"
 >
   <div class="site-shell relative z-10">
     <!-- Asymmetric Collage Container -->

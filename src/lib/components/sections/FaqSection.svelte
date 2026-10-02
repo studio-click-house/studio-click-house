@@ -3,23 +3,12 @@
   import { Plus } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { faqs } from "$lib/content/home";
-  import { previewMedia } from "$lib/content/media";
   import type { FaqItem, PreviewMedia } from "$lib/types/content";
   import { _ } from "svelte-i18n";
-  import { getRemoteImageSrcset } from "$lib/utils/responsive-media";
-
-  const defaultFaqImages = [
-    previewMedia.jewelryMacro, // Q1: Formats
-    previewMedia.jewelryDetail, // Q2: Turnaround
-    previewMedia.redStudioPortrait, // Q3: Revisions
-    previewMedia.editingWorkspace, // Q4: Transfer
-    previewMedia.perfumeShadow, // Q5: Consistency
-    previewMedia.studioPortrait, // Q6: Workflow
-  ];
 
   let { 
     items = faqs, 
-    images = defaultFaqImages,
+    images = [],
     imageFit = "cover",
     title = "",
   } = $props<{ 
@@ -31,15 +20,12 @@
 
   let isCustom = $derived(items !== faqs);
   let activeIndex = $state(0);
-  let sectionImage = $derived(images[Math.max(activeIndex, 0) % images.length]);
 
   let section: HTMLElement;
   let answerContainers: HTMLElement[] = [];
-  function handleFaqClick(index: number, isHover = false) {
-    // Toggle active accordion off on repeated clicks
-    if (activeIndex === index) {
-      if (isHover) return;
 
+  function handleFaqClick(index: number) {
+    if (activeIndex === index) {
       activeIndex = -1;
 
       registerScrollTrigger().then((runtime) => {
@@ -49,7 +35,7 @@
         if (prevAnswer) {
           gsap.to(prevAnswer, {
             height: 0,
-            duration: 0.4,
+            duration: 0.35,
             ease: "power2.out",
             overwrite: "auto",
           });
@@ -70,7 +56,7 @@
       if (prevAnswer && previousIndex !== -1) {
         gsap.to(prevAnswer, {
           height: 0,
-          duration: 0.4,
+          duration: 0.35,
           ease: "power2.out",
           overwrite: "auto",
         });
@@ -79,7 +65,7 @@
       if (nextAnswer) {
         gsap.to(nextAnswer, {
           height: "auto",
-          duration: 0.45,
+          duration: 0.42,
           ease: "power3.out",
           overwrite: "auto",
         });
@@ -103,40 +89,29 @@
             .timeline({
               scrollTrigger: {
                 trigger: section,
-                start: "top 95%",
+                start: "top 88%",
                 toggleActions: "play none none none",
                 once: true,
               },
             })
-            .from("#faq-section-title", {
+            .from(".faq-header-reveal", {
               autoAlpha: 0,
-              y: 18,
-              duration: 0.45,
+              y: 20,
+              duration: 0.5,
               ease: "power3.out",
               clearProps: "opacity,visibility,transform",
             })
             .from(
-              ".faq-item-reveal",
+              ".faq-row-reveal",
               {
                 autoAlpha: 0,
-                y: 14,
-                duration: 0.35,
-                stagger: 0.035,
+                y: 16,
+                duration: 0.4,
+                stagger: 0.04,
                 ease: "power2.out",
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.35",
-            )
-            .from(
-              ".faq-reveal-right",
-              {
-                autoAlpha: 0,
-                x: 20,
-                duration: 0.45,
-                ease: "power3.out",
-                clearProps: "opacity,visibility,transform",
-              },
-              "-=0.3",
+              "-=0.25",
             );
         });
 
@@ -155,108 +130,76 @@
   bind:this={section}
   id="faq"
   aria-labelledby="faq-section-title"
-  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden py-12 sm:py-14 lg:py-16 text-brand-dark"
 >
   <div class="site-shell relative z-10">
-    <div class="grid gap-14 lg:grid-cols-12 lg:gap-16 items-start">
-      <!-- Left Column: Questions List (Columns 1-7) -->
-      <div class="faq-reveal-left lg:col-span-7 space-y-6">
-        <!-- Header -->
-        <div class="pb-2">
-          <p class="eyebrow mb-3 text-brand-dark/50">
-            {$_("sectionLabels.faq")}
-          </p>
-          <h2
-            id="faq-section-title"
-            class="font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
-          >
-            {title || $_('home.faq.title')}
-          </h2>
-        </div>
+    <div class="mx-auto max-w-4xl">
+      <!-- Section Header: Clean, confident, pure typography -->
+      <div class="faq-header-reveal mb-8 sm:mb-10">
+        <p class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 mb-3">
+          {$_("sectionLabels.faq") || "Questions & Answers"}
+        </p>
+        <h2
+          id="faq-section-title"
+          class="font-display text-[clamp(2.4rem,4.5vw,3.85rem)] font-light leading-[1.02] tracking-[-0.035em] text-brand-dark"
+        >
+          {title || $_('home.faq.title') || "Frequently Asked Questions"}
+        </h2>
+        <p class="mt-4 text-sm sm:text-base leading-relaxed text-brand-dark/65 max-w-xl font-normal">
+          Direct details on file formats, turnaround planning, revisions, and production workflow for commercial imagery and motion.
+        </p>
+      </div>
 
-        <!-- Accordion List: Separate rounded row cards (table/pill style) -->
-        <div class="space-y-3 sm:space-y-3.5">
-          {#each items as item, index (item.question)}
-            <div
-              class="faq-item-reveal rounded-2xl border transition-all duration-300 overflow-hidden {activeIndex === index
-                ? 'border-brand-green/60 bg-white shadow-sm ring-1 ring-brand-green/15'
-                : 'border-brand-dark/10 bg-white/70 hover:bg-white hover:border-brand-dark/25 shadow-xs'}"
+      <!-- Hairline Accordion List (Pure Swiss Editorial — No Cards, No AI Bloat) -->
+      <div class="border-t border-brand-dark/15">
+        {#each items as item, index (item.question)}
+          <div class="faq-row-reveal border-b border-brand-dark/15 transition-colors">
+            <button
+              id={`faq-trigger-${index + 1}`}
+              type="button"
+              class="w-full flex items-start justify-between gap-6 py-6 sm:py-7 text-left group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-dark cursor-pointer select-none"
+              aria-expanded={activeIndex === index}
+              aria-controls={`faq-panel-${index + 1}`}
+              onclick={() => handleFaqClick(index)}
             >
-              <button
-                id={`faq-trigger-${index + 1}`}
-                type="button"
-                class="w-full flex items-center justify-between gap-4 px-5 py-4.5 sm:px-6 sm:py-5 text-left group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green transition-colors cursor-pointer"
-                aria-expanded={activeIndex === index}
-                aria-controls={`faq-panel-${index + 1}`}
-                onmouseenter={() => handleFaqClick(index, true)}
-                onclick={() => handleFaqClick(index, false)}
-              >
-                <!-- Question heading -->
+              <div class="flex items-baseline gap-4 sm:gap-6 min-w-0 pr-4">
+                <span class="font-mono text-xs text-brand-dark/35 transition-colors group-hover:text-brand-dark shrink-0">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <h3
-                  class="font-sans font-semibold text-[1.02rem] sm:text-[1.12rem] leading-snug text-brand-dark transition-colors duration-200 group-hover:text-brand-green"
-                  class:text-brand-green={activeIndex === index}
+                  class="font-sans font-medium text-[1.0625rem] sm:text-[1.2rem] leading-snug text-brand-dark transition-colors duration-200 group-hover:opacity-75"
                 >
                   {isCustom ? item.question : ($_(`home.faqs.${index}.question`) || item.question)}
                 </h3>
+              </div>
 
-                <!-- Circular Plus icon pill matching screenshot -->
-                <div
-                  class="size-8 sm:size-9 shrink-0 rounded-full flex items-center justify-center border transition-all duration-300 {activeIndex === index
-                    ? 'border-brand-green bg-brand-green text-brand-dark rotate-45 shadow-xs'
-                    : 'border-brand-dark/15 bg-brand-dark/5 text-brand-dark/60 group-hover:border-brand-green/40 group-hover:text-brand-green group-hover:bg-brand-green/10'}"
-                  aria-hidden="true"
-                >
-                  <Plus class="size-4 sm:size-4.5 stroke-[2.2] transition-transform duration-300" />
-                </div>
-              </button>
-
-              <!-- Answer slide panel (controlled by GSAP height changes) -->
+              <!-- Minimal hairline toggle (+ / -) -->
               <div
-                id={`faq-panel-${index + 1}`}
-                bind:this={answerContainers[index]}
-                class="overflow-hidden"
-                style="height: {index === 0 ? 'auto' : '0px'}"
-                role="region"
-                aria-labelledby={`faq-trigger-${index + 1}`}
+                class="size-6 shrink-0 flex items-center justify-center text-brand-dark/45 transition-transform duration-300 group-hover:text-brand-dark"
+                class:rotate-45={activeIndex === index}
+                aria-hidden="true"
               >
-                <div class="px-5 pb-5 pt-1 sm:px-6 sm:pb-6 border-t border-brand-dark/6 mt-0.5 pt-3.5">
-                  <p class="max-w-2xl text-sm leading-relaxed text-brand-dark/70 sm:text-[0.95rem]">
-                    {isCustom ? item.answer : ($_(`home.faqs.${index}.answer`) || item.answer)}
-                  </p>
-                </div>
+                <Plus class="size-4 stroke-[1.6]" />
+              </div>
+            </button>
+
+            <!-- Expandable Answer Panel -->
+            <div
+              id={`faq-panel-${index + 1}`}
+              bind:this={answerContainers[index]}
+              class="overflow-hidden"
+              style="height: {index === 0 ? 'auto' : '0px'}"
+              role="region"
+              aria-labelledby={`faq-trigger-${index + 1}`}
+            >
+              <div class="pb-6 sm:pb-7 pl-7 sm:pl-10">
+                <p class="max-w-2xl text-[0.9375rem] sm:text-base leading-[1.7] text-brand-dark/70 font-normal">
+                  {isCustom ? item.answer : ($_(`home.faqs.${index}.answer`) || item.answer)}
+                </p>
               </div>
             </div>
-          {/each}
-        </div>
-      </div>
-
-      <!-- Right Column: Dedicated Sticky Viewport Frame (Columns 8-12) -->
-      <div
-        class="faq-reveal-right lg:col-span-5 lg:sticky lg:top-[18vh] lg:self-start pointer-events-none"
-      >
-        <div
-          class="relative overflow-hidden w-full max-w-[28rem] mx-auto lg:mx-0 rounded-[2rem]"
-          style={`aspect-ratio: ${sectionImage && sectionImage.width / sectionImage.height < 0.72 ? "2 / 3" : "4 / 5"}`}
-        >
-          <!-- Image viewport -->
-          <div class="relative size-full overflow-hidden bg-brand-light">
-            {#if sectionImage}
-              <img
-                src={sectionImage.src}
-                srcset={getRemoteImageSrcset(sectionImage.src)}
-                sizes="(min-width: 1024px) 28rem, calc(100vw - 2rem)"
-                alt={sectionImage.alt}
-                width={sectionImage.width}
-                height={sectionImage.height}
-                loading="lazy"
-                class="size-full rounded-[2rem] object-center"
-                class:object-contain={imageFit === "contain"}
-                class:object-cover={imageFit === "cover"}
-                style:scale={sectionImage.src === "/images/services/ghost-mannequin-apparel/apparel-magnolia-lounge-sleepwear-top-0870-after.webp" ? 1.08 : undefined}
-              />
-            {/if}
           </div>
-        </div>
+        {/each}
       </div>
     </div>
   </div>

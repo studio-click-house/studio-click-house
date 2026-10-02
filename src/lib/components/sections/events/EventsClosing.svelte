@@ -7,7 +7,7 @@
 
 <section
   id="events-closing"
-  class="bg-brand-paper pb-20 pt-12 text-brand-dark sm:pb-24 lg:pb-28"
+  class="bg-brand-paper pb-12 pt-8 text-brand-dark sm:pb-14 lg:pb-16"
 >
   <div class="site-shell" data-event-closing>
     <div

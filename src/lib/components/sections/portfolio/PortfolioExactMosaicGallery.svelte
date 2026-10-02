@@ -499,11 +499,11 @@
   id="portfolio-mosaic-gallery"
   bind:this={gallerySection}
   aria-label="Mosaic Craft Gallery"
-  class="relative w-full bg-brand-light py-20 lg:py-32"
+  class="relative w-full bg-brand-light py-12 sm:py-14 lg:py-16"
 >
   <div class="site-shell relative z-10">
     <!-- Header & Interactive Category Filters -->
-    <div class="mosaic-header-group flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 lg:mb-16">
+    <div class="mosaic-header-group flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 lg:mb-10">
       <div class="max-w-2xl">
         <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
           Work Archive

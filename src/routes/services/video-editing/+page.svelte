@@ -6,6 +6,7 @@
   import VideoColorGrading from "$lib/components/sections/video-service/VideoColorGrading.svelte";
   import VideoSocialCutdowns from "$lib/components/sections/video-service/VideoSocialCutdowns.svelte";
   import VideoAiGeneration from "$lib/components/sections/video-service/VideoAiGeneration.svelte";
+  import VideoWall from "$lib/components/sections/video-service/VideoWall.svelte";
   import VideoWorkflow from "$lib/components/sections/video-service/VideoWorkflow.svelte";
   import VideoDeliveryStandards from "$lib/components/sections/video-service/VideoDeliveryStandards.svelte";
   import FaqSection from "$lib/components/sections/FaqSection.svelte";
@@ -78,6 +79,9 @@
 
   <!-- 5. Service 04: AI Video Generation & Motion Synthesis Reel -->
   <VideoAiGeneration data={videoEditingPageData.aiGeneration} />
+
+  <!-- The Wall: Living Editorial Video Grid Showcase -->
+  <VideoWall data={videoEditingPageData.wall} />
 
   <!-- 6. Production Workflow: 4-Step Collaborative Production Timeline -->
   <VideoWorkflow steps={videoEditingPageData.workflow} />

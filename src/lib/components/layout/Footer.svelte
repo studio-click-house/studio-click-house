@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { page } from "$app/state";
   import {
     ArrowUp,
     Instagram,
@@ -12,6 +13,8 @@
   import { siteConfig } from "$lib/config/site";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
+
+  const isHomePage = $derived(page.url.pathname === "/");
 
   const services = [
     { label: "Photo Retouching", href: "/services" },
@@ -128,10 +131,12 @@
 <footer
   bind:this={footerElement}
   id="site-footer"
-  class="relative overflow-hidden bg-brand-light text-brand-dark pt-24 pb-12 sm:pt-28 sm:pb-14 lg:pt-32 lg:pb-16"
+  class="relative overflow-hidden bg-brand-light text-brand-dark pt-12 pb-12 sm:pt-14 sm:pb-14 lg:pt-16 lg:pb-16"
 >
-  <!-- Ambient Section Transition Connector (matching client/services scroll pattern) -->
-  <div class="footer-glow-connector" aria-hidden="true"></div>
+  <!-- Ambient Section Transition Connector (only on home page to match globe glow) -->
+  {#if isHomePage}
+    <div class="footer-glow-connector" aria-hidden="true"></div>
+  {/if}
 
   <div class="site-shell relative z-10">
     <!-- Main Top Grid -->

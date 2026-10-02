@@ -60,7 +60,7 @@
 
 <section
   id="events-gallery"
-  class="relative overflow-hidden bg-brand-paper py-20 text-brand-dark sm:py-28 lg:py-32"
+  class="relative overflow-hidden bg-brand-paper py-12 text-brand-dark sm:py-14 lg:py-16"
 >
   <div class="site-shell relative z-10">
     <!-- Clean Editorial Header (No AI pills, No robot icons) -->

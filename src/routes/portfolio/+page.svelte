@@ -5,7 +5,6 @@
   import PortfolioExactIntroWatermark from "$lib/components/sections/portfolio/PortfolioExactIntroWatermark.svelte";
   import PortfolioBeforeAfter from "$lib/components/sections/portfolio/PortfolioBeforeAfter.svelte";
   import PortfolioExactStaggeredCollage from "$lib/components/sections/portfolio/PortfolioExactStaggeredCollage.svelte";
-  import PortfolioExactPanorama from "$lib/components/sections/portfolio/PortfolioExactPanorama.svelte";
   import PortfolioExactTabbedMatrix from "$lib/components/sections/portfolio/PortfolioExactTabbedMatrix.svelte";
   import PortfolioExactMosaicGallery from "$lib/components/sections/portfolio/PortfolioExactMosaicGallery.svelte";
   import PortfolioExactManifesto from "$lib/components/sections/portfolio/PortfolioExactManifesto.svelte";
@@ -68,10 +67,7 @@
   <!-- 4. Staggered Asymmetric Editorial Collage -->
   <PortfolioExactStaggeredCollage />
 
-  <!-- 5. Full-Width Panoramic Craft Spread -->
-  <PortfolioExactPanorama />
-
-  <!-- 6. Interactive Disciplines & Deliverables Matrix -->
+  <!-- 5. Interactive Disciplines & Deliverables Matrix -->
   <PortfolioExactTabbedMatrix />
 
   <!-- 7. Filterable Work Archive Gallery with Lightbox -->

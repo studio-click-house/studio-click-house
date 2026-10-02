@@ -5,6 +5,7 @@
   import { resolveServiceHref } from "$lib/content/service-pages";
   import { ArrowUpRight } from "lucide-svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
+  import { onLenisScroll } from "$lib/animations/lenis";
   import { showcaseProjects, workGalleryItems } from "$lib/content/home";
   import { getRemoteImageSrcset } from "$lib/utils/responsive-media";
   import { _ } from "svelte-i18n";
@@ -20,25 +21,11 @@
   };
 
   const workFieldPortraitMedia: Record<string, PreviewMedia> = {
-    "product-finishing": {
-      src: "/images/services/product-services/product-architectural-skylight-roof-window-section.webp",
-      alt: "Architectural roof-window product photographed for a clear commercial product image",
-      width: 1600,
-      height: 2000,
-      credit: "Studio Click House",
-    },
-    "beauty-detail": {
-      src: "/images/services/model-beauty/beauty-editorial-glam-leopard-portrait-298-after.webp",
-      alt: "Beauty portrait with polished editorial makeup and leopard print styling",
-      width: 1500,
-      height: 2000,
-      credit: "Studio Click House",
-    },
     "fashion-color": {
-      src: "/images/services/model-beauty/model-fashion-male-suit-street-editorial-after.webp",
-      alt: "Fashion model in a blue suit photographed on a city street",
-      width: 1544,
-      height: 2000,
+      src: "/images/3d-modeling/Wireframe%20Clay%20Sneaker%20Render.png",
+      alt: "Wireframe clay 3D render of a sneaker",
+      width: 1122,
+      height: 1402,
       credit: "Studio Click House",
     },
     "jewelry-detail": {
@@ -98,13 +85,10 @@
   const workFieldGalleryItems = [
     workFieldDemoItem,
     withImageKind(workGalleryItems[0]),
-    withImageKind(workGalleryItems[1]),
     workFieldLifestyleVideoItem,
-    ...workGalleryItems.slice(2).map(withImageKind),
+    ...workGalleryItems.slice(1).map(withImageKind),
   ];
   const workFieldServiceLabels: Record<string, string> = {
-    "product-finishing": "Product retouching",
-    "beauty-detail": "Beauty retouching",
     "commercial-video-editing": "Commercial video editing",
     "fashion-lifestyle-video": "Fashion video editing",
     "fashion-color": "Fashion color correction",
@@ -112,8 +96,6 @@
     "shadow-study": "Product image composition",
   };
   const workFieldServiceSlugs: Record<string, string> = {
-    "product-finishing": "ecommerce-retouching",
-    "beauty-detail": "editorial-retouching",
     "commercial-video-editing": "commercial-editing",
     "fashion-lifestyle-video": "commercial-editing",
     "fashion-color": "color-correction",
@@ -121,7 +103,7 @@
     "shadow-study": "ecommerce-retouching",
   };
   const workFieldItems =
-    finalShowcaseProject?.media.kind === "image"
+    finalShowcaseProject
       ? [
           {
             ...workGalleryItems[0],
@@ -148,8 +130,18 @@
       stage?.querySelectorAll<HTMLVideoElement>("video") ?? [],
     );
 
-    // Ensure every video cues its true first frame so that the native video frame is visible as thumbnail
+    // Identify ambient intro background video vs main project/showcase videos
+    const introVideo = stage?.querySelector<HTMLVideoElement>(
+      ".showcase-intro video",
+    );
+    const projectVideos = stageVideos.filter((v) => v !== introVideo);
+
+    // Configure all videos on mount: ensure muted DOM properties for autoplay permission and trigger preload
     stageVideos.forEach((v) => {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.preload = "auto";
       const cueFirstFrame = () => {
         if (v.currentTime === 0) {
           v.currentTime = 0.001;
@@ -175,7 +167,13 @@
     const playPromises = new WeakMap<HTMLVideoElement, Promise<void>>();
 
     const safePlay = (video: HTMLVideoElement) => {
-      if (!video.paused || playPromises.has(video)) return;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+
+      if (!video.paused) return;
+      if (playPromises.has(video)) return;
+
       try {
         const promise = video.play();
         if (promise !== undefined) {
@@ -184,8 +182,12 @@
             .catch(() => {})
             .finally(() => {
               playPromises.delete(video);
-              // If target changed while awaiting play, safely pause now
-              if (currentPlayingVideo !== video && !video.paused) {
+              // If video is no longer the target or section is not near viewport, pause safely
+              if (
+                currentPlayingVideo !== video &&
+                video !== introVideo &&
+                !video.paused
+              ) {
                 video.pause();
               }
             });
@@ -201,7 +203,11 @@
       if (pending) {
         pending
           .then(() => {
-            if (currentPlayingVideo !== video && !video.paused) {
+            if (
+              currentPlayingVideo !== video &&
+              video !== introVideo &&
+              !video.paused
+            ) {
               video.pause();
             }
           })
@@ -218,68 +224,113 @@
       });
     };
 
-    const isVideoVisibleOnScreen = (video: HTMLVideoElement): boolean => {
-      if (!video.isConnected) return false;
-      const rect = video.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return false;
-      // Must be vertically in viewport
-      if (rect.bottom < 40 || rect.top > window.innerHeight - 40) return false;
-      // Must be horizontally in viewport
-      if (rect.right < 40 || rect.left > window.innerWidth - 40) return false;
-      // Must overlap horizontally with at least 15% of viewport width
-      const overlapWidth =
-        Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
-      return overlapWidth > window.innerWidth * 0.15;
+    const isElementDomVisible = (el: HTMLElement): boolean => {
+      if (!el.isConnected) return false;
+      let current: HTMLElement | null = el;
+      while (current && current !== stage && current !== document.body) {
+        const style = window.getComputedStyle(current);
+        if (
+          style.display === "none" ||
+          style.visibility === "hidden" ||
+          parseFloat(style.opacity || "1") < 0.05
+        ) {
+          return false;
+        }
+        current = current.parentElement;
+      }
+      return true;
     };
 
-    const getDistanceFromCenter = (video: HTMLVideoElement): number => {
+    const updateIntroVideo = () => {
+      if (!introVideo) return;
+      if (!active || prefersReducedMotion.matches || !isSectionNearViewport) {
+        safePause(introVideo);
+        return;
+      }
+      const introEl = stage?.querySelector<HTMLElement>(".showcase-intro");
+      if (!introEl || !isElementDomVisible(introEl)) {
+        safePause(introVideo);
+        return;
+      }
+      const rect = introEl.getBoundingClientRect();
+      const isVisible =
+        rect.right > 60 &&
+        rect.left < window.innerWidth - 60 &&
+        rect.bottom > 60 &&
+        rect.top < window.innerHeight - 60;
+      if (isVisible) {
+        safePlay(introVideo);
+      } else {
+        safePause(introVideo);
+      }
+    };
+
+    const getVideoFocusScore = (
+      video: HTMLVideoElement,
+    ): { video: HTMLVideoElement; score: number } | null => {
+      if (!isElementDomVisible(video)) return null;
+
       const rect = video.getBoundingClientRect();
-      const videoCenterX = (rect.left + rect.right) * 0.5;
-      const vpCenterX = window.innerWidth * 0.5;
-      return Math.abs(videoCenterX - vpCenterX);
+      if (rect.width <= 0 || rect.height <= 0) return null;
+
+      const vLeft = Math.max(0, rect.left);
+      const vRight = Math.min(window.innerWidth, rect.right);
+      const vTop = Math.max(0, rect.top);
+      const vBottom = Math.min(window.innerHeight, rect.bottom);
+
+      const vWidth = Math.max(0, vRight - vLeft);
+      const vHeight = Math.max(0, vBottom - vTop);
+      const visibleArea = vWidth * vHeight;
+
+      if (vWidth < 60 || vHeight < 60 || visibleArea < 15000) {
+        return null;
+      }
+
+      const centerX = (vLeft + vRight) * 0.5;
+      const centerY = (vTop + vBottom) * 0.5;
+
+      const dx =
+        (centerX - window.innerWidth * 0.5) / (window.innerWidth * 0.5);
+      const dy =
+        (centerY - window.innerHeight * 0.5) / (window.innerHeight * 0.5);
+      const distFromCenter = Math.hypot(dx, dy);
+
+      // Score prioritizes cards with high visibility and proximity to viewport center
+      const score =
+        visibleArea / (rect.width * rect.height) / (1 + distFromCenter * 1.4);
+
+      return { video, score };
     };
 
     const getFocusedVideo = (): HTMLVideoElement | null => {
-      const visibleVideos = stageVideos.filter(isVideoVisibleOnScreen);
-      if (visibleVideos.length === 0) return null;
+      const candidates: Array<{ video: HTMLVideoElement; score: number }> = [];
 
-      // Hysteresis deadband: if a video is already playing and remains visible,
-      // require the candidate to be at least 120px closer to the center before switching.
-      // This completely prevents rapid jitter, audio/video decoder stalls, and freezing during scroll.
-      if (currentPlayingVideo && isVideoVisibleOnScreen(currentPlayingVideo)) {
-        const currentDist = getDistanceFromCenter(currentPlayingVideo);
-        let bestAlternate: HTMLVideoElement | null = null;
-        let minAlternateDist = currentDist;
-
-        for (const v of visibleVideos) {
-          if (v === currentPlayingVideo) continue;
-          const d = getDistanceFromCenter(v);
-          if (d < minAlternateDist) {
-            minAlternateDist = d;
-            bestAlternate = v;
-          }
-        }
-
-        if (bestAlternate && currentDist - minAlternateDist > 120) {
-          return bestAlternate;
-        }
-
-        return currentPlayingVideo;
-      }
-
-      // Initial or fallback selection: pick the video closest to viewport center
-      let bestVideo: HTMLVideoElement | null = null;
-      let minDistance = Infinity;
-
-      for (const v of visibleVideos) {
-        const d = getDistanceFromCenter(v);
-        if (d < minDistance) {
-          minDistance = d;
-          bestVideo = v;
+      for (const video of projectVideos) {
+        const res = getVideoFocusScore(video);
+        if (res && res.score > 0.05) {
+          candidates.push(res);
         }
       }
 
-      return bestVideo;
+      if (candidates.length === 0) return null;
+
+      candidates.sort((a, b) => b.score - a.score);
+      const topCandidate = candidates[0];
+
+      if (currentPlayingVideo) {
+        const currentCandidate = candidates.find(
+          (c) => c.video === currentPlayingVideo,
+        );
+        // Retain current playing video if it remains close to top score to prevent micro-jitter
+        if (
+          currentCandidate &&
+          currentCandidate.score >= topCandidate.score * 0.82
+        ) {
+          return currentPlayingVideo;
+        }
+      }
+
+      return topCandidate.video;
     };
 
     const updateFocusedVideo = () => {
@@ -289,12 +340,21 @@
         return;
       }
 
-      // If user is hovering over any card with a video, play that video exclusively
-      const targetVideo = hoveredVideo ?? getFocusedVideo();
-      currentPlayingVideo = targetVideo;
+      // Update ambient intro background video
+      updateIntroVideo();
 
-      stageVideos.forEach((video) => {
-        if (video === targetVideo) {
+      // If user is hovering over any card with a video, play that video exclusively
+      if (hoveredVideo) {
+        currentPlayingVideo = hoveredVideo;
+      } else {
+        const best = getFocusedVideo();
+        if (best) {
+          currentPlayingVideo = best;
+        }
+      }
+
+      projectVideos.forEach((video) => {
+        if (video === currentPlayingVideo) {
           safePlay(video);
         } else {
           safePause(video);
@@ -348,6 +408,34 @@
       });
     });
 
+    const mobileTrack =
+      stage?.querySelector<HTMLElement>(".work-fields-mobile");
+    if (mobileTrack) {
+      mobileTrack.addEventListener("scroll", scheduleUpdateFocusedVideo, {
+        passive: true,
+      });
+    }
+
+    const unregisterLenis = onLenisScroll(scheduleUpdateFocusedVideo);
+
+    const gestureEvents = [
+      "wheel",
+      "touchstart",
+      "pointerdown",
+      "keydown",
+    ] as const;
+    const handleFirstGesture = () => {
+      gestureEvents.forEach((ev) =>
+        window.removeEventListener(ev, handleFirstGesture),
+      );
+      if (isSectionNearViewport && !prefersReducedMotion.matches) {
+        scheduleUpdateFocusedVideo();
+      }
+    };
+    gestureEvents.forEach((ev) =>
+      window.addEventListener(ev, handleFirstGesture, { passive: true }),
+    );
+
     window.addEventListener("scroll", scheduleUpdateFocusedVideo, {
       passive: true,
     });
@@ -367,7 +455,7 @@
             pauseAllStageVideos();
           }
         },
-        { rootMargin: "300px 0px", threshold: 0.01 },
+        { rootMargin: "400px 0px", threshold: 0.01 },
       );
       videoObserver.observe(section);
     } else {
@@ -668,6 +756,7 @@
 
             let previousProjectLabel = "firstProject";
             timeline.addLabel(previousProjectLabel, 0);
+            timeline.call(scheduleUpdateFocusedVideo, [], 0);
 
             for (let index = 1; index < panels.length; index += 1) {
               const projectLabel = "project" + (index + 1);
@@ -679,6 +768,7 @@
                   projectLabel,
                   previousProjectLabel + "+=" + transitionDelay,
                 )
+                .call(scheduleUpdateFocusedVideo, [], projectLabel)
                 .to(
                   projectLinks[index - 1],
                   { scale: 0, autoAlpha: 0, duration: 0.15 },
@@ -707,6 +797,7 @@
 
             timeline
               .addLabel("workFields", previousProjectLabel + "+=1.05")
+              .call(scheduleUpdateFocusedVideo, [], "workFields")
               .to(
                 projectLinks[lastProjectIndex],
                 { scale: 0, autoAlpha: 0, duration: 0.15 },
@@ -864,6 +955,11 @@
       active = false;
       pauseAllStageVideos();
       hoverCleanupFns.forEach((fn) => fn());
+      gestureEvents.forEach((ev) =>
+        window.removeEventListener(ev, handleFirstGesture),
+      );
+      unregisterLenis();
+      mobileTrack?.removeEventListener("scroll", scheduleUpdateFocusedVideo);
       window.removeEventListener("scroll", scheduleUpdateFocusedVideo);
       window.removeEventListener("resize", scheduleUpdateFocusedVideo);
       prefersReducedMotion.removeEventListener("change", handleMotionChange);
@@ -895,7 +991,7 @@
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
           class="h-full w-full object-cover object-center"
         ></video>
@@ -948,7 +1044,7 @@
                     muted
                     loop
                     playsinline
-                    preload="metadata"
+                    preload="auto"
                     aria-label={project.media.alt}
                     class="project-image h-full w-full object-cover"
                     style:object-position={project.media.objectPosition ||
@@ -1061,22 +1157,38 @@
                   class:work-field-handoff-slide={index === 0}
                   class="work-field-slide relative overflow-hidden"
                 >
-                  {#if index === 0 && finalShowcaseProject && item.media.kind === "image"}
+                  {#if index === 0 && finalShowcaseProject}
                     <div
                       class="work-field-handoff-media relative h-full overflow-hidden bg-brand-dark"
                     >
-                      <img
-                        src={item.media.src}
-                        srcset={getRemoteImageSrcset(item.media.src)}
-                        sizes="67vw"
-                        alt=""
-                        width={item.media.width}
-                        height={item.media.height}
-                        loading="lazy"
-                        class="work-field-image h-full w-full object-cover object-center"
-                        style:object-position={item.media.objectPosition ||
-                          "center"}
-                      />
+                      {#if item.media.kind === "video"}
+                        <video
+                          src={item.media.src}
+                          poster={item.media.poster}
+                          width={item.media.width}
+                          height={item.media.height}
+                          muted
+                          loop
+                          playsinline
+                          preload="auto"
+                          aria-label={item.media.alt}
+                          class="work-field-image h-full w-full object-cover object-center"
+                          style:object-position={item.media.objectPosition || "center"}
+                        ></video>
+                      {:else}
+                        <img
+                          src={item.media.src}
+                          srcset={getRemoteImageSrcset(item.media.src)}
+                          sizes="67vw"
+                          alt=""
+                          width={item.media.width}
+                          height={item.media.height}
+                          loading="lazy"
+                          class="work-field-image h-full w-full object-cover object-center"
+                          style:object-position={item.media.objectPosition ||
+                            "center"}
+                        />
+                      {/if}
                       <div
                         class="work-field-handoff-counter hidden"
                         aria-hidden="true"
@@ -1150,7 +1262,7 @@
                           muted
                           loop
                           playsinline
-                          preload="metadata"
+                          preload="auto"
                           aria-label={item.media.alt}
                           class="work-field-image h-full w-full object-cover"
                         ></video>
@@ -1313,7 +1425,7 @@
                 muted
                 loop
                 playsinline
-                preload="metadata"
+                preload="auto"
                 aria-label={item.media.alt}
                 class="work-card-image h-full w-full object-cover"
               ></video>

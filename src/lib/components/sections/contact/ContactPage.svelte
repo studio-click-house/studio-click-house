@@ -374,7 +374,7 @@
     id="contact-signal"
     bind:this={signalSection}
     aria-labelledby="contact-signal-title"
-    class="relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20 lg:py-24"
+    class="relative overflow-hidden bg-brand-light py-10 text-brand-dark sm:py-12 lg:py-14"
   >
     <!-- 3D Wave Canvas inset behind the text -->
     <ContactSignalField />
@@ -403,7 +403,7 @@
     id="project-brief"
     bind:this={briefSection}
     aria-labelledby="project-brief-title"
-    class="relative bg-brand-paper py-16 text-brand-dark lg:py-20"
+    class="relative bg-brand-paper py-10 text-brand-dark lg:py-14"
   >
     <div class="site-shell">
       <header class="contact-brief-reveal max-w-3xl">
@@ -636,7 +636,7 @@
     id="global-offices"
     bind:this={officesSection}
     aria-labelledby="global-offices-title"
-    class="bg-brand-light py-16 text-brand-dark lg:py-24"
+    class="bg-brand-light py-10 text-brand-dark lg:py-14"
   >
     <div class="site-shell">
       <header class="contact-office-reveal max-w-3xl">

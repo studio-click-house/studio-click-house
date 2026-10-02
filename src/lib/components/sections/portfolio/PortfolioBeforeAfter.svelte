@@ -1,122 +1,87 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
-  import { ChevronLeft, ChevronRight } from "lucide-svelte";
+  import { onMount } from "svelte";
 
   let section = $state<HTMLElement | null>(null);
-  let activeStageIndex = $state(0);
 
-  const stages = [
+  interface ProcessStage {
+    step: string;
+    title: string;
+    badge: string;
+    desc: string;
+    image: string;
+  }
+
+  const stages: ProcessStage[] = [
     {
       step: "01",
-      title: "Raw Camera Capture",
-      desc: "Untouched 16-bit sensor data with original studio lighting, neutral exposure, and capture backdrop.",
+      title: "Studio RAW",
+      badge: "Sensor Capture",
+      desc: "Untouched 16-bit camera sensor data with neutral studio lighting and original capture backdrop.",
       image: "/images/portfolio/model-raw.png",
-      badge: "16-Bit Studio RAW",
     },
     {
       step: "02",
-      title: "Pen Vector Path",
-      desc: "Hand-drawn Bézier anchor paths mapping garment contours, silhouette edges, and fabric folds.",
+      title: "Vector Pen Path",
+      badge: "Bézier Precision",
+      desc: "Hand-drawn vector anchor paths mapping garment drape, silhouette boundaries, and subtle fabric folds.",
       image: "/images/portfolio/model-clipping-4x5.png",
-      badge: "Vector Clipping",
     },
     {
       step: "03",
-      title: "Subject Isolation",
-      desc: "Clean background extraction with sub-pixel edge transitions, hair flyaway control, and alpha channel.",
+      title: "Edge Isolation",
+      badge: "Alpha Cutout",
+      desc: "Sub-pixel background extraction preserving natural hair flyaways and clean edge transparency.",
       image: "/images/portfolio/model-isolated.png",
-      badge: "Edge Isolation",
     },
     {
       step: "04",
       title: "Contact Shadow",
-      desc: "Natural diffused ground shadow engineered for authentic perspective depth on campaign backdrops.",
+      badge: "Spatial Depth",
+      desc: "Diffused perspective ground shadow engineered for authentic dimensional realism on campaign backdrops.",
       image: "/images/portfolio/model-shadowed.png",
-      badge: "Ground Shadow",
     },
     {
       step: "05",
       title: "Campaign Color Master",
-      desc: "Selective emerald garment color grading, skin frequency separation, and print-calibrated delivery.",
-      image: "/images/portfolio/model-color-master-4x5.png",
       badge: "Color Master",
+      desc: "Selective emerald garment color grading, skin frequency separation, and publication-ready delivery.",
+      image: "/images/portfolio/model-color-master-4x5.png",
     },
   ];
 
-  function nextStage() {
-    activeStageIndex = (activeStageIndex + 1) % stages.length;
-  }
-
-  function prevStage() {
-    activeStageIndex = (activeStageIndex - 1 + stages.length) % stages.length;
-  }
-
-  function onKeyDown(event: KeyboardEvent, index: number) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      activeStageIndex = index;
-    } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
-      event.preventDefault();
-      activeStageIndex = (index + 1) % stages.length;
-    } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
-      event.preventDefault();
-      activeStageIndex = (index - 1 + stages.length) % stages.length;
-    }
-  }
-
-  $effect(() => {
-    if (!section) return;
+  onMount(() => {
     let active = true;
-    let context: { revert: () => void } | undefined;
+    let ctx: { revert: () => void } | undefined;
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !section) return;
       const { gsap } = runtime;
 
-      context = gsap.context(() => {
-        const media = gsap.matchMedia();
-        media.add(
-          {
-            isDesktop: "(min-width: 1024px)",
-            isTablet: "(min-width: 768px) and (max-width: 1023px)",
-            isMobile: "(max-width: 767px)",
-            reduceMotion: "(prefers-reduced-motion: reduce)",
-          },
-          (context) => {
-            const { isDesktop, isTablet, reduceMotion } = context.conditions!;
-            if (reduceMotion) {
-              gsap.set(".process-fade-item", { autoAlpha: 1, y: 0 });
-              return;
-            }
-
-            const yOffset = isDesktop ? 32 : isTablet ? 26 : 38;
-            const duration = isDesktop ? 0.85 : isTablet ? 0.75 : 0.75;
-            const stagger = isDesktop ? 0.1 : isTablet ? 0.08 : 0.08;
-            const startTrigger = isDesktop ? "top 78%" : isTablet ? "top 80%" : "top 78%";
-
-            gsap.from(".process-fade-item", {
-              y: yOffset,
-              scale: 0.97,
-              autoAlpha: 0,
-              duration,
-              stagger,
-              ease: isDesktop ? "power3.out" : "power2.out",
-              clearProps: "transform,opacity",
-              scrollTrigger: {
-                trigger: section,
-                start: startTrigger,
-                toggleActions: "play none none reverse",
-              },
-            });
-          }
-        );
-        return () => media.revert();
+      ctx = gsap.context(() => {
+        const mm = gsap.matchMedia();
+        mm.add("(prefers-reduced-motion: no-preference)", () => {
+          gsap.from(".stage-col", {
+            y: 32,
+            autoAlpha: 0,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: "power3.out",
+            clearProps: "all",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          });
+        });
       }, section);
     });
 
     return () => {
       active = false;
-      context?.revert();
+      ctx?.revert();
     };
   });
 </script>
@@ -125,152 +90,69 @@
   id="portfolio-before-after"
   bind:this={section}
   aria-label="Studio post-production process breakdown"
-  class="relative w-full bg-brand-light py-16 sm:py-20 lg:py-32 overflow-hidden scroll-mt-20 sm:scroll-mt-28"
+  class="relative w-full bg-brand-light py-14 sm:py-18 lg:py-24 overflow-hidden scroll-mt-20 sm:scroll-mt-28"
 >
-
   <div class="site-shell relative z-10">
-    <!-- Mobile Editorial Header (Shown only on mobile/tablet screens < lg so user reads headline first) -->
-    <div class="lg:hidden w-full max-w-md mx-auto mb-8 text-center process-fade-item">
-      <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-dark/50 font-semibold block mb-2">
-        Inspection Craft
-      </span>
-      <h2 class="font-display text-2xl sm:text-3xl font-normal text-brand-dark leading-tight tracking-tight mb-2">
-        From Studio RAW to <em class="font-display italic font-normal text-brand-green">Campaign Master.</em>
-      </h2>
-      <p class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal">
-        Tap the controls below to inspect each stage of post-production craft.
-      </p>
+    <!-- Editorial Section Header: 2-Column Split Eliminating Empty Right Side -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end mb-12 sm:mb-16 lg:mb-20">
+      <div class="lg:col-span-7">
+        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-3">
+          03 / Inspection Craft
+        </p>
+        <h2 class="font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
+          From Studio RAW to <span class="italic font-light text-brand-green">Campaign Master.</span>
+        </h2>
+      </div>
+
+      <div class="lg:col-span-5 flex flex-col justify-end">
+        <p class="text-sm sm:text-base text-brand-dark/70 leading-relaxed font-normal">
+          Behind every high-fashion campaign asset lies rigorous multi-pass digital craft. Trace how raw sensor captures evolve through manual vector paths into publication-ready masters.
+        </p>
+      </div>
     </div>
 
-    <!-- 12-Column Responsive Grid matching Service & Portfolio Standards -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
-      <!-- Left Column: Fixed-size stage image (Columns 1-5) -->
-      <div class="w-full lg:col-span-5 flex flex-col items-center justify-center process-fade-item">
-        <div class="relative w-[280px] sm:w-[360px] lg:w-[380px] xl:w-[420px] max-w-[calc(100vw-3rem)] aspect-[4/5] flex items-center justify-center">
-          <!-- One frame keeps every process stage the same size. -->
-          <div
-            class="relative w-full h-full rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] overflow-hidden bg-white shadow-lg border border-brand-dark/10 z-10 select-none"
-          >
-            <!-- Images Layer with crossfade -->
-            {#each stages as stage, idx (stage.step)}
+    <!-- 5-Stage Panoramic Process Spread -->
+    <div
+      class="flex overflow-x-auto no-scrollbar gap-5 pb-4 -mx-4 px-4 snap-x snap-mandatory lg:grid lg:grid-cols-5 lg:gap-5 xl:gap-6 lg:overflow-visible lg:p-0 lg:m-0 items-stretch"
+    >
+      {#each stages as stage (stage.step)}
+        <div
+          class="stage-col group flex flex-col justify-between shrink-0 w-[78vw] sm:w-[280px] lg:w-auto snap-center"
+        >
+          <div>
+            <!-- Media Window: Architectural portrait frame with subtle hover scale -->
+            <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-white border border-brand-dark/10 shadow-xs mb-5">
               <img
                 src={stage.image}
-                alt="{stage.title} portrait view"
-                class="absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-out pointer-events-none {activeStageIndex === idx
-                  ? 'opacity-100 z-10'
-                  : 'opacity-0 z-0'}"
+                alt="{stage.title} post-production step"
+                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 loading="lazy"
                 decoding="async"
               />
-            {/each}
+            </div>
 
-            <!-- Contrast label for the active production stage -->
-            <div
-              class="pointer-events-none absolute top-4 left-4 z-30 inline-flex items-center rounded-xl border border-white/25 bg-brand-dark/50 px-3.5 py-1.5 text-brand-light backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-all duration-300"
-            >
-              <span class="font-sans text-xs font-medium tracking-tight text-white">
-                {stages[activeStageIndex].badge}
+            <!-- Step Index + Badge -->
+            <div class="flex items-baseline justify-between gap-2 mb-2">
+              <span class="font-mono text-xs font-bold {stage.step === '05' ? 'text-brand-green' : 'text-brand-dark/40'} tracking-wider">
+                {stage.step} //
+              </span>
+              <span class="font-mono text-[0.65rem] uppercase tracking-wider text-brand-dark/45 font-medium">
+                {stage.badge}
               </span>
             </div>
+
+            <!-- Stage Title -->
+            <h3 class="font-display text-xl lg:text-[1.35rem] font-normal leading-tight tracking-tight text-brand-dark mb-2.5">
+              {stage.title}
+            </h3>
+
+            <!-- Clean, Concise Craft Description -->
+            <p class="text-xs text-brand-dark/65 leading-relaxed font-normal">
+              {stage.desc}
+            </p>
           </div>
         </div>
-
-        <!-- Mobile/Tablet Interactive Stepper Controls (Directly below preview card) -->
-        <div class="mt-5 flex items-center justify-between w-[280px] sm:w-[360px] max-w-[calc(100vw-3rem)] lg:hidden bg-white px-3 py-2 rounded-2xl border border-brand-dark/10 shadow-xs">
-          <button
-            type="button"
-            onclick={prevStage}
-            aria-label="View previous stage"
-            class="flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-brand-dark/70 hover:text-brand-green py-1.5 px-2.5 rounded-lg hover:bg-brand-dark/5 transition-colors cursor-pointer active:scale-95"
-          >
-            <ChevronLeft class="size-4 text-brand-green" />
-            <span>Prev</span>
-          </button>
-
-          <!-- Stage indicator text -->
-          <div class="flex items-center gap-1.5 font-mono text-xs font-semibold text-brand-dark">
-            <span class="text-brand-green">{stages[activeStageIndex].step}</span>
-            <span class="text-brand-dark/30">/</span>
-            <span>05</span>
-          </div>
-
-          <button
-            type="button"
-            onclick={nextStage}
-            aria-label="View next stage"
-            class="flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-brand-dark/70 hover:text-brand-green py-1.5 px-2.5 rounded-lg hover:bg-brand-dark/5 transition-colors cursor-pointer active:scale-95"
-          >
-            <span>Next</span>
-            <ChevronRight class="size-4 text-brand-green" />
-          </button>
-        </div>
-      </div>
-
-      <!-- Right Column: Editorial Narrative & Steps List (Columns 6-12) -->
-      <div class="w-full lg:col-span-7 flex flex-col justify-center process-fade-item lg:pl-4 xl:pl-8">
-        <!-- Desktop Title & Intro (Hidden on mobile) -->
-        <div class="hidden lg:block mb-7">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-brand-dark/50 font-semibold block mb-2">
-            Inspection Craft
-          </span>
-          <h2 class="font-display text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.65rem] font-normal text-brand-dark leading-[1.12] tracking-tight mb-3 max-w-[22ch]">
-            From Studio RAW to <em class="font-display italic font-normal text-brand-green">Campaign Master.</em>
-          </h2>
-          <p class="text-sm sm:text-base text-brand-dark/75 leading-relaxed font-normal max-w-lg">
-            Behind every high-fashion campaign asset lies rigorous multi-pass digital craft. Hover or click each phase to inspect how raw captures evolve into publication-ready masters.
-          </p>
-        </div>
-
-        <!-- Interactive Steps with Sliding Vertical Indicator Rail -->
-        <div class="relative flex gap-3.5 sm:gap-4 items-stretch w-full max-w-xl">
-          <!-- Rail Indicator (Tracks Active Step) -->
-          <div class="relative hidden w-[3px] rounded-full bg-brand-dark/10 sm:block overflow-hidden my-1.5 shrink-0">
-            <div
-              class="absolute left-0 w-full rounded-full bg-brand-green transition-all duration-300 ease-out"
-              style="top: {(activeStageIndex / stages.length) * 100}%; height: {100 / stages.length}%;"
-            ></div>
-          </div>
-
-          <!-- Step Buttons List -->
-          <div class="flex-1 flex flex-col gap-2" role="tablist" aria-label="Production stages">
-            {#each stages as stage, idx (stage.step)}
-              {@const isActive = activeStageIndex === idx}
-              <button
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                tabindex="0"
-                onmouseenter={() => (activeStageIndex = idx)}
-                onclick={() => (activeStageIndex = idx)}
-                onkeydown={(e) => onKeyDown(e, idx)}
-                class="group flex flex-col text-left py-3 px-4 sm:px-5 rounded-xl transition-all duration-200 cursor-pointer {isActive
-                  ? 'bg-white shadow-sm border border-brand-dark/10 translate-x-1'
-                  : 'hover:bg-white/50 hover:translate-x-1 border border-transparent'}"
-              >
-                <div class="flex items-start gap-3.5 sm:gap-4 w-full">
-                  <span
-                    class="font-display text-xl sm:text-2xl font-light leading-none select-none transition-colors duration-200 pt-0.5 shrink-0 w-7 {isActive
-                      ? 'text-brand-green font-normal'
-                      : 'text-brand-dark/25 group-hover:text-brand-dark/60'}"
-                  >
-                    {stage.step}
-                  </span>
-                  <div class="flex-1 min-w-0">
-                    <h3 class="font-display text-base sm:text-lg font-normal text-brand-dark leading-snug">
-                      {stage.title}
-                    </h3>
-                    {#if isActive}
-                      <p class="mt-1.5 text-xs sm:text-sm text-brand-dark/70 leading-relaxed font-normal">
-                        {stage.desc}
-                      </p>
-                    {/if}
-                  </div>
-                </div>
-              </button>
-            {/each}
-          </div>
-        </div>
-      </div>
+      {/each}
     </div>
   </div>
 </section>

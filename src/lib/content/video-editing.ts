@@ -96,6 +96,23 @@ export interface VideoDeliveryStandard {
   }[];
 }
 
+export interface VideoWallItem {
+  id: string;
+  title: string;
+  category: string;
+  videoSrc: string;
+  poster?: string;
+}
+
+export interface VideoWallData {
+  id: string;
+  heading: string;
+  viewAllLabel: string;
+  viewAllHref: string;
+  featured: VideoWallItem;
+  items: VideoWallItem[];
+}
+
 export interface VideoEditingPageData {
   seo: {
     title: string;
@@ -106,6 +123,7 @@ export interface VideoEditingPageData {
   grading: VideoColorGradingData;
   social: VideoSocialCutdownsData;
   aiGeneration: VideoAiGenerationData;
+  wall: VideoWallData;
   workflow: VideoWorkflowStep[];
   standards: VideoDeliveryStandard[];
   faqs: FaqItem[];
@@ -254,6 +272,58 @@ export const videoEditingPageData: VideoEditingPageData = {
         title: "Matching Colors",
         description:
           "Color-balancing generated video clips in DaVinci Resolve so they blend seamlessly with real live-action footage.",
+      },
+    ],
+  },
+
+  wall: {
+    id: "video-ai-wall",
+    heading: "AI Video Generation.",
+    viewAllLabel: "View all 200+ projects",
+    viewAllHref: "/portfolio",
+    featured: {
+      id: "featured-campaign",
+      title: "Commercial Campaign",
+      category: "Fashion Editorial",
+      videoSrc: "/images/video-editing/Create_fashion_campaign_video_1080p_20261001180912.mp4",
+      poster: "/images/about/orbit/ai-video-editing.jpg",
+    },
+    items: [
+      {
+        id: "wall-item-1",
+        title: "Activewear Studio Motion",
+        category: "Sport & Lifestyle",
+        videoSrc: "/images/video-editing/Fashion_model_in_sunlight_20261001165857.mp4",
+      },
+      {
+        id: "wall-item-2",
+        title: "Autumn Editorial Montage",
+        category: "Runway & Haute Couture",
+        videoSrc: "/images/video-editing/Fashion_editorial_montage_creation_1080p_20261001180512.mp4",
+      },
+      {
+        id: "wall-item-3",
+        title: "Fashion Reel Portrait",
+        category: "Model Portfolio",
+        videoSrc: "/images/video-editing/Woman_turning_in_fashion_reel_20261001165845.mp4",
+      },
+      {
+        id: "wall-item-4",
+        title: "Botanical Skincare Motion",
+        category: "Cosmetics & Packaging",
+        videoSrc: "/images/video-editing/Cosmetic_jar_with_floating_gummies_20261001165911.mp4",
+      },
+      {
+        id: "wall-item-5",
+        title: "Resort Collection Film",
+        category: "Menswear E-Commerce",
+        videoSrc: "/images/video-editing/Fashion_e-commerce_film_production_1080p_20261001185052.mp4",
+      },
+      {
+        id: "wall-item-6",
+        title: "High Jewelry & Fragrance",
+        category: "Luxury Campaign",
+        videoSrc: "/images/video-editing/Model_holding_perfume_bottle_20261001165916.mp4",
       },
     ],
   },

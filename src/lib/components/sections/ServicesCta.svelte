@@ -72,7 +72,7 @@
   bind:this={section}
   id={data ? "service-detail-cta" : "services-cta"}
   aria-labelledby={data ? "service-detail-cta-title" : "services-cta-title"}
-  class="relative overflow-hidden bg-brand-light py-18 text-brand-dark sm:py-20 lg:py-24"
+  class="relative overflow-hidden bg-brand-light py-10 text-brand-dark sm:py-12 lg:py-14"
 >
   <div
     class="services-cta-orbit pointer-events-none absolute -right-[14rem] -top-[18rem] h-[42rem] w-[42rem] rounded-full border border-brand-green/30"

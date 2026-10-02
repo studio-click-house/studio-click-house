@@ -81,66 +81,16 @@
               clearProps: "all",
             })
             .from(
-              ".services-hero-media",
-              {
-                autoAlpha: 0,
-                scale: 0.96,
-                y: 32,
-                duration: 1.05,
-                transformOrigin: "center bottom",
-                clearProps: "all",
-              },
-              "-=0.72",
-            )
-            .from(
               ".services-hero-meta",
               {
                 autoAlpha: 0,
-                y: 20,
-                duration: 0.72,
-                stagger: 0.07,
+                y: 18,
+                duration: 0.65,
+                stagger: 0.06,
                 clearProps: "all",
               },
-              "-=0.68",
+              "-=0.55",
             );
-
-          // Desktop-only parallax scrub for smooth touch scrolling on mobile & iPad
-          media.add("(min-width: 1024px)", () => {
-            gsap.to(".services-hero-scroll-media", {
-              yPercent: 8,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroSection,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-
-            gsap.to(".services-hero-text-motion", {
-              y: -54,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroSection,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-
-            gsap.to(".services-hero-media-row", {
-              y: -20,
-              scale: 0.98,
-              transformOrigin: "center bottom",
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroSection,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-          });
         });
 
         return () => media.revert();

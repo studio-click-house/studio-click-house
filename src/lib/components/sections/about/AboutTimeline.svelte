@@ -98,11 +98,11 @@
   id="our-journey"
   aria-label="Our Journey Timeline"
   bind:this={sectionRef}
-  class="relative overflow-hidden border-y border-brand-dark/15 bg-brand-light py-24 md:py-36"
+  class="relative overflow-hidden border-y border-brand-dark/15 bg-brand-light py-12 sm:py-14 lg:py-16"
 >
   <div class="site-shell">
     <!-- Header -->
-    <div class="mb-16 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-24">
+    <div class="mb-10 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-14">
       <div class="lg:col-span-8">
         <p class="eyebrow mb-3 text-brand-dark/50">
           {$_("sectionLabels.journey")}

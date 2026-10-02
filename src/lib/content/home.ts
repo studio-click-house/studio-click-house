@@ -290,24 +290,6 @@ export const serviceShowcases: ServiceShowcase[] = [
 
 export const workGalleryItems: WorkGalleryItem[] = [
   {
-    id: "product-finishing",
-    category: "Product finishing",
-    title: "Shape, light, and a clean final frame.",
-    description:
-      "A considered product image keeps its material and lighting believable while removing visual distractions.",
-    tags: ["Product", "Retouching"],
-    media: previewMedia.perfumeStillLife,
-  },
-  {
-    id: "beauty-detail",
-    category: "Beauty detail",
-    title: "Texture stays present. Distraction falls away.",
-    description:
-      "Focused finishing balances skin detail, tone, and the intended character of the portrait.",
-    tags: ["Beauty", "High-end"],
-    media: previewMedia.studioPortrait,
-  },
-  {
     id: "fashion-color",
     category: "Fashion color",
     title: "Color decisions that belong to the full story.",
@@ -558,12 +540,14 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     ],
     bgColor: "var(--color-brand-light)",
     media: {
-      kind: "image",
-      src: "/images/3d-modeling/Wireframe%20Clay%20Sneaker%20Render.png",
-      alt: "Wireframe clay render of a sneaker",
-      width: 1122,
-      height: 1402,
+      kind: "video",
+      src: "/images/video-editing/Cosmetic_jar_with_floating_gummies_20261001165911.mp4",
+      poster: "/images/portfolio/3d-cgi-showcase-v2.webp",
+      alt: "Photorealistic 3D cosmetic jar CGI animation with floating gummies",
+      width: 1920,
+      height: 1080,
       credit: "Studio Click House",
+      objectPosition: "center",
     },
     href: "/services",
   },

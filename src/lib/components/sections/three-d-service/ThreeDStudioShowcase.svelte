@@ -310,7 +310,7 @@
   bind:this={showcaseSection}
   id="threed-studio-showcase"
   aria-labelledby="threed-showcase-title"
-  class="relative isolate overflow-hidden bg-brand-light text-brand-dark transition-colors duration-300 py-16 sm:py-24"
+  class="relative isolate overflow-hidden bg-brand-light text-brand-dark transition-colors duration-300 py-12 sm:py-16"
 >
   <!-- Ambient Backdrop Glow -->
   <div
@@ -326,12 +326,12 @@
     <div class="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Copy & Actions (lg:col-span-5) -->
       <div class="space-y-6 lg:col-span-5">
-        <p class="eyebrow mb-3 text-brand-dark/50">
+        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
           {$_("sectionLabels.threeD")}
         </p>
         <h2
           id="threed-showcase-title"
-          class="threed-showcase-title font-display text-[clamp(2.2rem,3.8vw,4rem)] leading-[0.98] tracking-[-0.038em] font-bold text-brand-dark pb-1"
+          class="threed-showcase-title max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark pb-1"
         >
           <span class="block">{data.title}</span>
           <span class="block text-brand-green font-light italic mt-1.5 sm:mt-2">
@@ -339,7 +339,7 @@
           </span>
         </h2>
 
-        <p class="threed-showcase-lead max-w-[46ch] text-base leading-relaxed text-brand-dark/75 sm:text-lg sm:leading-relaxed">
+        <p class="threed-showcase-lead max-w-[38ch] text-sm sm:text-base leading-relaxed text-brand-dark/65">
           {data.description}
         </p>
 

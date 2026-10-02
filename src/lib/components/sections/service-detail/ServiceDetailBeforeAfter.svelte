@@ -88,7 +88,7 @@
   bind:this={section}
   id={sectionId}
   aria-labelledby={headingId}
-  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden py-12 text-brand-dark sm:py-14 lg:py-16"
 >
   <div class="site-shell relative z-10">
     {#if data.layout === "cards"}

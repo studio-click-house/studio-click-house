@@ -11,7 +11,7 @@
 
 <section
   id="upcoming-event"
-  class="bg-brand-paper py-16 text-brand-dark sm:py-20 lg:py-24"
+  class="bg-brand-paper py-10 text-brand-dark sm:py-12 lg:py-14"
 >
   <div class="site-shell">
     <div class="grid gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">

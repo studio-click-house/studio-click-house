@@ -74,7 +74,7 @@
   id="closing-cta"
   aria-label="Closing Call to Action"
   bind:this={sectionRef}
-  class="relative overflow-hidden border-t border-brand-dark/20 bg-brand-paper py-16 sm:py-24 md:py-32"
+  class="relative overflow-hidden border-t border-brand-dark/20 bg-brand-paper py-12 sm:py-14 lg:py-16"
 >
   <div
     class="closing-focus-ring pointer-events-none absolute -right-[18rem] -top-[18rem] aspect-square w-[46rem] rounded-full border border-brand-dark/12"

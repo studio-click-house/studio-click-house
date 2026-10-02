@@ -27,7 +27,7 @@
 
 <section
   id="event-archive"
-  class="relative overflow-hidden bg-brand-paper py-20 text-brand-dark sm:py-28 lg:py-36"
+  class="relative overflow-hidden bg-brand-paper py-12 text-brand-dark sm:py-14 lg:py-16"
 >
   <div class="site-shell">
     <!-- Editorial Header with Index Metadata -->

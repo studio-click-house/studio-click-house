@@ -72,7 +72,7 @@
   bind:this={section}
   id="service-detail-features"
   aria-labelledby="service-detail-features-title"
-  class="relative isolate overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden bg-brand-light py-12 text-brand-dark sm:py-14 lg:py-16"
 >
   <div class="site-shell relative z-10">
     <!-- Split Header matching reference -->

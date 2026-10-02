@@ -32,7 +32,7 @@
 <section
   id="pricing-assurances"
   aria-labelledby="pricing-assurances-title"
-  class="relative overflow-hidden bg-brand-dark py-16 sm:py-24 lg:py-32 text-brand-light"
+  class="relative overflow-hidden bg-brand-dark py-12 sm:py-14 lg:py-16 text-brand-light"
 >
   <div class="site-shell">
     <div class="grid gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-16">

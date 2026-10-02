@@ -287,25 +287,25 @@
 <section
   bind:this={sectionElement}
   id={data.id}
-  class="relative isolate overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-28"
+  class="relative isolate overflow-hidden bg-brand-light py-12 text-brand-dark sm:py-16"
 >
   <div class="site-shell relative z-10">
     <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Service Details & Deliverables -->
       <div class="turntable-reveal space-y-6 lg:col-span-5">
-        <div class="font-mono text-xs uppercase tracking-wider text-brand-dark/50 font-bold">
+        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
           03 / E-Commerce 3D
-        </div>
+        </p>
 
-        <h2 class="font-display text-[var(--text-feature-heading)] leading-[1.15] tracking-[-0.03em] font-bold text-brand-dark pb-0.5">
+        <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
           {data.heading}
         </h2>
 
-        <p class="text-base leading-relaxed text-brand-dark/75 sm:text-lg sm:leading-relaxed">
+        <p class="max-w-[38ch] text-sm sm:text-base leading-relaxed text-brand-dark/65">
           {data.leadParagraph}
         </p>
 
-        <p class="text-sm text-brand-dark/70 leading-relaxed">
+        <p class="max-w-[38ch] text-xs sm:text-sm leading-relaxed text-brand-dark/65">
           {data.bodyParagraph}
         </p>
 

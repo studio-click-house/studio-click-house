@@ -70,7 +70,7 @@
   bind:this={section}
   id="services-standards"
   aria-labelledby="services-standards-title"
-  class="relative overflow-hidden bg-brand-light py-16 text-brand-dark sm:py-20 lg:py-24"
+  class="relative overflow-hidden bg-brand-light py-10 text-brand-dark sm:py-12 lg:py-14"
 >
   <div class="site-shell">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">

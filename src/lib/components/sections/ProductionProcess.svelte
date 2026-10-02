@@ -45,12 +45,10 @@
       icon: PhoneCall,
       description:
         "Direct consultation to review your brand visual identity, lighting preferences, monthly image volume, and required delivery timelines.",
-      sla: "Same-Day Response SLA",
-      specs: [
-        { label: "Response Window", value: "Within 2–4 Business Hours" },
-        { label: "Consultation", value: "Dedicated Creative Producer" },
-        { label: "Project Intake", value: "Brand Guide & Style Brief" },
-        { label: "Volume Scoping", value: "Flexible Monthly Batch Planning" },
+      highlights: [
+        "Dedicated creative producer assigned within 2–4 business hours",
+        "Review brand guide, visual standards, lighting & monthly volume",
+        "Same-day response SLA with flexible monthly batch planning",
       ],
       image: homeWorkImage(
         "/images/home/step-01-outreach.webp",
@@ -68,12 +66,10 @@
       icon: FileEdit,
       description:
         "Send 1–3 benchmark images. We produce a complimentary sample retouch to your exact guidelines so you can evaluate our craft before committing.",
-      sla: "12–24h Turnaround SLA",
-      specs: [
-        { label: "Evaluation Cost", value: "100% Free · No Obligation" },
-        { label: "Sample Scope", value: "1–3 High-Res RAW or TIFF Files" },
-        { label: "Deliverables", value: "Full-Res Proof & Layered PSD" },
-        { label: "Refinement", value: "Tailored Adjustments to Sign-Off" },
+      highlights: [
+        "Complimentary sample test retouch on 1–3 benchmark images",
+        "100% free with no obligation to evaluate craft and consistency",
+        "Full-resolution proof and layered PSD with tailored adjustments",
       ],
       image: homeWorkImage(
         "/images/home/step-02-test-edit.webp",
@@ -91,12 +87,10 @@
       icon: ShieldCheck,
       description:
         "We execute bilateral NDAs, document your locked visual benchmarks, agree on volume pricing, and provision your dedicated studio account manager.",
-      sla: "24h Account Setup SLA",
-      specs: [
-        { label: "Confidentiality", value: "Bilateral NDA Executed" },
-        { label: "Visual Standards", value: "Locked Style & Color Guide" },
-        { label: "Account Lead", value: "Dedicated Project Manager" },
-        { label: "Direct Channel", value: "Slack, Microsoft Teams or Email" },
+      highlights: [
+        "Bilateral NDA executed and confidential asset handling confirmed",
+        "Documented visual benchmarks and locked color grading profiles",
+        "Direct studio communication via dedicated Slack, Teams or email",
       ],
       image: homeWorkImage(
         "/images/home/step-03-onboarding.webp",
@@ -114,12 +108,10 @@
       icon: Upload,
       description:
         "Upload source shoots and batch briefs via Dropbox, Google Drive, WeTransfer, OneDrive, or private FTP. Our intake team confirms file integrity immediately.",
-      sla: "Immediate Ingest Confirmation",
-      specs: [
-        { label: "Transfer Desk", value: "Dropbox, Drive, WeTransfer & FTP" },
-        { label: "File Audit", value: "Checksum & Resolution Verification" },
-        { label: "Supported Formats", value: "RAW, TIFF, PSD, AI, PNG" },
-        { label: "Studio Capacity", value: "5,000+ Assets Daily Capacity" },
+      highlights: [
+        "Secure upload via Dropbox, Google Drive, WeTransfer, OneDrive or FTP",
+        "Automated checksum and resolution audit verifying file integrity",
+        "5,000+ daily asset ingestion capacity across RAW, TIFF, PSD and PNG",
       ],
       image: homeWorkImage(
         "/images/home/step-04-handover.webp",
@@ -137,12 +129,10 @@
       icon: PenTool,
       description:
         "Certified retouchers work 24/7 across dedicated dual shifts on calibrated hardware, strictly following your approved batch briefs and color profiles.",
-      sla: "24/7 Production Coverage",
-      specs: [
-        { label: "Production Floor", value: "24/7 Dedicated Dual Shifts" },
-        { label: "Retouch Technique", value: "Sub-Pixel Pen Tool Masking" },
-        { label: "Hardware Displays", value: "Color-Calibrated EIZO Monitors" },
-        { label: "Artist Teams", value: "Specialized Discipline Retouchers" },
+      highlights: [
+        "24/7 dedicated dual shifts on color-calibrated EIZO monitors",
+        "Sub-pixel pen tool masking, meticulous skin texture & tone matching",
+        "Specialized discipline artists assigned strictly by project category",
       ],
       image: homeWorkImage(
         "/images/home/step-05-production.webp",
@@ -160,12 +150,10 @@
       icon: CheckCircle2,
       description:
         "Every asset passes our 5-Step Quality Control: technical file audit, task brief confirmation, and senior artist inspection at 100% zoom for edge fidelity.",
-      sla: "Zero-Defect Quality Guarantee",
-      specs: [
-        { label: "Inspection Zoom", value: "100% Pixel-Level Review" },
-        { label: "Technical Checks", value: "Color Profiles, Bleed & Curves" },
-        { label: "Mask Precision", value: "Edge Cleanliness & Natural Grain" },
-        { label: "Sign-Off Approval", value: "Senior QC Lead & Master Retoucher" },
+      highlights: [
+        "100% pixel-level review checking edge fidelity and natural grain",
+        "Technical audit of color profiles, curves, clipping paths and bleed",
+        "Final sign-off approval by Senior QC Lead and Master Retoucher",
       ],
       image: homeWorkImage(
         "/images/home/step-06-qc.webp",
@@ -183,12 +171,10 @@
       icon: PackageCheck,
       description:
         "Color-profiled web and print masters are delivered via secure cloud channels. Any requested adjustments receive immediate priority, followed by consolidated monthly billing.",
-      sla: "Guaranteed On-Time Delivery",
-      specs: [
-        { label: "Master Release", value: "Web & Print Color-Profiled Files" },
-        { label: "Revision Policy", value: "Priority Same-Day Adjustments" },
-        { label: "Packaging", value: "Organized Multi-SKU Archives" },
-        { label: "Invoicing", value: "Consolidated Monthly Invoicing" },
+      highlights: [
+        "Color-profiled web and print master files in organized archives",
+        "Priority same-day adjustments for any requested fine-tuning",
+        "Consolidated monthly invoicing with transparent batch tracking",
       ],
       image: homeWorkImage(
         "/images/home/step-07-delivery.webp",
@@ -414,7 +400,7 @@
   id="production-process"
   bind:this={section}
   aria-labelledby="production-process-title"
-  class="process-section overflow-hidden bg-brand-light text-brand-dark py-8 sm:py-10 md:py-12 lg:py-14 min-h-screen flex flex-col justify-center"
+  class="process-section overflow-hidden bg-brand-light text-brand-dark py-10 sm:py-12 lg:py-14"
 >
   <div class="site-shell process-shell">
     <div
@@ -443,22 +429,15 @@
           </p>
         </div>
 
-        <!-- Integrated Stage Specifications Spec Grid (No green dot, no green text) -->
-        <div class="process-specs-integrated" aria-hidden="true">
-          <div class="specs-editorial-top">
-            <span class="specs-editorial-heading">Stage Specifications</span>
-            <span class="specs-sla-text">{processSteps[activeIndex].sla}</span>
-          </div>
-
-          <div class="specs-editorial-rows">
-            {#each processSteps[activeIndex].specs as item}
-              <div class="specs-editorial-row">
-                <span class="specs-editorial-label">{item.label}</span>
-                <span class="specs-editorial-value">{item.value}</span>
-              </div>
-            {/each}
-          </div>
-        </div>
+        <!-- Clean Stage Highlights (No divider lines, clean green dots) -->
+        <ul class="process-highlights-list" aria-label="Stage highlights">
+          {#each processSteps[activeIndex].highlights as point}
+            <li class="process-highlight-item">
+              <span class="process-highlight-dot" aria-hidden="true"></span>
+              <span class="process-highlight-text">{point}</span>
+            </li>
+          {/each}
+        </ul>
       </div>
 
       <!-- Right: Single 4:5 Aspect Ratio Image With Zero Border -->
@@ -672,64 +651,37 @@
     color: color-mix(in srgb, var(--color-brand-dark) 80%, transparent);
   }
 
-  /* Integrated Stage Protocols (Clean Luxury Specs) */
-  .process-specs-integrated {
-    position: relative;
-    padding-top: 1.15rem;
-    border-top: 1px solid color-mix(in srgb, var(--color-brand-dark) 10%, transparent);
+  /* Clean Stage Highlights (No Dividers, Green Dots) */
+  .process-highlights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-top: 1.35rem;
+    padding: 0;
+    list-style: none;
     max-width: 36rem;
   }
 
-  .specs-editorial-top {
+  .process-highlight-item {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.65rem;
+    align-items: baseline;
+    gap: 0.75rem;
   }
 
-  .specs-editorial-heading {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: color-mix(in srgb, var(--color-brand-dark) 55%, transparent);
+  .process-highlight-dot {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 9999px;
+    background-color: var(--color-brand-green);
+    flex-shrink: 0;
+    transform: translateY(-0.1rem);
   }
 
-  .specs-sla-text {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
-  }
-
-  .specs-editorial-rows {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.65rem 1.6rem;
-  }
-
-  .specs-editorial-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-brand-dark) 7%, transparent);
-  }
-
-  .specs-editorial-label {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    color: color-mix(in srgb, var(--color-brand-dark) 50%, transparent);
-  }
-
-  .specs-editorial-value {
-    font-size: 0.84rem;
-    font-weight: 500;
-    color: var(--color-brand-dark);
-    line-height: 1.35;
+  .process-highlight-text {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--color-brand-dark) 85%, transparent);
+    font-weight: 400;
   }
 
   /* Right 4:5 Single Image Card */
@@ -797,11 +749,6 @@
 
     .process-editorial-block {
       max-width: 100%;
-    }
-
-    .specs-editorial-rows {
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
     }
 
     .process-image-card {

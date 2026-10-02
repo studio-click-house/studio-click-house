@@ -100,7 +100,7 @@
   id="portfolio-showreel-video"
   bind:this={showreelSection}
   aria-label="Studio Video Showreel"
-  class="relative w-full overflow-hidden bg-brand-light pt-8 pb-20 lg:pt-12 lg:pb-28"
+  class="relative w-full overflow-hidden bg-brand-light pt-6 pb-12 lg:pt-8 lg:pb-16"
 >
   <div class="site-shell max-w-6xl mx-auto">
     <!-- Header -->

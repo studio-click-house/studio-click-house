@@ -15,9 +15,9 @@
 <section
   id="creative-marquee"
   aria-labelledby="creative-marquee-title"
-  class="client-wall relative -mt-px overflow-x-clip bg-brand-light section-space text-brand-dark"
+  class="client-wall relative -mt-px overflow-x-clip bg-brand-light py-10 sm:py-12 lg:py-14 text-brand-dark"
 >
-  <div class="site-shell relative z-10 mb-10 text-center">
+  <div class="site-shell relative z-10 mb-6 sm:mb-8 text-center">
     <div>
       <p class="eyebrow mb-3 text-brand-dark/50">
         {$_("sectionLabels.clients")}

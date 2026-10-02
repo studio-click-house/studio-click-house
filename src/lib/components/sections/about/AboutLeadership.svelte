@@ -186,10 +186,10 @@
   id="leadership-team"
   aria-label="Leadership Team"
   bind:this={sectionRef}
-  class="relative bg-brand-light py-20 md:py-32"
+  class="relative bg-brand-light py-12 sm:py-14 lg:py-16"
 >
   <div class="site-shell">
-    <div class="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end md:mb-16">
+    <div class="mb-8 flex flex-col justify-between gap-6 sm:flex-row sm:items-end md:mb-12">
       <div>
         {#if leadership.eyebrow}
           <span

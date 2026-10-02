@@ -93,11 +93,11 @@
   id="portfolio-glance-stats"
   bind:this={statsSection}
   aria-label="Studio at a Glance Statistics"
-  class="relative w-full bg-brand-light py-20 lg:py-32 overflow-hidden"
+  class="relative w-full bg-brand-light py-12 sm:py-14 lg:py-16 overflow-hidden"
 >
   <div class="site-shell max-w-5xl mx-auto flex flex-col items-center text-center">
     <!-- Centered Eyebrow -->
-    <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-10 block">
+    <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-6 sm:mb-8 block">
       {$_('portfolio.stats.eyebrow') || 'Verified Studio Metrics'}
     </span>
 

@@ -94,7 +94,7 @@
   id="about-description"
   bind:this={section}
   aria-labelledby="about-description-title"
-  class="relative overflow-hidden bg-brand-light pt-20 sm:pt-24 lg:pt-28 pb-10 sm:pb-12 lg:pb-14 text-brand-dark"
+  class="relative overflow-hidden bg-brand-light pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 text-brand-dark"
 >
   <div class="site-shell relative z-10">
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">

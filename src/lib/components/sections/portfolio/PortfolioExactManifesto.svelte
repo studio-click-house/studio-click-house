@@ -67,7 +67,7 @@
   id="portfolio-manifesto-quote"
   bind:this={manifestoSection}
   aria-label="Studio Creative Manifesto"
-  class="relative w-full bg-brand-light pt-16 pb-6 lg:pt-24 lg:pb-8 text-center"
+  class="relative w-full bg-brand-light pt-10 pb-4 lg:pt-14 lg:pb-6 text-center"
 >
   <div class="site-shell max-w-4xl mx-auto flex flex-col items-center">
     <span class="manifesto-anim-item font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-dark/50 mb-8 block">

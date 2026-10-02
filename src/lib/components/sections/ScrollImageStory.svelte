@@ -256,7 +256,7 @@
 
   <div class="ai-panel relative z-10 bg-brand-light">
     <div class="ai-panel-curve" aria-hidden="true"></div>
-    <div class="site-shell relative z-10 py-16 sm:py-20 lg:py-24">
+    <div class="site-shell relative z-10 py-10 sm:py-12 lg:py-16">
       <div class="ai-panel-intro ai-panel-copy">
         <p class="eyebrow mb-3 text-brand-dark/50">
           {$_("sectionLabels.photoToVideo")}

@@ -1,227 +1,177 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
+  import { onMount } from "svelte";
 
   let sectionElement = $state<HTMLElement | null>(null);
-  let activeTab = $state(0);
 
-  interface ServiceItem {
+  interface DisciplineItem {
     index: string;
-    label: string;
-    image: string;
+    title: string;
+    category: string;
     desc: string;
-    sla: string;
-    deliverables: string[];
-    fit: "cover" | "contain";
-    bg?: string;
+    videoSrc?: string;
+    imageSrc?: string;
+    poster?: string;
+    href: string;
   }
 
-  const services: ServiceItem[] = [
+  const disciplines: DisciplineItem[] = [
     {
       index: "01",
-      label: "Editorial Retouch",
-      image: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
-      desc: "High-end fashion retouching, beauty cleaning, and fabric sculpting for global lookbooks and editorial campaigns.",
-      sla: "12–24 Hours",
-      deliverables: [
-        "Campaign & High-End Fashion",
-        "Commercial & Catalog Cleaning",
-        "Anatomical & Fabric Sculpting",
-        "High-End Beauty & Portraiture",
-      ],
-      fit: "cover",
+      title: "Editorial Retouching",
+      category: "Fashion & Beauty",
+      desc: "High-end beauty and fashion campaigns refined with natural skin texture and couture fabric sculpting.",
+      imageSrc: "/images/services/model-beauty/beauty-editorial-glam-makeup-retouch-0969-after.webp",
+      href: "/services/model-beauty-retouching",
     },
     {
       index: "02",
-      label: "Vector Clipping",
-      image: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-01-after.webp",
-      desc: "Precision hand-drawn clipping paths and multipath masks for flawless background isolation and recoloring.",
-      sla: "6–12 Hours",
-      deliverables: [
-        "Single Path Vector Clipping",
-        "Multi-Path Layering & Masking",
-        "Background Erasure & PNGs",
-        "Contact Shadows & Reflections",
-      ],
-      fit: "contain",
-      bg: "bg-[#E8E8E8]",
+      title: "Commercial Video",
+      category: "Motion & Film",
+      desc: "Cinematic commercial edits, DaVinci Resolve color grading, and dynamic multi-platform cutdowns.",
+      videoSrc: "/images/video-editing/Fashion_editorial_montage_creation_1080p_20261001180512.mp4",
+      poster: "/images/about/orbit/ai-video-editing.jpg",
+      href: "/services/video-editing",
     },
     {
       index: "03",
-      label: "Color & Swatches",
-      image: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-colorblock-knit-cardigan-flatlay-after.webp",
-      desc: "Calibrating and shifting product colors for absolute brand accuracy and seamless SKU consistency.",
-      sla: "12–18 Hours",
-      deliverables: [
-        "Swatch & Color Target Matching",
-        "Cross-SKU Color Consistency",
-        "Product Color Changing",
-        "Metallic & Sheen Enhancement",
-      ],
-      fit: "contain",
-      bg: "bg-[#FAF8F4]",
+      title: "3D CGI & Staging",
+      category: "Virtual Product",
+      desc: "Photorealistic 3D product modeling, ray-traced studio lighting, and virtual environments without physical samples.",
+      videoSrc: "/images/video-editing/Cosmetic_jar_with_floating_gummies_20261001165911.mp4",
+      poster: "/images/portfolio/3d-cgi-showcase-v2.webp",
+      href: "/services/3d-product-modeling",
     },
     {
       index: "04",
-      label: "3D CGI & Scopes",
-      image: "/images/portfolio/3d-cgi-showcase-v2.webp",
-      desc: "Bespoke 3D CGI product modeling, photorealistic rendering, wireframe visualization, and advanced luxury compositing.",
-      sla: "24–48 Hours",
-      deliverables: [
-        "3D Mesh & Wireframe Modeling",
-        "Photorealistic CGI Rendering",
-        "Glass, Caustics & Refractions",
-        "Macro Jewelry & Luxury Bottles",
-      ],
-      fit: "cover",
-      bg: "bg-[#050505]",
+      title: "Catalog & Paths",
+      category: "High-Volume E-Commerce",
+      desc: "Industrial catalog production, hand-drawn vector clipping paths, ghost mannequin, and calibrated colorways.",
+      imageSrc: "/images/services/bags-accessories/accessories-quinn-metallic-gold-bag-01-after.webp",
+      href: "/services/ecommerce-retouching",
     },
   ];
 
-  let current = $derived(services[activeTab]);
-
-  $effect(() => {
-    if (!sectionElement) return;
+  onMount(() => {
     let active = true;
-    let context: { revert: () => void } | undefined;
+    let ctx: { revert: () => void } | undefined;
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !sectionElement) return;
       const { gsap } = runtime;
 
-      context = gsap.context(() => {
-        const media = gsap.matchMedia();
-        media.add(
-          {
-            isDesktop: "(min-width: 1024px)",
-            isTablet: "(min-width: 768px) and (max-width: 1023px)",
-            isMobile: "(max-width: 767px)",
-            reduceMotion: "(prefers-reduced-motion: reduce)",
-          },
-          (context) => {
-            const { isDesktop, isTablet, reduceMotion } = context.conditions!;
-            if (reduceMotion) {
-              gsap.set(".matrix-anim-target", { autoAlpha: 1, y: 0 });
-              return;
-            }
-
-            const yOffset = isDesktop ? 36 : isTablet ? 28 : 38;
-            const duration = isDesktop ? 0.85 : isTablet ? 0.75 : 0.75;
-            const startTrigger = isDesktop ? "top 78%" : isTablet ? "top 80%" : "top 78%";
-
-            gsap.from(".matrix-anim-target", {
-              y: yOffset,
-              scale: 0.98,
-              autoAlpha: 0,
-              duration,
-              ease: isDesktop ? "power3.out" : "power2.out",
-              clearProps: "transform,opacity",
-              scrollTrigger: {
-                trigger: sectionElement,
-                start: startTrigger,
-                toggleActions: "play none none reverse",
-              },
-            });
-          }
-        );
-        return () => media.revert();
+      ctx = gsap.context(() => {
+        const mm = gsap.matchMedia();
+        mm.add("(prefers-reduced-motion: no-preference)", () => {
+          gsap.from(".discipline-col", {
+            y: 32,
+            autoAlpha: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            clearProps: "all",
+            scrollTrigger: {
+              trigger: sectionElement,
+              start: "top 80%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          });
+        });
       }, sectionElement);
     });
 
     return () => {
       active = false;
-      context?.revert();
+      ctx?.revert();
     };
   });
 </script>
 
 <section
-  id="portfolio-tabbed-matrix"
+  id="portfolio-disciplines"
   bind:this={sectionElement}
-  aria-label="Disciplines and Deliverables Catalog"
-  class="relative w-full bg-brand-light py-20 lg:py-32"
+  aria-label="Studio Disciplines and Scopes"
+  class="relative w-full bg-brand-light py-14 sm:py-18 lg:py-24"
 >
   <div class="site-shell relative z-10">
     <!-- Editorial Section Header -->
-    <div class="matrix-anim-target max-w-3xl mb-10 lg:mb-14">
-      <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
-        {$_('portfolio.matrix.eyebrow') || 'Disciplines & Scopes'}
-      </span>
-      <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1.05] tracking-tight mb-4">
+    <div class="mb-12 sm:mb-16 lg:mb-20">
+      <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-3">
+        {$_('portfolio.matrix.eyebrow') || '06 / Disciplines & Scopes'}
+      </p>
+      <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark mb-4">
         {$_('portfolio.matrix.headingPart1') || 'How we enforce'} <span class="italic font-light text-brand-green">{$_('portfolio.matrix.headingPart2') || 'precision'}</span> {$_('portfolio.matrix.headingPart3') || 'at scale.'}
       </h2>
-      <p class="text-sm sm:text-base text-brand-dark/75 leading-relaxed font-normal">
-        {$_('portfolio.matrix.description') || 'Explore our primary disciplines spanning campaign fashion, e-commerce catalog production, and 3D CGI.'}
+      <p class="max-w-[44ch] text-sm sm:text-base text-brand-dark/65 leading-relaxed font-normal">
+        {$_('portfolio.matrix.description') || 'Explore our primary disciplines spanning campaign fashion retouching, commercial video motion, 3D CGI, and high-volume e-commerce production.'}
       </p>
     </div>
 
-    <!-- Clean Editorial Discipline Tabs (Horizontally scrollable on mobile) -->
-    <div class="matrix-anim-target flex overflow-x-auto no-scrollbar sm:flex-wrap gap-4 sm:gap-8 mb-8 sm:mb-10 border-b border-brand-dark/10 pb-3" role="tablist" aria-label="Discipline Tabs">
-      {#each services as item, index (item.index)}
-        <button
-          type="button"
-          role="tab"
-          id="discipline-tab-{index}"
-          aria-selected={activeTab === index}
-          aria-controls="discipline-panel-{index}"
-          onclick={() => (activeTab = index)}
-          class="flex items-center gap-2 pb-2 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer border-b-2 -mb-3 shrink-0 {activeTab === index ? 'border-brand-green text-brand-dark font-bold' : 'border-transparent text-brand-dark/50 hover:text-brand-dark'}"
-        >
-          <span class="text-brand-green">{item.index}</span>
-          <span>{item.label}</span>
-        </button>
-      {/each}
-    </div>
+    <!-- 4-Column Editorial Discipline Spread: Clean, focused, uncluttered -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-7 xl:gap-8 items-stretch">
+      {#each disciplines as item (item.index)}
+        <div class="discipline-col group flex flex-col justify-between">
+          <div>
+            <!-- Media Frame: Architectural portrait window with subtle hover glide -->
+            <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-brand-dark/5 mb-6 border border-brand-dark/10 shadow-xs">
+              {#if item.videoSrc}
+                <video
+                  src={item.videoSrc}
+                  poster={item.poster}
+                  playsinline
+                  loop
+                  muted
+                  autoplay
+                  preload="metadata"
+                  class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  aria-label="{item.title} video demonstration"
+                ></video>
+              {:else if item.imageSrc}
+                <img
+                  src={item.imageSrc}
+                  alt="{item.title} preview"
+                  class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              {/if}
+            </div>
 
-    <!-- Active Discipline Feature Showcase -->
-    <div
-      id="discipline-panel-{activeTab}"
-      role="tabpanel"
-      aria-labelledby="discipline-tab-{activeTab}"
-      class="matrix-anim-target grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white p-6 sm:p-8 lg:p-12 shadow-sm"
-    >
-      <!-- Visual Column (Clean, Perfectly Fitted Preview Frame) -->
-      <div class="lg:col-span-6 relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-square xl:aspect-[4/3] rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden {current.bg || 'bg-white'} border border-brand-dark/10 flex items-center justify-center {current.fit === 'cover' ? 'p-0' : 'p-6 sm:p-10'} shadow-2xs">
-        <img
-          src={current.image}
-          alt="{current.label} deliverable preview"
-          class="h-full w-full {current.fit === 'cover' ? 'object-cover object-center' : 'object-contain object-center'} transition-all duration-500"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+            <!-- Number + Category -->
+            <div class="flex items-baseline justify-between gap-2 mb-2.5">
+              <span class="font-mono text-xs font-bold text-brand-green tracking-wider">
+                {item.index} //
+              </span>
+              <span class="font-mono text-[0.68rem] uppercase tracking-wider text-brand-dark/45 font-medium">
+                {item.category}
+              </span>
+            </div>
 
-      <!-- Description & Deliverables Column -->
-      <div class="lg:col-span-6 flex flex-col justify-center">
-        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3 pb-3 border-b border-brand-dark/10">
-          <div class="flex items-baseline gap-2">
-            <span class="font-mono text-sm text-brand-green font-bold">{current.index} //</span>
-            <h3 class="font-display text-2xl sm:text-3xl lg:text-4xl font-normal text-brand-dark">
-              {current.label}
+            <!-- Title -->
+            <h3 class="font-display text-2xl lg:text-[1.65rem] font-normal leading-[1.1] tracking-tight text-brand-dark mb-3">
+              {item.title}
             </h3>
+
+            <!-- Clean, Concise Editorial Description -->
+            <p class="text-xs sm:text-sm text-brand-dark/65 leading-relaxed font-normal mb-6">
+              {item.desc}
+            </p>
           </div>
-          <span class="font-mono text-xs text-brand-dark/60 uppercase tracking-wider">
-            Turnaround: {current.sla}
-          </span>
-        </div>
 
-        <p class="text-sm sm:text-base text-brand-dark/75 leading-relaxed font-normal mb-8">
-          {current.desc}
-        </p>
-
-        <div class="pt-6 border-t border-brand-dark/10">
-          <span class="font-mono text-xs uppercase tracking-wider text-brand-dark/50 font-semibold block mb-4">
-            Production Deliverables
-          </span>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
-            {#each current.deliverables as del (del)}
-              <div>
-                <span class="text-xs sm:text-sm text-brand-dark/85 font-medium leading-tight">{del}</span>
-              </div>
-            {/each}
+          <!-- Direct Link with Hairline Rule -->
+          <div class="pt-3 border-t border-brand-dark/10">
+            <a
+              href={item.href}
+              class="group/link inline-flex items-center gap-1.5 text-xs font-semibold tracking-tight text-brand-dark hover:text-brand-green transition-colors"
+            >
+              <span>Explore discipline</span>
+              <span class="inline-block transition-transform duration-200 group-hover/link:translate-x-1" aria-hidden="true">&rarr;</span>
+            </a>
           </div>
         </div>
-      </div>
+      {/each}
     </div>
   </div>
 </section>

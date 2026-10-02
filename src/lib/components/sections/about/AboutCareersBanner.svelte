@@ -115,7 +115,7 @@
     </div>
 
     <div class="careers-banner-content flex items-center lg:order-1">
-      <div class="w-full px-5 py-20 sm:px-10 md:py-28 lg:px-[max(3rem,8vw)]">
+      <div class="w-full px-5 py-12 sm:px-10 md:py-16 lg:px-[max(3rem,8vw)]">
         <p class="eyebrow mb-3 text-brand-light/60">
           {$_("sectionLabels.careers")}
         </p>

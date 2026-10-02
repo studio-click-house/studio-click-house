@@ -20,7 +20,7 @@
 <section
   id="pricing-options"
   aria-labelledby="pricing-options-title"
-  class="relative border-b border-brand-dark/10 bg-brand-light py-16 sm:py-24 lg:py-32 text-brand-dark"
+  class="relative border-b border-brand-dark/10 bg-brand-light py-12 sm:py-14 lg:py-16 text-brand-dark"
 >
   <div class="site-shell">
     <header class="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">

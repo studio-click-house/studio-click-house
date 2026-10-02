@@ -256,7 +256,7 @@
     {#each divisions as division, divIdx (division.id)}
       <article
         id={division.id}
-        class="service-chapter grid gap-y-10 py-16 sm:py-18 lg:grid-cols-12 lg:items-center lg:gap-x-12 lg:py-16"
+        class="service-chapter grid gap-y-10 py-10 sm:py-12 lg:grid-cols-12 lg:items-center lg:gap-x-12 lg:py-12"
         data-reverse={division.reverse}
       >
         <div class="chapter-content">

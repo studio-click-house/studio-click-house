@@ -110,11 +110,11 @@
   bind:this={section}
   id="service-detail-intro"
   aria-labelledby="service-detail-intro-title"
-  class="relative isolate overflow-hidden bg-brand-light py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden bg-brand-light py-12 text-brand-dark sm:py-14 lg:py-16"
 >
   <div class="site-shell relative z-10">
     <!-- Centered Editorial Header: Title only -->
-    <div class="sd-intro-header mb-14 text-center sm:mb-18 lg:mb-20">
+    <div class="sd-intro-header mb-8 text-center sm:mb-10 lg:mb-12">
       <span
         class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50"
       >

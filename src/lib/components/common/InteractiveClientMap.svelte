@@ -187,7 +187,8 @@
   }
 
   .network-section {
-    padding-block: var(--space-section-lg, clamp(7rem, 11vw, 12rem));
+    padding-top: var(--space-section-lg, clamp(6rem, 9vw, 9rem));
+    padding-bottom: clamp(2.5rem, 4.5vw, 4.5rem);
   }
 
   @media (prefers-reduced-motion: reduce) {

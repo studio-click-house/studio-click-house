@@ -160,7 +160,7 @@
   id="about-studio-video"
   aria-label="Studio Click House Workspace Video"
   bind:this={sectionRef}
-  class="relative overflow-hidden py-12 md:py-20 bg-brand-light"
+  class="relative overflow-hidden py-8 sm:py-10 md:py-12 bg-brand-light"
 >
   <div class="site-shell">
     <div

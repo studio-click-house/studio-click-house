@@ -6,19 +6,82 @@
   import { stripTitlePunctuation } from "$lib/utils";
   import { _ } from "svelte-i18n";
 
-  let section: HTMLElement;
-  let heroVideo: HTMLVideoElement;
-  let isVideoReady = $state(false);
+  const heroVideos = [
+    "/images/video-editing/Fashion_website_hero_film_1080p_20261002180020.mp4",
+    "/images/video-editing/Fashion_models_walking_in_archit%E2%80%A6_20261002180448.mp4",
+  ];
 
-  function handleVideoCanPlay() {
-    isVideoReady = true;
+  let section: HTMLElement;
+  let videoEl0: HTMLVideoElement | undefined = $state();
+  let videoEl1: HTMLVideoElement | undefined = $state();
+  let activeVideoIndex = $state(0);
+  let isVideoReady = $state(true);
+  let isTransitioning = false;
+
+  function getVideo(index: number) {
+    return index === 0 ? videoEl0 : videoEl1;
+  }
+
+  function getAllVideos() {
+    return [videoEl0, videoEl1].filter(Boolean) as HTMLVideoElement[];
+  }
+
+  function handleVideoCanPlay(index: number) {
+    if (index === activeVideoIndex) {
+      isVideoReady = true;
+    }
+  }
+
+  function transitionToNextVideo() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    const nextIndex = (activeVideoIndex + 1) % heroVideos.length;
+    const nextVideo = getVideo(nextIndex);
+    const prevIndex = activeVideoIndex;
+    const prevVideo = getVideo(prevIndex);
+
+    if (nextVideo) {
+      nextVideo.muted = true;
+      nextVideo.defaultMuted = true;
+      nextVideo.playsInline = true;
+      nextVideo.currentTime = 0;
+      void nextVideo.play().catch(() => {});
+    }
+
+    activeVideoIndex = nextIndex;
+
+    // Smooth 1s crossfade, then pause previous video
+    setTimeout(() => {
+      if (prevVideo && activeVideoIndex !== prevIndex) {
+        prevVideo.pause();
+        prevVideo.currentTime = 0;
+      }
+      isTransitioning = false;
+    }, 1000);
+  }
+
+  function handleTimeUpdate(index: number) {
+    if (activeVideoIndex !== index || isTransitioning) return;
+    const v = getVideo(index);
+    if (!v || !v.duration || v.duration <= 1) return;
+    // Crossfade 0.7s before reaching the end of the clip for continuous motion
+    if (v.currentTime >= v.duration - 0.7) {
+      transitionToNextVideo();
+    }
+  }
+
+  function handleVideoEnded(index: number) {
+    if (activeVideoIndex === index) {
+      transitionToNextVideo();
+    }
   }
 
   onMount(() => {
     let context: { revert: () => void } | undefined;
     let active = true;
     let isHeroVisible = true;
-    let hasVideoIntent = false;
+    let hasVideoIntent = true;
     let isPreloaderComplete = !document.querySelector(".site-preloader");
     let isPreloaderExiting = isPreloaderComplete;
     let startHeroMotion: (() => void) | undefined;
@@ -26,26 +89,31 @@
       "(prefers-reduced-motion: reduce)",
     );
 
+    // Ensure muted DOM properties on both videos
+    getAllVideos().forEach((v) => {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+    });
+
     const startVideo = () => {
-      if (
-        !hasVideoIntent ||
-        !isPreloaderComplete ||
-        prefersReducedMotion.matches ||
-        !heroVideo
-      )
-        return;
-      heroVideo.preload = "auto";
-      if (heroVideo.readyState === HTMLMediaElement.HAVE_NOTHING) {
-        heroVideo.load();
+      if (!isPreloaderComplete || prefersReducedMotion.matches) return;
+
+      const activeVideo = getVideo(activeVideoIndex);
+      if (!activeVideo) return;
+      activeVideo.preload = "auto";
+      activeVideo.muted = true;
+      activeVideo.defaultMuted = true;
+      activeVideo.playsInline = true;
+      if (activeVideo.readyState === HTMLMediaElement.HAVE_NOTHING) {
+        activeVideo.load();
       }
-      void heroVideo
+      void activeVideo
         .play()
         .then(() => {
           if (active) isVideoReady = true;
         })
-        .catch(() => {
-          // The poster remains visible if browser autoplay policy blocks playback.
-        });
+        .catch(() => {});
     };
 
     const videoIntentEvents = [
@@ -72,7 +140,7 @@
     let videoObserver: IntersectionObserver | undefined;
 
     if (prefersReducedMotion.matches) {
-      heroVideo.pause();
+      getAllVideos().forEach((v) => v.pause());
     } else if ("IntersectionObserver" in window) {
       videoObserver = new IntersectionObserver(
         ([entry]) => {
@@ -82,7 +150,7 @@
             if (!isPreloaderComplete) return;
             startVideo();
           } else {
-            heroVideo.pause();
+            getAllVideos().forEach((v) => v.pause());
           }
         },
         { rootMargin: "160px 0px", threshold: 0.05 },
@@ -94,7 +162,7 @@
 
     const handleMotionPreferenceChange = () => {
       if (prefersReducedMotion.matches) {
-        heroVideo.pause();
+        getAllVideos().forEach((v) => v.pause());
         isVideoReady = false;
       } else if (isHeroVisible) {
         startVideo();
@@ -213,6 +281,7 @@
 
     return () => {
       active = false;
+      getAllVideos().forEach((v) => v.pause());
       videoObserver?.disconnect();
       prefersReducedMotion.removeEventListener(
         "change",
@@ -239,61 +308,65 @@
   bind:this={section}
   class="relative min-h-[100dvh] overflow-hidden bg-brand-dark text-brand-light"
 >
-  <div class="hero-media absolute inset-0 size-full will-change-transform">
-    <img
-      src="/images/hero/hero-poster.jpg"
-      alt=""
-      width="1440"
-      height="900"
-      fetchpriority="high"
-      decoding="async"
-      aria-hidden="true"
-      class="hero-poster absolute inset-0 size-full object-cover object-[58%_center]"
-    />
+  <div class="hero-media absolute inset-0 size-full will-change-transform bg-brand-dark">
     <video
-      bind:this={heroVideo}
+      bind:this={videoEl0}
+      src={heroVideos[0]}
       muted
-      loop
       playsinline
-      preload="none"
+      preload="auto"
       aria-hidden="true"
       tabindex="-1"
-      oncanplay={handleVideoCanPlay}
-      class:video-ready={isVideoReady}
+      oncanplay={() => handleVideoCanPlay(0)}
+      ontimeupdate={() => handleTimeUpdate(0)}
+      onended={() => handleVideoEnded(0)}
+      class:video-active={activeVideoIndex === 0 && isVideoReady}
       class="hero-video absolute inset-0 size-full object-cover object-[58%_center]"
-    >
-      <source src="/videos/hero%20section.mp4" type="video/mp4" />
-    </video>
+    ></video>
+    <video
+      bind:this={videoEl1}
+      src={heroVideos[1]}
+      muted
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+      tabindex="-1"
+      oncanplay={() => handleVideoCanPlay(1)}
+      ontimeupdate={() => handleTimeUpdate(1)}
+      onended={() => handleVideoEnded(1)}
+      class:video-active={activeVideoIndex === 1 && isVideoReady}
+      class="hero-video absolute inset-0 size-full object-cover object-[58%_center]"
+    ></video>
   </div>
-  <!-- Directional gradients for high legibility over background media -->
+  <!-- Subtle directional gradients for high legibility while letting video shine brightly -->
   <div
-    class="absolute inset-0 bg-gradient-to-r from-brand-dark/85 via-brand-dark/40 to-brand-dark/80 pointer-events-none"
+    class="absolute inset-0 bg-gradient-to-r from-brand-dark/50 via-brand-dark/15 to-brand-dark/30 pointer-events-none"
   ></div>
   <div
-    class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-dark/95 via-brand-dark/45 to-transparent pointer-events-none"
+    class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-brand-dark/65 via-brand-dark/20 to-transparent pointer-events-none"
   ></div>
   <div
-    class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand-dark/60 to-transparent pointer-events-none"
+    class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-brand-dark/35 to-transparent pointer-events-none"
   ></div>
 
   <div
     class="site-shell relative z-20 grid min-h-[100dvh] content-end pb-24 pt-32 sm:pb-28 lg:grid-cols-12 lg:items-end lg:gap-10"
   >
     <!-- Left Column: Refined Title, Subtitle, Chips & CTAs -->
-    <div class="lg:col-span-7 xl:col-span-7 flex flex-col justify-end">
+    <div class="lg:col-span-8 xl:col-span-8 flex flex-col justify-end">
 
-      <!-- Refined Editorial Title -->
+      <!-- Refined Editorial Title (Strictly 2 Lines, Clean Font) -->
       <h1
-        class="max-w-3xl font-sans font-bold tracking-tight text-white text-[clamp(2.35rem,4.5vw,4.15rem)] leading-[1.08] select-none"
+        class="max-w-4xl font-sans font-bold uppercase tracking-tight text-white text-[clamp(1.5rem,3.75vw,3.5rem)] leading-[1.08] select-none"
       >
-        <span class="block overflow-hidden pb-0.5">
-          <span class="hero-line block">
-            {stripTitlePunctuation($_("home.hero.title1") || "Visual Post-Production")}
+        <span class="block overflow-hidden pb-1">
+          <span class="hero-line block whitespace-nowrap">
+            {stripTitlePunctuation($_("home.hero.title1") || "VISUAL POST-PRODUCTION")}
           </span>
         </span>
         <span class="block overflow-hidden pb-1">
-          <span class="hero-line block text-white/95">
-            {stripTitlePunctuation($_("home.hero.title2") || "Built to Scale")}
+          <span class="hero-line block whitespace-nowrap text-white">
+            {stripTitlePunctuation($_("home.hero.title2") || "BUILT TO SCALE")}
           </span>
         </span>
       </h1>
@@ -355,7 +428,7 @@
 
     <!-- Right Column: Pure Editorial Typography (No card style) -->
     <div
-      class="hero-sidebar mt-10 lg:mt-0 lg:col-span-5 flex flex-col justify-end lg:items-end text-left lg:text-right"
+      class="hero-sidebar mt-10 lg:mt-0 lg:col-span-4 xl:col-span-4 flex flex-col justify-end lg:items-end text-left lg:text-right"
     >
       <div class="space-y-6 max-w-xs sm:max-w-sm">
         <!-- Capacity Stat Block -->
@@ -427,11 +500,13 @@
 
   .hero-video {
     opacity: 0;
-    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
   }
 
-  .hero-video.video-ready {
+  .hero-video.video-active {
     opacity: 1;
+    z-index: 1;
   }
 
 

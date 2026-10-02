@@ -157,7 +157,7 @@
   id="our-people"
   aria-label="Our People and Studio Team"
   bind:this={sectionRef}
-  class="relative border-y border-brand-dark/15 bg-brand-paper py-24 md:py-32"
+  class="relative border-y border-brand-dark/15 bg-brand-paper py-12 sm:py-14 lg:py-16"
 >
   <div class="site-shell">
     <div

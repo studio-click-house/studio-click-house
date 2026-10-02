@@ -149,7 +149,7 @@
   bind:this={section}
   id="service-detail-showcase"
   aria-labelledby="service-detail-showcase-title"
-  class="relative isolate overflow-hidden py-20 text-brand-dark sm:py-24 lg:py-28"
+  class="relative isolate overflow-hidden py-12 text-brand-dark sm:py-14 lg:py-16"
 >
   <div class="site-shell relative z-10">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-14">

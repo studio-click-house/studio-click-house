@@ -168,7 +168,7 @@
   id="ai-about-section"
   bind:this={section}
   aria-labelledby="ai-about-title"
-  class="relative overflow-hidden bg-brand-light text-brand-dark pt-10 sm:pt-14 lg:pt-18 pb-16 sm:pb-22 lg:pb-28"
+  class="relative overflow-hidden bg-brand-light text-brand-dark pt-8 sm:pt-10 lg:pt-12 pb-10 sm:pb-12 lg:pb-14"
 >
   <div class="site-shell relative z-10">
 

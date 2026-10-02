@@ -54,108 +54,13 @@
               ".sd-hero-copy-reveal",
               {
                 autoAlpha: 0,
-                y: 22,
-                duration: 0.72,
-                stagger: 0.08,
+                y: 18,
+                duration: 0.65,
+                stagger: 0.06,
                 clearProps: "all",
               },
               "-=0.55",
-            )
-            .from(
-              ".sd-hero-media-card",
-              {
-                autoAlpha: 0,
-                y: 30,
-                scale: 0.96,
-                duration: 0.82,
-                stagger: 0.09,
-                clearProps: "all",
-              },
-              "-=0.62",
             );
-
-          const mediaStage = currentHero.querySelector<HTMLElement>(
-            ".sd-hero-media-stage",
-          );
-          const movePrimaryX = gsap.quickTo(".sd-hero-media-primary", "x", {
-            duration: 0.8,
-            ease: "power3.out",
-          });
-          const movePrimaryY = gsap.quickTo(".sd-hero-media-primary", "y", {
-            duration: 0.8,
-            ease: "power3.out",
-          });
-          const moveSupportX = gsap.quickTo(".sd-hero-media-support", "x", {
-            duration: 0.95,
-            ease: "power3.out",
-          });
-          const moveSupportY = gsap.quickTo(".sd-hero-media-support", "y", {
-            duration: 0.95,
-            ease: "power3.out",
-          });
-
-          const moveMedia = (event: PointerEvent) => {
-            if (event.pointerType !== "mouse" || !mediaStage) return;
-            const bounds = mediaStage.getBoundingClientRect();
-            const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-            const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-            movePrimaryX(x * 14);
-            movePrimaryY(y * 12);
-            moveSupportX(x * -10);
-            moveSupportY(y * -8);
-          };
-
-          const resetMedia = () => {
-            movePrimaryX(0);
-            movePrimaryY(0);
-            moveSupportX(0);
-            moveSupportY(0);
-          };
-
-          mediaStage?.addEventListener("pointermove", moveMedia);
-          mediaStage?.addEventListener("pointerleave", resetMedia);
-
-          // Desktop-only scrub
-          media.add("(min-width: 1024px)", () => {
-            gsap.to(".sd-hero-copy-motion", {
-              yPercent: -7,
-              ease: "none",
-              scrollTrigger: {
-                trigger: currentHero,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-
-            gsap.to(".sd-hero-media-primary", {
-              yPercent: -8,
-              ease: "none",
-              scrollTrigger: {
-                trigger: currentHero,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-
-            gsap.to(".sd-hero-media-support", {
-              yPercent: -14,
-              stagger: 0.08,
-              ease: "none",
-              scrollTrigger: {
-                trigger: currentHero,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-          });
-
-          return () => {
-            mediaStage?.removeEventListener("pointermove", moveMedia);
-            mediaStage?.removeEventListener("pointerleave", resetMedia);
-          };
         });
 
         return () => media.revert();
@@ -315,7 +220,7 @@
             {#each data.supportingMedia.slice(0, 2) as item (item.src)}
               <figure
                 class={cn(
-                  "sd-hero-media-card sd-hero-media-support relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] transition-all duration-300",
+                  "sd-hero-media-card sd-hero-media-support relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] transition-transform duration-500 ease-out hover:scale-[1.015]",
                   isFourFive
                     ? "aspect-[4/5] p-0"
                     : item.width > item.height
@@ -331,6 +236,8 @@
                   alt={item.alt}
                   width={item.width}
                   height={item.height}
+                  loading="eager"
+                  decoding="async"
                   class={cn(
                     "size-full",
                     isFourFive || item.width > item.height
@@ -345,7 +252,7 @@
           <!-- Right: Big Primary Image -->
           <figure
             class={cn(
-              "sd-hero-media-card sd-hero-media-primary relative overflow-hidden rounded-[2rem] transition-all duration-300",
+              "sd-hero-media-card sd-hero-media-primary relative overflow-hidden rounded-[2rem] transition-transform duration-500 ease-out hover:scale-[1.015]",
               isFourFive
                 ? "aspect-[4/5] p-0"
                 : data.mediaFit === "cover"
@@ -361,6 +268,9 @@
               alt={data.media.alt}
               width={data.media.width}
               height={data.media.height}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               class={cn(
                 "size-full",
                 isFourFive || data.mediaFit === "cover"
