@@ -154,12 +154,12 @@
   <div class="site-shell relative z-10">
     <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-14">
       <div class="sd-proof-copy sd-proof-copy-motion lg:col-span-5 lg:pr-4">
-        <p class="eyebrow mb-3 text-brand-dark/50">
+        <p class="font-sans text-sm font-medium mb-3 text-brand-dark/50">
           {$_("sectionLabels.showcase")}
         </p>
         <h2
           id="service-detail-showcase-title"
-          class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]"
+          class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em]"
         >
           {data.heading}
         </h2>
@@ -196,11 +196,11 @@
                 alt={data.beforeAfter.before.alt}
                 width={data.beforeAfter.before.width}
                 height={data.beforeAfter.before.height}
-                loading="lazy"
-                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                loading="eager"
+                class="size-full object-cover object-center"
               />
               <span
-                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
+                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-sans text-xs font-medium text-brand-dark/75 shadow-sm backdrop-blur-md"
               >
                 {data.beforeAfter.before.label || "Before"}
               </span>
@@ -215,11 +215,11 @@
                 alt={data.beforeAfter.after.alt}
                 width={data.beforeAfter.after.width}
                 height={data.beforeAfter.after.height}
-                loading="lazy"
-                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                loading="eager"
+                class="size-full object-cover object-center"
               />
               <span
-                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
+                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-sans text-xs font-medium text-brand-dark/75 shadow-sm backdrop-blur-md"
               >
                 {data.beforeAfter.after.label || "After"}
               </span>
@@ -248,7 +248,7 @@
                 >
                   <span class="block overflow-hidden pb-1">
                     <span
-                      class="sd-proof-metric-reveal block font-display text-[clamp(2.7rem,4vw,4.25rem)] leading-none tracking-[-0.04em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
+                      class="sd-proof-metric-reveal block font-sans font-black text-[clamp(2.7rem,4vw,4.25rem)] leading-none tracking-[-0.04em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
                     >
                       {data.stats[0].value}
                     </span>
@@ -284,7 +284,7 @@
                     >
                       <span class="block overflow-hidden pb-1">
                         <span
-                          class="sd-proof-metric-reveal block font-display text-[clamp(1.8rem,3vw,2.8rem)] leading-none tracking-[-0.035em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
+                          class="sd-proof-metric-reveal block font-sans font-black text-[clamp(1.8rem,3vw,2.8rem)] leading-none tracking-[-0.035em] text-brand-light transition-colors duration-300 group-hover:text-brand-green"
                         >
                           {data.stats[index].value}
                         </span>

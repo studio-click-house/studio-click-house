@@ -51,7 +51,7 @@
     onkeydown={(event) => { if (event.key === "Escape") onClose(); }}
   >
     <div class="absolute inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-4 text-white">
-      <div class="flex items-center gap-3 font-mono text-xs">
+      <div class="flex items-center gap-3 font-sans text-xs">
         <span class="rounded bg-brand-green px-2.5 py-0.5 font-bold uppercase tracking-wider text-brand-dark">{title}</span>
         <span class="text-white/70">{countLabel} {selectedIndex + 1} of {photos.length}</span>
       </div>
@@ -72,8 +72,8 @@
         <img src={current.src} alt={current.alt} loading="eager" class="max-h-[64vh] max-w-full object-contain" />
       </div>
       <div class="mt-4 max-w-xl text-center text-white">
-        {#if current.caption}<p class="font-display text-lg sm:text-xl">{current.caption}</p>{/if}
-        <p class="mt-1 font-mono text-xs text-white/70">{current.alt}</p>
+        {#if current.caption}<p class="font-sans text-lg sm:text-xl font-semibold">{current.caption}</p>{/if}
+        <p class="mt-1 font-sans text-xs text-white/70">{current.alt}</p>
       </div>
       <div class="mt-5 hidden max-w-2xl gap-2 overflow-x-auto p-1 sm:flex">
         {#each photos as thumb, index (thumb.id)}

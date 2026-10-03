@@ -189,7 +189,7 @@
     <!-- Left Column: 3 Category Selectors -->
     <div class="flex flex-col gap-4">
       <p
-        class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green font-semibold"
+        class="font-sans text-sm text-brand-green font-semibold"
       >
         {translate("nav.divisions", "Our Divisions")}
       </p>
@@ -211,7 +211,7 @@
               </div>
               <div class="flex flex-col">
                 <span
-                  class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 {activeCategory ===
+                  class="font-sans text-sm font-semibold transition-all duration-300 {activeCategory ===
                   category.id
                     ? 'text-brand-green translate-x-0.5'
                     : 'text-brand-light/80 group-hover:text-brand-light'}"
@@ -219,7 +219,7 @@
                   {translate(`nav.megaCategories.${category.key}.label`, category.label)}
                 </span>
                 <span
-                  class="font-sans text-[0.62rem] text-brand-light/45 mt-0.5 transition-colors group-hover:text-brand-light/60 group-data-[active=true]:text-brand-light/70"
+                  class="font-sans text-xs text-brand-light/45 mt-0.5 transition-colors group-hover:text-brand-light/60 group-data-[active=true]:text-brand-light/70"
                 >
                   {translate(`nav.megaCategories.${category.key}.description`, category.description)}
                 </span>
@@ -238,7 +238,7 @@
     <!-- Middle Column: Dynamic Services List -->
     <div class="border-l border-r border-brand-light/5 px-6">
       <p
-        class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-brand-green mb-5 font-semibold"
+        class="font-sans text-sm text-brand-green mb-5 font-semibold"
       >
         {translate("nav.services", "Services")}
       </p>
@@ -259,12 +259,12 @@
               >
                 <div class="flex items-center gap-2.5">
                   <span
-                    class="font-display text-[0.7rem] font-bold tracking-wide text-brand-green"
+                    class="font-sans text-sm font-bold tracking-wide text-brand-green"
                   >
                     {String(sIndex + 1).padStart(2, "0")}
                   </span>
                   <span
-                    class="font-sans text-xs font-bold uppercase tracking-wider text-brand-green transition-all duration-300 ease-out {service.slug ===
+                    class="font-sans text-sm font-semibold text-brand-green transition-all duration-300 ease-out {service.slug ===
                     activeServiceSlug
                       ? 'translate-x-1'
                       : 'group-hover:translate-x-1'}"
@@ -301,7 +301,7 @@
               >
                 <div class="flex items-center gap-2.5">
                   <span
-                    class="font-display text-[0.7rem] font-bold tracking-wide transition-colors duration-200 {service.slug ===
+                    class="font-sans text-sm font-bold tracking-wide transition-colors duration-200 {service.slug ===
                     activeServiceSlug
                       ? 'text-brand-green'
                       : 'text-brand-light/30'}"
@@ -309,7 +309,7 @@
                     {String(sIndex + 1).padStart(2, "0")}
                   </span>
                   <span
-                    class="font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out {service.slug ===
+                    class="font-sans text-sm font-semibold transition-all duration-300 ease-out {service.slug ===
                     activeServiceSlug
                       ? 'text-brand-green translate-x-1.5'
                       : 'text-brand-light/80'}"

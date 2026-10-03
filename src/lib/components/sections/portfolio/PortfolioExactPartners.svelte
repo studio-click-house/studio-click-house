@@ -102,10 +102,10 @@
 >
   <div class="site-shell max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="partners-header">
-      <span class="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-dark/50 mb-2.5 block">
+      <span class="font-sans text-sm text-brand-dark/50 mb-2.5 block font-medium">
         Trust & Scale
       </span>
-      <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-brand-dark mb-8 sm:mb-10">
+      <h2 class="font-sans text-2xl sm:text-3xl lg:text-4xl tracking-tight text-brand-dark mb-8 sm:mb-10 font-semibold">
         {$_('portfolio.partners.title') || 'Selected Brand Partners'}
       </h2>
     </div>
@@ -131,7 +131,7 @@
 
           <!-- Category tag that reveals smoothly on hover -->
           <span
-            class="absolute bottom-2.5 font-mono text-[9px] uppercase tracking-wider text-brand-green opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0 font-medium z-10"
+            class="absolute bottom-2.5 font-sans text-xs text-brand-green opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0 font-medium z-10"
           >
             {partner.category}
           </span>

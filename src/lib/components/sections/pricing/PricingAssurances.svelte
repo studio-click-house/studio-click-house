@@ -42,9 +42,9 @@
         </p>
         <h2
           id="pricing-assurances-title"
-          class="max-w-[10ch] font-display text-[clamp(2.35rem,5.2vw,4.5rem)] leading-[0.94] tracking-[-0.04em]"
+          class="max-w-[10ch] font-sans text-[clamp(2.35rem,5.2vw,4.5rem)] leading-[1.05] tracking-[-0.04em] font-semibold"
         >
-          {$_('pricing.assurances.heading1') || 'Included with'} <em class="font-normal text-brand-green">{$_('pricing.assurances.heading2') || 'every plan.'}</em
+          {$_('pricing.assurances.heading1') || 'Included with'} <em class="not-italic font-semibold text-brand-green">{$_('pricing.assurances.heading2') || 'every plan.'}</em
           >
         </h2>
         <p
@@ -62,12 +62,12 @@
             class="grid min-h-0 sm:min-h-40 grid-cols-[2rem_1fr] sm:grid-cols-[2.25rem_1fr] gap-3 sm:gap-4 border-b border-brand-light/15 py-5 sm:py-7 sm:px-6 sm:odd:border-r"
           >
             <span
-              class="font-mono text-[0.62rem] sm:text-[0.68rem] tracking-[0.14em] text-brand-green mt-0.5"
+              class="font-sans text-xs text-brand-green mt-0.5"
             >
               {assurance.number}
             </span>
             <div>
-              <h3 class="font-display text-xl tracking-[-0.02em] sm:text-2xl">
+              <h3 class="font-sans text-xl tracking-[-0.02em] sm:text-2xl font-semibold">
                 {$_(`pricing.assurances.items.${index}.title`) || assurance.title}
               </h3>
               <p

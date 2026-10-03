@@ -357,7 +357,7 @@
 
       <!-- Refined Editorial Title (Strictly 2 Lines, Clean Font) -->
       <h1
-        class="max-w-4xl font-sans font-bold uppercase tracking-tight text-white text-[clamp(1.5rem,3.75vw,3.5rem)] leading-[1.08] select-none"
+        class="max-w-4xl font-sans font-bold uppercase tracking-[-0.035em] text-white text-[clamp(1.5rem,3.75vw,3.5rem)] leading-[1.08]"
       >
         <span class="block overflow-hidden pb-1">
           <span class="hero-line block whitespace-nowrap">
@@ -365,7 +365,7 @@
           </span>
         </span>
         <span class="block overflow-hidden pb-1">
-          <span class="hero-line block whitespace-nowrap text-white">
+          <span class="hero-line block whitespace-nowrap font-bold text-white">
             {stripTitlePunctuation($_("home.hero.title2") || "BUILT TO SCALE")}
           </span>
         </span>
@@ -373,7 +373,7 @@
 
       <!-- Editorial Subtitle -->
       <p
-        class="hero-subtitle mt-3.5 sm:mt-4 max-w-lg text-sm sm:text-[0.9375rem] font-normal leading-relaxed text-white/70"
+        class="hero-subtitle mt-3.5 sm:mt-4 max-w-lg font-sans text-sm sm:text-base font-normal leading-[1.65] text-pretty text-white/70"
       >
         {$_("home.hero.subtitle") ||
           "High-volume retouching, CGI modeling, and video post-production for brands and creative teams worldwide."}
@@ -382,17 +382,17 @@
       <!-- Target Audience Chips -->
       <div class="hero-meta mt-4 flex flex-wrap items-center gap-2">
         <span
-          class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[0.625rem] font-medium uppercase tracking-wider text-white/60"
+          class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-sans text-xs font-medium text-white/60"
         >
           E-Commerce
         </span>
         <span
-          class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[0.625rem] font-medium uppercase tracking-wider text-white/60"
+          class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-sans text-xs font-medium text-white/60"
         >
           Fashion Brands
         </span>
         <span
-          class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[0.625rem] font-medium uppercase tracking-wider text-white/60"
+          class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-sans text-xs font-medium text-white/60"
         >
           Creative Teams
         </span>
@@ -402,7 +402,7 @@
       <div class="hero-actions mt-6 flex flex-wrap items-center gap-3 sm:gap-3.5">
         <a
           href={resolve("/contact")}
-          class="hero-btn-primary group inline-flex items-center justify-center gap-2 rounded-full bg-brand-green px-5 sm:px-6 py-2.5 sm:py-3 font-mono text-[0.6875rem] sm:text-xs font-bold uppercase tracking-[0.12em] text-brand-dark transition-all duration-300 hover:bg-brand-light hover:text-brand-dark hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-brand-green/20"
+          class="hero-btn-primary group inline-flex items-center justify-center gap-2 rounded-[var(--radius-control)] bg-brand-green min-h-11 px-5 py-2 font-sans text-sm font-semibold text-brand-dark transition-all duration-300 hover:bg-brand-light hover:text-brand-dark hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-brand-green/20"
         >
           <span>{$_("home.hero.bookMeeting") || "Book a meeting"}</span>
           <ArrowUpRight
@@ -414,7 +414,7 @@
 
         <a
           href={resolve("/contact")}
-          class="hero-btn-secondary group inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-brand-dark/50 backdrop-blur-md px-5 sm:px-6 py-2.5 sm:py-3 font-mono text-[0.6875rem] sm:text-xs font-semibold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark hover:scale-[1.02] active:scale-[0.98]"
+          class="hero-btn-secondary group inline-flex items-center justify-center gap-2 rounded-[var(--radius-control)] border border-white/25 bg-brand-dark/50 backdrop-blur-md min-h-11 px-5 py-2 font-sans text-sm font-semibold text-white transition-all duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark hover:scale-[1.02] active:scale-[0.98]"
         >
           <span>{$_("home.hero.startTrial") || "Start free trial"}</span>
           <ArrowRight
@@ -434,7 +434,7 @@
         <!-- Capacity Stat Block -->
         <div>
           <span
-            class="block font-mono text-[0.6875rem] font-bold uppercase tracking-[0.22em] text-brand-light/60"
+            class="block font-sans text-xs font-medium text-brand-light/60"
           >
             {$_("home.hero.capacityLabel") || "CAPACITY"}
           </span>
@@ -445,12 +445,12 @@
               {$_("home.hero.capacityNumber") || "150+"}
             </span>
             <span
-              class="font-mono text-xs uppercase tracking-wider text-white/70"
+              class="font-sans text-sm font-medium text-white/70"
             >
               {$_("home.hero.capacityRole") || "In-House Specialists"}
             </span>
           </div>
-          <p class="mt-1 font-mono text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-wider text-white/50">
+          <p class="mt-1 font-sans text-xs sm:text-sm text-white/50">
             {$_("home.hero.capacitySub") || "24/7 Production · 2,000+ Daily Output"}
           </p>
         </div>
@@ -458,12 +458,12 @@
         <!-- Identity / Heritage Statement -->
         <div class="border-t border-white/10 pt-5">
           <span
-            class="block font-mono text-[0.6875rem] font-bold uppercase tracking-[0.22em] text-brand-light/60"
+            class="block font-sans text-xs font-medium text-brand-light/60"
           >
             {$_("home.hero.identityLabel") || "OUR IDENTITY"}
           </span>
           <p
-            class="mt-2 text-xs sm:text-[0.8125rem] font-medium uppercase leading-relaxed tracking-[0.05em] text-white/75"
+            class="mt-2 font-sans text-sm font-normal leading-[1.65] text-white/75"
           >
             {$_("home.hero.identityDesc") ||
               "Since 2015 supporting creative teams behind the scenes with dedicated post-production capacity."}
@@ -477,7 +477,7 @@
     class="scroll-indicator absolute bottom-[5.5rem] left-1/2 -translate-x-1/2 z-25 flex flex-col items-center gap-2 pointer-events-none"
   >
     <span
-      class="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-brand-light/45"
+      class="font-sans text-xs font-medium text-brand-light/45"
     >
       {$_("home.hero.scroll")}
     </span>

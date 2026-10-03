@@ -49,7 +49,7 @@
       </p>
       <div class="mt-8 max-w-3xl border-b border-brand-dark/15 pb-12">
         <h1
-          class="hero-display-title text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.9] tracking-[-0.06em]"
+          class="font-sans uppercase text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.02] tracking-[-0.045em] font-bold"
         >
           {stripTitlePunctuation(
             $_("careers.title") || "Build beautiful work with us.",

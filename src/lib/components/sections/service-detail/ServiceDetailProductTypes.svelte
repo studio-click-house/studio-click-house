@@ -132,13 +132,13 @@
     >
       <div>
         <span
-          class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50"
+          class="font-sans text-sm font-medium text-brand-dark/50"
         >
           {eyebrow}
         </span>
         <h2
           id="built-for-every-product-type-title"
-          class="mt-3 max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="mt-3 max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark"
         >
           {heading}
         </h2>
@@ -176,12 +176,12 @@
               class="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/35 to-transparent p-5 sm:p-6 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
               <span
-                class="font-mono text-xs font-semibold tracking-wider text-white/60"
+                class="font-sans text-xs font-semibold tracking-wider text-white/60"
               >
                 /{item.code}
               </span>
               <h3
-                class="mt-1 translate-y-2 font-display text-lg font-extrabold uppercase tracking-tight text-white transition-transform duration-300 group-hover:translate-y-0 sm:text-xl"
+                class="mt-1 translate-y-2 font-sans text-lg font-semibold tracking-[-0.02em] text-white transition-transform duration-300 group-hover:translate-y-0 sm:text-xl"
               >
                 {item.title}
               </h3>
@@ -193,7 +193,7 @@
             </div>
           </div>
           <h3
-            class="mt-4 text-center font-display text-base font-extrabold uppercase tracking-tight text-brand-dark"
+            class="mt-4 text-center font-sans text-base font-semibold tracking-[-0.02em] text-brand-dark"
           >
             {item.title}
           </h3>

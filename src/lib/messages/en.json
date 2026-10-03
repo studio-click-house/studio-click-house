@@ -412,22 +412,22 @@
       "title1": "E-Commerce AI",
       "title2": "Workflow.",
       "stage1": {
-        "title": "Raw Image Input",
-        "description": "Standard product photo or flat-lay capture before processing."
+        "title": "Source image",
+        "description": "Start with a product photo or flat-lay image."
       },
       "stage2": {
-        "title": "Ghost Mannequin",
-        "description": "Clean hollow mannequin composite with natural 3D volume."
+        "title": "Ghost mannequin",
+        "description": "Give the garment shape with a clean, hollow mannequin edit."
       },
       "stage3": {
-        "title": "AI Model Generation",
-        "description": "Placing your garment naturally onto a realistic AI fashion model."
+        "title": "AI on-model imagery",
+        "description": "Create on-model imagery from the garment photo."
       },
       "stage4": {
-        "title": "Color Change & Variants",
-        "description": "Instant recoloring to any SKU shade while preserving real fabric textures."
+        "title": "Color variations",
+        "description": "Produce color options while retaining fabric texture."
       },
-      "explore": "Explore AI Services & Full Pipeline"
+      "explore": "Explore AI image production"
     },
     "showcaseIntro": {
       "title1": "Our",
@@ -435,47 +435,47 @@
       "description": "One production partner for AI-assisted imagery, polished stills, considered motion, and believable 3D—built around each project."
     },
     "aboutOrbit": {
-      "eyebrow": "AI Production System",
-      "heading": "From isolated packshots to campaign reality.",
-      "headingPart1": "From isolated packshots.",
-      "headingPart2": "To campaign reality.",
+      "eyebrow": "AI image production",
+      "heading": "From product photos to campaign imagery.",
+      "headingPart1": "From product photos.",
+      "headingPart2": "To campaign imagery.",
       "postProduction": "image compositing",
-      "description": "Combine multi-product e-commerce packshots into lifelike on-model campaign imagery with photorealistic lighting, natural fabric draping, and flawless accessory integration.",
-      "explore": "Explore Work",
+      "description": "Bring garments and accessories together in on-model imagery, with attention to fabric, lighting, and product detail.",
+      "explore": "Explore our work",
       "steps": [
         {
-          "title": "Virtual on-model fitting",
-          "description": "Seamlessly composite individual garments and accessories onto photorealistic AI models with authentic posture and studio lighting."
+          "title": "On-model composition",
+          "description": "Combine garment and accessory photos into one on-model image."
         },
         {
-          "title": "Fabric & drape physics",
-          "description": "Intelligent contour mapping and realistic crease synthesis preserve true garment weights, weaves, and natural silhouettes."
+          "title": "Fabric and fit",
+          "description": "Refine folds, texture, and silhouette to suit the garment."
         },
         {
-          "title": "Accessory & light matching",
-          "description": "Luxury watches, jewelry, bags, and eyewear integrated with millimeter precision, specular reflections, and contact shadows."
+          "title": "Accessories and lighting",
+          "description": "Match accessories, reflections, and shadows across the composition."
         },
         {
-          "title": "Commercial studio export",
-          "description": "High-resolution e-commerce and editorial deliverables with strict color fidelity, zero shoot overhead, and rapid turnaround."
+          "title": "Final image delivery",
+          "description": "Prepare the finished image for e-commerce and campaign use."
         }
       ],
       "stats": [
         {
           "value": "8 → 1",
-          "label": "Asset Synthesis"
+          "label": "Product composition"
         },
         {
           "value": "4K UHD",
-          "label": "Resolution Ready"
+          "label": "Image resolution"
         },
         {
           "value": "24h",
-          "label": "Turnaround SLA"
+          "label": "Turnaround"
         },
         {
           "value": "100%",
-          "label": "Color Fidelity"
+          "label": "Color fidelity"
         }
       ],
       "startProject": "Start a project",

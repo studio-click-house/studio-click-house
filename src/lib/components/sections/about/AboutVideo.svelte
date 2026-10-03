@@ -216,7 +216,7 @@
         </button>
 
         <span
-          class="shrink-0 font-mono text-[0.62rem] tabular-nums text-white/85 sm:text-[0.68rem]"
+          class="shrink-0 font-sans text-xs tabular-nums text-white/85"
         >
           {formatTime(currentTime)}
         </span>
@@ -242,7 +242,7 @@
         />
 
         <span
-          class="shrink-0 font-mono text-[0.62rem] tabular-nums text-white/55 sm:text-[0.68rem]"
+          class="shrink-0 font-sans text-xs tabular-nums text-white/55"
         >
           {formatTime(videoDuration)}
         </span>

@@ -176,13 +176,13 @@
           <div>
             <!-- Header Solid Black Badge Block -->
             <div
-              class="w-full bg-brand-dark text-brand-light text-center py-3.5 px-3 sm:px-4 rounded-xl font-mono text-[0.68rem] sm:text-[0.72rem] font-bold uppercase tracking-wider mb-6 flex items-center justify-center min-h-[58px] sm:min-h-[66px] shadow-xs"
+              class="w-full bg-brand-dark text-brand-light text-center py-3.5 px-3 sm:px-4 rounded-xl font-sans text-sm mb-6 flex items-center justify-center min-h-[58px] sm:min-h-[66px] shadow-xs font-medium"
             >
               {$_(`pricing.packages.plans.${planIdx}.name`) || plan.name}
             </div>
 
             <!-- Description -->
-            <p class="text-xs text-brand-dark/65 leading-relaxed mb-6 font-sans">
+            <p class="text-sm text-brand-dark/65 leading-relaxed mb-6 font-sans">
               {$_(`pricing.packages.plans.${planIdx}.description`) || plan.description}
             </p>
 
@@ -190,9 +190,9 @@
             <div class="mb-6 sm:mb-8">
               <ul class="space-y-0.5">
                 {#each plan.services as svc, svcIdx (`${svcIdx}-${svc.name}`)}
-                  <li class="flex items-center justify-between gap-2 py-2 border-b border-dashed border-brand-dark/12 text-xs sm:text-[0.78rem] text-brand-dark">
+                  <li class="flex items-center justify-between gap-2 py-2 border-b border-dashed border-brand-dark/12 text-sm text-brand-dark">
                     <span class="font-medium text-left pr-1 min-w-0 break-words leading-snug">{$_(`pricing.packages.plans.${planIdx}.services.${svcIdx}.name`) || svc.name}</span>
-                    <span class="font-mono font-bold text-brand-green-ink shrink-0">{svc.price}</span>
+                    <span class="font-sans font-bold text-brand-green-ink shrink-0">{svc.price}</span>
                   </li>
                 {/each}
               </ul>
@@ -201,7 +201,7 @@
             <!-- Guarantees Checklist -->
             <ul class="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
               {#each plan.features as feature, featureIdx (`${featureIdx}-${feature}`)}
-                <li class="flex items-start gap-2.5 text-xs text-brand-dark/75 font-mono">
+                <li class="flex items-start gap-2.5 text-sm text-brand-dark/75 font-sans">
                   <div
                     class="w-4 h-4 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mt-0.5"
                   >
@@ -216,11 +216,11 @@
           <!-- Button -->
           <a
             href={resolve(plan.buttonHref as "/contact")}
-            class="min-h-[44px] w-full py-3 px-4 rounded-[var(--radius-control)] text-xs font-bold text-center tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 border cursor-pointer {
-              activePlanId === plan.id
-                ? 'bg-brand-green text-brand-dark border-brand-green shadow-xs'
-                : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark hover:bg-brand-dark/10'
-            }"
+            class="min-h-[44px] w-full py-3 px-4 rounded-[var(--radius-control)] text-sm font-semibold text-center transition-all duration-300 flex items-center justify-center gap-1.5 border cursor-pointer {
+ activePlanId === plan.id
+ ? 'bg-brand-green text-brand-dark border-brand-green shadow-xs'
+ : 'border-brand-dark/10 bg-brand-dark/5 text-brand-dark hover:bg-brand-dark/10'
+ }"
           >
             <span>{$_('pricing.packages.orderNow') || plan.buttonText}</span>
             <ArrowRight

@@ -62,7 +62,7 @@
     `absolute inset-0 size-full object-${mediaFit} object-center`,
   );
   const mediaLabelClass =
-    "absolute top-[0.8rem] z-[5] rounded-full border border-brand-light/30 bg-brand-dark/40 px-3 py-[0.38rem] font-mono text-[0.46rem] uppercase tracking-[0.13em] text-brand-light backdrop-blur-[0.35rem]";
+    "absolute top-[0.8rem] z-[5] rounded-full border border-brand-light/30 bg-brand-dark/40 px-3 py-[0.38rem] font-sans text-xs font-medium text-brand-light backdrop-blur-[0.35rem]";
 
   function updateComparison(event: Event) {
     const input = event.currentTarget;

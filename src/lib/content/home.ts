@@ -542,7 +542,6 @@ export const showcaseProjects: ShowcaseProjectItem[] = [
     media: {
       kind: "video",
       src: "/images/video-editing/Cosmetic_jar_with_floating_gummies_20261001165911.mp4",
-      poster: "/images/portfolio/3d-cgi-showcase-v2.webp",
       alt: "Photorealistic 3D cosmetic jar CGI animation with floating gummies",
       width: 1920,
       height: 1080,

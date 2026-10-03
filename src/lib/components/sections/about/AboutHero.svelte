@@ -124,20 +124,20 @@
       <!-- Left Column: Editorial Copy & Studio Statement -->
       <div class="lg:col-span-5">
         <span
-          class="hero-editorial-item font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-4 block"
+          class="hero-editorial-item font-sans text-sm text-brand-dark/50 mb-4 block font-medium"
         >
           Studio Collective &middot; Dhaka, Bangladesh
         </span>
 
         <h1
-          class="hero-editorial-item hero-display-title font-display text-[clamp(2.75rem,5.2vw,5.5rem)] leading-[0.92] tracking-tight text-brand-dark"
+          class="hero-editorial-item font-sans uppercase text-[clamp(2.75rem,5vw,5rem)] leading-[1.02] tracking-tight text-brand-dark font-bold"
         >
           <span class="block">
             {stripTitlePunctuation(
               $_("about.hero.headingLine1") || hero.headingLine1,
             )}
           </span>
-          <span class="hero-display-outline block">
+          <span class="text-brand-green block">
             {stripTitlePunctuation(
               $_("about.hero.headingLine2") || hero.headingLine2,
             )}
@@ -158,7 +158,7 @@
             href="#about-studio-video"
             onclick={handleScrollToVideo}
             size="lg"
-            class="font-mono text-xs uppercase tracking-wider"
+            class="font-sans text-sm font-semibold"
           >
             Watch Studio Film
           </Button>
@@ -166,7 +166,7 @@
             href="#team-collective"
             variant="secondary"
             size="lg"
-            class="bg-white/80 font-mono text-xs uppercase tracking-wider hover:bg-white"
+            class="bg-white/80 font-sans text-sm hover:bg-white font-semibold"
           >
             Meet The Collective
           </Button>
@@ -180,14 +180,14 @@
           {#each hero.stats as stat, i (stat.label)}
             <div>
               <div
-                class="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl lg:text-4xl"
+                class="font-sans text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl lg:text-4xl"
               >
                 <span>{displayedStats[i]?.value ?? stat.value}</span><span
                   class="text-brand-green">{stat.suffix}</span
                 >
               </div>
               <div
-                class="mt-1 font-mono text-[0.62rem] font-medium uppercase tracking-wider text-brand-dark/60 sm:text-[0.68rem]"
+                class="mt-1 font-sans text-xs font-medium text-brand-dark/60"
               >
                 {$_(`about.hero.stats.${i}.label`) || stat.label}
               </div>
@@ -234,7 +234,7 @@
             />
           </div>
           <p
-            class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider"
+            class="mt-2 text-center font-sans text-xs text-brand-dark/70"
           >
             Dhaka Production Floor
           </p>
@@ -256,7 +256,7 @@
             />
           </div>
           <p
-            class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider"
+            class="mt-2 text-center font-sans text-xs text-brand-dark/70"
           >
             Color Grading Suite
           </p>

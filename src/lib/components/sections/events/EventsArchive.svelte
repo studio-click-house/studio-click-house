@@ -32,13 +32,13 @@
   <div class="site-shell">
     <!-- Editorial Header with Index Metadata -->
     <div class="pb-2">
-      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-4 block">
+      <span class="font-sans text-sm text-brand-dark/50 mb-4 block font-medium">
         Expeditions & Company Tours · {events.length} Chapters
       </span>
 
       <div class="mt-4 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <h2
-          class="max-w-[16ch] font-display text-[clamp(2.8rem,4.8vw,5.4rem)] font-normal leading-[0.92] tracking-tight text-brand-dark"
+          class="max-w-[16ch] font-sans text-[clamp(2.8rem,4.8vw,5.4rem)] leading-[1.05] tracking-tight text-brand-dark font-semibold"
         >
           Journeys that built our culture.
         </h2>
@@ -61,7 +61,7 @@
           data-event-archive
         >
           <!-- Giant Architectural Chapter Index -->
-          <div class="absolute -top-12 left-0 pointer-events-none select-none font-display text-[5.5rem] font-light leading-none text-brand-dark/[0.04] sm:-top-16 sm:text-[8rem] lg:text-[10rem]">
+          <div class="absolute -top-12 left-0 pointer-events-none select-none font-sans text-[5.5rem] font-light leading-none text-brand-dark/[0.04] sm:-top-16 sm:text-[8rem] lg:text-[10rem]">
             {chapterNum}
           </div>
 
@@ -93,7 +93,7 @@
                 <!-- Floating top bar inside cover: Clean View All badge -->
                 <div class="absolute inset-x-0 top-0 z-20 flex items-center justify-end p-4 text-white">
                   <span
-                    class="rounded-md bg-white/95 px-3.5 py-1.5 font-mono text-xs font-semibold text-brand-dark shadow-md transition-all group-hover:bg-brand-green group-hover:text-brand-dark"
+                    class="rounded-md bg-white/95 px-3.5 py-1.5 font-sans text-xs font-semibold text-brand-dark shadow-md transition-all group-hover:bg-brand-green group-hover:text-brand-dark"
                   >
                     View All
                   </span>
@@ -128,14 +128,14 @@
             class="relative z-10 lg:col-span-5"
             data-event-copy
           >
-            <div class="flex items-center gap-3 font-mono text-xs text-brand-dark/60">
+            <div class="flex items-center gap-3 font-sans text-xs text-brand-dark/60">
               <span class="font-bold text-brand-green-ink">Chapter {chapterNum}</span>
               <span>·</span>
               <span>{event.date}</span>
             </div>
 
             <h3
-              class="mt-4 font-display text-[clamp(2.3rem,3.6vw,3.8rem)] font-normal leading-[0.94] tracking-[-0.035em] text-brand-dark"
+              class="mt-4 font-sans text-[clamp(2.3rem,3.6vw,3.8rem)] leading-[1.15] tracking-[-0.035em] text-brand-dark font-semibold"
             >
               {event.title}
             </h3>
@@ -144,14 +144,14 @@
               {event.summary}
             </p>
 
-            <div class="mt-4 font-mono text-xs uppercase tracking-wider text-brand-dark/65 font-medium">
+            <div class="mt-4 font-sans text-xs text-brand-dark/65 font-medium">
               {event.location}
             </div>
 
             <!-- Focus Tags -->
             <div class="mt-5 flex flex-wrap gap-2">
               {#each event.focus as tag (tag)}
-                <span class="rounded-md border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-xs text-brand-dark/75">
+                <span class="rounded-md border border-brand-dark/12 bg-white/70 px-3 py-1 font-sans text-xs text-brand-dark/75">
                   {tag}
                 </span>
               {/each}
@@ -170,7 +170,7 @@
                   <button
                     type="button"
                     onclick={() => openTourGallery(event, 0)}
-                    class="font-mono text-xs font-semibold text-brand-green hover:text-brand-dark transition-colors"
+                    class="font-sans text-xs font-semibold text-brand-green hover:text-brand-dark transition-colors"
                   >
                     View all {galleryCount} photos →
                   </button>
@@ -197,7 +197,7 @@
                         />
                       </div>
                       {#if isLast}
-                        <div class="absolute inset-0.5 flex items-center justify-center rounded-lg bg-brand-dark/85 font-mono text-xs font-bold text-brand-light backdrop-blur-[2px]">
+                        <div class="absolute inset-0.5 flex items-center justify-center rounded-lg bg-brand-dark/85 font-sans text-xs font-bold text-brand-light backdrop-blur-[2px]">
                           +{remainingCount}
                         </div>
                       {/if}

@@ -108,7 +108,7 @@
           {$_("sectionLabels.journey")}
         </p>
         <h2
-          class="journey-header-reveal font-display text-[clamp(2.5rem,5.5vw,7rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark"
+          class="journey-header-reveal font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.045em] text-brand-dark font-semibold"
         >
           {$_('about.journey.heading') || journey.heading}
         </h2>
@@ -149,16 +149,16 @@
             <!-- Left / Right Layout Column 1 -->
             <div
               class="w-full md:w-1/2 pl-12 md:pl-0 {isEven
-                ? 'md:pr-12 md:text-right'
-                : 'md:order-2 md:pl-12 md:text-left'}"
+ ? 'md:pr-12 md:text-right'
+ : 'md:order-2 md:pl-12 md:text-left'}"
             >
               <div
-                class="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-green-ink"
+                class="mb-3 font-sans text-sm text-brand-green-ink font-medium"
               >
                 {milestone.year} · {$_(`about.journey.milestones.${index}.subtitle`) || milestone.subtitle}
               </div>
               <h3
-                class="mb-3 font-display text-2xl font-normal text-brand-dark md:text-4xl"
+                class="mb-3 font-sans text-2xl text-brand-dark md:text-4xl font-semibold"
               >
                 {$_(`about.journey.milestones.${index}.title`) || milestone.title}
               </h3>
@@ -169,7 +169,7 @@
               </p>
               {#if milestone.statsHighlight}
                 <div
-                  class="inline-flex items-center gap-2 border-t border-brand-dark/25 pt-2 text-xs font-mono font-medium text-brand-dark/75"
+                  class="inline-flex items-center gap-2 border-t border-brand-dark/25 pt-2 text-xs font-sans font-medium text-brand-dark/75"
                 >
                   {$_(`about.journey.milestones.${index}.statsHighlight`) || milestone.statsHighlight}
                 </div>
@@ -179,8 +179,8 @@
             <!-- Left / Right Layout Column 2 (Supporting Image Card) -->
             <div
               class="w-full md:w-1/2 pl-12 md:pl-0 {isEven
-                ? 'md:order-2 md:pl-12'
-                : 'md:pr-12'}"
+ ? 'md:order-2 md:pl-12'
+ : 'md:pr-12'}"
             >
               {#if milestone.media}
                 <div
@@ -196,7 +196,7 @@
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div
-                    class="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 text-white text-xs font-mono"
+                    class="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 text-white text-xs font-sans"
                   >
                     {milestone.media.credit}
                   </div>

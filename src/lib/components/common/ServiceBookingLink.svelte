@@ -6,6 +6,6 @@
   let { label }: { label: string } = $props();
 </script>
 
-<Button href={resolve("/contact")} variant="ghost" size="sm" class="border-0 border-b border-brand-green px-0 font-mono text-xs uppercase tracking-wider text-brand-dark hover:text-brand-dark">
+<Button href={resolve("/contact")} variant="ghost" size="sm" class="border-0 border-b border-brand-green px-0 font-sans text-sm font-medium text-brand-dark hover:text-brand-dark">
   {label} <ArrowRight size={14} />
 </Button>

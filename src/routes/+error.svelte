@@ -27,13 +27,13 @@
 
   <div class="site-shell relative z-10 mx-auto max-w-2xl text-center">
     <span
-      class="inline-block rounded-full border border-brand-green/30 bg-brand-green/10 px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-brand-green"
+      class="inline-block rounded-full border border-brand-green/30 bg-brand-green/10 px-4 py-1.5 font-sans text-xs font-semibold text-brand-green"
     >
       {$_('error.statusBadge') || 'Error'} {status}
     </span>
 
     <h1
-      class="mt-6 font-display text-[clamp(2.8rem,5.5vw,5.2rem)] font-light leading-[0.95] tracking-[-0.04em]"
+      class="mt-6 font-sans text-[clamp(2.8rem,5.5vw,5.2rem)] leading-[1.02] tracking-[-0.045em] font-bold"
     >
       {#if is404}
         {$_('error.title404') || 'Page Not Found'}

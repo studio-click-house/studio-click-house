@@ -326,15 +326,15 @@
     <div class="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Copy & Actions (lg:col-span-5) -->
       <div class="space-y-6 lg:col-span-5">
-        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
+        <p class="font-sans text-sm font-medium text-brand-dark/50">
           {$_("sectionLabels.threeD")}
         </p>
         <h2
           id="threed-showcase-title"
-          class="threed-showcase-title max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark pb-1"
+          class="threed-showcase-title max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark pb-1"
         >
           <span class="block">{data.title}</span>
-          <span class="block text-brand-green font-light italic mt-1.5 sm:mt-2">
+          <span class="block text-brand-green font-semibold mt-1.5 sm:mt-2">
             {data.titleAccent}
           </span>
         </h2>

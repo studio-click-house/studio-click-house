@@ -136,12 +136,12 @@
     <div class="mx-auto max-w-4xl">
       <!-- Section Header: Clean, confident, pure typography -->
       <div class="faq-header-reveal mb-8 sm:mb-10">
-        <p class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-brand-dark/45 mb-3">
+        <p class="mb-4 font-sans text-sm font-medium text-brand-dark/60">
           {$_("sectionLabels.faq") || "Questions & Answers"}
         </p>
         <h2
           id="faq-section-title"
-          class="font-display text-[clamp(2.4rem,4.5vw,3.85rem)] font-light leading-[1.02] tracking-[-0.035em] text-brand-dark"
+          class="font-sans text-[clamp(2.4rem,4.5vw,3.85rem)] font-semibold leading-[1.05] tracking-[-0.045em] text-brand-dark"
         >
           {title || $_('home.faq.title') || "Frequently Asked Questions"}
         </h2>
@@ -163,11 +163,11 @@
               onclick={() => handleFaqClick(index)}
             >
               <div class="flex items-baseline gap-4 sm:gap-6 min-w-0 pr-4">
-                <span class="font-mono text-xs text-brand-dark/35 transition-colors group-hover:text-brand-dark shrink-0">
+                <span class="font-sans text-xs font-medium text-brand-dark/50 transition-colors group-hover:text-brand-dark shrink-0">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3
-                  class="font-sans font-medium text-[1.0625rem] sm:text-[1.2rem] leading-snug text-brand-dark transition-colors duration-200 group-hover:opacity-75"
+                  class="font-sans font-semibold text-[1.0625rem] sm:text-[1.2rem] leading-snug text-brand-dark transition-colors duration-200 group-hover:opacity-75"
                 >
                   {isCustom ? item.question : ($_(`home.faqs.${index}.question`) || item.question)}
                 </h3>

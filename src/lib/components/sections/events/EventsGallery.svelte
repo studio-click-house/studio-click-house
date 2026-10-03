@@ -65,14 +65,14 @@
   <div class="site-shell relative z-10">
     <!-- Clean Editorial Header (No AI pills, No robot icons) -->
     <div class="pb-2">
-      <span class="font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-3 block">
+      <span class="font-sans text-sm text-brand-dark/50 mb-3 block font-medium">
         Visual Archive · All Photographs
       </span>
 
       <div class="mt-4 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
           <h2
-            class="max-w-[15ch] font-display text-[clamp(2.6rem,4.4vw,4.8rem)] font-normal leading-[0.94] tracking-tight text-brand-dark"
+            class="max-w-[15ch] font-sans text-[clamp(2.6rem,4.4vw,4.8rem)] leading-[1.05] tracking-tight text-brand-dark font-semibold"
           >
             Life outside the studio.
           </h2>
@@ -97,7 +97,7 @@
           role="tab"
           aria-selected={isActive}
           onclick={() => selectCategory(cat.id)}
-          class="rounded-lg px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all {isActive
+          class="rounded-lg px-4 py-2 font-sans text-xs uppercase tracking-wider transition-all {isActive
             ? 'bg-brand-dark text-white font-semibold shadow-sm'
             : 'border border-brand-dark/15 bg-white/80 text-brand-dark/75 hover:border-brand-dark/30 hover:bg-white hover:text-brand-dark'}"
         >
@@ -135,7 +135,7 @@
               class="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 opacity-0 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 group-hover:opacity-100 text-white"
             >
               <div class="pr-2">
-                <span class="rounded bg-brand-green px-2 py-0.5 font-mono text-[0.6rem] font-bold uppercase tracking-wider text-brand-dark">
+                <span class="rounded bg-brand-green px-2 py-0.5 font-sans text-xs font-bold text-brand-dark">
                   {photo.categoryLabel}
                 </span>
                 {#if photo.caption}
@@ -163,7 +163,7 @@
           type="button"
           onclick={loadMore}
           size="lg"
-          class="bg-brand-dark px-8 font-mono text-xs uppercase tracking-wider text-brand-light hover:bg-brand-green hover:text-brand-dark"
+          class="bg-brand-dark px-8 font-sans text-sm text-brand-light hover:bg-brand-green hover:text-brand-dark font-semibold"
         >
           Load More Photos ({filteredPhotos.length - displayedPhotos.length} remaining)
         </Button>

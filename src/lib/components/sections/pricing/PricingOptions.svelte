@@ -30,7 +30,7 @@
         </p>
         <h2
           id="pricing-options-title"
-          class="font-display text-[clamp(2.35rem,5.2vw,4.5rem)] leading-[0.94] tracking-[-0.04em] text-brand-dark"
+          class="font-sans text-[clamp(2.35rem,5.2vw,4.5rem)] leading-[1.05] tracking-[-0.04em] text-brand-dark font-semibold"
         >
           {$_('pricing.options.heading') || 'Our Pricing'}
         </h2>
@@ -52,10 +52,10 @@
           role="tab"
           aria-selected={activeView === "packages"}
           aria-controls="pricing-packages-panel"
-          class="flex-1 sm:flex-initial min-h-11 rounded-[0.45rem] px-4 sm:px-6 font-mono text-[0.68rem] sm:text-xs font-semibold uppercase tracking-[0.12em] transition-colors cursor-pointer {activeView ===
-          'packages'
-            ? 'bg-brand-dark text-brand-light shadow-xs'
-            : 'text-brand-dark/65 hover:text-brand-dark'}"
+          class="flex-1 sm:flex-initial min-h-11 rounded-[0.45rem] px-4 sm:px-6 font-sans text-sm transition-colors cursor-pointer {activeView ===
+ 'packages'
+ ? 'bg-brand-dark text-brand-light shadow-xs'
+ : 'text-brand-dark/65 hover:text-brand-dark'} font-semibold"
           onclick={() => setView("packages")}
         >
           {$_('pricing.options.packagesTab') || 'Packages'}
@@ -66,10 +66,10 @@
           role="tab"
           aria-selected={activeView === "custom"}
           aria-controls="pricing-custom-panel"
-          class="flex-1 sm:flex-initial min-h-11 rounded-[0.45rem] px-4 sm:px-6 font-mono text-[0.68rem] sm:text-xs font-semibold uppercase tracking-[0.12em] transition-colors cursor-pointer {activeView ===
-          'custom'
-            ? 'bg-brand-dark text-brand-light shadow-xs'
-            : 'text-brand-dark/65 hover:text-brand-dark'}"
+          class="flex-1 sm:flex-initial min-h-11 rounded-[0.45rem] px-4 sm:px-6 font-sans text-sm transition-colors cursor-pointer {activeView ===
+ 'custom'
+ ? 'bg-brand-dark text-brand-light shadow-xs'
+ : 'text-brand-dark/65 hover:text-brand-dark'} font-semibold"
           onclick={() => setView("custom")}
         >
           {$_('pricing.options.customTab') || 'Custom Price'}

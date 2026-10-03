@@ -19,7 +19,7 @@
         {$_("sectionLabels.culture")}
       </p>
       <h2
-        class="max-w-[15ch] font-display text-[clamp(2.7rem,4.6vw,5rem)] leading-[0.94] tracking-[-0.04em]"
+        class="max-w-[15ch] font-sans text-[clamp(2.7rem,4.6vw,5rem)] leading-[1.05] tracking-[-0.04em] font-semibold"
       >
         {$_('events.culture.heading') || 'The work grows when the team does.'}
       </h2>
@@ -56,7 +56,7 @@
             class="relative flex h-full flex-col justify-end p-6 sm:p-8"
           >
             <h3
-              class="font-display text-[clamp(2rem,3vw,3.4rem)] leading-[0.96] tracking-[-0.03em] text-brand-light"
+              class="font-sans text-[clamp(2rem,3vw,3.4rem)] leading-[1.15] tracking-[-0.03em] text-brand-light font-semibold"
             >
               {activity.title}
             </h3>

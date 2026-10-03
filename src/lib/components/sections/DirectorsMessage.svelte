@@ -70,7 +70,7 @@
       </p>
       <h2
         id="director-message-title"
-        class="director-header-reveal mt-7 font-display text-4xl sm:text-5xl lg:text-6xl leading-[0.95] tracking-[-0.035em]"
+        class="director-header-reveal mt-7 font-sans text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-[-0.035em] font-semibold"
       >
         {$_('about.directorsMessage.title') || 'Driven by dedication and ready for every challenge.'}
       </h2>
@@ -96,7 +96,7 @@
                 </div>
               {/if}
               <div class="flex-1 space-y-4">
-                <p class="director-quote relative font-display text-2xl md:text-3xl leading-snug">
+                <p class="director-quote relative font-sans text-2xl md:text-3xl leading-[1.45] font-normal">
                   <span class="director-quote-mark" aria-hidden="true">“</span>
                   {$_(`about.directorsMessage.testimonials.${index}.quote`) || testimonial.quote}
                 </p>
@@ -109,7 +109,7 @@
                       {testimonial.name}
                     </cite>
                     <span
-                      class="text-brand-light/65 text-xs block sm:inline sm:before:content-['//'] sm:before:mx-1 font-mono"
+                      class="text-brand-light/65 text-xs block sm:inline sm:before:content-['//'] sm:before:mx-1 font-sans"
                     >
                       {#if testimonial.role}
                         {$_(`about.directorsMessage.testimonials.${index}.role`) || testimonial.role},
@@ -132,7 +132,7 @@
             class="text-brand-green"
           />
           <div>
-            <p class="font-display text-4xl sm:text-5xl">
+            <p class="font-sans text-4xl sm:text-5xl font-semibold">
               {$_('about.directorsMessage.emptyTitle') || 'Client stories will live here.'}
             </p>
             <p class="mt-4 max-w-xl text-sm leading-relaxed text-brand-light/65">
@@ -150,7 +150,7 @@
     position: absolute;
     top: -0.35em;
     left: -0.08em;
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: 3.5em;
     line-height: 1;
     color: var(--color-brand-green);

@@ -99,12 +99,12 @@
       <div class="lg:col-span-5">
         <header>
           <div class="standards-reveal">
-            <p class="eyebrow mb-3 text-brand-dark/50">
+            <p class="font-sans text-sm font-medium mb-3 text-brand-dark/50">
               {$_("sectionLabels.quality")}
             </p>
             <h2
               id="services-standards-title"
-              class="max-w-[12ch] font-display text-[clamp(2.6rem,3.6vw,4rem)] leading-[0.92] tracking-[-0.04em]"
+              class="max-w-[12ch] font-sans font-semibold text-[clamp(2.6rem,3.6vw,4rem)] leading-[1.05] tracking-[-0.04em]"
             >
               {$_('services.standards.heading') || 'Quality is a system, not a final check.'}
             </h2>

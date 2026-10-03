@@ -205,11 +205,11 @@
   }
 
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--text-micro);
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-size: var(--text-body-small);
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
     transition: color 220ms ease;
   }
 

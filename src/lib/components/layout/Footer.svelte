@@ -155,23 +155,23 @@
               class="h-9 w-auto"
             />
           </div>
-          <p class="font-mono text-[0.65rem] font-bold tracking-[0.22em] text-brand-dark uppercase">
+          <p class="font-sans text-xs font-semibold text-brand-dark">
             {$_('footer.tagline') || 'Every Pixel Finished With Intent'}
           </p>
         </div>
 
-        <p class="text-[0.86rem] leading-relaxed text-brand-dark/70 max-w-md font-sans">
+        <p class="text-[0.9375rem] leading-relaxed text-brand-dark/70 max-w-md font-sans">
           {$_('footer.description') || 'Studio Click House is a full-scale Creative Post-Production Studio helping global E-commerce brands, Retailers, Agencies, and Photo studios produce clean, consistent, high-impact content at scale.'}
         </p>
 
         <!-- Direct Email -->
         <div>
-          <span class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78 block mb-1">
+          <span class="font-sans text-xs font-semibold text-brand-dark/78 block mb-1">
             {$_('footer.emailUs') || 'Email Us'}
           </span>
           <a
             href={`mailto:${siteConfig.contact.email}`}
-            class="font-sans text-xl font-bold tracking-tight text-brand-dark border-b-2 border-brand-dark pb-0.5 hover:text-brand-green hover:border-brand-green transition-colors [overflow-wrap:anywhere]"
+            class="font-sans text-xl font-semibold font-bold tracking-tight text-brand-dark border-b-2 border-brand-dark pb-0.5 hover:text-brand-green hover:border-brand-green transition-colors [overflow-wrap:anywhere]"
           >
             {siteConfig.contact.email}
           </a>
@@ -237,7 +237,7 @@
               class="h-7 w-12 rounded-[4px] bg-[#006FCF] px-1 flex items-center justify-center shadow-xs border border-[#006FCF]/40 transition-transform duration-200 hover:scale-105"
               title="American Express"
             >
-              <span class="font-mono text-[0.55rem] font-black tracking-tighter text-white uppercase">AMEX</span>
+              <span class="font-sans text-[0.55rem] font-black tracking-tighter text-white uppercase">AMEX</span>
             </div>
 
             <!-- Apple Pay -->
@@ -267,9 +267,43 @@
               title="SSLCommerz"
             >
               <span class="flex flex-col items-center leading-none">
-                <span class="font-mono text-[0.55rem] font-black tracking-tight text-white">SSL</span>
-                <span class="font-mono text-[0.4rem] font-bold tracking-[0.06em] text-white/85">COMMERZ</span>
+                <span class="font-sans text-[0.55rem] font-black tracking-tight text-white">SSL</span>
+                <span class="font-sans text-[0.4rem] font-bold tracking-[0.06em] text-white/85">COMMERZ</span>
               </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accreditation & Membership Card -->
+        <div id="footer-affiliations" class="pt-3">
+          <div class="overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white shadow-xs">
+            <div class="flex items-center justify-between px-4 pt-3 pb-1">
+              <p class="font-sans text-xs font-semibold text-brand-dark/78">
+                {$_('footer.accreditations') || 'Accredited & Member Of'}
+              </p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4">
+              {#each affiliations as item, i (item.name)}
+                <div
+                  class="group flex flex-col items-center justify-center gap-2 border-brand-dark/8 px-2 py-4 transition-colors duration-300 hover:bg-brand-dark/[0.02] {i % 2 === 0
+ ? 'border-r'
+ : ''} {i < 2 ? 'border-b sm:border-b-0' : ''} {i < 3 ? 'sm:border-r' : ''}"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.fullName}
+                    width={item.width}
+                    height={item.height}
+                    loading="lazy"
+                    decoding="async"
+                    title={item.fullName}
+                    class="h-7 w-auto object-contain transition-all duration-300 [filter:grayscale(100%)_brightness(0)_opacity(60%)] group-hover:opacity-100 group-hover:[filter:grayscale(0%)_brightness(1)_opacity(100%)]"
+                  />
+                  <span class="text-center font-sans text-xs font-semibold text-brand-dark/78">
+                    {item.caption}
+                  </span>
+                </div>
+              {/each}
             </div>
           </div>
         </div>
@@ -278,27 +312,27 @@
       <!-- Right Column: OUR LOCATIONS (4 Country Cards + Navigation) -->
       <div class="lg:col-span-7 space-y-4">
         <div class="flex flex-col items-start gap-2 pb-1 sm:flex-row sm:items-center sm:justify-between">
-          <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78">
+          <p class="font-sans text-xs font-semibold text-brand-dark/78">
             {$_('footer.locationsTitle') || 'Our Locations'}
           </p>
-          <span class="font-mono text-[0.65rem] text-brand-dark/78 font-semibold">{$_('footer.productionTag') || '24/7 Global Production'}</span>
+          <span class="font-sans text-xs text-brand-dark/78 font-semibold">{$_('footer.productionTag') || '24/7 Global Production'}</span>
         </div>
 
         <!-- Headquarters Card (Bangladesh / Dhaka) -->
         <div class="relative overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white p-5 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm">
           <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <span class="font-mono text-[0.58rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78 block mb-1">
+              <span class="font-sans text-xs font-semibold text-brand-dark/78 block mb-1">
                 {$_('footer.headquarters') || 'Headquarters'}
               </span>
-              <h3 class="flex flex-wrap items-baseline gap-2.5 font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
+              <h3 class="flex flex-wrap items-baseline gap-2.5 font-sans text-2xl font-semibold tracking-tight text-brand-dark sm:text-3xl">
                 DHAKA <span class="font-sans text-xs font-medium text-brand-dark/78">Bangladesh</span>
               </h3>
-              <p class="mt-1 text-[0.76rem] text-brand-dark/78 font-sans max-w-sm">
+              <p class="mt-1 text-sm text-brand-dark/78 font-sans max-w-sm">
                 Level 1, West Boxnagar, Demra, Dhaka-1361
               </p>
             </div>
-            <div class="flex flex-col md:items-end gap-0.5 font-mono text-[0.75rem]">
+            <div class="flex flex-col md:items-end gap-0.5 font-sans text-[0.75rem]">
               <a
                 href="tel:+8809609777111"
                 class="font-bold text-brand-dark hover:text-brand-green transition-colors tabular-nums"
@@ -320,16 +354,16 @@
           <!-- United Kingdom / London -->
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
-              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78 block mb-0.5">
+              <span class="font-sans text-xs font-semibold text-brand-dark/78 block mb-0.5">
                 {$_('footer.europeHub') || 'Europe Hub'}
               </span>
-              <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
-                LONDON <span class="font-sans text-[0.68rem] font-normal text-brand-dark/78">UK</span>
+              <h4 class="font-sans text-lg font-semibold text-brand-dark flex items-baseline gap-1.5">
+                LONDON <span class="font-sans text-xs font-normal text-brand-dark/78">UK</span>
               </h4>
-              <p class="text-[0.7rem] text-brand-dark/78 font-sans mt-0.5">London, UK</p>
+              <p class="text-xs text-brand-dark/78 font-sans mt-0.5">London, UK</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-brand-dark/6">
-              <a href="tel:+443330047739" class="font-mono text-[0.7rem] font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
+              <a href="tel:+443330047739" class="font-sans text-xs font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
                 +44 333 004 7739
               </a>
             </div>
@@ -338,16 +372,16 @@
           <!-- Sweden / Stockholm -->
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
-              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78 block mb-0.5">
+              <span class="font-sans text-xs font-semibold text-brand-dark/78 block mb-0.5">
                 {$_('footer.nordicHub') || 'Nordic Hub'}
               </span>
-              <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
-                SWEDEN <span class="font-sans text-[0.68rem] font-normal text-brand-dark/78">Stockholm</span>
+              <h4 class="font-sans text-lg font-semibold text-brand-dark flex items-baseline gap-1.5">
+                SWEDEN <span class="font-sans text-xs font-normal text-brand-dark/78">Stockholm</span>
               </h4>
-              <p class="text-[0.7rem] text-brand-dark/78 font-sans mt-0.5">Stockholm, Sweden</p>
+              <p class="text-xs text-brand-dark/78 font-sans mt-0.5">Stockholm, Sweden</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-brand-dark/6">
-              <a href="tel:+46855924212" class="font-mono text-[0.7rem] font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
+              <a href="tel:+46855924212" class="font-sans text-xs font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
                 +46 8 559 24212
               </a>
             </div>
@@ -356,16 +390,16 @@
           <!-- Australia / Sydney -->
           <div class="relative overflow-hidden rounded-[12px] border border-brand-dark/10 bg-white p-4 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-sm flex flex-col justify-between">
             <div>
-              <span class="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78 block mb-0.5">
+              <span class="font-sans text-xs font-semibold text-brand-dark/78 block mb-0.5">
                 {$_('footer.americasApac') || 'Americas & APAC'}
               </span>
-              <h4 class="font-display text-lg font-bold text-brand-dark flex items-baseline gap-1.5">
-                AUSTRALIA <span class="font-sans text-[0.68rem] font-normal text-brand-dark/78">Sydney</span>
+              <h4 class="font-sans text-lg font-semibold text-brand-dark flex items-baseline gap-1.5">
+                AUSTRALIA <span class="font-sans text-xs font-normal text-brand-dark/78">Sydney</span>
               </h4>
-              <p class="text-[0.7rem] text-brand-dark/78 font-sans mt-0.5">Sydney, Australia</p>
+              <p class="text-xs text-brand-dark/78 font-sans mt-0.5">Sydney, Australia</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-brand-dark/6">
-              <a href="tel:+61483963759" class="font-mono text-[0.7rem] font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
+              <a href="tel:+61483963759" class="font-sans text-xs font-medium text-brand-dark/80 hover:text-brand-green transition-colors block tabular-nums">
                 +61 4 8396 3759
               </a>
             </div>
@@ -376,10 +410,10 @@
         <div class="grid grid-cols-1 gap-8 pt-4 sm:grid-cols-3 sm:gap-5">
           <!-- Company -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78">
+            <p class="font-sans text-xs font-semibold text-brand-dark/78">
               {$_('footer.company') || 'Company'}
             </p>
-            <ul class="space-y-1.5 text-[0.82rem]">
+            <ul class="space-y-1.5 text-sm">
               {#each companyLinks as link, idx (link.href)}
                 <li>
                   <a
@@ -388,7 +422,7 @@
                   >
                     <span>{$_(`footer.companyLinks.${idx}`) || link.label}</span>
                     {#if link.badge}
-                      <span class="rounded bg-brand-acid px-1 py-0.2 font-mono text-[0.5rem] font-bold uppercase text-brand-dark">
+                      <span class="rounded bg-brand-acid px-1 py-0.2 font-sans text-xs font-semibold text-brand-dark">
                         {link.badge}
                       </span>
                     {/if}
@@ -400,10 +434,10 @@
 
           <!-- Services -->
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78">
+            <p class="font-sans text-xs font-semibold text-brand-dark/78">
               {$_('footer.services') || 'Services'}
             </p>
-            <ul class="space-y-1.5 text-[0.82rem]">
+            <ul class="space-y-1.5 text-sm">
               {#each services as link, idx (link.href)}
                 <li>
                   <a
@@ -418,12 +452,12 @@
           </div>
 
           <div class="space-y-2.5">
-            <p class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brand-dark/78">
+            <p class="font-sans text-xs font-semibold text-brand-dark/78">
               Community
             </p>
             <a
               href={resolve("/csr")}
-              class="text-[0.82rem] text-brand-dark/70 hover:text-brand-green transition-colors"
+              class="text-sm text-brand-dark/70 hover:text-brand-green transition-colors"
             >
               CSR &amp; Community
             </a>
@@ -435,43 +469,9 @@
 
 
 
-    <!-- Accreditation & Membership Card -->
-    <div id="footer-affiliations" class="footer-reveal">
-      <div class="overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white shadow-xs">
-        <div class="flex items-center justify-between px-5 pt-4 pb-1">
-          <p class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.2em] text-brand-dark/78">
-            {$_('footer.accreditations') || 'Accredited & Member Of'}
-          </p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4">
-          {#each affiliations as item, i (item.name)}
-            <div
-              class="group flex flex-col items-center justify-center gap-2.5 border-brand-dark/8 px-4 py-5 transition-colors duration-300 hover:bg-brand-dark/[0.02] {i % 2 === 0
-                ? 'border-r'
-                : ''} {i < 2 ? 'border-b sm:border-b-0' : ''} {i < 3 ? 'sm:border-r' : ''}"
-            >
-              <img
-                src={item.src}
-                alt={item.fullName}
-                width={item.width}
-                height={item.height}
-                loading="lazy"
-                decoding="async"
-                title={item.fullName}
-                class="h-7 w-auto object-contain transition-all duration-300 [filter:grayscale(100%)_brightness(0)_opacity(60%)] group-hover:opacity-100 group-hover:[filter:grayscale(0%)_brightness(1)_opacity(100%)] md:h-8"
-              />
-              <span class="text-center font-mono text-[0.48rem] font-semibold uppercase tracking-[0.12em] text-brand-dark/78">
-                {item.caption}
-              </span>
-            </div>
-          {/each}
-        </div>
-      </div>
-    </div>
-
     <!-- Bottom Legal Bar -->
     <div
-      class="footer-reveal flex flex-col gap-3 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-brand-dark/78 sm:flex-row sm:items-center sm:justify-between"
+      class="footer-reveal flex flex-col gap-3 pt-4 font-sans text-xs text-brand-dark/78 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>
         &copy; {new Date().getFullYear()} {$_('footer.allRightsReserved') || 'Studio Click House Limited. All rights reserved.'}

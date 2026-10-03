@@ -9,74 +9,63 @@
 
   let heroSection: HTMLElement;
 
-  const imageShowcases = [
+  const disciplines = [
     {
       title: "Editorial Retouching",
-      unit: "image",
-      offsetClass: "sm:translate-y-4",
-      images: [
-        {
-          src: "/images/services/model-beauty/model-cue-chic-editorial-fashion-0161.webp",
-          alt: "High-fashion luxury lookbook editorial fashion retouching",
-        },
-        {
-          src: "/images/services/model-beauty/model-black-silk-floral-slip-dress-05.webp",
-          alt: "Editorial silk gown fashion color and drape finishing",
-        },
-        {
-          src: "/images/services/model-beauty/model-male-headshot-leather-jacket-2301-after.webp",
-          alt: "Studio male portrait frequency separation and skin micro-contouring",
-        },
-      ],
+      media: {
+        src: "/images/services/model-beauty/beauty-portrait-close-up-skincare-retouch-0500-after.webp",
+        alt: "High-fashion beauty and skincare frequency separation retouching",
+        width: 1500,
+        height: 2000,
+      },
     },
     {
-      title: "3D Product CGI",
-      unit: "asset",
-      offsetClass: "sm:-translate-y-4",
-      images: [
-        {
-          src: "/images/services/product-services/product-furniture-modern-patterned-armchair-velvet.webp",
-          alt: "Photorealistic 3D CGI modern patterned velvet armchair rendering",
-        },
-        {
-          src: "/images/services/jewelry/jewelry-aquamarine-emerald-gold-ring-4054.webp",
-          alt: "Luxury 3D emerald and gold fine jewelry macro render",
-        },
-        {
-          src: "/images/services/product-services/product-furniture-scandinavian-wood-side-table-dark.webp",
-          alt: "Architectural Scandinavian dark wood table product staging render",
-        },
-      ],
+      title: "3D CGI Modeling",
+      media: {
+        src: "/images/3d-modeling/Wireframe%20Clay%20Sneaker%20Render.png",
+        alt: "Photorealistic 3D wireframe clay sneaker render",
+        width: 1122,
+        height: 1402,
+      },
     },
     {
       title: "Color & Finishing",
-      unit: "video",
-      offsetClass: "sm:translate-y-2",
-      images: [
-        {
-          src: "/images/services/product-services/service-retouching-pattern-change-after.webp",
-          alt: "Precision garment pattern change and color calibration master",
-        },
-        {
-          src: "/images/services/product-services/architectural-aerial-london-cityscape-photography-after.webp",
-          alt: "Cinematic commercial cityscape color grading and atmosphere finishing",
-        },
-        {
-          src: "/images/services/jewelry/jewelry-editorial-seashell-gold-necklace-model-2061-after.webp",
-          alt: "Editorial gold jewelry color grading and skin tone balance",
-        },
-      ],
+      media: {
+        src: "/images/services/jewelry/jewelry-westwood-statement-gold-earrings-02-after.webp",
+        alt: "Sculptural gold earrings macro color grading and finish",
+        width: 1600,
+        height: 2000,
+      },
     },
   ];
+
+  let selectedDiscipline = $state(0);
+  let autoTimer: ReturnType<typeof setInterval> | undefined;
+
+  function startAutoChange() {
+    stopAutoChange();
+    autoTimer = setInterval(() => {
+      selectedDiscipline = (selectedDiscipline + 1) % disciplines.length;
+    }, 3800);
+  }
+
+  function stopAutoChange() {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = undefined;
+    }
+  }
+
+  function selectDiscipline(idx: number) {
+    selectedDiscipline = idx;
+    startAutoChange();
+  }
 
   const stats = [
     { value: "24h", label: "Turnaround SLA" },
     { value: "25%", label: "Volume tiering" },
     { value: "99.8%", label: "QC pass rate" },
   ];
-
-  // Reactive index array for the cross-fade slideshow
-  let activeIndexes = $state([0, 0, 0]);
 
   function activateCustomCalculator() {
     const customTab = document.getElementById("pricing-custom-tab");
@@ -97,6 +86,8 @@
   onMount(() => {
     let active = true;
     let context: { revert: () => void } | undefined;
+
+    startAutoChange();
 
     registerScrollTrigger().then((runtime) => {
       if (!active || !runtime || !heroSection) return;
@@ -122,13 +113,12 @@
             ease: "power2.out",
             clearProps: "all",
           }).from(
-            ".hero-img-anim",
+            ".hero-media-frame",
             {
-              y: 24,
-              opacity: 0,
-              duration: 0.65,
-              stagger: 0.08,
-              ease: "power2.out",
+              autoAlpha: 0,
+              y: 28,
+              duration: 0.95,
+              ease: "power3.out",
               clearProps: "all",
             },
             "-=0.45",
@@ -138,29 +128,10 @@
       }, heroSection);
     });
 
-    // Staggered slide changes to avoid simultaneous jumps
-    const intervals = [
-      setInterval(() => {
-        if (active)
-          activeIndexes[0] =
-            (activeIndexes[0] + 1) % imageShowcases[0].images.length;
-      }, 4200),
-      setInterval(() => {
-        if (active)
-          activeIndexes[1] =
-            (activeIndexes[1] + 1) % imageShowcases[1].images.length;
-      }, 4600),
-      setInterval(() => {
-        if (active)
-          activeIndexes[2] =
-            (activeIndexes[2] + 1) % imageShowcases[2].images.length;
-      }, 5000),
-    ];
-
     return () => {
       active = false;
+      stopAutoChange();
       context?.revert();
-      intervals.forEach(clearInterval);
     };
   });
 </script>
@@ -184,12 +155,12 @@
 
           <!-- Main Headline -->
           <h1
-            class="hero-anim-item hero-display-title mt-4 font-display text-[clamp(2.35rem,5vw,4.5rem)] leading-[0.94] tracking-[-0.04em] text-brand-dark"
+            class="hero-anim-item font-sans uppercase mt-4 text-[clamp(2.35rem,5vw,4.5rem)] leading-[1.02] tracking-[-0.045em] text-brand-dark font-bold"
           >
             {stripTitlePunctuation(
               $_("pricing.hero.heading1") || "Tailored production",
             )}
-            <em class="hero-display-outline not-italic"
+            <em class="text-brand-green not-italic"
               >{stripTitlePunctuation(
                 $_("pricing.hero.heading2") || "estimates.",
               )}</em
@@ -238,12 +209,12 @@
             {#each stats as stat, i (stat.label)}
               <div>
                 <div
-                  class="font-display text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-brand-dark"
+                  class="font-sans text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-brand-dark"
                 >
                   {stat.value}
                 </div>
                 <div
-                  class="mt-1 font-mono text-[0.6rem] uppercase tracking-wider text-brand-dark/50 sm:text-[0.68rem]"
+                  class="mt-1 font-sans text-xs text-brand-dark/50"
                 >
                   {$_(`pricing.hero.stats.${i}.label`) || stat.label}
                 </div>
@@ -253,49 +224,53 @@
         </div>
       </div>
 
-      <!-- Right Column: 3-Image Slideshow Composition -->
+      <!-- Right Column: Single Clean 4:5 Visual Showcase (Matching ServicesHero) -->
       <div
-        class="lg:col-span-7 xl:col-span-7 flex items-center justify-center lg:justify-end w-full"
+        class="lg:col-span-7 xl:col-span-7 w-full flex flex-col items-center lg:items-end justify-center"
       >
-        <div
-          class="grid w-full grid-cols-3 gap-2.5 sm:gap-4 lg:gap-4.5 items-center max-w-[620px]"
-        >
-          {#each imageShowcases as item, cardIdx (item.title)}
-            <div class="hero-img-anim w-full">
-              <div
-                class="group relative flex min-h-[220px] sm:min-h-[330px] md:min-h-[390px] lg:min-h-[430px] xl:min-h-[470px] w-full flex-col overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-white shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.18)] hover:-translate-y-2 {item.offsetClass}"
-              >
-                <!-- Cross-fading Images List -->
-                {#each item.images as img, imgIdx (img.src)}
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    width="600"
-                    height="900"
-                    fetchpriority={imgIdx === 0 ? "high" : "low"}
-                    decoding="async"
-                    class="absolute inset-0 size-full object-cover object-center transition-opacity duration-1000 ease-in-out group-hover:scale-105 {activeIndexes[
-                      cardIdx
-                    ] === imgIdx
-                      ? 'opacity-100 z-10'
-                      : 'opacity-0 z-0'}"
-                  />
-                {/each}
+        <div class="w-full max-w-[440px] sm:max-w-[460px] lg:max-w-[480px]">
+          <!-- Clean 4:5 Media Frame (Zero White Border, Zero Shadow) -->
+          <figure
+            class="hero-media-frame relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-media)] bg-brand-dark/5"
+          >
+            {#each disciplines as disc, idx (disc.media.src)}
+              <img
+                src={disc.media.src}
+                alt={disc.media.alt}
+                width={disc.media.width}
+                height={disc.media.height}
+                fetchpriority={idx === 0 ? "high" : "low"}
+                decoding="async"
+                class="absolute inset-0 size-full object-cover object-center transition-opacity duration-500 ease-in-out {selectedDiscipline === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}"
+              />
+            {/each}
+          </figure>
 
-                <!-- Bottom Sleek Micro Info Bar -->
-                <div
-                  class="relative z-20 mt-auto m-1 sm:m-2 rounded-md sm:rounded-lg bg-white/95 p-1.5 sm:p-2 backdrop-blur-md shadow-xs border border-black/[0.04]"
+          <!-- Clean Minimal Category Selector (No Divider, Hover Change, Auto Change) -->
+          <nav
+            class="hero-anim-item mt-4 grid grid-cols-3 gap-2"
+            aria-label="Discipline Showcase Selector"
+          >
+            {#each disciplines as disc, idx (disc.title)}
+              <button
+                type="button"
+                onmouseenter={() => selectDiscipline(idx)}
+                onclick={() => selectDiscipline(idx)}
+                class="group flex flex-col items-start py-1.5 transition-colors cursor-pointer text-left"
+              >
+                <span
+                  class="font-sans text-xs transition-colors {selectedDiscipline === idx ? 'text-brand-green font-bold' : 'text-brand-dark/40 group-hover:text-brand-dark/70'}"
                 >
-                  <div
-                    class="font-display text-[0.58rem] sm:text-[0.68rem] font-bold leading-tight tracking-tight text-brand-dark truncate"
-                  >
-                    {$_(`pricing.hero.showcases.${cardIdx}.title`) ||
-                      item.title}
-                  </div>
-                </div>
-              </div>
-            </div>
-          {/each}
+                  0{idx + 1}
+                </span>
+                <span
+                  class="mt-0.5 text-xs font-semibold tracking-tight {selectedDiscipline === idx ? 'text-brand-dark' : 'text-brand-dark/60 group-hover:text-brand-dark'} transition-colors"
+                >
+                  {$_(`pricing.hero.showcases.${idx}.title`) || disc.title}
+                </span>
+              </button>
+            {/each}
+          </nav>
         </div>
       </div>
     </div>

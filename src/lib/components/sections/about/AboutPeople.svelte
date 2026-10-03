@@ -168,7 +168,7 @@
           {$_("sectionLabels.people")}
         </p>
         <h2
-          class="people-header-reveal max-w-[11ch] font-display text-[clamp(2.5rem,5vw,6rem)] leading-[0.88] tracking-[-0.045em] text-brand-dark"
+          class="people-header-reveal max-w-[11ch] font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.045em] text-brand-dark font-semibold"
         >
           {$_('about.people.heading') || people.heading}
         </h2>
@@ -200,18 +200,18 @@
             class="absolute inset-0 bg-gradient-to-t from-brand-dark/55 via-transparent to-transparent"
           ></div>
           <div
-            class="absolute left-4 top-4 flex h-11 w-11 items-center justify-center border border-white/50 font-mono text-xs text-white"
+            class="absolute left-4 top-4 flex h-11 w-11 items-center justify-center border border-white/50 font-sans text-xs text-white"
           >
             A1
           </div>
           <p
-            class="absolute bottom-4 left-4 max-w-[18rem] font-display text-2xl leading-none text-white md:text-3xl"
+            class="absolute bottom-4 left-4 max-w-[18rem] font-sans text-2xl leading-[1.15] text-white md:text-3xl font-semibold"
           >
             {$_('about.people.collectiveTitle') || 'Studio Click House collective'}
           </p>
         </div>
         <figcaption
-          class="mt-3 flex items-center justify-between border-t border-brand-dark/25 pt-2 text-[0.64rem] uppercase tracking-[0.14em] text-brand-dark/55"
+          class="mt-3 flex items-center justify-between border-t border-brand-dark/25 pt-2 text-xs uppercase tracking-[0.14em] text-brand-dark/55"
         >
           <span>{$_('about.people.location1') || 'Dhaka headquarters'}</span>
           <span>{$_('about.people.location2') || 'Production floor / suites'}</span>
@@ -240,13 +240,13 @@
                 class="h-full w-full object-cover transition-all duration-700 group-hover:scale-[1.04] group-hover:grayscale-0 md:grayscale"
               />
               <span
-                class="absolute left-2 top-2 bg-brand-paper px-2 py-1 font-mono text-[0.58rem] text-brand-dark"
+                class="absolute left-2 top-2 bg-brand-paper px-2 py-1 font-sans text-xs text-brand-dark"
                 >B{index + 1}</span
               >
             </div>
             <figcaption class="mt-2 border-t border-brand-dark/25 pt-2">
               <p
-                class="text-[0.58rem] font-semibold uppercase tracking-[0.13em] text-brand-green"
+                class="text-xs font-semibold uppercase tracking-[0.13em] text-brand-green"
               >
                 {$_(`about.people.moments.${index}.category`) || moment.category}
               </p>
@@ -267,12 +267,12 @@
         <div class="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <span
-              class="people-header-reveal mb-2 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-dark/50"
+              class="people-header-reveal mb-2 inline-block font-sans text-xs font-medium text-brand-dark/50"
             >
               {people.snapshotsEyebrow || 'Studio Culture & Craft'}
             </span>
             <h3
-              class="people-header-reveal font-display text-2xl sm:text-3xl md:text-4xl leading-tight tracking-[-0.035em] text-brand-dark"
+              class="people-header-reveal font-sans text-2xl sm:text-3xl md:text-4xl leading-tight tracking-[-0.035em] text-brand-dark font-semibold"
             >
               {people.snapshotsHeading || 'Inside Our Dhaka Headquarters'}
             </h3>
@@ -315,17 +315,17 @@
                   class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/25 to-transparent"
                 ></div>
                 <span
-                  class="absolute left-3 top-3 bg-brand-paper/90 backdrop-blur-xs px-2.5 py-1 font-mono text-[0.62rem] font-medium text-brand-dark rounded"
+                  class="absolute left-3 top-3 bg-brand-paper/90 backdrop-blur-xs px-2.5 py-1 font-sans text-xs font-medium text-brand-dark rounded"
                 >
                   {(index + 1).toString().padStart(2, '0')}
                 </span>
                 <div class="absolute inset-x-0 bottom-0 p-5 text-white">
                   <p
-                    class="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-brand-green"
+                    class="text-xs font-semibold uppercase tracking-[0.14em] text-brand-green"
                   >
                     {snapshot.category}
                   </p>
-                  <h4 class="mt-1 font-display text-lg leading-tight text-white sm:text-xl">
+                  <h4 class="mt-1 font-sans text-lg leading-tight text-white sm:text-xl font-semibold">
                     {snapshot.title}
                   </h4>
                   <p class="mt-2 text-xs leading-relaxed text-white/75 line-clamp-2">

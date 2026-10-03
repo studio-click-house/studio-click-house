@@ -1334,7 +1334,7 @@
                 x="12.5"
                 y="21"
                 text-anchor="middle"
-                font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                font-family="var(--font-sans)"
                 font-size={file.label.length > 3 ? "7" : "8"}
                 font-weight="900"
                 fill="#ffffff"
@@ -1376,7 +1376,7 @@
                 x="12.5"
                 y="21"
                 text-anchor="middle"
-                font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                font-family="var(--font-sans)"
                 font-size={file.label.length > 3 ? "7" : "8"}
                 font-weight="900"
                 fill="#1c1b1a"

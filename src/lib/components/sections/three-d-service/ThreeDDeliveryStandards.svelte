@@ -65,10 +65,10 @@
   <div class="site-shell relative z-10">
     <!-- Header Block -->
     <div class="deliverables-header max-w-3xl space-y-4">
-      <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
+      <p class="font-sans text-sm font-medium text-brand-dark/50">
         {$_("sectionLabels.delivery")}
       </p>
-      <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
+      <h2 class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark">
         What we deliver.
       </h2>
 
@@ -83,7 +83,7 @@
         <div class="deliverable-card rounded-[2rem] border border-brand-dark/10 bg-white p-8 sm:p-9 transition-colors duration-300 hover:border-brand-green flex flex-col justify-between">
           <div class="space-y-6">
             <div>
-              <h3 class="font-display text-xl font-bold tracking-tight text-brand-dark">
+              <h3 class="font-sans text-xl font-semibold tracking-tight text-brand-dark">
                 {block.headline}
               </h3>
             </div>
@@ -97,7 +97,7 @@
                     <div class="font-sans text-sm font-semibold text-brand-dark">
                       {spec.label}
                     </div>
-                    <div class="font-sans text-xs text-brand-dark/70 leading-relaxed">
+                    <div class="font-sans text-sm text-brand-dark/70 leading-relaxed">
                       {spec.value}
                     </div>
                   </div>

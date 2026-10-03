@@ -461,12 +461,12 @@
             class="flex items-center justify-between border-b border-brand-light/10 bg-brand-light/5 px-5 py-4 sm:px-7"
           >
             <p
-              class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-brand-green"
+              class="font-sans text-xs font-semibold text-brand-green"
             >
               Explore the studio
             </p>
             <p
-              class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-light/40"
+              class="font-sans text-xs text-brand-light/40"
             >
               SCHL · Navigation
             </p>
@@ -486,10 +486,10 @@
                       class="group/link flex flex-1 items-center px-6 py-5 text-left transition-colors hover:bg-brand-light/8"
                     >
                       <span class="flex items-baseline gap-3">
-                        <span class="font-mono text-[0.55rem] text-brand-light/35">
+                        <span class="font-sans text-xs text-brand-light/35">
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
+                        <span class="font-sans text-xl font-semibold tracking-tight text-brand-light group-hover/link:text-brand-green">
                           {$_('nav.' + item.label.toLowerCase()) || item.label}
                         </span>
                       </span>
@@ -519,10 +519,10 @@
                     style="transition-delay: {index * 35}ms"
                   >
                     <span class="flex items-baseline gap-3">
-                      <span class="font-mono text-[0.55rem] text-brand-light/35">
+                      <span class="font-sans text-xs text-brand-light/35">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span class="font-display text-xl tracking-tight text-brand-light group-hover/link:text-brand-green">
+                      <span class="font-sans text-xl font-semibold tracking-tight text-brand-light group-hover/link:text-brand-green">
                         {$_('nav.' + item.label.toLowerCase()) || item.label}
                       </span>
                     </span>
@@ -543,7 +543,7 @@
             <a
               href={resolve("/login")}
               onclick={() => (isMenuOpen = false)}
-              class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
+              class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-sans text-xs font-semibold"
             >
               {$_('nav.login') || 'Login'} <ArrowUpRight size={14} strokeWidth={1.7} />
             </a>
@@ -558,12 +558,12 @@
               <button
                 type="button"
                 onclick={() => (mobileView = "routes")}
-                class="inline-flex items-center gap-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-brand-green hover:text-brand-light transition-colors cursor-pointer py-1"
+                class="inline-flex items-center gap-2 font-sans text-xs font-semibold text-brand-green hover:text-brand-light transition-colors cursor-pointer py-1"
               >
                 <ArrowLeft size={14} strokeWidth={2} />
                 <span>{$_('common.back') || 'Back to Menu'}</span>
               </button>
-              <span class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-light/40">
+              <span class="font-sans text-xs text-brand-light/40">
                 SCHL · Services
               </span>
             </div>
@@ -573,17 +573,17 @@
               <!-- Title & Overview Link -->
               <div class="flex items-center justify-between border-b border-brand-light/8 pb-3">
                 <div>
-                  <h3 class="font-display text-xl sm:text-2xl tracking-tight text-brand-light">
+                  <h3 class="font-sans text-xl font-semibold sm:text-2xl tracking-tight text-brand-light">
                     {$_('nav.services') || 'Our Services'}
                   </h3>
-                  <p class="font-sans text-[0.65rem] text-brand-light/50 mt-0.5">
+                  <p class="font-sans text-xs text-brand-light/50 mt-0.5">
                     {$_('nav.divisions') || 'Explore our divisions & capabilities'}
                   </p>
                 </div>
                 <a
                   href={resolve("/services")}
                   onclick={closeNavigationMenus}
-                  class="inline-flex items-center gap-1.5 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-brand-green hover:underline shrink-0"
+                  class="inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-brand-green hover:underline shrink-0"
                 >
                   <span>{$_('nav.all_services') || 'All Services'}</span>
                   <ArrowUpRight size={13} strokeWidth={2} />
@@ -599,7 +599,7 @@
                     class="flex flex-col items-center justify-center gap-1.5 rounded-lg border p-2.5 text-center transition-all cursor-pointer {mobileActiveCategory === cat.id ? 'border-brand-green bg-brand-green/15 text-brand-green shadow-[0_0_14px_rgba(126,166,65,0.2)]' : 'border-brand-light/10 bg-brand-light/5 text-brand-light/60 hover:border-brand-light/20 hover:text-brand-light'}"
                   >
                     <cat.icon size={15} strokeWidth={1.8} />
-                    <span class="font-sans text-[0.62rem] font-bold uppercase tracking-wider leading-tight">
+                    <span class="font-sans text-xs font-semibold leading-tight">
                       {$_(`nav.megaCategories.${cat.key}.label`, { default: cat.label })}
                     </span>
                   </button>
@@ -617,14 +617,14 @@
                         class="group/svc flex items-center justify-between p-3 rounded-lg hover:bg-brand-light/6 transition-colors"
                       >
                         <div class="flex items-center gap-3">
-                          <span class="font-mono text-[0.65rem] font-bold text-brand-green">
+                          <span class="font-sans text-xs font-semibold text-brand-green">
                             {String(sIndex + 1).padStart(2, "0")}
                           </span>
                           <div class="flex flex-col">
-                            <span class="font-sans text-xs font-semibold uppercase tracking-wider text-brand-light group-hover/svc:text-brand-green transition-colors">
+                            <span class="font-sans text-xs font-semibold text-brand-light group-hover/svc:text-brand-green transition-colors">
                               {$_(`home.services.${service.slug}.title`, { default: service.title })}
                             </span>
-                            <span class="font-sans text-[0.6rem] text-brand-light/40 mt-0.5 line-clamp-1">
+                            <span class="font-sans text-xs text-brand-light/40 mt-0.5 line-clamp-1">
                               {service.description}
                             </span>
                           </div>
@@ -648,7 +648,7 @@
               <a
                 href={resolve("/login")}
                 onclick={() => (isMenuOpen = false)}
-                class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
+                class="flex flex-1 items-center justify-between border-r border-brand-light/10 px-6 py-4 font-sans text-xs font-semibold"
               >
                 {$_('nav.login') || 'Login'} <ArrowUpRight size={14} strokeWidth={1.7} />
               </a>
@@ -768,10 +768,10 @@
     border: 1px solid var(--color-brand-green);
     border-radius: 4px;
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.018em;
-    text-transform: uppercase;
+    text-transform: none;
     transition:
       color 280ms ease,
       border-color 280ms ease,
@@ -792,10 +792,10 @@
       color-mix(in srgb, var(--color-brand-light) 26%, transparent);
     border-radius: 4px;
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.018em;
-    text-transform: uppercase;
+    text-transform: none;
     color: var(--color-brand-light);
     background: transparent;
     transition:
@@ -824,11 +824,11 @@
     border: 1px solid
       color-mix(in srgb, var(--color-brand-light) 28%, transparent);
     border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: normal;
+    text-transform: none;
     transition:
       background 220ms ease,
       border-color 220ms ease,

@@ -19,12 +19,12 @@
 >
   <div class="site-shell relative z-10 mb-6 sm:mb-8 text-center">
     <div>
-      <p class="eyebrow mb-3 text-brand-dark/50">
+      <p class="mb-4 font-sans text-sm font-medium text-brand-dark/60">
         {$_("sectionLabels.clients")}
       </p>
       <h2
         id="creative-marquee-title"
-        class="font-display text-[clamp(2.6rem,5vw,4.75rem)] leading-[0.9] tracking-[-0.045em]"
+        class="font-sans text-[clamp(2.5rem,4.5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.045em]"
       >
         {$_('home.creativeMarquee.title')}
       </h2>
@@ -108,10 +108,10 @@
     display: grid;
     gap: 0.35rem;
     color: rgb(51 46 45 / 0.42);
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: clamp(1.75rem, 2.4vw, 2.6rem);
-    font-style: italic;
-    line-height: 0.85;
+    font-weight: 500;
+    line-height: 1.05;
     text-align: center;
     letter-spacing: -0.04em;
     transition:
@@ -120,11 +120,10 @@
   }
 
   .placeholder-mark small {
-    font-family: var(--font-mono);
-    font-size: 0.52rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
     font-style: normal;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    letter-spacing: 0;
   }
 
   .logo-slot:hover .placeholder-mark {

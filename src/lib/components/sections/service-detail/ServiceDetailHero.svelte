@@ -112,7 +112,7 @@
         {#if data.kicker}
           <p
             class={cn(
-              "sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em]",
+              "sd-hero-kicker font-sans text-sm font-medium",
               isLight ? "text-brand-dark/50" : "text-brand-light/55",
             )}
           >
@@ -121,7 +121,7 @@
         {:else}
           <p
             class={cn(
-              "sd-hero-kicker font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em]",
+              "sd-hero-kicker font-sans text-sm font-medium",
               isLight ? "text-brand-dark/50" : "text-brand-light/55",
             )}
           >
@@ -132,7 +132,7 @@
           id="service-detail-hero-title"
           class={cn(
             "mt-5",
-            "hero-display-title font-display text-[clamp(3.5rem,5.8vw,5.5rem)] leading-[0.84] tracking-[-0.055em]",
+            "font-sans font-bold uppercase text-[clamp(2.75rem,5vw,5rem)] leading-[1.02] tracking-[-0.045em]",
             titleWidthClass,
           )}
         >
@@ -147,7 +147,7 @@
             </span>
           </span>
           <span class="block overflow-hidden pb-[0.08em]">
-            <span class="sd-hero-title-line hero-display-outline block">
+            <span class="sd-hero-title-line block text-brand-green">
               {stripTitlePunctuation(data.titleAccent)}
             </span>
           </span>
@@ -155,7 +155,7 @@
 
         <p
           class={cn(
-            "sd-hero-copy-reveal mt-7 max-w-[44ch] text-lg leading-8 sm:text-xl",
+            "sd-hero-copy-reveal mt-7 max-w-[44ch] font-sans text-base leading-[1.65] sm:text-lg",
             isLight ? "text-brand-dark/70" : "text-brand-light/66",
           )}
         >

@@ -193,13 +193,13 @@
       <div>
         {#if leadership.eyebrow}
           <span
-            class="leadership-header-reveal mb-3 inline-block font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-brand-dark/50"
+            class="leadership-header-reveal mb-3 inline-block font-sans text-sm text-brand-dark/50 font-medium"
           >
             {$_('about.leadership.eyebrow') || leadership.eyebrow}
           </span>
         {/if}
         <h2
-          class="leadership-header-reveal font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.04] tracking-[-0.035em] text-brand-dark"
+          class="leadership-header-reveal font-sans text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] tracking-[-0.035em] text-brand-dark font-semibold"
         >
           {$_('about.leadership.heading') || leadership.heading}
         </h2>
@@ -236,9 +236,9 @@
             <div class="mt-4 border-t border-brand-dark/20 pt-4">
               <div class="flex items-start justify-between gap-4">
                 <div>
-                  <p class="mb-1.5 font-mono text-xs font-medium text-brand-green">01</p>
+                  <p class="mb-1.5 font-sans text-xs font-medium text-brand-green">01</p>
                   <h3
-                    class="font-display text-2xl leading-none text-brand-dark transition-colors group-hover:text-brand-green"
+                    class="font-sans text-2xl leading-[1.15] text-brand-dark transition-colors group-hover:text-brand-green font-semibold"
                   >
                     {mdCard.name}
                   </h3>
@@ -303,11 +303,11 @@
               <div class="mt-4 border-t border-brand-dark/20 pt-4">
                 <div class="flex items-start justify-between gap-4">
                   <div>
-                    <p class="mb-1.5 font-mono text-xs font-medium text-brand-green">
+                    <p class="mb-1.5 font-sans text-xs font-medium text-brand-green">
                       {(index + 2).toString().padStart(2, "0")}
                     </p>
                     <h3
-                      class="font-display text-2xl leading-none text-brand-dark transition-colors group-hover:text-brand-green"
+                      class="font-sans text-2xl leading-[1.15] text-brand-dark transition-colors group-hover:text-brand-green font-semibold"
                     >
                       {member.name}
                     </h3>

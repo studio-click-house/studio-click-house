@@ -70,21 +70,21 @@
   class="relative w-full bg-brand-light pt-10 pb-4 lg:pt-14 lg:pb-6 text-center"
 >
   <div class="site-shell max-w-4xl mx-auto flex flex-col items-center">
-    <span class="manifesto-anim-item font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-dark/50 mb-8 block">
+    <span class="manifesto-anim-item font-sans text-sm text-brand-dark/50 mb-8 block font-medium">
       Our Philosophy
     </span>
 
     <blockquote
-      class="manifesto-anim-item font-display text-2xl sm:text-4xl lg:text-5xl font-normal leading-[1.25] text-brand-dark tracking-tight mb-8 text-balance"
+      class="manifesto-anim-item font-sans text-2xl sm:text-4xl lg:text-5xl font-normal leading-[1.25] text-brand-dark tracking-tight mb-8 text-balance"
     >
       {$_('portfolio.manifesto.quote') || '“The true standard of post-production is invisible perfection: every pixel refined so the art, garment, and human expression feel completely effortless.”'}
     </blockquote>
 
     <div class="manifesto-anim-item flex flex-col items-center">
-      <cite class="not-italic font-display text-lg sm:text-xl font-normal text-brand-dark mb-1">
+      <cite class="not-italic font-sans text-lg sm:text-xl text-brand-dark mb-1 font-semibold">
         {$_('portfolio.manifesto.author') || 'Studio Click House'}
       </cite>
-      <span class="font-mono text-xs uppercase tracking-widest text-brand-dark/60">
+      <span class="font-sans text-xs text-brand-dark/60">
         {$_('portfolio.manifesto.role') || 'Global Creative Post-Production & Color Studio'}
       </span>
     </div>

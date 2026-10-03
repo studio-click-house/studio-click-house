@@ -20,7 +20,7 @@
       spec: "16-Bit Precision",
       badge: "Skin & Texture",
       desc: "Lossless frequency separation preserving micro pore texture, fine hair flyaways, and fabric textile weave without artificial smoothing.",
-      image: "/images/editorial-retouching/editorial-retouching-fashion-detail-workflow.webp",
+      image: "/images/services/model-beauty/beauty-high-fashion-orchid-headpiece-portrait-after.webp",
       href: "/services/editorial-retouching",
     },
     {
@@ -38,7 +38,7 @@
       spec: "Delta-E Color Lock",
       badge: "Pantone Match",
       desc: "Certified Pantone and digital swatch calibration ensuring 100% SKU color fidelity across lookbooks, e-commerce listings, and billboard prints.",
-      image: "/images/color-correction/color-correction-fashion-capsule-color-match-board.webp",
+      image: "/images/color-correction/product-services-color-correction-editorial-garment-after.webp",
       href: "/services/color-correction",
     },
   ];
@@ -110,11 +110,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end mb-12 sm:mb-16 lg:mb-20 intro-fade-item">
       <!-- Left: Eyebrow (Grey) + Display Title -->
       <div class="lg:col-span-7">
-        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-3">
+        <p class="font-sans text-sm text-brand-dark/50 mb-3 font-medium">
           Editorial Standard
         </p>
-        <h2 class="font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
-          The High-End <span class="italic font-light text-brand-green">Post-Production</span> Standard
+        <h2 class="font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark font-semibold">
+          The High-End <span class="not-italic font-semibold text-brand-green">Post-Production</span> Standard
         </h2>
       </div>
 
@@ -140,30 +140,30 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-brand-dark/85 backdrop-blur-xs font-mono text-[0.62rem] uppercase tracking-wider text-brand-light font-medium">
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-brand-dark/85 backdrop-blur-xs font-sans text-xs text-brand-light font-medium">
                 {pillar.badge}
               </div>
             </div>
 
             <!-- Step Index + Spec Badge -->
             <div class="flex items-baseline justify-between gap-2 mb-2">
-              <span class="font-mono text-xs font-bold text-brand-green tracking-wider">
-                {pillar.step} //
+              <span class="font-sans text-xs font-bold text-brand-green">
+                {pillar.step}
               </span>
-              <span class="font-mono text-[0.65rem] uppercase tracking-wider text-brand-dark/45 font-medium">
+              <span class="font-sans text-xs text-brand-dark/45 font-medium">
                 {pillar.spec}
               </span>
             </div>
 
             <!-- Pillar Title -->
-            <h3 class="font-display text-xl sm:text-2xl font-normal text-brand-dark tracking-tight mb-2.5">
+            <h3 class="font-sans text-xl sm:text-2xl text-brand-dark tracking-tight mb-2.5 font-semibold">
               <a href={pillar.href} class="hover:text-brand-green transition-colors inline-block">
                 {pillar.title}
               </a>
             </h3>
 
             <!-- Pillar Description -->
-            <p class="text-xs sm:text-sm text-brand-dark/65 leading-relaxed font-normal">
+            <p class="text-sm text-brand-dark/65 leading-relaxed font-normal">
               {pillar.desc}
             </p>
           </div>

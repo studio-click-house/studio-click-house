@@ -65,10 +65,10 @@
   <div class="site-shell relative z-10">
     <!-- Header Block -->
     <div class="workflow-header max-w-3xl space-y-4">
-      <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
+      <p class="font-sans text-sm font-medium text-brand-dark/50">
         {$_("sectionLabels.workflow")}
       </p>
-      <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
+      <h2 class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark">
         How we work together.
       </h2>
 
@@ -83,19 +83,19 @@
         <div class="workflow-card flex flex-col justify-between rounded-[2rem] border border-brand-dark/10 bg-white p-7 sm:p-8 transition-colors duration-300 hover:border-brand-green">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="font-mono text-xl font-bold text-brand-green">
+              <span class="font-sans text-xl font-bold text-brand-green">
                 {item.step}
               </span>
-              <span class="rounded-full bg-brand-dark/5 px-3 py-1 font-mono text-[0.68rem] font-semibold text-brand-dark/70">
+              <span class="rounded-full bg-brand-dark/5 px-3 py-1 font-sans text-xs font-medium text-brand-dark/70">
                 {item.timeframe}
               </span>
             </div>
 
-            <h3 class="font-display text-xl font-bold tracking-tight text-brand-dark">
+            <h3 class="font-sans text-xl font-semibold tracking-tight text-brand-dark">
               {item.title}
             </h3>
 
-            <p class="text-xs sm:text-sm leading-relaxed text-brand-dark/70">
+            <p class="text-sm leading-relaxed text-brand-dark/70">
               {item.description}
             </p>
           </div>

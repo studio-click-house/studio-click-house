@@ -98,11 +98,11 @@
   <div class="site-shell relative z-10">
     <!-- Editorial Section Header -->
     <div class="mb-12 sm:mb-16 lg:mb-20">
-      <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-3">
+      <p class="font-sans text-sm text-brand-dark/50 mb-3 font-medium">
         {$_('portfolio.matrix.eyebrow') || '06 / Disciplines & Scopes'}
       </p>
-      <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark mb-4">
-        {$_('portfolio.matrix.headingPart1') || 'How we enforce'} <span class="italic font-light text-brand-green">{$_('portfolio.matrix.headingPart2') || 'precision'}</span> {$_('portfolio.matrix.headingPart3') || 'at scale.'}
+      <h2 class="max-w-[20ch] font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark mb-4 font-semibold">
+        {$_('portfolio.matrix.headingPart1') || 'How we enforce'} <span class="not-italic font-semibold text-brand-green">{$_('portfolio.matrix.headingPart2') || 'precision'}</span> {$_('portfolio.matrix.headingPart3') || 'at scale.'}
       </h2>
       <p class="max-w-[44ch] text-sm sm:text-base text-brand-dark/65 leading-relaxed font-normal">
         {$_('portfolio.matrix.description') || 'Explore our primary disciplines spanning campaign fashion retouching, commercial video motion, 3D CGI, and high-volume e-commerce production.'}
@@ -141,21 +141,21 @@
 
             <!-- Number + Category -->
             <div class="flex items-baseline justify-between gap-2 mb-2.5">
-              <span class="font-mono text-xs font-bold text-brand-green tracking-wider">
-                {item.index} //
+              <span class="font-sans text-xs font-bold text-brand-green">
+                {item.index}
               </span>
-              <span class="font-mono text-[0.68rem] uppercase tracking-wider text-brand-dark/45 font-medium">
+              <span class="font-sans text-xs text-brand-dark/45 font-medium">
                 {item.category}
               </span>
             </div>
 
             <!-- Title -->
-            <h3 class="font-display text-2xl lg:text-[1.65rem] font-normal leading-[1.1] tracking-tight text-brand-dark mb-3">
+            <h3 class="font-sans text-2xl lg:text-[1.65rem] leading-[1.15] tracking-tight text-brand-dark mb-3 font-semibold">
               {item.title}
             </h3>
 
             <!-- Clean, Concise Editorial Description -->
-            <p class="text-xs sm:text-sm text-brand-dark/65 leading-relaxed font-normal mb-6">
+            <p class="text-sm text-brand-dark/65 leading-relaxed font-normal mb-6">
               {item.desc}
             </p>
           </div>

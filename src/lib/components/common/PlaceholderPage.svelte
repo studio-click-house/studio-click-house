@@ -40,7 +40,7 @@
     </p>
     <div>
       <h1
-        class="hero-display-title text-[clamp(2.5rem,6vw,6rem)] leading-[0.9] tracking-[-0.06em] max-w-6xl"
+        class="font-sans uppercase text-[clamp(2.5rem,6vw,6rem)] leading-[1.02] tracking-[-0.045em] max-w-6xl font-bold"
       >
         {stripTitlePunctuation($_(`${pageKey}.title`) || title)}
       </h1>

@@ -162,10 +162,10 @@
 
       <!-- Right Column: Service Description & Standards -->
       <div class="grading-reveal space-y-6 lg:col-span-5">
-        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
+        <p class="font-sans text-sm font-medium text-brand-dark/50">
           {$_("sectionLabels.grading")}
         </p>
-        <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
+        <h2 class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark">
           {data.heading}
         </h2>
 
@@ -184,7 +184,7 @@
                 <h3 class="font-sans text-sm font-semibold text-brand-dark">
                   {item.title}
                 </h3>
-                <p class="text-xs sm:text-sm text-brand-dark/70 leading-relaxed">
+                <p class="text-sm text-brand-dark/70 leading-relaxed">
                   {item.description}
                 </p>
               </div>

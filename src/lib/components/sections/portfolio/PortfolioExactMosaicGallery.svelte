@@ -17,6 +17,8 @@
     fit?: "cover" | "contain";
     bg?: string;
     zoom?: boolean;
+    isVideo?: boolean;
+    poster?: string;
   }
 
   const galleryItems: GalleryItem[] = [
@@ -29,6 +31,17 @@
       aspect: "tall",
       fit: "contain",
       bg: "bg-white",
+    },
+    {
+      id: "gal-v1",
+      src: "/images/video-editing/Creating_fashion_commercial_video_1080p_20261002180624.mp4",
+      poster: "/images/services/model-beauty/model-female-headshot-white-blouse-0997-after.webp",
+      alt: "Commercial high-fashion studio video production and color grading",
+      title: "Commercial Fashion Film",
+      category: "video",
+      aspect: "tall",
+      fit: "cover",
+      isVideo: true,
     },
     {
       id: "gal-2",
@@ -51,6 +64,17 @@
       bg: "bg-white",
     },
     {
+      id: "gal-v2",
+      src: "/images/video-editing/Create_fashion_campaign_video_1080p_20261001180912.mp4",
+      poster: "/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp",
+      alt: "Autumn high-fashion lookbook video montage and dynamic motion cuts",
+      title: "Autumn Lookbook Motion Reel",
+      category: "video",
+      aspect: "tall",
+      fit: "cover",
+      isVideo: true,
+    },
+    {
       id: "gal-4",
       src: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-patterned-jumpsuit-flatlay-after.webp",
       alt: "Patterned jumpsuit fabric color matching and print calibration",
@@ -69,6 +93,17 @@
       aspect: "tall",
       fit: "cover",
       bg: "bg-[#B7B6B0]",
+    },
+    {
+      id: "gal-v3",
+      src: "/images/video-editing/Creating_luxury_product_hero_film_20261002180255.mp4",
+      poster: "/images/services/3d-cgi/graphical-fragrance-cgi.webp",
+      alt: "Luxury fragrance bottle cinematic lighting choreography and hero commercial",
+      title: "Luxury Fragrance Hero Film",
+      category: "video",
+      aspect: "tall",
+      fit: "cover",
+      isVideo: true,
     },
     {
       id: "gal-6",
@@ -90,6 +125,17 @@
       fit: "cover",
     },
     {
+      id: "gal-v4",
+      src: "/images/video-editing/Macro_jewelry_retouching_focus_20260914143303.mp4",
+      poster: "/images/services/jewelry/jewelry-jules-textured-gold-earrings-03-after.webp",
+      alt: "Macro fine jewelry reflection control and gold shimmer cinematography",
+      title: "Fine Jewelry Macro Film",
+      category: "video",
+      aspect: "square",
+      fit: "cover",
+      isVideo: true,
+    },
+    {
       id: "gal-8",
       src: "/images/services/bags-accessories/accessories-antony-morato-designer-footwear-3080.webp",
       alt: "Antony Morato designer leather footwear isolated with vector clipping",
@@ -107,6 +153,17 @@
       category: "cgi",
       aspect: "square",
       fit: "cover",
+    },
+    {
+      id: "gal-v5",
+      src: "/images/video-editing/Fashion_website_hero_film_1080p_20261002180020.mp4",
+      poster: "/images/services/model-beauty/model-corporate-headshot-executive-male-3683-after.webp",
+      alt: "Fashion brand digital website hero film motion design and lookbook pacing",
+      title: "Digital Campaign Hero Film",
+      category: "video",
+      aspect: "wide",
+      fit: "cover",
+      isVideo: true,
     },
     {
       id: "gal-10",
@@ -130,6 +187,17 @@
       bg: "bg-[#202020]",
     },
     {
+      id: "gal-v6",
+      src: "/images/video-editing/Fashion_e-commerce_video_montage_1080p_20261001184732.mp4",
+      poster: "/images/services/ghost-mannequin-apparel/apparel-tiny-big-sister-patterned-jumpsuit-flatlay-after.webp",
+      alt: "Rapid e-commerce apparel video montage and color harmonization",
+      title: "Apparel Motion Lookbook",
+      category: "video",
+      aspect: "tall",
+      fit: "cover",
+      isVideo: true,
+    },
+    {
       id: "gal-12",
       src: "/images/services/model-beauty/model-black-silk-floral-slip-dress-27.webp",
       alt: "Editorial portrait of a model wearing a black floral silk slip dress",
@@ -147,6 +215,17 @@
       category: "retouching",
       aspect: "tall",
       fit: "cover",
+    },
+    {
+      id: "gal-v7",
+      src: "/images/video-editing/Cosmetic_jar_with_floating_gummies_20261001165911.mp4",
+      poster: "/images/services/3d-product/3d-isometric-living-room-interior-soft-blue.webp",
+      alt: "Cosmetic jar 3D kinetic motion simulation and liquid floating elements",
+      title: "Cosmetic Jar 3D Kinetic Film",
+      category: "video",
+      aspect: "square",
+      fit: "cover",
+      isVideo: true,
     },
     {
       id: "gal-14",
@@ -178,6 +257,17 @@
       bg: "bg-white",
     },
     {
+      id: "gal-v8",
+      src: "/images/video-editing/Model_holding_perfume_bottle_20261001165916.mp4",
+      poster: "/images/services/model-beauty/model-black-silk-floral-slip-dress-27.webp",
+      alt: "Model holding luxury perfume bottle commercial lighting and skin grading",
+      title: "Luxury Perfume Commercial Cut",
+      category: "video",
+      aspect: "tall",
+      fit: "cover",
+      isVideo: true,
+    },
+    {
       id: "gal-17",
       src: "/images/services/ghost-mannequin-apparel/apparel-montmartre-stripe-maxi-dress-169-after.webp",
       alt: "Striped maxi dress with consistent fabric color and preserved pattern detail",
@@ -207,6 +297,17 @@
       bg: "bg-white",
     },
     {
+      id: "gal-v9",
+      src: "/images/services/3d-product/3d-animated-abstract-geometric-clay-spheres.mp4",
+      poster: "/images/services/3d-product/3d-isometric-living-room-interior-pastel-peach.webp",
+      alt: "Kinetic clay spheres 3D simulation and abstract material shading",
+      title: "Kinetic Clay Spheres Motion",
+      category: "video",
+      aspect: "square",
+      fit: "cover",
+      isVideo: true,
+    },
+    {
       id: "gal-20",
       src: "/images/services/ghost-mannequin-apparel/ghost-mannequin-greenpoint-knit-cardigan-ice-blue-after.webp",
       alt: "Ice-blue knit cardigan shaped and presented with a ghost mannequin finish",
@@ -224,6 +325,17 @@
       category: "cgi",
       aspect: "square",
       fit: "cover",
+    },
+    {
+      id: "gal-v10",
+      src: "/images/video-editing/Fashion_editorial_montage_creation_1080p_20261001181249.mp4",
+      poster: "/images/services/model-beauty/model-rachel-gilbert-evening-dress-0081.webp",
+      alt: "Editorial master cut film montage and pacing revision",
+      title: "Editorial Master Reel",
+      category: "video",
+      aspect: "tall",
+      fit: "cover",
+      isVideo: true,
     },
     {
       id: "gal-22",
@@ -335,6 +447,7 @@
   const categories = [
     { id: "all", label: "All Works" },
     { id: "retouching", label: "Editorial Retouch" },
+    { id: "video", label: "Commercial Video" },
     { id: "clipping-path", label: "Vector Clipping" },
     { id: "color-correction", label: "Color Calibration" },
     { id: "ghost-mannequin", label: "Ghost Mannequin" },
@@ -505,10 +618,10 @@
     <!-- Header & Interactive Category Filters -->
     <div class="mosaic-header-group flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 lg:mb-10">
       <div class="max-w-2xl">
-        <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
+        <span class="font-sans text-sm text-brand-dark/50 mb-3 block font-medium">
           Work Archive
         </span>
-        <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1] tracking-tight">
+        <h2 class="font-sans text-3xl sm:text-5xl lg:text-6xl text-brand-dark leading-[1.05] tracking-tight font-semibold">
           Selected Productions
         </h2>
       </div>
@@ -519,7 +632,7 @@
           <button
             type="button"
             onclick={() => selectCategory(cat.id)}
-            class="font-mono text-xs uppercase tracking-wider pb-1 transition-colors cursor-pointer border-b-2 -mb-2 shrink-0 {activeFilter === cat.id ? 'border-brand-green text-brand-dark font-bold' : 'border-transparent text-brand-dark/50 hover:text-brand-dark'}"
+            class="font-sans text-sm font-medium pb-1 transition-colors cursor-pointer border-b-2 -mb-2 shrink-0 {activeFilter === cat.id ? 'border-brand-green text-brand-dark font-bold' : 'border-transparent text-brand-dark/50 hover:text-brand-dark'}"
             aria-pressed={activeFilter === cat.id}
           >
             {cat.label}
@@ -537,20 +650,35 @@
           class="group relative overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 {item.bg || 'bg-white'} text-left cursor-pointer aspect-[4/5] shadow-2xs hover:shadow-md transition-shadow duration-300 flex items-center justify-center"
           aria-label="View {item.title}"
         >
-          <img
-            src={item.src}
-            alt={item.alt}
-            loading="lazy"
-            decoding="async"
-            class="absolute inset-0 h-full w-full {item.fit === 'cover' ? 'object-cover object-top' : 'object-contain'} {item.zoom ? 'scale-[1.06] group-hover:scale-[1.11]' : 'group-hover:scale-105'} transition-transform duration-700 ease-out"
-          />
+          {#if item.isVideo}
+            <video
+              src={item.src}
+              poster={item.poster}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            >
+              <track kind="captions" />
+            </video>
+          {:else}
+            <img
+              src={item.src}
+              alt={item.alt}
+              loading="lazy"
+              decoding="async"
+              class="absolute inset-0 h-full w-full {item.fit === 'cover' ? 'object-cover object-top' : 'object-contain'} {item.zoom ? 'scale-[1.06] group-hover:scale-[1.11]' : 'group-hover:scale-105'} transition-transform duration-700 ease-out"
+            />
+          {/if}
 
-          <div class="absolute inset-0 bg-brand-dark/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
+          <div class="absolute inset-0 bg-brand-dark/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white z-10">
             <div>
-              <span class="font-mono text-[10px] uppercase tracking-widest text-brand-green font-semibold block mb-1">
+              <span class="font-sans text-xs text-brand-green font-semibold block mb-1">
                 {item.category.replace("-", " ")}
               </span>
-              <h3 class="font-display text-lg font-normal text-white">
+              <h3 class="font-sans text-lg text-white font-semibold">
                 {item.title}
               </h3>
             </div>
@@ -565,9 +693,9 @@
           type="button"
           onclick={loadMore}
           size="lg"
-          class="bg-brand-dark px-8 font-mono text-xs uppercase tracking-wider text-brand-light hover:bg-brand-green hover:text-brand-dark"
+          class="bg-brand-dark px-8 font-sans text-sm text-brand-light hover:bg-brand-green hover:text-brand-dark font-semibold"
         >
-          Load More Images ({filteredItems.length - displayedItems.length} remaining)
+          Load More Productions ({filteredItems.length - displayedItems.length} remaining)
         </Button>
       </div>
     {/if}
@@ -605,11 +733,24 @@
       </button>
 
       <div class="max-h-[75vh] w-full overflow-hidden bg-black/40 flex items-center justify-center p-4">
-        <img
-          src={selectedImage.src}
-          alt={selectedImage.alt}
-          class="h-full w-full object-contain max-h-[72vh] rounded-[1.5rem] border border-white/10"
-        />
+        {#if selectedImage.isVideo}
+          <video
+            src={selectedImage.src}
+            poster={selectedImage.poster}
+            controls
+            autoplay
+            playsinline
+            class="h-full w-full object-contain max-h-[72vh] rounded-[1.5rem] border border-white/10"
+          >
+            <track kind="captions" />
+          </video>
+        {:else}
+          <img
+            src={selectedImage.src}
+            alt={selectedImage.alt}
+            class="h-full w-full object-contain max-h-[72vh] rounded-[1.5rem] border border-white/10"
+          />
+        {/if}
       </div>
 
       <div
@@ -617,15 +758,15 @@
       >
         <div>
           <span
-            class="font-mono text-xs uppercase tracking-widest text-brand-green font-semibold"
+            class="font-sans text-xs text-brand-green font-semibold"
           >
             {selectedImage.category.replace("-", " ")}
           </span>
-          <h3 class="font-display text-xl font-normal text-white">
+          <h3 class="font-sans text-xl text-white font-semibold">
             {selectedImage.title}
           </h3>
         </div>
-        <span class="font-mono text-xs text-brand-light/50">Studio Click House Archive</span>
+        <span class="font-sans text-xs text-brand-light/50">Studio Click House Archive</span>
       </div>
     </div>
   </div>

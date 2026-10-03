@@ -101,7 +101,7 @@
         <!-- Pipeline Category Selection -->
         <div>
           <h3
-            class="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-dark/55"
+            class="mb-3 font-sans text-sm text-brand-dark/55 font-semibold"
           >
             {$_('pricing.calculator.pipelineCategory') || 'Pipeline Category'}
           </h3>
@@ -110,7 +110,7 @@
               <button
                 type="button"
                 class={cn(
-                  "rounded-[var(--radius-control)] border px-4 py-2.5 font-mono text-[0.65rem] uppercase tracking-wider transition-all duration-200 cursor-pointer",
+                  "rounded-[var(--radius-control)] border px-4 py-2.5 font-sans text-sm font-medium transition-all duration-200 cursor-pointer",
                   activeCatIndex === index
                     ? "border-brand-dark bg-brand-dark text-brand-light font-bold shadow-sm"
                     : "border-brand-dark/20 text-brand-dark/75 hover:border-brand-dark hover:text-brand-dark bg-transparent",
@@ -126,7 +126,7 @@
         <!-- Modules Selection -->
         <div>
           <h3
-            class="mb-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-brand-dark/55"
+            class="mb-3 font-sans text-sm text-brand-dark/55 font-semibold"
           >
             {$_('pricing.calculator.services') || 'Services'}
           </h3>
@@ -151,7 +151,7 @@
                     {rate.name}
                   </span>
                   <span
-                    class="mt-1 block font-mono text-[0.62rem] text-brand-dark/52"
+                    class="mt-1 block font-sans text-xs text-brand-dark/52"
                   >
                     ${rate.basePrice.toFixed(2)}/{rate.unit}
                   </span>
@@ -188,7 +188,7 @@
                 {$_('pricing.calculator.estimatedVolume') || 'Estimated Volume'}
               </h3>
               <span
-                class="font-mono text-xs font-bold bg-brand-green/15 text-brand-green-ink px-2.5 py-1 rounded-md"
+                class="font-sans text-xs font-bold bg-brand-green/15 text-brand-green-ink px-2.5 py-1 rounded-md"
               >
                 {volume}
                 {activeCategory.rates[0]?.unit ?? "units"}
@@ -207,7 +207,7 @@
               class="w-full accent-brand-green bg-brand-dark/15 h-2 rounded-lg cursor-pointer outline-none"
             />
             <div
-              class="flex justify-between text-xs font-mono text-brand-dark/55 mt-3"
+              class="flex justify-between text-xs font-sans text-brand-dark/55 mt-3"
             >
               <span>Min: 1</span>
               <span
@@ -232,7 +232,7 @@
                 <button
                   type="button"
                   class={cn(
-                    "py-2 sm:py-2.5 px-1 sm:px-2 rounded-[var(--radius-control)] font-mono text-[0.68rem] sm:text-xs uppercase tracking-tight sm:tracking-wider transition-all duration-200 cursor-pointer text-center",
+                    "py-2 sm:py-2.5 px-1 sm:px-2 rounded-[var(--radius-control)] font-sans text-xs font-medium transition-all duration-200 cursor-pointer text-center",
                     selectedComplexity === index
                       ? "bg-brand-dark text-brand-light font-bold shadow-xs"
                       : "border border-brand-dark/15 hover:bg-brand-dark/5 text-brand-dark/75",
@@ -269,7 +269,7 @@
                 <span class="text-sm font-medium">{$_(`pricing.calculator.turnaround.${index}.label`) || option.label}</span>
                 <span
                   class={cn(
-                    "text-xs font-mono mt-1",
+                    "text-xs font-sans mt-1",
                     selectedTurnaround === index
                       ? "text-brand-green"
                       : "text-brand-dark/55",
@@ -295,12 +295,12 @@
           >
             <div>
               <p
-                class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-dark/50"
+                class="font-sans text-xs font-semibold text-brand-dark/50"
               >
                 {$_('pricing.calculator.realTimeCalculation') || 'Real-Time Calculation'}
               </p>
               <h3
-                class="mt-1 font-display text-2xl font-normal text-brand-dark"
+                class="mt-1 font-sans text-2xl text-brand-dark font-semibold"
               >
                 {$_('pricing.calculator.investmentSummary') || 'Investment Summary'}
               </h3>
@@ -316,17 +316,17 @@
           <div class="py-8 border-b border-brand-dark/15">
             <div class="flex items-baseline gap-2">
               <span
-                class="font-display text-4xl sm:text-5xl font-bold tracking-tight text-brand-dark"
+                class="font-sans text-4xl sm:text-5xl font-black tabular-nums tracking-tight text-brand-dark"
               >
                 ${animatedPrice}
               </span>
               <span
-                class="font-mono text-sm font-semibold uppercase text-brand-dark/60"
+                class="font-sans text-sm font-semibold text-brand-dark/60"
               >
                 USD
               </span>
             </div>
-            <p class="mt-2 text-xs text-brand-dark/65 leading-relaxed">
+            <p class="mt-2 text-sm text-brand-dark/65 leading-relaxed">
               {$_('pricing.calculator.estimatedTotalNote') || 'Estimated total based on selected volume, complexity, and priority.'}
             </p>
           </div>
@@ -368,7 +368,7 @@
             <Button
               href={resolve(`/contact?service=${encodeURIComponent(activeCategory.categoryName.toLowerCase().replace(" ", "-"))}&volume=${volume}&complexity=${selectedComplexity}&turnaround=${selectedTurnaround}`)}
               size="lg"
-              class="w-full font-mono text-xs font-bold uppercase tracking-widest"
+              class="w-full font-sans text-sm font-semibold"
             >
               {$_('pricing.calculator.requestCustomProposal') || 'Request Custom Proposal'} <ArrowRight size={16} />
             </Button>
@@ -376,7 +376,7 @@
               href={resolve("/contact")}
               variant="secondary"
               size="lg"
-              class="w-full font-mono text-xs uppercase tracking-widest hover:border-brand-dark hover:bg-brand-dark/5"
+              class="w-full font-sans text-sm hover:border-brand-dark hover:bg-brand-dark/5 font-semibold"
             >
               {$_('pricing.calculator.bookConsultation') || 'Book a Consultation'}
             </Button>

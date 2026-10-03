@@ -108,7 +108,7 @@
         ></div>
       </div>
       <p
-        class="absolute bottom-5 right-5 border-t border-white/35 pt-2 text-[0.68rem] uppercase tracking-[0.16em] text-white/75"
+        class="absolute bottom-5 right-5 border-t border-white/35 pt-2 text-xs uppercase tracking-[0.16em] text-white/75"
       >
         {$_('about.careers.tag') || 'Inside the studio'}
       </p>
@@ -120,7 +120,7 @@
           {$_("sectionLabels.careers")}
         </p>
         <h2
-          class="max-w-[10ch] font-display text-[clamp(2.5rem,5.5vw,6.5rem)] leading-[0.88] tracking-[-0.045em] text-white"
+          class="max-w-[10ch] font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.045em] text-white font-semibold"
         >
           {$_('about.careers.heading') || careers.heading}
         </h2>
@@ -135,20 +135,20 @@
           class="mt-10 grid grid-cols-3 border-y border-white/20 py-5 text-white/70"
         >
           <div>
-            <dt class="font-display text-2xl text-white sm:text-3xl">150+</dt>
-            <dd class="mt-1 text-[0.62rem] uppercase tracking-[0.13em]">
+            <dt class="font-sans text-2xl text-white sm:text-3xl font-bold">150+</dt>
+            <dd class="mt-1 text-xs uppercase tracking-[0.13em]">
               {$_('about.careers.stats.0.label') || 'Artists'}
             </dd>
           </div>
           <div class="border-x border-white/20 px-4 sm:px-6">
-            <dt class="font-display text-2xl text-white sm:text-3xl">24/7</dt>
-            <dd class="mt-1 text-[0.62rem] uppercase tracking-[0.13em]">
+            <dt class="font-sans text-2xl text-white sm:text-3xl font-bold">24/7</dt>
+            <dd class="mt-1 text-xs uppercase tracking-[0.13em]">
               {$_('about.careers.stats.1.label') || 'Operations'}
             </dd>
           </div>
           <div class="pl-4 sm:pl-6">
-            <dt class="font-display text-2xl text-white sm:text-3xl">Dhaka</dt>
-            <dd class="mt-1 text-[0.62rem] uppercase tracking-[0.13em]">
+            <dt class="font-sans text-2xl text-white sm:text-3xl font-bold">Dhaka</dt>
+            <dd class="mt-1 text-xs uppercase tracking-[0.13em]">
               {$_('about.careers.stats.2.label') || 'Studio HQ'}
             </dd>
           </div>

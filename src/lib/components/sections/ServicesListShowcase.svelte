@@ -91,9 +91,8 @@
       ),
       media: {
         kind: "video",
-        src: "/videos/editing-video-720p.webm",
-        poster:
-          "/images/services/model-beauty/model-menswear-streetwear-studio-127.webp",
+        src: "/videos/services-showcase-motion-reel-4-5.mp4",
+        poster: "/images/work-fields/studio-production-poster.jpg",
       },
     },
     {
@@ -235,8 +234,31 @@
       }, section);
     });
 
+    let videoObserver: IntersectionObserver | undefined;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!prefersReducedMotion && "IntersectionObserver" in window && section) {
+      const videoEl = section.querySelector<HTMLVideoElement>("video");
+      if (videoEl) {
+        videoObserver = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              videoEl.play().catch(() => {});
+            } else {
+              videoEl.pause();
+            }
+          },
+          { threshold: 0.15 },
+        );
+        videoObserver.observe(videoEl);
+      }
+    }
+
     return () => {
       active = false;
+      videoObserver?.disconnect();
       context?.revert();
     };
   });
@@ -261,24 +283,24 @@
       >
         <div class="chapter-content">
           <header class="chapter-copy chapter-reveal">
-            <p class="eyebrow mb-3 text-brand-dark/50">
+            <p class="font-sans text-sm font-medium mb-3 text-brand-dark/50">
               {$_("sectionLabels.divisions")}
             </p>
             <h3
-              class="max-w-[12ch] font-display text-[clamp(2.5rem,3.8vw,4.35rem)] leading-[0.9] tracking-[-0.04em]"
+              class="max-w-[12ch] font-sans font-semibold text-[clamp(2.5rem,3.8vw,4.35rem)] leading-[1.05] tracking-[-0.04em]"
             >
               {$_(`services.showcase.divisions.${divIdx}.title`) ||
                 division.title}
             </h3>
             <p
-              class="mt-5 max-w-[38rem] text-[0.95rem] leading-[1.65] text-brand-dark/65 lg:max-w-[38ch]"
+              class="mt-5 max-w-[38rem] font-sans text-base leading-[1.65] text-brand-dark/65 lg:max-w-[38ch]"
             >
               {$_(`services.showcase.divisions.${divIdx}.description`) ||
                 division.description}
             </p>
             <a
               href={resolve("/contact")}
-              class="mt-6 inline-flex items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/25 px-4 py-2 text-xs font-semibold transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
+              class="mt-6 inline-flex items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/25 min-h-11 px-5 py-2 font-sans text-sm font-semibold transition-colors duration-300 hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
             >
               {$_("services.showcase.planWorkflow") ||
                 "Plan this workflow"}<ArrowUpRight class="h-3.5 w-3.5" />
@@ -304,7 +326,7 @@
           </div>
         </div>
         <div
-          class="chapter-media chapter-scroll-media relative w-full max-w-[28rem] justify-self-center sm:max-w-[32rem] lg:max-w-[28rem]"
+          class="chapter-media chapter-scroll-media relative w-full max-w-[28rem] sm:max-w-[32rem] lg:max-w-[28rem] justify-self-center"
         >
           {#if division.media.kind === "comparison"}
             <BeforeAfterSlider
@@ -322,16 +344,17 @@
             />
           {:else if division.media.kind === "video"}
             <figure
-              class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"
+              class="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl shadow-brand-dark/5"
             >
               <video
+                src={division.media.src}
                 poster={division.media.poster}
                 autoplay
                 muted
                 loop
                 playsinline
-                preload="auto"
-                class="h-full w-full rounded-[2rem] object-cover"
+                preload="metadata"
+                class="size-full rounded-[2rem] object-cover"
                 aria-label="Studio video editing and color grading preview"
                 onloadedmetadata={(e) => {
                   const v = e.currentTarget;
@@ -339,13 +362,12 @@
                   v.play().catch(() => {});
                 }}
               >
-                <source src="/videos/editing_video.mp4" type="video/mp4" />
-                <source src={division.media.src} type="video/webm" />
+                <source src={division.media.src} type="video/mp4" />
               </video>
             </figure>
           {:else}
             <figure
-              class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-brand-dark shadow-xl shadow-brand-dark/5"
+              class="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl shadow-brand-dark/5"
             >
               <img
                 src={division.media.src}
@@ -376,7 +398,7 @@
       grid-column: 7 / 13;
     }
     .service-chapter[data-reverse="true"] .chapter-media {
-      grid-column: 1 / 6;
+      grid-column: 1 / 7;
       grid-row: 1;
       justify-self: start;
     }

@@ -96,11 +96,11 @@
     <!-- Editorial Section Header: 2-Column Split Eliminating Empty Right Side -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end mb-12 sm:mb-16 lg:mb-20">
       <div class="lg:col-span-7">
-        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-3">
+        <p class="font-sans text-sm text-brand-dark/50 mb-3 font-medium">
           03 / Inspection Craft
         </p>
-        <h2 class="font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
-          From Studio RAW to <span class="italic font-light text-brand-green">Campaign Master.</span>
+        <h2 class="font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark font-semibold">
+          From Studio RAW to <span class="not-italic font-semibold text-brand-green">Campaign Master.</span>
         </h2>
       </div>
 
@@ -133,21 +133,21 @@
 
             <!-- Step Index + Badge -->
             <div class="flex items-baseline justify-between gap-2 mb-2">
-              <span class="font-mono text-xs font-bold {stage.step === '05' ? 'text-brand-green' : 'text-brand-dark/40'} tracking-wider">
-                {stage.step} //
+              <span class="font-sans text-xs font-bold {stage.step === '05' ? 'text-brand-green' : 'text-brand-dark/40'}">
+                {stage.step}
               </span>
-              <span class="font-mono text-[0.65rem] uppercase tracking-wider text-brand-dark/45 font-medium">
+              <span class="font-sans text-xs text-brand-dark/45 font-medium">
                 {stage.badge}
               </span>
             </div>
 
             <!-- Stage Title -->
-            <h3 class="font-display text-xl lg:text-[1.35rem] font-normal leading-tight tracking-tight text-brand-dark mb-2.5">
+            <h3 class="font-sans text-xl lg:text-[1.35rem] leading-tight tracking-tight text-brand-dark mb-2.5 font-semibold">
               {stage.title}
             </h3>
 
             <!-- Clean, Concise Craft Description -->
-            <p class="text-xs text-brand-dark/65 leading-relaxed font-normal">
+            <p class="text-sm text-brand-dark/65 leading-relaxed font-normal">
               {stage.desc}
             </p>
           </div>

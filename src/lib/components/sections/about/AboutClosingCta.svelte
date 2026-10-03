@@ -96,7 +96,7 @@
           {$_("sectionLabels.project")}
         </p>
         <h2
-          class="max-w-5xl font-display text-[clamp(2.5rem,5.5vw,6.5rem)] leading-[0.9] tracking-[-0.04em] text-brand-dark"
+          class="max-w-5xl font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark font-semibold"
         >
           {$_('about.closingCta.heading') || closingCta.heading}
         </h2>

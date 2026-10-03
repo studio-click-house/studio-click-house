@@ -224,17 +224,17 @@
       class="ai-visual-copy site-shell absolute inset-0 z-[3] flex items-center"
     >
       <div class="ai-visual-copy-inner max-w-3xl">
-        <p class="eyebrow mb-3 text-brand-light/60 ai-visual-kicker">
+        <p class="mb-5 font-sans text-sm font-medium text-brand-light/70 ai-visual-kicker">
           {$_("sectionLabels.aiVideo")}
         </p>
         <p
-          class="font-display text-5xl leading-[0.9] tracking-[-0.04em] text-brand-light sm:text-6xl lg:text-7xl"
+          class="font-sans text-5xl font-bold leading-[1.02] tracking-[-0.045em] text-brand-light sm:text-6xl lg:text-7xl"
         >
           <span class="ai-visual-title-line"
             ><span>{$_("home.scrollImage.title1")}</span></span
           >
           <span class="ai-visual-title-line">
-            <span class="italic">
+            <span>
               {#each aiVideoTitleWords as word, index (index)}
                 {#if index === aiVideoTitleWords.length - 1}
                   <span class="text-brand-green">{word}</span>
@@ -258,16 +258,16 @@
     <div class="ai-panel-curve" aria-hidden="true"></div>
     <div class="site-shell relative z-10 py-10 sm:py-12 lg:py-16">
       <div class="ai-panel-intro ai-panel-copy">
-        <p class="eyebrow mb-3 text-brand-dark/50">
+        <p class="mb-4 font-sans text-sm font-medium text-brand-dark/60">
           {$_("sectionLabels.photoToVideo")}
         </p>
         <h2
           id="scroll-image-story-title"
-          class="ai-panel-copy-heading font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="ai-panel-copy-heading font-sans text-[clamp(2.5rem,4.5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.045em] text-brand-dark"
         >
           {#each photoToVideoTitleWords as word, index (index)}
             {#if index === photoToVideoTitleWords.length - 1}
-              <em class="font-normal text-brand-green">{word}</em>
+              <span class="text-brand-green">{word}</span>
             {:else}
               {word}
             {/if}{index < photoToVideoTitleWords.length - 1 ? " " : ""}
@@ -367,7 +367,7 @@
           class="ai-explore-link group"
         >
           <span
-            class="font-sans text-xs sm:text-[0.84rem] font-semibold text-brand-dark group-hover:text-brand-green transition-colors duration-200"
+            class="font-sans text-sm font-medium text-brand-dark group-hover:text-brand-green transition-colors duration-200"
           >
             {$_("home.scrollImage.explore") ||
               "Explore video editing & post-production"}
@@ -535,7 +535,7 @@
   }
 
   .video-stage-idx {
-    font-family: var(--font-mono, monospace);
+    font-family: var(--font-sans, sans-serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;

@@ -105,10 +105,10 @@
   <div class="site-shell max-w-6xl mx-auto">
     <!-- Header -->
     <div class="showreel-anim-target max-w-2xl mb-8 sm:mb-12">
-      <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-3 block">
+      <span class="font-sans text-sm text-brand-dark/50 mb-3 block font-medium">
         Process Spotlight
       </span>
-      <h2 class="font-display text-3xl sm:text-5xl font-normal tracking-tight text-brand-dark mb-3">
+      <h2 class="font-sans text-3xl sm:text-5xl tracking-tight text-brand-dark mb-3 font-semibold">
         {$_('portfolio.showreel.title') || 'Process & Craft Showreel'}
       </h2>
       <p class="text-sm sm:text-base text-brand-dark/70 font-normal">
@@ -132,6 +132,7 @@
           src="/videos/work-fields-studio-production.mp4"
           type="video/mp4"
         />
+        <track kind="captions" />
       </video>
 
       <!-- Overlay Play/Pause Action -->

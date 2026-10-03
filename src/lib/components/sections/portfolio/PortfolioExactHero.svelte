@@ -99,38 +99,40 @@
   <video
     bind:this={heroVideo}
     poster="/images/portfolio/portfolio-fashion-studio-hero.jpg"
+    autoplay
     loop
     muted
     playsinline
-    preload="none"
-    class="absolute inset-0 h-full w-full object-cover object-center scale-105 opacity-60"
+    preload="metadata"
+    class="absolute inset-0 h-full w-full object-cover object-center scale-105 opacity-85 transition-opacity duration-700"
     aria-label="Studio Click House high-fashion post-production studio showcase"
   >
-    <source src="/videos/work-fields-studio-production.mp4" type="video/mp4" />
+    <source src="/videos/portfolio-hero-production.mp4" type="video/mp4" />
+    <track kind="captions" />
   </video>
 
-  <div class="absolute inset-0 bg-brand-dark/70"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/45 via-brand-dark/30 to-brand-dark/55"></div>
 
   <div
     class="site-shell relative z-10 flex flex-col items-center text-center text-brand-light max-w-5xl mx-auto"
   >
     <!-- Studio Eyebrow (Clean Editorial Typography, No AI Pill) -->
     <span
-      class="hero-anim-item mb-8 block font-mono text-xs font-medium uppercase tracking-[0.25em] text-brand-light/70"
+      class="hero-anim-item mb-8 block font-sans text-sm text-brand-light/70 font-medium"
     >
       {$_("portfolio.hero.badge") || "Portfolio · Selected Work · 2015–2026"}
     </span>
 
     <!-- Editorial Display Headline -->
     <h1
-      class="hero-anim-item hero-display-title mb-6 max-w-5xl text-[clamp(3rem,7vw,6.5rem)] leading-[0.9] tracking-[-0.055em] text-brand-light"
+      class="hero-anim-item font-sans uppercase mb-6 max-w-5xl text-[clamp(2.75rem,5.5vw,5.5rem)] leading-[1.02] tracking-[-0.045em] text-brand-light font-bold"
     >
       <span class="block"
         >{stripTitlePunctuation(
           $_("portfolio.hero.title") || "Visual Craft",
         )}</span
       >
-      <span class="hero-display-outline block">Made Tangible</span>
+      <span class="text-brand-green block">Made Tangible</span>
     </h1>
 
     <!-- Subtitle with Studio Positioning -->
@@ -143,7 +145,7 @@
 
     <!-- Quick In-Page Exploration Links -->
     <div
-      class="hero-anim-item flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 font-mono text-xs uppercase tracking-wider w-full sm:w-auto px-4"
+      class="hero-anim-item flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 font-sans text-xs w-full sm:w-auto px-4"
     >
       <Button href="#portfolio-before-after" size="lg" class="w-full sm:w-auto">
         Inspect Raw vs Final
@@ -160,7 +162,7 @@
 
     <!-- Bottom Scroll Cue -->
     <div
-      class="hero-anim-item mt-14 sm:mt-16 flex flex-col items-center gap-2 text-brand-light/50 font-mono text-[10px] tracking-widest uppercase"
+      class="hero-anim-item mt-14 sm:mt-16 flex flex-col items-center gap-2 text-brand-light/50 font-sans text-xs"
     >
       <span>Scroll to Explore</span>
       <ArrowDown class="size-3.5 animate-bounce text-brand-green" />

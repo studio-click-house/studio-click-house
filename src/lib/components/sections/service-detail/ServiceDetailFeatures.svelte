@@ -81,13 +81,13 @@
     >
       <div>
         <span
-          class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50"
+          class="font-sans text-sm font-medium text-brand-dark/50"
         >
           {eyebrow}
         </span>
         <h2
           id="service-detail-features-title"
-          class="mt-3 max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="mt-3 max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark"
         >
           {heading}
         </h2>
@@ -112,14 +112,14 @@
         >
           <!-- Big Bold Watermark Number -->
           <span
-            class="font-display text-4xl font-black tracking-tight text-brand-dark/15 transition-colors duration-300 group-hover:text-brand-green/40 sm:text-5xl"
+            class="font-sans text-4xl font-black tracking-tight text-brand-dark/15 transition-colors duration-300 group-hover:text-brand-green/40 sm:text-5xl"
           >
             {String(i + 1).padStart(2, "0")}
           </span>
 
           <!-- Bold Uppercase Title -->
           <h3
-            class="mt-5 font-display text-base font-extrabold uppercase tracking-tight text-brand-dark sm:text-lg"
+            class="mt-5 font-sans text-base font-semibold tracking-[-0.02em] text-brand-dark sm:text-lg"
           >
             {item.title}
           </h3>

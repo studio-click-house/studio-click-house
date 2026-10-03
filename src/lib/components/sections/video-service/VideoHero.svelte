@@ -123,15 +123,15 @@
 
   <div class="site-shell relative z-10 flex items-center py-12 sm:py-16">
     <div class="w-full max-w-3xl space-y-7">
-      <p class="eyebrow mb-3 text-brand-light/60">
+      <p class="font-sans text-sm font-medium mb-3 text-brand-light/60">
         {$_("sectionLabels.video")}
       </p>
       <h1
         id="video-hero-title"
-        class="video-hero-title hero-display-title max-w-[12ch] font-display text-[clamp(3rem,6.5vw,6.2rem)] leading-[0.91] tracking-[-0.045em] text-brand-light"
+        class="video-hero-title max-w-[12ch] font-sans font-bold uppercase text-[clamp(3rem,6.5vw,6.2rem)] leading-[1.02] tracking-[-0.045em] text-brand-light"
       >
         <span class="block">{stripTitlePunctuation(data.title)}</span>
-        <span class="hero-display-outline mt-2 block sm:mt-3">
+        <span class="text-brand-green mt-2 block sm:mt-3">
           {stripTitlePunctuation(data.titleAccent)}
         </span>
       </h1>

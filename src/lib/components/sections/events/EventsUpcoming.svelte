@@ -38,7 +38,7 @@
             {$_("sectionLabels.upcoming")}
           </p>
           <h2
-            class="max-w-[13ch] font-display text-[clamp(2.4rem,4.2vw,4.6rem)] leading-[0.94] tracking-[-0.035em]"
+            class="max-w-[13ch] font-sans text-[clamp(2.4rem,4.2vw,4.6rem)] leading-[1.05] tracking-[-0.035em] font-semibold"
           >
             {event.title}
           </h2>
@@ -52,7 +52,7 @@
           <dl class="grid grid-cols-2 gap-5">
             <div class="grid gap-1.5">
               <dt
-                class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/44"
+                class="font-sans text-xs text-brand-dark/44"
               >
                 {$_('events.upcoming.format') || 'Format'}
               </dt>
@@ -60,7 +60,7 @@
             </div>
             <div class="grid gap-1.5">
               <dt
-                class="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/44"
+                class="font-sans text-xs text-brand-dark/44"
               >
                 {$_('events.upcoming.place') || 'Place'}
               </dt>
@@ -74,7 +74,7 @@
           >
             {#each event.focus as item (item)}
               <li
-                class="font-mono text-[0.56rem] uppercase tracking-[0.12em] text-brand-dark/64"
+                class="font-sans text-xs font-medium text-brand-dark/64"
               >
                 {item}
               </li>

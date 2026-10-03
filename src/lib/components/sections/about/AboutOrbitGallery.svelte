@@ -25,33 +25,33 @@
   const assurances = [
     {
       step: "01",
-      title: "Virtual on-model fitting",
+      title: "On-model composition",
       description:
-        "Seamlessly composite individual garments and accessories onto photorealistic AI models with authentic posture and studio lighting.",
+        "Combine garment and accessory photos into one on-model image.",
       cardIndex: 3,
       tag: "On-Model Synthesis",
     },
     {
       step: "02",
-      title: "Fabric & drape physics",
+      title: "Fabric and fit",
       description:
-        "Intelligent contour mapping and realistic crease synthesis preserve true garment weights, weaves, and natural silhouettes.",
+        "Refine folds, texture, and silhouette to suit the garment.",
       cardIndex: 1,
       tag: "Textile Simulation",
     },
     {
       step: "03",
-      title: "Accessory & light matching",
+      title: "Accessories and lighting",
       description:
-        "Luxury watches, jewelry, bags, and eyewear integrated with millimeter precision, specular reflections, and contact shadows.",
+        "Match accessories, reflections, and shadows across the composition.",
       cardIndex: 6,
       tag: "Specular & Shadow",
     },
     {
       step: "04",
-      title: "Commercial studio export",
+      title: "Final image delivery",
       description:
-        "High-resolution e-commerce and editorial deliverables with strict color fidelity, zero shoot overhead, and rapid turnaround.",
+        "Prepare the finished image for e-commerce and campaign use.",
       cardIndex: 0,
       tag: "Commercial Master",
     },
@@ -599,14 +599,14 @@
   >
     <!-- MOBILE HEADER (visible on mobile, hidden on desktop) -->
     <header class="w-full pb-6 mb-6 block md:hidden">
-      <p class="eyebrow mb-3 text-brand-dark/50">
+      <p class="mb-4 font-sans text-sm font-medium text-brand-dark/60">
         {$_("sectionLabels.quality")}
       </p>
       <h2
-        class="font-display text-2xl font-light leading-tight tracking-[-0.03em] text-brand-dark mt-2"
+        class="font-sans text-[clamp(2rem,7vw,3rem)] font-medium leading-[1.05] tracking-[-0.045em] text-brand-dark mt-2"
       >
-        {$_('home.aboutOrbit.headingPart1') || "Quality isn't the last step."}
-        <em class="font-display italic font-normal text-brand-green">{$_('home.aboutOrbit.headingPart2') || "It's every step."}</em>
+        {$_('home.aboutOrbit.headingPart1') || "From product photos."}
+        <span class="font-sans font-medium text-brand-green">{$_('home.aboutOrbit.headingPart2') || "To campaign imagery."}</span>
       </h2>
     </header>
 
@@ -663,7 +663,7 @@
               <div
                 class="card-stage-pill pointer-events-none absolute bottom-3.5 left-3.5 z-30 inline-flex max-w-[calc(100%-1.75rem)] items-center rounded-full border border-white/20 bg-brand-dark/80 backdrop-blur-md px-3 py-1 text-brand-light shadow-[0_4px_16px_rgba(0,0,0,0.35)] transition-all duration-300"
               >
-                <span class="truncate font-sans text-[0.58rem] font-semibold tracking-tight text-white sm:text-[0.62rem]">
+                <span class="truncate font-sans text-xs font-medium text-brand-light">
                   {isInteractive && activeCardIndex === 3 && index === 3 ? "On-Model Campaign Look" : ($_( `home.aboutOrbit.cards.${card.id}.title`) || card.title)}
                 </span>
               </div>
@@ -678,13 +678,13 @@
         class="orbit-center-copy relative z-30 max-w-[11rem] px-1 text-center sm:max-w-md sm:px-6"
       >
         <h2
-          class="font-display text-2xl font-light leading-tight tracking-[-0.035em] text-brand-dark sm:text-4xl md:text-5xl lg:text-6xl"
+          class="font-sans text-3xl font-medium leading-[1.04] tracking-[-0.055em] text-brand-dark sm:text-4xl md:text-5xl lg:text-6xl"
         >
-          AI <span class="italic text-brand-green">{$_('home.aboutOrbit.postProduction')}</span>
+          AI <span class="text-brand-green">{$_('home.aboutOrbit.postProduction')}</span>
         </h2>
 
         <p
-          class="mt-4 text-xs leading-relaxed text-brand-dark/75 sm:text-sm md:text-base"
+          class="mt-5 font-sans text-sm leading-[1.65] text-brand-dark/75 md:text-base"
         >
           {$_('home.aboutOrbit.description')}
         </p>
@@ -692,7 +692,7 @@
         <div class="mt-8">
           <a
             href={resolve("/portfolio")}
-            class="group inline-flex items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/15 bg-transparent px-5 py-2.5 font-sans text-xs font-semibold text-brand-dark transition-all duration-300 hover:border-brand-dark/30 hover:bg-brand-dark/5"
+            class="group inline-flex items-center gap-2 rounded-[var(--radius-control)] border border-brand-dark/15 bg-transparent px-5 py-2.5 font-sans text-sm font-medium text-brand-dark transition-all duration-300 hover:border-brand-dark/30 hover:bg-brand-dark/5"
           >
             <span>{$_('home.aboutOrbit.explore')}</span>
             <ArrowUpRight
@@ -716,14 +716,14 @@
           bind:this={workflowHeaderRef}
           class="workflow-header mb-6 hidden md:block"
         >
-          <p class="eyebrow mb-3 text-brand-dark/50">
+          <p class="mb-4 font-sans text-sm font-medium text-brand-dark/60">
             {$_('home.aboutOrbit.eyebrow') || "AI Production System"}
           </p>
           <h2
-            class="font-display text-[clamp(1.35rem,1.9vw,2.05rem)] font-light leading-[1.15] tracking-[-0.03em] text-brand-dark"
+            class="font-sans text-[clamp(1.6rem,2.2vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.045em] text-brand-dark"
           >
-            {$_('home.aboutOrbit.headingPart1') || "From isolated packshots."}
-            <em class="font-display italic font-normal text-brand-green">{$_('home.aboutOrbit.headingPart2') || "To campaign reality."}</em>
+            {$_('home.aboutOrbit.headingPart1') || "From product photos."}
+            <span class="font-sans font-medium text-brand-green">{$_('home.aboutOrbit.headingPart2') || "To campaign imagery."}</span>
           </h2>
         </header>
 
@@ -759,7 +759,7 @@
                 <div class="assurance-content flex items-start gap-3.5 sm:gap-4 w-full">
                   <!-- Large editorial numeral -->
                   <span
-                    class="font-display text-2xl sm:text-[1.85rem] font-light leading-none select-none transition-colors duration-300 w-7 sm:w-8 shrink-0 pt-0.5 {isActive
+                    class="font-sans text-xl sm:text-2xl font-medium leading-none select-none transition-colors duration-300 w-7 sm:w-8 shrink-0 pt-0.5 {isActive
                       ? 'text-brand-green'
                       : 'text-brand-dark/25 group-hover:text-brand-dark/60'}"
                   >
@@ -768,11 +768,11 @@
 
                   <!-- Title + Description -->
                   <div class="flex-1 min-w-0">
-                    <h3 class="font-sans font-semibold text-[0.92rem] sm:text-[0.98rem] leading-tight text-brand-dark tracking-[-0.01em]">
+                    <h3 class="font-sans font-medium text-base leading-[1.35] text-brand-dark tracking-[-0.01em]">
                       {$_(`home.aboutOrbit.steps.${index}.title`) || assurance.title}
                     </h3>
 
-                    <p class="assurance-description mt-1 text-[0.76rem] sm:text-[0.8rem] leading-relaxed transition-colors duration-300 {isActive ? 'text-brand-dark/85 font-normal' : 'text-brand-dark/60'}">
+                    <p class="assurance-description mt-2 font-sans text-sm leading-[1.65] transition-colors duration-300 {isActive ? 'text-brand-dark/85 font-normal' : 'text-brand-dark/60'}">
                       {$_(`home.aboutOrbit.steps.${index}.description`) || assurance.description}
                     </p>
                   </div>
@@ -792,41 +792,41 @@
         <div class="flex-1 grid grid-cols-4 gap-6 text-left">
           <div class="metric-item group transition-transform duration-200 hover:-translate-y-0.5">
             <span
-              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              class="block font-sans text-[clamp(1.5rem,2vw,2.2rem)] font-medium leading-none text-brand-dark"
               >{$_('home.aboutOrbit.stats.0.value') || '8 → 1'}</span
             >
             <span
-              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-sans text-xs font-normal text-brand-dark/65"
               >{$_('home.aboutOrbit.stats.0.label') || 'Asset Synthesis'}</span
             >
           </div>
           <div class="orbit-stat-fade-up">
             <span
-              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              class="block font-sans text-[clamp(1.5rem,2vw,2.2rem)] font-medium leading-none text-brand-dark"
               >{$_('home.aboutOrbit.stats.1.value') || '4K UHD'}</span
             >
             <span
-              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-sans text-xs font-normal text-brand-dark/65"
               >{$_('home.aboutOrbit.stats.1.label') || 'Resolution Ready'}</span
             >
           </div>
           <div class="orbit-stat-fade-up">
             <span
-              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              class="block font-sans text-[clamp(1.5rem,2vw,2.2rem)] font-medium leading-none text-brand-dark"
               >{$_('home.aboutOrbit.stats.2.value') || '24h'}</span
             >
             <span
-              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-sans text-xs font-normal text-brand-dark/65"
               >{$_('home.aboutOrbit.stats.2.label') || 'Turnaround SLA'}</span
             >
           </div>
           <div class="orbit-stat-fade-up">
             <span
-              class="block font-display text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-none text-brand-dark"
+              class="block font-sans text-[clamp(1.5rem,2vw,2.2rem)] font-medium leading-none text-brand-dark"
               >{$_('home.aboutOrbit.stats.3.value') || '100%'}</span
             >
             <span
-              class="block mt-1.5 font-mono text-[0.52rem] uppercase tracking-wider text-brand-dark/50"
+              class="block mt-1.5 font-sans text-xs font-normal text-brand-dark/65"
               >{$_('home.aboutOrbit.stats.3.label') || 'Color Fidelity'}</span
             >
           </div>
@@ -855,41 +855,41 @@
       <div class="grid grid-cols-2 gap-6 text-left">
         <div class="flex flex-col">
           <span
-            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            class="block font-sans text-2xl font-medium leading-none text-brand-dark"
             >{$_('home.aboutOrbit.stats.0.value') || '8 → 1'}</span
           >
           <span
-            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            class="block mt-1 font-sans text-xs font-normal text-brand-dark/65"
             >{$_('home.aboutOrbit.stats.0.label') || 'Asset Synthesis'}</span
           >
         </div>
         <div class="flex flex-col">
           <span
-            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            class="block font-sans text-2xl font-medium leading-none text-brand-dark"
             >{$_('home.aboutOrbit.stats.1.value') || '4K UHD'}</span
           >
           <span
-            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            class="block mt-1 font-sans text-xs font-normal text-brand-dark/65"
             >{$_('home.aboutOrbit.stats.1.label') || 'Resolution Ready'}</span
           >
         </div>
         <div class="flex flex-col">
           <span
-            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            class="block font-sans text-2xl font-medium leading-none text-brand-dark"
             >{$_('home.aboutOrbit.stats.2.value') || '24h'}</span
           >
           <span
-            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            class="block mt-1 font-sans text-xs font-normal text-brand-dark/65"
             >{$_('home.aboutOrbit.stats.2.label') || 'Turnaround SLA'}</span
           >
         </div>
         <div class="flex flex-col">
           <span
-            class="block font-display text-2xl font-light leading-none text-brand-dark"
+            class="block font-sans text-2xl font-medium leading-none text-brand-dark"
             >{$_('home.aboutOrbit.stats.3.value') || '100%'}</span
           >
           <span
-            class="block mt-1 font-mono text-[0.58rem] uppercase tracking-wider text-brand-dark/50"
+            class="block mt-1 font-sans text-xs font-normal text-brand-dark/65"
             >{$_('home.aboutOrbit.stats.3.label') || 'Color Fidelity'}</span
           >
         </div>
@@ -1039,16 +1039,16 @@
 
   .assurance-row h3 {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     letter-spacing: -0.015em;
     color: var(--color-brand-dark);
   }
 
   .assurance-row p {
-    font-size: 0.78rem;
-    line-height: 1.5;
-    color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--color-brand-dark) 75%, transparent);
     max-width: 32rem;
   }
 
@@ -1066,10 +1066,10 @@
     background: var(--color-brand-dark);
     color: var(--color-brand-light);
     font-family: var(--font-sans);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.045em;
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     transition:
       color 280ms ease,
       background 280ms ease,
@@ -1171,7 +1171,7 @@
     }
 
     .assurance-row p {
-      font-size: 0.73rem;
+      font-size: 0.875rem;
     }
   }
 

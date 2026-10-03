@@ -116,13 +116,13 @@
     <!-- Centered Editorial Header: Title only -->
     <div class="sd-intro-header mb-8 text-center sm:mb-10 lg:mb-12">
       <span
-        class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50"
+        class="font-sans text-sm font-medium text-brand-dark/50"
       >
         Service Overview
       </span>
       <h2
         id="service-detail-intro-title"
-        class="mx-auto mt-3 max-w-[22ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+        class="mx-auto mt-3 max-w-[22ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark"
       >
         {data.heading}
       </h2>
@@ -141,13 +141,13 @@
           >
             <!-- Count in muted gray -->
             <span
-              class="font-display text-2xl font-black tracking-tight text-brand-dark/25 transition-colors duration-300 group-hover:text-brand-dark/40 sm:text-3xl"
+              class="font-sans text-2xl font-black tracking-tight text-brand-dark/25 transition-colors duration-300 group-hover:text-brand-dark/40 sm:text-3xl"
             >
               0{stepIndex + 1}
             </span>
             <!-- Simple clean title -->
             <h3
-              class="mt-2.5 font-display text-base font-extrabold uppercase tracking-tight text-brand-dark sm:text-lg"
+              class="mt-2.5 font-sans text-base font-semibold tracking-[-0.02em] text-brand-dark sm:text-lg"
             >
               {stage.label}
             </h3>
@@ -190,13 +190,13 @@
           >
             <!-- Count in muted gray -->
             <span
-              class="font-display text-2xl font-black tracking-tight text-brand-dark/25 transition-colors duration-300 group-hover:text-brand-dark/40 sm:text-3xl"
+              class="font-sans text-2xl font-black tracking-tight text-brand-dark/25 transition-colors duration-300 group-hover:text-brand-dark/40 sm:text-3xl"
             >
               0{stepIndex + 1}
             </span>
             <!-- Simple clean title -->
             <h3
-              class="mt-2.5 font-display text-base font-extrabold uppercase tracking-tight text-brand-dark sm:text-lg"
+              class="mt-2.5 font-sans text-base font-semibold tracking-[-0.02em] text-brand-dark sm:text-lg"
             >
               {stage.label}
             </h3>

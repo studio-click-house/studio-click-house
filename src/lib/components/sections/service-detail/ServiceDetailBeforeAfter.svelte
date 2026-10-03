@@ -19,6 +19,31 @@
   const headingId = $derived(`${sectionId}-title`);
   let section = $state<HTMLElement>();
 
+  const beforeList = $derived(
+    data.beforeCards && data.beforeCards.length > 0
+      ? data.beforeCards
+      : [
+          {
+            src: data.beforeSrc,
+            alt: data.beforeAlt,
+            label: data.beforeLabel || "Before",
+            width: data.width,
+            height: data.height,
+          },
+        ],
+  );
+
+  let activeBeforeIndex = $state(0);
+  let isHoveringBefore = $state(false);
+
+  $effect(() => {
+    if (beforeList.length <= 1 || isHoveringBefore) return;
+    const interval = setInterval(() => {
+      activeBeforeIndex = (activeBeforeIndex + 1) % beforeList.length;
+    }, 3600);
+    return () => clearInterval(interval);
+  });
+
   onMount(() => {
     let active = true;
     let context: { revert: () => void } | undefined;
@@ -92,7 +117,7 @@
 >
   <div class="site-shell relative z-10">
     {#if data.layout === "cards"}
-      <!-- 2-card direct comparison -->
+      <!-- 2-card direct comparison with interactive multi-before switcher -->
       <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
         <div
           class={cn(
@@ -105,25 +130,89 @@
           )}
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
+            <!-- BEFORE CARD -->
             <figure
+              onmouseenter={() => (isHoveringBefore = true)}
+              onmouseleave={() => (isHoveringBefore = false)}
               class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-dark/20 sm:-translate-y-2"
             >
-              <img
-                src={data.beforeSrc}
-                alt={data.beforeAlt}
-                width={data.width}
-                height={data.height}
-                loading={imageLoading}
-                fetchpriority={imageLoading === "eager" ? "low" : undefined}
-                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-              />
-              <span
-                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
-              >
-                {data.beforeLabel || "Before"}
-              </span>
+              {#each beforeList as card, idx (card.src)}
+                <img
+                  src={card.src}
+                  alt={card.alt}
+                  width={card.width ?? data.width}
+                  height={card.height ?? data.height}
+                  loading={imageLoading}
+                  fetchpriority={imageLoading === "eager" && idx === 0 ? "high" : undefined}
+                  class={cn(
+                    "size-full object-cover object-center transition-opacity duration-500 ease-out",
+                    beforeList.length > 1 ? "absolute inset-0" : "",
+                    idx === activeBeforeIndex
+                      ? "opacity-100 z-0"
+                      : "opacity-0 pointer-events-none -z-10",
+                  )}
+                />
+              {/each}
+
+              {#if beforeList.length > 1}
+                <!-- Multi-Before interactive tabs -->
+                <div
+                  class="absolute top-3.5 inset-x-3.5 z-20 flex items-center justify-between pointer-events-auto"
+                >
+                  <div
+                    class="inline-flex rounded-full border border-brand-dark/10 bg-white/95 p-0.5 shadow-sm backdrop-blur-md"
+                  >
+                    {#each beforeList as card, idx}
+                      <button
+                        type="button"
+                        onclick={() => (activeBeforeIndex = idx)}
+                        class={cn(
+                          "rounded-full px-2.5 py-1 font-sans text-xs font-medium transition-all duration-200 cursor-pointer",
+                          activeBeforeIndex === idx
+                            ? "bg-brand-dark text-brand-light shadow-sm"
+                            : "text-brand-dark/65 hover:text-brand-dark hover:bg-brand-dark/5",
+                        )}
+                      >
+                        {card.label || `Before ${idx + 1}`}
+                      </button>
+                    {/each}
+                  </div>
+
+                  <span
+                    class="inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-2.5 py-1 font-sans text-xs font-medium text-brand-dark/75 shadow-sm backdrop-blur-md"
+                  >
+                    Before
+                  </span>
+                </div>
+
+                <!-- Subtle pagination dots at bottom -->
+                <div
+                  class="absolute bottom-3.5 inset-x-0 z-20 flex items-center justify-center gap-1.5 pointer-events-auto"
+                >
+                  {#each beforeList as _, idx}
+                    <button
+                      type="button"
+                      onclick={() => (activeBeforeIndex = idx)}
+                      aria-label={`View before input ${idx + 1}`}
+                      class={cn(
+                        "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
+                        activeBeforeIndex === idx
+                          ? "w-5 bg-brand-dark"
+                          : "w-1.5 bg-brand-dark/30 hover:bg-brand-dark/60",
+                      )}
+                    ></button>
+                  {/each}
+                </div>
+              {:else if data.showLabels !== false}
+                <span
+                  class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-sans text-xs font-medium text-brand-dark/75 shadow-sm backdrop-blur-md"
+                >
+                  {data.beforeLabel || "Before"}
+                </span>
+              {/if}
             </figure>
 
+            <!-- AFTER CARD -->
             <figure
               class="sd-ba-card group relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-lg shadow-brand-dark/[0.03] transition-all duration-500 hover:shadow-xl hover:border-brand-green/30 sm:translate-y-8"
             >
@@ -133,34 +222,34 @@
                 width={data.width}
                 height={data.height}
                 loading={imageLoading}
-                fetchpriority={imageLoading === "eager" ? "low" : undefined}
-                class="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                fetchpriority={imageLoading === "eager" ? "high" : undefined}
+                class="size-full object-cover object-center"
               />
-              <span
-                class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-mono text-[0.62rem] font-medium uppercase tracking-[0.18em] text-brand-dark/75 shadow-sm backdrop-blur-md"
-              >
-                {data.afterLabel || "After"}
-              </span>
+              {#if data.showLabels !== false}
+                <span
+                  class="absolute top-4 left-4 z-10 inline-flex items-center rounded-full border border-brand-dark/10 bg-white/90 px-3.5 py-1 font-sans text-xs font-medium text-brand-dark/75 shadow-sm backdrop-blur-md"
+                >
+                  {data.afterLabel || "After"}
+                </span>
+              {/if}
             </figure>
           </div>
         </div>
 
         <div
           class={cn(
-            "sd-ba-copy lg:col-span-5 lg:pl-4",
+            "sd-ba-copy lg:col-span-5",
             data.textPosition === "left"
-              ? "lg:order-1"
-              : data.textPosition === "right"
-                ? "lg:order-2"
-                : "",
+              ? "lg:order-1 lg:pr-6"
+              : "lg:order-2 lg:pl-6",
           )}
         >
-          <p class="eyebrow mb-3 text-brand-dark/50">
+          <p class="font-sans text-sm font-medium mb-3 text-brand-dark/50">
             {$_("sectionLabels.comparison")}
           </p>
           <h2
             id={headingId}
-            class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]"
+            class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em]"
           >
             {data.heading}
           </h2>
@@ -181,7 +270,9 @@
             </ul>
           {/if}
 
-          <ServiceActionPair comparisonHref="#service-detail-showcase" />
+          <ServiceActionPair
+            comparisonHref={data.comparisonHref || "#service-detail-showcase"}
+          />
         </div>
       </div>
     {:else}
@@ -209,12 +300,12 @@
 
         <!-- Right: Text & Details (Columns 8-12) -->
         <div class="sd-ba-copy lg:order-2 lg:col-span-5 lg:pl-4">
-          <p class="eyebrow mb-3 text-brand-dark/50">
+          <p class="font-sans text-sm font-medium mb-3 text-brand-dark/50">
             {$_("sectionLabels.comparison")}
           </p>
           <h2
             id={headingId}
-            class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]"
+            class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em]"
           >
             {data.heading}
           </h2>
@@ -226,7 +317,7 @@
 
           {#if data.caption}
             <p
-              class="mt-7 border-l border-brand-green/70 pl-4 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-brand-dark/45"
+              class="mt-7 border-l border-brand-green/70 pl-4 font-sans text-xs text-brand-dark/45"
             >
               {data.caption}
             </p>
@@ -243,7 +334,9 @@
             </ul>
           {/if}
 
-          <ServiceActionPair comparisonHref="#service-detail-showcase" />
+          <ServiceActionPair
+            comparisonHref={data.comparisonHref || "#service-detail-showcase"}
+          />
         </div>
       </div>
     {/if}

@@ -305,11 +305,11 @@
     <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left Column: Service Details & Deliverables -->
       <div class="modeling-reveal space-y-6 lg:col-span-5">
-        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50">
+        <p class="font-sans text-sm font-medium text-brand-dark/50">
           01 / 3D Product Modeling
         </p>
 
-        <h2 class="max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark">
+        <h2 class="max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark">
           {data.heading}
         </h2>
 
@@ -317,7 +317,7 @@
           {data.leadParagraph}
         </p>
 
-        <p class="max-w-[38ch] text-xs sm:text-sm leading-relaxed text-brand-dark/65">
+        <p class="max-w-[38ch] text-sm leading-relaxed text-brand-dark/65">
           {data.bodyParagraph}
         </p>
 
@@ -335,7 +335,7 @@
                   {item.title}
                 </h3>
                 <p
-                  class="text-xs sm:text-sm text-brand-dark/70 leading-relaxed"
+                  class="text-sm text-brand-dark/70 leading-relaxed"
                 >
                   {item.description}
                 </p>

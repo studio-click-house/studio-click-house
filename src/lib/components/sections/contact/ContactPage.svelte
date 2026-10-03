@@ -223,7 +223,7 @@
           </p>
           <h1
             id="contact-page-title"
-            class="hero-display-title mt-4 sm:mt-5 max-w-none font-display text-[clamp(2.5rem,5.8vw,6rem)] leading-[0.94] tracking-[-0.04em]"
+            class="font-sans uppercase mt-4 sm:mt-5 max-w-none text-[clamp(2.5rem,5.8vw,6rem)] leading-[1.02] tracking-[-0.045em] font-bold"
           >
             <span class="contact-title-mask">
               <span class="contact-title-line"
@@ -249,7 +249,7 @@
                 handleScrollTo("#project-brief");
               }}
               size="lg"
-              class="group bg-brand-dark font-mono text-xs uppercase tracking-[0.13em] text-brand-light hover:bg-brand-green hover:text-brand-dark"
+              class="group bg-brand-dark font-sans text-sm font-semibold text-brand-light hover:bg-brand-green hover:text-brand-dark"
             >
               {$_("contact.hero.sendBrief") || "Send a brief"}
               <ArrowDown size={15} />
@@ -385,7 +385,7 @@
       </p>
       <h2
         id="contact-signal-title"
-        class="text-balance font-display text-[clamp(2.1rem,4.4vw,4.4rem)] leading-[0.96] tracking-[-0.035em] text-brand-dark"
+        class="text-balance font-sans text-[clamp(2.1rem,4.4vw,4.4rem)] leading-[1.05] tracking-[-0.035em] text-brand-dark font-semibold"
       >
         {$_("contact.signal.title") ||
           "A clear brief turns scattered inputs into one production signal."}
@@ -412,7 +412,7 @@
         </p>
         <h2
           id="project-brief-title"
-          class="text-balance font-display text-[clamp(2.4rem,4vw,4.4rem)] leading-[0.92] tracking-[-0.04em]"
+          class="text-balance font-sans text-[clamp(2.4rem,4vw,4.4rem)] leading-[1.05] tracking-[-0.04em] font-semibold"
         >
           {$_("contact.form.title") || "Share your project details."}
         </h2>
@@ -549,7 +549,7 @@
             <Button
               type="submit"
               size="lg"
-              class="group font-mono text-xs uppercase tracking-[0.11em] sm:min-h-13"
+              class="group font-sans text-sm sm:min-h-13 font-semibold"
             >
               Open email draft
               <ArrowUpRight
@@ -575,22 +575,22 @@
                   'object-center'} transition-[object-position] duration-300"
               />
               <figcaption class="bg-brand-dark p-4 sm:p-5 text-brand-light">
-                <p class="font-display text-xl sm:text-2xl tracking-[-0.02em]">
+                <p class="font-sans text-xl sm:text-2xl tracking-[-0.02em] font-semibold">
                   {selectedServiceDetail.name}
                 </p>
                 <p
-                  class="mt-1.5 text-xs sm:text-sm leading-relaxed text-brand-light/66"
+                  class="mt-1.5 text-sm leading-relaxed text-brand-light/66"
                 >
                   {selectedServiceDetail.descriptor}
                 </p>
               </figcaption>
             </figure>
             <div class="p-4 sm:p-5">
-              <h3 class="font-display text-xl sm:text-2xl tracking-[-0.02em]">
+              <h3 class="font-sans text-xl sm:text-2xl tracking-[-0.02em] font-semibold">
                 {$_("contact.form.haveQuestions") || "Have questions?"}
               </h3>
               <p
-                class="mt-2 text-xs sm:text-sm leading-relaxed text-brand-dark/62"
+                class="mt-2 text-sm leading-relaxed text-brand-dark/62"
               >
                 {$_("contact.form.haveQuestionsNote") ||
                   "Call or email the Dhaka studio before sending a brief."}
@@ -614,7 +614,7 @@
                   <button
                     type="button"
                     onclick={copyStudioEmail}
-                    class="inline-flex items-center gap-1.5 rounded-[var(--radius-control)] border border-brand-dark/14 px-2 py-1 font-mono text-[0.55rem] uppercase tracking-[0.1em] text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green cursor-pointer"
+                    class="inline-flex items-center gap-1.5 rounded-[var(--radius-control)] border border-brand-dark/14 px-2 py-1 font-sans text-sm text-brand-dark/54 transition-colors hover:border-brand-green hover:text-brand-green cursor-pointer font-semibold"
                     aria-live="polite"
                   >
                     {#if emailCopied}
@@ -645,7 +645,7 @@
         </p>
         <h2
           id="global-offices-title"
-          class="text-balance font-display text-[clamp(2.5rem,4.6vw,5.2rem)] leading-[0.9] tracking-[-0.045em]"
+          class="text-balance font-sans text-[clamp(2.5rem,4.6vw,5.2rem)] leading-[1.05] tracking-[-0.045em] font-semibold"
         >
           {$_("contact.offices.title") || "Reach us here."}
         </h2>
@@ -672,12 +672,12 @@
           >
             <div class="lg:col-span-5">
               <h3
-                class="font-display text-[clamp(2.4rem,4.5vw,4.5rem)] leading-[0.92] tracking-[-0.04em] text-brand-light"
+                class="font-sans text-[clamp(2.4rem,4.5vw,4.5rem)] leading-[1.15] tracking-[-0.04em] text-brand-light font-semibold"
               >
                 {primaryOffice.country}
               </h3>
               <p
-                class="mt-3 sm:mt-4 max-w-md text-xs sm:text-sm leading-relaxed text-brand-light/75"
+                class="mt-3 sm:mt-4 max-w-md text-sm leading-relaxed text-brand-light/75"
               >
                 {primaryOffice.address}
               </p>
@@ -747,7 +747,7 @@
             >
               <div>
                 <h3
-                  class="font-display text-2xl sm:text-3xl font-light tracking-[-0.035em] text-brand-dark"
+                  class="font-sans text-2xl sm:text-3xl tracking-[-0.035em] text-brand-dark font-semibold"
                 >
                   {office.country}
                 </h3>
@@ -847,12 +847,12 @@
     display: block;
     margin-bottom: 0.15rem;
     color: color-mix(in srgb, var(--color-brand-dark) 48%, transparent);
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    font-weight: 600;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    line-height: 1;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
+    line-height: 1.4;
   }
 
   .contact-channel-text span {
@@ -867,12 +867,12 @@
   .brief-field-label {
     display: block;
     color: color-mix(in srgb, var(--color-brand-dark) 64%, transparent);
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.13em;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: normal;
     line-height: 1.2;
-    text-transform: uppercase;
+    text-transform: none;
   }
 
   .brief-field {
@@ -903,7 +903,7 @@
     padding-top: 0.5rem;
     color: var(--color-brand-dark);
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.3;
     outline: none;
   }
@@ -912,11 +912,11 @@
     border-radius: var(--radius-control);
     background: var(--color-brand-paper);
     color: var(--color-brand-dark);
-    font-family: var(--font-mono);
-    font-size: 0.61rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
     transition:
       border-color 220ms ease,
       background-color 220ms ease,
@@ -967,7 +967,7 @@
     padding-top: 0.75rem;
     color: var(--color-brand-dark);
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.55;
     outline: none;
   }
@@ -1006,12 +1006,12 @@
     display: block;
     margin-bottom: 0.15rem;
     color: var(--color-brand-green);
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
+    line-height: 1.4;
   }
 
   .office-channel-dark span {

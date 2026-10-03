@@ -91,46 +91,50 @@
 >
   <div class="site-shell relative z-10">
     <!-- Asymmetric Collage Container -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16 items-start">
       <!-- Left Column Group -->
-      <div class="md:col-span-6 flex flex-col gap-8">
+      <div class="md:col-span-6 flex flex-col gap-10 lg:gap-12">
         <!-- Top Left: Large Editorial Campaign Showcase -->
-        <div
-          class="collage-item group overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-sm"
+        <figure
+          class="collage-item group m-0 w-full max-w-[32rem] md:ml-auto"
         >
-          <div class="aspect-[4/3] w-full overflow-hidden bg-brand-dark/5">
-            <img
-              src="/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp"
-              alt="High-fashion night glam editorial lookbook retouching"
-              width="2000"
-              height="1500"
-              loading="lazy"
-              decoding="async"
+          <div class="aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-dark/5 relative">
+            <video
+              src="/images/video-editing/Fashion_editorial_montage_creation_1080p_20261001180512.mp4"
+              poster="/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Fashion editorial post-production film"
               class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            />
+            >
+              <track kind="captions" />
+            </video>
           </div>
-          <div
-            class="p-5 border-t border-brand-dark/10 flex items-center justify-between"
+          <figcaption
+            class="pt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"
           >
-            <span class="font-display text-base font-normal text-brand-dark">
+            <span class="font-sans text-sm font-medium text-brand-dark">
               {$_("portfolio.collage.selectedCampaign") || "Editorial Showcase"}
             </span>
-            <span class="font-mono text-xs text-brand-dark/50"
+            <span class="font-sans text-xs text-brand-dark/50"
               >Paris & Milan Seasons</span
             >
-          </div>
-        </div>
+          </figcaption>
+        </figure>
 
         <!-- Middle-Left: Micro-row (Text block on left + Garment Swatch on right) -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center"
         >
           <div class="collage-item flex flex-col justify-center">
-            <h3 class="font-display text-2xl font-normal text-brand-dark mb-2">
+            <h3 class="font-sans text-2xl text-brand-dark mb-2 font-semibold">
               {$_("portfolio.collage.pantonePrecision") || "Pantone Precision"}
             </h3>
             <p
-              class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal"
+              class="text-sm text-brand-dark/75 leading-relaxed font-normal"
             >
               {$_("portfolio.collage.pantoneDesc") ||
                 "Flawless garment recoloring and skin tone harmony calibrated for high-end print lookbooks."}
@@ -138,7 +142,7 @@
           </div>
 
           <div
-            class="collage-item group aspect-square overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-sm flex items-center justify-center p-3 sm:p-4"
+            class="collage-item group aspect-square overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-white flex items-center justify-center p-3 sm:p-4"
           >
             <img
               src="/images/services/ghost-mannequin-apparel/ghost-mannequin-antony-morato-winter-parka-brown-front-after.webp"
@@ -154,21 +158,21 @@
       </div>
 
       <!-- Right Column Group -->
-      <div class="md:col-span-6 flex flex-col gap-8">
+      <div class="md:col-span-6 flex flex-col gap-8 lg:gap-10 md:pt-8 lg:pt-12">
         <!-- Top Right Story Header & Paragraph -->
-        <div class="collage-item pt-2 pb-2">
+        <div class="collage-item max-w-lg">
           <span
-            class="font-mono text-xs uppercase tracking-widest text-brand-dark/50 font-semibold block mb-2"
+            class="font-sans text-sm text-brand-dark/50 font-medium block mb-3"
           >
             {$_("portfolio.collage.selectedCampaign") || "Selected Campaign"}
           </span>
           <h2
-            class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-brand-dark leading-tight tracking-tight mb-3"
+            class="font-sans text-[length:var(--text-section)] text-brand-dark leading-[1.05] tracking-[-0.035em] mb-5 font-semibold text-balance"
           >
             {$_("portfolio.collage.hauteCouture") || "Haute Couture Retouch"}
           </h2>
           <p
-            class="text-sm sm:text-base text-brand-dark/80 font-normal leading-relaxed max-w-lg"
+            class="text-base text-brand-dark/70 font-normal leading-relaxed max-w-lg"
           >
             {$_("portfolio.collage.hauteCoutureDesc") ||
               "High-fashion editorial finishing engineered to maintain the authentic tactile texture of silk, velvet, and fine jewelry while perfecting lighting contour lines."}
@@ -180,7 +184,7 @@
           class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center"
         >
           <div
-            class="collage-item group aspect-[3/4] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-sm"
+            class="collage-item group aspect-[4/5] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-white"
           >
             <img
               src="/images/services/model-beauty/model-female-headshot-white-blouse-0997-after.webp"
@@ -194,11 +198,11 @@
           </div>
 
           <div class="collage-item flex flex-col justify-center">
-            <h3 class="font-display text-2xl font-normal text-brand-dark mb-2">
+            <h3 class="font-sans text-2xl text-brand-dark mb-2 font-semibold">
               {$_("portfolio.collage.microContouring") || "Micro Contouring"}
             </h3>
             <p
-              class="text-xs sm:text-sm text-brand-dark/75 leading-relaxed font-normal"
+              class="text-sm text-brand-dark/75 leading-relaxed font-normal"
             >
               {$_("portfolio.collage.microContouringDesc") ||
                 "Non-destructive frequency separation preserving pore fidelity and natural skin luminescence."}
@@ -208,10 +212,10 @@
 
         <!-- Bottom Right Feature Card (Footwear Vector Isolation) -->
         <div
-          class="collage-item group overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] border border-brand-dark/10 bg-white shadow-sm"
+          class="collage-item group"
         >
           <div
-            class="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-white flex items-center justify-center p-4 sm:p-8"
+            class="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-white flex items-center justify-center p-4 sm:p-8"
           >
             <img
               src="/images/services/bags-accessories/accessories-antony-morato-white-leather-sneakers-3285.webp"
@@ -224,13 +228,13 @@
             />
           </div>
           <div
-            class="flex items-center justify-between border-t border-brand-dark/10 p-4"
+            class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 pt-3"
           >
-            <h4 class="font-display text-base font-normal text-brand-dark">
+            <h4 class="font-sans text-base text-brand-dark font-semibold">
               {$_("portfolio.collage.footwearIsolation") ||
                 "Footwear Vector Isolation"}
             </h4>
-            <span class="font-mono text-xs text-brand-dark/50">
+            <span class="font-sans text-xs text-brand-dark/50">
               {$_("portfolio.collage.archiveBadge") || "2026 Archive"}
             </span>
           </div>

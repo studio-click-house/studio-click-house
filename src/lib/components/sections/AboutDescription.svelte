@@ -1,303 +1,152 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { ArrowUpRight, Users, Clock, ShieldCheck, Globe } from "lucide-svelte";
   import { resolve } from "$app/paths";
-  import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
   import { Button } from "$lib/components/ui/button";
+  import { previewMedia } from "$lib/content/media";
+  import { siteConfig } from "$lib/config/site";
 
-  let section: HTMLElement;
-  let copyBlock: HTMLElement;
-  let highlightsBlock: HTMLElement;
+  let studioVideo: HTMLVideoElement;
 
   onMount(() => {
-    let context: { revert: () => void } | undefined;
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let visible = false;
     let active = true;
+    let pendingPlay: Promise<void> | undefined;
+    const shouldPlay = () =>
+      active && visible && !document.hidden && !motionPreference.matches;
 
-    registerScrollTrigger().then((runtime) => {
-      if (!active || !runtime || !section || !copyBlock || !highlightsBlock) return;
-
-      const { gsap } = runtime;
-
-      context = gsap.context(() => {
-        const media = gsap.matchMedia();
-
-        media.add("(prefers-reduced-motion: no-preference)", () => {
-          gsap.fromTo(
-            ".desc-title-line > span",
-            { yPercent: 100, rotate: 1.2 },
-            {
-              yPercent: 0,
-              rotate: 0,
-              duration: 0.6,
-              stagger: 0.08,
-              ease: "power3.out",
-              clearProps: "all",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 88%",
-                once: true,
-              },
-            },
-          );
-
-          gsap.fromTo(
-            ".desc-story-item",
-            { autoAlpha: 0, y: 20 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.55,
-              stagger: 0.1,
-              ease: "power2.out",
-              clearProps: "all",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 88%",
-                once: true,
-              },
-            },
-          );
-
-          gsap.fromTo(
-            ".desc-stat-card",
-            { autoAlpha: 0, y: 24, scale: 0.97 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.55,
-              stagger: 0.08,
-              ease: "power2.out",
-              clearProps: "all",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 88%",
-                once: true,
-              },
-            },
-          );
+    const updatePlayback = () => {
+      if (!shouldPlay()) {
+        studioVideo.pause();
+        return;
+      }
+      if (!studioVideo.paused || pendingPlay) return;
+      studioVideo.muted = true;
+      pendingPlay = studioVideo.play();
+      pendingPlay
+        .catch(() => {})
+        .finally(() => {
+          pendingPlay = undefined;
+          if (!shouldPlay()) studioVideo.pause();
         });
+    };
 
-        return () => media.revert();
-      }, section);
-    });
+    const cuePreview = () => {
+      if (studioVideo.currentTime === 0) studioVideo.currentTime = 0.001;
+    };
+    if (studioVideo.readyState >= 1) cuePreview();
+    studioVideo.addEventListener("loadedmetadata", cuePreview);
+    studioVideo.addEventListener("canplay", updatePlayback);
+    document.addEventListener("visibilitychange", updatePlayback);
+    motionPreference.addEventListener("change", updatePlayback);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = Boolean(entry?.isIntersecting);
+        updatePlayback();
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(studioVideo);
 
     return () => {
       active = false;
-      context?.revert();
+      observer.disconnect();
+      studioVideo.pause();
+      studioVideo.removeEventListener("loadedmetadata", cuePreview);
+      studioVideo.removeEventListener("canplay", updatePlayback);
+      document.removeEventListener("visibilitychange", updatePlayback);
+      motionPreference.removeEventListener("change", updatePlayback);
     };
   });
 </script>
 
 <section
   id="about-description"
-  bind:this={section}
   aria-labelledby="about-description-title"
-  class="relative overflow-hidden bg-brand-light pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 text-brand-dark"
+  class="relative bg-brand-light py-14 text-brand-dark sm:py-20 lg:py-24"
 >
   <div class="site-shell relative z-10">
-    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-      
-      <!-- Left Column: Stylish Editorial Heading & Studio Story -->
-      <div bind:this={copyBlock} class="lg:col-span-7">
-        
-        <!-- Display Headline with Mixed Editorial Typography -->
-        <p class="eyebrow mb-3 text-brand-dark/50">
-          {$_("sectionLabels.about")}
+    <div class="about-layout">
+      <div class="about-heading">
+        <p class="mb-5 font-sans text-sm font-medium text-brand-dark/60">
+          {$_("home.aboutDescription.title1") || "About us"}
         </p>
         <h2
           id="about-description-title"
-          class="font-display text-[clamp(2.5rem,4.4vw,4.8rem)] leading-[0.92] tracking-[-0.04em]"
+          class="max-w-[11ch] font-sans text-[clamp(3rem,4.8vw,5.5rem)] font-medium leading-[0.99] tracking-[-0.055em]"
         >
-          <span class="desc-title-line block overflow-hidden pb-1">
-            <span class="block will-change-transform">About Us</span>
-          </span>
-          <span class="desc-title-line block overflow-hidden pb-1">
-            <span class="block will-change-transform">
-              <em class="font-display italic font-normal text-brand-dark">Studio Click House.</em>
-            </span>
-          </span>
+          {siteConfig.name}
         </h2>
+      </div>
 
-        <!-- Story Copy -->
-        <div class="mt-6 space-y-4 max-w-xl">
-          <p class="desc-story-item font-sans text-base leading-[1.55] font-normal text-brand-dark/90 sm:text-[1.15rem] sm:leading-[1.5]">
-            {$_('home.aboutDescription.paragraph1') || 'Studio Click House is an international visual post-production house serving world-class photographers, global fashion brands, e-commerce retailers, and creative agencies.'}
-          </p>
-          
-          <p class="desc-story-item text-xs leading-relaxed text-brand-dark/65 sm:text-sm font-sans">
-            {$_('home.aboutDescription.paragraph2') || 'We specialize in editorial image retouching, video color grading, and photorealistic 3D CGI rendering. Combining meticulous human artistry with an overnight 24/7 production pipeline, our studio ensures every frame meets uncompromising creative and commercial standards.'}
-          </p>
-        </div>
+      <div
+        id="about-studio-media"
+        class="about-media"
+        aria-label="Studio Click House visual work"
+      >
+        <figure
+          class="about-film m-0 overflow-hidden rounded-[var(--radius-media-sm)] bg-brand-dark sm:rounded-[var(--radius-media)]"
+        >
+          <video
+            bind:this={studioVideo}
+            src="/images/video-editing/Creating_fashion_commercial_video_1080p_20261002180624.mp4"
+            width="1920"
+            height="1080"
+            muted
+            playsinline
+            loop
+            preload="metadata"
+            aria-label="Fashion commercial production film"
+            class="aspect-video h-full w-full object-cover"
+          ></video>
+        </figure>
+        <figure
+          class="about-portrait m-0 overflow-hidden rounded-[var(--radius-media-sm)] bg-brand-dark sm:rounded-[var(--radius-media)]"
+        >
+          <img
+            src={previewMedia.cgiProductShowcase.src}
+            alt={previewMedia.cgiProductShowcase.alt}
+            width={previewMedia.cgiProductShowcase.width}
+            height={previewMedia.cgiProductShowcase.height}
+            loading="lazy"
+            decoding="async"
+            sizes="(min-width: 1024px) 18vw, 32vw"
+            class="aspect-[4/5] h-full w-full object-cover"
+          />
+        </figure>
+      </div>
 
-        <!-- Action CTAs -->
-        <div class="desc-story-item about-actions">
+      <div class="about-story">
+        <p
+          class="max-w-[43ch] font-sans text-[clamp(1.05rem,1.25vw,1.25rem)] leading-[1.55] text-brand-dark/90"
+        >
+          {$_("home.aboutDescription.paragraph1") ||
+            "Studio Click House is a visual post-production studio for photographers, fashion brands, e-commerce retailers, and creative agencies."}
+        </p>
+        <p
+          class="mt-5 max-w-[55ch] font-sans text-sm leading-[1.7] text-brand-dark/65 sm:text-[0.95rem]"
+        >
+          {$_("home.aboutDescription.paragraph2") ||
+            "We handle editorial retouching, product image editing, video color grading, and photorealistic 3D CGI. Our Dhaka production team works across shifts to keep large batches moving while senior artists review the finish."}
+        </p>
+        <div class="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
           <Button
             href={resolve("/about")}
             size="lg"
-            class="min-w-42 justify-between bg-brand-dark text-brand-light hover:bg-brand-green hover:text-brand-dark"
+            class="bg-brand-dark px-6 text-brand-light hover:bg-brand-green hover:text-brand-dark"
           >
-            <span>{$_('home.aboutDescription.aboutStudio') || 'About the studio'}</span>
-            <ArrowUpRight size={15} strokeWidth={1.7} />
+            {$_("home.aboutDescription.aboutStudio") || "About the studio"}
           </Button>
-
-          <Button
+          <a
             href={resolve("/contact")}
-            variant="secondary"
-            size="lg"
-            class="min-w-42 justify-between"
+            class="rounded-[var(--radius-control)] py-3 font-sans text-sm font-medium text-brand-dark/75 underline-offset-4 hover:text-brand-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
           >
-            <span>{$_('home.aboutDescription.freeTrial') || 'Start Free Trial'}</span>
-            <ArrowUpRight size={15} strokeWidth={1.7} />
-          </Button>
-        </div>
-      </div>
-
-      <!-- Right Column: 4 Architecture-Themed Studio Location Cards -->
-      <div bind:this={highlightsBlock} class="lg:col-span-5">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4.5">
-          
-          <!-- Card 1: Dhaka Production Atelier -->
-          <div
-            class="desc-stat-card group relative flex flex-col justify-between overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white p-5 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-md"
-          >
-            <!-- Top bar: Icon Badge + Monospace Tag -->
-            <div class="relative z-10 flex items-center gap-2.5">
-              <div class="grid h-8 w-8 place-items-center rounded-lg border border-brand-dark/10 bg-brand-light text-brand-dark/70 transition-colors duration-200 group-hover:border-brand-green/30 group-hover:text-brand-green">
-                <Users size={15} strokeWidth={1.75} />
-              </div>
-              <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                {$_('home.aboutDescription.atelierTags.0') || 'ATELIER 01'}
-              </span>
-            </div>
-
-            <!-- Content -->
-            <div class="relative z-10 mt-4">
-              <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                {$_('home.aboutDescription.stats.0.value') || '150+'}
-              </span>
-              <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                {$_('home.aboutDescription.stats.0.label') || 'Senior Specialists'}
-              </h3>
-              <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                {$_('home.aboutDescription.stats.0.sub') || 'Dedicated in-house retouchers & 3D artists'}
-              </p>
-            </div>
-
-            <!-- Architectural Art 1: Dhaka Studio Atelier HQ Silhouette -->
-            <div class="pointer-events-none absolute right-1.5 bottom-0 opacity-15 transition-all duration-300 group-hover:opacity-35 group-hover:text-brand-green" aria-hidden="true">
-              <svg width="155" height="50" viewBox="0 0 165 50" fill="none" stroke="currentColor" class="text-brand-dark group-hover:text-brand-green transition-colors duration-300">
-                <path d="M5 50V32h14V18h16v32h10V10h18v40h12V22h16v28h12V14h18v36h12V28h15v22h8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-          </div>
-
-          <!-- Card 2: London European Hub Skyline -->
-          <div
-            class="desc-stat-card group relative flex flex-col justify-between overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white p-5 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-md"
-          >
-            <!-- Top bar: Icon Badge + Monospace Tag -->
-            <div class="relative z-10 flex items-center gap-2.5">
-              <div class="grid h-8 w-8 place-items-center rounded-lg border border-brand-dark/10 bg-brand-light text-brand-dark/70 transition-colors duration-200 group-hover:border-brand-green/30 group-hover:text-brand-green">
-                <Clock size={15} strokeWidth={1.75} />
-              </div>
-              <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                {$_('home.aboutDescription.atelierTags.1') || 'CONTINUOUS'}
-              </span>
-            </div>
-
-            <!-- Content -->
-            <div class="relative z-10 mt-4">
-              <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                {$_('home.aboutDescription.stats.1.value') || '24/7'}
-              </span>
-              <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                {$_('home.aboutDescription.stats.1.label') || 'Global Production'}
-              </h3>
-              <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                {$_('home.aboutDescription.stats.1.sub') || 'Continuous worldwide overnight turnaround'}
-              </p>
-            </div>
-
-            <!-- Architectural Art 2: London Landmark Skyline Silhouette -->
-            <div class="pointer-events-none absolute right-1.5 bottom-0 opacity-15 transition-all duration-300 group-hover:opacity-35 group-hover:text-brand-green" aria-hidden="true">
-              <svg width="155" height="50" viewBox="0 0 165 50" fill="none" stroke="currentColor" class="text-brand-dark group-hover:text-brand-green transition-colors duration-300">
-                <path d="M5 50V40h10V26h8v24h8V12h8l2-6 2 6h8v38h12V20h14v30h10V30h14v20h10V16h16v34h12" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-          </div>
-
-          <!-- Card 3: Stockholm Nordic Hub Skyline -->
-          <div
-            class="desc-stat-card group relative flex flex-col justify-between overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white p-5 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-md"
-          >
-            <!-- Top bar: Icon Badge + Monospace Tag -->
-            <div class="relative z-10 flex items-center gap-2.5">
-              <div class="grid h-8 w-8 place-items-center rounded-lg border border-brand-dark/10 bg-brand-light text-brand-dark/70 transition-colors duration-200 group-hover:border-brand-green/30 group-hover:text-brand-green">
-                <ShieldCheck size={15} strokeWidth={1.75} />
-              </div>
-              <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                {$_('home.aboutDescription.atelierTags.2') || '3-TIER QC'}
-              </span>
-            </div>
-
-            <!-- Content -->
-            <div class="relative z-10 mt-4">
-              <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                {$_('home.aboutDescription.stats.2.value') || '99.8%'}
-              </span>
-              <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                {$_('home.aboutDescription.stats.2.label') || 'QC Accuracy'}
-              </h3>
-              <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                {$_('home.aboutDescription.stats.2.sub') || 'Three-tier precision inspection system'}
-              </p>
-            </div>
-
-            <!-- Architectural Art 3: Stockholm City Hall & Spire Silhouette -->
-            <div class="pointer-events-none absolute right-1.5 bottom-0 opacity-15 transition-all duration-300 group-hover:opacity-35 group-hover:text-brand-green" aria-hidden="true">
-              <svg width="155" height="50" viewBox="0 0 165 50" fill="none" stroke="currentColor" class="text-brand-dark group-hover:text-brand-green transition-colors duration-300">
-                <path d="M5 50V34h12V22h14v28h8V8l3-6 3 6v42h12V24h15v26h10V14h14v36h12V34h14v16h12" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-          </div>
-
-          <!-- Card 4: Sydney APAC Hub Skyline -->
-          <div
-            class="desc-stat-card group relative flex flex-col justify-between overflow-hidden rounded-[14px] border border-brand-dark/10 bg-white p-5 shadow-xs transition-all duration-300 hover:border-brand-dark/30 hover:shadow-md"
-          >
-            <!-- Top bar: Icon Badge + Monospace Tag -->
-            <div class="relative z-10 flex items-center gap-2.5">
-              <div class="grid h-8 w-8 place-items-center rounded-lg border border-brand-dark/10 bg-brand-light text-brand-dark/70 transition-colors duration-200 group-hover:border-brand-green/30 group-hover:text-brand-green">
-                <Globe size={15} strokeWidth={1.75} />
-              </div>
-              <span class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brand-dark/50">
-                {$_('home.aboutDescription.atelierTags.3') || 'WORLDWIDE'}
-              </span>
-            </div>
-
-            <!-- Content -->
-            <div class="relative z-10 mt-4">
-              <span class="font-display text-3xl font-bold tracking-tight text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-                {$_('home.aboutDescription.stats.3.value') || '20+'}
-              </span>
-              <h3 class="mt-1 font-sans text-xs sm:text-[0.82rem] font-semibold tracking-tight text-brand-dark">
-                {$_('home.aboutDescription.stats.3.label') || 'Countries Served'}
-              </h3>
-              <p class="mt-0.5 text-[0.7rem] text-brand-dark/60 font-sans leading-tight">
-                {$_('home.aboutDescription.stats.3.sub') || 'Trusted by international luxury brands'}
-              </p>
-            </div>
-
-            <!-- Architectural Art 4: Sydney Harbour & Opera Architectural Silhouette -->
-            <div class="pointer-events-none absolute right-1.5 bottom-0 opacity-15 transition-all duration-300 group-hover:opacity-35 group-hover:text-brand-green" aria-hidden="true">
-              <svg width="155" height="50" viewBox="0 0 165 50" fill="none" stroke="currentColor" class="text-brand-dark group-hover:text-brand-green transition-colors duration-300">
-                <path d="M5 50V40h10c4-12 12-22 22-22v22h8c4-16 14-26 26-26v26h8c3-10 10-18 18-18v18h10V28h14v22h14" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-          </div>
-
+            {$_("home.aboutDescription.freeTrial") || "Start free trial"}
+          </a>
         </div>
       </div>
     </div>
@@ -305,29 +154,62 @@
 </section>
 
 <style>
-  .desc-title-line {
-    display: block;
-    overflow: hidden;
+  .about-layout {
+    display: grid;
+    gap: 2rem;
   }
 
-  .desc-stat-card {
-    opacity: 1;
-    visibility: visible;
-    min-height: 9.25rem;
+  .about-media {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
   }
 
-  .about-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
+  .about-film {
+    grid-column: 1 / 12;
+    grid-row: 1;
+    aspect-ratio: 16 / 9;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .desc-title-line > span,
-    .desc-stat-card,
-    .desc-story-item {
-      will-change: auto;
+  .about-portrait {
+    grid-column: 9 / 13;
+    grid-row: 1;
+    margin-top: 65%;
+    aspect-ratio: 4 / 5;
+  }
+
+  @media (min-width: 1024px) {
+    .about-layout {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-rows: auto 1fr;
+      column-gap: clamp(3rem, 5vw, 6rem);
+      row-gap: 2rem;
+      align-items: start;
+    }
+
+    .about-heading {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .about-story {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .about-media {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      padding-block: 1.5rem;
+    }
+
+    .about-film {
+      grid-column: 1 / 12;
+    }
+
+    .about-portrait {
+      margin-top: 90%;
     }
   }
 </style>

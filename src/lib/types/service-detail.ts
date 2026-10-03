@@ -43,6 +43,14 @@ export interface ServiceAudienceItem {
   examples?: string[];
 }
 
+export interface ServiceBeforeAfterCardItem {
+  src: string;
+  alt: string;
+  label?: string;
+  width?: number;
+  height?: number;
+}
+
 export interface ServiceBeforeAfterData {
   sectionId?: string;
   heading: string;
@@ -61,6 +69,9 @@ export interface ServiceBeforeAfterData {
   showButtons?: boolean;
   layout?: "slider" | "cards";
   textPosition?: "left" | "right";
+  comparisonHref?: string;
+  beforeCards?: ServiceBeforeAfterCardItem[];
+  cards?: ServiceBeforeAfterCardItem[];
 }
 
 export interface ServiceShowcaseGalleryItem {

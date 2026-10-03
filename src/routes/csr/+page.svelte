@@ -67,7 +67,7 @@
 
       <div class="mt-8 max-w-4xl border-b border-brand-dark/15 pb-12">
         <h1
-          class="hero-display-title text-[clamp(2.75rem,6vw,6rem)] leading-[0.9] tracking-[-0.06em]"
+          class="font-sans uppercase text-[clamp(2.75rem,6vw,6rem)] leading-[1.02] tracking-[-0.045em] font-bold"
         >
           {stripTitlePunctuation($_("csr.title") || "Digital CSR")}
         </h1>
@@ -87,12 +87,12 @@
               class="border-b border-brand-dark/10 pb-10 last:border-0 last:pb-0"
             >
               <span
-                class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-brand-dark/50"
+                class="font-sans text-xs text-brand-dark/50"
               >
                 Pillar · {pillar.id.replace("-", " ")}
               </span>
               <h2
-                class="mt-3 font-display text-2xl tracking-[-0.02em] text-brand-dark sm:text-3xl"
+                class="mt-3 font-sans text-2xl tracking-[-0.02em] text-brand-dark sm:text-3xl font-semibold"
               >
                 {$_(`csr.pillars.${index}.title`) || pillar.title}
               </h2>
@@ -111,7 +111,7 @@
         >
           <div>
             <h3
-              class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand-dark"
+              class="font-sans text-sm text-brand-dark font-semibold"
             >
               {$_("csr.sidebar.partnerTitle") || "Partnering on Impact"}
             </h3>
@@ -130,7 +130,7 @@
 
           <div class="border-t border-brand-dark/10 pt-8">
             <h3
-              class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand-dark"
+              class="font-sans text-sm text-brand-dark font-semibold"
             >
               {$_("csr.sidebar.commitTitle") || "Our Commitment"}
             </h3>

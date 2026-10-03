@@ -97,7 +97,7 @@
 >
   <div class="site-shell max-w-5xl mx-auto flex flex-col items-center text-center">
     <!-- Centered Eyebrow -->
-    <span class="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark/50 mb-6 sm:mb-8 block">
+    <span class="font-sans text-sm text-brand-dark/50 mb-6 sm:mb-8 block font-medium">
       {$_('portfolio.stats.eyebrow') || 'Verified Studio Metrics'}
     </span>
 
@@ -107,10 +107,10 @@
     >
       {#each metrics as m (m.label)}
         <div class="metric-anim-item flex flex-col items-center">
-          <div class="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-brand-dark leading-none tracking-tight">
+          <div class="font-sans text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-brand-dark leading-none tracking-tight">
             {m.value}
           </div>
-          <span class="font-mono text-xs uppercase tracking-wider text-brand-dark/60 mt-3 font-medium">
+          <span class="font-sans text-xs text-brand-dark/60 mt-3 font-medium">
             {m.label}
           </span>
         </div>
@@ -122,7 +122,7 @@
       <p class="eyebrow mb-3 text-brand-dark/50">
         {$_("sectionLabels.project")}
       </p>
-      <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-brand-dark leading-[1.08] tracking-tight mb-6">
+      <h2 class="font-sans text-3xl sm:text-5xl lg:text-6xl text-brand-dark leading-[1.05] tracking-tight mb-6 font-semibold">
         {$_('portfolio.stats.ctaHeading') || 'Ready to see what we can do for your brand?'}
       </h2>
 
@@ -134,7 +134,7 @@
         <Button
           href={resolve('/contact')}
           size="lg"
-          class="w-full font-mono text-xs uppercase tracking-wider sm:w-auto sm:text-sm"
+          class="w-full font-sans text-sm sm:w-auto sm:text-sm font-semibold"
         >
           <span>{$_('portfolio.stats.ctaButton') || 'Request Free Test Retouch'}</span>
           <ArrowUpRight class="size-4 shrink-0" />
@@ -144,7 +144,7 @@
           href={resolve('/services')}
           variant="secondary"
           size="lg"
-          class="w-full bg-white font-mono text-xs uppercase tracking-wider hover:border-brand-dark hover:bg-brand-dark/5 sm:w-auto sm:text-sm"
+          class="w-full bg-white font-sans text-sm hover:border-brand-dark hover:bg-brand-dark/5 sm:w-auto sm:text-sm font-semibold"
         >
           <span>Explore Services</span>
         </Button>

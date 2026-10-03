@@ -83,10 +83,11 @@
     },
   };
   const workFieldGalleryItems = [
-    workFieldDemoItem,
     withImageKind(workGalleryItems[0]),
+    workFieldDemoItem,
+    withImageKind(workGalleryItems[1]),
     workFieldLifestyleVideoItem,
-    ...workGalleryItems.slice(1).map(withImageKind),
+    ...workGalleryItems.slice(2).map(withImageKind),
   ];
   const workFieldServiceLabels: Record<string, string> = {
     "commercial-video-editing": "Commercial video editing",
@@ -102,21 +103,20 @@
     "jewelry-detail": "jewelry-retouching",
     "shadow-study": "ecommerce-retouching",
   };
-  const workFieldItems =
-    finalShowcaseProject
-      ? [
-          {
-            ...workGalleryItems[0],
-            id: `showcase-handoff-${finalShowcaseProject.id}`,
-            title: finalShowcaseProject.title,
-            category: finalShowcaseProject.category,
-            description: finalShowcaseProject.description,
-            tags: ["3D", "CGI"],
-            media: finalShowcaseProject.media,
-          },
-          ...workFieldGalleryItems,
-        ]
-      : workFieldGalleryItems;
+  const workFieldItems = finalShowcaseProject
+    ? [
+        {
+          ...workGalleryItems[0],
+          id: `showcase-handoff-${finalShowcaseProject.id}`,
+          title: finalShowcaseProject.title,
+          category: finalShowcaseProject.category,
+          description: finalShowcaseProject.description,
+          tags: ["3D", "CGI"],
+          media: finalShowcaseProject.media,
+        },
+        ...workFieldGalleryItems,
+      ]
+    : workFieldGalleryItems;
 
   let section: HTMLElement | null = null;
   let stage: HTMLElement | null = null;
@@ -136,12 +136,12 @@
     );
     const projectVideos = stageVideos.filter((v) => v !== introVideo);
 
-    // Configure all videos on mount: ensure muted DOM properties for autoplay permission and trigger preload
+    const videoCleanupFns: Array<() => void> = [];
     stageVideos.forEach((v) => {
       v.muted = true;
       v.defaultMuted = true;
       v.playsInline = true;
-      v.preload = "auto";
+      v.preload = "metadata";
       const cueFirstFrame = () => {
         if (v.currentTime === 0) {
           v.currentTime = 0.001;
@@ -152,15 +152,25 @@
       } else {
         v.addEventListener("loadedmetadata", cueFirstFrame, { once: true });
       }
+      videoCleanupFns.push(() =>
+        v.removeEventListener("loadedmetadata", cueFirstFrame),
+      );
     });
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
     let isSectionNearViewport = false;
-    let hoveredVideo: HTMLVideoElement | null = null;
     let currentPlayingVideo: HTMLVideoElement | null = null;
     let isRafScheduled = false;
+    let videoUpdateFrame = 0;
+    let shouldPlayIntro = false;
+    const shouldPlayVideo = (video: HTMLVideoElement) =>
+      active &&
+      !document.hidden &&
+      !prefersReducedMotion.matches &&
+      isSectionNearViewport &&
+      (video === introVideo ? shouldPlayIntro : currentPlayingVideo === video);
 
     // Track in-flight play promises to strictly prevent DOMException AbortError
     // when pause() is requested before play() fulfills
@@ -182,12 +192,7 @@
             .catch(() => {})
             .finally(() => {
               playPromises.delete(video);
-              // If video is no longer the target or section is not near viewport, pause safely
-              if (
-                currentPlayingVideo !== video &&
-                video !== introVideo &&
-                !video.paused
-              ) {
+              if (!shouldPlayVideo(video) && !video.paused) {
                 video.pause();
               }
             });
@@ -198,16 +203,11 @@
     };
 
     const safePause = (video: HTMLVideoElement) => {
-      if (video.paused) return;
       const pending = playPromises.get(video);
       if (pending) {
         pending
           .then(() => {
-            if (
-              currentPlayingVideo !== video &&
-              video !== introVideo &&
-              !video.paused
-            ) {
+            if (!shouldPlayVideo(video) && !video.paused) {
               video.pause();
             }
           })
@@ -219,6 +219,7 @@
 
     const pauseAllStageVideos = () => {
       currentPlayingVideo = null;
+      shouldPlayIntro = false;
       stageVideos.forEach((video) => {
         safePause(video);
       });
@@ -243,6 +244,7 @@
 
     const updateIntroVideo = () => {
       if (!introVideo) return;
+      shouldPlayIntro = false;
       if (!active || prefersReducedMotion.matches || !isSectionNearViewport) {
         safePause(introVideo);
         return;
@@ -259,6 +261,7 @@
         rect.bottom > 60 &&
         rect.top < window.innerHeight - 60;
       if (isVisible) {
+        shouldPlayIntro = true;
         safePlay(introVideo);
       } else {
         safePause(introVideo);
@@ -273,10 +276,24 @@
       const rect = video.getBoundingClientRect();
       if (rect.width <= 0 || rect.height <= 0) return null;
 
-      const vLeft = Math.max(0, rect.left);
-      const vRight = Math.min(window.innerWidth, rect.right);
-      const vTop = Math.max(0, rect.top);
-      const vBottom = Math.min(window.innerHeight, rect.bottom);
+      let vLeft = Math.max(0, rect.left);
+      let vRight = Math.min(window.innerWidth, rect.right);
+      let vTop = Math.max(0, rect.top);
+      let vBottom = Math.min(window.innerHeight, rect.bottom);
+      let parent = video.parentElement;
+      while (parent) {
+        const style = window.getComputedStyle(parent);
+        const bounds = parent.getBoundingClientRect();
+        if (/(hidden|clip|auto|scroll)/.test(style.overflowX)) {
+          vLeft = Math.max(vLeft, bounds.left);
+          vRight = Math.min(vRight, bounds.right);
+        }
+        if (/(hidden|clip|auto|scroll)/.test(style.overflowY)) {
+          vTop = Math.max(vTop, bounds.top);
+          vBottom = Math.min(vBottom, bounds.bottom);
+        }
+        parent = parent.parentElement;
+      }
 
       const vWidth = Math.max(0, vRight - vLeft);
       const vHeight = Math.max(0, vBottom - vTop);
@@ -285,6 +302,22 @@
       if (vWidth < 60 || vHeight < 60 || visibleArea < 15000) {
         return null;
       }
+
+      const card = video.closest(
+        ".project-panel, .work-field-slide, .work-card",
+      );
+      if (!card) return null;
+      let visibleSamples = 0;
+      for (const x of [0.15, 0.5, 0.85]) {
+        for (const y of [0.15, 0.5, 0.85]) {
+          const hit = document.elementFromPoint(
+            vLeft + vWidth * x,
+            vTop + vHeight * y,
+          );
+          if (hit && card.contains(hit)) visibleSamples += 1;
+        }
+      }
+      if (visibleSamples === 0) return null;
 
       const centerX = (vLeft + vRight) * 0.5;
       const centerY = (vTop + vBottom) * 0.5;
@@ -297,7 +330,7 @@
 
       // Score prioritizes cards with high visibility and proximity to viewport center
       const score =
-        visibleArea / (rect.width * rect.height) / (1 + distFromCenter * 1.4);
+        (visibleArea * visibleSamples) / 9 / (1 + distFromCenter * 1.4);
 
       return { video, score };
     };
@@ -335,7 +368,12 @@
 
     const updateFocusedVideo = () => {
       isRafScheduled = false;
-      if (!active || prefersReducedMotion.matches || !isSectionNearViewport) {
+      if (
+        !active ||
+        document.hidden ||
+        prefersReducedMotion.matches ||
+        !isSectionNearViewport
+      ) {
         pauseAllStageVideos();
         return;
       }
@@ -343,15 +381,7 @@
       // Update ambient intro background video
       updateIntroVideo();
 
-      // If user is hovering over any card with a video, play that video exclusively
-      if (hoveredVideo) {
-        currentPlayingVideo = hoveredVideo;
-      } else {
-        const best = getFocusedVideo();
-        if (best) {
-          currentPlayingVideo = best;
-        }
-      }
+      currentPlayingVideo = getFocusedVideo();
 
       projectVideos.forEach((video) => {
         if (video === currentPlayingVideo) {
@@ -365,7 +395,7 @@
     const scheduleUpdateFocusedVideo = () => {
       if (!isRafScheduled) {
         isRafScheduled = true;
-        requestAnimationFrame(updateFocusedVideo);
+        videoUpdateFrame = requestAnimationFrame(updateFocusedVideo);
       }
     };
 
@@ -378,38 +408,17 @@
     };
     prefersReducedMotion.addEventListener("change", handleMotionChange);
 
-    // Attach hover listeners to each card container so hovering plays its video
-    const hoverCleanupFns: Array<() => void> = [];
     stageVideos.forEach((video) => {
-      const card =
-        video.closest<HTMLElement>(
-          ".project-panel, .showcase-intro, .work-field-slide, .work-card",
-        ) ?? video;
-
-      const onEnter = () => {
-        hoveredVideo = video;
-        scheduleUpdateFocusedVideo();
-      };
-
-      const onLeave = (e: MouseEvent) => {
-        if (card.contains(e.relatedTarget as Node)) return;
-        if (hoveredVideo === video) {
-          hoveredVideo = null;
-        }
-        scheduleUpdateFocusedVideo();
-      };
-
-      card.addEventListener("mouseenter", onEnter);
-      card.addEventListener("mouseleave", onLeave);
-
-      hoverCleanupFns.push(() => {
-        card.removeEventListener("mouseenter", onEnter);
-        card.removeEventListener("mouseleave", onLeave);
+      video.addEventListener("canplay", scheduleUpdateFocusedVideo);
+      videoCleanupFns.push(() => {
+        video.removeEventListener("canplay", scheduleUpdateFocusedVideo);
       });
     });
+    document.addEventListener("visibilitychange", scheduleUpdateFocusedVideo);
 
-    const mobileTrack =
-      stage?.querySelector<HTMLElement>(".work-fields-mobile");
+    const mobileTrack = stage?.querySelector<HTMLElement>(
+      ".work-fields-mobile",
+    );
     if (mobileTrack) {
       mobileTrack.addEventListener("scroll", scheduleUpdateFocusedVideo, {
         passive: true,
@@ -954,7 +963,12 @@
     return () => {
       active = false;
       pauseAllStageVideos();
-      hoverCleanupFns.forEach((fn) => fn());
+      cancelAnimationFrame(videoUpdateFrame);
+      videoCleanupFns.forEach((fn) => fn());
+      document.removeEventListener(
+        "visibilitychange",
+        scheduleUpdateFocusedVideo,
+      );
       gestureEvents.forEach((ev) =>
         window.removeEventListener(ev, handleFirstGesture),
       );
@@ -991,7 +1005,7 @@
           muted
           loop
           playsinline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           class="h-full w-full object-cover object-center"
         ></video>
@@ -1003,18 +1017,18 @@
       </div>
 
       <div class="relative z-10 flex flex-col items-center text-center">
-        <p class="eyebrow mb-3 text-brand-light/60">
+        <p class="mb-5 font-sans text-sm font-medium text-brand-light/70">
           {$_("sectionLabels.divisions")}
         </p>
         <h3
-          class="font-display text-[clamp(3.6rem,6.8vw,7.75rem)] font-medium uppercase leading-[0.82] tracking-[-0.065em] text-brand-light"
+          class="font-sans text-[clamp(3.2rem,5.6vw,6.5rem)] font-bold leading-[0.99] tracking-[-0.055em] text-brand-light"
         >
-          {$_("home.showcaseIntro.title1") || "Our"}<br />{$_(
+          {$_("home.showcaseIntro.title1") || "Our"}<br /><span class="text-brand-green">{$_(
             "home.showcaseIntro.title2",
-          ) || "services"}
+          ) || "services"}</span>
         </h3>
         <p
-          class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[36rem] text-center text-[clamp(0.85rem,1.05vw,1.05rem)] leading-[1.4] text-brand-light/85"
+          class="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[36rem] text-center font-sans text-[clamp(0.95rem,1.1vw,1.125rem)] leading-[1.6] text-brand-light/85"
         >
           {$_("home.showcaseIntro.description") ||
             "One production partner for polished stills, considered motion, and believable 3D imagery—built around the needs of each project."}
@@ -1044,7 +1058,7 @@
                     muted
                     loop
                     playsinline
-                    preload="auto"
+                    preload="metadata"
                     aria-label={project.media.alt}
                     class="project-image h-full w-full object-cover"
                     style:object-position={project.media.objectPosition ||
@@ -1073,12 +1087,12 @@
           >
             <div class="mb-4 flex items-center gap-4">
               <span
-                class="detail-reveal rounded-full border border-brand-light/60 px-3 py-1 font-mono text-[0.65rem] font-bold"
+                class="detail-reveal rounded-full border border-brand-light/60 px-3 py-1 font-sans text-xs font-medium"
                 ><span class="detail-reveal-inner block">{project.year}</span
                 ></span
               >
               <p
-                class="detail-reveal font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em] text-brand-light/60"
+                class="detail-reveal font-sans text-xs font-medium tracking-[0.01em] text-brand-light/60"
               >
                 <span class="detail-reveal-inner block"
                   >{$_(`home.showcaseProjects.${project.id}.category`) ||
@@ -1088,7 +1102,7 @@
             </div>
             <h3
               id="project-title-{project.id}"
-              class="detail-reveal max-w-[12ch] pb-1 font-display text-[clamp(2.8rem,6.4vw,6rem)] font-bold uppercase leading-[0.84] tracking-[-0.06em]"
+              class="detail-reveal max-w-[12ch] pb-1 font-sans text-[clamp(2.8rem,5.4vw,5.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]"
             >
               <span class="detail-reveal-inner block"
                 >{$_(`home.showcaseProjects.${project.id}.title`) ||
@@ -1096,7 +1110,7 @@
               >
             </h3>
             <p
-              class="detail-reveal mt-4 max-w-[48ch] text-[clamp(0.95rem,1.35vw,1.25rem)] font-semibold italic leading-[1.3] text-brand-light/90"
+              class="detail-reveal mt-4 max-w-[48ch] text-[clamp(0.95rem,1.35vw,1.25rem)] font-normal leading-[1.55] text-brand-light/90"
             >
               <span class="detail-reveal-inner block"
                 >{$_(`home.showcaseProjects.${project.id}.description`) ||
@@ -1109,7 +1123,7 @@
             >
               {#each project.capabilities as capability}
                 <li
-                  class="detail-reveal inline-flex items-center gap-2 font-mono text-[0.58rem] font-bold uppercase tracking-[0.12em] text-brand-light/80"
+                  class="detail-reveal inline-flex items-center gap-2 font-sans text-xs font-medium tracking-[0.01em] text-brand-light/80"
                 >
                   <span
                     class="detail-reveal-inner inline-flex items-center gap-2"
@@ -1123,7 +1137,7 @@
             </ul>
             <a
               href={resolve(project.href as "/services")}
-              class="group project-link mt-6 inline-flex w-fit items-center gap-3 border-b-2 border-brand-green pb-2 font-mono text-xs font-bold uppercase tracking-[0.14em] text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
+              class="group project-link mt-6 inline-flex w-fit items-center gap-3 border-b-2 border-brand-green pb-2 font-sans text-sm font-medium tracking-[0.01em] text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
               aria-label="View capabilities for {project.title}"
             >
               {$_("services.hero.viewCapabilities") || "View capabilities"}
@@ -1170,10 +1184,11 @@
                           muted
                           loop
                           playsinline
-                          preload="auto"
+                          preload="metadata"
                           aria-label={item.media.alt}
                           class="work-field-image h-full w-full object-cover object-center"
-                          style:object-position={item.media.objectPosition || "center"}
+                          style:object-position={item.media.objectPosition ||
+                            "center"}
                         ></video>
                       {:else}
                         <img
@@ -1200,12 +1215,12 @@
                     >
                       <div class="mb-4 flex items-center gap-4">
                         <span
-                          class="rounded-full border border-brand-light/60 px-3 py-1 font-mono text-[0.65rem] font-bold"
+                          class="rounded-full border border-brand-light/60 px-3 py-1 font-sans text-xs font-medium"
                         >
                           {finalShowcaseProject.year}
                         </span>
                         <p
-                          class="font-mono text-[0.62rem] font-bold uppercase tracking-[0.14em]"
+                          class="font-sans text-xs font-medium tracking-[0.01em]"
                         >
                           {$_(
                             `home.showcaseProjects.${finalShowcaseProject.id}.category`,
@@ -1214,14 +1229,14 @@
                       </div>
 
                       <h3
-                        class="max-w-[12ch] pb-1 font-display text-[clamp(2.8rem,6.4vw,6rem)] font-bold uppercase leading-[0.84] tracking-[-0.06em]"
+                        class="max-w-[12ch] pb-1 font-sans text-[clamp(2.8rem,5.4vw,5.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]"
                       >
                         {$_(
                           `home.showcaseProjects.${finalShowcaseProject.id}.title`,
                         ) || finalShowcaseProject.title}
                       </h3>
                       <p
-                        class="mt-4 max-w-[48ch] text-[clamp(0.95rem,1.35vw,1.25rem)] font-semibold italic leading-[1.3] text-brand-light/90"
+                        class="mt-4 max-w-[48ch] text-[clamp(0.95rem,1.35vw,1.25rem)] font-normal leading-[1.55] text-brand-light/90"
                       >
                         {$_(
                           `home.showcaseProjects.${finalShowcaseProject.id}.description`,
@@ -1233,7 +1248,7 @@
                       >
                         {#each finalShowcaseProject.capabilities as capability}
                           <li
-                            class="inline-flex items-center gap-2 font-mono text-[0.58rem] font-bold uppercase tracking-[0.12em] text-brand-light/80"
+                            class="inline-flex items-center gap-2 font-sans text-xs font-medium tracking-[0.01em] text-brand-light/80"
                           >
                             <span
                               class="size-2 rounded-full bg-brand-green"
@@ -1244,7 +1259,7 @@
                       </ul>
                       <a
                         href={resolve(finalShowcaseProject.href as "/services")}
-                        class="mt-6 inline-flex w-fit items-center gap-3 border-b-2 border-brand-green pb-2 font-mono text-xs font-bold uppercase tracking-[0.14em] text-brand-light"
+                        class="mt-6 inline-flex w-fit items-center gap-3 border-b-2 border-brand-green pb-2 font-sans text-xs font-medium tracking-[0.01em] text-brand-light"
                       >
                         {$_("services.hero.viewCapabilities") ||
                           "View capabilities"}
@@ -1262,7 +1277,7 @@
                           muted
                           loop
                           playsinline
-                          preload="auto"
+                          preload="metadata"
                           aria-label={item.media.alt}
                           class="work-field-image h-full w-full object-cover"
                         ></video>
@@ -1292,13 +1307,13 @@
                         class="work-field-hover-detail absolute inset-x-0 top-0 flex items-center justify-between gap-5 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.8rem,1.5vh,1.2rem)]"
                       >
                         <p
-                          class="font-mono text-[0.56rem] font-bold uppercase tracking-[0.14em]"
+                          class="font-sans text-xs font-medium tracking-[0.01em]"
                         >
                           {$_(`home.workGalleryItems.${item.id}.category`) ||
                             item.category}
                         </p>
                         <span
-                          class="rounded-full border border-brand-light/80 px-3 py-1 font-mono text-[0.54rem] font-bold"
+                          class="rounded-full border border-brand-light/80 px-3 py-1 font-sans text-xs font-medium"
                         >
                           {String(index).padStart(2, "0")} / {String(
                             workFieldGalleryItems.length,
@@ -1306,7 +1321,7 @@
                         </span>
                       </div>
                       <h3
-                        class="work-field-hover-detail absolute bottom-[clamp(1rem,2vw,1.5rem)] left-[clamp(1rem,2vw,1.5rem)] max-w-[70%] font-display text-[clamp(1.3rem,1.8vw,2rem)] leading-[0.95] tracking-[-0.035em]"
+                        class="work-field-hover-detail absolute bottom-[clamp(1rem,2vw,1.5rem)] left-[clamp(1rem,2vw,1.5rem)] max-w-[70%] font-sans text-[clamp(1.3rem,1.8vw,2rem)] font-medium leading-[1.1] tracking-[-0.035em]"
                       >
                         {$_(`home.workGalleryItems.${item.id}.title`) ||
                           item.title}
@@ -1343,20 +1358,20 @@
             >
               <div class="w-full max-w-[48rem]">
                 <p
-                  class="work-fields-intro-inner mb-5 font-mono text-[0.58rem] font-bold uppercase tracking-[0.18em] text-brand-dark/50"
+                  class="work-fields-intro-inner mb-5 font-sans text-xs font-medium tracking-[0.01em] text-brand-dark/50"
                 >
                   Image and video post-production
                 </p>
                 <h3
                   id="work-fields-intro-title"
-                  class="overflow-hidden pb-[0.12em] font-display text-[clamp(2.8rem,4.7vw,5.8rem)] font-medium leading-[0.86] tracking-[-0.055em]"
+                  class="overflow-hidden pb-[0.12em] font-sans text-[clamp(2.8rem,4.7vw,5.8rem)] font-medium leading-[1.02] tracking-[-0.055em]"
                 >
                   <span class="work-fields-intro-inner block">
                     Built around every final frame.
                   </span>
                 </h3>
                 <p
-                  class="mt-[clamp(1.25rem,2.5vh,2rem)] max-w-[52ch] overflow-hidden text-[clamp(0.8rem,0.95vw,0.98rem)] leading-[1.55] text-brand-dark/70"
+                  class="mt-[clamp(1.25rem,2.5vh,2rem)] max-w-[52ch] overflow-hidden text-[clamp(0.95rem,1.05vw,1.125rem)] leading-[1.6] text-brand-dark/70"
                 >
                   <span class="work-fields-intro-inner block">
                     Studio Click House supports ecommerce and campaign
@@ -1384,12 +1399,12 @@
                         ] ?? item.category} service"
                       >
                         <span
-                          class="font-mono text-[0.56rem] font-bold tracking-[0.12em]"
+                          class="font-sans text-xs font-medium tracking-[0.01em]"
                         >
                           {String(index + 1).padStart(2, "0")}
                         </span>
                         <span
-                          class="text-[clamp(0.78rem,0.95vw,0.98rem)] font-medium"
+                          class="text-[clamp(0.95rem,1.05vw,1.125rem)] font-medium"
                         >
                           {workFieldServiceLabels[item.id] ?? item.category}
                         </span>
@@ -1425,7 +1440,7 @@
                 muted
                 loop
                 playsinline
-                preload="auto"
+                preload="metadata"
                 aria-label={item.media.alt}
                 class="work-card-image h-full w-full object-cover"
               ></video>
@@ -1448,7 +1463,7 @@
             <div class="work-card-copy absolute inset-x-0 bottom-0 p-5 sm:p-7">
               <div class="work-card-detail">
                 <h3
-                  class="max-w-sm font-display text-2xl leading-[1.0] tracking-[-0.025em] text-brand-light sm:text-3xl"
+                  class="max-w-sm font-sans text-2xl font-semibold leading-[1.1] tracking-[-0.025em] text-brand-light sm:text-3xl"
                 >
                   {$_(`home.workGalleryItems.${item.id}.title`) || item.title}
                 </h3>
@@ -1677,7 +1692,7 @@
 
     .showcase-intro h3 {
       margin-top: 3rem;
-      font-size: clamp(4rem, 20vw, 6.5rem);
+      font-size: clamp(3.2rem, 15vw, 5rem);
     }
 
     .project-body {

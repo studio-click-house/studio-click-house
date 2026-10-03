@@ -4,6 +4,7 @@
   import { resolve } from "$app/paths";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
+  import { stripTitlePunctuation } from "$lib/utils";
 
   let section: HTMLElement;
 
@@ -174,14 +175,14 @@
 
     <!-- ═══ Section Header (Centered) ═══ -->
     <div class="mb-10 sm:mb-14 text-center">
-      <p class="eyebrow mb-3 text-brand-dark/50">
+      <p class="mb-5 font-sans text-sm font-medium text-brand-dark/60">
         {$_("sectionLabels.aiWorkflow")}
       </p>
       <h2
         id="ai-about-title"
-        class="ai-head-reveal font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em]"
+        class="ai-head-reveal font-sans text-[clamp(3rem,4.8vw,5.5rem)] font-medium leading-[0.99] tracking-[-0.055em]"
       >
-        {$_('home.aiWorkflow.title1') || 'E-Commerce AI'} <em class="font-display italic font-normal text-brand-green">{$_('home.aiWorkflow.title2') || 'Workflow.'}</em>
+        {$_('home.aiWorkflow.title1') || 'E-Commerce AI'} <span class="text-brand-green">{stripTitlePunctuation($_('home.aiWorkflow.title2') || 'Workflow')}</span>
       </h2>
     </div>
 
@@ -209,10 +210,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index">01</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage1.title') || 'Raw Image Input'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage1.title') || 'Source image'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage1.description') || 'Standard product photo or flat-lay capture before processing.'}
+              {$_('home.aiWorkflow.stage1.description') || 'Start with a product photo or flat-lay image.'}
             </p>
           </div>
         </div>
@@ -247,10 +248,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index text-brand-green">02</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage2.title') || 'Ghost Mannequin'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage2.title') || 'Ghost mannequin'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage2.description') || 'Clean hollow mannequin composite with natural 3D volume.'}
+              {$_('home.aiWorkflow.stage2.description') || 'Give the garment shape with a clean, hollow mannequin edit.'}
             </p>
           </div>
         </div>
@@ -285,10 +286,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index">03</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage3.title') || 'AI Model Generation'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage3.title') || 'AI on-model imagery'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage3.description') || 'Placing your garment naturally onto a realistic AI fashion model.'}
+              {$_('home.aiWorkflow.stage3.description') || 'Create on-model imagery from the garment photo.'}
             </p>
           </div>
         </div>
@@ -323,10 +324,10 @@
           <div class="stage-content">
             <div class="stage-heading">
               <span class="stage-index">04</span>
-              <h3 class="stage-title">{$_('home.aiWorkflow.stage4.title') || 'Color Change & Variants'}</h3>
+              <h3 class="stage-title">{$_('home.aiWorkflow.stage4.title') || 'Color variations'}</h3>
             </div>
             <p class="stage-description">
-              {$_('home.aiWorkflow.stage4.description') || 'Instant recoloring to any SKU shade while preserving real fabric textures.'}
+              {$_('home.aiWorkflow.stage4.description') || 'Produce color options while retaining fabric texture.'}
             </p>
           </div>
         </div>
@@ -337,8 +338,8 @@
     <!-- ═══ Clean Explore Link (Centered) ═══ -->
     <div class="mt-10 sm:mt-12 flex justify-center">
       <a href={resolve("/services/ai-retouch")} class="ai-explore-link group">
-        <span class="font-sans text-xs sm:text-[0.84rem] font-semibold text-brand-dark group-hover:text-brand-green transition-colors duration-200">
-          {$_('home.aiWorkflow.explore') || 'Explore AI Services & Full Pipeline'}
+        <span class="font-sans text-sm font-medium text-brand-dark group-hover:text-brand-green transition-colors duration-200">
+          {$_('home.aiWorkflow.explore') || 'Explore AI image production'}
         </span>
         <span class="grid h-6 w-6 place-items-center rounded-full border border-brand-dark/15 bg-white text-brand-dark transition-all duration-200 group-hover:border-brand-green group-hover:bg-brand-green group-hover:text-brand-dark">
           <ArrowUpRight size={13} strokeWidth={1.8} class="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -442,37 +443,40 @@
   .stage-content {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
     padding-inline: 0.2rem;
   }
 
   .stage-heading {
     display: flex;
     align-items: baseline;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .stage-index {
-    font-family: var(--font-mono);
+    flex: 0 0 1.1rem;
+    font-family: var(--font-sans);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0.08em;
     color: var(--color-brand-green);
   }
 
   .stage-title {
     font-family: var(--font-sans);
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.35;
     color: var(--color-brand-dark);
     letter-spacing: -0.015em;
   }
 
   .stage-description {
+    padding-left: 1.6rem;
     font-family: var(--font-sans);
-    font-size: 0.72rem;
-    line-height: 1.45;
-    color: color-mix(in srgb, var(--color-brand-dark) 65%, transparent);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--color-brand-dark) 75%, transparent);
   }
 
   /* ═══ Connectors ═══ */

@@ -21,7 +21,7 @@
           {$_("sectionLabels.culture")}
         </p>
         <h2
-          class="max-w-[13ch] font-display text-[clamp(2.5rem,4.5vw,4.8rem)] leading-[0.94] tracking-[-0.04em]"
+          class="max-w-[13ch] font-sans text-[clamp(2.5rem,4.5vw,4.8rem)] leading-[1.05] tracking-[-0.04em] font-semibold"
         >
           {$_('events.closing.heading') || 'Meet the people. See the work.'}
         </h2>
@@ -31,7 +31,7 @@
         <Button
           href={resolve("/about")}
           size="lg"
-          class="font-mono text-xs uppercase tracking-[0.14em] hover:bg-white"
+          class="font-sans text-sm hover:bg-white font-semibold"
         >
           {$_('events.closing.aboutStudio') || 'About the studio'} <ArrowUpRight size={15} />
         </Button>
@@ -39,7 +39,7 @@
           href={resolve("/portfolio")}
           variant="secondary"
           size="lg"
-          class="border-white/20 bg-white/5 font-mono text-xs uppercase tracking-[0.14em] text-brand-light hover:border-brand-green hover:bg-brand-green hover:text-brand-dark"
+          class="border-white/20 bg-white/5 font-sans text-sm text-brand-light hover:border-brand-green hover:bg-brand-green hover:text-brand-dark font-semibold"
         >
           {$_('events.closing.viewPortfolio') || 'View portfolio'} <ArrowUpRight size={15} />
         </Button>

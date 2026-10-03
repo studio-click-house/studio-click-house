@@ -118,17 +118,17 @@
       <!-- Left Side: Editorial Headline & Copy -->
       <div class="sd-trust-left lg:sticky lg:top-28 lg:col-span-5 lg:pr-6">
         <p
-          class="eyebrow text-brand-dark/50"
+          class="font-sans text-sm font-medium text-brand-dark/50"
         >
           {preheading}
         </p>
 
         <h2
           id="why-studio-click-house-title"
-          class="mt-3 max-w-[20ch] font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="mt-3 max-w-[20ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark"
         >
           {heading}
-          <span class="block text-brand-dark">{headingAccent}</span>
+          <span class="block text-brand-green">{headingAccent}</span>
         </h2>
 
         <p class="mt-6 max-w-[34ch] text-base leading-relaxed text-brand-dark/65">
@@ -148,7 +148,7 @@
               : ''}"
           >
             <h3
-              class="font-display text-base font-extrabold uppercase tracking-tight text-brand-dark transition-colors duration-300 sm:text-lg"
+              class="font-sans text-base font-semibold tracking-[-0.02em] text-brand-dark transition-colors duration-300 sm:text-lg"
             >
               {item.title}
             </h3>

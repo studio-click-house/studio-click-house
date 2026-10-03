@@ -29,16 +29,16 @@
       <!-- Editorial Copy Column -->
       <div class="lg:col-span-5" data-events-hero-copy>
         <span
-          class="font-mono text-xs uppercase tracking-[0.22em] text-brand-dark/50 font-medium mb-4 block"
+          class="font-sans text-sm text-brand-dark/50 mb-4 block font-medium"
         >
           Studio Archive · Company Events & Tours
         </span>
 
         <h1
-          class="hero-display-title font-display text-[clamp(3.2rem,5.6vw,6rem)] leading-[0.92] tracking-tight text-brand-dark"
+          class="font-sans uppercase text-[clamp(3.2rem,5.6vw,6rem)] leading-[1.02] tracking-tight text-brand-dark font-bold"
         >
           <span class="block">Moments beyond</span>
-          <span class="hero-display-outline block">the pixels</span>
+          <span class="text-brand-green block">the pixels</span>
         </h1>
 
         <p
@@ -54,7 +54,7 @@
           <Button
             href="#event-archive"
             size="lg"
-            class="font-mono text-xs uppercase tracking-wider"
+            class="font-sans text-sm font-semibold"
           >
             Explore Tours
           </Button>
@@ -62,7 +62,7 @@
             href="#events-gallery"
             variant="secondary"
             size="lg"
-            class="bg-white/80 font-mono text-xs uppercase tracking-wider hover:bg-white"
+            class="bg-white/80 font-sans text-sm hover:bg-white font-semibold"
           >
             Browse All Photos
           </Button>
@@ -112,7 +112,7 @@
               />
             </div>
             <p
-              class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider"
+              class="mt-2 text-center font-sans text-xs text-brand-dark/70"
             >
               Mawa River Sunset
             </p>
@@ -137,7 +137,7 @@
               />
             </div>
             <p
-              class="mt-2 text-center font-mono text-[0.62rem] text-brand-dark/70 uppercase tracking-wider"
+              class="mt-2 text-center font-sans text-xs text-brand-dark/70"
             >
               Studio Football League
             </p>

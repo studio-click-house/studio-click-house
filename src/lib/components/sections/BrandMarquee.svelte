@@ -40,7 +40,7 @@
   class="hero-service-marquee absolute inset-x-0 bottom-0 z-20 overflow-hidden border-y border-brand-light/15 text-brand-light backdrop-blur-md"
 >
   <div
-    class="marquee-track flex w-max items-center py-4 will-change-transform sm:py-[1.1rem]"
+    class="marquee-track flex w-max items-center py-3 will-change-transform sm:py-3.5"
   >
     {#each loopServices as service, index (`${service.slug}-${index}`)}
       <span
@@ -50,7 +50,7 @@
         <span class="mx-5 size-[3px] rounded-full bg-brand-light/30 sm:mx-8" aria-hidden="true"
         ></span>
         <span
-          class="marquee-service-name font-mono text-[0.62rem] font-medium uppercase tracking-[0.2em] text-brand-light/75 sm:text-[0.68rem]"
+          class="marquee-service-name font-sans text-xs font-medium tracking-[0.01em] text-brand-light/75 sm:text-sm"
         >
           {$_(`home.services.${service.slug}.title`) || service.title}
           <span class="marquee-center-probe" aria-hidden="true"></span>

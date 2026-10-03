@@ -122,18 +122,18 @@
       class="grid items-center gap-6 lg:grid-cols-12 lg:gap-8"
     >
       <div class="z-20 flex flex-col lg:col-span-4 lg:py-6">
-        <p class="eyebrow mb-3 text-brand-dark/50 network-copy-step">
+        <p class="mb-4 font-sans text-sm font-medium text-brand-dark/60 network-copy-step">
           {$_("sectionLabels.project")}
         </p>
         <h2
           id="global-production-heading"
-          class="network-copy-step max-w-xl font-display text-[clamp(3rem,5.5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em] text-brand-dark"
+          class="network-copy-step max-w-xl font-sans text-[clamp(2.5rem,4.2vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.045em] text-brand-dark"
         >
           {$_('home.closingCta.heading') || closingCta.heading}
         </h2>
 
         <p
-          class="network-copy-step mt-4 max-w-md text-sm leading-6 text-brand-dark/75"
+          class="network-copy-step mt-5 max-w-md font-sans text-base leading-[1.65] text-brand-dark/75"
         >
           {$_('home.closingCta.description') || closingCta.description}
         </p>

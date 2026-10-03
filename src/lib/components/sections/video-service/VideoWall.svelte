@@ -181,11 +181,11 @@
     <!-- Header: Editorial Title + View All Link -->
     <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div>
-        <p class="font-mono text-[0.64rem] font-bold uppercase tracking-[0.2em] text-brand-dark/50 mb-2">
+        <p class="font-sans text-sm font-medium text-brand-dark/50 mb-2">
           AI Motion Gallery
         </p>
         <h2
-          class="font-display text-[length:var(--text-section)] leading-[0.98] tracking-[-0.04em] text-brand-dark"
+          class="font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark"
         >
           {data.heading}
         </h2>

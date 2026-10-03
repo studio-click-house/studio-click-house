@@ -416,10 +416,10 @@
           <span class="process-watermark-num" aria-hidden="true">
             {String(activeIndex + 1).padStart(2, "0")}
           </span>
-          <div class="process-timing eyebrow text-brand-dark/55 flex items-center gap-2">
+          <div class="process-timing font-sans text-sm font-medium text-brand-dark/55 flex items-center gap-2">
             <span>{$_(`home.processSteps.${activeIndex}.timing`) || processSteps[activeIndex].timing}</span>
             <span class="text-brand-dark/25">·</span>
-            <span class="font-mono text-[0.6875rem]">Phase 0{activeIndex + 1} / 07</span>
+            <span class="font-sans text-xs">Phase 0{activeIndex + 1} / 07</span>
           </div>
           <h2 id="production-process-title">
             {$_(`home.processSteps.${activeIndex}.title`) || processSteps[activeIndex].title}
@@ -515,64 +515,64 @@
     >
       <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
         <span
-          class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-brand-dark/50 mr-1"
+          class="font-sans text-xs font-medium text-brand-dark/50 mr-1"
         >
           Sharing Platforms:
         </span>
         <span
-          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-sans text-xs font-semibold text-brand-dark shadow-2xs"
           >Dropbox</span
         >
         <span
-          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-sans text-xs font-semibold text-brand-dark shadow-2xs"
           >Google Drive</span
         >
         <span
-          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-sans text-xs font-semibold text-brand-dark shadow-2xs"
           >WeTransfer</span
         >
         <span
-          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-sans text-xs font-semibold text-brand-dark shadow-2xs"
           >OneDrive</span
         >
         <span
-          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-mono text-[0.6875rem] font-semibold text-brand-dark shadow-2xs"
+          class="rounded-full border border-brand-dark/12 bg-white/70 px-3 py-1 font-sans text-xs font-semibold text-brand-dark shadow-2xs"
           >Private FTP</span
         >
       </div>
 
       <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
         <span
-          class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-brand-dark/50 mr-1"
+          class="font-sans text-xs font-medium text-brand-dark/50 mr-1"
         >
           Supported Formats:
         </span>
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-bold text-brand-dark"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-bold text-brand-dark"
           >RAW</span
         >
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-medium text-brand-dark/80"
           >PSD</span
         >
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-medium text-brand-dark/80"
           >TIFF</span
         >
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-medium text-brand-dark/80"
           >PNG</span
         >
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-medium text-brand-dark/80"
           >JPG</span
         >
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-medium text-brand-dark/80"
           >AI</span
         >
         <span
-          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-mono text-[0.65rem] font-medium text-brand-dark/80"
+          class="rounded border border-brand-dark/12 bg-brand-dark/[0.04] px-2 py-0.5 font-sans text-xs font-medium text-brand-dark/80"
           >PDF</span
         >
       </div>
@@ -615,7 +615,7 @@
     position: absolute;
     top: -1.75rem;
     left: -0.5rem;
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: clamp(6.5rem, 10vw, 9.5rem);
     font-weight: 400;
     line-height: 1;
@@ -634,11 +634,11 @@
     position: relative;
     max-width: 18ch;
     margin: 0.6rem 0 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.15rem, 3.2vw, 3.1rem);
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-size: clamp(2.25rem, 3.6vw, 3.5rem);
+    font-weight: 600;
     line-height: 1.1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.045em;
     color: var(--color-brand-dark);
   }
 
@@ -719,8 +719,8 @@
     inset-inline: 0;
     bottom: 0;
     padding: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
     line-height: 1.2;
     color: #fff;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
@@ -825,7 +825,7 @@
   }
 
   .tab-label-group > span {
-    font-size: 0.74rem;
+    font-size: 0.8125rem;
     font-weight: 500;
     letter-spacing: 0.01em;
     line-height: 1.2;
@@ -913,8 +913,8 @@
     border: 1px solid var(--color-brand-dark);
     border-radius: 50%;
     background: var(--color-brand-light);
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     transform: translateX(-50%) translateY(0.15rem);

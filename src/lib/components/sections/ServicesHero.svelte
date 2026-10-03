@@ -116,13 +116,13 @@
     >
       <div class="services-hero-text-motion lg:col-span-5">
         <p
-          class="mb-6 font-mono text-[0.62rem] font-bold uppercase tracking-[0.22em] text-brand-dark/50"
+          class="mb-6 font-sans text-sm font-medium text-brand-dark/50"
         >
           {$_("services.showcase.heading") || "Our services"}
         </p>
         <h1
           id="services-hero-title"
-          class="hero-display-title text-[clamp(3.25rem,6.2vw,6.5rem)] leading-[0.82] text-brand-dark"
+          class="font-sans font-bold tracking-[-0.045em] text-[clamp(3rem,5.5vw,5.5rem)] leading-[1.02] text-brand-dark"
         >
           <span class="block overflow-hidden pb-[0.12em]">
             <span class="services-hero-title-line block">
@@ -132,13 +132,13 @@
             </span>
           </span>
           <span class="block overflow-hidden pb-[0.12em]">
-            <span class="services-hero-title-line hero-display-outline block">
+            <span class="services-hero-title-line block text-brand-green">
               {stripTitlePunctuation($_("services.hero.heading2") || "finish.")}
             </span>
           </span>
           <span class="mt-2 block overflow-hidden pb-[0.12em]">
             <span
-              class="services-hero-title-line block text-[0.43em] tracking-[-0.055em]"
+              class="services-hero-title-line block text-[0.43em] font-semibold tracking-[-0.025em]"
             >
               {stripTitlePunctuation(
                 $_("services.hero.heading3") || "Built to scale.",
@@ -204,7 +204,7 @@
               class="group flex min-h-12 items-center justify-between gap-3 py-2 text-sm font-semibold text-brand-dark transition-colors duration-300 hover:text-brand-green sm:text-base"
             >
               <span class="flex items-center gap-3">
-                <span class="font-mono text-[0.6rem] text-brand-dark/40">
+                <span class="font-sans text-xs text-brand-dark/40">
                   0{discIdx + 1}
                 </span>
                 {$_(`services.hero.disciplines.${discIdx}`) || discipline.label}
