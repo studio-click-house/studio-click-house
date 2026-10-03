@@ -1,7 +1,11 @@
 <script lang="ts">
   import { Volume2, VolumeX } from "lucide-svelte";
 
-  let { video }: { video: HTMLVideoElement | undefined } = $props();
+  let { video, controlId = "editorial-video-sound", videoLabel = "editorial video" }: {
+    video: HTMLVideoElement | undefined;
+    controlId?: string;
+    videoLabel?: string;
+  } = $props();
   let isMuted = $state(true);
   let toggleSound: () => void = () => undefined;
 
@@ -35,7 +39,7 @@
     }
     const onVolumeChange = () => { isMuted = player.muted; };
     const retryAudio = (event: Event) => {
-      if (event.target instanceof Element && event.target.closest("#editorial-video-sound")) return;
+      if (event.target instanceof Element && event.target.closest(`#${controlId}`)) return;
       if (soundEnabled && audioBlocked) playVideo();
     };
     toggleSound = () => {
@@ -71,10 +75,10 @@
 </script>
 
 <button
-  id="editorial-video-sound"
+  id={controlId}
   type="button"
   onclick={() => toggleSound()}
-  aria-label={isMuted ? "Turn editorial video sound on" : "Mute editorial video sound"}
+  aria-label={isMuted ? `Turn ${videoLabel} sound on` : `Mute ${videoLabel} sound`}
   class="absolute bottom-3 right-3 z-10 inline-flex items-center gap-2 rounded-[var(--radius-control)] bg-brand-dark/85 px-3 py-2 text-xs font-medium text-brand-light focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
 >
   {#if isMuted}<VolumeX size={16} />{:else}<Volume2 size={16} />{/if}
