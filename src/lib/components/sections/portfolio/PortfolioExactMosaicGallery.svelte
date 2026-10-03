@@ -739,6 +739,7 @@
             poster={selectedImage.poster}
             controls
             autoplay
+            muted
             playsinline
             class="h-full w-full object-contain max-h-[72vh] rounded-[1.5rem] border border-white/10"
           >

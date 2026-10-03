@@ -540,19 +540,19 @@
       "location2": "Production floor / suites",
       "moments": [
         {
-          "title": "Precision Color Grading",
-          "category": "Video Suite"
+          "title": "Production House",
+          "category": "Our Production Team"
         },
         {
-          "title": "Quality Control & Proofing",
-          "category": "Retouching Desk"
+          "title": "Daily Studio Operations",
+          "category": "Production Floor"
         },
         {
-          "title": "3D & CGI Rendering",
-          "category": "3D Department"
+          "title": "Marketing & Client Coordination",
+          "category": "Marketing & Communications"
         },
         {
-          "title": "Workshop & Skill Sharing",
+          "title": "People & Workplace",
           "category": "Studio Culture"
         }
       ]

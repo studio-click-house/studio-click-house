@@ -50,8 +50,8 @@ export const aboutPageData: AboutPageData = {
     moments: [
       {
         id: "fashion-retouching",
-        title: "Precision Fashion Retouching",
-        category: "Retouching Desk",
+        title: "Production House",
+        category: "Our Production Team",
         media: {
           src: "/images/about/team/studio-click-house-team-03.jpg",
           alt: "Senior retouchers finishing fashion portrait editorial on calibrated display at Studio Click House",
@@ -62,8 +62,8 @@ export const aboutPageData: AboutPageData = {
       },
       {
         id: "production-pipeline",
-        title: "Multi-Shift Digital Production",
-        category: "Active Floor",
+        title: "Daily Studio Operations",
+        category: "Production Floor",
         media: {
           src: "/images/about/team/studio-click-house-team-04.jpg",
           alt: "Production team editing commercial image batches at Studio Click House",
@@ -74,8 +74,8 @@ export const aboutPageData: AboutPageData = {
       },
       {
         id: "client-communications",
-        title: "Client Communications & SLA Pod",
-        category: "Account Coordination",
+        title: "Marketing & Client Coordination",
+        category: "Marketing & Communications",
         media: {
           src: "/images/about/team/studio-click-house-team-05.jpg",
           alt: "Client communications pod coordinating delivery schedules and feedback at Studio Click House",
@@ -86,8 +86,8 @@ export const aboutPageData: AboutPageData = {
       },
       {
         id: "studio-culture",
-        title: "Studio Environment & Quality Control",
-        category: "Dhaka Headquarters",
+        title: "People & Workplace",
+        category: "Studio Culture",
         media: {
           src: "/images/about/team/studio-click-house-team-06.jpg",
           alt: "Studio Click House QA workstation and conference suite entrance with SCH logo",

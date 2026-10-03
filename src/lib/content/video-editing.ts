@@ -142,8 +142,8 @@ export const videoEditingPageData: VideoEditingPageData = {
     titleAccent: "& AI motion.",
     description:
       "Full-service post-production for brands and creative agencies—commercial storytelling, DaVinci Resolve color grading, 9:16 social cutdowns, and generative AI motion.",
-    videoSrc: "/images/services/video-editing/video-editor-suite-multitrack-timeline-ultrawide.mp4",
-    videoPoster: "/images/about/orbit/ai-video-editing.jpg",
+    videoSrc: "/images/video-editing/Creating_fashion_commercial_video_1080p_20261002180624.mp4",
+    videoPoster: "/images/video-editing/commercial-hero-poster.webp",
   },
 
   commercial: {

@@ -128,7 +128,7 @@
       </p>
       <h1
         id="video-hero-title"
-        class="video-hero-title max-w-[12ch] font-sans font-bold uppercase text-[clamp(3rem,6.5vw,6.2rem)] leading-[1.02] tracking-[-0.045em] text-brand-light"
+        class="video-hero-title max-w-[18ch] font-sans font-bold uppercase text-[clamp(2.75rem,5vw,5rem)] leading-[1.02] tracking-[-0.045em] text-brand-light"
       >
         <span class="block">{stripTitlePunctuation(data.title)}</span>
         <span class="text-brand-green mt-2 block sm:mt-3">

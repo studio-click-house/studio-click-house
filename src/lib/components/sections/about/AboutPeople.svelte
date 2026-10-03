@@ -91,7 +91,7 @@
 
         media.add("(prefers-reduced-motion: no-preference)", () => {
           gsap.fromTo(
-            ".people-header-reveal",
+            ".people-intro-reveal",
             { autoAlpha: 0, y: 30 },
             {
               scrollTrigger: { trigger: sectionRef, start: "top 88%", once: true },
@@ -104,24 +104,16 @@
             },
           );
 
-          gsap.fromTo(
-            ".people-contact-frame",
-            { autoAlpha: 0, y: 28, scale: 0.98 },
-            {
-              scrollTrigger: {
-                trigger: ".people-contact-sheet",
-                start: "top 88%",
-                once: true,
-              },
+          for (const frame of sectionRef.querySelectorAll(".people-contact-frame")) {
+            gsap.fromTo(frame, { autoAlpha: 0, y: 24 }, {
+              scrollTrigger: { trigger: frame, start: "top 88%", once: true },
               autoAlpha: 1,
               y: 0,
-              scale: 1,
               duration: 0.85,
-              stagger: 0.1,
               ease: "power3.out",
               clearProps: "all",
-            },
-          );
+            });
+          }
 
           if (document.querySelector(".people-snapshot-card")) {
             gsap.fromTo(
@@ -155,38 +147,26 @@
 
 <section
   id="our-people"
-  aria-label="Our People and Studio Team"
+  aria-labelledby="our-people-title"
   bind:this={sectionRef}
-  class="relative border-y border-brand-dark/15 bg-brand-paper py-12 sm:py-14 lg:py-16"
+  class="relative bg-brand-light py-12 sm:py-14 lg:py-16"
 >
   <div class="site-shell">
-    <div
-      class="mb-12 grid gap-7 pt-5 lg:grid-cols-12 lg:items-end md:mb-16"
-    >
-      <div class="lg:col-span-8">
-        <p class="eyebrow mb-3 text-brand-dark/50">
-          {$_("sectionLabels.people")}
-        </p>
-        <h2
-          class="people-header-reveal max-w-[11ch] font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.045em] text-brand-dark font-semibold"
-        >
-          {$_('about.people.heading') || people.heading}
-        </h2>
-      </div>
-      <p
-        class="people-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
-      >
-        {$_('about.people.subheading') || people.subheading}
+    <header id="our-people-introduction" class="mb-8 sm:mb-10 lg:mb-12">
+      <p class="people-intro-reveal eyebrow mb-3 text-brand-dark/50">
+        {$_("sectionLabels.people")}
       </p>
-    </div>
-
-    <div class="people-contact-sheet grid gap-8 md:grid-cols-12 md:gap-6">
-      <figure
-        class="people-contact-frame group relative md:col-span-7 lg:col-span-6"
+      <h2
+        id="our-people-title"
+        class="people-intro-reveal max-w-[22ch] font-sans text-[length:var(--text-section)] font-semibold leading-[1.05] tracking-[-0.04em] text-brand-dark"
       >
-        <div
-          class="relative aspect-[5/4] overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-light"
-        >
+        {$_('about.people.heading') || people.heading}
+      </h2>
+    </header>
+
+    <div id="studio-team-portraits" class="people-contact-sheet">
+      <figure class="people-contact-frame m-0 grid gap-5 sm:gap-6 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <div class="aspect-video w-full max-w-[52rem] overflow-hidden rounded-[var(--radius-media-sm)] bg-brand-light sm:rounded-[var(--radius-media)] lg:col-span-8">
           <img
             src={people.heroCollectiveMedia.src}
             alt={people.heroCollectiveMedia.alt}
@@ -194,42 +174,30 @@
             height={people.heroCollectiveMedia.height}
             loading="lazy"
             decoding="async"
-            class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-[1.025]"
+            class="h-full w-full object-cover"
           />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-brand-dark/55 via-transparent to-transparent"
-          ></div>
-          <div
-            class="absolute left-4 top-4 flex h-11 w-11 items-center justify-center border border-white/50 font-sans text-xs text-white"
-          >
-            A1
-          </div>
-          <p
-            class="absolute bottom-4 left-4 max-w-[18rem] font-sans text-2xl leading-[1.15] text-white md:text-3xl font-semibold"
-          >
-            {$_('about.people.collectiveTitle') || 'Studio Click House collective'}
-          </p>
         </div>
-        <figcaption
-          class="mt-3 flex items-center justify-between border-t border-brand-dark/25 pt-2 text-xs uppercase tracking-[0.14em] text-brand-dark/55"
-        >
-          <span>{$_('about.people.location1') || 'Dhaka headquarters'}</span>
-          <span>{$_('about.people.location2') || 'Production floor / suites'}</span>
+        <figcaption class="grid gap-5 lg:col-span-4 lg:gap-6">
+          <div>
+            <p class="font-sans text-lg font-semibold leading-tight tracking-[-0.02em] text-brand-dark sm:text-xl">
+              {$_('about.people.collectiveTitle') || 'Studio Click House collective'}
+            </p>
+            <p class="mt-2 text-xs leading-relaxed text-brand-dark/50">
+              {$_('about.people.location1') || 'Dhaka headquarters'}
+              <span class="mx-1" aria-hidden="true">/</span>
+              {$_('about.people.location2') || 'Production floor / suites'}
+            </p>
+          </div>
+          <p class="max-w-[48ch] text-base leading-relaxed text-brand-dark/70">
+            {$_('about.people.subheading') || people.subheading}
+          </p>
         </figcaption>
       </figure>
 
-      <div
-        class="grid grid-cols-2 gap-x-4 gap-y-6 md:col-span-5 md:gap-x-5 lg:col-span-6"
-      >
+      <div class="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 md:mt-12 lg:grid-cols-4 lg:gap-x-8">
         {#each people.moments as moment, index (moment.id)}
-          <figure
-            class="people-contact-frame group {index === 1 || index === 2
-              ? 'md:mt-8'
-              : ''}"
-          >
-            <div
-              class="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-light"
-            >
+          <figure class="people-contact-frame m-0">
+            <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-media-sm)] bg-brand-light sm:rounded-[var(--radius-media)] lg:aspect-[4/5]">
               <img
                 src={moment.media.src}
                 alt={moment.media.alt}
@@ -237,22 +205,14 @@
                 height={moment.media.height}
                 loading="lazy"
                 decoding="async"
-                class="h-full w-full object-cover transition-all duration-700 group-hover:scale-[1.04] group-hover:grayscale-0 md:grayscale"
+                class="h-full w-full object-cover"
               />
-              <span
-                class="absolute left-2 top-2 bg-brand-paper px-2 py-1 font-sans text-xs text-brand-dark"
-                >B{index + 1}</span
-              >
             </div>
-            <figcaption class="mt-2 border-t border-brand-dark/25 pt-2">
-              <p
-                class="text-xs font-semibold uppercase tracking-[0.13em] text-brand-green"
-              >
+            <figcaption class="mt-4">
+              <p class="text-xs font-medium leading-relaxed text-brand-dark/50">
                 {$_(`about.people.moments.${index}.category`) || moment.category}
               </p>
-              <h3
-                class="mt-1 text-sm font-semibold leading-tight text-brand-dark md:text-base"
-              >
+              <h3 class="mt-1 text-sm font-semibold leading-snug text-brand-dark sm:text-base">
                 {$_(`about.people.moments.${index}.title`) || moment.title}
               </h3>
             </figcaption>
@@ -263,16 +223,16 @@
 
     {#if people.snapshots && people.snapshots.length > 0}
       <!-- Studio Snapshots Carousel -->
-      <div id="studio-snapshots" class="mt-20 border-t border-brand-dark/15 pt-16 md:mt-28 md:pt-20">
+      <div id="studio-snapshots" class="mt-16 md:mt-20">
         <div class="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <span
-              class="people-header-reveal mb-2 inline-block font-sans text-xs font-medium text-brand-dark/50"
+              class="people-header-reveal eyebrow mb-3 inline-block text-brand-dark/50"
             >
               {people.snapshotsEyebrow || 'Studio Culture & Craft'}
             </span>
             <h3
-              class="people-header-reveal font-sans text-2xl sm:text-3xl md:text-4xl leading-tight tracking-[-0.035em] text-brand-dark font-semibold"
+              class="people-header-reveal max-w-[20ch] font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em] text-brand-dark font-semibold"
             >
               {people.snapshotsHeading || 'Inside Our Dhaka Headquarters'}
             </h3>

@@ -8,7 +8,10 @@
   import type { ServiceDetailCtaData } from "$lib/types/service-detail";
   import { _ } from "svelte-i18n";
 
-  let { data }: { data?: ServiceDetailCtaData } = $props();
+  let { data, sectionId }: {
+    data?: Omit<ServiceDetailCtaData, "steps"> & { steps?: ServiceDetailCtaData["steps"] };
+    sectionId?: string;
+  } = $props();
   let section = $state<HTMLElement>();
 
   onMount(() => {
@@ -70,8 +73,8 @@
 
 <section
   bind:this={section}
-  id={data ? "service-detail-cta" : "services-cta"}
-  aria-labelledby={data ? "service-detail-cta-title" : "services-cta-title"}
+  id={sectionId ?? (data ? "service-detail-cta" : "services-cta")}
+  aria-labelledby={sectionId ? `${sectionId}-title` : (data ? "service-detail-cta-title" : "services-cta-title")}
   class="relative overflow-hidden bg-brand-light py-10 text-brand-dark sm:py-12 lg:py-14"
 >
   <div
@@ -90,7 +93,7 @@
           {$_("sectionLabels.project")}
         </p>
         <h2
-          id={data ? "service-detail-cta-title" : "services-cta-title"}
+          id={sectionId ? `${sectionId}-title` : (data ? "service-detail-cta-title" : "services-cta-title")}
           class={data ? "max-w-[18ch] font-sans font-semibold text-[length:var(--text-section)] leading-[1.05] tracking-[-0.04em]" : "max-w-[13ch] font-sans font-semibold text-[clamp(2.4rem,4.5vw,4.5rem)] leading-[1.05] tracking-[-0.045em]"}
         >
           {data?.heading ?? ($_('services.cta.heading') || 'Put the next image in motion.')}

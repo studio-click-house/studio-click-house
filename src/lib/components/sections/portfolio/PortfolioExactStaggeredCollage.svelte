@@ -1,6 +1,8 @@
 <script lang="ts">
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import { _ } from "svelte-i18n";
+  import PortfolioVideoAudio from "$lib/components/common/PortfolioVideoAudio.svelte";
+  let editorialVideo = $state<HTMLVideoElement>();
 
   let collageSection = $state<HTMLElement | null>(null);
 
@@ -100,9 +102,9 @@
         >
           <div class="aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-dark/5 relative">
             <video
+              bind:this={editorialVideo}
               src="/images/video-editing/Fashion_editorial_montage_creation_1080p_20261001180512.mp4"
               poster="/images/services/model-beauty/beauty-fashion-editorial-night-glam-057-after.webp"
-              autoplay
               muted
               loop
               playsinline
@@ -112,6 +114,7 @@
             >
               <track kind="captions" />
             </video>
+            <PortfolioVideoAudio video={editorialVideo} />
           </div>
           <figcaption
             class="pt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"

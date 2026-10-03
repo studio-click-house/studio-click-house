@@ -1,94 +1,153 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { registerScrollTrigger } from "$lib/animations/gsap";
   import type { AboutPageData } from "$lib/types/about";
   import { _ } from "svelte-i18n";
 
   let { journey } = $props<{ journey: AboutPageData["journey"] }>();
-
   let sectionRef: HTMLElement;
   let timelineTrackRef: HTMLElement;
-  let progressLineRef: HTMLElement;
+  let progressPathRef: SVGPathElement;
+  let routePath = $state("");
+  let routeViewBox = $state("0 0 1 1");
+  let yearCutouts = $state<{ x: number; y: number; rx: number; ry: number }[]>([]);
 
   onMount(() => {
     let active = true;
     let context: { revert: () => void } | undefined;
+    let resizeFrame = 0;
+    let refreshAnimation: (() => void) | undefined;
 
-    registerScrollTrigger().then((runtime) => {
+    function updateRoute() {
+      const bounds = timelineTrackRef.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      const markers = Array.from(
+        timelineTrackRef.querySelectorAll<HTMLElement>(".journey-year"),
+      ).map((marker) => {
+        const rect = marker.getBoundingClientRect();
+        return {
+          x: rect.left - bounds.left + rect.width / 2,
+          y: rect.top - bounds.top + rect.height / 2,
+          rx: rect.width / 2 + 8,
+          ry: rect.height / 2 + 12,
+        };
+      });
+      if (!markers.length) return;
+      yearCutouts = markers;
+      const first = markers[0];
+      const last = markers[markers.length - 1];
+      const bend = window.matchMedia("(min-width: 768px)").matches
+        ? Math.min(bounds.width * 0.1, 130)
+        : 22;
+      let path = `M ${first.x} ${Math.max(0, first.y - 64)} L ${first.x} ${first.y}`;
+      for (let i = 1; i < markers.length; i++) {
+        const previous = markers[i - 1];
+        const next = markers[i];
+        const distance = (next.y - previous.y) * 0.42;
+        const offset = i % 2 === 0 ? -bend : bend;
+        path += ` C ${previous.x + offset} ${previous.y + distance}, ${next.x + offset} ${next.y - distance}, ${next.x} ${next.y}`;
+      }
+      routePath = `${path} L ${last.x} ${Math.min(bounds.height, last.y + 64)}`;
+      routeViewBox = `0 0 ${bounds.width} ${bounds.height}`;
+      void tick().then(() => {
+        if (active) refreshAnimation?.();
+      });
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(updateRoute);
+    });
+    resizeObserver.observe(timelineTrackRef);
+    updateRoute();
+    void document.fonts.ready.then(() => { if (active) updateRoute(); });
+
+    registerScrollTrigger().then(async (runtime) => {
+      await document.fonts.ready;
+      if (!active) return;
+      updateRoute();
+      await tick();
       if (!active || !runtime || !sectionRef) return;
-      const { gsap } = runtime;
-
+      const { gsap, ScrollTrigger } = runtime;
+      refreshAnimation = () => ScrollTrigger.refresh();
       context = gsap.context(() => {
         const media = gsap.matchMedia();
-
         media.add("(prefers-reduced-motion: no-preference)", () => {
-          // Section header animation
-          gsap.fromTo(
-            ".journey-header-reveal",
-            { autoAlpha: 0, y: 30 },
+          gsap.from(".journey-header-reveal", {
+            autoAlpha: 0,
+            y: 24,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: "power2.out",
+            clearProps: "all",
+            scrollTrigger: { trigger: sectionRef, start: "top 88%", once: true },
+          });
+          gsap.fromTo(progressPathRef,
             {
+              strokeDasharray: () => `${progressPathRef.getTotalLength()} ${progressPathRef.getTotalLength()}`,
+              strokeDashoffset: () => progressPathRef.getTotalLength(),
+            },
+            {
+              strokeDashoffset: 0,
+              ease: "none",
               scrollTrigger: {
-                trigger: sectionRef,
-                start: "top 88%",
-                once: true,
+                trigger: timelineTrackRef,
+                start: "top 65%",
+                end: "bottom 65%",
+                scrub: 0.6,
+                invalidateOnRefresh: true,
               },
-              autoAlpha: 1,
-              y: 0,
+            },
+          );
+          for (const chapter of timelineTrackRef.querySelectorAll(".journey-chapter")) {
+            gsap.fromTo(chapter.querySelector(".journey-year-label"), {
+              opacity: 0.4,
+              scale: 0.92,
+            }, {
+              opacity: 1,
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: chapter.querySelector(".journey-year"),
+                start: "center 85%",
+                end: "center 55%",
+                scrub: 0.4,
+              },
+            });
+            gsap.from(chapter.querySelectorAll(".journey-chapter-content"), {
+              autoAlpha: 0,
+              y: 28,
               duration: 0.8,
               stagger: 0.1,
               ease: "power2.out",
               clearProps: "all",
-            },
-          );
-
-          // Scroll-scrubbed connecting line fill
-          if (timelineTrackRef && progressLineRef) {
-            gsap.fromTo(
-              progressLineRef,
-              { scaleY: 0 },
-              {
-                scrollTrigger: {
-                  trigger: timelineTrackRef,
-                  start: "top 80%",
-                  end: "bottom 35%",
-                  scrub: 0.5,
-                },
-                scaleY: 1,
-                transformOrigin: "top center",
-                ease: "none",
-              },
-            );
+              scrollTrigger: { trigger: chapter, start: "top 88%", toggleActions: "play none none reverse" },
+            });
           }
-
-          // Individual milestone entry reveals
-          const milestoneCards = gsap.utils.toArray<HTMLElement>(
-            ".timeline-milestone-item",
-          );
-          milestoneCards.forEach((card) => {
-            gsap.fromTo(
-              card,
-              { autoAlpha: 0, y: 30, scale: 0.98 },
-              {
-                scrollTrigger: {
-                  trigger: card,
-                  start: "top 88%",
-                  once: true,
-                },
-                autoAlpha: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.7,
-                ease: "power2.out",
-                clearProps: "all",
+        });
+        media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+          for (const image of timelineTrackRef.querySelectorAll(".journey-photo-frame img")) {
+            gsap.fromTo(image, { yPercent: -4, scale: 1.12 }, {
+              yPercent: 4,
+              scale: 1.1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: image.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.6,
               },
-            );
-          });
+            });
+          }
         });
       }, sectionRef);
+      ScrollTrigger.refresh();
     });
-
     return () => {
       active = false;
+      cancelAnimationFrame(resizeFrame);
+      resizeObserver.disconnect();
+      refreshAnimation = undefined;
       context?.revert();
     };
   });
@@ -96,116 +155,146 @@
 
 <section
   id="our-journey"
-  aria-label="Our Journey Timeline"
+  aria-labelledby="our-journey-title"
   bind:this={sectionRef}
-  class="relative overflow-hidden border-y border-brand-dark/15 bg-brand-light py-12 sm:py-14 lg:py-16"
+  class="relative overflow-hidden bg-brand-light py-14 sm:py-16 lg:py-20"
 >
   <div class="site-shell">
-    <!-- Header -->
-    <div class="mb-10 grid gap-7 lg:grid-cols-12 lg:items-end md:mb-14">
-      <div class="lg:col-span-8">
-        <p class="eyebrow mb-3 text-brand-dark/50">
-          {$_("sectionLabels.journey")}
-        </p>
-        <h2
-          class="journey-header-reveal font-sans text-[length:var(--text-section)] leading-[1.05] tracking-[-0.045em] text-brand-dark font-semibold"
-        >
+    <header class="mb-12 grid gap-6 md:mb-16 lg:grid-cols-12 lg:items-end">
+      <div class="journey-header-reveal lg:col-span-7">
+        <p class="eyebrow mb-3 text-brand-dark/50">{$_("sectionLabels.journey")}</p>
+        <h2 id="our-journey-title" class="max-w-[13ch] font-sans text-[length:var(--text-section)] font-semibold leading-[1.05] tracking-[-0.04em] text-brand-dark">
           {$_('about.journey.heading') || journey.heading}
         </h2>
       </div>
-      <p
-        class="journey-header-reveal max-w-md text-base leading-relaxed text-brand-dark/70 lg:col-span-3 lg:pb-2 md:text-lg"
-      >
+      <p class="journey-header-reveal max-w-xl text-base leading-relaxed text-brand-dark/70 lg:col-span-5">
         {$_('about.journey.subheading') || journey.subheading}
       </p>
-    </div>
+    </header>
 
-    <!-- Timeline Container -->
-    <div bind:this={timelineTrackRef} class="relative max-w-5xl mx-auto">
-      <!-- Central / Left Connecting Vertical Line -->
-      <div
-        class="absolute top-0 bottom-0 left-2 w-px bg-brand-dark/15 md:left-1/2 md:-translate-x-1/2"
-      >
-        <div
-          bind:this={progressLineRef}
-          class="h-full w-full bg-brand-green"
-        ></div>
-      </div>
+    <div id="studio-story-timeline" bind:this={timelineTrackRef} class="journey-track relative">
+      <svg class="journey-route pointer-events-none absolute inset-0 h-full w-full" viewBox={routeViewBox} preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <mask id="studio-story-route-mask" maskUnits="userSpaceOnUse">
+            <rect width="100%" height="100%" fill="white" />
+            {#each yearCutouts as cutout, index (index)}
+              <ellipse cx={cutout.x} cy={cutout.y} rx={cutout.rx} ry={cutout.ry} fill="black" />
+            {/each}
+          </mask>
+        </defs>
+        <g mask="url(#studio-story-route-mask)">
+          <path d={routePath} class="journey-road" />
+          <path d={routePath} class="journey-route-base" />
+          <path bind:this={progressPathRef} d={routePath} class="journey-route-progress" />
+        </g>
+      </svg>
 
-      <!-- Timeline Items -->
-      <div class="space-y-12 md:space-y-20 relative">
+      <ol class="relative m-0 list-none space-y-12 p-0 md:space-y-16 lg:space-y-20">
         {#each journey.milestones as milestone, index (milestone.year)}
-          {@const isEven = index % 2 === 0}
-          <div
-            class="timeline-milestone-item relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12"
-          >
-            <!-- Timeline Center Node Badge -->
-            <div
-              class="absolute left-2 z-10 h-3 w-3 -translate-x-1/2 overflow-hidden bg-brand-green text-transparent ring-4 ring-brand-light md:left-1/2"
-            >
-              {milestone.year.slice(2)}
+          <li id={`studio-story-${milestone.year}`} class="journey-chapter" class:journey-chapter-reverse={index % 2 === 1}>
+            <div class="journey-year font-sans font-bold tabular-nums tracking-[-0.05em] text-brand-dark">
+              <span class="journey-year-label inline-block py-3">{milestone.year}</span>
             </div>
-
-            <!-- Left / Right Layout Column 1 -->
-            <div
-              class="w-full md:w-1/2 pl-12 md:pl-0 {isEven
- ? 'md:pr-12 md:text-right'
- : 'md:order-2 md:pl-12 md:text-left'}"
-            >
-              <div
-                class="mb-3 font-sans text-sm text-brand-green-ink font-medium"
-              >
-                {milestone.year} · {$_(`about.journey.milestones.${index}.subtitle`) || milestone.subtitle}
-              </div>
-              <h3
-                class="mb-3 font-sans text-2xl text-brand-dark md:text-4xl font-semibold"
-              >
+            <div class="journey-copy journey-chapter-content">
+              <p class="mb-3 text-sm font-medium text-brand-dark/50">
+                {$_(`about.journey.milestones.${index}.subtitle`) || milestone.subtitle}
+              </p>
+              <h3 class="mb-4 max-w-[20ch] font-sans text-2xl font-semibold leading-[1.15] tracking-[-0.025em] text-brand-dark lg:text-3xl">
                 {$_(`about.journey.milestones.${index}.title`) || milestone.title}
               </h3>
-              <p
-                class="text-sm md:text-base text-brand-dark/80 leading-relaxed mb-4"
-              >
+              <p class="max-w-md text-sm leading-relaxed text-brand-dark/70 sm:text-base">
                 {$_(`about.journey.milestones.${index}.description`) || milestone.description}
               </p>
               {#if milestone.statsHighlight}
-                <div
-                  class="inline-flex items-center gap-2 border-t border-brand-dark/25 pt-2 text-xs font-sans font-medium text-brand-dark/75"
-                >
+                <p class="mt-5 text-sm font-semibold leading-relaxed text-brand-dark/80">
                   {$_(`about.journey.milestones.${index}.statsHighlight`) || milestone.statsHighlight}
-                </div>
+                </p>
               {/if}
             </div>
-
-            <!-- Left / Right Layout Column 2 (Supporting Image Card) -->
-            <div
-              class="w-full md:w-1/2 pl-12 md:pl-0 {isEven
- ? 'md:order-2 md:pl-12'
- : 'md:pr-12'}"
-            >
-              {#if milestone.media}
-                <div
-                  class="group relative aspect-[16/10] w-full overflow-hidden rounded-[var(--radius-media-sm)] sm:rounded-[var(--radius-media)] bg-brand-paper"
-                >
-                  <img
-                    src={milestone.media.src}
-                    alt={milestone.media.alt}
-                    width={milestone.media.width}
-                    height={milestone.media.height}
-                    loading="lazy"
-                    decoding="async"
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div
-                    class="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 text-white text-xs font-sans"
-                  >
-                    {milestone.media.credit}
-                  </div>
+            {#if milestone.media}
+              <figure class="journey-photo journey-chapter-content m-0">
+                <div class="journey-photo-frame overflow-hidden bg-brand-paper">
+                  <img src={milestone.media.src} alt={milestone.media.alt} width={milestone.media.width} height={milestone.media.height} loading="lazy" decoding="async" class="h-full w-full object-cover" />
                 </div>
-              {/if}
-            </div>
-          </div>
+                {#if milestone.media.credit}
+                  <figcaption class="mt-3 text-xs leading-relaxed text-brand-dark/50">{milestone.media.credit}</figcaption>
+                {/if}
+              </figure>
+            {/if}
+          </li>
         {/each}
-      </div>
+      </ol>
     </div>
   </div>
 </section>
+
+<style>
+  .journey-road {
+    fill: none;
+    stroke: var(--color-brand-dark);
+    opacity: 0.04;
+    stroke-width: 18;
+    stroke-linecap: round;
+  }
+  .journey-route-base,
+  .journey-route-progress {
+    fill: none;
+    stroke: var(--color-brand-green);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .journey-route-base { stroke: var(--color-brand-dark); opacity: 0.12; }
+  .journey-route-progress { stroke-width: 3; }
+  .journey-chapter {
+    display: grid;
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+    align-items: start;
+    column-gap: 1rem;
+    row-gap: 1.5rem;
+  }
+  .journey-year {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 1.75rem;
+    line-height: 1;
+    padding-top: 0.5rem;
+  }
+  .journey-copy { grid-column: 2; grid-row: 1; }
+  .journey-photo { grid-column: 2; grid-row: 2; width: 100%; }
+  .journey-photo-frame {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-media-sm);
+  }
+  @media (min-width: 48rem) {
+    .journey-road { stroke-width: 32; }
+    .journey-chapter {
+      grid-template-columns: minmax(0, 1fr) 8rem minmax(0, 1fr);
+      align-items: center;
+      gap: 2rem;
+      min-height: 22rem;
+    }
+    .journey-year {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 2.25rem;
+      padding-top: 0;
+    }
+    .journey-copy { grid-column: 1; grid-row: 1; }
+    .journey-photo { grid-column: 3; grid-row: 1; max-width: 28rem; justify-self: end; }
+    .journey-photo-frame {
+      border-radius: 5rem var(--radius-media) var(--radius-media) var(--radius-media);
+    }
+    .journey-chapter-reverse .journey-copy { grid-column: 3; }
+    .journey-chapter-reverse .journey-photo { grid-column: 1; justify-self: start; }
+    .journey-chapter-reverse .journey-photo-frame {
+      border-radius: var(--radius-media) 5rem var(--radius-media) var(--radius-media);
+    }
+  }
+  @media (min-width: 64rem) {
+    .journey-chapter { column-gap: 3.5rem; }
+    .journey-year { font-size: 2.75rem; }
+  }
+</style>
